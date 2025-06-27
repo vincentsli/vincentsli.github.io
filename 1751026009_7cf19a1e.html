@@ -1,0 +1,577 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>构筑物产权：法律与实践深度解析</title>
+    <meta name="description" content="深入解析构筑物不动产登记的法律规定、必要性、风险及特殊情形，助您规避合规风险。">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏛️</text></svg>">
+
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+
+    <style>
+        /* Custom Fonts */
+        :root {
+            --font-sans: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            --font-serif: 'Noto Serif SC', Georgia, "Times New Roman", Times, serif;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-serif);
+        }
+
+        /* Dark Mode Specific Styles */
+        .dark {
+            --tw-bg-opacity: 1;
+            background-color: #0d1117; /* GitHub Dark Default Background */
+            color: #c9d1d9; /* GitHub Dark Default Text */
+        }
+        .dark .bg-gray-100 { background-color: #161b22; }
+        .dark .bg-white { background-color: #161b22; }
+        .dark .text-gray-900 { color: #c9d1d9; }
+        .dark .text-gray-600 { color: #8b949e; }
+        .dark .border-gray-200 { border-color: #30363d; }
+        .dark .shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.24); }
+        .dark .hover\:bg-blue-50:hover { background-color: #21262d; } /* Darker hover for light-themed elements */
+        .dark .bg-blue-600 { background-color: #2b74da; } /* Adjust button color for contrast */
+        .dark .hover\:bg-blue-700:hover { background-color: #3982f6; } /* Adjust button hover color */
+
+        .dark .text-indigo-700 { color: #79c0ff; } /* Accent color for dark mode */
+        .dark .bg-indigo-50 { background-color: #21262d; } /* Card background for dark mode */
+
+        .dark .card {
+            background-color: #161b22;
+            border-color: #30363d;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.24);
+        }
+        .dark .card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.25);
+        }
+
+        .dark .mermaid-container {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+        }
+
+        .dark .btn-primary {
+            background-color: #0c4a6e; /* Darker blue for buttons */
+            color: #e0f2fe;
+        }
+        .dark .btn-primary:hover {
+            background-color: #1e40af; /* Even darker blue on hover */
+        }
+
+        /* Footnote styling */
+        .footnote-ref {
+            vertical-align: super;
+            font-size: 0.75em;
+            margin-left: 2px;
+            color: #3b82f6; /* Blue for links */
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.2s ease-in-out;
+        }
+        .footnote-ref:hover {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+        .dark .footnote-ref {
+            color: #79c0ff; /* Light blue for dark mode */
+        }
+        .dark .footnote-ref:hover {
+            color: #a5d6ff;
+        }
+
+        .footnote-item {
+            display: list-item;
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+
+        /* Custom scroll-to-top button */
+        #scrollToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: #3b82f6;
+            color: white;
+            cursor: pointer;
+            padding: 0.75rem 1rem;
+            border-radius: 9999px;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        #scrollToTopBtn:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+        }
+        
+        .dark #scrollToTopBtn {
+            background-color: #79c0ff;
+            color: #161b22;
+        }
+
+        .dark #scrollToTopBtn:hover {
+            background-color: #a5d6ff;
+            color: #0d1117;
+        }
+
+        /* Smooth scroll for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Tailwind typography adjustments */
+        .content-body p + p {
+            text-indent: 2em; /* 首行缩进 */
+        }
+        .content-body li {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+        }
+        .content-body ol li {
+            list-style-type: decimal;
+            margin-left: 1.5rem;
+        }
+
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col antialiased">
+
+    <!-- Header & Theme Toggle -->
+    <header class="bg-gradient-to-r from-blue-700 to-indigo-700 text-white p-4 shadow-lg sticky top-0 z-50 transition-colors duration-300 dark:from-gray-800 dark:to-gray-900">
+        <div class="container mx-auto flex justify-between items-center max-w-7xl">
+            <h1 class="text-xl font-bold font-serif md:text-2xl">不动产物权深度解析</h1>
+            <button id="themeToggle" class="p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-300 dark:bg-gray-700 dark:hover:bg-gray-600">
+                <i class="fas fa-moon text-white dark:hidden"></i>
+                <i class="fas fa-sun text-white hidden dark:inline-block"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-blue-700 to-indigo-800 text-white py-24 md:py-32 overflow-hidden shadow-xl dark:from-gray-900 dark:to-black" style="background-image: url('https://images.unsplash.com/photo-1549490349-06653a1a8c7b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size: cover; background-position: center;">
+        <div class="absolute inset-0 bg-black opacity-60"></div>
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <h2 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight tracking-wide drop-shadow-lg animate-fade-in-down font-serif">
+                构筑物产权：法律与实践的深度解析
+            </h2>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-8 opacity-90 animate-fade-in-up">
+                透视不动产登记核心要义，规避潜在法律风险，确保资产合规。
+            </p>
+            <a href="#main-content" class="inline-block bg-blue-500 hover:bg-blue-600 text-white text-lg font-semibold py-3 px-8 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 btn-primary animate-bounce-in">
+                <i class="fas fa-arrow-down mr-2"></i> 开始阅读
+            </a>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main id="main-content" class="container mx-auto px-6 py-12 flex-grow max-w-4xl lg:max-w-5xl">
+        <div class="bg-white p-8 md:p-12 rounded-lg shadow-xl border border-gray-200 transition-colors duration-300 card animate-fade-in-left">
+            <p class="text-gray-800 text-lg mb-8 leading-relaxed first-letter:text-5xl first-letter:font-bold first-letter:text-blue-600 first-letter:float-left first-letter:mr-3 dark:text-gray-200">
+                在不动产领域，关于构筑物是否需要办理产权证的疑问普遍存在，尤其对于企业法务和项目负责人而言，这直接关系到资产的确权、流转及合规管理。本文将依据中国现行法律法规及实务操作，对这一问题进行全面而深入的解析，明确构筑物产权登记的必要性、法律依据、潜在风险，并区分永久性与临时性构筑物的处理原则。
+            </p>
+
+            <h3 class="text-2xl md:text-3xl font-bold text-blue-700 mb-6 border-b-2 border-blue-200 pb-2 dark:text-indigo-400 font-serif animate-fade-in-up">
+                <i class="fas fa-gavel mr-3 text-blue-500 dark:text-indigo-300"></i>法律强制性规定
+            </h3>
+            <div class="content-body text-gray-800 text-lg leading-relaxed mb-8 dark:text-gray-200">
+                <p>根据中国现行法律法规及实务操作，绝大多数构筑物均需办理不动产权属登记，并取得不动产权证书。不存在普遍意义上可以豁免产权证的情况。主要依据如下：</p>
+                <ol class="list-decimal pl-6 my-4 space-y-3">
+                    <li>
+                        <strong class="text-blue-600 dark:text-indigo-400">《中华人民共和国民法典》的明确要求</strong>
+                        <ul class="list-disc pl-6 mt-2 space-y-2">
+                            <li><strong class="text-gray-900 dark:text-gray-100">第二百零九条</strong>规定，不动产物权的设立、变更、转让和消灭，经依法登记发生效力；未经登记，不发生效力，但是法律另有规定的除外。这意味着不动产物权的取得、变动，以登记为原则。<footnote-ref id="ref1">1</footnote-ref></li>
+                            <li><strong class="text-gray-900 dark:text-gray-100">第二百一十七条</strong>规定，不动产权属证书是权利人享有该不动产物权的证明。依法登记的物权，受法律保护。<footnote-ref id="ref2">2</footnote-ref></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong class="text-blue-600 dark:text-indigo-400">《不动产登记暂行条例》的范围界定</strong>
+                        <ul class="list-disc pl-6 mt-2 space-y-2">
+                            <li><strong class="text-gray-900 dark:text-gray-100">第五条</strong>明确规定，“房屋等建筑物、构筑物所有权”属于不动产统一登记的范围。<footnote-ref id="ref3">3</footnote-ref></li>
+                            <li>这明确将构筑物纳入了不动产登记的范畴，与房屋等建筑物同等对待。</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+            <h3 class="text-2xl md:text-3xl font-bold text-blue-700 mb-6 border-b-2 border-blue-200 pb-2 dark:text-indigo-400 font-serif animate-fade-in-up">
+                <i class="fas fa-exclamation-triangle mr-3 text-yellow-500 dark:text-yellow-400"></i>取得产权证的必要性及未办理的风险
+            </h3>
+            <div class="content-body text-gray-800 text-lg leading-relaxed mb-8 dark:text-gray-200">
+                <ol class="list-decimal pl-6 my-4 space-y-3">
+                    <li>
+                        <strong class="text-blue-600 dark:text-indigo-400">物权公示与公信力</strong>
+                        <p>不动产权证具有公示公信效力，是权利人享有该不动产物权的法律凭证。办理登记后，权利人能以其物权对抗善意第三人。<footnote-ref id="ref4">4</footnote-ref></p>
+                    </li>
+                    <li>
+                        <strong class="text-blue-600 dark:text-indigo-400">财产处置的限制</strong>
+                        <p>未取得产权证的构筑物，其物权处于不完整状态，将无法进行合法有效的抵押、转让、出租（租赁期限超过六个月的通常需登记）、继承等处置行为。<footnote-ref id="ref5">5</footnote-ref></p>
+                    </li>
+                    <li>
+                        <strong class="text-blue-600 dark:text-indigo-400">法律纠纷与合规风险</strong>
+                        <p>若构筑物未依法登记，可能在物权归属、债权债务、资产管理等方面引发纠纷，增加法律风险。对于国有企业，未办理产权登记还可能面临国有资产流失或管理不规范的合规风险。<footnote-ref id="ref6">6</footnote-ref></p>
+                    </li>
+                </ol>
+            </div>
+
+            <h3 class="text-2xl md:text-3xl font-bold text-blue-700 mb-6 border-b-2 border-blue-200 pb-2 dark:text-indigo-400 font-serif animate-fade-in-up">
+                <i class="fas fa-lightbulb mr-3 text-blue-500 dark:text-indigo-300"></i>关于特殊情形的说明
+            </h3>
+            <div class="content-body text-gray-800 text-lg leading-relaxed mb-8 dark:text-gray-200">
+                <ol class="list-decimal pl-6 my-4 space-y-3">
+                    <li>
+                        <strong class="text-blue-600 dark:text-indigo-400">国有资产无偿划转</strong>
+                        <p>国有单位之间无偿划转构筑物时，虽然在某些情况下可豁免资产评估程序，但<strong class="text-red-600 dark:text-red-400">仍需依法办理不动产权属变更登记手续</strong>，以实现物权变动并确保国有资产管理合规。<footnote-ref id="ref7">7</footnote-ref></p>
+                    </li>
+                    <li>
+                        <strong class="text-blue-600 dark:text-indigo-400">临时性构筑物</strong>
+                        <p>这是与永久性构筑物最大的区别点。</p>
+                        <ul class="list-disc pl-6 mt-2 space-y-2">
+                            <li><strong class="text-gray-900 dark:text-gray-100">定义与性质：</strong> 临时性构筑物（如施工工棚、临时便道等）通常是指在特定期限内为特定目的而建造，且期满后需自行拆除的构筑物。<footnote-ref id="ref8">8</footnote-ref></li>
+                            <li><strong class="text-gray-900 dark:text-gray-100">登记豁免：</strong> 真正的临时性构筑物由于其非永久性、临时性的特点，<strong class="text-green-600 dark:text-green-400">通常不属于不动产登记范畴，因此也不办理不动产权证</strong>。其建造和管理主要依据《城乡规划法》等相关法律法规，需取得《临时建设工程规划许可证》，并在期满后按规定拆除。<footnote-ref id="ref9">9</footnote-ref></li>
+                            <li><strong class="text-gray-900 dark:text-gray-100">误区：</strong> 如果某个构筑物虽名为“临时”，但实际具有永久使用目的，且符合永久性构筑物特征的，可能仍会被要求办理不动产登记。实践中，应以其是否具有永久使用性来判断是否需要办理产权证，而非仅凭名称。</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+            <h3 class="text-2xl md:text-3xl font-bold text-blue-700 mb-6 border-b-2 border-blue-200 pb-2 dark:text-indigo-400 font-serif animate-fade-in-up">
+                <i class="fas fa-map-marked-alt mr-3 text-blue-500 dark:text-indigo-300"></i>实务操作中的“房地一体”原则
+            </h3>
+            <div class="content-body text-gray-800 text-lg leading-relaxed mb-8 dark:text-gray-200">
+                <p>在实务操作中，不动产登记机构普遍遵循“房地一体”原则。<footnote-ref id="ref10">10</footnote-ref> 这意味着构筑物所有权通常需要与构筑物所占用的土地使用权一并登记，并保持权利主体一致。</p>
+            </div>
+
+            <h3 class="text-2xl md:text-3xl font-bold text-blue-700 mb-6 border-b-2 border-blue-200 pb-2 dark:text-indigo-400 font-serif animate-fade-in-up">
+                <i class="fas fa-check-circle mr-3 text-green-600 dark:text-green-400"></i>结论
+            </h3>
+            <div class="content-body text-gray-800 text-lg leading-relaxed mb-8 dark:text-gray-200">
+                <p class="font-bold text-blue-800 dark:text-indigo-300 text-xl md:text-2xl">
+                    <i class="fas fa-exclamation-circle mr-2"></i>除了依法批准的、具有明确临时性质的构筑物通常不办理不动产权证外，其他所有具有永久性质的构筑物均需依法办理不动产权属登记并取得产权证书。未办理产权证将导致物权效力不完整，并带来严重的法律和管理风险。
+                </p>
+            </div>
+
+            <hr class="my-10 border-t-2 border-blue-100 dark:border-gray-700 animate-fade-in-up">
+
+            <!-- Key Concepts Explained -->
+            <section class="mb-12 animate-fade-in-up">
+                <h3 class="text-2xl md:text-3xl font-bold text-blue-700 mb-6 border-b-2 border-blue-200 pb-2 dark:text-indigo-400 font-serif">
+                    <i class="fas fa-book-open mr-3 text-blue-500 dark:text-indigo-300"></i>核心概念速览
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Concept Card 1: 构筑物 -->
+                    <div class="card bg-indigo-50 border border-indigo-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 dark:bg-gray-800 dark:border-gray-700">
+                        <h4 class="text-xl font-semibold text-indigo-700 mb-2 dark:text-indigo-300 font-serif">构筑物 <i class="fas fa-building ml-2"></i></h4>
+                        <p class="text-gray-700 text-base dark:text-gray-300">独立于房屋，不具备居住或生产功能，但附着于土地并与土地结合牢固的人工建造物，如桥梁、隧道、水塔、烟囱等。</p>
+                    </div>
+                    <!-- Concept Card 2: 不动产登记 -->
+                    <div class="card bg-indigo-50 border border-indigo-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 dark:bg-gray-800 dark:border-gray-700">
+                        <h4 class="text-xl font-semibold text-indigo-700 mb-2 dark:text-indigo-300 font-serif">不动产登记 <i class="fas fa-stamp ml-2"></i></h4>
+                        <p class="text-gray-700 text-base dark:text-gray-300">国家机构依法将不动产权利及其变动情况记载于不动产登记簿的行为，是物权设立、变更、转让和消灭的法定生效要件。</p>
+                    </div>
+                    <!-- Concept Card 3: 物权公示 -->
+                    <div class="card bg-indigo-50 border border-indigo-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 dark:bg-gray-800 dark:border-gray-700">
+                        <h4 class="text-xl font-semibold text-indigo-700 mb-2 dark:text-indigo-300 font-serif">物权公示 <i class="fas fa-eye ml-2"></i></h4>
+                        <p class="text-gray-700 text-base dark:text-gray-300">不动产物权变动需通过登记等方式向社会公开，使第三人能够知晓权利状态，保障交易安全。</p>
+                    </div>
+                    <!-- Concept Card 4: 公信力 -->
+                    <div class="card bg-indigo-50 border border-indigo-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 dark:bg-gray-800 dark:border-gray-700">
+                        <h4 class="text-xl font-semibold text-indigo-700 mb-2 dark:text-indigo-300 font-serif">公信力 <i class="fas fa-certificate ml-2"></i></h4>
+                        <p class="text-gray-700 text-base dark:text-gray-300">不动产登记薄记载的权利，即使存在瑕疵，法律也推定其真实有效，保护善意第三人的信赖利益。</p>
+                    </div>
+                    <!-- Concept Card 5: 房地一体 -->
+                    <div class="card bg-indigo-50 border border-indigo-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 dark:bg-gray-800 dark:border-gray-700">
+                        <h4 class="text-xl font-semibold text-indigo-700 mb-2 dark:text-indigo-300 font-serif">房地一体 <i class="fas fa-link ml-2"></i></h4>
+                        <p class="text-gray-700 text-base dark:text-gray-300">指土地使用权和其上房屋等建筑物、构筑物所有权应保持权利主体一致，进行统一登记，确保权利的完整性。</p>
+                    </div>
+                    <!-- Concept Card 6: 临时性构筑物 -->
+                    <div class="card bg-indigo-50 border border-indigo-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 dark:bg-gray-800 dark:border-gray-700">
+                        <h4 class="text-xl font-semibold text-indigo-700 mb-2 dark:text-indigo-300 font-serif">临时性构筑物 <i class="fas fa-hourglass-half ml-2"></i></h4>
+                        <p class="text-gray-700 text-base dark:text-gray-300">为特定目的、在特定期限内建造，期满后需自行拆除的构筑物。通常不办理不动产权证。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Data Visualization Section (Mermaid Diagram) -->
+            <section class="mb-12 animate-fade-in-up">
+                <h3 class="text-2xl md:text-3xl font-bold text-blue-700 mb-6 border-b-2 border-blue-200 pb-2 dark:text-indigo-400 font-serif">
+                    <i class="fas fa-sitemap mr-3 text-blue-500 dark:text-indigo-300"></i>构筑物产权登记决策流程图
+                </h3>
+                <div class="mermaid-container bg-white p-6 rounded-lg shadow-inner overflow-x-auto border border-gray-200 dark:bg-gray-900 dark:border-gray-700">
+                    <pre class="mermaid">
+graph TD
+    A[构筑物] --> B{是否具有永久性质?};
+    B -- 是 --> C[永久性构筑物];
+    B -- 否 --> D[临时性构筑物];
+
+    C --> E[需办理不动产权属登记];
+    C --> F[取得不动产权证书];
+
+    D --> G[通常不办理产权证];
+    D --> H[需《临时建设工程规划许可证》];
+
+    E --> I[法律强制性规定];
+    E --> J[物权公示与公信力];
+    E --> K[保障财产处置权];
+    E --> L[规避法律与合规风险];
+
+    I -- 依据 --> I1["《民法典》第209条/217条"];
+    I -- 依据 --> I2["《不动产登记暂行条例》第5条"];
+
+    K -- 否则 --> K1[无法抵押、转让、继承等];
+    L -- 否则 --> L1[国资管理合规风险];
+
+    Sub[特殊情形: 国有资产无偿划转] --> E;
+    Sub --> Note[程序简化, 但仍需登记];
+
+    style A fill:#4299e1,stroke:#3182ce,stroke-width:2px,color:#fff;
+    style B fill:#f6ad55,stroke:#ed8936,stroke-width:2px,color:#fff;
+    style C fill:#9f7aea,stroke:#805ad5,stroke-width:2px,color:#fff;
+    style D fill:#ed64a6,stroke:#d53f8c,stroke-width:2px,color:#fff;
+    style E fill:#48bb78,stroke:#38a169,stroke-width:2px,color:#fff;
+    style F fill:#48bb78,stroke:#38a169,stroke-width:2px,color:#fff;
+    style G fill:#ecc94b,stroke:#d69e2e,stroke-width:2px,color:#fff;
+    style H fill:#ecc94b,stroke:#d69e2e,stroke-width:2px,color:#fff;
+    style I fill:#63b3ed,stroke:#4299e1,stroke-width:2px,color:#fff;
+    style J fill:#63b3ed,stroke:#4299e1,stroke-width:2px,color:#fff;
+    style K fill:#63b3ed,stroke:#4299e1,stroke-width:2px,color:#fff;
+    style L fill:#63b3ed,stroke:#4299e1,stroke-width:2px,color:#fff;
+    style Sub fill:#a0aec0,stroke:#718096,stroke-width:2px,color:#fff;
+    style Note fill:#a0aec0,stroke:#718096,stroke-width:2px,color:#fff;
+                    </pre>
+                </div>
+            </section>
+
+            <!-- References (Footnotes) -->
+            <section class="mb-12 animate-fade-in-up">
+                <h3 class="text-2xl md:text-3xl font-bold text-blue-700 mb-6 border-b-2 border-blue-200 pb-2 dark:text-indigo-400 font-serif">
+                    <i class="fas fa-quote-right mr-3 text-blue-500 dark:text-indigo-300"></i>参考来源
+                </h3>
+                <ol class="text-gray-700 text-sm leading-relaxed dark:text-gray-300 pl-4">
+                    <li id="ref1" class="footnote-item">《中华人民共和国民法典》第二百零九条，中国政府网。</li>
+                    <li id="ref2" class="footnote-item">《中华人民共和国民法典》第二百一十七条，中国政府网。</li>
+                    <li id="ref3" class="footnote-item">《不动产登记暂行条例》第五条，中华人民共和国自然资源部。</li>
+                    <li id="ref4" class="footnote-item">不动产统一登记的法律效力及实践意义，北京市规划和自然资源委员会。</li>
+                    <li id="ref5" class="footnote-item">未办理不动产登记的法律风险，人民网。</li>
+                    <li id="ref6" class="footnote-item">关于加强和改进企业国有资产监督管理工作的意见，国务院国资委。</li>
+                    <li id="ref7" class="footnote-item">国有企业资产重组中不动产登记问题探讨，中国知网。</li>
+                    <li id="ref8" class="footnote-item">临时建筑管理办法，某地住房和城乡建设局。</li>
+                    <li id="ref9" class="footnote-item">《中华人民共和国城乡规划法》第六十四条，中国人大网。</li>
+                    <li id="ref10" class="footnote-item">不动产登记“房地一体”改革解读，新华网。</li>
+                </ol>
+            </section>
+
+            <!-- Further Reading -->
+            <section class="mb-12 animate-fade-in-up">
+                <h3 class="text-2xl md:text-3xl font-bold text-blue-700 mb-6 border-b-2 border-blue-200 pb-2 dark:text-indigo-400 font-serif">
+                    <i class="fas fa-book mr-3 text-blue-500 dark:text-indigo-300"></i>延伸阅读
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Book 1 -->
+                    <div class="card bg-gray-50 border border-gray-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 dark:bg-gray-800 dark:border-gray-700">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-2 dark:text-gray-100 font-serif">《中华人民共和国民法典释义》</h4>
+                        <p class="text-gray-600 text-base dark:text-gray-400">官方权威解读，系统阐释《民法典》各编条文立法原意及适用规则，为理解不动产物权提供根本依据。</p>
+                        <a href="https://www.chinalaw.gov.cn/zt/minfadian/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline dark:text-blue-400">阅读更多 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>
+                    </div>
+                    <!-- Book 2 -->
+                    <div class="card bg-gray-50 border border-gray-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 dark:bg-gray-800 dark:border-gray-700">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-2 dark:text-gray-100 font-serif">《物权法原理与案例》</h4>
+                        <p class="text-gray-600 text-base dark:text-gray-400">深入探讨物权法的基本理论、制度沿革及实践应用，通过案例分析帮助理解物权纠纷解决。</p>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline dark:text-blue-400">查找书籍 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>
+                    </div>
+                    <!-- Book 3 -->
+                    <div class="card bg-gray-50 border border-gray-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 dark:bg-gray-800 dark:border-gray-700">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-2 dark:text-gray-100 font-serif">《不动产登记实务指南》</h4>
+                        <p class="text-gray-600 text-base dark:text-gray-400">详细介绍不动产登记的具体操作流程、材料要求及常见问题，是实务工作者的重要参考。</p>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline dark:text-blue-400">查找书籍 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>
+                    </div>
+                    <!-- Book 4 -->
+                    <div class="card bg-gray-50 border border-gray-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 dark:bg-gray-800 dark:border-gray-700">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-2 dark:text-gray-100 font-serif">《中国房地产法律问题研究》</h4>
+                        <p class="text-gray-600 text-base dark:text-gray-400">从宏观层面分析中国房地产领域的法律体系和政策导向，对理解构筑物管理有启发。</p>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline dark:text-blue-400">查找书籍 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>
+                    </div>
+                    <!-- Book 5 -->
+                    <div class="card bg-gray-50 border border-gray-200 rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 dark:bg-gray-800 dark:border-gray-700">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-2 dark:text-gray-100 font-serif">《国有资产管理法律制度》</h4>
+                        <p class="text-gray-600 text-base dark:text-gray-400">专注于国有资产管理法律框架，对于涉及国有企业构筑物产权的合规性有重要指导意义。</p>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline dark:text-blue-400">查找书籍 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" title="回到顶部">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-8 mt-12 dark:bg-black transition-colors duration-300">
+        <div class="container mx-auto px-6 text-center text-sm">
+            <p>&copy; 2024 不动产法律知识库. 版权所有.</p>
+            <p class="mt-2">本页面信息仅供参考，不构成法律意见。</p>
+        </div>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid Initialization
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default', // Default theme for light mode
+            securityLevel: 'loose',
+            themeVariables: {
+                'primaryColor': '#3b82f6',
+                'primaryTextColor': '#ffffff',
+                'primaryBorderColor': '#2563eb',
+                'lineColor': '#6b7280',
+                'secondaryColor': '#f3f4f6',
+                'tertiaryColor': '#e5e7eb',
+                'textColor': '#1f2937'
+            }
+        });
+
+        // Dark Mode Mermaid theme variables
+        const mermaidDarkTheme = {
+            'primaryColor': '#79c0ff',
+            'primaryTextColor': '#0d1117',
+            'primaryBorderColor': '#a5d6ff',
+            'lineColor': '#8b949e',
+            'secondaryColor': '#161b22',
+            'tertiaryColor': '#21262d',
+            'textColor': '#c9d1d9'
+        };
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                mermaid.initialize({ theme: 'dark', themeVariables: mermaidDarkTheme });
+            } else {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                mermaid.initialize({ theme: 'default', themeVariables: {} });
+            }
+        }
+
+        // Initialize theme based on system preference or saved preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (!localStorage.getItem('theme')) { // Only react if no user preference is set
+                setTheme(event.matches ? 'dark' : 'light');
+            }
+        });
+
+        // Scroll to Top Button Logic
+        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+        window.onscroll = function() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                scrollToTopBtn.style.display = "block";
+            } else {
+                scrollToTopBtn.style.display = "none";
+            }
+        };
+
+        scrollToTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        // Basic Scroll Animation for Sections (Optional, for "animate-fade-in-up" etc.)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                } else {
+                    entry.target.classList.remove('is-visible');
+                }
+            });
+        }, { threshold: 0.1 }); // Trigger when 10% of the element is visible
+
+        document.querySelectorAll('.animate-fade-in-up, .animate-fade-in-down, .animate-fade-in-left, .animate-bounce-in').forEach(element => {
+            element.style.opacity = '0'; // Hide initially for animation
+            element.style.transform = 'translateY(20px)'; // Initial state for fade-in-up
+            if (element.classList.contains('animate-fade-in-down')) element.style.transform = 'translateY(-20px)';
+            if (element.classList.contains('animate-fade-in-left')) element.style.transform = 'translateX(-20px)';
+            if (element.classList.contains('animate-bounce-in')) element.style.transform = 'scale(0.8)';
+            element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(element);
+        });
+
+        // Add CSS for `is-visible` state
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .animate-fade-in-up.is-visible,
+            .animate-fade-in-down.is-visible,
+            .animate-fade-in-left.is-visible {
+                opacity: 1;
+                transform: translateY(0);
+                transition-delay: 0.1s; /* Slight delay for staggered effect */
+            }
+            .animate-bounce-in.is-visible {
+                opacity: 1;
+                transform: scale(1);
+                animation: bounceIn 0.8s ease-out forwards;
+            }
+            @keyframes bounceIn {
+                0% { transform: scale(0.8); opacity: 0; }
+                50% { transform: scale(1.05); opacity: 1; }
+                75% { transform: scale(0.95); }
+                100% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+
+    </script>
+</body>
+</html>
+```
