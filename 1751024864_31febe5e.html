@@ -1,0 +1,464 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>揭秘：运载火箭核心材料构成与协同机制</title>
+    <meta name="description" content="深入解析运载火箭的直接材料构成、各系统功能及其精妙的协同机制，从技术与资本双重视角提供专业洞察。">
+    
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts for Noto Serif SC (headings) and Noto Sans SC (body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom Fonts & Fallbacks for Chinese */
+        :root {
+            --font-serif-sc: "Noto Serif SC", serif;
+            --font-sans-sc: "Noto Sans SC", "Tahoma", Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            --bg-color-light: #f8f9fa;
+            --text-color-light: #212529;
+            --card-bg-light: #ffffff;
+            --border-color-light: #e0e0e0;
+            --primary-color: #3498db; /* Blue */
+            --accent-color: #f39c12; /* Amber */
+        }
+
+        .dark {
+            --bg-color-light: #1a1a2e; /* Dark Blue/Purple */
+            --text-color-light: #e0e0e0;
+            --card-bg-light: #2c2c4d; /* Slightly lighter dark blue */
+            --border-color-light: #3a3a5e;
+            --primary-color: #6a9acb; /* Lighter Blue for dark mode */
+            --accent-color: #f7dc6f; /* Softer Gold for dark mode */
+        }
+
+        body {
+            font-family: var(--font-sans-sc);
+            background-color: var(--bg-color-light);
+            color: var(--text-color-light);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-serif-sc);
+        }
+
+        .text-primary-color {
+            color: var(--primary-color);
+        }
+
+        .text-accent-color {
+            color: var(--accent-color);
+        }
+
+        .bg-card {
+            background-color: var(--card-bg-light);
+            border: 1px solid var(--border-color-light);
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1541873676-e910609340f1?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center / cover;
+            /* Placeholder image: A abstract space/rocket launch image. Consider replacing with a custom high-res image if possible. */
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6); /* Dark overlay for text readability */
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        /* Card hover effect */
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Button hover effect */
+        .btn-hover:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* Mermaid styling for dark mode compatibility */
+        .mermaid {
+            background-color: var(--card-bg-light);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            color: var(--text-color-light); /* Fallback */
+        }
+        .dark .mermaid .node rect, .dark .mermaid .node circle, .dark .mermaid .node polygon {
+            fill: #4c4c73 !important; /* Node background in dark mode */
+            stroke: #6a9acb !important; /* Node border in dark mode */
+        }
+        .dark .mermaid .node text {
+            fill: #e0e0e0 !important; /* Node text in dark mode */
+        }
+        .dark .mermaid .edgePath path {
+            stroke: #a0a0c0 !important; /* Edge line in dark mode */
+        }
+        .dark .mermaid .arrowheadPath {
+            fill: #a0a0c0 !important; /* Arrowhead in dark mode */
+        }
+        .dark .mermaid .edgeLabel rect {
+            fill: #2c2c4d !important;
+            stroke: #3a3a5e !important;
+        }
+        .dark .mermaid .edgeLabel text {
+            fill: #e0e0e0 !important;
+        }
+        
+    </style>
+</head>
+<body class="leading-relaxed">
+
+    <!-- Theme Toggle Button -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="theme-toggle" class="p-3 rounded-full bg-card shadow-lg text-primary-color border-none btn-hover transform transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-color">
+            <i class="fas fa-moon hidden dark:inline-block"></i>
+            <i class="fas fa-sun inline-block dark:hidden"></i>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="hero-content">
+            <h1 class="text-5xl md:text-6xl font-bold mb-4 tracking-tight animate-fade-in-down">
+                <span class="block text-primary-color mb-2 text-6xl">揭秘</span>
+                运载火箭核心材料构成与协同机制
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-6 animate-fade-in-up">
+                专业视角剖析航天器的骨骼与神经，洞察其飞向星辰大海的奥秘。
+            </p>
+            <a href="#content" class="inline-block bg-primary-color text-white py-3 px-8 rounded-full text-lg font-semibold shadow-xl transition duration-300 ease-in-out transform hover:scale-105 btn-hover focus:outline-none focus:ring-2 focus:ring-primary-color">
+                <i class="fas fa-arrow-down mr-2"></i> 深入探索
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main id="content" class="container mx-auto px-4 py-16 max-w-6xl">
+
+        <section class="mb-16">
+            <h2 class="text-4xl font-bold mb-8 text-center text-primary-color">
+                <i class="fas fa-cogs mr-3"></i> 直接材料构成及核心功能
+            </h2>
+            <p class="text-lg text-center mb-12 opacity-80">
+                运载火箭的每一寸材料都承载着飞向宇宙的使命。以下是其五大核心构成部分及其关键作用。
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 动力系统 Card -->
+                <div class="p-6 rounded-xl shadow-lg bg-card transition duration-300 card-hover">
+                    <h3 class="text-2xl font-semibold mb-4 text-accent-color flex items-center">
+                        <i class="fas fa-rocket mr-3 text-3xl"></i> 动力系统 <span class="ml-auto text-base text-gray-500 dark:text-gray-400">(28-37%)</span>
+                    </h3>
+                    <ul class="space-y-3 text-lg opacity-90">
+                        <li><strong class="text-primary-color"><i class="fas fa-fire-alt mr-2"></i>功能：</strong>提供升空动力和轨道调整能力。</li>
+                        <li><strong class="text-primary-color"><i class="fas fa-microchip mr-2"></i>关键组件：</strong>液体/固体发动机、涡轮泵、燃烧室、喷管。</li>
+                        <li><strong class="text-primary-color"><i class="fas fa-dollar-sign mr-2"></i>成本核心：</strong>高性能材料（如镍基合金）和精密制造工艺。</li>
+                    </ul>
+                </div>
+
+                <!-- 结构系统 Card -->
+                <div class="p-6 rounded-xl shadow-lg bg-card transition duration-300 card-hover">
+                    <h3 class="text-2xl font-semibold mb-4 text-accent-color flex items-center">
+                        <i class="fas fa-cube mr-3 text-3xl"></i> 结构系统 <span class="ml-auto text-base text-gray-500 dark:text-gray-400">(26-30%)</span>
+                    </h3>
+                    <ul class="space-y-3 text-lg opacity-90">
+                        <li><strong class="text-primary-color"><i class="fas fa-shield-alt mr-2"></i>功能：</strong>构成箭体骨架，承受发射载荷和空间环境应力。</li>
+                        <li><strong class="text-primary-color"><i class="fas fa-layer-group mr-2"></i>关键组件：</strong>燃料贮箱壳体、级间段、整流罩、承力构件。</li>
+                        <li><strong class="text-primary-color"><i class="fas fa-gem mr-2"></i>材料特性：</strong>轻量化复合材料（碳纤维）、高强度铝合金。</li>
+                    </ul>
+                </div>
+
+                <!-- 电气系统 Card -->
+                <div class="p-6 rounded-xl shadow-lg bg-card transition duration-300 card-hover">
+                    <h3 class="text-2xl font-semibold mb-4 text-accent-color flex items-center">
+                        <i class="fas fa-bolt mr-3 text-3xl"></i> 电气系统 <span class="ml-auto text-base text-gray-500 dark:text-gray-400">(12-14%)</span>
+                    </h3>
+                    <ul class="space-y-3 text-lg opacity-90">
+                        <li><strong class="text-primary-color"><i class="fas fa-robot mr-2"></i>功能：</strong>实现飞行控制、数据采集与指令传输。</li>
+                        <li><strong class="text-primary-color"><i class="fas fa-network-wired mr-2"></i>关键组件：</strong>航电计算机、传感器网络、遥测系统、线束。</li>
+                        <li><strong class="text-primary-color"><i class="fas fa-code mr-2"></i>技术特点：</strong>抗辐射芯片、冗余设计、实时操作系统。</li>
+                    </ul>
+                </div>
+
+                <!-- 增压输运系统 Card -->
+                <div class="p-6 rounded-xl shadow-lg bg-card transition duration-300 card-hover">
+                    <h3 class="text-2xl font-semibold mb-4 text-accent-color flex items-center">
+                        <i class="fas fa-pump-medical mr-3 text-3xl"></i> 增压输运系统 <span class="ml-auto text-base text-gray-500 dark:text-gray-400">(7-10%)</span>
+                    </h3>
+                    <ul class="space-y-3 text-lg opacity-90">
+                        <li><strong class="text-primary-color"><i class="fas fa-water mr-2"></i>功能：</strong>维持燃料贮箱压力，精确调控推进剂输送。</li>
+                        <li><strong class="text-primary-color"><i class="fas fa-gas-pump mr-2"></i>关键组件：</strong>高压气瓶、减压阀、管路、作动器。</li>
+                        <li><strong class="text-primary-color"><i class="fas fa-exclamation-triangle mr-2"></i>工程难点：</strong>超低温密封、动态流量控制。</li>
+                    </ul>
+                </div>
+
+                <!-- 火工品 Card -->
+                <div class="p-6 rounded-xl shadow-lg bg-card transition duration-300 card-hover">
+                    <h3 class="text-2xl font-semibold mb-4 text-accent-color flex items-center">
+                        <i class="fas fa-bomb mr-3 text-3xl"></i> 火工品 <span class="ml-auto text-base text-gray-500 dark:text-gray-400">(0.6-3%)</span>
+                    </h3>
+                    <ul class="space-y-3 text-lg opacity-90">
+                        <li><strong class="text-primary-color"><i class="fas fa-share-alt mr-2"></i>功能：</strong>执行级间分离、整流罩抛离等关键动作。</li>
+                        <li><strong class="text-primary-color"><i class="fas fa-puzzle-piece mr-2"></i>关键组件：</strong>分离螺栓、切割索、爆炸接头。</li>
+                        <li><strong class="text-primary-color"><i class="fas fa-check-circle mr-2"></i>可靠性：</strong>双路点火保障（失败率<0.1%）。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-t-2 border-gray-200 dark:border-gray-700 my-16">
+
+        <section class="mb-16">
+            <h2 class="text-4xl font-bold mb-8 text-center text-primary-color">
+                <i class="fas fa-link mr-3"></i> 子系统协同机制
+            </h2>
+            <p class="text-lg text-center mb-12 opacity-80">
+                这些独立的系统如同交响乐团的各个声部，在精密编排下共同奏响航天飞行的壮丽乐章。
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-3xl font-semibold mb-6 text-accent-color flex items-center">
+                        <i class="fas fa-project-diagram mr-3"></i> 发射阶段协同链
+                    </h3>
+                    <div class="mermaid-diagram bg-card p-6 rounded-xl shadow-lg flex justify-center items-center h-full">
+                        <pre class="mermaid text-sm md:text-base">
+                            graph LR
+                            A[动力系统点火] --&gt; B[增压系统维持燃料压力]
+                            B --&gt; C[结构系统承载载荷]
+                            C --&gt; D[电气系统实时调整姿态]
+                            D --&gt; E[火工品执行级间分离]
+                        </pre>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-3xl font-semibold mb-6 text-accent-color flex items-center">
+                        <i class="fas fa-dollar-sign mr-3"></i> 成本与功能耦合关系
+                    </h3>
+                    <div class="bg-card p-6 rounded-xl shadow-lg h-full flex flex-col justify-center">
+                        <ul class="space-y-4 text-lg opacity-90">
+                            <li><i class="fas fa-chart-pie mr-2 text-primary-color"></i> <strong class="text-primary-color">动力与结构系统</strong>：占材料成本<span class="text-accent-color font-bold">60%以上</span>，构成基础性能框架，是火箭的核心骨骼与肌肉。</li>
+                            <li><i class="fas fa-brain mr-2 text-primary-color"></i> <strong class="text-primary-color">电气系统</strong>：作为“神经中枢”协调动力/增压系统工作参数，确保飞行路径的精准无误。</li>
+                            <li><i class="fas fa-sync-alt mr-2 text-primary-color"></i> <strong class="text-primary-color">增压系统</strong>：为动力系统提供稳定工质条件，如同心脏般持续泵血。</li>
+                            <li><i class="fas fa-hand-point-right mr-2 text-primary-color"></i> <strong class="text-primary-color">火工品</strong>：在预设节点触发结构系统重构，是确保任务分阶段成功的“关键开关”。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-t-2 border-gray-200 dark:border-gray-700 my-16">
+
+        <section class="mb-16">
+            <h2 class="text-4xl font-bold mb-8 text-center text-primary-color">
+                <i class="fas fa-chart-line mr-3"></i> 资本视角的观察与建议
+            </h2>
+            <p class="text-lg text-center mb-12 opacity-80">
+                从投资与产业发展的角度，技术迭代与成本结构变化揭示了行业的趋势与机遇。
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div class="p-6 rounded-xl shadow-lg bg-card transition duration-300 card-hover">
+                    <h3 class="text-2xl font-semibold mb-4 text-accent-color flex items-center">
+                        <i class="fas fa-balance-scale mr-3"></i> 成本结构差异
+                    </h3>
+                    <ul class="space-y-3 text-lg opacity-90">
+                        <li><strong class="text-primary-color">天龙三号结构系统：</strong>成本<span class="text-accent-color font-bold">增加36%</span>，可能采用新型复合材料，提升性能同时增加初期投入。</li>
+                        <li><strong class="text-primary-color">火工品成本：</strong><span class="text-accent-color font-bold">下降75%</span>，反映分离技术成熟度提升，标准化与量产化效应显著。</li>
+                    </ul>
+                </div>
+                <div class="p-6 rounded-xl shadow-lg bg-card transition duration-300 card-hover">
+                    <h3 class="text-2xl font-semibold mb-4 text-accent-color flex items-center">
+                        <i class="fas fa-code-branch mr-3"></i> 技术迭代路径
+                    </h3>
+                    <ul class="space-y-3 text-lg opacity-90">
+                        <li><strong class="text-primary-color">电气系统占比：</strong>提升<span class="text-accent-color font-bold">2.1pct</span>，暗示电子系统复杂度和智能化水平显著升级，是未来发展的重要方向。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="p-6 rounded-xl shadow-lg bg-card mb-8 opacity-90">
+                <h3 class="text-2xl font-semibold mb-4 text-accent-color flex items-center">
+                    <i class="fas fa-industry mr-3"></i> 供应链关注点
+                </h3>
+                <ul class="space-y-3 text-lg">
+                    <li><strong class="text-primary-color">动力系统供应商：</strong>集中度高（通常前三大供应商占80%+份额），核心技术壁垒显著。</li>
+                    <li><strong class="text-primary-color">结构系统材料：</strong>涉及特种材料进口替代空间，如碳纤维T800级量产能力是重要突破口。</li>
+                </ul>
+            </div>
+
+            <div class="p-6 rounded-xl bg-card shadow-lg border-l-4 border-accent-color opacity-90">
+                <p class="text-lg italic text-gray-700 dark:text-gray-300">
+                    <i class="fas fa-info-circle mr-2 text-accent-color"></i>
+                    <strong class="text-primary-color">行业验证：</strong>该成本结构与SpaceX Falcon 9公开资料呈现相似分布（动力+结构占材料成本65%-70%），符合液体燃料火箭典型特征。需注意火工品成本异常波动可能涉及批次采购差异。
+                </p>
+            </div>
+
+            <div class="mt-12 p-8 rounded-xl bg-primary-color text-white shadow-xl">
+                <h3 class="text-3xl font-bold mb-4 flex items-center">
+                    <i class="fas fa-lightbulb mr-3"></i> 资本分析建议
+                </h3>
+                <p class="text-xl leading-relaxed">
+                    重点关注<strong class="text-accent-color">动力系统供应商技术壁垒</strong>（如涡轮泵机械密封技术），以及<strong class="text-accent-color">结构系统材料国产化进程</strong>（涉及碳纤维T800级量产能力）。这些领域存在显著的价值提升空间，是航天投资的重要方向。
+                </p>
+            </div>
+        </section>
+
+        <hr class="border-t-2 border-gray-200 dark:border-gray-700 my-16">
+
+        <!-- Optional: Further Reading -->
+        <section class="mb-16">
+            <h2 class="text-4xl font-bold mb-8 text-center text-primary-color">
+                <i class="fas fa-book-open mr-3"></i> 延伸阅读
+            </h2>
+            <p class="text-lg text-center mb-12 opacity-80">
+                深入探索航天科技、工程管理与产业经济的更多奥秘。
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Book 1 -->
+                <a href="#" class="block p-6 rounded-xl shadow-lg bg-card transition duration-300 card-hover no-underline text-inherit">
+                    <h3 class="text-2xl font-semibold mb-3 text-accent-color">《太空：一部人类探索史》</h3>
+                    <p class="text-lg text-gray-700 dark:text-gray-300">通过宏大的叙事，回顾人类探索宇宙的壮丽征程，感受航天精神的深远影响。</p>
+                </a>
+                <!-- Book 2 -->
+                <a href="#" class="block p-6 rounded-xl shadow-lg bg-card transition duration-300 card-hover no-underline text-inherit">
+                    <h3 class="text-2xl font-semibold mb-3 text-accent-color">《火箭科学基础》</h3>
+                    <p class="text-lg text-gray-700 dark:text-gray-300">从工程学角度深入讲解火箭设计、推进原理和系统集成，适合技术爱好者。</p>
+                </a>
+                <!-- Book 3 -->
+                <a href="#" class="block p-6 rounded-xl shadow-lg bg-card transition duration-300 card-hover no-underline text-inherit">
+                    <h3 class="text-2xl font-semibold mb-3 text-accent-color">《材料的秘密：设计、工程与创新》</h3>
+                    <p class="text-lg text-gray-700 dark:text-gray-300">揭示新材料如何推动航空航天等高科技产业的发展与变革。</p>
+                </a>
+                <!-- Book 4 -->
+                <a href="#" class="block p-6 rounded-xl shadow-lg bg-card transition duration-300 card-hover no-underline text-inherit">
+                    <h3 class="text-2xl font-semibold mb-3 text-accent-color">《从0到1：开启商业与未来的秘密》</h3>
+                    <p class="text-lg text-gray-700 dark:text-gray-300">虽然非航天专业，但其创新思维与垄断优势理论对理解高科技产业有启发。</p>
+                </a>
+                <!-- Book 5 -->
+                <a href="#" class="block p-6 rounded-xl shadow-lg bg-card transition duration-300 card-hover no-underline text-inherit">
+                    <h3 class="text-2xl font-semibold mb-3 text-accent-color">《中国航天：从两弹一星到载人飞天》</h3>
+                    <p class="text-lg text-gray-700 dark:text-gray-300">详细记录中国航天事业的发展历程与重大成就，展现民族自豪感。</p>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 dark:bg-gray-900 text-white py-8 text-center">
+        <div class="container mx-auto px-4">
+            <p>&copy; 2023 运载火箭材料分析。保留所有权利。</p>
+            <p class="mt-2 text-sm opacity-75">数据来源于公开资料及专业分析，仅供参考。</p>
+        </div>
+    </footer>
+
+    <!-- Mermaid.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid.js
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default', // Will be overridden by CSS based on dark mode
+            themeVariables: {
+                dark: {
+                    background: '#2c2c4d',
+                    primaryColor: '#4c4c73',
+                    primaryBorderColor: '#6a9acb',
+                    primaryTextColor: '#e0e0e0',
+                    lineColor: '#a0a0c0',
+                    secondaryColor: '#4c4c73',
+                    tertiaryColor: '#4c4c73',
+                },
+                light: {
+                    background: '#ffffff',
+                    primaryColor: '#f8f9fa',
+                    primaryBorderColor: '#3498db',
+                    primaryTextColor: '#212529',
+                    lineColor: '#34495e',
+                    secondaryColor: '#f8f9fa',
+                    tertiaryColor: '#f8f9fa',
+                }
+            }
+        });
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            }
+            // Re-render Mermaid diagrams to apply new theme
+            mermaid.init(); 
+        }
+
+        // Check for saved theme or system preference on load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light'); // Default to light if no preference and not dark mode
+        }
+
+        // Event listener for toggle button
+        themeToggle.addEventListener('click', () => {
+            if (html.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Optional: Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+```
