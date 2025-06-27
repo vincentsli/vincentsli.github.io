@@ -1,0 +1,511 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>洞悉商业航天：投资视角下的未来疆域</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts for Noto Serif SC and Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom Fonts */
+        :root {
+            --font-heading: 'Noto Serif SC', 'Times New Roman', serif;
+            --font-body: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+
+        .font-heading { font-family: var(--font-heading); }
+        .font-body { font-family: var(--font-body); }
+
+        /* Dark/Light Mode Transitions */
+        body {
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+        
+        /* Gradient Text Effect */
+        .text-gradient {
+            background: linear-gradient(90deg, #6366f1, #a855f7); /* Indigo to Purple */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Card Hover Effects */
+        .card-hover {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        .dark .card-hover:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        .light .card-hover:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Keyframe animations for subtle entry effects */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0; /* Hidden by default */
+        }
+
+        .animate-slide-in-up {
+            animation: slideInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        /* Delay utilities for staggered animations */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+
+        /* Mermaid styling for dark mode */
+        .dark .mermaid .node rect, .dark .mermaid .node circle, .dark .mermaid .node ellipse, .dark .mermaid .node polygon {
+            fill: #374151 !important; /* Tailwind gray-700 */
+            stroke: #4B5563 !important; /* Tailwind gray-600 */
+            stroke-width: 2px !important;
+        }
+        .dark .mermaid .edge path {
+            stroke: #9CA3AF !important; /* Tailwind gray-400 */
+            stroke-width: 1.5px !important;
+        }
+        .dark .mermaid .node text {
+            fill: #D1D5DB !important; /* Tailwind gray-300 */
+        }
+        .dark .mermaid .cluster rect {
+            fill: #1F2937 !important; /* Tailwind gray-900 slightly lighter */
+            stroke: #4B5563 !important;
+        }
+        .dark .mermaid .cluster text {
+            fill: #9CA3AF !important;
+        }
+        /* Mermaid styling for light mode */
+        .light .mermaid .node rect, .light .mermaid .node circle, .light .mermaid .node ellipse, .light .mermaid .node polygon {
+            fill: #F3F4F6 !important; /* Tailwind gray-100 */
+            stroke: #D1D5DB !important; /* Tailwind gray-300 */
+            stroke-width: 2px !important;
+        }
+        .light .mermaid .edge path {
+            stroke: #6B7280 !important; /* Tailwind gray-500 */
+            stroke-width: 1.5px !important;
+        }
+        .light .mermaid .node text {
+            fill: #374151 !important; /* Tailwind gray-700 */
+        }
+        .light .mermaid .cluster rect {
+            fill: #E5E7EB !important; /* Tailwind gray-200 */
+            stroke: #D1D5DB !important;
+        }
+        .light .mermaid .cluster text {
+            fill: #6B7280 !important;
+        }
+        /* Ensures Mermaid's background is transparent and text color inherited */
+        .mermaid {
+            background-color: transparent !important;
+            color: inherit !important;
+        }
+    </style>
+</head>
+<body class="font-body antialiased bg-gray-900 text-gray-200 dark:bg-gray-900 dark:text-gray-200 light:bg-gray-50 light:text-gray-800 transition-colors duration-300">
+
+    <!-- Dark/Light Mode Script (placed early to prevent FOUC) -->
+    <script>
+        const applyTheme = (theme) => {
+            document.documentElement.classList.remove('light', 'dark');
+            document.documentElement.classList.add(theme);
+            localStorage.setItem('theme', theme);
+        };
+
+        const getPreferredTheme = () => {
+            if (localStorage.getItem('theme')) {
+                return localStorage.getItem('theme');
+            }
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        };
+
+        const initialTheme = getPreferredTheme();
+        applyTheme(initialTheme);
+
+        window.onload = () => {
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', () => {
+                    const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    applyTheme(newTheme);
+                    
+                    // Update button icon
+                    const icon = themeToggleBtn.querySelector('i');
+                    if (icon) {
+                        if (newTheme === 'dark') {
+                            icon.classList.remove('fa-sun');
+                            icon.classList.add('fa-moon');
+                        } else {
+                            icon.classList.remove('fa-moon');
+                            icon.classList.add('fa-sun');
+                        }
+                    }
+
+                    // Re-initialize Mermaid to apply new theme variables
+                    mermaid.initialize({
+                        startOnLoad: true,
+                        theme: newTheme === 'dark' ? 'dark' : 'default', // 'default' for light mode
+                        securityLevel: 'loose', 
+                        themeVariables: {
+                            darkMode: newTheme === 'dark',
+                            primaryColor: '#6366F1',
+                            primaryBorderColor: '#A78BFA',
+                            lineColor: '#9CA3AF',
+                            textColor: '#D1D5DB',
+                            clusterBkg: '#1F2937',
+                            clusterBorder: '#4B5563',
+                        }
+                    });
+                    // Force re-render of existing diagrams
+                    mermaid.init();
+                });
+
+                // Set initial icon for the toggle button based on resolved theme
+                const icon = themeToggleBtn.querySelector('i');
+                if (icon) {
+                    if (initialTheme === 'dark') {
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                    } else {
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                    }
+                }
+            }
+        };
+    </script>
+
+    <!-- Header -->
+    <header class="bg-gray-800 dark:bg-gray-800 light:bg-white text-gray-200 dark:text-gray-200 light:text-gray-900 py-4 shadow-lg transition-colors duration-300">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold font-heading text-gradient">AI 智囊</a>
+            <nav>
+                <ul class="flex space-x-6 items-center">
+                    <li><a href="#overview" class="hover:text-purple-400 transition duration-200">航天概览</a></li>
+                    <li><a href="#technology" class="hover:text-purple-400 transition duration-200">核心技术</a></li>
+                    <li><a href="#investment" class="hover:text-purple-400 transition duration-200">投资洞察</a></li>
+                    <li><a href="#mermaid-diagram" class="hover:text-purple-400 transition duration-200">知识图谱</a></li>
+                    <li><a href="#further-reading" class="hover:text-purple-400 transition duration-200">延伸阅读</a></li>
+                    <li>
+                        <button id="theme-toggle" class="p-2 rounded-full text-gray-400 hover:text-white dark:hover:text-white light:hover:text-gray-700 hover:bg-gray-700 dark:hover:bg-gray-700 light:hover:bg-gray-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                            <i class="fas fa-moon text-lg"></i>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-cover bg-center h-screen flex items-center justify-center text-center px-4" style="background-image: url('https://images.unsplash.com/photo-1541804297-f584e0c4b281?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');">
+        <div class="absolute inset-0 bg-black opacity-60 dark:bg-black dark:opacity-70 light:bg-gray-900 light:opacity-50 transition-opacity duration-300"></div>
+        <div class="relative z-10 max-w-4xl">
+            <h1 class="text-5xl md:text-7xl font-bold font-heading leading-tight mb-4 text-white drop-shadow-lg animate-fade-in-up">
+                <span class="text-gradient">洞悉商业航天：</span><br>投资视角下的未来疆域
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 dark:text-gray-300 light:text-gray-100 mb-8 animate-fade-in-up delay-200">
+                聚焦资本运作与科技前沿，探索千亿级市场机遇。
+            </p>
+            <a href="#overview" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105 animate-fade-in-up delay-400">
+                <i class="fas fa-arrow-down mr-2"></i> 深入探索
+            </a>
+        </div>
+    </section>
+
+    <main class="container mx-auto px-4 py-16 max-w-screen-xl">
+
+        <!-- Initial disclaimer / scope -->
+        <section id="scope-clarification" class="mb-16 bg-gray-800 dark:bg-gray-800 light:bg-blue-50 p-8 rounded-lg shadow-xl border border-purple-500 dark:border-purple-500 light:border-blue-300 transition-colors duration-300 animate-slide-in-up">
+            <h2 class="text-3xl font-heading font-semibold mb-4 text-purple-400 dark:text-purple-400 light:text-blue-800">
+                <i class="fas fa-info-circle mr-3"></i> 关于我的专业范围
+            </h2>
+            <p class="text-lg leading-relaxed mb-4 text-gray-300 dark:text-gray-300 light:text-gray-700">
+                作为一名专注于<strong class="font-semibold text-purple-300 dark:text-purple-300 light:text-blue-600">投行业务、A股市场资本运作及行业分析</strong>的AI助手，我的核心专长在于解读金融市场、识别投资机会和分析企业价值。
+            </p>
+            <p class="text-lg leading-relaxed mb-4 text-gray-300 dark:text-gray-300 light:text-gray-700">
+                对于您之前关于“东风-XX新一代中远程弹道导弹、长征十一号运载火箭、东风-XX高超音速滑翔导弹、捷龙一号运载火箭等国防重点武器型号和运载火箭”燃料类型及技术细节的查询，我<strong class="font-semibold text-red-400 dark:text-red-400 light:text-red-600">无法直接提供专业回答</strong>。这类信息属于军事科技与国防安全领域，超出了我的专业范畴。
+            </p>
+            <p class="text-lg leading-relaxed text-gray-300 dark:text-gray-300 light:text-gray-700">
+                然而，在我的知识库中，存储了大量关于<strong class="font-semibold text-purple-300 dark:text-purple-300 light:text-blue-600">商业航天产业、火箭技术发展及其投资价值</strong>的深度分析。我乐于在此分享这些见解，帮助您从<strong class="font-semibold text-purple-300 dark:text-purple-300 light:text-blue-600">资本与产业</strong>的视角，洞察这一充满潜力的未来赛道。
+            </p>
+        </section>
+
+        <!-- Section: Commercial Aerospace Overview -->
+        <section id="overview" class="mb-16">
+            <h2 class="text-4xl font-heading font-bold text-center mb-12 text-gradient animate-fade-in-up">
+                <i class="fas fa-rocket mr-4"></i> 商业航天赛道概览
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card-hover bg-gray-800 dark:bg-gray-800 light:bg-white p-6 rounded-lg shadow-lg border border-gray-700 dark:border-gray-700 light:border-gray-200 animate-fade-in-up delay-100">
+                    <h3 class="text-2xl font-heading font-semibold mb-4 text-purple-300 dark:text-purple-300 light:text-purple-700"><i class="fas fa-lightbulb mr-2"></i> 商业模式创新</h3>
+                    <p class="text-gray-300 dark:text-gray-300 light:text-gray-700 leading-relaxed">
+                        行业正从单一的火箭发射服务，向集<strong class="font-semibold">卫星制造、发射、在轨服务</strong>为一体的全链条商业模式延伸，极大拓展了市场空间与服务范畴。
+                    </p>
+                </div>
+                <div class="card-hover bg-gray-800 dark:bg-gray-800 light:bg-white p-6 rounded-lg shadow-lg border border-gray-700 dark:border-gray-700 light:border-gray-200 animate-fade-in-up delay-200">
+                    <h3 class="text-2xl font-heading font-semibold mb-4 text-purple-300 dark:text-purple-300 light:text-purple-700"><i class="fas fa-chart-line mr-2"></i> 政策驱动与市场需求</h3>
+                    <p class="text-gray-300 dark:text-gray-300 light:text-gray-700 leading-relaxed">
+                        “十四五”规划及中国星网工程等政策，强力推动低轨卫星星座组网建设，催生对高频次、低成本火箭发射服务的巨大需求。
+                    </p>
+                </div>
+                <div class="card-hover bg-gray-800 dark:bg-gray-800 light:bg-white p-6 rounded-lg shadow-lg border border-gray-700 dark:border-gray-700 light:border-gray-200 animate-fade-in-up delay-300">
+                    <h3 class="text-2xl font-heading font-semibold mb-4 text-purple-300 dark:text-purple-300 light:text-purple-700"><i class="fas fa-cogs mr-2"></i> 技术迭代与成本优化</h3>
+                    <p class="text-gray-300 dark:text-gray-300 light:text-gray-700 leading-relaxed">
+                        可复用火箭技术正加速商业化进程，通过显著降低发射成本，推动商业航天从少数精英活动向大众化服务转型。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Liquid Rocket Engines -->
+        <section id="technology" class="mb-16">
+            <h2 class="text-4xl font-heading font-bold text-center mb-12 text-gradient animate-fade-in-up">
+                <i class="fas fa-flask mr-4"></i> 液体火箭发动机：核心技术与优势
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-6 animate-fade-in-up delay-100">
+                    <div class="card-hover bg-gray-800 dark:bg-gray-800 light:bg-white p-6 rounded-lg shadow-lg border border-gray-700 dark:border-gray-700 light:border-gray-200">
+                        <h3 class="text-2xl font-heading font-semibold mb-3 text-purple-300 dark:text-purple-300 light:text-purple-700"><i class="fas fa-wrench mr-2"></i> 突破“卡脖子”技术</h3>
+                        <p class="text-gray-300 dark:text-gray-300 light:text-gray-700 leading-relaxed">
+                            液体火箭发动机是推动中国商业航天发展的关键技术之一，尤其在<strong class="font-semibold">可重复使用和精准推力控制</strong>方面，是降低发射成本的核心路径，被视为突破“卡脖子”技术的战略高地。
+                        </p>
+                    </div>
+                    <div class="card-hover bg-gray-800 dark:bg-gray-800 light:bg-white p-6 rounded-lg shadow-lg border border-gray-700 dark:border-gray-700 light:border-gray-200">
+                        <h3 class="text-2xl font-heading font-semibold mb-3 text-purple-300 dark:text-purple-300 light:text-purple-700"><i class="fas fa-gas-pump mr-2"></i> 燃料路径优势</h3>
+                        <p class="text-gray-300 dark:text-gray-300 light:text-gray-700 leading-relaxed">
+                            <strong class="font-semibold">液氧煤油</strong>技术路径在比冲性能上优于液氧甲烷和固体燃料，同时具备供应链成熟、安全性高的优势，是当前主流且前景广阔的选择。
+                        </p>
+                    </div>
+                    <div class="card-hover bg-gray-800 dark:bg-gray-800 light:bg-white p-6 rounded-lg shadow-lg border border-gray-700 dark:border-gray-700 light:border-gray-200">
+                        <h3 class="text-2xl font-heading font-semibold mb-3 text-purple-300 dark:text-purple-300 light:text-purple-700"><i class="fas fa-atom mr-2"></i> 先进制造技术</h3>
+                        <p class="text-gray-300 dark:text-gray-300 light:text-gray-700 leading-relaxed">
+                            通过引入<strong class="font-semibold">3D打印和针栓喷注</strong>等技术，新一代液体火箭发动机零部件数量减少30%，单发发射成本降低50%，重复使用次数可超50次，显著摊薄单次发射成本。
+                        </p>
+                    </div>
+                </div>
+                <div class="flex justify-center items-center p-6 bg-gray-800 dark:bg-gray-800 light:bg-white rounded-lg shadow-lg border border-gray-700 dark:border-gray-700 light:border-gray-200 animate-fade-in-up delay-200">
+                    <img src="https://images.unsplash.com/photo-1541804297-f584e0c4b281?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Liquid Rocket Engine" class="rounded-lg max-w-full h-auto object-cover">
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Investment Insights -->
+        <section id="investment" class="mb-16">
+            <h2 class="text-4xl font-heading font-bold text-center mb-12 text-gradient animate-fade-in-up">
+                <i class="fas fa-dollar-sign mr-4"></i> 投资与资本运作洞察
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card-hover bg-gray-800 dark:bg-gray-800 light:bg-white p-6 rounded-lg shadow-lg border border-gray-700 dark:border-gray-700 light:border-gray-200 animate-fade-in-up delay-100">
+                    <h3 class="text-2xl font-heading font-semibold mb-4 text-purple-300 dark:text-purple-300 light:text-purple-700"><i class="fas fa-building mr-2"></i> 优秀案例：天兵科技</h3>
+                    <p class="text-gray-300 dark:text-gray-300 light:text-gray-700 leading-relaxed">
+                        天兵科技凭借“天龙二号”液体火箭的成功，获得十发市场订单，占据国内商业航天发射市场最大份额，成为国家卫星互联网新基建的核心供应商，彰显技术与市场双重优势。
+                    </p>
+                </div>
+                <div class="card-hover bg-gray-800 dark:bg-gray-800 light:bg-white p-6 rounded-lg shadow-lg border border-gray-700 dark:border-gray-700 light:border-gray-200 animate-fade-in-up delay-200">
+                    <h3 class="text-2xl font-heading font-semibold mb-4 text-purple-300 dark:text-purple-300 light:text-purple-700"><i class="fas fa-hand-holding-usd mr-2"></i> 科创板上市考量</h3>
+                    <p class="text-gray-300 dark:text-gray-300 light:text-gray-700 leading-relaxed">
+                        对于商业航天企业而言，科创板上市标准五强调<strong class="font-semibold">市场空间和技术优势</strong>。液体火箭等核心技术实力是吸引审核方关注，成功登陆资本市场的关键。
+                    </p>
+                </div>
+                <div class="card-hover bg-gray-800 dark:bg-gray-800 light:bg-white p-6 rounded-lg shadow-lg border border-gray-700 dark:border-gray-700 light:border-gray-200 animate-fade-in-up delay-300">
+                    <h3 class="text-2xl font-heading font-semibold mb-4 text-purple-300 dark:text-purple-300 light:text-purple-700"><i class="fas fa-box-open mr-2"></i> 资本性支出分析</h3>
+                    <p class="text-gray-300 dark:text-gray-300 light:text-gray-700 leading-relaxed">
+                        火箭制造企业的资本性支出主要包括生产硬件、研发体系、测试设施和配套资产，需结合行业标准进行细化分类和核算，以进行精准的财务评估。
+                    </p>
+                </div>
+                <div class="card-hover bg-gray-800 dark:bg-gray-800 light:bg-white p-6 rounded-lg shadow-lg border border-gray-700 dark:border-gray-700 light:border-gray-200 animate-fade-in-up delay-400">
+                    <h3 class="text-2xl font-heading font-semibold mb-4 text-purple-300 dark:text-purple-300 light:text-purple-700"><i class="fas fa-recycle mr-2"></i> 回收技术与成本优化</h3>
+                    <p class="text-gray-300 dark:text-gray-300 light:text-gray-700 leading-relaxed">
+                        全球及中国商业航天公司正聚焦<strong class="font-semibold">一子级垂直回收技术</strong>。因一子级占火箭成本的60%-70%，成功回收可大幅降低发射成本，是实现规模化商业运营的关键。
+                    </p>
+                </div>
+                <div class="card-hover bg-gray-800 dark:bg-gray-800 light:bg-white p-6 rounded-lg shadow-lg border border-gray-700 dark:border-gray-700 light:border-gray-200 animate-fade-in-up delay-500">
+                    <h3 class="text-2xl font-heading font-semibold mb-4 text-purple-300 dark:text-purple-300 light:text-purple-700"><i class="fas fa-calculator mr-2"></i> 折旧费用核算</h3>
+                    <p class="text-gray-300 dark:text-gray-300 light:text-gray-700 leading-relaxed">
+                        试车台和发射台等重资产的折旧费用，可根据实际使用量（如工时、次数、能耗）按比例分摊至具体火箭型号的研发支出或生产成本，反映真实运营效益。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Visualization Section (Mermaid.js) -->
+        <section id="mermaid-diagram" class="mb-16">
+            <h2 class="text-4xl font-heading font-bold text-center mb-12 text-gradient animate-fade-in-up">
+                <i class="fas fa-project-diagram mr-4"></i> 商业航天投资逻辑图谱
+            </h2>
+            <div class="bg-gray-800 dark:bg-gray-800 light:bg-white p-8 rounded-lg shadow-xl border border-gray-700 dark:border-gray-700 light:border-gray-200 overflow-x-auto relative animate-fade-in-up delay-100">
+                <div class="mermaid-container flex justify-center items-center min-h-[400px]">
+                    <pre class="mermaid font-mono text-xs md:text-sm lg:text-base">
+graph TD
+    A[政策驱动: "十四五"规划, 中国星网] --> B{市场需求: 低轨卫星星座, 高频次发射};
+    B --> C[技术迭代: 可复用火箭, 液体发动机];
+
+    subgraph 技术核心
+        C --> C1[液体火箭发动机: "卡脖子"技术];
+        C1 --> C2[液氧煤油路径: 高性能, 供应链成熟];
+        C1 --> C3[先进制造: 3D打印, 针栓喷注];
+        C3 --> C4[成本效益: 零部件-30%, 单发成本-50%, 重复使用>50次];
+        C --> C5[一子级回收: 降低60-70%成本];
+    end
+
+    C --> D{投资机会};
+    D --> D1[商业模式创新: 全链条服务];
+    D --> D2[优秀企业案例: 天兵科技];
+    D2 --> D2.1[“天龙二号”成功, 市场份额领先];
+    D2.1 --> D2.2[国家卫星互联网核心供应商];
+
+    D --> E[资本运作考量];
+    E --> E1[科创板上市: 强调市场空间, 技术优势];
+    E --> E2[资本性支出分析: 生产, 研发, 测试, 配套];
+    E --> E3[财务核算: 试车/发射台折旧分摊];
+
+    style A fill:#4F46E5,stroke:#8B5CF6,stroke-width:2px,color:#FFFFFF
+    style B fill:#8B5CF6,stroke:#A78BFA,stroke-width:2px,color:#FFFFFF
+    style C fill:#6366F1,stroke:#8B5CF6,stroke-width:2px,color:#FFFFFF
+    style D fill:#10B981,stroke:#34D399,stroke-width:2px,color:#FFFFFF
+    style E fill:#F59E0B,stroke:#FBBF24,stroke-width:2px,color:#FFFFFF
+
+    linkStyle 0 stroke:#C084FC,stroke-width:1.5px;
+    linkStyle 1 stroke:#C084FC,stroke-width:1.5px;
+    linkStyle 2 stroke:#A78BFA,stroke-width:1.5px;
+    linkStyle 3 stroke:#A78BFA,stroke-width:1.5px;
+    linkStyle 4 stroke:#A78BFA,stroke-width:1.5px;
+    linkStyle 5 stroke:#A78BFA,stroke-width:1.5px;
+    linkStyle 6 stroke:#A78BFA,stroke-width:1.5px;
+    linkStyle 7 stroke:#34D399,stroke-width:1.5px;
+    linkStyle 8 stroke:#34D399,stroke-width:1.5px;
+    linkStyle 9 stroke:#34D399,stroke-width:1.5px;
+    linkStyle 10 stroke:#34D399,stroke-width:1.5px;
+    linkStyle 11 stroke:#34D399,stroke-width:1.5px;
+    linkStyle 12 stroke:#FBBF24,stroke-width:1.5px;
+    linkStyle 13 stroke:#FBBF24,stroke-width:1.5px;
+                    </pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Further Reading Section -->
+        <section id="further-reading" class="mb-16">
+            <h2 class="text-4xl font-heading font-bold text-center mb-12 text-gradient animate-fade-in-up">
+                <i class="fas fa-book-open mr-4"></i> 延伸阅读：深度洞察商业航天
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card-hover bg-gray-800 dark:bg-gray-800 light:bg-white p-6 rounded-lg shadow-lg border border-gray-700 dark:border-gray-700 light:border-gray-200 animate-fade-in-up delay-100">
+                    <h3 class="text-2xl font-heading font-semibold mb-3 text-purple-300 dark:text-purple-300 light:text-purple-700">1. 《未来已来：商业航天新时代》</h3>
+                    <p class="text-gray-300 dark:text-gray-300 light:text-gray-700 leading-relaxed mb-4">
+                        全面介绍商业航天的发展历程、当前格局与未来趋势，涵盖技术、市场与政策等多维度分析。
+                    </p>
+                    <a href="#" class="text-blue-400 hover:underline transition duration-200 flex items-center">
+                        <i class="fas fa-external-link-alt mr-2"></i> 了解更多
+                    </a>
+                </div>
+                <div class="card-hover bg-gray-800 dark:bg-gray-800 light:bg-white p-6 rounded-lg shadow-lg border border-gray-700 dark:border-gray-700 light:border-gray-200 animate-fade-in-up delay-200">
+                    <h3 class="text-2xl font-heading font-semibold mb-3 text-purple-300 dark:text-purple-300 light:text-purple-700">2. 《太空经济：万亿市场的崛起》</h3>
+                    <p class="text-gray-300 dark:text-gray-300 light:text-gray-700 leading-relaxed mb-4">
+                        深入探讨太空经济的构成、投资机会与面临的挑战，分析全球主要参与者的战略布局。
+                    </p>
+                    <a href="#" class="text-blue-400 hover:underline transition duration-200 flex items-center">
+                        <i class="fas fa-external-link-alt mr-2"></i> 了解更多
+                    </a>
+                </div>
+                <div class="card-hover bg-gray-800 dark:bg-gray-800 light:bg-white p-6 rounded-lg shadow-lg border border-gray-700 dark:border-gray-700 light:border-gray-200 animate-fade-in-up delay-300">
+                    <h3 class="text-2xl font-heading font-semibold mb-3 text-purple-300 dark:text-purple-300 light:text-purple-700">3. 《资本的力量：科创板与硬科技投资》</h3>
+                    <p class="text-gray-300 dark:text-gray-300 light:text-gray-700 leading-relaxed mb-4">
+                        从资本市场角度分析科创板对硬科技企业（如商业航天）的赋能作用，及投资者如何把握机遇。
+                    </p>
+                    <a href="#" class="text-blue-400 hover:underline transition duration-200 flex items-center">
+                        <i class="fas fa-external-link-alt mr-2"></i> 了解更多
+                    </a>
+                </div>
+                <div class="card-hover bg-gray-800 dark:bg-gray-800 light:bg-white p-6 rounded-lg shadow-lg border border-gray-700 dark:border-gray-700 light:border-gray-200 animate-fade-in-up delay-400">
+                    <h3 class="text-2xl font-heading font-semibold mb-3 text-purple-300 dark:text-purple-300 light:text-purple-700">4. 《火箭发动机设计原理与应用》</h3>
+                    <p class="text-gray-300 dark:text-gray-300 light:text-gray-700 leading-relaxed mb-4">
+                        一本技术性较强的书籍，适合希望了解火箭发动机，尤其是液体发动机技术细节的读者。
+                    </p>
+                    <a href="#" class="text-blue-400 hover:underline transition duration-200 flex items-center">
+                        <i class="fas fa-external-link-alt mr-2"></i> 了解更多
+                    </a>
+                </div>
+                <div class="card-hover bg-gray-800 dark:bg-gray-800 light:bg-white p-6 rounded-lg shadow-lg border border-gray-700 dark:border-gray-700 light:border-gray-200 animate-fade-in-up delay-500">
+                    <h3 class="text-2xl font-heading font-semibold mb-3 text-purple-300 dark:text-purple-300 light:text-purple-700">5. 《中国商业航天白皮书（最新版）》</h3>
+                    <p class="text-gray-300 dark:text-gray-300 light:text-gray-700 leading-relaxed mb-4">
+                        官方或行业组织发布的年度白皮书，提供中国商业航天最新的政策、市场数据和发展方向。
+                    </p>
+                    <a href="#" class="text-blue-400 hover:underline transition duration-200 flex items-center">
+                        <i class="fas fa-external-link-alt mr-2"></i> 了解更多
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 dark:bg-gray-800 light:bg-gray-900 text-gray-400 dark:text-gray-400 light:text-gray-500 py-8 text-center transition-colors duration-300">
+        <div class="container mx-auto px-4">
+            <p>&copy; 2023 AI 智囊. All rights reserved. | 专注于投行业务与A股市场分析</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <a href="#" class="hover:text-purple-400 transition duration-200" aria-label="Twitter"><i class="fab fa-twitter text-xl"></i></a>
+                <a href="#" class="hover:text-purple-400 transition duration-200" aria-label="LinkedIn"><i class="fab fa-linkedin-in text-xl"></i></a>
+                <a href="#" class="hover:text-purple-400 transition duration-200" aria-label="Email"><i class="fas fa-envelope text-xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initial Mermaid initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: document.documentElement.classList.contains('dark') ? 'dark' : 'default', // Dynamic theme for Mermaid
+                securityLevel: 'loose', // Allow custom styling
+                themeVariables: {
+                    // Dark mode specific variables for Mermaid
+                    darkMode: document.documentElement.classList.contains('dark'),
+                    primaryColor: '#6366F1', // Indigo 500
+                    primaryBorderColor: '#A78BFA', // Purple 300
+                    lineColor: '#9CA3AF', // Gray 400
+                    textColor: '#D1D5DB', // Gray 300
+                    clusterBkg: '#1F2937', // Gray 900 slightly lighter
+                    clusterBorder: '#4B5563', // Gray 600
+
+                    // Light mode specific variables, potentially overridden by custom CSS for better control
+                    // (Mermaid's 'default' theme usually handles light mode well, but explicit values can ensure consistency)
+                    // We also have custom CSS for .light .mermaid elements, which provides finer control.
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+```
