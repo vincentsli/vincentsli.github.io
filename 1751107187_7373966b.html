@@ -1,0 +1,542 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资产核查深度解析：会计师与券商的盘点协作</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 基本样式：默认深色模式 */
+        body {
+            font-family: 'Noto Sans SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', sans-serif;
+            background-color: #1a202c; /* 深色背景 */
+            color: #e2e8f0; /* 浅色文本 */
+            transition: background-color 0.3s ease, color 0.3s ease; /* 平滑过渡 */
+        }
+
+        /* 浅色模式样式 */
+        html.light body {
+            background-color: #ffffff;
+            color: #2d3748;
+        }
+        html.light .text-primary-400 {
+            color: #2b6cb0; /* 蓝色系作为主标题色 */
+        }
+        html.light .bg-gray-800 {
+            background-color: #f7fafc; /* 浅色卡片背景 */
+        }
+        html.light .bg-gray-700 {
+            background-color: #edf2f7; /* 浅色嵌套卡片/表格头背景 */
+        }
+        html.light .text-emerald-400 {
+            color: #38a169; /* 绿色系作为点缀色 */
+        }
+        html.light .border-gray-700 {
+            border-color: #cbd5e0; /* 浅色边框 */
+        }
+        html.light table th, html.light table td {
+            border-color: #cbd5e0;
+        }
+
+        /* 中文字体优化 */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', serif;
+        }
+
+        /* 自定义滚动条美化（深色模式） */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #2d3748;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4a5568;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5a6578;
+        }
+
+        /* 自定义滚动条美化（浅色模式） */
+        html.light ::-webkit-scrollbar-track {
+            background: #f0f4f8;
+        }
+        html.light ::-webkit-scrollbar-thumb {
+            background: #a0aec0;
+        }
+        html.light ::-webkit-scrollbar-thumb:hover {
+            background: #718096;
+        }
+
+        /* 微交互效果 */
+        .card-hover-scale:hover {
+            transform: scale(1.005);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        /* 浅色模式下的阴影调整 */
+        html.light .card-hover-scale:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .link-hover-effect {
+            position: relative;
+            display: inline-block;
+        }
+        .link-hover-effect::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: currentColor;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+        .link-hover-effect:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 min-h-screen antialiased flex flex-col items-center">
+
+    <!-- 主题切换按钮 -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="themeToggle" class="p-3 rounded-full bg-gray-800 text-gray-400 hover:text-emerald-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all duration-300 shadow-lg dark:shadow-none light:shadow-md">
+            <i class="fas fa-sun hidden dark:inline-block"></i>
+            <i class="fas fa-moon dark:hidden"></i>
+        </button>
+    </div>
+
+    <div class="container mx-auto p-4 md:p-8 lg:p-12 max-w-7xl">
+
+        <!-- Hero 模块 -->
+        <header class="text-center py-16 md:py-24 bg-gradient-to-br from-gray-900 to-gray-800 rounded-lg shadow-xl mb-12 relative overflow-hidden dark:from-gray-900 dark:to-gray-800 light:from-blue-50 light:to-white">
+            <div class="absolute inset-0 bg-cover bg-center opacity-10" style="background-image: url('https://images.unsplash.com/photo-1590283088339-165f973c1d9b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="relative z-10 p-4">
+                <h1 class="text-4xl md:text-6xl font-bold text-emerald-400 dark:text-emerald-400 light:text-blue-700 mb-4 tracking-tight leading-tight drop-shadow-lg">
+                    审计双璧：会计师与券商的资产盘点协作
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 dark:text-gray-300 light:text-gray-600 mb-6 max-w-3xl mx-auto leading-relaxed">
+                    深度解析存货与固定资产核查中的职责与要点
+                </p>
+                <p class="text-lg text-gray-400 dark:text-gray-400 light:text-gray-500 italic max-w-4xl mx-auto">
+                    在资本市场运作中，准确的资产评估是基石。本文将详细阐述会计师与券商在企业存货和固定资产盘点过程中所扮演的关键角色、协作机制，以及监管机构的关注焦点，助您洞悉资产核查的专业实践。
+                </p>
+            </div>
+        </header>
+
+        <main class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- 主内容区域 -->
+            <div class="lg:col-span-2 space-y-10">
+
+                <!-- Section: 会计师的核心职责 -->
+                <section class="bg-gray-800 p-8 rounded-lg shadow-xl card-hover-scale transition-all duration-300">
+                    <h2 class="text-3xl font-semibold text-primary-400 mb-6 border-b border-gray-700 pb-3 flex items-center">
+                        <i class="fas fa-user-tie text-emerald-400 mr-3"></i>会计师的核心职责
+                        <span class="text-base text-gray-500 ml-3">(审计主体)</span>
+                    </h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-2xl font-medium text-gray-300 mb-3 flex items-center">
+                                <i class="fas fa-boxes-stacked text-emerald-400 mr-2"></i>1. 存货监盘
+                            </h3>
+                            <ul class="list-none space-y-3 pl-0">
+                                <li class="flex items-start">
+                                    <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                                    <p><strong class="text-gray-300">监督与评价</strong>：评价被审计单位存货盘点指令和程序的合理性（如盘点范围、方法），观察管理层盘点执行情况。</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                                    <p><strong class="text-gray-300">实质性检查</strong>：现场检查存货实物状态（是否积压、残次、呆滞），拍照记录。对特殊存货（如危化品）聘请专家协助。执行抽盘程序，核对盘点表与财务记录的一致性。</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                                    <p><strong class="text-gray-300">覆盖完整性</strong>：确保盘点范围包含发出商品、在途物资等易遗漏项目。</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-medium text-gray-300 mb-3 flex items-center">
+                                <i class="fas fa-building text-emerald-400 mr-2"></i>2. 固定资产监盘
+                            </h3>
+                            <ul class="list-none space-y-3 pl-0">
+                                <li class="flex items-start">
+                                    <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                                    <p><strong class="text-gray-300">实物核查</strong>：现场观察固定资产运行状态，核查权属证明（如房产证、设备发票）。关注资产是否闲置、毁损或存在抵押限制。</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                                    <p><strong class="text-gray-300">账实匹配</strong>：从实物追溯至台账（或反向），验证资产编号与账面记录一致性。检查新增固定资产的采购合同、验收单据等支持性文件。</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-medium text-gray-300 mb-3 flex items-center">
+                                <i class="fas fa-file-signature text-emerald-400 mr-2"></i>3. 记录与报告
+                            </h3>
+                            <ul class="list-none space-y-3 pl-0">
+                                <li class="flex items-start">
+                                    <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                                    <p><strong class="text-gray-300">编制监盘小结</strong>，要求盘点人员、仓管员等签字确认盘点表。</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                                    <p><strong class="text-gray-300">对差异执行替代程序</strong>（如检查出入库单据、维修记录）。</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section: 券商的职责 -->
+                <section class="bg-gray-800 p-8 rounded-lg shadow-xl card-hover-scale transition-all duration-300">
+                    <h2 class="text-3xl font-semibold text-primary-400 mb-6 border-b border-gray-700 pb-3 flex items-center">
+                        <i class="fas fa-chart-line text-emerald-400 mr-3"></i>券商的职责
+                        <span class="text-base text-gray-500 ml-3">(督导与复核)</span>
+                    </h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-2xl font-medium text-gray-300 mb-3 flex items-center">
+                                <i class="fas fa-clipboard-check text-emerald-400 mr-2"></i>1. 程序合规性督导
+                            </h3>
+                            <ul class="list-none space-y-3 pl-0">
+                                <li class="flex items-start">
+                                    <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                                    <p><strong class="text-gray-300">确保会计师制定详细的盘点计划</strong>（时间、地点、人员分工），特别关注多地同步盘点的可行性。</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                                    <p><strong class="text-gray-300">复核监盘底稿的完整性</strong>：包括签字版盘点表、照片影像、企业盘点报告等。</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-medium text-gray-300 mb-3 flex items-center">
+                                <i class="fas fa-magnifying-glass-chart text-emerald-400 mr-2"></i>2. 重点风险核查
+                            </h3>
+                            <ul class="list-none space-y-3 pl-0">
+                                <li class="flex items-start">
+                                    <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                                    <p><strong class="text-gray-300">存货真实性</strong>：抽查会计师未全覆盖的品类（如冷备存货、境外库存），必要时追加盘点程序。验证发出商品函证的收发地址与业务真实性匹配。</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                                    <p><strong class="text-gray-300">固定资产权属</strong>：交叉核对租赁合同与现场地址一致性，排查权属瑕疵。</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-medium text-gray-300 mb-3 flex items-center">
+                                <i class="fas fa-shield-halved text-emerald-400 mr-2"></i>3. 内控有效性评估
+                            </h3>
+                            <ul class="list-none space-y-3 pl-0">
+                                <li class="flex items-start">
+                                    <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                                    <p><strong class="text-gray-300">检查被审计单位是否建立定期盘点制度</strong>（频率、责任人），并评估执行效果（如民爆光电案例中无签字的漏洞）。</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-caret-right text-emerald-400 mt-1 mr-2"></i>
+                                    <p><strong class="text-gray-300">对盘点差异较大的项目</strong>，督促企业调整并完善内控。</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section: 双方协作要点 -->
+                <section class="bg-gray-800 p-8 rounded-lg shadow-xl card-hover-scale transition-all duration-300">
+                    <h2 class="text-3xl font-semibold text-primary-400 mb-6 border-b border-gray-700 pb-3 flex items-center">
+                        <i class="fas fa-handshake text-emerald-400 mr-3"></i>双方协作要点
+                    </h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full table-auto border-collapse border border-gray-700 rounded-lg">
+                            <thead>
+                                <tr class="bg-gray-700 text-gray-300 text-left">
+                                    <th class="p-4 border-r border-gray-600">环节</th>
+                                    <th class="p-4 border-r border-gray-600">会计师工作</th>
+                                    <th class="p-4">券商督导重点</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-gray-700 hover:bg-gray-700 transition-colors duration-200">
+                                    <td class="p-4 border-r border-gray-700 font-medium text-emerald-300">盘点前</td>
+                                    <td class="p-4 border-r border-gray-700">制定监盘计划，明确范围和方法</td>
+                                    <td class="p-4">复核计划合理性（如是否覆盖高风险品类、多地同步安排）</td>
+                                </tr>
+                                <tr class="border-t border-gray-700 hover:bg-gray-700 transition-colors duration-200">
+                                    <td class="p-4 border-r border-gray-700 font-medium text-emerald-300">盘点中</td>
+                                    <td class="p-4 border-r border-gray-700">执行抽盘/全盘，记录状态并签字</td>
+                                    <td class="p-4">监督执行过程（如是否拍照、人员资质），抽查关键节点</td>
+                                </tr>
+                                <tr class="border-t border-gray-700 hover:bg-gray-700 transition-colors duration-200">
+                                    <td class="p-4 border-r border-gray-700 font-medium text-emerald-300">盘点后</td>
+                                    <td class="p-4 border-r border-gray-700">编制监盘报告，对差异执行替代程序</td>
+                                    <td class="p-4">复核底稿完整性，确保证据链闭环（如邮寄单、函证控制表）</td>
+                                </tr>
+                                <tr class="border-t border-gray-700 hover:bg-gray-700 transition-colors duration-200">
+                                    <td class="p-4 border-r border-gray-700 font-medium text-emerald-300">特殊场景</td>
+                                    <td class="p-4 border-r border-gray-700">境外存货利用当地会计师工作（需核查其资质）</td>
+                                    <td class="p-4">评估第三方工作质量，必要时亲赴境外复验</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- 侧边栏：可视化与补充信息 -->
+            <aside class="lg:col-span-1 space-y-8">
+
+                <!-- Section: 数据可视化 - 职责关联图 -->
+                <section class="bg-gray-800 p-6 rounded-lg shadow-xl card-hover-scale transition-all duration-300">
+                    <h2 class="text-2xl font-semibold text-primary-400 mb-4 border-b border-gray-700 pb-3 flex items-center">
+                        <i class="fas fa-project-diagram text-emerald-400 mr-2"></i>职责关联图
+                    </h2>
+                    <div class="mermaid text-center">
+                        graph TD
+                            A[资产盘点] --> B(会计师职责);
+                            A --> C(券商职责);
+
+                            B --> B1{存货监盘};
+                            B --> B2{固定资产监盘};
+                            B --> B3{记录与报告};
+
+                            C --> C1{程序合规性督导};
+                            C --> C2{重点风险核查};
+                            C --> C3{内控有效性评估};
+
+                            B1 -- 实地核查 & 报告 --> C2;
+                            B2 -- 实地核查 & 报告 --> C2;
+                            B3 -- 提供底稿 --> C1;
+
+                            C -- 监督 & 复核 --> B;
+                            A -- 风险控制 & 合规 --> D[监管机构];
+                            B -- 遵循审计准则 --> D;
+                            C -- 遵循投行要求 --> D;
+
+                            style A fill:#38A169,stroke:#38A169,stroke-width:2px,color:#fff;
+                            style B fill:#4C51BF,stroke:#4C51BF,stroke-width:2px,color:#fff;
+                            style C fill:#D69E2E,stroke:#D69E2E,stroke-width:2px,color:#fff;
+                            style D fill:#C53030,stroke:#C53030,stroke-width:2px,color:#fff;
+                    </div>
+                    <p class="text-sm text-gray-500 mt-4 text-center">图：会计师与券商在资产盘点中的协作关系与核心职责</p>
+                </section>
+
+                <!-- Section: 监管重点关注 -->
+                <section class="bg-gray-800 p-6 rounded-lg shadow-xl card-hover-scale transition-all duration-300">
+                    <h2 class="text-2xl font-semibold text-primary-400 mb-4 border-b border-gray-700 pb-3 flex items-center">
+                        <i class="fas fa-balance-scale-left text-emerald-400 mr-2"></i>监管重点关注
+                        <span class="text-base text-gray-500 ml-2">(风险提示)</span>
+                    </h2>
+                    <ul class="list-none space-y-4 pl-0">
+                        <li class="flex items-start">
+                            <i class="fas fa-exclamation-triangle text-red-400 mt-1 mr-3"></i>
+                            <p><strong class="text-gray-300">签字缺失</strong>：如民爆光电案例中无仓管员签字的盘点表被质疑内控缺陷。</p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right-arrow-left text-orange-400 mt-1 mr-3"></i>
+                            <p><strong class="text-gray-300">程序替代</strong>：未实地监盘的境外存货需提供充分替代证据（如物流单据、第三方检测报告）。</p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-file-invoice text-blue-400 mt-1 mr-3"></i>
+                            <p><strong class="text-gray-300">底稿留痕</strong>：需保留盘点过程影像、邮寄凭证等原始证据，否则可能被认定程序瑕疵（如现场检查要求）。</p>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Section: 资料来源 -->
+                <section class="bg-gray-800 p-6 rounded-lg shadow-xl card-hover-scale transition-all duration-300">
+                    <h2 class="text-2xl font-semibold text-primary-400 mb-4 border-b border-gray-700 pb-3 flex items-center">
+                        <i class="fas fa-book-open text-emerald-400 mr-2"></i>资料来源
+                    </h2>
+                    <ul class="list-none space-y-3 pl-0 text-gray-400 text-sm">
+                        <li><span class="font-bold text-gray-300">[^1]</span>：<a href="https://www.cicpa.org.cn/news/newsaffix/7764_200695_2.pdf" target="_blank" class="link-hover-effect text-emerald-400 hover:text-emerald-300 transition-colors duration-200"><i class="fas fa-external-link-alt mr-1 text-xs"></i>《审计准则1311号——存货监盘》指南（中国注册会计师协会）</a></li>
+                        <li><span class="font-bold text-gray-300">[^3]</span>：IPO尽职调查指引（2020年10月）<span class="text-gray-500">(知识库资料)</span></li>
+                        <li><span class="font-bold text-gray-300">[^16]</span>：民爆光电问询案例（存货盘点内控缺陷）<span class="text-gray-500">(知识库资料)</span></li>
+                        <li><span class="font-bold text-gray-300">[^18]</span>：<a href="https://www.sohu.com/a/123873027_482481" target="_blank" class="link-hover-effect text-emerald-400 hover:text-emerald-300 transition-colors duration-200"><i class="fas fa-external-link-alt mr-1 text-xs"></i>境外存货监盘要求（投行财务核查实务）</a></li>
+                        <li class="pt-2"><p class="text-gray-500 italic">更多实务细节可进一步咨询具体项目中的审计团队或质控部门。</p></li>
+                    </ul>
+                </section>
+
+                <!-- Section: 延伸阅读 -->
+                <section class="bg-gray-800 p-6 rounded-lg shadow-xl card-hover-scale transition-all duration-300">
+                    <h2 class="text-2xl font-semibold text-primary-400 mb-4 border-b border-gray-700 pb-3 flex items-center">
+                        <i class="fas fa-book text-emerald-400 mr-2"></i>延伸阅读
+                    </h2>
+                    <ul class="list-none space-y-4 pl-0">
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-gray-500 mt-1 mr-3 text-sm"></i>
+                            <p><strong class="text-gray-300">《注册会计师全国统一考试辅导教材—审计》</strong><br><span class="text-gray-400 text-sm">注册会计师考试必备，系统学习审计准则与实务。</span></p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-gray-500 mt-1 mr-3 text-sm"></i>
+                            <p><strong class="text-gray-300">《投资银行学》</strong><br><span class="text-gray-400 text-sm">了解投行核心业务与尽职调查流程。</span></p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-gray-500 mt-1 mr-3 text-sm"></i>
+                            <p><strong class="text-gray-300">《企业内部控制基本规范及配套指引》</strong><br><span class="text-gray-400 text-sm">掌握企业内部控制的建立与评估。</span></p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-gray-500 mt-1 mr-3 text-sm"></i>
+                            <p><strong class="text-gray-300">《中国注册会计师职业道德守则》</strong><br><span class="text-gray-400 text-sm">理解审计师的职业行为准则与责任。</span></p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-gray-500 mt-1 mr-3 text-sm"></i>
+                            <p><strong class="text-gray-300">行业协会发布的最新审计报告或实务指南</strong><br><span class="text-gray-400 text-sm">关注行业动态，获取最前沿的实务操作指引。</span></p>
+                        </li>
+                    </ul>
+                </section>
+
+            </aside>
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="text-center py-12 mt-16 border-t border-gray-700 text-gray-500 text-sm">
+            <p>&copy; 2023 资产核查解析. All rights reserved.</p>
+            <p class="mt-2">受现代金融报道与数字期刊设计启发。</p>
+        </footer>
+
+    </div>
+
+    <!-- Mermaid.js 脚本 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid.js 配置
+        const mermaidConfigDark = {
+            startOnLoad: true,
+            theme: 'base', // 使用 base 主题，并通过 themeVariables 精细控制
+            themeVariables: {
+                darkMode: true,
+                background: '#2d3748', // 卡片背景色
+                primaryColor: '#4C51BF',
+                primaryBorderColor: '#4C51BF',
+                primaryTextColor: '#e2e8f0',
+                secondaryColor: '#D69E2E',
+                secondaryBorderColor: '#D69E2E',
+                secondaryTextColor: '#e2e8f0',
+                tertiaryColor: '#38A169',
+                tertiaryBorderColor: '#38A169',
+                tertiaryTextColor: '#e2e8f0',
+                nodeBorder: '#4A5568',
+                lineColor: '#A0AEC0',
+                mainBkg: '#2d3748',
+                edgeLabelBackground: '#2d3748',
+                clusterBkg: '#1A202C',
+                clusterBorder: '#4A5568',
+                defaultLinkColor: '#A0AEC0',
+                noteBkg: '#6B46C1',
+                noteBorder: '#553C9A',
+                noteTextColor: '#e2e8f0',
+                labelBoxBkgColor: '#2d3748',
+                labelBoxBorderColor: '#4A5568',
+            }
+        };
+
+        const mermaidConfigLight = {
+            startOnLoad: true,
+            theme: 'base', // 使用 base 主题，并通过 themeVariables 精细控制
+            themeVariables: {
+                darkMode: false,
+                background: '#f7fafc', // 浅色卡片背景色
+                primaryColor: '#2b6cb0',
+                primaryBorderColor: '#2b6cb0',
+                primaryTextColor: '#ffffff',
+                secondaryColor: '#D69E2E',
+                secondaryBorderColor: '#D69E2E',
+                secondaryTextColor: '#ffffff',
+                tertiaryColor: '#38a169',
+                tertiaryBorderColor: '#38a169',
+                tertiaryTextColor: '#ffffff',
+                nodeBorder: '#cbd5e0',
+                lineColor: '#718096',
+                mainBkg: '#f7fafc',
+                edgeLabelBackground: '#f7fafc',
+                clusterBkg: '#e2e8f0',
+                clusterBorder: '#cbd5e0',
+                defaultLinkColor: '#718096',
+                noteBkg: '#a0aec0',
+                noteBorder: '#718096',
+                noteTextColor: '#2d3748',
+                labelBoxBkgColor: '#f7fafc',
+                labelBoxBorderColor: '#cbd5e0',
+            }
+        };
+
+        // 主题切换功能
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+        let currentMermaidConfig = mermaidConfigDark; // 跟踪当前Mermaid配置
+
+        // 函数：设置主题
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                localStorage.setItem('theme', 'dark');
+                currentMermaidConfig = mermaidConfigDark;
+            } else {
+                htmlElement.classList.add('light');
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                currentMermaidConfig = mermaidConfigLight;
+            }
+            // 重新初始化 Mermaid 以应用新主题
+            mermaid.initialize(currentMermaidConfig);
+            // 强制重新渲染图表
+            // 查找所有 Mermaid 容器并清空后重新渲染
+            document.querySelectorAll('.mermaid').forEach(element => {
+                element.removeAttribute('data-processed'); // 移除已处理标记
+                element.innerHTML = element.dataset.graph; // 恢复原始图表定义
+            });
+            mermaid.init(currentMermaidConfig, '.mermaid');
+        }
+
+        // 页面加载时初始化主题（优先 localStorage，其次系统偏好）
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light'); // 如果没有偏好且不是深色系统，默认浅色
+        }
+
+        // 监听主题切换按钮点击事件
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // 监听系统主题变化（用户未手动设置时生效）
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (!localStorage.getItem('theme')) { // 仅当用户未手动设置偏好时响应系统变化
+                setTheme(event.matches ? 'dark' : 'light');
+            }
+        });
+
+        // 在DOM加载完毕后，将mermaid图表内容保存到data属性，以便主题切换时重新渲染
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.mermaid').forEach(element => {
+                element.dataset.graph = element.innerHTML;
+            });
+            // 首次渲染Mermaid图表
+            mermaid.initialize(currentMermaidConfig);
+            mermaid.init(currentMermaidConfig, '.mermaid');
+        });
+    </script>
+</body>
+</html>
+```
