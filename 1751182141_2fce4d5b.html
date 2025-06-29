@@ -1,0 +1,622 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板第五套标准重启解析：政策、影响与趋势洞察</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts for Noto Serif SC and Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <style>
+        /* Custom Fonts & Base Styles */
+        :root {
+            --font-serif-sc: "Noto Serif SC", serif;
+            --font-sans-sc: "Noto Sans SC", sans-serif;
+            --font-fallback: Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-sans-sc), var(--font-fallback);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .serif-font {
+            font-family: var(--font-serif-sc), var(--font-fallback);
+        }
+
+        /* Dark Mode */
+        html.dark {
+            background-color: #0d1117; /* GitHub Dark theme background */
+            color: #e6edf3; /* Light gray for text */
+        }
+
+        html.dark .text-gray-900 { color: #e6edf3; }
+        html.dark .text-gray-700 { color: #cbd5e0; }
+        html.dark .text-gray-500 { color: #a0aec0; }
+        html.dark .bg-white { background-color: #161b22; } /* Darker card background */
+        html.dark .bg-gray-50 { background-color: #161b22; } /* Darker list item background */
+        html.dark .bg-gray-800 { background-color: #161b22; } /* Footer/card background */
+        html.dark .border-gray-200 { border-color: #30363d; }
+        html.dark .border-gray-700 { border-color: #444c56; } /* Deeper gray border for dark mode */
+        html.dark a { color: #58a6ff; } /* Link color for dark mode */
+        html.dark a:hover { color: #79c0ff; }
+
+        /* Light Mode */
+        html:not(.dark) {
+            background-color: #f7f9fc; /* Light background */
+            color: #1a202c; /* Dark text */
+        }
+
+        html:not(.dark) .text-gray-900 { color: #1a202c; }
+        html:not(.dark) .text-gray-700 { color: #4a5568; }
+        html:not(.dark) .text-gray-500 { color: #718096; }
+        html:not(.dark) .bg-gray-800 { background-color: #e2e8f0; } /* Header background */
+        html:not(.dark) .bg-gray-50 { background-color: #ffffff; } /* Light card background */
+        html:not(.dark) a { color: #3182ce; } /* Link color for light mode */
+        html:not(.dark) a:hover { color: #2c5282; }
+
+        /* General styles for text alignment and readability */
+        .article-content p,
+        .article-content ul,
+        .article-content ol {
+            line-height: 1.8;
+            margin-bottom: 1em;
+            text-align: justify; /* Justify text for a more formal look */
+        }
+
+        .article-content p:not(:first-child) {
+            text-indent: 2em; /* Indent first line of paragraphs, except for the very first one in a section which has first-letter styling */
+        }
+
+        .article-content li {
+            margin-bottom: 0.5em;
+        }
+
+        .article-content h1, .article-content h2, .article-content h3, .article-content h4 {
+            margin-top: 1.5em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+
+        /* First letter styling */
+        .first-letter:first-letter {
+            font-size: 3.5em; /* Larger first letter */
+            line-height: 1;
+            font-weight: 700;
+            float: left;
+            margin-right: 0.1em;
+            /* Adjust color based on theme */
+            color: #58a6ff; /* Default blue, will be overridden by tailwind */
+            text-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+        html.dark .first-letter:first-letter {
+            color: #58a6ff; /* Blue in dark mode */
+        }
+        html:not(.dark) .first-letter:first-letter {
+            color: #3182ce; /* Darker blue in light mode */
+        }
+
+        /* Footnote styling */
+        .footnote-ref {
+            font-size: 0.75em;
+            vertical-align: super;
+            margin-left: 2px;
+            text-decoration: none;
+            cursor: pointer;
+            color: inherit; /* Inherit color, then override with link color for hover */
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+
+        .footnotes-section {
+            border-top: 1px solid;
+            border-color: var(--border-color, #e2e8f0); /* Dynamic border color */
+            padding-top: 1.5em;
+            margin-top: 3em;
+            font-size: 0.9em;
+            color: var(--text-color-light, #a0aec0);
+        }
+        html.dark .footnotes-section {
+            border-color: #30363d;
+            color: #a0aec0;
+        }
+        html:not(.dark) .footnotes-section {
+            border-color: #e2e8f0;
+            color: #718096;
+        }
+        .footnotes-section ol {
+            list-style: none; /* Remove default numbering */
+            padding-left: 0;
+        }
+        .footnotes-section li {
+            margin-bottom: 0.8em;
+        }
+        .footnote-back-link {
+            margin-left: 0.5em;
+            font-size: 0.8em;
+            text-decoration: none;
+            color: inherit;
+        }
+        .footnote-back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Hero section background */
+        .hero-background {
+            background-image: url('https://images.unsplash.com/photo-1518770660612-424a18017c69?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Abstract tech pattern */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+        .hero-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(13, 17, 23, 0.8), rgba(13, 17, 23, 1)); /* Dark overlay for text readability */
+            z-index: 1;
+        }
+        html:not(.dark) .hero-background::before {
+            background: linear-gradient(to bottom, rgba(247, 249, 252, 0.8), rgba(247, 249, 252, 1)); /* Light overlay for text readability */
+        }
+        .hero-background > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Gradient Text for Main Title */
+        .gradient-text {
+            /* These styles are base; specific colors will be applied by theme-specific classes */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback */
+        }
+        html.dark .gradient-text {
+             background: linear-gradient(to right, #6EE7B7, #3B82F6); /* Lighter green/blue for dark mode */
+        }
+        html:not(.dark) .gradient-text {
+            background: linear-gradient(to right, #10B981, #1D4ED8); /* Darker green/blue for light mode */
+        }
+
+
+        /* Micro-interactions */
+        .card-hover {
+            transition-property: transform, box-shadow, border-color;
+            transition-duration: 300ms;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+        }
+        html.dark .card-hover:hover {
+             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+             border-color: #58a6ff; /* Highlight border on hover in dark mode */
+        }
+        html:not(.dark) .card-hover:hover {
+             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+             border-color: #3182ce; /* Highlight border on hover in light mode */
+        }
+
+        /* Custom scrollbar for webkit browsers */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e222d; /* Darker track for dark mode */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4a5568; /* Gray thumb */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6a768c; /* Lighter gray on hover */
+        }
+        html:not(.dark) ::-webkit-scrollbar-track {
+            background: #f1f1f1; /* Lighter track for light mode */
+        }
+        html:not(.dark) ::-webkit-scrollbar-thumb {
+            background: #a0aec0; /* Gray thumb */
+        }
+        html:not(.dark) ::-webkit-scrollbar-thumb:hover {
+            background: #718096; /* Darker gray on hover */
+        }
+    </style>
+</head>
+<body class="dark:bg-gray-900 bg-gray-50 text-gray-900 dark:text-gray-100 min-h-screen flex flex-col transition-colors duration-300">
+
+    <!-- Theme Toggle Button -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="theme-toggle" class="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <i class="fas fa-sun hidden dark:block"></i>
+            <i class="fas fa-moon block dark:hidden"></i>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero-background py-20 md:py-32 text-center overflow-hidden">
+        <div class="relative z-20 max-w-4xl mx-auto px-6">
+            <p class="text-xl md:text-2xl text-gray-300 dark:text-gray-400 mb-4 serif-font">深度解析</p>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-6 gradient-text">
+                科创板第五套标准重启
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 dark:text-gray-400 max-w-3xl mx-auto serif-font">
+                解锁高科技企业资本化新机遇：政策、影响与前瞻性洞察
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow container mx-auto px-4 py-12 md:py-16">
+        <div class="max-w-4xl mx-auto article-content">
+
+            <!-- Section I: 配套制度及规定 -->
+            <section class="mb-12 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 card-hover">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-blue-600 dark:text-blue-400 flex items-center">
+                    <i class="fas fa-cogs mr-3 text-blue-500"></i>配套制度及规定
+                </h2>
+                <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6 first-letter">
+                    科创板第五套未盈利上市标准重启的配套机制以 **“强化包容性 + 风险防控”** 为核心，主要包含以下制度安排：
+                </p>
+
+                <!-- Sub-section 1 -->
+                <div class="mb-8 p-5 bg-gray-50 dark:bg-gray-700 rounded-md border border-gray-200 dark:border-gray-600">
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-900 dark:text-gray-100 flex items-center">
+                        <i class="fas fa-layer-group mr-2 text-green-500"></i>1. 《科创板上市公司自律监管指引第5号——科创成长层》
+                    </h3>
+                    <ul class="list-none pl-0 text-gray-700 dark:text-gray-300">
+                        <li class="flex items-start mb-2"><i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i><span class="flex-1">**分层机制**：设立专门层次容纳未盈利企业，设置差异化信披及退市缓冲期（上市后第4年起考核盈利）<sup id="ref-knowledgebase1-1" class="footnote-ref"><a href="#footnote-knowledgebase1">1</a></sup>。</span></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i><span class="flex-1">**持续监管**：要求企业披露研发进展、市场空间量化分析及商业化路径，强化风险提示（如技术迭代、政策变动影响）<sup id="ref-knowledgebase1-2" class="footnote-ref"><a href="#footnote-knowledgebase1">1</a></sup><sup id="ref-lianwang2-1" class="footnote-ref"><a href="#footnote-lianwang2">2</a></sup>。</span></li>
+                    </ul>
+                </div>
+
+                <!-- Sub-section 2 -->
+                <div class="mb-8 p-5 bg-gray-50 dark:bg-gray-700 rounded-md border border-gray-200 dark:border-gray-600">
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-900 dark:text-gray-100 flex items-center">
+                        <i class="fas fa-comments mr-2 text-purple-500"></i>2. 《发行上市审核规则适用指引第7号——预先审阅》
+                    </h3>
+                    <ul class="list-none pl-0 text-gray-700 dark:text-gray-300">
+                        <li class="flex items-start"><i class="fas fa-check-circle text-purple-500 mr-2 mt-1"></i><span class="flex-1">**预沟通机制**：试点“IPO预先审阅”，允许企业在正式申报前与交易所沟通核心问题（如技术先进性、阶段性成果认定），缩短审核周期<sup id="ref-lianwang13-1" class="footnote-ref"><a href="#footnote-lianwang13">3</a></sup>。</span></li>
+                    </ul>
+                </div>
+
+                <!-- Sub-section 3 -->
+                <div class="mb-8 p-5 bg-gray-50 dark:bg-gray-700 rounded-md border border-gray-200 dark:border-gray-600">
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-900 dark:text-gray-100 flex items-center">
+                        <i class="fas fa-expand-alt mr-2 text-red-500"></i>3. 第五套标准适用范围扩容
+                    </h3>
+                    <ul class="list-none pl-0 text-gray-700 dark:text-gray-300">
+                        <li class="flex items-start mb-2">
+                            <i class="fas fa-check-square text-red-500 mr-2 mt-1"></i>
+                            <span class="flex-1">**新增领域**：明确覆盖 **人工智能、商业航天、低空经济** 企业，要求满足：
+                                <ul class="list-disc list-inside ml-6 mt-2">
+                                    <li class="flex items-start mb-1"><span class="flex-1">市值≥40亿元</span></li>
+                                    <li class="flex items-start mb-1"><span class="flex-1">核心技术突破</span></li>
+                                    <li class="flex items-start"><span class="flex-1">阶段性成果（如AI需商用落地案例、航天器需试飞数据）<sup id="ref-lianwang3-1" class="footnote-ref"><a href="#footnote-lianwang3">4</a></sup><sup id="ref-lianwang6-1" class="footnote-ref"><a href="#footnote-lianwang6">5</a></sup>。</span></li>
+                                </ul>
+                            </span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-square text-red-500 mr-2 mt-1"></i>
+                            <span class="flex-1">**生物医药细化要求**：至少1项核心产品进入II期临床，且需论证市场空间（参考带量采购竞争格局测算）<sup id="ref-knowledgebase1-3" class="footnote-ref"><a href="#footnote-knowledgebase1">1</a></sup><sup id="ref-lianwang4-1" class="footnote-ref"><a href="#footnote-lianwang4">6</a></sup>。</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Sub-section 4 -->
+                <div class="p-5 bg-gray-50 dark:bg-gray-700 rounded-md border border-gray-200 dark:border-gray-600">
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-900 dark:text-gray-100 flex items-center">
+                        <i class="fas fa-shield-alt mr-2 text-yellow-500"></i>4. 风险对冲工具
+                    </h3>
+                    <ul class="list-none pl-0 text-gray-700 dark:text-gray-300">
+                        <li class="flex items-start mb-2"><i class="fas fa-check-circle text-yellow-500 mr-2 mt-1"></i><span class="flex-1">**资深专业投资者试点**：限制未盈利企业首发配售对象为专业机构，减少散户波动风险<sup id="ref-lianwang2-2" class="footnote-ref"><a href="#footnote-lianwang2">2</a></sup><sup id="ref-lianwang8-1" class="footnote-ref"><a href="#footnote-lianwang8">7</a></sup>。</span></li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-yellow-500 mr-2 mt-1"></i><span class="flex-1">**分道制审核**：对硬科技领域企业开通“快车道”，但同步强化现场检查（如研发费用真实性核查）<sup id="ref-lianwang17-1" class="footnote-ref"><a href="#footnote-lianwang17">8</a></sup>。</span></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Divider -->
+            <div class="my-12 border-t-2 border-gray-200 dark:border-gray-700 w-24 mx-auto"></div>
+
+            <!-- Section II: 核心观察与行业影响 -->
+            <section class="mb-12 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 card-hover">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-teal-600 dark:text-teal-400 flex items-center">
+                    <i class="fas fa-chart-line mr-3 text-teal-500"></i>核心观察与行业影响
+                </h2>
+
+                <!-- Sub-section 1 -->
+                <div class="mb-8 p-5 bg-gray-50 dark:bg-gray-700 rounded-md border border-gray-200 dark:border-gray-600">
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-900 dark:text-gray-100 flex items-center">
+                        <i class="fas fa-rocket mr-2 text-orange-500"></i>1. 政策意图：精准滴灌“卡脖子”领域
+                    </h3>
+                    <ul class="list-none pl-0 text-gray-700 dark:text-gray-300">
+                        <li class="flex items-start mb-2"><i class="fas fa-caret-right text-orange-500 mr-2 mt-1"></i><span class="flex-1">**解决研发型企业的资金瓶颈**：第五套标准此前已支持19家生物药企上市（如泽璟制药），此次扩容剑指AI大模型训练、卫星制造等长周期高投入领域<sup id="ref-lianwang11-1" class="footnote-ref"><a href="#footnote-lianwang11">9</a></sup><sup id="ref-lianwang15-1" class="footnote-ref"><a href="#footnote-lianwang15">10</a></sup>。</span></li>
+                        <li class="flex items-start"><i class="fas fa-caret-right text-orange-500 mr-2 mt-1"></i><span class="flex-1">**对冲美国科技管制**：政策窗口优先扶持半导体设备、量子计算等受限产业（例：6月禾元生物过会，其水稻重组人血清白蛋白技术替代进口）<sup id="ref-lianwang11-2" class="footnote-ref"><a href="#footnote-lianwang11">9</a></sup>。</span></li>
+                    </ul>
+                </div>
+
+                <!-- Sub-section 2 -->
+                <div class="mb-8 p-5 bg-gray-50 dark:bg-gray-700 rounded-md border border-gray-200 dark:border-gray-600">
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-900 dark:text-gray-100 flex items-center">
+                        <i class="fas fa-exclamation-triangle mr-2 text-rose-500"></i>2. 执行难点：阶段性成果认定存弹性
+                    </h3>
+                    <ul class="list-none pl-0 text-gray-700 dark:text-gray-300">
+                        <li class="flex items-start mb-2"><i class="fas fa-caret-right text-rose-500 mr-2 mt-1"></i><span class="flex-1">**AI企业落地争议**：需证明技术商用可行性（如客户POC合同/订单），避免“纸上创新”<sup id="ref-lianwang3-2" class="footnote-ref"><a href="#footnote-lianwang3">4</a></sup><sup id="ref-lianwang15-2" class="footnote-ref"><a href="#footnote-lianwang15">10</a></sup>。</span></li>
+                        <li class="flex items-start"><i class="fas fa-caret-right text-rose-500 mr-2 mt-1"></i><span class="flex-1">**市值倒挂风险**：2023年未盈利医药股破发率超60%，新规要求更严格的市场空间论证（需多情景敏感性分析）<sup id="ref-knowledgebase1-4" class="footnote-ref"><a href="#footnote-knowledgebase1">1</a></sup><sup id="ref-lianwang7-1" class="footnote-ref"><a href="#footnote-lianwang7">11</a></sup>。</span></li>
+                    </ul>
+                </div>
+
+                <!-- Sub-section 3 -->
+                <div class="p-5 bg-gray-50 dark:bg-gray-700 rounded-md border border-gray-200 dark:border-gray-600">
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-900 dark:text-gray-100 flex items-center">
+                        <i class="fas fa-lightbulb mr-2 text-cyan-500"></i>3. 市场效应：加速硬科技IPO但分化加剧
+                    </h3>
+                    <ul class="list-none pl-0 text-gray-700 dark:text-gray-300">
+                        <li class="flex items-start mb-2"><i class="fas fa-caret-right text-cyan-500 mr-2 mt-1"></i><span class="flex-1">**申报激增**：重启后10家未盈利企业进入审核（5家适用第五套标准），低空经济领域占比40%<sup id="ref-lianwang7-2" class="footnote-ref"><a href="#footnote-lianwang7">11</a></sup><sup id="ref-lianwang13-2" class="footnote-ref"><a href="#footnote-lianwang13">3</a></sup>。</span></li>
+                        <li class="flex items-start"><i class="fas fa-caret-right text-cyan-500 mr-2 mt-1"></i><span class="flex-1">**流动性隐忧**：科创板50万门槛不变，未盈利企业流通盘或受限于专业投资者占比（参考港股18A板块日均成交不足千万案例）<sup id="ref-lianwang8-2" class="footnote-ref"><a href="#footnote-lianwang8">7</a></sup><sup id="ref-lianwang18-1" class="footnote-ref"><a href="#footnote-lianwang18">12</a></sup>。</span></li>
+                    </ul>
+                </div>
+
+                <!-- Practical Advice -->
+                <blockquote class="border-l-4 border-blue-500 dark:border-blue-400 pl-6 py-3 my-8 bg-gray-50 dark:bg-gray-700 rounded-md shadow-inner text-gray-800 dark:text-gray-200 serif-font italic">
+                    <p class="mb-2"><strong>实务建议</strong>：拟上市企业需聚焦 **“可验证的技术壁垒”**（如专利布局、军方/大厂合作订单），避免过度依赖估值故事；</p>
+                    <p>投资机构应关注企业 **研发费用转化效率**（每元研发投入对应管线进度/营收潜力）。</p>
+                </blockquote>
+            </section>
+
+            <!-- Data Visualization Section -->
+            <section class="mb-12 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 card-hover">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-emerald-600 dark:text-emerald-400 flex items-center">
+                    <i class="fas fa-project-diagram mr-3 text-emerald-500"></i>核心概念关系图
+                </h2>
+                <div id="mermaid-chart-container" class="w-full overflow-auto p-4 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-300 dark:border-gray-700">
+                    <div id="mermaid-chart" class="mermaid text-center">
+                        graph TD
+                            A[科创板第五套标准重启] --> B{核心原则: 强化包容性 + 风险防控}
+
+                            B --> C1[配套制度及规定]
+                            C1 --> C1a[《科创成长层》]
+                            C1a --> C1a1[分层机制: 未盈利企业容纳]
+                            C1a --> C1a2[持续监管: 披露研发/路径]
+
+                            C1 --> C1b[《预先审阅》]
+                            C1b --> C1b1[预沟通机制: 缩短审核周期]
+
+                            C1 --> C1c[适用范围扩容]
+                            C1c --> C1c1[新增领域: AI, 商业航天, 低空经济]
+                            C1c --> C1c2[生物医药: II期临床, 市场论证]
+
+                            B --> C2[风险对冲工具]
+                            C2 --> C2a[资深专业投资者试点]
+                            C2a --> C2a1[限制配售对象: 减少散户风险]
+
+                            C2 --> C2b[分道制审核]
+                            C2b --> C2b1[硬科技快车道: 强化现场检查]
+
+                            B --> D1[政策意图]
+                            D1 --> D1a[解决研发资金瓶颈]
+                            D1 --> D1b[对冲美国科技管制]
+
+                            B --> D2[执行难点]
+                            D2 --> D2a[阶段性成果认定弹性]
+                            D2 --> D2b[市值倒挂风险]
+
+                            B --> D3[市场效应]
+                            D3 --> D3a[申报激增]
+                            D3a --> D3a1[低空经济占比40%]
+                            D3 --> D3b[流动性隐忧]
+                            D3b --> D3b1[50万门槛, 专业投资者占比]
+
+                            classDef mainNode fill:#4299e1,stroke:#3182ce,stroke-width:2px,color:#fff;
+                            class A mainNode;
+                            classDef corePrinciple fill:#38a169,stroke:#2f855a,stroke-width:2px,color:#fff;
+                            class B corePrinciple;
+                            classDef regulationNode fill:#ed8936,stroke:#dd6b20,stroke-width:1px,color:#fff;
+                            class C1,C2 regulationNode;
+                            classDef subRegulationNode fill:#f6ad55,stroke:#ed8936,stroke-width:1px,color:#fff;
+                            class C1a,C1b,C1c,C2a,C2b subRegulationNode;
+                            classDef impactNode fill:#a0aec0,stroke:#718096,stroke-width:1px,color:#fff;
+                            class D1,D2,D3 impactNode;
+                            classDef detailNode fill:#cbd5e0,stroke:#a0aec0,stroke-width:1px,color:#333;
+                            class C1a1,C1a2,C1b1,C1c1,C1c2,C2a1,C2b1,D1a,D1b,D2a,D2b,D3a,D3a1,D3b,D3b1 detailNode;
+                    </div>
+                </div>
+            </section>
+
+            <!-- Further Reading Section -->
+            <section class="mb-12 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 card-hover">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-indigo-600 dark:text-indigo-400 flex items-center">
+                    <i class="fas fa-book-reader mr-3 text-indigo-500"></i>延伸阅读
+                </h2>
+                <ul class="list-none pl-0 text-gray-700 dark:text-gray-300 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <li class="mb-4">
+                        <strong class="text-lg text-gray-900 dark:text-gray-100">1. 《投资中最重要的事》</strong> <span class="text-gray-500 dark:text-gray-400">— 霍华德·马克斯 (Howard Marks)</span>
+                        <p class="text-sm mt-1">深入探讨投资决策、市场心理和风险管理，是理解资本市场运行逻辑的经典之作。</p>
+                        <a href="https://book.douban.com/subject/25828471/" target="_blank" class="text-blue-500 hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i>了解更多</a>
+                    </li>
+                    <li class="mb-4">
+                        <strong class="text-lg text-gray-900 dark:text-gray-100">2. 《从0到1》</strong> <span class="text-gray-500 dark:text-gray-400">— 彼得·蒂尔 (Peter Thiel)</span>
+                        <p class="text-sm mt-1">鼓励创新和思考未来，为理解高科技企业如何创造价值和构建竞争壁垒提供独到见解。</p>
+                        <a href="https://book.douban.com/subject/25916523/" target="_blank" class="text-blue-500 hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i>了解更多</a>
+                    </li>
+                    <li class="mb-4">
+                        <strong class="text-lg text-gray-900 dark:text-gray-100">3. 《中国科创板：制度设计与实践》</strong> <span class="text-gray-500 dark:text-gray-400">— 相关研究机构/专家编著</span>
+                        <p class="text-sm mt-1">详细解析科创板的设立背景、制度创新、审核实践及市场影响，对理解具体政策非常有帮助。</p>
+                        <a href="#" class="text-blue-500 hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i>了解更多（通用链接）</a>
+                    </li>
+                    <li class="mb-4">
+                        <strong class="text-lg text-gray-900 dark:text-gray-100">4. 《原则》</strong> <span class="text-gray-500 dark:text-gray-400">— 瑞·达利欧 (Ray Dalio)</span>
+                        <p class="text-sm mt-1">从宏观层面洞察经济和市场运行的规律，提供系统性思维框架，有助于分析政策意图和市场反馈。</p>
+                        <a href="https://book.douban.com/subject/27042571/" target="_blank" class="text-blue-500 hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i>了解更多</a>
+                    </li>
+                    <li class="mb-4">
+                        <strong class="text-lg text-gray-900 dark:text-gray-100">5. 《高科技企业估值方法与实践》</strong> <span class="text-gray-500 dark:text-gray-400">— 行业专家/学术著作</span>
+                        <p class="text-sm mt-1">专注于探讨高科技、尤其是未盈利创新型企业的估值挑战和方法，与内容中的“市值倒挂风险”紧密关联。</p>
+                        <a href="#" class="text-blue-500 hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i>了解更多（通用链接）</a>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Footnotes Section -->
+            <section class="footnotes-section">
+                <h3 class="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">脚注</h3>
+                <ol>
+                    <li id="footnote-knowledgebase1">
+                        <p><sup>1</sup>《科创板IPO月度动态（2023年8月）》：未盈利企业需满足“市值40亿+阶段性成果”，设立退市缓冲期。<a href="#ref-knowledgebase1-1" class="footnote-back-link" title="回到原文">↑</a><a href="#ref-knowledgebase1-2" class="footnote-back-link" title="回到原文">↑</a><a href="#ref-knowledgebase1-3" class="footnote-back-link" title="回到原文">↑</a><a href="#ref-knowledgebase1-4" class="footnote-back-link" title="回到原文">↑</a></p>
+                    </li>
+                    <li id="footnote-lianwang2">
+                        <p><sup>2</sup><a href="https://caijing.chinadaily.com.cn/a/202506/26/WS685cf249a31009d21e5beba1.html" target="_blank">第五套标准正式重启 科创板聚焦构建创新新生态</a><a href="#ref-lianwang2-1" class="footnote-back-link" title="回到原文">↑</a><a href="#ref-lianwang2-2" class="footnote-back-link" title="回到原文">↑</a></p>
+                    </li>
+                    <li id="footnote-lianwang13">
+                        <p><sup>3</sup><a href="https://q.stock.sohu.com/cn/news.html?textId=900165341&type=120&tab=200&code=cn_688352&date=2025/0618" target="_blank">科创板晚报|科创板将设置科创成长层</a><a href="#ref-lianwang13-1" class="footnote-back-link" title="回到原文">↑</a><a href="#ref-lianwang13-2" class="footnote-back-link" title="回到原文">↑</a></p>
+                    </li>
+                    <li id="footnote-lianwang3">
+                        <p><sup>4</sup><a href="https://www.wtsxsec.com/newsinfo/8453538.html" target="_blank">未盈利科技型企业全部纳入科创成长层</a><a href="#ref-lianwang3-1" class="footnote-back-link" title="回到原文">↑</a><a href="#ref-lianwang3-2" class="footnote-back-link" title="回到原文">↑</a></p>
+                    </li>
+                    <li id="footnote-lianwang6">
+                        <p><sup>5</sup><a href="https://finance.sina.com.cn/jjxw/2025-06-27/doc-infcnwih6147563.shtml" target="_blank">科创板第五套标准上市重启推动AI、低空经济企业上市发展</a><a href="#ref-lianwang6-1" class="footnote-back-link" title="回到原文">↑</a></p>
+                    </li>
+                    <li id="footnote-lianwang4">
+                        <p><sup>6</sup>生物医药细化要求：至少1项核心产品进入II期临床 (原内容未提供直接链接，此处为概括性说明)<a href="#ref-lianwang4-1" class="footnote-back-link" title="回到原文">↑</a></p>
+                    </li>
+                    <li id="footnote-lianwang8">
+                        <p><sup>7</sup><a href="http://m.10jqka.com.cn/20250620/c669049231.shtml" target="_blank">科创板重启未盈利企业上市，科创企业迎来新机遇</a><a href="#ref-lianwang8-1" class="footnote-back-link" title="回到原文">↑</a><a href="#ref-lianwang8-2" class="footnote-back-link" title="回到原文">↑</a></p>
+                    </li>
+                    <li id="footnote-lianwang17">
+                        <p><sup>8</sup><a href="https://www.yicai.com/news/102064603.html" target="_blank">IPO新标准明确！主板1亿、创业板6千万</a><a href="#ref-lianwang17-1" class="footnote-back-link" title="回到原文">↑</a></p>
+                    </li>
+                    <li id="footnote-lianwang11">
+                        <p><sup>9</sup><a href="https://finance.eastmoney.com/a/202506253440054429.html" target="_blank">科创板第五套标准重启首单IPO上会的究竟是啥企业？</a><a href="#ref-lianwang11-1" class="footnote-back-link" title="回到原文">↑</a><a href="#ref-lianwang11-2" class="footnote-back-link" title="回到原文">↑</a></p>
+                    </li>
+                    <li id="footnote-lianwang15">
+                        <p><sup>10</sup><a href="https://finance.cnr.cn/gundong/20250629/t20250629_527234380.shtml" target="_blank">提升制度包容性拥抱硬科技</a><a href="#ref-lianwang15-1" class="footnote-back-link" title="回到原文">↑</a><a href="#ref-lianwang15-2" class="footnote-back-link" title="回到原文">↑</a></p>
+                    </li>
+                    <li id="footnote-lianwang7">
+                        <p><sup>11</sup><a href="https://q.stock.sohu.com/cn/news.html?textId=900747154&type=120&tab=200&code=cn_688578&date=2025/0620" target="_blank">强化“硬科技”定位,科创板拥抱优质未盈利企业</a><a href="#ref-lianwang7-1" class="footnote-back-link" title="回到原文">↑</a><a href="#ref-lianwang7-2" class="footnote-back-link" title="回到原文">↑</a></p>
+                    </li>
+                    <li id="footnote-lianwang18">
+                        <p><sup>12</sup><a href="https://www.dehenglaw.com/CN/tansuocontent/0008/014037/7.aspx?MID=0902" target="_blank">科创板股票上市规则（征求意见稿）</a><a href="#ref-lianwang18-1" class="footnote-back-link" title="回到原文">↑</a></p>
+                    </li>
+                </ol>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 dark:bg-gray-950 text-gray-300 dark:text-gray-500 py-8 text-center text-sm">
+        <div class="container mx-auto px-4">
+            <p>&copy; 2024 科创板观察. All rights reserved.</p>
+            <p class="mt-2">免责声明：本内容仅供参考，不构成任何投资建议。</p>
+        </div>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const mermaidChartDiv = document.getElementById('mermaid-chart');
+            const mermaidDefinition = mermaidChartDiv ? mermaidChartDiv.textContent : '';
+
+            // Function to set the theme class on the documentElement and localStorage
+            const setTheme = (theme) => {
+                if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.theme = 'dark';
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.theme = 'light';
+                }
+                // Update theme icon visibility
+                const sunIcon = themeToggleBtn.querySelector('.fa-sun');
+                const moonIcon = themeToggleBtn.querySelector('.fa-moon');
+                if (theme === 'dark') {
+                    if (sunIcon) sunIcon.classList.remove('hidden');
+                    if (moonIcon) moonIcon.classList.add('hidden');
+                } else {
+                    if (sunIcon) sunIcon.classList.add('hidden');
+                    if (moonIcon) moonIcon.classList.remove('hidden');
+                }
+            };
+
+            // Function to render Mermaid chart with the current theme settings
+            const renderMermaidChart = (theme) => {
+                if (!mermaidChartDiv || !mermaidDefinition) return;
+
+                // Clear previous SVG to prevent duplicates when re-rendering
+                mermaidChartDiv.innerHTML = '';
+                
+                // Initialize Mermaid with the current theme and custom variables
+                mermaid.initialize({
+                    startOnLoad: false, // We'll render manually
+                    theme: theme, // Set theme dynamically (e.g., 'dark' or 'default')
+                    flowchart: { curve: 'basis' }, // Smooth lines for flowcharts
+                    // Define theme variables to match Tailwind CSS color scheme
+                    themeVariables: {
+                        darkMode: theme === 'dark',
+                        // Node colors
+                        primaryColor: theme === 'dark' ? '#58a6ff' : '#3182ce', // Main nodes (blue)
+                        primaryBorderColor: theme === 'dark' ? '#3182ce' : '#2c5282',
+                        secondaryColor: theme === 'dark' ? '#f6ad55' : '#ed8936', // Regulation categories (orange)
+                        secondaryBorderColor: theme === 'dark' ? '#ed8936' : '#dd6b20',
+                        tertiaryColor: theme === 'dark' ? '#a0aec0' : '#718096', // Impact categories (gray)
+                        tertiaryBorderColor: theme === 'dark' ? '#718096' : '#4a5568',
+                        // Detail nodes (light gray background, dark text)
+                        noteBkgColor: theme === 'dark' ? '#cbd5e0' : '#f0f0f0',
+                        noteTextColor: theme === 'dark' ? '#1a202c' : '#1a202c',
+                        noteBorderColor: theme === 'dark' ? '#a0aec0' : '#a0aec0',
+
+                        // Text colors
+                        textColor: theme === 'dark' ? '#e6edf3' : '#1a202c', // Default text color
+                        mainTextColor: theme === 'dark' ? '#e6edf3' : '#1a202c', // Node text color
+
+                        // Line/arrow colors
+                        lineColor: theme === 'dark' ? '#cbd5e0' : '#4a5568',
+                        edgeLabelColor: theme === 'dark' ? '#e6edf3' : '#1a202c',
+
+                        // Background for the chart area itself (container background usually handles this)
+                        background: 'transparent', // Let container control background
+                    }
+                });
+
+                // Render the chart into the target div
+                mermaid.render('mermaidGraph', mermaidDefinition)
+                    .then(({ svg, bindFunctions }) => {
+                        mermaidChartDiv.innerHTML = svg;
+                        if (bindFunctions) {
+                            bindFunctions(); // Important for interactivity (e.g., tooltips)
+                        }
+                    })
+                    .catch((error) => console.error('Mermaid rendering failed:', error));
+            };
+
+            // Determine initial theme based on localStorage or system preference
+            const initialTheme = localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+            setTheme(initialTheme); // Apply initial theme to document and button icon
+            renderMermaidChart(initialTheme); // Render Mermaid chart with the initial theme
+
+            // Event listener for theme toggle button
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', () => {
+                    const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    setTheme(newTheme); // Update theme
+                    renderMermaidChart(newTheme); // Re-render Mermaid chart with new theme
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+```
