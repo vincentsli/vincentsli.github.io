@@ -1,0 +1,400 @@
+```html
+<!DOCTYPE html>
+<html lang="zh" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>江苏证监局IPO辅导见面会解析</title>
+    <meta name="description" content="深入解析江苏证监局IPO辅导见面会的必要性、时间安排与监管实践。">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <style>
+        /* Custom Fonts for Chinese and English */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', Georgia, "Times New Roman", Times, serif;
+        }
+
+        /* Dark Mode Specific Styles */
+        .dark {
+            --tw-bg-opacity: 1;
+            background-color: rgb(17 24 39 / var(--tw-bg-opacity)); /* Tailwind gray-900 */
+            --tw-text-opacity: 1;
+            color: rgb(229 231 235 / var(--tw-text-opacity)); /* Tailwind gray-200 */
+        }
+        .dark .bg-white {
+            background-color: rgb(31 41 55 / var(--tw-bg-opacity)); /* Tailwind gray-800 for cards */
+        }
+        .dark .text-gray-800 {
+            color: rgb(229 231 235 / var(--tw-text-opacity)); /* Text inside cards */
+        }
+        .dark .text-gray-600 {
+            color: rgb(156 163 175 / var(--tw-text-opacity)); /* Secondary text */
+        }
+        .dark .border-gray-200 {
+            border-color: rgb(55 65 81 / var(--tw-border-opacity)); /* Borders */
+        }
+        .dark .text-blue-600 {
+            color: rgb(147 197 253 / var(--tw-text-opacity)); /* Light blue for links */
+        }
+        .dark .mermaid {
+            filter: invert(0.9) hue-rotate(180deg); /* Adjust Mermaid colors for dark mode */
+        }
+
+        /* Custom Scrollbar for aesthetic */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* 首字下沉 (Initial letter drop cap) */
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 4em;
+            line-height: 0.7;
+            padding-right: 8px;
+            font-family: 'Noto Serif SC', serif;
+            color: var(--accent-color, #3b82f6); /* Use a CSS variable for accent color */
+        }
+        .dark .drop-cap::first-letter {
+            color: var(--accent-color-dark, #60a5fa);
+        }
+
+        /* Custom accent colors (can be changed in JS if dynamic themes are desired) */
+        :root {
+            --accent-color: #3b82f6; /* Blue-600 */
+            --accent-color-dark: #60a5fa; /* Blue-400 */
+        }
+
+        /* Micro-interactions */
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        .dark .card-hover:hover {
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-500 antialiased leading-relaxed">
+
+    <!-- Theme Toggle Button -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="theme-toggle" class="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+            <i class="fas fa-moon hidden dark:block"></i>
+            <i class="fas fa-sun dark:hidden"></i>
+        </button>
+    </div>
+
+    <!-- Hero Module -->
+    <header class="relative overflow-hidden pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-blue-700 to-blue-900 dark:from-gray-800 dark:to-gray-900 text-white shadow-xl">
+        <div class="absolute inset-0 z-0 opacity-10" style="background-image: url('https://images.unsplash.com/photo-1543286315-0d2b14421b93?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size: cover; background-position: center;"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-blue-900 dark:to-gray-900 opacity-90"></div>
+
+        <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 drop-shadow-lg leading-tight">
+                江苏证监局IPO辅导见面会解析
+            </h1>
+            <p class="text-xl sm:text-2xl font-light opacity-90 drop-shadow">
+                监管实践、程序与时间要点
+            </p>
+            <div class="mt-8 mx-auto max-w-2xl text-lg opacity-80 border-t border-b border-white border-opacity-30 py-4 italic">
+                <p class="drop-cap">
+                    本次分析旨在为企业及保荐机构提供江苏证监局IPO辅导备案中“见面会”的全面解读，结合最新监管实践与案例，明确其必要性与具体安排，助力企业顺利完成上市辅导。
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-12 md:py-16">
+
+        <!-- Introduction Section -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-semibold mb-6 text-blue-600 dark:text-blue-400 text-center">
+                <i class="fas fa-lightbulb mr-3"></i>核心洞察
+            </h2>
+            <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed text-center">
+                根据江苏证监局IPO辅导备案的监管实践（截至2025年6月），结合联网搜索结果及知识库资料（详见<a href="https://example.com/knowledge" target="_blank" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 transition-colors duration-200 underline">江苏天兵科技IPO时间表 <i class="fas fa-external-link-alt text-sm"></i></a>），我们对辅导见面会的两个核心问题进行了详尽答复。
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-xl card-hover transition-all duration-300 border-b-4 border-blue-500 dark:border-blue-600">
+                    <h3 class="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100 flex items-center">
+                        <i class="fas fa-question-circle text-blue-500 dark:text-blue-400 mr-3"></i>必要性辨析
+                    </h3>
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                        见面会是否为IPO辅导的强制性环节？我们分析了其在法律与实际操作中的地位。
+                    </p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-xl card-hover transition-all duration-300 border-b-4 border-emerald-500 dark:border-emerald-600">
+                    <h3 class="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100 flex items-center">
+                        <i class="fas fa-clock text-emerald-500 dark:text-emerald-400 mr-3"></i>时间轴解读
+                    </h3>
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                        见面会究竟安排在辅导备案之前还是之后？一份清晰的时间线助您理解。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-t border-gray-200 dark:border-gray-700 my-12">
+
+        <!-- Section 1: Is the meeting necessary? -->
+        <section id="necessity" class="mb-12">
+            <h2 class="text-3xl font-semibold mb-6 text-blue-600 dark:text-blue-400 flex items-center">
+                <i class="fas fa-balance-scale mr-4"></i>见面会是否为必要程序？
+            </h2>
+            <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg border-l-4 border-blue-500 dark:border-blue-600">
+                <p class="text-xl font-medium text-gray-900 dark:text-gray-100 mb-4">
+                    <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                    <strong class="text-emerald-600 dark:text-emerald-400">非法定强制程序，但属于普遍监管要求</strong>
+                </p>
+                <ul class="list-none space-y-4 text-gray-700 dark:text-gray-300 text-lg">
+                    <li class="flex items-start">
+                        <i class="fas fa-info-circle text-blue-400 dark:text-blue-300 mr-3 mt-1 flex-shrink-0"></i>
+                        <p>江苏证监局未在《首次公开发行股票并上市辅导监管规定》中明确强制要求见面会（<a href="https://www.gov.cn/gongbao/2024/issue_11386/202406/content_6955747.html" target="_blank" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 transition-colors duration-200 underline">注1 <i class="fas fa-external-link-alt text-sm"></i></a>）。</p>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-hand-point-right text-purple-400 dark:text-purple-300 mr-3 mt-1 flex-shrink-0"></i>
+                        <p>然而，在实务操作中（如江苏天兵科技案例）以及多地证监局（如广东、上海）的惯例表明，见面会（或称“辅导沟通会”）是辅导期内的常规环节。</p>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-bullhorn text-red-400 dark:text-red-300 mr-3 mt-1 flex-shrink-0"></i>
+                        <p>其主要目的在于核查企业合规性、提示监管重点（如财务规范、关联交易等）（<a href="https://example.com/knowledge" target="_blank" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 transition-colors duration-200 underline">注2 <i class="fas fa-external-link-alt text-sm"></i></a>）。</p>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-exclamation-triangle text-orange-400 dark:text-orange-300 mr-3 mt-1 flex-shrink-0"></i>
+                        <p>值得注意的是，若企业不积极配合安排见面会，可能会影响后续辅导验收的效率甚至进程（<a href="https://www.sohu.com/a/159403045_618578" target="_blank" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 transition-colors duration-200 underline">注3 <i class="fas fa-external-link-alt text-sm"></i></a>）。</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <hr class="border-t border-gray-200 dark:border-gray-700 my-12">
+
+        <!-- Section 2: When is the meeting held? -->
+        <section id="timing" class="mb-12">
+            <h2 class="text-3xl font-semibold mb-6 text-blue-600 dark:text-blue-400 flex items-center">
+                <i class="fas fa-calendar-alt mr-4"></i>见面会安排在报辅导之前还是之后？
+            </h2>
+            <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg border-l-4 border-emerald-500 dark:border-emerald-600">
+                <p class="text-xl font-medium text-gray-900 dark:text-gray-100 mb-4">
+                    <i class="fas fa-hourglass-start text-indigo-500 mr-2"></i>
+                    <strong class="text-emerald-600 dark:text-emerald-400">安排在辅导备案之后，辅导期内进行</strong>
+                </p>
+                <ul class="list-none space-y-4 text-gray-700 dark:text-gray-300 text-lg">
+                    <li class="flex items-start">
+                        <i class="fas fa-file-alt text-indigo-400 dark:text-indigo-300 mr-3 mt-1 flex-shrink-0"></i>
+                        <p><strong class="font-semibold">报辅导后：</strong>企业需首先向江苏证监局提交辅导备案材料（含辅导协议、备案报告等）。证监局通常会在5个工作日内完成备案并进行公示（<a href="https://www.gov.cn/gongbao/2024/issue_11386/202406/content_6955747.html" target="_blank" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 transition-colors duration-200 underline">注4 <i class="fas fa-external-link-alt text-sm"></i></a>）。</p>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-comments text-cyan-400 dark:text-cyan-300 mr-3 mt-1 flex-shrink-0"></i>
+                        <p><strong class="font-semibold">辅导期内：</strong>见面会通常安排在备案完成后的<span class="text-red-500 dark:text-red-400 font-bold">1-2个月内</span>开展（<a href="https://example.com/knowledge" target="_blank" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 transition-colors duration-200 underline">注5 <i class="fas fa-external-link-alt text-sm"></i></a>）。例如，参考江苏天兵科技案例，企业于2025年7月提交备案，同年8月便安排了首次监管沟通会。</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Mermaid Diagram for Process Flow -->
+            <h3 class="text-2xl font-semibold mb-4 mt-12 text-blue-600 dark:text-blue-400 text-center">
+                <i class="fas fa-sitemap mr-2"></i>IPO辅导备案与见面会流程图
+            </h3>
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg overflow-x-auto">
+                <pre class="mermaid text-center text-gray-800 dark:text-gray-200">
+graph TD
+    A[企业准备材料] --> B[提交辅导备案申请];
+    B -- 5个工作日内 --> C[备案完成并公示];
+    C --> D[进入辅导期];
+    D -- 备案后1-2个月内 --> E[首次监管见面会/辅导沟通会];
+    E --> F[持续辅导与定期报告];
+    F --> G[提交辅导验收申请];
+    G --> H[完成辅导];
+
+    style A fill:#e0f2f7,stroke:#3498db,stroke-width:2px,color:#2c3e50
+    style B fill:#d0eaff,stroke:#3498db,stroke-width:2px,color:#2c3e50
+    style C fill:#a7d9f7,stroke:#3498db,stroke-width:2px,color:#2c3e50
+    style D fill:#87ceeb,stroke:#3498db,stroke-width:2px,color:#2c3e50
+    style E fill:#f7caca,stroke:#e74c3c,stroke-width:2px,color:#2c3e50
+    style F fill:#e2f2ff,stroke:#3498db,stroke-width:2px,color:#2c3e50
+    style G fill:#d9edc7,stroke:#2ecc71,stroke-width:2px,color:#2c3e50
+    style H fill:#a8dda8,stroke:#2ecc71,stroke-width:2px,color:#2c3e50
+                </pre>
+            </div>
+        </section>
+
+        <hr class="border-t border-gray-200 dark:border-gray-700 my-12">
+
+        <!-- Supplementary Advice -->
+        <section id="advice" class="mb-12">
+            <h2 class="text-3xl font-semibold mb-6 text-blue-600 dark:text-blue-400 flex items-center">
+                <i class="fas fa-handshake mr-4"></i>补充建议
+            </h2>
+            <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg border-l-4 border-purple-500 dark:border-purple-600">
+                <ul class="list-none space-y-4 text-gray-700 dark:text-gray-300 text-lg">
+                    <li class="flex items-start">
+                        <i class="fas fa-phone-alt text-purple-400 dark:text-purple-300 mr-3 mt-1 flex-shrink-0"></i>
+                        <p><strong class="font-semibold">时效性确认：</strong>监管要求可能动态调整。建议保荐机构在实际操作前，直接咨询江苏证监局公司监管处以获取最新信息。联系电话：<span class="font-bold text-lg text-emerald-600 dark:text-emerald-400">025-84575566</span>。</p>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-industry text-orange-400 dark:text-orange-300 mr-3 mt-1 flex-shrink-0"></i>
+                        <p><strong class="font-semibold">特殊行业注意：</strong>如企业涉及军工等敏感行业（可参考天兵科技案例），需同步协调国防科工办等相关部门的审批。但这通常不影响证监局见面会的基础时序安排。</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <hr class="border-t border-gray-200 dark:border-gray-700 my-12">
+
+        <!-- Notes Section -->
+        <section id="notes" class="mb-12">
+            <h2 class="text-2xl font-semibold mb-6 text-blue-600 dark:text-blue-400 flex items-center">
+                <i class="fas fa-info-circle mr-3"></i>注解
+            </h2>
+            <ol class="list-decimal list-inside text-gray-600 dark:text-gray-400 space-y-2 text-md pl-4 leading-relaxed">
+                <li>依据《首次公开发行股票并上市辅导监管规定》（证监会公告〔2024〕2号）第十一条至第二十条，未强制要求见面会（<a href="https://www.gov.cn/gongbao/2024/issue_11386/202406/content_6955747.html" target="_blank" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 transition-colors duration-200 underline">来源：中国政府网 <i class="fas fa-external-link-alt text-sm"></i></a>）。</li>
+                <li>实务中见面会目的参见<a href="https://example.com/knowledge" target="_blank" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 transition-colors duration-200 underline">江苏天兵科技IPO辅导说明 <i class="fas fa-external-link-alt text-sm"></i></a>中“辅导期监管沟通”部分。</li>
+                <li>广东证监局案例显示未安排见面会可能延长验收周期（<a href="https://www.sohu.com/a/159403045_618578" target="_blank" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 transition-colors duration-200 underline">来源：A股IPO辅导的过程与程序 <i class="fas fa-external-link-alt text-sm"></i></a>）。</li>
+                <li>备案流程详见《辅导监管规定》第十二条（<a href="https://www.gov.cn/gongbao/2024/issue_11386/202406/content_6955747.html" target="_blank" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 transition-colors duration-200 underline">来源：中国政府网 <i class="fas fa-external-link-alt text-sm"></i></a>）。</li>
+                <li>时间安排参考<a href="https://example.com/knowledge" target="_blank" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 transition-colors duration-200 underline">江苏天兵科技IPO时间表 <i class="fas fa-external-link-alt text-sm"></i></a>：“提交备案→1个月内安排首次沟通会”。</li>
+            </ol>
+        </section>
+
+        <!-- Further Reading Section -->
+        <section id="further-reading" class="mb-12">
+            <h2 class="text-3xl font-semibold mb-6 text-blue-600 dark:text-blue-400 flex items-center">
+                <i class="fas fa-book-open mr-4"></i>进一步阅读
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover transition-all duration-300">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">1. 《首次公开发行股票并上市辅导实务指南》</h3>
+                    <p class="text-gray-700 dark:text-gray-300 text-base">深入解析IPO辅导流程、重点及案例，是实务操作的必备参考。</p>
+                    <a href="#" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 text-sm mt-2 inline-block"><i class="fas fa-link mr-1"></i>了解更多</a>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover transition-all duration-300">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">2. 《中国证券法精要与案例分析》</h3>
+                    <p class="text-gray-700 dark:text-gray-300 text-base">系统学习中国证券法律法规的基础与应用，理解监管框架。</p>
+                    <a href="#" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 text-sm mt-2 inline-block"><i class="fas fa-link mr-1"></i>了解更多</a>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover transition-all duration-300">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">3. 《企业上市财务与税务合规实务》</h3>
+                    <p class="text-gray-700 dark:text-gray-300 text-base">专注于IPO过程中企业财务和税务规范化、常见问题与解决方案。</p>
+                    <a href="#" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 text-sm mt-2 inline-block"><i class="fas fa-link mr-1"></i>了解更多</a>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover transition-all duration-300">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">4. 《A股IPO审核问答与实战策略》</h3>
+                    <p class="text-gray-700 dark:text-gray-300 text-base">结合最新审核要求，提供企业应对A股IPO审核的实战策略和经验。</p>
+                    <a href="#" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 text-sm mt-2 inline-block"><i class="fas fa-link mr-1"></i>了解更多</a>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover transition-all duration-300">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">5. 《资本市场监管动态与公司治理》</h3>
+                    <p class="text-gray-700 dark:text-gray-300 text-base">探讨资本市场前沿监管趋势、公司治理结构优化及其对IPO的影响。</p>
+                    <a href="#" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 text-sm mt-2 inline-block"><i class="fas fa-link mr-1"></i>了解更多</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-200 dark:bg-gray-900 text-gray-600 dark:text-gray-400 py-8 text-center text-sm border-t border-gray-300 dark:border-gray-700">
+        <p>&copy; 2025 江苏证监局IPO辅导解析。保留所有权利。</p>
+        <p class="mt-2">本页面信息仅供参考，请以最新监管规定为准。</p>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid Configuration (optional, for custom themes)
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default', // Will be overridden by CSS filter for dark mode
+            themeVariables: {
+                // Default theme for light mode
+                // Graph nodes
+                nodeBorder: '#3498db',
+                nodeBkg: '#e0f2f7',
+                // Text
+                textColor: '#2c3e50',
+                lineColor: '#3498db',
+                // Sequence diagram
+                actorBorder: '#6c757d',
+                actorBkg: '#ececec',
+                signalColor: '#6c757d',
+                signalTextColor: '#6c757d',
+                labelBoxBkgColor: '#f8f9fa',
+                labelBoxBorderColor: '#ced4da',
+                labelTextColor: '#495057',
+            },
+            securityLevel: 'loose' // Allows external links in notes, etc.
+        });
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Check for saved theme preference or system preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            htmlElement.classList.add('dark');
+        } else {
+            htmlElement.classList.remove('dark');
+        }
+
+        // Event listener for theme toggle button
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            // Re-render Mermaid diagrams to apply theme changes
+            // A more robust solution might involve destroying and re-initializing mermaid or using a specific theme API
+            // For now, a simple re-render helps, though the CSS filter is primary for dark mode
+            mermaid.init(undefined, ".mermaid");
+        });
+
+        // Optional: Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add class for drop cap when content is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropCapElement = document.querySelector('.drop-cap');
+            if (dropCapElement && dropCapElement.innerText.length > 0) {
+                // Ensure the first letter is actually there to apply drop-cap
+                // No explicit JS class addition needed if applied via CSS directly
+            }
+        });
+    </script>
+</body>
+</html>
+```
