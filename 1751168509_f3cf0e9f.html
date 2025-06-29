@@ -1,0 +1,653 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO资金流水核查：深度解析与实务指南</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Fonts & Fallbacks */
+        :root {
+            --font-serif-sc: 'Noto Serif SC', serif;
+            --font-sans-sc: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-self;
+        }
+
+        body {
+            font-family: var(--font-sans-sc);
+            line-height: 1.8; /* Increased line height for readability */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-serif-sc);
+            line-height: 1.3;
+        }
+
+        /* Dark Mode Specific Styles (Tailwind's dark: prefix handles most) */
+        html.dark {
+            background-color: #1a1a1a; /* Dark background */
+            color: #e0e0e0; /* Light text */
+        }
+        html:not(.dark) {
+            background-color: #f8f8f8; /* Light background */
+            color: #333333; /* Dark text */
+        }
+
+        /* Custom scrollbar for aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #2c2c2c; /* Dark track in dark mode */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #555; /* Dark thumb in dark mode */
+            border-radius: 4px;
+        }
+        html:not(.dark)::-webkit-scrollbar-track {
+            background: #eaeaea;
+        }
+        html:not(.dark)::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #777;
+        }
+
+        /* Smooth scroll for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Specific styles for Mermaid container to ensure proper rendering */
+        .mermaid {
+            background-color: var(--tw-bg-opacity, #333); /* Ensure Mermaid bg fits theme */
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            overflow-x: auto; /* Allow horizontal scroll for large diagrams */
+        }
+        /* Mermaid styling for dark mode */
+        html.dark .mermaid {
+            background-color: #2a2a2a; /* Slightly lighter than body bg for contrast */
+            color: #e0e0e0; /* Text color inside mermaid diagram */
+        }
+        /* Mermaid styling for light mode */
+        html:not(.dark) .mermaid {
+            background-color: #ffffff;
+            color: #333333;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+        }
+
+        /* Custom button for theme toggle */
+        #theme-toggle {
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+        }
+        #theme-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footnote styling */
+        .footnote {
+            vertical-align: super;
+            font-size: 0.7em;
+            margin-left: 2px;
+            color: #63b3ed; /* Accent color for footnotes */
+            cursor: pointer;
+        }
+        .footnote-list {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #444; /* Separator for footnotes */
+        }
+        html:not(.dark) .footnote-list {
+            border-top-color: #ddd;
+        }
+
+        /* Card hover effect */
+        .card-item {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.2);
+        }
+        html:not(.dark) .card-item:hover {
+             box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Blockquote styling */
+        blockquote {
+            border-left: 4px solid #63b3ed; /* Accent color for blockquote border */
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: #b0b0b0;
+        }
+        html:not(.dark) blockquote {
+            border-left-color: #3f80c0;
+            color: #555;
+        }
+    </style>
+</head>
+<body class="transition-colors duration-300">
+    <!-- Header with Theme Toggle -->
+    <header class="fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-12 bg-gray-900 bg-opacity-90 backdrop-blur-sm shadow-lg flex justify-end items-center transition-colors duration-300 dark:bg-gray-900 dark:bg-opacity-90 dark:text-white
+                   light:bg-white light:bg-opacity-90 light:text-gray-800">
+        <button id="theme-toggle" class="p-2 rounded-full bg-gray-700 text-white hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500
+                                       dark:bg-gray-700 dark:hover:bg-gray-600
+                                       light:bg-blue-500 light:text-white light:hover:bg-blue-600">
+            <i class="fas fa-sun hidden dark:inline-block"></i>
+            <i class="fas fa-moon inline-block dark:hidden"></i>
+        </button>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center text-center overflow-hidden
+                    bg-gradient-to-br from-gray-900 to-gray-800 text-white
+                    dark:from-gray-900 dark:to-gray-800 dark:text-white
+                    light:from-blue-600 light:to-blue-800 light:text-white">
+        <div class="absolute inset-0 z-0 opacity-10" style="background-image: url('https://source.unsplash.com/random/1600x900/?finance,legal,data'); background-size: cover; background-position: center;"></div>
+        <div class="absolute inset-0 z-10 bg-black opacity-60 dark:bg-black dark:opacity-60 light:bg-blue-900 light:opacity-50"></div>
+        <div class="relative z-20 max-w-4xl mx-auto px-6">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 tracking-tight" style="font-family: var(--font-serif-sc);">
+                <i class="fas fa-balance-scale-left text-cyan-400 mr-4"></i>IPO资金流水核查：深度解析与实务指南
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8" style="font-family: var(--font-sans-sc);">
+                透视监管要求，规避合规风险，确保企业顺利上市
+            </p>
+            <p class="text-md md:text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                在A股IPO进程中，资金流水核查是监管机构关注的重中之重。本指南将为您全面剖析其核心范围、亲属核查细则及异常情形应对策略，助您精准把握监管脉络。
+            </p>
+            <a href="#content-start" class="mt-10 inline-block px-8 py-3 bg-cyan-500 text-white text-lg font-semibold rounded-full shadow-lg
+                                         hover:bg-cyan-600 transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400">
+                <i class="fas fa-arrow-down mr-2"></i> 开始阅读
+            </a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="content-start" class="container mx-auto px-4 py-16 max-w-6xl">
+        <!-- Introduction Card -->
+        <div class="bg-gray-800 p-8 rounded-lg shadow-xl mb-12 transform hover:translate-y-[-5px] transition-transform duration-300
+                    dark:bg-gray-800 dark:text-gray-200
+                    light:bg-white light:text-gray-800 light:shadow-lg">
+            <h2 class="text-3xl font-bold mb-6 text-cyan-400 flex items-center">
+                <i class="fas fa-info-circle mr-3"></i>前言：IPO资金流水核查的重要性
+            </h2>
+            <p class="text-lg leading-relaxed text-gray-300 dark:text-gray-300 light:text-gray-700">
+                在A股首次公开募股（IPO）的严格审核体系中，企业及其关键人员的资金流水核查是**确保财务真实性、规范性**的核心环节。监管机构通过穿透式核查，旨在发现是否存在体外资金循环、虚增收入、成本费用不实、利益输送等违规行为。对于拟上市公司而言，全面、准确地理解并执行资金流水核查要求，是**顺利通过审核、规避法律风险**的关键。本文将基于最新的监管规定和丰富的实务案例，为您提供一套清晰、专业的核查指南。
+            </p>
+        </div>
+
+        <!-- Section 1: 核心核查范围 -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 text-cyan-400 flex items-center">
+                <i class="fas fa-search-dollar mr-3"></i>一、核心核查范围
+            </h2>
+            <p class="text-lg mb-6 dark:text-gray-300 light:text-gray-700">
+                根据《监管规则适用指引——发行类第5号》及实务操作，资金流水核查范围需分层划分：
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card-item bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300
+                            dark:bg-gray-800 dark:text-gray-200
+                            light:bg-white light:text-gray-800">
+                    <h3 class="text-xl font-semibold mb-3 text-white dark:text-white light:text-gray-900 flex items-center">
+                        <i class="fas fa-building mr-2 text-blue-400"></i>1. 发行人主体
+                    </h3>
+                    <ul class="list-disc list-inside text-gray-400 dark:text-gray-400 light:text-gray-600">
+                        <li>所有银行账户（含已注销账户）的资金流水。</li>
+                    </ul>
+                </div>
+
+                <div class="card-item bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300
+                            dark:bg-gray-800 dark:text-gray-200
+                            light:bg-white light:text-gray-800">
+                    <h3 class="text-xl font-semibold mb-3 text-white dark:text-white light:text-gray-900 flex items-center">
+                        <i class="fas fa-user-tie mr-2 text-blue-400"></i>2. 关键自然人
+                    </h3>
+                    <p class="text-gray-400 dark:text-gray-400 light:text-gray-600">
+                        **必须核查人员**：
+                    </p>
+                    <ul class="list-disc list-inside text-gray-400 dark:text-gray-400 light:text-gray-600 mt-2">
+                        <li>实际控制人及其配偶、成年子女<span class="footnote" id="fnref1">[1]</span><span class="footnote" id="fnref2">[2]</span>；</li>
+                        <li>董事、监事、高级管理人员（董监高）；</li>
+                        <li>关键岗位人员（财务、销售、采购、研发负责人，含报告期内离职人员）。</li>
+                    </ul>
+                </div>
+
+                <div class="card-item bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300
+                            dark:bg-gray-800 dark:text-gray-200
+                            light:bg-white light:text-gray-800">
+                    <h3 class="text-xl font-semibold mb-3 text-white dark:text-white light:text-gray-900 flex items-center">
+                        <i class="fas fa-handshake mr-2 text-blue-400"></i>3. 关联方
+                    </h3>
+                    <ul class="list-disc list-inside text-gray-400 dark:text-gray-400 light:text-gray-600">
+                        <li>控股股东、主要关联方（法人主体）的所有银行账户流水。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: 需核查亲属的人员范围及亲属范围 -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 text-cyan-400 flex items-center">
+                <i class="fas fa-users mr-3"></i>二、需核查亲属的人员范围及亲属范围
+            </h2>
+            <p class="text-lg mb-6 dark:text-gray-300 light:text-gray-700">
+                亲属核查是资金流水核查中的敏感环节，需根据具体人员和风险因素谨慎界定：
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card-item bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300
+                            dark:bg-gray-800 dark:text-gray-200
+                            light:bg-white light:text-gray-800">
+                    <h3 class="text-xl font-semibold mb-3 text-white dark:text-white light:text-gray-900 flex items-center">
+                        <i class="fas fa-user-friends mr-2 text-purple-400"></i>1. 必须核查亲属的人员
+                    </h3>
+                    <ul class="list-disc list-inside text-gray-400 dark:text-gray-400 light:text-gray-600">
+                        <li>**实际控制人**：配偶及成年子女（部分案例需扩展至父母、兄弟姐妹，需结合风险判断）<span class="footnote" id="fnref1-2">[1]</span><span class="footnote" id="fnref2-2">[2]</span>；</li>
+                        <li>**董监高及关键岗位人员**：配偶（部分案例要求成年子女）<span class="footnote" id="fnref1-3">[1]</span><span class="footnote" id="fnref3">[3]</span>。</li>
+                    </ul>
+                </div>
+
+                <div class="card-item bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300
+                            dark:bg-gray-800 dark:text-gray-200
+                            light:bg-white light:text-gray-800">
+                    <h3 class="text-xl font-semibold mb-3 text-white dark:text-white light:text-gray-900 flex items-center">
+                        <i class="fas fa-sitemap mr-2 text-purple-400"></i>2. 亲属核查范围
+                    </h3>
+                    <ul class="list-disc list-inside text-gray-400 dark:text-gray-400 light:text-gray-600">
+                        <li>**基础范围**：配偶、成年子女（18周岁以上）；</li>
+                        <li>**扩展情形**（需结合风险判断）：
+                            <ul class="list-circle list-inside ml-4">
+                                <li>异常资金往来（频繁转账至父母、兄弟姐妹账户）；</li>
+                                <li>亲属在发行人客户/供应商处任职或持股<span class="footnote" id="fnref1-4">[1]</span><span class="footnote" id="fnref3-2">[3]</span>；</li>
+                                <li>监管问询要求（如某案例因未核查实控人祖母被问询）<span class="footnote" id="fnref2-3">[2]</span>。</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 需扩大核查范围的异常情形 -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 text-cyan-400 flex items-center">
+                <i class="fas fa-exclamation-triangle mr-3"></i>三、需扩大核查范围的异常情形
+            </h2>
+            <p class="text-lg mb-6 dark:text-gray-300 light:text-gray-700">
+                若存在以下风险，需进一步扩大核查至更广泛的亲属或其他人员<span class="footnote" id="fnref1-5">[1]</span><span class="footnote" id="fnref6">[6]</span>：
+            </p>
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-400 dark:text-gray-400 light:text-gray-600">
+                <li class="flex items-start">
+                    <i class="fas fa-dot-circle text-orange-400 mt-1 mr-3"></i><span>资金管理不规范（如大额取现、公私混用）；</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-dot-circle text-orange-400 mt-1 mr-3"></i><span>毛利率/费用率异常或与同行偏差较大；</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-dot-circle text-orange-400 mt-1 mr-3"></i><span>经销模式占比高且毛利异常；</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-dot-circle text-orange-400 mt-1 mr-3"></i><span>关键人员薪酬骤变；</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-dot-circle text-orange-400 mt-1 mr-3"></i><span>发现资金流向客户/供应商关联方。</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Section 4: 操作要求 -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 text-cyan-400 flex items-center">
+                <i class="fas fa-tasks mr-3"></i>四、操作要求
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card-item bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300
+                            dark:bg-gray-800 dark:text-gray-200
+                            light:bg-white light:text-gray-800">
+                    <h3 class="text-xl font-semibold mb-3 text-white dark:text-white light:text-gray-900 flex items-center">
+                        <i class="fas fa-clipboard-check mr-2 text-green-400"></i>1. 核查程序
+                    </h3>
+                    <ul class="list-disc list-inside text-gray-400 dark:text-gray-400 light:text-gray-600">
+                        <li>亲自赴银行打印流水，验证账户完整性（通过人行账户清单、云闪付等）<span class="footnote" id="fnref1-6">[1]</span>；</li>
+                        <li>覆盖所有银行卡、支付宝/微信等电子账户<span class="footnote" id="fnref4">[4]</span>；</li>
+                        <li>对异常流水（如大额转账、频繁取现）逐笔核查原因并取得证据。</li>
+                    </ul>
+                </div>
+
+                <div class="card-item bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300
+                            dark:bg-gray-800 dark:text-gray-200
+                            light:bg-white light:text-gray-800">
+                    <h3 class="text-xl font-semibold mb-3 text-white dark:text-white light:text-gray-900 flex items-center">
+                        <i class="fas fa-file-alt mr-2 text-green-400"></i>2. 留痕要求
+                    </h3>
+                    <ul class="list-disc list-inside text-gray-400 dark:text-gray-400 light:text-gray-600">
+                        <li>保存银行网点合影、流水打印过程照片等，确保核查可追溯<span class="footnote" id="fnref1-7">[1]</span>。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practical Advice Callout -->
+        <blockquote class="bg-gray-800 p-6 rounded-lg shadow-md border-l-4 border-yellow-500
+                           dark:bg-gray-800 dark:text-gray-300 dark:border-yellow-500
+                           light:bg-blue-50 light:text-gray-800 light:border-blue-600">
+            <h3 class="text-xl font-semibold mb-3 text-yellow-400 dark:text-yellow-400 light:text-blue-700 flex items-center">
+                <i class="fas fa-lightbulb mr-2"></i>实务建议
+            </h3>
+            <p class="leading-relaxed">
+                具体核查范围需按 **风险导向原则** 动态调整。若发现销售人员、服务商存在资金异常，需将其纳入关键岗位人员核查范围；若亲属账户涉及异常交易（如代垫成本、体外循环），则需扩大至父母、兄弟姐妹等<span class="footnote" id="fnref1-8">[1]</span><span class="footnote" id="fnref6-2">[6]</span>。
+            </p>
+            <p class="leading-relaxed mt-2">
+                参考近期案例：<a href="https://zhuanlan.zhihu.com/p/551621678" target="_blank" class="text-cyan-400 hover:underline">北交所明确核查资金流水范围</a>、<a href="https://zhuanlan.zhihu.com/p/563808790" target="_blank" class="text-cyan-400 hover:underline">IPO流水核查监管要求</a>。
+            </p>
+        </blockquote>
+
+        <!-- Data Visualization Section -->
+        <section class="mt-16 mb-12">
+            <h2 class="text-3xl font-bold mb-8 text-cyan-400 text-center flex items-center justify-center">
+                <i class="fas fa-project-diagram mr-3"></i>IPO资金流水核查核心概念关系图
+            </h2>
+            <div class="mermaid-container bg-gray-800 p-6 rounded-lg shadow-xl
+                        dark:bg-gray-800 light:bg-gray-50">
+                 <pre class="mermaid text-white dark:text-gray-200 light:text-gray-800">
+graph TD
+    A[监管机构要求] --> B(资金流水核查范围);
+
+    B --> C1(发行人主体账户);
+    B --> C2(控股股东 & 主要关联方);
+    B --> C3(关键自然人账户);
+
+    C3 --> D1(实际控制人);
+    C3 --> D2(董监高);
+    C3 --> D3(关键岗位人员);
+
+    D1 -- 必须核查亲属 --> E1(配偶 & 成年子女);
+    D1 -- 异常时扩展 --> E2(父母 & 兄弟姐妹);
+
+    D2 -- 通常核查亲属 --> E3(配偶);
+    D2 -- 异常时扩展 --> E4(成年子女 & 其他近亲属);
+
+    D3 -- 通常核查亲属 --> E5(配偶);
+    D3 -- 异常时扩展 --> E6(成年子女 & 父母);
+
+    F[异常情形] --> G(扩大核查范围);
+    G -- 涉及 --> H(更广泛亲属 & 相关人员);
+
+    F --> F1(资金管理不规范);
+    F --> F2(财务指标异常);
+    F --> F3(经销模式占比高且异常);
+    F --> F4(大额异常交易/资金往来);
+    F --> F5(关键人员薪酬骤变);
+    F --> F6(资金流向异常);
+
+    style A fill:#4F46E5,stroke:#4F46E5,stroke-width:2px,color:#fff
+    style B fill:#1D4ED8,stroke:#1D4ED8,stroke-width:2px,color:#fff
+    style C1 fill:#2563EB,stroke:#2563EB,stroke-width:1px,color:#fff
+    style C2 fill:#2563EB,stroke:#2563EB,stroke-width:1px,color:#fff
+    style C3 fill:#2563EB,stroke:#2563EB,stroke-width:1px,color:#fff
+    style D1 fill:#4A0E63,stroke:#4A0E63,stroke-width:1px,color:#fff
+    style D2 fill:#4A0E63,stroke:#4A0E63,stroke-width:1px,color:#fff
+    style D3 fill:#4A0E63,stroke:#4A0E63,stroke-width:1px,color:#fff
+    style E1 fill:#9D1C7F,stroke:#9D1C7F,stroke-width:1px,color:#fff
+    style E2 fill:#9D1C7F,stroke:#9D1C7F,stroke-width:1px,color:#fff
+    style E3 fill:#9D1C7F,stroke:#9D1C7F,stroke-width:1px,color:#fff
+    style E4 fill:#9D1C7F,stroke:#9D1C7F,stroke-width:1px,color:#fff
+    style E5 fill:#9D1C7F,stroke:#9D1C7F,stroke-width:1px,color:#fff
+    style E6 fill:#9D1C7F,stroke:#9D1C7F,stroke-width:1px,color:#fff
+    style F fill:#E0B420,stroke:#E0B420,stroke-width:2px,color:#000
+    style F1 fill:#FACC15,stroke:#FACC15,stroke-width:1px,color:#000
+    style F2 fill:#FACC15,stroke:#FACC15,stroke-width:1px,color:#000
+    style F3 fill:#FACC15,stroke:#FACC15,stroke-width:1px,color:#000
+    style F4 fill:#FACC15,stroke:#FACC15,stroke-width:1px,color:#000
+    style F5 fill:#FACC15,stroke:#FACC15,stroke-width:1px,color:#000
+    style F6 fill:#FACC15,stroke:#FACC15,stroke-width:1px,color:#000
+    style G fill:#DC2626,stroke:#DC2626,stroke-width:2px,color:#fff
+    style H fill:#EF4444,stroke:#EF4444,stroke-width:1px,color:#fff
+                 </pre>
+            </div>
+        </section>
+
+        <!-- Footnotes Section -->
+        <section class="footnote-list text-gray-500 text-sm dark:text-gray-500 light:text-gray-600">
+            <h3 class="text-xl font-semibold mb-4 text-cyan-400 flex items-center">
+                <i class="fas fa-book-reader mr-3"></i>参考文献
+            </h3>
+            <ol class="list-decimal list-inside">
+                <li id="fn1" class="mb-2">知识库资料《IPO 月度动态（2021 年 8 月）》：关键自然人包括实际控制人及配偶和成年子女、董监高、关键岗位人员；流水获取需由投行人员亲自执行并留痕。</li>
+                <li id="fn2" class="mb-2">IPO 审核新动态｜北交所明确要求核查银行流水！：核查范围包含实际控制人近亲属、关键岗位人员。<a href="https://zhuanlan.zhihu.com/p/551621678" target="_blank" class="text-blue-400 hover:underline">链接</a></li>
+                <li id="fn3" class="mb-2">「鹏拍」一文搞懂IPO资金流水核查：监管问询未将实控人祖母纳入核查的案例。<a href="http://www.360doc.com/content/22/0915/18/48421311_1048035645.shtml" target="_blank" class="text-blue-400 hover:underline">链接</a></li>
+                <li id="fn4" class="mb-2">IPO现场检查超1/3，AI如何帮助企业把银行流水核查做精做细：微信、支付宝流水需纳入核查。<a href="https://www.paodingai.com/blog/IPO%E7%8E%B0%E5%9C%BA%E6%A3%80%E6%9F%A5%E8%B6%851/3%EF%BC%8CAI%E5%A6%82%E4%BD%95%E5%B8%AE%E5%8A%A9%E4%BC%81%E4%B8%9A%E6%8A%8A%E9%93%B6%E8%A1%8C%E6%B5%81%E6%B0%B4%E6%A0%B8%E6%9F%A5%E5%81%9A%E7%B2%BE%E5%81%9A%E7%BB%86/" target="_blank" class="text-blue-400 hover:underline">链接</a></li>
+                <li id="fn6" class="mb-2">银行流水核查中关于扩大核查范围的异常风险事项的总结：存在销售/采购异常时需扩大至相关业务人员亲属。<a href="https://www.sohu.com/a/747775602_482481" target="_blank" class="text-blue-400 hover:underline">链接</a></li>
+            </ol>
+        </section>
+
+        <!-- Further Reading Section -->
+        <section class="mt-16 mb-12 bg-gray-800 p-8 rounded-lg shadow-xl
+                        dark:bg-gray-800 dark:text-gray-200
+                        light:bg-blue-50 light:text-gray-800 light:shadow-lg">
+            <h2 class="text-3xl font-bold mb-6 text-yellow-400 flex items-center">
+                <i class="fas fa-book-open mr-3"></i>延伸阅读：推荐书籍与资料
+            </h2>
+            <p class="text-lg mb-6 dark:text-gray-300 light:text-gray-700">
+                深入理解IPO资金流水核查，推荐以下专业书籍与资料：
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card-item bg-gray-700 p-5 rounded-lg shadow-md
+                            dark:bg-gray-700 dark:text-gray-300
+                            light:bg-white light:text-gray-700 light:border light:border-gray-200">
+                    <h3 class="text-xl font-semibold mb-2 text-white dark:text-white light:text-gray-900">
+                        <i class="fas fa-file-contract mr-2 text-red-300"></i>《中华人民共和国证券法》
+                    </h3>
+                    <p class="text-gray-400 dark:text-gray-400 light:text-gray-600 text-sm">
+                        中国资本市场的基础法律，理解其精神对于把握各项监管要求至关重要。
+                    </p>
+                </div>
+                <div class="card-item bg-gray-700 p-5 rounded-lg shadow-md
+                            dark:bg-gray-700 dark:text-gray-300
+                            light:bg-white light:text-gray-700 light:border light:border-gray-200">
+                    <h3 class="text-xl font-semibold mb-2 text-white dark:text-white light:text-gray-900">
+                        <i class="fas fa-gavel mr-2 text-red-300"></i>中国证监会官方发行监管问答
+                    </h3>
+                    <p class="text-gray-400 dark:text-gray-400 light:text-gray-600 text-sm">
+                        汇集了证监会对于IPO审核中的具体问题解答和最新监管精神，具有极高的实务指导价值。
+                    </p>
+                </div>
+                <div class="card-item bg-gray-700 p-5 rounded-lg shadow-md
+                            dark:bg-gray-700 dark:text-gray-300
+                            light:bg-white light:text-gray-700 light:border light:border-gray-200">
+                    <h3 class="text-xl font-semibold mb-2 text-white dark:text-white light:text-gray-900">
+                        <i class="fas fa-chart-line mr-2 text-red-300"></i>《IPO全程指引与操作实务》
+                    </h3>
+                    <p class="text-gray-400 dark:text-gray-400 light:text-gray-600 text-sm">
+                        由资深投行、会计师或律师撰写，涵盖IPO全流程的实务操作细节和案例分析。
+                    </p>
+                </div>
+                <div class="card-item bg-gray-700 p-5 rounded-lg shadow-md
+                            dark:bg-gray-700 dark:text-gray-300
+                            light:bg-white light:text-gray-700 light:border light:border-gray-200">
+                    <h3 class="text-xl font-semibold mb-2 text-white dark:text-white light:text-gray-900">
+                        <i class="fas fa-file-invoice-dollar mr-2 text-red-300"></i>《会计师事务所在IPO项目中的职责与风险控制》
+                    </h3>
+                    <p class="text-gray-400 dark:text-gray-400 light:text-gray-600 text-sm">
+                        深入探讨会计师在IPO审计中面临的挑战与应对策略，对财务核查有重要参考意义。
+                    </p>
+                </div>
+                <div class="card-item bg-gray-700 p-5 rounded-lg shadow-md
+                            dark:bg-gray-700 dark:text-gray-300
+                            light:bg-white light:text-gray-700 light:border light:border-gray-200">
+                    <h3 class="text-xl font-semibold mb-2 text-white dark:text-white light:text-gray-900">
+                        <i class="fas fa-shield-alt mr-2 text-red-300"></i>《资本市场合规与风险管理》
+                    </h3>
+                    <p class="text-gray-400 dark:text-gray-400 light:text-gray-600 text-sm">
+                        从宏观层面解析资本市场的合规体系及风险管理策略，提升对监管逻辑的理解。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-8 text-center text-gray-400 text-sm dark:bg-gray-900 light:bg-gray-200 light:text-gray-700">
+        <p>&copy; 2023 IPO资金流水核查指南. All rights reserved.</p>
+        <p class="mt-2">专业洞见，助力合规上市</p>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid Configuration
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark', // Default to dark theme for mermaid
+            securityLevel: 'loose', // Allow external links, etc.
+            themeVariables: {
+                dark: {
+                    background: '#2a2a2a', // Match custom mermaid container background
+                    mainBkg: '#2a2a2a',
+                    lineColor: '#e0e0e0',
+                    nodeBorder: '#e0e0e0',
+                    nodeTextColor: '#e0e0e0',
+                    primaryColor: '#63b3ed', // Blue
+                    primaryTextColor: '#ffffff',
+                    secondaryColor: '#9D1C7F', // Purple
+                    secondaryTextColor: '#ffffff',
+                    tertiaryColor: '#E0B420', // Yellow
+                    tertiaryTextColor: '#000000',
+                    // Define colors for custom styles used in the graph
+                    clusterBkg: '#3d3d3d',
+                    clusterBorder: '#666666'
+                },
+                light: {
+                    background: '#ffffff', // Match custom mermaid container background
+                    mainBkg: '#ffffff',
+                    lineColor: '#333333',
+                    nodeBorder: '#333333',
+                    nodeTextColor: '#333333',
+                    primaryColor: '#3f80c0', // Blue
+                    primaryTextColor: '#ffffff',
+                    secondaryColor: '#800080', // Purple
+                    secondaryTextColor: '#ffffff',
+                    tertiaryColor: '#FFD700', // Yellow
+                    tertiaryTextColor: '#000000',
+                    clusterBkg: '#f0f0f0',
+                    clusterBorder: '#aaaaaa'
+                }
+            }
+        });
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                // Update Mermaid theme dynamically if it's already rendered
+                if (window.mermaid) {
+                    mermaid.initialize({ theme: 'dark' });
+                }
+            } else {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                // Update Mermaid theme dynamically
+                if (window.mermaid) {
+                    mermaid.initialize({ theme: 'light' });
+                }
+            }
+        }
+
+        // Initialize theme based on local storage or system preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light'); // Default to light if no preference is found
+        }
+
+        // Toggle theme on button click
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Scroll to footnote logic
+        document.querySelectorAll('.footnote').forEach(footnoteRef => {
+            footnoteRef.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.id.replace('fnref', 'fn');
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    // Add a temporary highlight to the target footnote
+                    targetElement.style.backgroundColor = 'rgba(99, 179, 237, 0.2)'; // Blue accent with transparency
+                    setTimeout(() => {
+                        targetElement.style.backgroundColor = ''; // Remove highlight after a short delay
+                    }, 1500);
+                }
+            });
+        });
+
+        // Add return links for footnotes
+        document.addEventListener('DOMContentLoaded', () => {
+            const footnoteRefs = document.querySelectorAll('.footnote');
+            footnoteRefs.forEach((ref, index) => {
+                const refId = ref.id;
+                const footnoteTargetId = refId.replace('fnref', 'fn');
+                const targetFootnoteLi = document.getElementById(footnoteTargetId);
+                if (targetFootnoteLi) {
+                    // Create an anchor point back to the reference
+                    const returnLink = document.createElement('a');
+                    returnLink.href = '#' + refId;
+                    returnLink.className = 'text-blue-400 ml-2 hover:underline';
+                    returnLink.innerHTML = '(返回)';
+                    // Check if a return link already exists to prevent duplicates
+                    if (!targetFootnoteLi.querySelector(`a[href="#${refId}"]`)) {
+                        targetFootnoteLi.appendChild(returnLink);
+                    }
+                }
+            });
+        });
+
+        // Ensure Mermaid renders correctly on theme change, if not initially loaded properly
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === 'class' && mutation.target === htmlElement) {
+                    // Only re-render if the 'dark' class actually changed state
+                    if (htmlElement.classList.contains('dark') !== (mutation.oldValue?.includes('dark') || false)) {
+                        console.log('Theme changed, attempting Mermaid re-render.');
+                        // Re-initialize mermaid to pick up new theme variables
+                        // This causes a full re-render of all diagrams on the page
+                        mermaid.initialize({
+                            startOnLoad: true,
+                            theme: htmlElement.classList.contains('dark') ? 'dark' : 'default', // 'default' is light
+                            securityLevel: 'loose',
+                            themeVariables: mermaid.config.themeVariables // Use existing theme variables
+                        });
+                    }
+                }
+            });
+        });
+        observer.observe(htmlElement, { attributes: true, attributeOldValue: true });
+
+    </script>
+</body>
+</html>
+```
