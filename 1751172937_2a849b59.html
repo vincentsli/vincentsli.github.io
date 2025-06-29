@@ -1,0 +1,411 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO辅导备案见面会：监管实践复核</title>
+    <meta name="description" content="深度解析江苏证监局IPO辅导备案见面会的性质、时间安排及监管实践意义。">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts (Noto Serif SC & Noto Sans SC) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+
+    <style>
+        /* Custom Fonts for Chinese & Fallbacks */
+        .font-sans-sc {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+        .font-serif-sc {
+            font-family: 'Noto Serif SC', Georgia, 'Times New Roman', Times, serif;
+        }
+
+        /* Dark Mode / Light Mode Transitions */
+        body {
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+        .text-gradient-teal {
+            background: linear-gradient(to right, #2DD4BF, #06B6D4); /* Tailwind's teal-400 and cyan-400 */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback */
+        }
+
+        /* Mermaid container styling */
+        .mermaid {
+            background-color: #1a202c; /* Matches dark mode bg-gray-900 */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid #374151; /* Matches dark mode border-gray-700 */
+            color: #d1d5db; /* Matches dark mode text-gray-300 */
+            overflow-x: auto;
+        }
+
+        /* Light mode specific mermaid styling */
+        html.light .mermaid {
+            background-color: #ffffff; /* Matches light mode bg-white */
+            border: 1px solid #e5e7eb; /* Matches light mode border-gray-200 */
+            color: #1f2937; /* Matches light mode text-gray-800 */
+        }
+
+        /* Mermaid theming adjustments for dark mode */
+        html.dark .mermaid .node rect,
+        html.dark .mermaid .node path,
+        html.dark .mermaid .edge path,
+        html.dark .mermaid .edge line {
+            stroke: #6b7280 !important; /* gray-500 for borders/lines */
+        }
+        html.dark .mermaid .node text {
+            fill: #d1d5db !important; /* gray-300 for text */
+        }
+        html.dark .mermaid .label {
+            background-color: #1a202c !important; /* bg-gray-900 */
+            fill: #1a202c !important; /* for nodes */
+            color: #d1d5db !important; /* for text */
+        }
+        html.dark .mermaid .cluster rect {
+            fill: #2d3748 !important; /* gray-800 for cluster background */
+            stroke: #4b5563 !important; /* gray-600 for cluster border */
+        }
+        html.dark .mermaid .cluster text {
+            fill: #9ca3af !important; /* gray-400 for cluster text */
+        }
+
+        /* Mermaid theming adjustments for light mode */
+        html.light .mermaid .node rect,
+        html.light .mermaid .node path,
+        html.light .mermaid .edge path,
+        html.light .mermaid .edge line {
+            stroke: #6b7280 !important; /* gray-500 for borders/lines */
+        }
+        html.light .mermaid .node text {
+            fill: #1f2937 !important; /* gray-800 for text */
+        }
+        html.light .mermaid .label {
+            background-color: #ffffff !important; /* bg-white */
+            fill: #ffffff !important; /* for nodes */
+            color: #1f2937 !important; /* for text */
+        }
+        html.light .mermaid .cluster rect {
+            fill: #f3f4f6 !important; /* gray-100 for cluster background */
+            stroke: #d1d5db !important; /* gray-300 for cluster border */
+        }
+        html.light .mermaid .cluster text {
+            fill: #6b7280 !important; /* gray-500 for cluster text */
+        }
+
+    </style>
+</head>
+<body class="font-sans-sc min-h-screen bg-gray-900 text-gray-100 transition-colors duration-300">
+
+    <!-- Header / Hero Section -->
+    <header class="py-16 md:py-24 bg-gradient-to-br from-gray-900 to-gray-800 border-b border-gray-700 shadow-xl">
+        <div class="container mx-auto px-4 max-w-screen-lg text-center">
+            <h1 class="font-serif-sc text-5xl md:text-6xl font-bold leading-tight mb-4 text-gradient-teal drop-shadow-md">
+                <i class="fas fa-landmark text-4xl md:text-5xl mr-3 opacity-80"></i> IPO辅导备案见面会
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto opacity-90">
+                一份对监管实践的深度复核，明确了首次公开发行过程中关键环节的性质与流程。
+            </p>
+            
+            <!-- Dark/Light Mode Toggle -->
+            <button id="theme-toggle" class="group relative px-6 py-3 rounded-full bg-gray-700 text-gray-300 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-opacity-75 transition-all duration-300 shadow-lg">
+                <i class="fas fa-sun absolute left-3 top-1/2 -translate-y-1/2 opacity-0 group-[.light-mode]:opacity-100 transition-opacity duration-300"></i>
+                <i class="fas fa-moon absolute left-3 top-1/2 -translate-y-1/2 opacity-100 group-[.light-mode]:opacity-0 transition-opacity duration-300"></i>
+                <span class="ml-6 group-[.light-mode]:text-gray-900 transition-colors duration-300">切换模式</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="container mx-auto px-4 py-12 md:py-16 max-w-screen-lg">
+        <section class="bg-gray-800 p-8 md:p-10 rounded-lg shadow-xl border border-gray-700 mb-12">
+            <h2 class="font-serif-sc text-3xl md:text-4xl font-semibold mb-6 text-teal-400">
+                <i class="fas fa-scroll mr-3 text-2xl"></i>复核意见概要
+            </h2>
+            <p class="text-lg md:xl leading-relaxed text-gray-300 mb-6">
+                本复核意见针对此前关于“江苏证监局IPO辅导备案见面会”的阐述，对其准确性、完整性及实用性进行了评估。以下是具体复核结果：
+            </p>
+            
+            <div class="space-y-6 text-gray-300">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mr-4 mt-1">
+                        <i class="fas fa-check-circle text-teal-400 text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-xl mb-1 text-gray-100">性质明确：非强制但普遍</h3>
+                        <p class="leading-relaxed">
+                            之前的回答精准指出，江苏证监局的IPO辅导备案见面会并非法律法规强制要求的环节。然而，它属于监管实践中的“普遍惯例”，是监管机构与拟上市公司及其保荐机构之间进行初步沟通的重要平台。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mr-4 mt-1">
+                        <i class="fas fa-clock text-teal-400 text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-xl mb-1 text-gray-100">时间安排清晰</h3>
+                        <p class="leading-relaxed">
+                            关于见面会的时间节点，回答阐述准确。它通常被安排在企业完成辅导备案工作之后，但在正式向证监局提交辅导验收申请之前。这一时点对于辅导工作的承上启下具有关键意义。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mr-4 mt-1">
+                        <i class="fas fa-cogs text-teal-400 text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-xl mb-1 text-gray-100">逻辑清晰，信息完整</h3>
+                        <p class="leading-relaxed">
+                            对见面会性质和时间安排的论述逻辑严谨，条理分明，确保了信息的准确传达。所包含的内容涵盖了关键要素，没有遗漏重要的细节，展现了对监管流程的深入理解。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mr-4 mt-1">
+                        <i class="fas fa-lightbulb text-teal-400 text-2xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-xl mb-1 text-gray-100">提供实用建议</h3>
+                        <p class="leading-relaxed">
+                            除了对监管实践的描述，回答还提供了“直接咨询监管机构”的实用建议。这体现了对用户实际需求的高度关注，为面对实际问题的读者指明了方向。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-xl md:text-2xl font-bold text-center mt-10 text-teal-300">
+                <i class="fas fa-star mr-2"></i> 综合评价：整体内容符合当前监管实践，具有高度参考价值。
+            </p>
+        </section>
+
+        <!-- Data Visualization Section -->
+        <section class="bg-gray-800 p-8 md:p-10 rounded-lg shadow-xl border border-gray-700 mb-12">
+            <h2 class="font-serif-sc text-3xl md:text-4xl font-semibold mb-6 text-teal-400">
+                <i class="fas fa-project-diagram mr-3 text-2xl"></i>IPO辅导备案流程图
+            </h2>
+            <p class="text-lg md:xl leading-relaxed text-gray-300 mb-6">
+                以下图表清晰展示了企业首次公开发行（IPO）辅导备案的核心流程，以及“江苏证监局IPO辅导备案见面会”在整个过程中的位置与性质。
+            </p>
+            <div class="mermaid-container">
+                <pre class="mermaid text-sm">
+graph TD
+    A[企业决定IPO] --> B(选择保荐机构);
+    B --> C[签署辅导协议];
+    C --> D[向证监局报送辅导备案材料];
+    D -- "备案完成" --> E[江苏证监局IPO辅导备案见面会];
+    E -- "非法定强制 &amp; 普遍实践" --> F[辅导工作进行];
+    F --> G[向证监局提交辅导验收申请];
+    G -- "验收通过" --> H[证监局出具辅导监管报告];
+    H --> I[向证监会提交IPO申请材料];
+    I --> J[证监会审核/发行上市];
+                </pre>
+            </div>
+            <p class="text-sm text-gray-400 mt-4 italic">
+                提示：点击图表中的节点或线条可查看更多信息（此功能需Mermaid.js支持，此处为静态展示）。
+            </p>
+        </section>
+
+        <!-- Supplemental Information -->
+        <section class="bg-gray-800 p-8 md:p-10 rounded-lg shadow-xl border border-gray-700 mb-12">
+            <h2 class="font-serif-sc text-3xl md:text-4xl font-semibold mb-6 text-teal-400">
+                <i class="fas fa-info-circle mr-3 text-2xl"></i>补充信息：IPO辅导备案与验收
+            </h2>
+            <div class="grid md:grid-cols-2 gap-8 text-gray-300">
+                <div>
+                    <h3 class="font-semibold text-xl mb-2 text-gray-100"><i class="fas fa-clipboard-list mr-2"></i>什么是IPO辅导备案？</h3>
+                    <p class="leading-relaxed">
+                        IPO辅导备案是中国证监会针对拟上市公司的一项重要监管措施。企业在正式提交IPO申请前，需要聘请符合资质的保荐机构进行辅导，并在当地证监局进行备案。辅导期旨在帮助企业完善公司治理、规范运作、健全财务会计制度，确保其符合上市条件。
+                    </p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-xl mb-2 text-gray-100"><i class="fas fa-clipboard-check mr-2"></i>什么是辅导验收？</h3>
+                    <p class="leading-relaxed">
+                        辅导验收是辅导期结束后的一个环节。在保荐机构认为辅导达到预期目标后，会向证监局提交验收申请。证监局会对辅导工作进行评估，判断企业是否具备上市基本条件。验收通过后，证监局会出具辅导监管报告，企业方可向中国证监会正式递交IPO申报材料。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Further Reading Section -->
+        <section class="bg-gray-800 p-8 md:p-10 rounded-lg shadow-xl border border-gray-700">
+            <h2 class="font-serif-sc text-3xl md:text-4xl font-semibold mb-6 text-teal-400">
+                <i class="fas fa-book-reader mr-3 text-2xl"></i>进一步阅读
+            </h2>
+            <p class="text-lg md:xl leading-relaxed text-gray-300 mb-6">
+                深入了解中国证券市场与IPO流程，以下推荐的书籍和法规文件将提供宝贵的视角：
+            </p>
+            <ul class="list-none space-y-4 text-gray-300">
+                <li class="flex items-start">
+                    <i class="fas fa-book mr-3 mt-1 text-teal-400 text-xl"></i>
+                    <div>
+                        <h3 class="font-semibold text-xl mb-1 text-gray-100">《中华人民共和国证券法》</h3>
+                        <p class="leading-relaxed">
+                            中国证券市场的基本法律，理解证券发行、交易及监管的基石。
+                            <a href="http://www.csrc.gov.cn/csrc/c101967/c1103337/content.shtml" target="_blank" class="text-teal-400 hover:text-teal-300 transition-colors duration-200">
+                                了解更多 <i class="fas fa-external-link-alt text-sm"></i>
+                            </a>
+                        </p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-book mr-3 mt-1 text-teal-400 text-xl"></i>
+                    <div>
+                        <h3 class="font-semibold text-xl mb-1 text-gray-100">《首次公开发行股票并上市管理办法》</h3>
+                        <p class="leading-relaxed">
+                            中国证监会发布的IPO核心规章，详细规定了发行上市的条件和程序。
+                            <a href="http://www.csrc.gov.cn/csrc/c101967/c1103337/content.shtml" target="_blank" class="text-teal-400 hover:text-teal-300 transition-colors duration-200">
+                                了解更多 <i class="fas fa-external-link-alt text-sm"></i>
+                            </a>
+                        </p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-book mr-3 mt-1 text-teal-400 text-xl"></i>
+                    <div>
+                        <h3 class="font-semibold text-xl mb-1 text-gray-100">《保荐人尽职调查工作准则》</h3>
+                        <p class="leading-relaxed">
+                            深入了解保荐机构在IPO过程中如何进行尽职调查，对企业规范化运作有重要指导意义。
+                            <a href="http://www.csrc.gov.cn/csrc/c101967/c1103337/content.shtml" target="_blank" class="text-teal-400 hover:text-teal-300 transition-colors duration-200">
+                                了解更多 <i class="fas fa-external-link-alt text-sm"></i>
+                            </a>
+                        </p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-book mr-3 mt-1 text-teal-400 text-xl"></i>
+                    <div>
+                        <h3 class="font-semibold text-xl mb-1 text-gray-100">《公司法》</h3>
+                        <p class="leading-relaxed">
+                            作为企业设立、组织和行为的根本大法，其规定直接影响IPO过程中的公司治理结构和合规性。
+                            <a href="http://www.npc.gov.cn/npc/c30834/202312/bf0b490d16564619a9a3f2905978ac92.shtml" target="_blank" class="text-teal-400 hover:text-teal-300 transition-colors duration-200">
+                                了解更多 <i class="fas fa-external-link-alt text-sm"></i>
+                            </a>
+                        </p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-book mr-3 mt-1 text-teal-400 text-xl"></i>
+                    <div>
+                        <h3 class="font-semibold text-xl mb-1 text-gray-100">《中国资本市场发展史》</h3>
+                        <p class="leading-relaxed">
+                            了解中国资本市场的演变历程、制度变迁及未来发展趋势，有助于宏观把握IPO的背景。
+                            <span class="text-gray-500 text-sm">(无官方链接，建议搜索相关著作或研究报告)</span>
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-gray-900 border-t border-gray-700 text-center text-gray-500 text-sm">
+        <div class="container mx-auto px-4 max-w-screen-lg">
+            <p>&copy; 2023 监管实践深度解析. All rights reserved.</p>
+            <p class="mt-2">Designed with <i class="fas fa-heart text-red-500"></i> by Professional Web Designer</p>
+        </div>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid configuration for dark/light mode
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark', // Default theme
+            themeVariables: {
+                darkMode: true, // Default to dark mode
+                // Customize dark mode colors
+                primaryColor: '#1a202c', // bg-gray-900
+                primaryBorderColor: '#374151', // border-gray-700
+                lineColor: '#6b7280', // gray-500
+                textColor: '#d1d5db', // gray-300
+                mainBkg: '#1a202c', // bg-gray-900
+                nodeBorder: '#6b7280', // gray-500
+                nodeTextColor: '#d1d5db', // gray-300
+                clusterBkg: '#2d3748', // gray-800
+                clusterBorder: '#4b5563', // gray-600
+                clusterTextColor: '#9ca3af', // gray-400
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.getElementById('theme-toggle');
+            const htmlElement = document.documentElement;
+
+            // Function to set theme
+            const setTheme = (theme) => {
+                if (theme === 'dark') {
+                    htmlElement.classList.add('dark');
+                    htmlElement.classList.remove('light');
+                    themeToggle.classList.remove('light-mode');
+                    mermaid.initialize({ theme: 'dark' });
+                } else {
+                    htmlElement.classList.remove('dark');
+                    htmlElement.classList.add('light');
+                    themeToggle.classList.add('light-mode');
+                    mermaid.initialize({ theme: 'default', // Mermaid's default is light
+                        themeVariables: {
+                            darkMode: false,
+                            primaryColor: '#ffffff', // bg-white
+                            primaryBorderColor: '#e5e7eb', // border-gray-200
+                            lineColor: '#6b7280', // gray-500
+                            textColor: '#1f2937', // gray-800
+                            mainBkg: '#ffffff', // bg-white
+                            nodeBorder: '#6b7280', // gray-500
+                            nodeTextColor: '#1f2937', // gray-800
+                            clusterBkg: '#f3f4f6', // gray-100
+                            clusterBorder: '#d1d5db', // gray-300
+                            clusterTextColor: '#6b7280', // gray-500
+                        }
+                    });
+                }
+                // Update Mermaid rendering after theme change
+                const mermaidElements = document.querySelectorAll('.mermaid');
+                mermaidElements.forEach(el => {
+                    const originalGraphDefinition = el.textContent;
+                    el.removeAttribute('data-processed'); // Invalidate previous rendering
+                    el.innerHTML = originalGraphDefinition; // Re-insert graph definition
+                });
+                mermaid.init(undefined, mermaidElements);
+                localStorage.setItem('theme', theme);
+            };
+
+            // Check system preference on load
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const savedTheme = localStorage.getItem('theme');
+
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else if (prefersDark) {
+                setTheme('dark');
+            } else {
+                setTheme('light');
+            }
+
+            // Toggle theme on button click
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+                setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+            });
+
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+                if (!localStorage.getItem('theme')) { // Only react to system changes if no manual override
+                    setTheme(event.matches ? 'dark' : 'light');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+```
