@@ -1,0 +1,427 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="system-mode">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO辅导备案见面会：专业复核意见解读</title>
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <style>
+        /* Base font settings and fallbacks for Chinese and English text */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Serif font for headings to give a publishing/magazine feel */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+
+        /* Custom Dark Mode Colors (overriding Tailwind defaults for specific elements if needed) */
+        /* Tailwind's `dark:` variant handles most styling. This provides deeper control. */
+        html.dark {
+            background-color: #0A0A10; /* Very deep dark background */
+            color: #E0E0E0; /* Light grey for primary text */
+        }
+        /* Background for cards/sections in dark mode */
+        html.dark .bg-card-light {
+            background-color: #1A1A22;
+        }
+        /* Text color adjustments for dark mode */
+        html.dark .text-gray-900 {
+            color: #E0E0E0;
+        }
+        html.dark .text-gray-800 {
+            color: #C0C0C0;
+        }
+        html.dark .text-gray-700 {
+            color: #A0A0A0;
+        }
+        /* Border color adjustments for dark mode */
+        html.dark .border-gray-200 {
+            border-color: #333333;
+        }
+        /* Link/accent color adjustments for dark mode */
+        html.dark .text-indigo-600 {
+            color: #818cf8; /* Lighter indigo for dark mode links */
+        }
+        html.dark .text-blue-600 {
+            color: #60a5fa; /* Lighter blue for dark mode accents */
+        }
+
+        /* 首字下沉 (Drop Cap) Styling */
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 3.5em; /* Large size */
+            line-height: 1; /* Aligns well with first line */
+            margin-right: 0.1em; /* Spacing from rest of text */
+            font-weight: bold;
+            color: #6366f1; /* Tailwind indigo-500 for accent */
+        }
+
+        /* Mermaid.js styling overrides for both light and dark modes */
+        .mermaid {
+            background-color: transparent !important; /* Ensure transparent background */
+            color: inherit !important; /* Inherit text color from parent */
+        }
+        /* Light Mode Mermaid Styles */
+        .mermaid .node rect, .mermaid .node circle, .mermaid .node ellipse {
+            fill: #f3f4f6; /* Node background: Tailwind gray-100 */
+            stroke: #cbd5e1; /* Node border: Tailwind gray-300 */
+            stroke-width: 2px;
+        }
+        .mermaid .node text {
+            fill: #1f2937; /* Node text: Tailwind gray-800 */
+            font-weight: 500; /* Noto Sans SC medium weight */
+        }
+        .mermaid .edge path {
+            stroke: #a5b4fc; /* Edge line: Tailwind indigo-300 */
+            stroke-width: 1.5px;
+        }
+        .mermaid .edge text {
+            fill: #1f2937; /* Edge text: Tailwind gray-800 */
+            font-weight: normal;
+        }
+
+        /* Dark Mode Mermaid Styles */
+        html.dark .mermaid .node rect, html.dark .mermaid .node circle, html.dark .mermaid .node ellipse {
+            fill: #1A1A22; /* Node background in dark mode */
+            stroke: #6366f1; /* Node border in dark mode: Tailwind indigo-500 */
+        }
+        html.dark .mermaid .node text {
+            fill: #E0E0E0; /* Node text in dark mode */
+        }
+        html.dark .mermaid .edge path {
+            stroke: #818cf8; /* Edge line in dark mode: Tailwind indigo-400 */
+        }
+        html.dark .mermaid .edge text {
+            fill: #C0C0C0; /* Edge text in dark mode */
+        }
+
+        /* Keyframe for simple fade-in-up animation */
+        @keyframes fadeInMoveUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade-in-up {
+            animation: fadeInMoveUp 0.8s ease-out forwards;
+            opacity: 0; /* Hidden by default */
+        }
+        /* Animation delays */
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-600 { animation-delay: 0.6s; }
+
+        /* Custom scrollbar for better aesthetics in dark mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            border-radius: 4px;
+        }
+        html.dark ::-webkit-scrollbar-track {
+            background: #1e1e1e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a8a8a8;
+            border-radius: 4px;
+        }
+        html.dark ::-webkit-scrollbar-thumb {
+            background: #444;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #888;
+        }
+        html.dark ::-webkit-scrollbar-thumb:hover {
+            background: #666;
+        }
+    </style>
+</head>
+<body class="transition-colors duration-500 bg-gray-50 text-gray-900 dark:bg-[#0A0A10] dark:text-[#E0E0E0]">
+    <!-- Header Section -->
+    <header class="py-4 px-6 md:px-12 flex justify-between items-center border-b border-gray-200 dark:border-[#333333] sticky top-0 z-50 bg-white dark:bg-[#0A0A10] shadow-sm dark:shadow-none">
+        <div class="flex items-center space-x-3">
+            <i class="fas fa-file-invoice-dollar text-indigo-500 text-2xl"></i>
+            <h1 class="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">IPO 监管复核</h1>
+        </div>
+        <!-- Theme Toggle Button -->
+        <button id="themeToggle" class="p-2 rounded-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <i class="fas fa-moon text-gray-700 dark:text-yellow-400 text-lg theme-icon"></i>
+        </button>
+    </header>
+
+    <main class="container mx-auto px-6 md:px-12 py-10 max-w-4xl">
+
+        <!-- Hero Section: Visually striking introduction -->
+        <section class="text-center mb-16 py-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-indigo-700 dark:to-purple-800 shadow-xl relative overflow-hidden">
+            <!-- Subtle background pattern for visual depth -->
+            <div class="absolute inset-0 opacity-10 dark:opacity-5" style="background-image: url('data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M100 0L0 100V0z\' fill=\'%23ffffff\' opacity=\'0.1\'/%3E%3C/svg%3E'); background-size: 10px; opacity: 0.1;"></div>
+            <div class="relative z-10 p-6">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-4 animate-fade-in-up">
+                    <span class="block">江苏证监局IPO辅导备案见面会</span>
+                    <span class="block mt-2 text-3xl md:text-4xl">专业复核意见解读</span>
+                </h2>
+                <p class="text-indigo-100 text-lg md:text-xl font-light max-w-2xl mx-auto mb-8 animate-fade-in-up delay-200">
+                    深入剖析关键环节，洞察监管实践与法定要求，助您精准把握 IPO 脉络。
+                </p>
+                <div class="space-x-4 animate-fade-in-up delay-400">
+                    <a href="#review-summary" class="inline-block bg-white text-indigo-700 hover:bg-indigo-50 transition-colors duration-300 px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl group">
+                        <i class="fas fa-arrow-down mr-2 group-hover:translate-y-1 transition-transform"></i>
+                        查看复核摘要
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Review Opinion Summary Section: Highlights key feedback points -->
+        <section id="review-summary" class="mb-16">
+            <h3 class="text-3xl md:text-4xl font-bold mb-8 text-center text-gray-900 dark:text-white relative">
+                复核意见核心观点
+                <!-- Decorative underline -->
+                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-indigo-500 rounded-full"></span>
+            </h3>
+            <div class="bg-white dark:bg-[#1A1A22] shadow-lg rounded-xl p-8 transition-all duration-300 hover:shadow-2xl border border-gray-200 dark:border-[#333333] group">
+                <p class="text-lg md:text-xl leading-relaxed mb-6 text-gray-800 dark:text-gray-200 drop-cap">
+                    该回答对**江苏证监局IPO辅导备案见面会**的必要性和时间安排进行了详细且准确的阐述。
+                </p>
+                <ul class="space-y-4 text-gray-700 dark:text-gray-300 text-base md:text-lg">
+                    <li class="flex items-start group-hover:translate-x-1 transition-transform duration-200">
+                        <i class="fas fa-check-circle text-indigo-500 mt-1 mr-3 flex-shrink-0"></i>
+                        <div>
+                            <strong class="text-gray-900 dark:text-white">逻辑清晰：</strong> 内容逻辑严谨，有效区分了**法定要求**与**监管实践**，帮助读者全面理解。
+                        </div>
+                    </li>
+                    <li class="flex items-start group-hover:translate-x-1 transition-transform duration-200 delay-100">
+                        <i class="fas fa-check-circle text-indigo-500 mt-1 mr-3 flex-shrink-0"></i>
+                        <div>
+                            <strong class="text-gray-900 dark:text-white">支撑有力：</strong> 结合具体案例和权威监管文件，提供了可靠的理论与实践依据。
+                        </div>
+                    </li>
+                    <li class="flex items-start group-hover:translate-x-1 transition-transform duration-200 delay-200">
+                        <i class="fas fa-check-circle text-indigo-500 mt-1 mr-3 flex-shrink-0"></i>
+                        <div>
+                            <strong class="text-gray-900 dark:text-white">极具实用性：</strong> 特别针对**特殊行业**提供了具体提示，并以**结论建议表格**的形式高效呈现信息。
+                        </div>
+                    </li>
+                    <li class="flex items-start group-hover:translate-x-1 transition-transform duration-200 delay-300">
+                        <i class="fas fa-check-circle text-indigo-500 mt-1 mr-3 flex-shrink-0"></i>
+                        <div>
+                            <strong class="text-gray-900 dark:text-white">全面专业：</strong> 整体回答内容详尽、观点专业，完全契合用户需求，具备高度参考价值。
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Data Visualization Section: Mermaid.js to illustrate review feedback structure -->
+        <section class="mb-16">
+            <h3 class="text-3xl md:text-4xl font-bold mb-8 text-center text-gray-900 dark:text-white relative">
+                复核意见要素关联图
+                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-purple-500 rounded-full"></span>
+            </h3>
+            <div class="bg-white dark:bg-[#1A1A22] shadow-lg rounded-xl p-6 md:p-8 flex items-center justify-center min-h-[400px] border border-gray-200 dark:border-[#333333] overflow-x-auto">
+                <div class="mermaid text-sm md:text-base w-full">
+                    graph TD
+                        subgraph 复核意见的赞扬维度
+                            A[复核意见] --> B(必要性与时间安排);
+                            A --> C(内容逻辑清晰);
+                            A --> D(支撑有力);
+                            A --> E(极具实用性);
+                            A --> F(全面专业);
+                        end
+
+                        subgraph 具体亮点
+                            B -- 构成 --> G{详细阐述};
+                            C -- 包含 --> H{区分法定要求与监管实践};
+                            D -- 体现于 --> I{结合案例与监管文件};
+                            E -- 包含 --> J{特殊行业提示};
+                            E -- 包含 --> K{结论建议表格};
+                            F -- 结果是 --> L{完全符合用户需求};
+                        end
+
+                        G --- H;
+                        H --- I;
+                        I -- 提升 --> K;
+                        J -- 提升 --> K;
+                        K -- 证明 --> L;
+                </div>
+            </div>
+        </section>
+
+        <!-- Supplementary Information Section: Provides context for the content -->
+        <section class="mb-16">
+            <h3 class="text-3xl md:text-4xl font-bold mb-8 text-center text-gray-900 dark:text-white relative">
+                背景解读：IPO辅导备案见面会
+                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-emerald-500 rounded-full"></span>
+            </h3>
+            <div class="bg-white dark:bg-[#1A1A22] shadow-lg rounded-xl p-8 border border-gray-200 dark:border-[#333333]">
+                <p class="text-lg leading-relaxed text-gray-800 dark:text-gray-200 mb-4">
+                    <strong class="text-indigo-600 dark:text-indigo-400">IPO辅导备案见面会</strong>，是中国企业申请首次公开发行股票（IPO）过程中的一个重要环节。它通常指的是拟上市公司在向中国证监会或其派出机构（如各省证监局）提交辅导备案材料后，与监管机构进行的首次正式会晤。
+                </p>
+                <p class="text-lg leading-relaxed text-gray-800 dark:text-gray-200 mb-4">
+                    <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                    <strong>核心目的：</strong> 监管机构通过见面会了解拟上市公司的基本情况、存在的问题、辅导机构的工作计划以及辅导进展等。这有助于监管机构提前介入，识别潜在风险，并为后续的审核工作打下基础。
+                </p>
+                <p class="text-lg leading-relaxed text-gray-800 dark:text-gray-200">
+                    <i class="fas fa-users-cog text-blue-500 mr-2"></i>
+                    <strong>参会主体：</strong> 通常包括拟上市公司的高管、保荐机构项目负责人、律师、会计师等关键中介机构代表，以及证监局的相关负责人员。
+                </p>
+            </div>
+        </section>
+
+        <!-- Further Reading Section: Curated list of related resources -->
+        <section>
+            <h3 class="text-3xl md:text-4xl font-bold mb-8 text-center text-gray-900 dark:text-white relative">
+                延伸阅读：资本市场深度探索
+                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-pink-500 rounded-full"></span>
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Book 1 -->
+                <a href="#" class="block bg-white dark:bg-[#1A1A22] p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 dark:border-[#333333] group">
+                    <h4 class="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                        <i class="fas fa-book mr-2 text-indigo-500"></i>中国证券法解析与案例
+                    </h4>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm">
+                        深入解读中国证券法律体系，结合实际案例剖析法规应用与合规要点。
+                    </p>
+                </a>
+                <!-- Book 2 -->
+                <a href="#" class="block bg-white dark:bg-[#1A1A22] p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 dark:border-[#333333] group">
+                    <h4 class="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                        <i class="fas fa-book-open mr-2 text-indigo-500"></i>企业IPO上市实务指南
+                    </h4>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm">
+                        从筹划到上市的全流程实务指导，覆盖各阶段操作细节与注意事项。
+                    </p>
+                </a>
+                <!-- Book 3 -->
+                <a href="#" class="block bg-white dark:bg-[#1A1A22] p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 dark:border-[#333333] group">
+                    <h4 class="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                        <i class="fas fa-balance-scale mr-2 text-indigo-500"></i>监管问答与合规风险防范
+                    </h4>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm">
+                        整理证监会各类审核问答，为企业提供合规风险识别与规避策略。
+                    </p>
+                </a>
+                <!-- Book 4 -->
+                <a href="#" class="block bg-white dark:bg-[#1A1A22] p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 dark:border-[#333333] group">
+                    <h4 class="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                        <i class="fas fa-chart-line mr-2 text-indigo-500"></i>中国资本市场发展史
+                    </h4>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm">
+                        追溯中国资本市场的发展脉络，理解其演变历程与未来趋势。
+                    </p>
+                </a>
+                <!-- Book 5 -->
+                <a href="#" class="block bg-white dark:bg-[#1A1A22] p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 dark:border-[#333333] group">
+                    <h4 class="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                        <i class="fas fa-gavel mr-2 text-indigo-500"></i>证券发行与承销实务
+                    </h4>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm">
+                        剖析证券发行与承销的关键流程、法律法规和市场操作。
+                    </p>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="py-8 px-6 md:px-12 text-center text-gray-600 dark:text-gray-400 border-t border-gray-200 dark:border-[#333333] mt-16 bg-white dark:bg-[#0A0A10]">
+        <p>&copy; 2023 专业复核意见. 保留所有权利。</p>
+        <p class="text-sm mt-2">设计与开发：高级前端专家</p>
+    </footer>
+
+    <!-- Mermaid.js for diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid.js
+        mermaid.initialize({
+            startOnLoad: true, // Render charts found on page load
+            theme: 'base', // Use 'base' theme and let CSS handle color definitions
+            securityLevel: 'loose' // Allow more features (e.g., custom CSS classes)
+        });
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                html.classList.add('dark');
+                html.classList.remove('light', 'system-mode');
+                // Update icon to sun for dark mode
+                themeToggle.querySelector('.theme-icon').classList.replace('fa-moon', 'fa-sun');
+                themeToggle.querySelector('.theme-icon').classList.replace('text-gray-700', 'text-yellow-400');
+            } else if (theme === 'light') {
+                html.classList.add('light');
+                html.classList.remove('dark', 'system-mode');
+                // Update icon to moon for light mode
+                themeToggle.querySelector('.theme-icon').classList.replace('fa-sun', 'fa-moon');
+                themeToggle.querySelector('.theme-icon').classList.replace('text-yellow-400', 'text-gray-700');
+            } else { // 'system' mode
+                // Apply theme based on system preference
+                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    html.classList.add('dark');
+                    html.classList.remove('light', 'system-mode');
+                    themeToggle.querySelector('.theme-icon').classList.replace('fa-moon', 'fa-sun');
+                    themeToggle.querySelector('.theme-icon').classList.replace('text-gray-700', 'text-yellow-400');
+                } else {
+                    html.classList.add('light');
+                    html.classList.remove('dark', 'system-mode');
+                    themeToggle.querySelector('.theme-icon').classList.replace('fa-sun', 'fa-moon');
+                    themeToggle.querySelector('.theme-icon').classList.replace('text-yellow-400', 'text-gray-700');
+                }
+                html.classList.add('system-mode'); // Mark as system-controlled
+            }
+            localStorage.setItem('theme', theme); // Persist user's choice
+            // Re-render Mermaid charts to apply new CSS styles
+            mermaid.contentLoaded();
+        }
+
+        // Initialize theme on page load: check local storage first, then system preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else {
+            setTheme('system'); // Default to system preference if no saved theme
+        }
+
+        // Listen for changes in system color scheme preference if currently in 'system-mode'
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (html.classList.contains('system-mode')) {
+                setTheme('system'); // Update theme if system preference changes
+            }
+        });
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            if (html.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Ensure mermaid charts render correctly on initial load and theme changes
+        window.addEventListener('load', () => {
+            mermaid.contentLoaded();
+        });
+    </script>
+</body>
+</html>
+```
