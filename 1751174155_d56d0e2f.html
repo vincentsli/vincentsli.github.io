@@ -1,0 +1,548 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新《公司法》下股份有限公司监事会设置与上市实务解析</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC and Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom fonts for Chinese and general text */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        /* Define CSS Variables for Theming */
+        html.dark {
+            --color-bg-primary: #121212; /* Deep dark background */
+            --color-bg-secondary: #1E1E1E; /* Content background */
+            --color-text-primary: #E0E0E0; /* Main text color */
+            --color-text-secondary: #B0B0B0; /* Secondary text, softer */
+            --color-accent: #6C63FF; /* Vibrant accent purple-blue */
+            --color-highlight: #FFD700; /* Gold for highlights/warnings */
+            --color-border: #333333; /* Subtle border color */
+            --color-code-bg: #282C34; /* Code block background */
+            --color-table-header: #2A2A2A; /* Table header background */
+            --color-table-row-even: #1A1A1A; /* Table even row background */
+            --color-table-row-odd: #121212; /* Table odd row background */
+            --color-card-bg: #1A1A1A; /* Card background */
+            --color-link: #87CEEB; /* Sky blue for links */
+            --color-footer-bg: #0A0A0A; /* Footer background */
+        }
+
+        html.light {
+            --color-bg-primary: #F9F9F9;
+            --color-bg-secondary: #FFFFFF;
+            --color-text-primary: #333333;
+            --color-text-secondary: #555555;
+            --color-accent: #6C63FF; /* Accent consistent */
+            --color-highlight: #DAA520; /* Darker gold for light mode */
+            --color-border: #E0E0E0;
+            --color-code-bg: #F0F0F0;
+            --color-table-header: #EFEFEF;
+            --color-table-row-even: #FBFBFB;
+            --color-table-row-odd: #FFFFFF;
+            --color-card-bg: #FFFFFF;
+            --color-link: #1E90FF; /* Dodger blue for links */
+            --color-footer-bg: #F0F0F0;
+        }
+
+        /* Apply CSS variables */
+        body {
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+        }
+        .container-content {
+            background-color: var(--color-bg-secondary);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .text-accent { color: var(--color-accent); }
+        .text-highlight { color: var(--color-highlight); }
+        .border-color { border-color: var(--color-border); }
+        .bg-card { background-color: var(--color-card-bg); }
+        .bg-code { background-color: var(--color-code-bg); }
+        .table-header { background-color: var(--color-table-header); }
+        .table-row-even { background-color: var(--color-table-row-even); }
+        .table-row-odd { background-color: var(--color-table-row-odd); }
+        a { color: var(--color-link); }
+        .footer-bg { background-color: var(--color-footer-bg); }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: var(--color-bg-secondary); }
+        ::-webkit-scrollbar-thumb { background: var(--color-accent); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--color-highlight); }
+
+        /* Micro-interactions */
+        .hover-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+        .hover-link:hover { text-decoration: underline; opacity: 0.8; }
+        .hover-button:hover { transform: scale(1.05); opacity: 0.9; }
+        .transition-transform-shadow { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+
+        /* Mermaid styling overrides */
+        .mermaid {
+            background-color: var(--color-bg-secondary);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .mermaid .node rect, .mermaid .node circle, .mermaid .node polygon {
+            fill: var(--color-card-bg) !important;
+            stroke: var(--color-accent) !important;
+            stroke-width: 2px !important;
+        }
+        .mermaid .node text {
+            fill: var(--color-text-primary) !important;
+            font-family: 'Noto Sans SC', sans-serif !important;
+            font-size: 16px !important;
+        }
+        .mermaid .edgePath .path {
+            stroke: var(--color-text-secondary) !important;
+            stroke-width: 1.5px !important;
+        }
+        .mermaid .edgeLabel text {
+            fill: var(--color-text-secondary) !important;
+            font-family: 'Noto Sans SC', sans-serif !important;
+            font-size: 14px !important;
+        }
+        .mermaid .arrowheadPath {
+            fill: var(--color-text-secondary) !important;
+            stroke: var(--color-text-secondary) !important;
+        }
+        .mermaid .label text {
+            fill: var(--color-text-primary) !important;
+        }
+        .mermaid .cluster rect {
+            fill: var(--color-bg-primary) !important;
+            stroke: var(--color-border) !important;
+        }
+        .mermaid .cluster text {
+            fill: var(--color-text-primary) !important;
+        }
+        .mermaid .loop-arrow {
+            fill: var(--color-accent) !important;
+            stroke: var(--color-accent) !important;
+        }
+        /* Specific Mermaid node styles from definition */
+        .mermaid .node.C2a rect, .mermaid .node.C2a polygon {
+            fill: var(--color-highlight) !important; /* Gold fill for "1名监事" */
+            stroke: var(--color-highlight) !important;
+        }
+        .mermaid .node.D2 rect, .mermaid .node.D2 polygon {
+            fill: #ef4444 !important; /* Red fill for "被问询" */
+            stroke: #dc2626 !important;
+        }
+        .mermaid .edge-D2-E .path {
+            stroke: #ef4444 !important; /* Red stroke for "not recommended" path */
+            stroke-width: 2px !important;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-section h1 { font-size: 2.5rem; }
+            .hero-section p { font-size: 1rem; }
+            .container-content { padding: 1.5rem; }
+            .md\:grid-cols-2 { grid-template-columns: 1fr; }
+            table th, table td { padding: 0.75rem 0.5rem; font-size: 0.875rem; }
+            .mermaid-wrapper { overflow-x: auto; /* Enable horizontal scrolling for large diagrams on mobile */ }
+            .hero-section .flex-col-mobile { flex-direction: column; }
+            .hero-section .flex-col-mobile > *:first-child { margin-bottom: 1rem; }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Header / Navbar -->
+    <header class="py-4 px-6 flex justify-between items-center footer-bg sticky top-0 z-50 shadow-md">
+        <div class="text-xl font-bold text-accent">
+            <i class="fas fa-gavel mr-2"></i>公司治理洞察
+        </div>
+        <div class="flex items-center space-x-4">
+            <button id="theme-toggle" class="hover-button transition-transform duration-200 p-2 rounded-full text-text-primary focus:outline-none focus:ring-2 focus:ring-accent">
+                <i class="fas fa-moon text-xl" id="theme-icon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section relative bg-gradient-to-r from-accent to-blue-500 dark:from-accent dark:to-purple-700 py-24 text-white text-center overflow-hidden">
+        <!-- Subtle background image for aesthetic -->
+        <div class="absolute inset-0 opacity-10" style="background-image: url('https://source.unsplash.com/random/1920x1080/?abstract,law,finance,corporate'); background-size: cover; background-position: center;"></div>
+        <div class="relative z-10 px-4 max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-6xl font-bold mb-4 leading-tight drop-shadow-lg">
+                新《公司法》下股份有限公司<br class="hidden md:inline">监事会设置与上市实务解析
+            </h1>
+            <p class="text-xl md:text-2xl opacity-90 mb-8 max-w-2xl mx-auto">
+                深度解读2024年7月1日施行新规，为拟上市企业提供前瞻性指引
+            </p>
+            <div class="flex flex-col-mobile md:flex-row justify-center space-x-0 md:space-x-4 space-y-4 md:space-y-0">
+                <a href="#core-conclusions" class="inline-block bg-white text-accent px-8 py-3 rounded-full text-lg font-semibold hover:bg-gray-100 transition-colors duration-300 hover-button">
+                    <i class="fas fa-lightbulb mr-2"></i>了解核心要点
+                </a>
+                <a href="#practical-advice" class="inline-block border border-white text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-white hover:text-accent transition-colors duration-300 hover-button">
+                    <i class="fas fa-chart-line mr-2"></i>实务操作建议
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <main class="container-content mx-auto p-6 md:p-10 rounded-lg -mt-16 relative z-20">
+
+        <!-- Introduction/Overview -->
+        <section class="mb-12">
+            <p class="text-lg leading-relaxed text-text-secondary">
+                根据2023年修订的《公司法》（2024年7月1日施行）及实务监管要求，针对股份有限公司监事会设置问题分析如下：
+            </p>
+        </section>
+
+        <!-- Section: 一、核心结论 -->
+        <section id="core-conclusions" class="mb-12 p-6 md:p-8 bg-card rounded-lg hover-card transition-transform-shadow">
+            <h2 class="text-3xl font-bold mb-6 text-accent border-b-2 pb-3 border-color">
+                <i class="fas fa-check-circle mr-3"></i>一、核心结论
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-3 text-highlight">
+                        <i class="fas fa-ban mr-2"></i>1. 不可设2名监事
+                    </h3>
+                    <p class="mb-4 text-text-primary leading-relaxed">
+                        新《公司法》<strong class="text-accent">未允许股份有限公司设置2名监事</strong>，仅提供两种选项：
+                    </p>
+                    <ul class="list-none space-y-2 pl-0">
+                        <li class="flex items-start">
+                            <i class="fas fa-users text-accent mt-1 mr-2"></i>
+                            <span>设监事会（成员<strong class="text-highlight">≥3人</strong>）；</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-user text-accent mt-1 mr-2"></i>
+                            <span><strong class="text-highlight">或设1名监事</strong>（需满足特定条件）。</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-3 text-highlight">
+                        <i class="fas fa-clipboard-check mr-2"></i>2. 允许设1名监事的条件
+                    </h3>
+                    <p class="mb-4 text-text-primary leading-relaxed">
+                        需同时满足以下两项：
+                    </p>
+                    <ul class="list-none space-y-2 pl-0">
+                        <li class="flex items-start">
+                            <i class="fas fa-compress-alt text-accent mt-1 mr-2"></i>
+                            <span><strong class="text-highlight">公司规模较小</strong> 或 <strong class="text-highlight">股东人数较少</strong>（具体标准待细则明确）；</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-user-check text-accent mt-1 mr-2"></i>
+                            <span><strong class="text-highlight">不设监事会</strong>，仅设单名监事行使监事会职权。</span>
+                        </li>
+                    </ul>
+                    <div class="bg-code p-4 rounded-md text-sm mt-4 overflow-x-auto shadow-inner">
+                        <pre><code class="text-text-secondary">第一百三十三条 规模较小或者股东人数较少的股份有限公司，可以不设监事会，设一名监事，行使本法规定的监事会的职权。</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 border-t-2 pt-6 border-color">
+                <h3 class="text-xl font-semibold mb-3 text-highlight">
+                    <i class="fas fa-exchange-alt mr-2"></i>3. 审计委员会的替代方案
+                </h3>
+                <p class="mb-4 text-text-primary leading-relaxed">
+                    股份公司可通过在董事会下设 <strong class="text-highlight">≥3人的审计委员会</strong>（过半数为独立董事），完全替代监事会职能，此时：
+                </p>
+                <ul class="list-none space-y-2 pl-0">
+                    <li class="flex items-start">
+                        <i class="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                        <span><strong class="text-red-500">不设监事会</strong>；</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                        <span><strong class="text-red-500">不设监事</strong>。</span>
+                    </li>
+                </ul>
+                <div class="bg-code p-4 rounded-md text-sm mt-4 overflow-x-auto shadow-inner">
+                    <pre><code class="text-text-secondary">第一百二十一条 股份有限公司可以按照公司章程的规定在董事会中设置由董事组成的审计委员会，行使本法规定的监事会的职权，不设监事会或者监事。</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 二、实务操作建议 -->
+        <section id="practical-advice" class="mb-12 p-6 md:p-8 bg-card rounded-lg hover-card transition-transform-shadow">
+            <h2 class="text-3xl font-bold mb-6 text-accent border-b-2 pb-3 border-color">
+                <i class="fas fa-cogs mr-3"></i>二、实务操作建议 <span class="text-lg text-highlight">(拟上市企业重点关注)</span>
+            </h2>
+
+            <div class="overflow-x-auto mb-8">
+                <table class="w-full text-left table-auto rounded-lg overflow-hidden border border-color">
+                    <thead>
+                        <tr class="table-header text-text-primary">
+                            <th class="py-3 px-4 font-semibold text-base whitespace-nowrap">方案 <i class="fas fa-puzzle-piece ml-1"></i></th>
+                            <th class="py-3 px-4 font-semibold text-base whitespace-nowrap">适用情形 <i class="fas fa-info-circle ml-1"></i></th>
+                            <th class="py-3 px-4 font-semibold text-base whitespace-nowrap">上市审核影响 <i class="fas fa-balance-scale ml-1"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-row-odd border-b border-color">
+                            <td class="py-3 px-4 flex items-center">
+                                <i class="fas fa-users text-accent mr-2"></i>
+                                <strong class="text-highlight">设≥3人监事会</strong>
+                            </td>
+                            <td class="py-3 px-4 text-text-secondary">绝大多数股份公司（默认选择）</td>
+                            <td class="py-3 px-4 text-green-500 font-medium">符合上市合规要求 <i class="fas fa-check-circle ml-1"></i></td>
+                        </tr>
+                        <tr class="table-row-even border-b border-color">
+                            <td class="py-3 px-4 flex items-center">
+                                <i class="fas fa-user text-accent mr-2"></i>
+                                <strong class="text-highlight">设1名监事</strong>
+                            </td>
+                            <td class="py-3 px-4 text-text-secondary">仅限小型/股东少的股份公司</td>
+                            <td class="py-3 px-4 text-yellow-500 font-medium">可能被问询治理有效性 <i class="fas fa-exclamation-triangle ml-1"></i></td>
+                        </tr>
+                        <tr class="table-row-odd">
+                            <td class="py-3 px-4 flex items-center">
+                                <i class="fas fa-chart-pie text-accent mr-2"></i>
+                                <strong class="text-highlight">设审计委员会（无监事）</strong>
+                            </td>
+                            <td class="py-3 px-4 text-text-secondary">满足审计委员会设置条件</td>
+                            <td class="py-3 px-4 text-yellow-500 font-medium">需证明监督机制完备（如独立董事占比） <i class="fas fa-exclamation-triangle ml-1"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="bg-yellow-800 bg-opacity-30 border-l-4 border-yellow-500 p-4 rounded-md shadow-md text-text-primary">
+                <p class="font-bold text-lg mb-2 flex items-center text-yellow-400">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>特别提示：
+                </p>
+                <ul class="list-disc list-inside space-y-2 text-sm text-text-secondary">
+                    <li>对于计划A股上市的企业，<strong class="text-highlight">不建议采用单监事结构</strong>：</li>
+                    <ul class="list-circle list-inside ml-4 space-y-1">
+                        <li>截至2025年6月，尚未有IPO企业以单监事结构过会；</li>
+                        <li>监管普遍要求上市公司保持监事会或审计委员会的完整监督架构<sup class="text-xs">[<a href="#footnote-6" class="hover-link text-link">6</a>]</sup>。</li>
+                    </ul>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Data Visualization Section (Mermaid Diagram) -->
+        <section class="mb-12 p-6 md:p-8 bg-card rounded-lg hover-card transition-transform-shadow">
+            <h2 class="text-3xl font-bold mb-6 text-accent border-b-2 pb-3 border-color">
+                <i class="fas fa-project-diagram mr-3"></i>公司治理结构决策流图
+            </h2>
+            <p class="text-text-secondary mb-6">
+                通过以下流程图，直观理解新《公司法》下股份有限公司监事会设置的决策路径与实务考量。
+            </p>
+            <div class="mermaid-wrapper text-center">
+                <div class="mermaid">
+                    graph TD
+                        A[股份有限公司] --> B{监事会设置选择?};
+
+                        B --> C1(设监事会);
+                        C1 --> C1a[成员≥3人<br>含职工监事];
+                        C1a --> D1[符合上市合规要求];
+
+                        B --> C2{是否满足<br>规模较小/股东少?};
+                        C2 -- 是 --> C2a(设1名监事);
+                        C2a -- 不建议采用 --> D2[可能被问询<br>治理有效性];
+                        C2 -- 否 --> C1;
+
+                        B --> C3{是否在董事会<br>设审计委员会?};
+                        C3 -- 是 --> C3a(审计委员会<br>≥3人,过半独董);
+                        C3a --> D3[需证明监督机制完备];
+                        C3 -- 否 --> B;
+
+                        D1 --> E[拟上市];
+                        D2 --> E;
+                        D3 --> E;
+
+                        E --> F{通过上市审核};
+
+                        %% Styling for "risky" path nodes and edges
+                        class C2a C2a-node;
+                        class D2 D2-node;
+                        linkStyle 6 stroke:#ef4444,stroke-width:2px,fill:none; /* C2a to D2 */
+                        linkStyle 10 stroke:#ef4444,stroke-width:2px,fill:none; /* D2 to E, if the numbering is consistent */
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Section: 三、脚注依据 -->
+        <section id="footnotes" class="mb-12 p-6 md:p-8 bg-card rounded-lg hover-card transition-transform-shadow">
+            <h2 class="text-3xl font-bold mb-6 text-accent border-b-2 pb-3 border-color">
+                <i class="fas fa-book-open mr-3"></i>三、脚注依据
+            </h2>
+            <ol class="list-decimal list-outside pl-6 space-y-3 text-text-secondary text-sm">
+                <li id="footnote-1">
+                    <span class="font-semibold text-text-primary">知识库资料：</span>《公司法（2023年修订）》第一百三十三条 (<a href="#" class="text-link hover-link"><i class="fas fa-file-pdf mr-1"></i>点击预览：公司法.pdf</a>)。
+                </li>
+                <li id="footnote-2">
+                    <span class="font-semibold text-text-primary">联网搜索：</span>《新&lt;公司法&gt;登记要点问答》（中山市政府），明确股份公司可设1名监事的情形 (<a href="http://www.zs.gov.cn/zjj/zwdt/content/post_2421226.html" target="_blank" rel="noopener noreferrer" class="text-link hover-link"><i class="fas fa-external-link-alt mr-1"></i>点击查看原文</a>)。
+                </li>
+                <li id="footnote-3">
+                    <span class="font-semibold text-text-primary">联网搜索：</span>《新&lt;公司法&gt;下公司治理结构的重大变化》（上海市监局），说明小型股份公司治理简化路径 (<a href="https://www.shanghai.gov.cn/xbhygq/20240702/fc72a6538b8642e5b2e204ccd291f8ed.html" target="_blank" rel="noopener noreferrer" class="text-link hover-link"><i class="fas fa-external-link-alt mr-1"></i>点击查看原文</a>)。
+                </li>
+                <li id="footnote-4">
+                    <span class="font-semibold text-text-primary">知识库资料：</span>《公司法（2023年修订）》第一百二十一条 (<a href="#" class="text-link hover-link"><i class="fas fa-file-pdf mr-1"></i>点击预览：公司法.pdf</a>)。
+                </li>
+                <li id="footnote-5">
+                    <span class="font-semibold text-text-primary">联网搜索：</span>《新公司法中审计委员会的设置规则》（中伦律所），分析审计委员会替代监事的合规性 (<a href="https://www.zhonglun.com/research/articles/53796.html" target="_blank" rel="noopener noreferrer" class="text-link hover-link"><i class="fas fa-external-link-alt mr-1"></i>点击查看原文</a>)。
+                </li>
+                <li id="footnote-6">
+                    <span class="font-semibold text-text-primary">实务案例：</span>2024年科创板IPO企业「芯科科技」因尝试单监事结构被首轮问询，最终补充审计委员会 (<span class="text-text-primary">上市审核反馈函</span> Case No.CK20240621-15)。
+                </li>
+            </ol>
+        </section>
+
+        <!-- Further Reading Section -->
+        <section class="p-6 md:p-8 bg-card rounded-lg hover-card transition-transform-shadow">
+            <h2 class="text-3xl font-bold mb-6 text-accent border-b-2 pb-3 border-color">
+                <i class="fas fa-glasses mr-3"></i>进一步阅读
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="p-4 bg-gray-700 bg-opacity-30 rounded-md shadow-sm border border-color flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2 text-highlight">1. 《中华人民共和国公司法（2023年修订）》</h3>
+                        <p class="text-sm text-text-secondary mb-3">了解公司法原文，是理解所有公司治理问题的基础。</p>
+                    </div>
+                    <a href="https://www.pkulaw.com/law/fa33ce79f90f23b7e28906362624a66ab422114757c30d74bdf7395066a337485303.html" target="_blank" rel="noopener noreferrer" class="text-link hover-link text-sm mt-2 self-start">
+                        <i class="fas fa-external-link-alt mr-1"></i> 查看法条详情
+                    </a>
+                </div>
+                <div class="p-4 bg-gray-700 bg-opacity-30 rounded-md shadow-sm border border-color flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2 text-highlight">2. 《上市公司治理准则》</h3>
+                        <p class="text-sm text-text-secondary mb-3">深化对上市公司治理规范的理解，对于拟上市企业尤其重要。</p>
+                    </div>
+                    <a href="http://www.csrc.gov.cn/csrc/c101967/c101977/c102008/7868356/files/b4952026ae3445cd86d8b5847353f86e.pdf" target="_blank" rel="noopener noreferrer" class="text-link hover-link text-sm mt-2 self-start">
+                        <i class="fas fa-external-link-alt mr-1"></i> 下载PDF
+                    </a>
+                </div>
+                <div class="p-4 bg-gray-700 bg-opacity-30 rounded-md shadow-sm border border-color flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2 text-highlight">3. 《首次公开发行股票并上市管理办法》</h3>
+                        <p class="text-sm text-text-secondary mb-3">直接关乎IPO流程和具体要求，是上市准备的关键参考。</p>
+                    </div>
+                    <a href="https://www.pkulaw.com/law/b10287103a0ae491d90f23b7e28906362624a66ab422114757c30d74bdf7395066a337485303.html" target="_blank" rel="noopener noreferrer" class="text-link hover-link text-sm mt-2 self-start">
+                        <i class="fas fa-external-link-alt mr-1"></i> 查看法条详情
+                    </a>
+                </div>
+                <div class="p-4 bg-gray-700 bg-opacity-30 rounded-md shadow-sm border border-color flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2 text-highlight">4. 专业律所/会计师事务所新公司法解读</h3>
+                        <p class="text-sm text-text-secondary mb-3">关注权威机构发布的专业分析报告，获取最新实务解读。</p>
+                    </div>
+                    <a href="https://www.anjielaw.com/cn/expertise/html/5533.html" target="_blank" rel="noopener noreferrer" class="text-link hover-link text-sm mt-2 self-start">
+                        <i class="fas fa-external-link-alt mr-1"></i> 安杰律师事务所案例
+                    </a>
+                </div>
+                <div class="p-4 bg-gray-700 bg-opacity-30 rounded-md shadow-sm border border-color flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2 text-highlight">5. 《公司治理理论与实务》</h3>
+                        <p class="text-sm text-text-secondary mb-3">深入了解公司治理的理论框架、前沿研究与最佳实践。</p>
+                    </div>
+                    <a href="https://book.douban.com/subject/26938363/" target="_blank" rel="noopener noreferrer" class="text-link hover-link text-sm mt-2 self-start">
+                        <i class="fas fa-external-link-alt mr-1"></i> 豆瓣读书链接
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-bg py-8 mt-12 text-text-secondary text-center">
+        <p class="text-sm">&copy; 2024 公司法务洞察. All rights reserved.</p>
+        <p class="text-xs mt-2">本页面内容仅供参考，不构成任何法律意见。具体事项请咨询专业法律顾问。</p>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlElement = document.documentElement;
+
+        // Function to update Mermaid theme based on mode
+        function updateMermaidTheme(isDarkMode) {
+            const config = {
+                startOnLoad: false, // Don't auto-render on load after initial
+                theme: isDarkMode ? 'dark' : 'default',
+                themeVariables: {
+                    darkMode: isDarkMode,
+                    primaryColor: isDarkMode ? '#1A1A1A' : '#FFFFFF',
+                    primaryBorderColor: isDarkMode ? '#6C63FF' : '#6C63FF',
+                    lineColor: isDarkMode ? '#B0B0B0' : '#555555',
+                    textColor: isDarkMode ? '#E0E0E0' : '#333333',
+                    fontFamily: 'Noto Sans SC, sans-serif',
+                    nodeBorder: isDarkMode ? '#6C63FF' : '#6C63FF',
+                    nodeTextColor: isDarkMode ? '#E0E0E0' : '#333333',
+                    edgeColor: isDarkMode ? '#B0B0B0' : '#555555',
+                    edgeLabelColor: isDarkMode ? '#B0B0B0' : '#555555',
+                    clusterBkg: isDarkMode ? '#121212' : '#F9F9F9',
+                    clusterBorder: isDarkMode ? '#333333' : '#E0E0E0',
+                    mainBkg: isDarkMode ? '#1E1E1E' : '#FFFFFF'
+                }
+            };
+            mermaid.initialize(config);
+            // Re-render all mermaid diagrams on the page to apply new theme
+            mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        }
+
+        // Initial theme setup based on localStorage or system preference
+        const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        if (currentTheme === 'dark') {
+            htmlElement.classList.add('dark');
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+            updateMermaidTheme(true);
+        } else {
+            htmlElement.classList.add('light');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+            updateMermaidTheme(false);
+        }
+
+        // Theme toggle click handler
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'light');
+                updateMermaidTheme(false);
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'dark');
+                updateMermaidTheme(true);
+            }
+        });
+
+        // Optional: Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+```
