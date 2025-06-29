@@ -1,0 +1,386 @@
+Here's the complete HTML code for a visually appealing and informative webpage about IPO fund flow verification requirements:
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO资金流水核查指南 - 关键人员范围及亲属核查要求</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            @apply bg-gray-900 text-gray-200;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Noto Serif SC', serif;
+        }
+        .hero-pattern {
+            background-image: radial-gradient(circle at 25% 25%, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 1) 100%);
+        }
+        .card {
+            @apply bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700 transition-all duration-300 hover:shadow-xl hover:border-indigo-500;
+        }
+        .icon-circle {
+            @apply flex items-center justify-center w-12 h-12 rounded-full bg-indigo-600 text-white mb-4;
+        }
+        .flow-item {
+            @apply relative pl-8 pb-6 border-l-2 border-indigo-500;
+        }
+        .flow-item:last-child {
+            @apply pb-0;
+        }
+        .flow-item::before {
+            content: '';
+            @apply absolute left-0 w-4 h-4 rounded-full bg-indigo-500 -translate-x-[9px];
+        }
+        table {
+            @apply w-full border-collapse;
+        }
+        th {
+            @apply bg-gray-700 text-left py-3 px-4 font-medium;
+        }
+        td {
+            @apply border-t border-gray-700 py-3 px-4;
+        }
+        tr:hover td {
+            @apply bg-gray-750;
+        }
+    </style>
+</head>
+<body>
+    <header class="hero-pattern py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-flex items-center px-4 py-2 rounded-full bg-indigo-900/50 text-indigo-300 text-sm font-medium mb-6">
+                <i class="fas fa-file-invoice-dollar mr-2"></i> IPO财务核查指南
+            </div>
+            <h1 class="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
+                IPO资金流水核查范围<br>
+                <span class="text-indigo-400">关键人员及亲属核查要求</span>
+            </h1>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                根据《监管规则适用指引——发行类第5号》及实务操作整理，全面解析A股IPO资金流水核查的核心范围、亲属核查要求及异常情形处理。
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <section class="grid md:grid-cols-2 gap-8 mb-16">
+            <div class="card">
+                <div class="icon-circle">
+                    <i class="fas fa-user-tie text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-4">核查核心原则</h3>
+                <p class="text-gray-300 mb-4">
+                    IPO资金流水核查遵循<strong class="text-indigo-400">风险导向原则</strong>，核查范围需根据公司具体情况<strong>动态调整</strong>，重点关注可能影响财务真实性的异常资金往来。
+                </p>
+                <div class="bg-gray-750 rounded-lg p-4">
+                    <p class="text-sm text-gray-300">
+                        <i class="fas fa-info-circle text-indigo-400 mr-2"></i>
+                        <strong>监管依据：</strong>《监管规则适用指引——发行类第5号》明确要求对发行人及相关主体的银行账户流水进行全面核查。
+                    </p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="icon-circle">
+                    <i class="fas fa-clipboard-check text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-4">核查程序要求</h3>
+                <ul class="text-gray-300 space-y-2">
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-indigo-400 mt-1 mr-2"></i>
+                        <span>亲自赴银行打印流水，验证账户完整性</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-indigo-400 mt-1 mr-2"></i>
+                        <span>覆盖所有银行卡、支付宝/微信等电子账户</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-indigo-400 mt-1 mr-2"></i>
+                        <span>对异常流水逐笔核查原因并取证</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-white mb-8 flex items-center">
+                <i class="fas fa-users mr-4 text-indigo-400"></i>
+                <span>核心核查范围</span>
+            </h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="card">
+                    <h3 class="text-xl font-bold text-white mb-4">发行人主体</h3>
+                    <ul class="text-gray-300 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs mt-2 mr-2 text-indigo-400"></i>
+                            <span>所有银行账户（含已注销账户）</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-bold text-white mb-4">关键自然人</h3>
+                    <ul class="text-gray-300 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs mt-2 mr-2 text-indigo-400"></i>
+                            <span>实际控制人及其配偶、成年子女</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs mt-2 mr-2 text-indigo-400"></i>
+                            <span>董事、监事、高级管理人员</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs mt-2 mr-2 text-indigo-400"></i>
+                            <span>关键岗位人员（财务、销售、采购等）</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-bold text-white mb-4">关联方</h3>
+                    <ul class="text-gray-300 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs mt-2 mr-2 text-indigo-400"></i>
+                            <span>控股股东</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs mt-2 mr-2 text-indigo-400"></i>
+                            <span>主要关联方（法人主体）</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-white mb-8 flex items-center">
+                <i class="fas fa-family mr-4 text-indigo-400"></i>
+                <span>亲属核查要求</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">必须核查亲属的人员</h3>
+                    <div class="flow-elements space-y-6">
+                        <div class="flow-item">
+                            <h4 class="text-lg font-semibold text-indigo-300 mb-2">实际控制人</h4>
+                            <p class="text-gray-300">
+                                <span class="font-medium text-white">基础范围：</span>配偶及成年子女（18周岁以上）<br>
+                                <span class="font-medium text-white">扩展情形：</span>父母、兄弟姐妹（需结合风险判断）
+                            </p>
+                        </div>
+                        <div class="flow-item">
+                            <h4 class="text-lg font-semibold text-indigo-300 mb-2">董监高及关键岗位人员</h4>
+                            <p class="text-gray-300">
+                                <span class="font-medium text-white">基础范围：</span>配偶（部分案例要求成年子女）<br>
+                                <span class="font-medium text-white">扩展情形：</span>父母、兄弟姐妹（发现异常资金往来时）
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">亲属核查扩展情形</h3>
+                    <ul class="text-gray-300 space-y-4">
+                        <li class="flex items-start">
+                            <div class="bg-indigo-600/20 text-indigo-300 rounded-full w-8 h-8 flex items-center justify-center mr-3 shrink-0">
+                                <i class="fas fa-exclamation-circle text-sm"></i>
+                            </div>
+                            <span>发现异常资金往来（如频繁转账至父母、兄弟姐妹账户）</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-indigo-600/20 text-indigo-300 rounded-full w-8 h-8 flex items-center justify-center mr-3 shrink-0">
+                                <i class="fas fa-exclamation-circle text-sm"></i>
+                            </div>
+                            <span>亲属在发行人客户/供应商处任职或持股</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-indigo-600/20 text-indigo-300 rounded-full w-8 h-8 flex items-center justify-center mr-3 shrink-0">
+                                <i class="fas fa-exclamation-circle text-sm"></i>
+                            </div>
+                            <span>监管问询要求（如某案例因未核查实控人祖母被问询）</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-white mb-8 flex items-center">
+                <i class="fas fa-exclamation-triangle mr-4 text-indigo-400"></i>
+                <span>需扩大核查范围的异常情形</span>
+            </h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full rounded-lg overflow-hidden">
+                    <thead>
+                        <tr>
+                            <th class="w-1/3">异常情形</th>
+                            <th>核查扩展范围</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>资金管理不规范</td>
+                            <td>扩大至操作人员及其亲属</td>
+                        </tr>
+                        <tr>
+                            <td>毛利率/费用率异常</td>
+                            <td>扩大至相关业务部门人员及亲属</td>
+                        </tr>
+                        <tr>
+                            <td>经销模式占比高且毛利异常</td>
+                            <td>扩大至经销商相关人员及亲属</td>
+                        </tr>
+                        <tr>
+                            <td>关键人员薪酬骤变</td>
+                            <td>扩大至相关人员亲属账户</td>
+                        </tr>
+                        <tr>
+                            <td>发现资金流向客户/供应商关联方</td>
+                            <td>扩大至相关交易对手方关联人员</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-white mb-8 flex items-center">
+                <i class="fas fa-lightbulb mr-4 text-indigo-400"></i>
+                <span>实务操作建议</span>
+            </h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="card">
+                    <h3 class="text-xl font-bold text-white mb-4">1. 核查程序</h3>
+                    <ul class="text-gray-300 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-400 mt-1 mr-2"></i>
+                            <span>亲自赴银行打印流水并验证账户完整性</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-400 mt-1 mr-2"></i>
+                            <span>覆盖所有电子支付账户（支付宝/微信等）</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-400 mt-1 mr-2"></i>
+                            <span>对异常流水逐笔核查并取得解释证据</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-bold text-white mb-4">2. 留痕要求</h3>
+                    <ul class="text-gray-300 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-400 mt-1 mr-2"></i>
+                            <span>保存银行网点合影</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-400 mt-1 mr-2"></i>
+                            <span>流水打印过程照片</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-400 mt-1 mr-2"></i>
+                            <span>异常流水核查记录</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="text-xl font-bold text-white mb-4">3. 沟通协调</h3>
+                    <ul class="text-gray-300 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-400 mt-1 mr-2"></i>
+                            <span>与会计师事务所充分沟通</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-400 mt-1 mr-2"></i>
+                            <span>参考近期类似案例反馈意见</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-400 mt-1 mr-2"></i>
+                            <span>提前准备异常情形解释方案</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-6 md:mb-0 md:pr-8">
+                    <h3 class="text-2xl font-bold text-white mb-4">进一步阅读</h3>
+                    <ul class="text-gray-300 space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-book text-indigo-400 mt-1 mr-3"></i>
+                            <span>《监管规则适用指引——发行类第5号》</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-book text-indigo-400 mt-1 mr-3"></i>
+                            <a href="https://zhuanlan.zhihu.com/p/551621678" class="text-indigo-300 hover:text-indigo-200">北交所IPO反馈案例：资金流水核查范围</a>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-book text-indigo-400 mt-1 mr-3"></i>
+                            <a href="https://zhuanlan.zhihu.com/p/563808790" class="text-indigo-300 hover:text-indigo-200">IPO资金流水核查监管要求详解</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="md:w-1/2 bg-gray-750 rounded-lg p-6">
+                    <h4 class="text-lg font-bold text-white mb-4">重要提示</h4>
+                    <p class="text-gray-300 mb-4">
+                        监管要求日趋严格，建议在具体项目中：
+                    </p>
+                    <ul class="text-gray-300 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs mt-2 mr-2 text-indigo-400"></i>
+                            <span>根据公司风险特征确定基础核查范围</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs mt-2 mr-2 text-indigo-400"></i>
+                            <span>通过尽职调查识别异常线索，动态调整核查范围</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs mt-2 mr-2 text-indigo-400"></i>
+                            <span>保留完整的核查记录，证明勤勉尽责</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center text-gray-400">
+                <p>© 2023 IPO财务核查指南. 本资料仅供参考，具体操作请以最新监管规定为准。</p>
+                <p class="mt-2">如需专业咨询，请联系投行项目组或会计师事务所。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dark/light mode toggle (optional)
+        const toggle = document.createElement('button');
+        toggle.className = 'fixed bottom-6 right-6 bg-gray-700 hover:bg-gray-600 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all duration-300';
+        toggle.innerHTML = '<i class="fas fa-moon text-xl"></i>';
+        toggle.title = '切换浅色/深色模式';
+        document.body.appendChild(toggle);
+
+        toggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            toggle.innerHTML = isDark ? '<i class="fas fa-sun text-xl"></i>' : '<i class="fas fa-moon text-xl"></i>';
+            
+            // Save preference to localStorage
+            localStorage.setItem('darkMode', isDark);
+        });
+
+        // Check for saved user preference or system preference
+        if (localStorage.getItem('darkMode') === 'false' || 
+            (window.matchMedia('(prefers-color-scheme: light)').matches && localStorage.getItem('darkMode') === null)) {
+            document.documentElement.classList.remove('dark');
+            toggle.innerHTML = '<i class="fas fa-moon text-xl"></i>';
+        }
+    </script>
+</body>
+</html>
+```
