@@ -1,0 +1,531 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A股董事会专门委员会要求深度解析</title>
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Define CSS variables for theme colors */
+        :root {
+            --primary-text: #E0E0E0; /* Light text for dark mode */
+            --secondary-text: #B0B0B0; /* Muted text for dark mode */
+            --background-dark: #1A1A2E; /* Deep navy blue */
+            --background-light: #F8F8F8; /* Off-white for light mode */
+            --card-dark: #2B2B47; /* Slightly lighter navy for cards in dark mode */
+            --card-light: #FFFFFF; /* White for cards in light mode */
+            --accent-color: #F5C70D; /* Muted gold/yellow */
+            --border-dark: #3F3F6D; /* Darker border for contrast */
+            --border-light: #E0E0E0; /* Light border */
+            
+            /* Mermaid specific variables for custom styling */
+            --mermaid-bg-dark: var(--card-dark);
+            --mermaid-bg-light: var(--background-light);
+            --mermaid-text-dark: var(--primary-text);
+            --mermaid-text-light: #333333;
+            --mermaid-stroke-dark: var(--accent-color);
+            --mermaid-stroke-light: var(--background-dark);
+        }
+
+        /* Dark mode default styles */
+        html.dark {
+            color-scheme: dark;
+            background-color: var(--background-dark);
+            color: var(--primary-text);
+        }
+        /* Override Tailwind defaults for dark mode */
+        html.dark .text-gray-700 { color: var(--primary-text); }
+        html.dark .bg-white { background-color: var(--card-dark); }
+        html.dark .border-gray-200 { border-color: var(--border-dark); }
+        html.dark .bg-gray-100, html.dark .bg-gray-50 { background-color: var(--card-dark); }
+
+        /* Light mode styles */
+        html.light {
+            color-scheme: light;
+            background-color: var(--background-light);
+            color: #333333;
+        }
+        /* Override Tailwind defaults for light mode */
+        html.light .text-gray-700 { color: #333333; }
+        html.light .bg-white { background-color: var(--card-light); }
+        html.light .border-gray-200 { border-color: var(--border-light); }
+        html.light .bg-gray-100, html.light .bg-gray-50 { background-color: var(--card-light); }
+
+        /* Base font settings */
+        body {
+            font-family: Noto Sans SC, Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Heading font settings */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: Noto Serif SC, serif;
+        }
+
+        /* Hero section background and overlay */
+        .hero-section {
+            background-image: linear-gradient(rgba(26, 26, 46, 0.7), rgba(26, 26, 46, 0.9)), url('https://images.unsplash.com/photo-1590283603417-66a7b7a4f9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcwMnwwfDF8c2VhcmNofDE2fHxmaW5hbmNlJTIwYmFja2dyb3VuZHxlbnwwfHx8fDE3MTc0MDIzODd8MA&ixlib=rb-4.0.3&q=80&w=1080');
+            background-size: cover;
+            background-position: center;
+            color: white; /* Default text color for hero */
+        }
+        /* Hero section background and overlay for light mode */
+        html.light .hero-section {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.9)), url('https://images.unsplash.com/photo-1590283603417-66a7b7a4f9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcwMnwwfDF8c2VhcmNofDE2fHxmaW5hbmNlJTIwYmFja2dyb3VuZHxlbnwwfHx8fDE3MTc0MDIzODd8MA&ixlib=rb-4.0.3&q=80&w=1080');
+            color: #333333; /* Text color for hero in light mode */
+        }
+        
+        /* Section title underline effect */
+        .section-title {
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        /* Custom styling for Mermaid diagram container */
+        .mermaid {
+            background-color: var(--mermaid-bg-dark);
+            color: var(--mermaid-text-dark);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        html.light .mermaid {
+            background-color: var(--mermaid-bg-light);
+            color: var(--mermaid-text-light);
+        }
+        /* Mermaid theme customization for SVG elements */
+        .mermaid svg {
+            font-family: Noto Sans SC, Tahoma, Arial, sans-serif;
+        }
+        /* Dark mode Mermaid node/line colors */
+        html.dark .mermaid .node rect, html.dark .mermaid .node circle, html.dark .mermaid .node polygon {
+            fill: var(--card-dark) !important;
+            stroke: var(--accent-color) !important;
+        }
+        html.dark .mermaid .node text { fill: var(--primary-text) !important; }
+        html.dark .mermaid .edgePath .path { stroke: var(--secondary-text) !important; fill: none !important; }
+        html.dark .mermaid .edgeLabel text { fill: var(--secondary-text) !important; }
+        html.dark .mermaid .cluster rect { fill: var(--background-dark) !important; stroke: var(--border-dark) !important; }
+        html.dark .mermaid .cluster text { fill: var(--primary-text) !important; }
+
+        /* Light mode Mermaid node/line colors */
+        html.light .mermaid .node rect, html.light .mermaid .node circle, html.light .mermaid .node polygon {
+            fill: var(--card-light) !important;
+            stroke: var(--accent-color) !important;
+        }
+        html.light .mermaid .node text { fill: var(--mermaid-text-light) !important; }
+        html.light .mermaid .edgePath .path { stroke: var(--mermaid-text-light) !important; fill: none !important; }
+        html.light .mermaid .edgeLabel text { fill: var(--mermaid-text-light) !important; }
+        html.light .mermaid .cluster rect { fill: var(--background-light) !important; stroke: var(--border-light) !important; }
+        html.light .mermaid .cluster text { fill: var(--mermaid-text-light) !important; }
+
+        /* Custom scrollbar styles */
+        ::-webkit-scrollbar { width: 10px; }
+        html.dark ::-webkit-scrollbar-track { background: var(--background-dark); }
+        html.dark ::-webkit-scrollbar-thumb { background: var(--card-dark); border-radius: 5px; }
+        html.dark ::-webkit-scrollbar-thumb:hover { background: var(--border-dark); }
+        html.light ::-webkit-scrollbar-track { background: var(--background-light); }
+        html.light ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 5px; }
+        html.light ::-webkit-scrollbar-thumb:hover { background: #aaa; }
+
+        /* Styles for references/footnotes */
+        .references ol { list-style-type: decimal; padding-left: 1.5rem; }
+        .references li { margin-bottom: 0.5rem; }
+        .references a { color: var(--accent-color); text-decoration: none; }
+        .references a:hover { text-decoration: underline; }
+        .footnote-link {
+            vertical-align: super;
+            font-size: 0.75em;
+            color: var(--accent-color);
+            text-decoration: none;
+            cursor: pointer;
+            padding-left: 2px;
+        }
+        .footnote-link:hover { text-decoration: underline; }
+        
+        /* Smooth scrolling */
+        html { scroll-behavior: smooth; }
+        
+        /* List icon styling */
+        .list-icon {
+            color: var(--accent-color);
+            margin-right: 0.5rem;
+            width: 1.25rem; /* Ensure consistent width */
+            text-align: center;
+            flex-shrink: 0; /* Prevent icon from shrinking on small screens */
+        }
+
+        /* Responsive table styling */
+        .responsive-table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch; /* For smoother scrolling on iOS */
+        }
+        .custom-table {
+            min-width: 600px; /* Ensure table doesn't get too squished on small screens */
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .custom-table th, .custom-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-dark);
+            text-align: left;
+        }
+        html.light .custom-table th, html.light .custom-table td {
+            border-bottom: 1px solid var(--border-light);
+        }
+        .custom-table th {
+            background-color: var(--card-dark);
+            font-weight: 600;
+        }
+        html.light .custom-table th {
+            background-color: var(--card-light);
+        }
+        .custom-table tr:hover {
+            background-color: var(--card-dark); /* Slightly lighter on hover */
+        }
+        html.light .custom-table tr:hover {
+            background-color: var(--border-light);
+        }
+    </style>
+</head>
+<body class="transition-colors duration-300">
+    <!-- Theme Toggle Button -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="themeToggle" class="p-3 rounded-full bg-white dark:bg-card-dark shadow-lg transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-accent-color focus:ring-opacity-75">
+            <i class="fas fa-sun text-xl text-yellow-500 hidden dark:block"></i>
+            <i class="fas fa-moon text-xl text-indigo-700 dark:hidden"></i>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero-section py-24 md:py-36 text-center">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">A股董事会专门委员会要求深度解析</h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90 font-light">聚焦沪深主板、科创板与创业板最新规则</p>
+            <p class="text-lg md:text-xl max-w-2xl mx-auto opacity-80 italic">
+                “根据当前有效的A股上市规则，不同板块对董事会专门委员会的核心要求基本一致，但在具体执行细节和配套规则上存在差异。”
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-16 max-w-4xl">
+        <!-- Introduction -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 section-title">概述</h2>
+            <p class="text-lg leading-relaxed text-gray-700">
+                本报告旨在全面梳理和分析当前中国A股市场不同板块（包括沪深主板、科创板和创业板）对上市公司董事会专门委员会的设立与运作要求。作为投行专业人士，理解这些规则的异同，对于企业合规上市和高效运营至关重要。尽管各板块在具体表述上有所侧重，但其核心原则和强制性要求保持高度一致。
+            </p>
+        </section>
+
+        <!-- Common Requirements -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 section-title">一、共同要求 <span class="text-lg font-normal opacity-70">(适用于所有A股板块)</span></h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+                    <h3 class="text-2xl font-semibold mb-4 flex items-center text-accent-color"><i class="fas fa-gavel list-icon"></i>审计委员会强制设立</h3>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        所有A股上市公司（含主板、科创板、创业板）均须强制设立审计委员会，这是确保上市公司财务透明与内部控制有效性的基石。
+                    </p>
+                    <ul class="list-none space-y-3 text-gray-700">
+                        <li class="flex items-start"><i class="fas fa-check-circle list-icon pt-1"></i>成员全部由董事组成，独立董事占<strong class="text-accent-color">多数</strong>。</li>
+                        <li class="flex items-start"><i class="fas fa-user-tie list-icon pt-1"></i>召集人由独立董事中的<strong class="text-accent-color">会计专业人士</strong>担任。</li>
+                        <li class="flex items-start"><i class="fas fa-chart-pie list-icon pt-1"></i>职责涵盖监督财务报告、内部控制及关联交易审查等<sup class="footnote-link"><a href="#footnote-1">1</a></sup><sup class="footnote-link"><a href="#footnote-2">2</a></sup><sup class="footnote-link"><a href="#footnote-4">4</a></sup>。</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+                    <h3 class="text-2xl font-semibold mb-4 flex items-center text-accent-color"><i class="fas fa-users-cog list-icon"></i>其他委员会选择性设立</h3>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        战略、提名、薪酬与考核等专门委员会可根据公司自身的战略需求和治理结构灵活选择设立。
+                    </p>
+                    <ul class="list-none space-y-3 text-gray-700">
+                        <li class="flex items-start"><i class="fas fa-vote-yea list-icon pt-1"></i>提名/薪酬委员会中独立董事占<strong class="text-accent-color">多数</strong>并担任召集人。</li>
+                        <li class="flex items-start"><i class="fas fa-lightbulb list-icon pt-1"></i>战略委员会无强制独立董事比例要求<sup class="footnote-link"><a href="#footnote-1">1</a></sup><sup class="footnote-link"><a href="#footnote-5">5</a></sup>。</li>
+                        <li class="flex items-start"><i class="fas fa-handshake list-icon pt-1"></i>若设立，则需对董事会负责，并按照相关规定履行职责。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section II: Board Differences (Table) -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 section-title">二、板块差异</h2>
+            <div class="responsive-table-wrapper bg-white p-4 rounded-lg shadow-lg">
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th class="py-3 px-4 uppercase text-sm tracking-wider">板块</th>
+                            <th class="py-3 px-4 uppercase text-sm tracking-wider">特殊要求</th>
+                            <th class="py-3 px-4 uppercase text-sm tracking-wider">依据</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="transition-colors duration-200">
+                            <td class="py-3 px-4 text-gray-700 font-semibold">科创板</td>
+                            <td class="py-3 px-4 text-gray-700">强调审计委员会需关注<strong class="text-accent-color">技术研发投入</strong>的合规性，但未增设额外委员会要求。</td>
+                            <td class="py-3 px-4 text-gray-700">《科创板股票上市规则（2023年8月修订）》<sup class="footnote-link"><a href="#footnote-7">7</a></sup><sup class="footnote-link"><a href="#footnote-9">9</a></sup></td>
+                        </tr>
+                        <tr class="transition-colors duration-200">
+                            <td class="py-3 px-4 text-gray-700 font-semibold">创业板</td>
+                            <td class="py-3 px-4 text-gray-700">要求审计委员会强化对<strong class="text-accent-color">创新业务财务风险</strong>的监督，需定期评估研发费用资本化合理性。</td>
+                            <td class="py-3 px-4 text-gray-700">《深圳证券交易所创业板股票上市规则（2024年修订）》<sup class="footnote-link"><a href="#footnote-13">13</a></sup></td>
+                        </tr>
+                        <tr class="transition-colors duration-200">
+                            <td class="py-3 px-4 text-gray-700 font-semibold">主板</td>
+                            <td class="py-3 px-4 text-gray-700">遵循《上市公司治理准则》基本规范，无附加要求。</td>
+                            <td class="py-3 px-4 text-gray-700">《上市公司治理准则》（2022年修订）<sup class="footnote-link"><a href="#footnote-1">1</a></sup></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section III: Core Performance Standards -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 section-title">三、履职核心规范 <span class="text-lg font-normal opacity-70">(各板块统一)</span></h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+                    <h3 class="text-2xl font-semibold mb-4 flex items-center text-accent-color"><i class="fas fa-balance-scale list-icon"></i>独立性要求</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        专门委员会决议需<strong class="text-accent-color">独立</strong>于管理层影响，尤其对关联交易、高管薪酬等事项<sup class="footnote-link"><a href="#footnote-5">5</a></sup>。
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+                    <h3 class="text-2xl font-semibold mb-4 flex items-center text-accent-color"><i class="fas fa-calendar-alt list-icon"></i>履职频率</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        审计委员会每年至少召开<strong class="text-accent-color">4次会议</strong>，其他委员会至少<strong class="text-accent-color">2次</strong><sup class="footnote-link"><a href="#footnote-4">4</a></sup>。
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+                    <h3 class="text-2xl font-semibold mb-4 flex items-center text-accent-color"><i class="fas fa-bullseye list-icon"></i>监督重点</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        聚焦<strong class="text-accent-color">控股股东关联交易</strong>、<strong class="text-accent-color">财务真实性</strong>及<strong class="text-accent-color">核心技术人员持股合规性</strong><sup class="footnote-link"><a href="#footnote-4">4</a></sup><sup class="footnote-link"><a href="#footnote-19">19</a></sup>。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 section-title">结论</h2>
+            <p class="text-lg leading-relaxed text-gray-700">
+                综上所述，不同板块对董事会专门委员会的<strong class="text-accent-color">核心框架要求相同</strong>（如审计委员会强制设立、独立董事主导），但科创板与创业板在审计委员会职能上结合板块定位提出了更具体的风险监督要求。拟上市公司需同时满足《上市公司治理准则》的通用规定及各交易所板块规则<sup class="footnote-link"><a href="#footnote-1">1</a></sup><sup class="footnote-link"><a href="#footnote-13">13</a></sup><sup class="footnote-link"><a href="#footnote-7">7</a></sup>。建议相关专业人士持续关注监管动态，确保合规运营。
+            </p>
+        </section>
+
+        <!-- Data Visualization (Mermaid) -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 section-title">董事会专门委员会体系概览</h2>
+            <p class="text-lg leading-relaxed text-gray-700 mb-8">
+                以下图表可视化展示了A股董事会专门委员会的核心结构、共同要求、板块差异及履职规范。
+            </p>
+            <div class="mermaid text-center overflow-auto">
+                graph TD
+                    A[A股董事会专门委员会体系] --> B{核心要求}
+                    A --> C{板块差异}
+                    A --> D{履职规范}
+
+                    B --> B1[共同要求]
+                    B1 --> B1_1[强制设立审计委员会]
+                    B1_1 --> B1_1_1[成员: 董事组成, 独董多数]
+                    B1_1 --> B1_1_2[召集人: 独董会计专业人士]
+                    B1_1 --> B1_1_3[职责: 财务, 内控, 关联交易]
+                    B1 --> B1_2[选择设立其他委员会]
+                    B1_2 --> B1_2_1[提名/薪酬: 独董多数, 独董召集人]
+                    B1_2 --> B1_2_2[战略: 无强制独董比例]
+
+                    C --> C1[科创板]
+                    C1 --> C1_1[审计委员会: 关注技术研发投入合规性]
+                    C1 --> C1_2[未增设额外委员会]
+
+                    C --> C2[创业板]
+                    C2 --> C2_1[审计委员会: 强化创新业务财务风险监督]
+                    C2 --> C2_2[评估研发费用资本化合理性]
+
+                    C --> C3[主板]
+                    C3 --> C3_1[遵循《上市公司治理准则》基本规范]
+                    C3 --> C3_2[无附加要求]
+
+                    D --> D1[独立性要求]
+                    D1 --> D1_1[决议独立于管理层]
+                    D1_1 --> D1_2[尤其关注关联交易, 高管薪酬]
+
+                    D --> D2[履职频率]
+                    D2 --> D2_1[审计委员会: 至少4次/年]
+                    D2 --> D2_2[其他委员会: 至少2次/年]
+
+                    D --> D3[监督重点]
+                    D3 --> D3_1[控股股东关联交易]
+                    D3 --> D3_2[财务真实性]
+                    D3 --> D3_3[核心技术人员持股合规性]
+
+                    subgraph 强制性要求
+                        B1_1
+                    end
+                    subgraph 独立董事主导
+                        B1_1_1
+                        B1_1_2
+                        B1_2_1
+                        D1
+                    end
+                    subgraph 板块特性
+                        C1_1
+                        C2_1
+                        C2_2
+                    end
+            </div>
+        </section>
+
+        <!-- Further Reading -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 section-title">进一步阅读</h2>
+            <p class="text-lg leading-relaxed text-gray-700 mb-6">
+                深入理解A股上市公司治理与董事会专门委员会运作，推荐以下资料：
+            </p>
+            <ul class="list-none space-y-4 text-gray-700">
+                <li class="flex items-start">
+                    <i class="fas fa-book-open list-icon mt-1"></i>
+                    <div>
+                        <h4 class="font-semibold text-xl mb-1 text-accent-color">《公司治理：法律与实践》（中国版）</h4>
+                        <p class="text-base mb-1">深入探讨中国公司治理的法律框架、实践案例及面临的挑战，对理解董事会运作有宏观指导意义。</p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-book-open list-icon mt-1"></i>
+                    <div>
+                        <h4 class="font-semibold text-xl mb-1 text-accent-color">《中国证券法精要与案例分析》</h4>
+                        <p class="text-base mb-1">全面解析中国证券市场的法律法规，包括上市公司信息披露、投资者保护等与董事会职责息息相关的内容。</p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-book-open list-icon mt-1"></i>
+                    <div>
+                        <h4 class="font-semibold text-xl mb-1 text-accent-color">《上市公司独立董事制度研究》</h4>
+                        <p class="text-base mb-1">聚焦独立董事制度的理论基础、国际经验及中国特色，有助于理解独立董事在专门委员会中的核心作用。</p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-book-open list-icon mt-1"></i>
+                    <div>
+                        <h4 class="font-semibold text-xl mb-1 text-accent-color">《科创板与注册制改革：制度与实践》</h4>
+                        <p class="text-base mb-1">针对科创板的特殊性进行剖析，包括其上市条件、监管逻辑以及对公司治理提出的新要求。</p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-book-open list-icon mt-1"></i>
+                    <div>
+                        <h4 class="font-semibold text-xl mb-1 text-accent-color">《财务报告内部控制与审计实务》</h4>
+                        <p class="text-base mb-1">从专业角度讲解财务报告内部控制的设计、执行与审计，是理解审计委员会职责的实用指南。</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- References / Footnotes -->
+        <section class="references mt-20 border-t pt-8 border-gray-200">
+            <h2 class="text-xl font-semibold mb-6 section-title text-accent-color">参考文献</h2>
+            <ol class="text-sm text-gray-700">
+                <li id="footnote-1">海问律师事务所《A股上市公司监管法律风险提示》，明确审计委员会强制设立及独立董事占比要求。</li>
+                <li id="footnote-2">新疆证监局《辖区上市公司监管动态》，强调专门委员会对董事会负责的定位。</li>
+                <li id="footnote-4">嘉源律师事务所《关于上市公司独立董事管理办法解读》，细化专门委员会监督事项。</li>
+                <li id="footnote-5">知识库资料“A股各板块最新上市标准—科创板”，确认科创板审计委员会纳入技术合规审查。</li>
+                <li id="footnote-7">民生证券《关于发布&lt;科创板股票上市规则&gt;的通知》，链接为最新2023年8月修订版。</li>
+                <li id="footnote-9">上交所官网《科创板股票上市规则（2023年8月修订）》历史版本。</li>
+                <li id="footnote-13">《深圳证券交易所创业板股票上市规则（2024年修订）》，明确创新业务财务监督要求。</li>
+                <li id="footnote-19">中伦律师事务所《科创板核心技术人员法律实务分析》，提及审计委员会对核心技术持股的监督职责。</li>
+            </ol>
+        </section>
+    </main>
+
+    <footer class="py-8 text-center text-gray-500 text-sm">
+        <p>&copy; 2025 A股董事会专门委员会研究. All rights reserved.</p>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid with custom theme variables that will be overridden by CSS
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base', // Use 'base' theme for maximum CSS control
+            securityLevel: 'loose', // Allows for more diagram flexibility
+            themeVariables: {
+                // These variables serve as defaults but are largely overridden by specific CSS rules
+                'darkMode': true, // Initial assumption for dark mode
+                'primaryColor': 'var(--card-dark)',
+                'primaryBorderColor': 'var(--accent-color)',
+                'lineColor': 'var(--secondary-text)',
+                'textColor': 'var(--primary-text)',
+                'clusterBkg': 'var(--background-dark)',
+                'clusterBorder': 'var(--border-dark)'
+            }
+        });
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            }
+            // Re-render Mermaid diagrams to apply new theme colors from CSS variables
+            mermaid.mermaidAPI.render('mermaidSvg', document.querySelector('.mermaid').textContent, (svgCode, bindFunctions) => {
+                const mermaidDiv = document.querySelector('.mermaid');
+                mermaidDiv.innerHTML = svgCode;
+                bindFunctions();
+            });
+        }
+
+        // Initialize theme based on local storage or system preference
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme) {
+            setTheme(storedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+
+        // Add event listener for toggle button
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (!localStorage.getItem('theme')) { // Only react if user hasn't manually set a preference
+                setTheme(event.matches ? 'dark' : 'light');
+            }
+        });
+    </script>
+</body>
+</html>
+```
