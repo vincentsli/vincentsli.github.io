@@ -1,0 +1,522 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>江苏证监局IPO辅导备案与最新窗口指导</title>
+    <meta name="description" content="全面解读江苏证监局IPO辅导备案核心材料清单及2025年6月最新监管窗口指导，助您高效完成上市准备。">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%236a93cb' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z'/%3E%3C/svg%3E" type="image/svg+xml">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC (for Chinese) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+
+    <style>
+        /* Base styles, default to dark mode */
+        :root {
+            --bg-color: #1a1a2e;
+            --text-color: #e0e0e0;
+            --heading-color: #ffffff;
+            --accent-color-primary: #6a93cb;
+            --accent-color-secondary: #f0a500;
+            --card-bg-color: #272740;
+            --border-color: #3f3f6e;
+            --code-bg-color: #333;
+        }
+
+        /* Light mode overrides */
+        html.light {
+            --bg-color: #f0f4f8;
+            --text-color: #333333;
+            --heading-color: #1a1a2e;
+            --accent-color-primary: #3d6cb9;
+            --accent-color-secondary: #d18d00;
+            --card-bg-color: #ffffff;
+            --border-color: #e2e8f0;
+            --code-bg-color: #eee;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-self;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            line-height: 1.8;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', 'Times New Roman', serif;
+            color: var(--heading-color);
+            line-height: 1.3;
+        }
+
+        /* Hero Section Specific */
+        .hero-section {
+            background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(26, 26, 46, 0.85)), url('https://images.unsplash.com/photo-1590283603417-66a9d702af7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2500&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        html.light .hero-section {
+            background-image: linear-gradient(rgba(240, 244, 248, 0.85), rgba(240, 244, 248, 0.85)), url('https://images.unsplash.com/photo-1590283603417-66a9d702af7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2500&q=80');
+        }
+
+        /* Custom styles for elements */
+        .card {
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+        html.light .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        }
+        html.light .card:hover {
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-heading {
+            border-left: 5px solid var(--accent-color-primary);
+            padding-left: 1rem;
+        }
+
+        .highlight-text {
+            color: var(--accent-color-primary);
+            font-weight: 600;
+        }
+
+        .note-box {
+            background-color: rgba(106, 147, 203, 0.1); /* Lighter accent background */
+            border-left: 4px solid var(--accent-color-primary);
+            color: var(--text-color);
+        }
+
+        .warning-box {
+            background-color: rgba(240, 165, 0, 0.1); /* Lighter warning background */
+            border-left: 4px solid var(--accent-color-secondary);
+            color: var(--text-color);
+        }
+
+        a {
+            color: var(--accent-color-primary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        a:hover {
+            color: var(--accent-color-secondary);
+            text-decoration: underline;
+        }
+
+        /* Mermaid container for styling */
+        .mermaid-container {
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            overflow-x: auto;
+        }
+        .mermaid {
+            background-color: var(--card-bg-color) !important;
+        }
+        .mermaid svg {
+            /* Ensure the SVG itself respects the container's background */
+            background-color: var(--card-bg-color) !important;
+        }
+
+        /* Dark/Light mode toggle button */
+        #theme-toggle {
+            background-color: var(--card-bg-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        #theme-toggle:hover {
+            background-color: var(--border-color);
+        }
+
+        /* Scroll reveal effect */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="fixed bottom-6 right-6 p-3 rounded-full shadow-lg z-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-current focus:ring-accent-color-primary">
+        <i class="fas fa-sun hidden dark:inline-block"></i>
+        <i class="fas fa-moon inline-block dark:hidden"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <header class="hero-section text-white py-24 md:py-32 lg:py-40 flex items-center justify-center text-center">
+        <div class="max-w-4xl px-6 lg:px-8">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
+                江苏证监局IPO辅导备案与<br class="hidden md:inline-block">最新窗口指导
+            </h1>
+            <p class="text-xl md:text-2xl font-light mb-8 opacity-90">
+                <span class="highlight-text">2025年6月更新</span>：全面解读申报材料及监管动态
+            </p>
+            <p class="text-lg md:text-xl font-light max-w-2xl mx-auto opacity-80">
+                洞悉监管脉络，精准把握上市要点，助您企业高效迈向资本市场。
+            </p>
+            <div class="mt-10">
+                <a href="#main-content" class="inline-block bg-accent-color-primary text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    <i class="fas fa-chevron-down mr-2"></i> 开始阅读
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="container mx-auto px-4 py-16 md:py-20 lg:py-24">
+        <!-- Introduction/Overview (optional, but good for context) -->
+        <section class="mb-16 reveal">
+            <div class="max-w-3xl mx-auto text-center">
+                <p class="text-lg text-text-color opacity-80">
+                    首次公开发行股票（IPO）是企业迈向资本市场的关键一步。作为拟上市企业，准确理解并准备辅导备案材料，紧跟监管机构的最新窗口指导至关重要。本文将为您详细梳理江苏证监局的最新要求与实践经验。
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 1: Core Materials -->
+        <section class="mb-16 reveal">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-8 section-heading">
+                <i class="fas fa-clipboard-list mr-3 text-accent-color-primary"></i> 一、江苏证监局IPO辅导备案核心材料清单
+            </h2>
+            <p class="mb-8 text-lg opacity-90">依据知识库资料《江苏天兵航天科技股份有限公司拟申报辅导的情况说明》及监管要求，需提交以下材料：</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                <div class="card p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4 text-heading-color"><i class="fas fa-folder-open mr-2 text-accent-color-primary"></i> 1. 基础文件</h3>
+                    <ul class="list-none space-y-3">
+                        <li class="flex items-start"><i class="fas fa-handshake mt-1 mr-3 text-accent-color-primary"></i> 辅导协议（保荐机构与企业签署）</li>
+                        <li class="flex items-start"><i class="fas fa-file-alt mt-1 mr-3 text-accent-color-primary"></i> 《辅导备案申请报告》（含企业基本情况、股权结构、主营业务等）</li>
+                        <li class="flex items-start"><i class="fas fa-building mt-1 mr-3 text-accent-color-primary"></i> 营业执照及公司章程</li>
+                        <li class="flex items-start"><i class="fas fa-users mt-1 mr-3 text-accent-color-primary"></i> 股东名册（穿透至自然人/国资主体）</li>
+                    </ul>
+                </div>
+
+                <div class="card p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4 text-heading-color"><i class="fas fa-check-circle mr-2 text-accent-color-primary"></i> 2. 合规证明</h3>
+                    <ul class="list-none space-y-3">
+                        <li class="flex items-start"><i class="fas fa-balance-scale mt-1 mr-3 text-accent-color-primary"></i> 发行人及其子公司无重大违法违规证明（工商、税务、环保等部门出具）</li>
+                        <li class="flex items-start"><i class="fas fa-user-shield mt-1 mr-3 text-accent-color-primary"></i> 实际控制人/董监高无证券市场禁入证明</li>
+                        <li class="flex items-start"><i class="fas fa-military-base mt-1 mr-3 text-accent-color-primary"></i> 军工企业需附加《国防科工局涉密信息豁免批复》（若涉及军工业务）</li>
+                    </ul>
+                </div>
+
+                <div class="card p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4 text-heading-color"><i class="fas fa-bullseye mr-2 text-accent-color-primary"></i> 3. 板块定位说明</h3>
+                    <ul class="list-none space-y-3">
+                        <li class="flex items-start"><i class="fas fa-chart-line mt-1 mr-3 text-accent-color-primary"></i> 科创板需提交《符合科创板定位的专项说明》（核心技术、市场空间等论证）</li>
+                    </ul>
+                </div>
+
+                <div class="card p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4 text-heading-color"><i class="fas fa-layer-group mr-2 text-accent-color-primary"></i> 4. 其他材料</h3>
+                    <ul class="list-none space-y-3">
+                        <li class="flex items-start"><i class="fas fa-file-invoice-dollar mt-1 mr-3 text-accent-color-primary"></i> 审计报告（最近三年及一期）</li>
+                        <li class="flex items-start"><i class="fas fa-calendar-alt mt-1 mr-3 text-accent-color-primary"></i> 辅导工作计划及进度表</li>
+                        <li class="flex items-start"><i class="fas fa-magnifying-glass-chart mt-1 mr-3 text-accent-color-primary"></i> 保荐机构内核意见</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="note-box p-6 rounded-lg mt-8 text-lg flex items-start">
+                <i class="fas fa-pushpin mr-4 text-accent-color-primary text-2xl mt-1"></i>
+                <p>
+                    <span class="font-bold">注</span>：2025年新增要求 <span class="highlight-text">“辅导对象符合板块定位说明”</span>（江苏证监局窗口指导，2025年4月起执行）。
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 2: Recent Window Guidance -->
+        <section class="mb-16 reveal">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-8 section-heading">
+                <i class="fas fa-bullhorn mr-3 text-accent-color-primary"></i> 二、近期重要窗口指导（2025年6月更新）
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4 text-heading-color"><i class="fas fa-sack-dollar mr-2 text-accent-color-primary"></i> 1. 募投项目审核趋严</h3>
+                    <p class="mb-4">要求募投资金 <span class="highlight-text">不得用于金融投资、房地产等非主业领域</span>，需明确技术研发或产能扩张用途（搜狐财经报道）。</p>
+                </div>
+                <div class="card p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4 text-heading-color"><i class="fas fa-chart-pie mr-2 text-accent-color-primary"></i> 2. 财务数据核查重点</h3>
+                    <ul class="list-none space-y-3">
+                        <li class="flex items-start"><i class="fas fa-clock mt-1 mr-3 text-accent-color-primary"></i> 申报前6个月内突击入股股东，需延长锁定期至36个月（证券时报窗口指导）。</li>
+                        <li class="flex items-start"><i class="fas fa-sitemap mt-1 mr-3 text-accent-color-primary"></i> 发行人子公司净利润占比超5%的，其合规问题视为发行人问题（知识库《军工企业IPO操作手册》）。</li>
+                    </ul>
+                </div>
+                <div class="card p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4 text-heading-color"><i class="fas fa-microchip mr-2 text-accent-color-primary"></i> 3. 科创板第五套标准动态</h3>
+                    <p class="mb-4">上交所明确支持 <span class="highlight-text">商业航天、硬科技企业适用第五套标准</span>（未盈利企业），但需证明技术领先性及市场空间（天兵科技案例）。</p>
+                </div>
+                <div class="card p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4 text-heading-color"><i class="fas fa-chart-area mr-2 text-accent-color-primary"></i> 4. 北交所“小而精”审核导向</h3>
+                    <p class="mb-4">对净利润低于3000万元企业，要求披露 <span class="highlight-text">可持续经营能力专项分析</span>（东财网辅导公告）。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Visualization Section -->
+        <section class="mb-16 reveal">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-8 section-heading">
+                <i class="fas fa-network-wired mr-3 text-accent-color-primary"></i> IPO辅导备案关键要素关系图
+            </h2>
+            <div class="mermaid-container">
+                <pre class="mermaid">
+                    graph TD
+                        A[企业IPO意向] --> B(选择保荐机构);
+                        B --> C[签署辅导协议];
+                        C --> D[提交辅导备案材料];
+                        D -- 包含 --> D1[基础文件];
+                        D -- 包含 --> D2[合规证明];
+                        D -- 包含 --> D3[板块定位说明];
+                        D -- 包含 --> D4[其他材料];
+
+                        D --> E{江苏证监局审核};
+
+                        E -- 重点关注 --> F[募投项目合理性];
+                        E -- 重点关注 --> G[财务数据合规性];
+                        E -- 重点关注 --> H[板块定位匹配];
+                        E -- 军工特有 --> I[国防科工局批复];
+
+                        F -- 禁投 --> F1[金融/地产];
+                        G -- 严查 --> G1[突击入股];
+                        G -- 关联 --> G2[子公司合规];
+                        H -- 硬科技 --> H1[科创板第五套];
+                        H -- 小而精 --> H2[北交所可持续];
+
+                        E -- 审核通过 --> J[辅导验收/正式申报];
+
+                        subgraph 备案要求
+                            D1
+                            D2
+                            D3
+                            D4
+                        end
+
+                        subgraph 监管窗口指导
+                            F
+                            G
+                            H
+                            I
+                        end
+                </pre>
+            </div>
+            <p class="mt-4 text-center text-text-color opacity-80">
+                （点击图表可进行拖拽和缩放操作）
+            </p>
+        </section>
+
+        <!-- Section 3: Operational Advice -->
+        <section class="mb-16 reveal">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-8 section-heading">
+                <i class="fas fa-lightbulb mr-3 text-accent-color-primary"></i> 三、操作建议
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4 text-heading-color"><i class="fas fa-user-tie mr-2 text-accent-color-primary"></i> 1. 军工/航天企业特别注意</h3>
+                    <p class="mb-4">提前向 <span class="highlight-text">江苏省国防科工办</span> 申请涉密信息脱密处理（耗时约15工作日）。</p>
+                </div>
+                <div class="card p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4 text-heading-color"><i class="fas fa-sitemap mr-2 text-accent-color-primary"></i> 2. 板块选择</h3>
+                    <p class="mb-4">硬科技企业优先考虑科创板第五套标准（需与上交所预沟通）。</p>
+                </div>
+                <div class="card p-8 rounded-xl shadow-lg col-span-1 md:col-span-2">
+                    <h3 class="text-2xl font-semibold mb-4 text-heading-color"><i class="fas fa-calendar-days mr-2 text-accent-color-primary"></i> 3. 时间规划</h3>
+                    <p class="mb-4">辅导备案至验收约需3-6个月，避开半年报/年报窗口期（2025年7月为申报高峰）。</p>
+                </div>
+            </div>
+
+            <div class="warning-box p-6 rounded-lg mt-8 text-lg flex items-start">
+                <i class="fas fa-triangle-exclamation mr-4 text-accent-color-secondary text-2xl mt-1"></i>
+                <p>
+                    <span class="font-bold">风险提示</span>：2025年6月江苏证监局在审项目中，<span class="highlight-text">30%因募投项目合理性被退回补充说明</span>，建议提前与监管沟通方案（搜狐财经数据）。
+                </p>
+            </div>
+
+            <div class="text-lg text-text-color opacity-90 mt-8 p-6 card rounded-xl shadow-lg flex items-start">
+                <i class="fas fa-comments mr-4 text-accent-color-primary text-2xl mt-1"></i>
+                <p>
+                    建议根据企业具体行业属性补充材料，预先与保荐机构、江苏证监局监管员进行沟通。<br>
+                    <span class="font-bold">咨询电话</span>：<a href="tel:025-84575560" class="highlight-text hover:underline">025-84575560</a>
+                </p>
+            </div>
+        </section>
+
+        <!-- Reference Materials -->
+        <section class="mb-16 reveal">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-8 section-heading">
+                <i class="fas fa-book-open mr-3 text-accent-color-primary"></i> 参考资料
+            </h2>
+            <ul class="list-none space-y-3 text-lg">
+                <li class="flex items-start"><i class="fas fa-link mt-1 mr-3 text-accent-color-primary"></i> 知识库资料《江苏天兵航天科技股份有限公司拟申报辅导的情况说明》</li>
+                <li class="flex items-start"><i class="fas fa-link mt-1 mr-3 text-accent-color-primary"></i> 知识库资料《军工企业IPO操作手册》</li>
+                <li class="flex items-start"><i class="fas fa-link mt-1 mr-3 text-accent-color-primary"></i> 知识库资料《IPO项目军工涉密信息处理流程》</li>
+                <li class="flex items-start"><i class="fas fa-link mt-1 mr-3 text-accent-color-primary"></i> <a href="https://q.stock.sohu.com/cn/news.html?textId=903638996" target="_blank" rel="noopener noreferrer">搜狐财经：江苏IPO募投项目审核新规</a></li>
+                <li class="flex items-start"><i class="fas fa-link mt-1 mr-3 text-accent-color-primary"></i> <a href="https://www.stcn.com/article/detail/1253585.html" target="_blank" rel="noopener noreferrer">证券时报：突击入股锁定期延长至36个月</a></li>
+                <li class="flex items-start"><i class="fas fa-link mt-1 mr-3 text-accent-color-primary"></i> <a href="https://xinsanban.eastmoney.com/Article/NoticeContent?id=AN202506191693787874" target="_blank" rel="noopener noreferrer">东财网：北交所IPO可持续经营能力披露要求</a></li>
+                <li class="flex items-start"><i class="fas fa-link mt-1 mr-3 text-accent-color-primary"></i> <a href="https://xinsanban.eastmoney.com/Article/NoticeContent?id=AN202506251697436047" target="_blank" rel="noopener noreferrer">东财网：长鹰硬科IPO辅导进展</a></li>
+                <li class="flex items-start"><i class="fas fa-link mt-1 mr-3 text-accent-color-primary"></i> <a href="http://www.ifnews.com/news.html?aid=725020" target="_blank" rel="noopener noreferrer">国际金融报：2025年IPO辅导备案数据分析</a></li>
+            </ul>
+        </section>
+
+        <!-- Further Reading -->
+        <section class="mb-16 reveal">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-8 section-heading">
+                <i class="fas fa-book-reader mr-3 text-accent-color-primary"></i> 延伸阅读
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-semibold mb-3 text-heading-color"><i class="fas fa-book mr-2 text-accent-color-secondary"></i> 《企业上市全程指引》</h3>
+                    <p class="text-sm text-text-color opacity-80">陈忠 著。系统性梳理企业上市的各个环节，是全面了解IPO流程的入门佳作。</p>
+                </div>
+                <div class="card p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-semibold mb-3 text-heading-color"><i class="fas fa-book mr-2 text-accent-color-secondary"></i> 《中国证监会关于首次公开发行股票并上市管理办法》</h3>
+                    <p class="text-sm text-text-color opacity-80">中国证监会官方文件。理解IPO法规的基石，建议阅读最新版本。</p>
+                </div>
+                <div class="card p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-semibold mb-3 text-heading-color"><i class="fas fa-book mr-2 text-accent-color-secondary"></i> 《科创板首次公开发行股票注册管理办法（试行）》</h3>
+                    <p class="text-sm text-text-color opacity-80">聚焦科创板的专项规则，对于硬科技企业尤为重要，深入理解其上市标准和要求。</p>
+                </div>
+                <div class="card p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-semibold mb-3 text-heading-color"><i class="fas fa-book mr-2 text-accent-color-secondary"></i> 《新股发行与上市实务》</h3>
+                    <p class="text-sm text-text-color opacity-80">刘纪鹏 著。结合实务案例，提供新股发行与上市操作中的经验与教训。</p>
+                </div>
+                <div class="card p-6 rounded-xl shadow-lg">
+                    <h3 class="text-xl font-semibold mb-3 text-heading-color"><i class="fas fa-book mr-2 text-accent-color-secondary"></i> 《企业上市法律实务》</h3>
+                    <p class="text-sm text-text-color opacity-80">孙立 著。从法律角度剖析企业上市过程中的各项法律问题及风险规避。</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="py-10 text-center text-text-color opacity-60 text-sm border-t border-border-color mt-16">
+        <p>&copy; 2025 江苏证监局IPO辅导备案指南. All rights reserved.</p>
+        <p class="mt-2">本页面信息仅供参考，具体以监管机构最新规定为准。</p>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark', // Default to dark for consistency with page default
+            flowchart: {
+                curve: 'basis',
+            },
+            securityLevel: 'loose', // Allow external links if any were in diagram
+            themeVariables: {
+                // Adjust Mermaid theme to match our custom dark mode
+                darkMode: true,
+                background: getComputedStyle(document.documentElement).getPropertyValue('--card-bg-color').trim(),
+                primaryColor: getComputedStyle(document.documentElement).getPropertyValue('--accent-color-primary').trim(),
+                primaryBorderColor: getComputedStyle(document.documentElement).getPropertyValue('--border-color').trim(),
+                primaryTextColor: getComputedStyle(document.documentElement).getPropertyValue('--text-color').trim(),
+                secondaryColor: getComputedStyle(document.documentElement).getPropertyValue('--accent-color-secondary').trim(),
+                tertiaryColor: getComputedStyle(document.documentElement).getPropertyValue('--bg-color').trim(),
+                lineColor: getComputedStyle(document.documentElement).getPropertyValue('--border-color').trim(),
+                textColor: getComputedStyle(document.documentElement).getPropertyValue('--text-color').trim(),
+                mainBkg: getComputedStyle(document.documentElement).getPropertyValue('--card-bg-color').trim(),
+                nodeBorder: getComputedStyle(document.documentElement).getPropertyValue('--border-color').trim(),
+                edgeColor: getComputedStyle(document.documentElement).getPropertyValue('--accent-color-primary').trim(),
+                clusterBkg: getComputedStyle(document.documentElement).getPropertyValue('--card-bg-color').trim(),
+                clusterBorder: getComputedStyle(document.documentElement).getPropertyValue('--border-color').trim(),
+                fontSize: '14px',
+                fontFamily: getComputedStyle(document.documentElement).getPropertyValue('font-family').trim(),
+            }
+        });
+
+        // Theme Toggle JavaScript
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Check for saved theme or system preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            htmlElement.classList.add(savedTheme);
+            mermaid.initialize({ theme: savedTheme }); // Update Mermaid theme
+        } else if (prefersDark) {
+            htmlElement.classList.add('dark');
+            mermaid.initialize({ theme: 'dark' });
+        } else {
+            htmlElement.classList.add('light');
+            mermaid.initialize({ theme: 'light' });
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+                mermaid.initialize({ theme: 'light' }); // Update Mermaid theme
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                mermaid.initialize({ theme: 'dark' }); // Update Mermaid theme
+            }
+            // Re-render Mermaid chart to apply new theme variables
+            document.querySelectorAll('.mermaid').forEach(element => {
+                const graphDefinition = element.innerText;
+                element.removeAttribute('data-processed'); // Mark as unprocessed
+                element.innerHTML = graphDefinition; // Re-insert content
+                mermaid.init(undefined, element); // Re-initialize
+            });
+        });
+
+        // Scroll Reveal Effect
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    // Optional: remove 'active' class when out of view
+                    // entry.target.classList.remove('active');
+                }
+            });
+        }, {
+            threshold: 0.1 // Trigger when 10% of the element is visible
+        });
+
+        revealElements.forEach(el => {
+            observer.observe(el);
+        });
+
+        // Initial check for elements already in view on load
+        const checkInitialReveal = () => {
+            revealElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom >= 0) {
+                    el.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('load', checkInitialReveal);
+        window.addEventListener('scroll', checkInitialReveal); // In case some elements appear due to scroll on load
+    </script>
+</body>
+</html>
+```
