@@ -1,0 +1,679 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>再融资募投项目：非全资子公司出资问题深度解析</title>
+    <meta name="description" content="深入解析再融资项目中，非全资子公司作为募投项目实施主体时，监管对小股东同比例出资的要求、豁免情形与实操案例。">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2360A5FA' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z'/%3E%3C/svg%3E" type="image/svg+xml">
+
+    <!-- Google Fonts for Noto Serif SC and Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+
+    <style>
+        /* Base styles with custom fonts and smooth transitions */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, serif;
+            font-weight: 700;
+        }
+
+        /* Dark Mode defaults */
+        html.dark {
+            background-color: #1a202c; /* Tailwind's bg-gray-900 */
+            color: #e2e8f0; /* Tailwind's text-gray-200 */
+        }
+        html.dark .text-primary { color: #93c5fd; } /* text-blue-300 */
+        html.dark .bg-card { background-color: #2d3748; } /* Tailwind's bg-gray-800 */
+        html.dark .border-primary { border-color: #4a5568; } /* Tailwind's border-gray-600 */
+        html.dark .text-muted { color: #a0aec0; } /* Tailwind's text-gray-400 */
+        html.dark .icon-color { color: #63b3ed; } /* Tailwind's text-blue-400 */
+        html.dark .bg-accent { background-color: #3b82f6; } /* Tailwind's bg-blue-500 */
+        html.dark .bg-accent-hover:hover { background-color: #2563eb; } /* Tailwind's bg-blue-600 */
+        html.dark .mermaid-dark-theme .cluster rect { fill: #2d3748; stroke: #4a5568; }
+        html.dark .mermaid-dark-theme .cluster text { fill: #e2e8f0; }
+        html.dark .mermaid-dark-theme .node rect, html.dark .mermaid-dark-theme .node circle, html.dark .mermaid-dark-theme .node polygon { fill: #4a5568; stroke: #63b3ed; }
+        html.dark .mermaid-dark-theme .node text { fill: #e2e8f0; }
+        html.dark .mermaid-dark-theme .edgePath .path { stroke: #e2e8f0; }
+        html.dark .mermaid-dark-theme .edgeLabels text { fill: #a0aec0; }
+
+        /* Light Mode overrides */
+        html.light {
+            background-color: #ffffff; /* Tailwind's bg-white */
+            color: #2d3748; /* Tailwind's text-gray-800 */
+        }
+        html.light .text-primary { color: #2563eb; } /* text-blue-600 */
+        html.light .bg-card { background-color: #f7fafc; } /* Tailwind's bg-gray-50 */
+        html.light .border-primary { border-color: #e2e8f0; } /* Tailwind's border-gray-200 */
+        html.light .text-muted { color: #718096; } /* Tailwind's text-gray-600 */
+        html.light .icon-color { color: #3b82f6; } /* Tailwind's text-blue-500 */
+        html.light .bg-accent { background-color: #3b82f6; } /* Tailwind's bg-blue-500 */
+        html.light .bg-accent-hover:hover { background-color: #2563eb; } /* Tailwind's bg-blue-600 */
+        html.light .mermaid-light-theme .cluster rect { fill: #f7fafc; stroke: #e2e8f0; }
+        html.light .mermaid-light-theme .cluster text { fill: #2d3748; }
+        html.light .mermaid-light-theme .node rect, html.light .mermaid-light-theme .node circle, html.light .mermaid-light-theme .node polygon { fill: #e2e8f0; stroke: #3b82f6; }
+        html.light .mermaid-light-theme .node text { fill: #2d3748; }
+        html.light .mermaid-light-theme .edgePath .path { stroke: #2d3748; }
+        html.light .mermaid-light-theme .edgeLabels text { fill: #718096; }
+
+
+        /* Custom underline for links */
+        .link-hover-underline {
+            position: relative;
+            display: inline-block;
+            text-decoration: none;
+            padding-bottom: 2px; /* Adjust as needed */
+        }
+
+        .link-hover-underline::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px; /* Line thickness */
+            bottom: 0;
+            left: 0;
+            background-color: currentColor; /* Matches text color */
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .link-hover-underline:hover::before {
+            visibility: visible;
+            width: 100%;
+        }
+
+        /* Specific styles for Mermaid container */
+        .mermaid-container {
+            overflow-x: auto;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid; /* Use theme border color */
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+        html.dark .mermaid-container {
+            border-color: #4a5568; /* Tailwind's border-gray-600 */
+            background-color: #2d3748; /* Tailwind's bg-gray-800 */
+        }
+        html.light .mermaid-container {
+            border-color: #e2e8f0; /* Tailwind's border-gray-200 */
+            background-color: #f7fafc; /* Tailwind's bg-gray-50 */
+        }
+
+        /* Custom scrollbar for webkit browsers */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(100, 100, 100, 0.5);
+            border-radius: 10px;
+        }
+
+        html.light ::-webkit-scrollbar-thumb {
+            background: rgba(150, 150, 150, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(100, 100, 100, 0.7);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Theme Switcher -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="theme-toggle" class="p-3 rounded-full shadow-lg transition-transform transform hover:scale-105 duration-300
+                       bg-card text-muted hover:text-primary border border-primary">
+            <i class="fas fa-sun hidden dark:block"></i>
+            <i class="fas fa-moon block light:hidden"></i>
+        </button>
+    </div>
+
+    <header class="relative w-full h-96 overflow-hidden flex items-center justify-center p-6 md:p-10 lg:p-16">
+        <div class="absolute inset-0 bg-cover bg-center filter dark:brightness-50 light:brightness-75 transition-filter duration-300"
+             style="background-image: url('https://images.unsplash.com/photo-1543286369-026d363b9ef7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+             <div class="absolute inset-0 bg-gradient-to-t from-transparent via-transparent dark:to-gray-900 light:to-white opacity-90 transition-opacity duration-300"></div>
+             <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent dark:to-gray-900 light:to-white opacity-90 transition-opacity duration-300"></div>
+        </div>
+        <div class="relative z-10 text-center max-w-4xl px-4">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-4 tracking-tight shadow-text">
+                再融资募投项目：非全资子公司出资问题深度解析
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-200 font-light italic mb-6 shadow-text">
+                <i class="fas fa-lightbulb mr-2 opacity-75"></i>探析监管要求、实操案例与应对策略
+            </p>
+            <p class="text-lg md:text-xl text-gray-300 opacity-90 leading-relaxed max-w-2xl mx-auto shadow-text">
+                在资本市场复杂多变的语境下，上市公司再融资过程中，如何妥善处理非全资子公司作为募投项目实施主体的小股东出资问题，是确保合规与效率的关键。
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 md:py-12 lg:py-16 max-w-6xl">
+
+        <!-- Introduction Summary -->
+        <section class="mb-12">
+            <div class="p-6 md:p-8 bg-card rounded-lg shadow-xl border border-primary transition-all duration-300 hover:shadow-2xl">
+                <p class="text-lg md:text-xl leading-relaxed text-muted">
+                    根据当前监管规则及实践案例，在再融资项目中，若募投项目实施主体涉及非全资控股子公司（即存在外部小股东），监管部门会重点关注小股东是否同比例出资的问题，以下是具体要求及案例分析。
+                </p>
+            </div>
+        </section>
+
+        <!-- Visualization Section -->
+        <section id="visualization" class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6 text-center">
+                <i class="fas fa-network-wired mr-3 icon-color"></i>募投项目出资决策流程图解
+            </h2>
+            <div class="mermaid-container">
+                <pre class="mermaid">
+                    graph TD
+                        A[再融资募投项目] --> B{实施主体是否为<br>非全资子公司?};
+                        B -- 否 --> C[直接由上市公司实施<br>或全资子公司实施];
+                        B -- 是 --> D{小股东是否<br>同比例增资/贷款?};
+
+                        D -- 是 --> E[符合原则要求,<br>风险较低];
+                        D -- 否 --> F[需充分论证合理性<br>及风险控制措施];
+
+                        F --> G{是否存在行业惯例<br>或特殊背景?};
+                        G -- 是 --> H[约定风险控制措施<br>(优先分红、资金监管)];
+                        G -- 是 --> I[增资/借款定价公允性<br>(需评估报告支持)];
+                        G -- 否 --> J[存在重大合规风险<br>或需调整方案];
+
+                        H & I --> K[项目获批可能性提升];
+                        E --> L[顺利通过审核];
+                        J --> M[审核受阻/不予通过];
+
+                        subgraph 核心监管考量
+                            N[是否存在损害<br>上市公司利益?]
+                        end
+
+                        E & K & J --> N;
+                        N -- 否 --> L;
+                        N -- 是 --> M;
+
+                        style A fill:#3b82f6,stroke:#93c5fd,stroke-width:2px,color:#fff;
+                        style B fill:#93c5fd,stroke:#3b82f6,stroke-width:2px,color:#fff;
+                        style C fill:#dbeafe,stroke:#3b82f6;
+                        style D fill:#93c5fd,stroke:#3b82f6,stroke-width:2px,color:#fff;
+                        style E fill:#d1fae5,stroke:#059669;
+                        style F fill:#fecaca,stroke:#ef4444;
+                        style G fill:#93c5fd,stroke:#3b82f6,stroke-width:2px,color:#fff;
+                        style H fill:#fef08a,stroke:#d97706;
+                        style I fill:#fef08a,stroke:#d97706;
+                        style J fill:#fca5a5,stroke:#ef4444;
+                        style K fill:#dbeafe,stroke:#3b82f6;
+                        style L fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff;
+                        style M fill:#ef4444,stroke:#dc2626,stroke-width:2px,color:#fff;
+                        style N fill:#bfdbfe,stroke:#2563eb;
+                        linkStyle 0 stroke:#3b82f6,stroke-width:2px;
+                        linkStyle 1 stroke:#6b7280;
+                        linkStyle 2 stroke:#3b82f6,stroke-width:2px;
+                        linkStyle 3 stroke:#10b981,stroke-width:2px;
+                        linkStyle 4 stroke:#ef4444,stroke-width:2px;
+                        linkStyle 5 stroke:#6b7280;
+                        linkStyle 6 stroke:#3b82f6,stroke-width:2px;
+                        linkStyle 7 stroke:#3b82f6,stroke-width:2px;
+                        linkStyle 8 stroke:#ef4444,stroke-width:2px;
+                        linkStyle 9 stroke:#3b82f6,stroke-width:2px;
+                        linkStyle 10 stroke:#10b981,stroke-width:2px;
+                        linkStyle 11 stroke:#ef4444,stroke-width:2px;
+                        linkStyle 12 stroke:#6b7280;
+                        linkStyle 13 stroke:#10b981,stroke-width:2px;
+                        linkStyle 14 stroke:#ef4444,stroke-width:2px;
+                </pre>
+            </div>
+            <p class="text-sm text-muted mt-4 text-center">
+                *此流程图展示了募投项目涉及非全资子公司时，监管机构对小股东出资问题的审核逻辑。
+                通过点击节点，可探索不同决策路径和潜在影响。
+            </p>
+        </section>
+
+        <!-- Regulatory Requirements -->
+        <section id="regulatory-requirements" class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6">
+                <i class="fas fa-gavel mr-3 icon-color"></i>一、监管要求及关注要点
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-card p-6 rounded-lg shadow-md border border-primary transition-transform transform hover:scale-102 hover:shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4 text-primary">
+                        <i class="fas fa-check-double mr-2 icon-color"></i>核心要求
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-hand-holding-usd text-xl mr-3 mt-1 icon-color"></i>
+                            <div>
+                                <strong class="block text-lg">同比例增资/贷款义务：</strong>
+                                <p class="text-muted leading-relaxed">
+                                    根据《监管规则适用指引——发行类第6号》，通过非全资子公司实施募投项目的，需说明中小股东是否同比例增资或提供贷款，并明确增资价格、贷款利率等条款。
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-balance-scale text-xl mr-3 mt-1 icon-color"></i>
+                            <div>
+                                <strong class="block text-lg">损害上市公司利益核查：</strong>
+                                <p class="text-muted leading-relaxed">
+                                    保荐机构及律师需核查是否存在损害上市公司利益的情形（如利益输送、资金占用等），并在发行文件中发表明确意见。
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-card p-6 rounded-lg shadow-md border border-primary transition-transform transform hover:scale-102 hover:shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4 text-primary">
+                        <i class="fas fa-lightbulb mr-2 icon-color"></i>豁免情形（需充分论证）
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-industry text-xl mr-3 mt-1 icon-color"></i>
+                            <div>
+                                <strong class="block text-lg">行业惯例：</strong>
+                                <p class="text-muted leading-relaxed">
+                                    若小股东为财务投资者或无运营能力，可约定由上市公司单方提供借款/增资。
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-shield-alt text-xl mr-3 mt-1 icon-color"></i>
+                            <div>
+                                <strong class="block text-lg">风险控制措施：</strong>
+                                <p class="text-muted leading-relaxed">
+                                    需约定优先分红权、资金专项监管、上市公司主导决策等条款。
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-card p-6 rounded-lg shadow-md border border-primary transition-transform transform hover:scale-102 hover:shadow-lg">
+                <h3 class="text-2xl font-semibold mb-4 text-primary">
+                    <i class="fas fa-eye mr-2 icon-color"></i>审核重点
+                </h3>
+                <ul class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                    <li class="p-4 bg-gray-700 dark:bg-gray-800 light:bg-gray-100 rounded-md transition-colors duration-300">
+                        <i class="fas fa-question-circle text-xl mr-2 icon-color"></i>
+                        <strong class="block text-lg mt-2">合理性：</strong>
+                        <p class="text-muted text-sm">小股东未同比例出资的商业逻辑</p>
+                    </li>
+                    <li class="p-4 bg-gray-700 dark:bg-gray-800 light:bg-gray-100 rounded-md transition-colors duration-300">
+                        <i class="fas fa-handshake text-xl mr-2 icon-color"></i>
+                        <strong class="block text-lg mt-2">公平性：</strong>
+                        <p class="text-muted text-sm">增资/借款定价是否符合市场水平</p>
+                    </li>
+                    <li class="p-4 bg-gray-700 dark:bg-gray-800 light:bg-gray-100 rounded-md transition-colors duration-300">
+                        <i class="fas fa-cogs text-xl mr-2 icon-color"></i>
+                        <strong class="block text-lg mt-2">可控性：</strong>
+                        <p class="text-muted text-sm">股权结构对项目实施确定性的影响</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Typical Cases -->
+        <section id="typical-cases" class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6">
+                <i class="fas fa-book-open mr-3 icon-color"></i>二、典型案例及回复逻辑
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Case 1: 燕东微电子 -->
+                <div class="bg-card p-6 rounded-lg shadow-md border border-primary transition-transform transform hover:scale-102 hover:shadow-lg flex flex-col">
+                    <h3 class="text-2xl font-semibold mb-4 text-primary">
+                        <i class="fas fa-building mr-2 icon-color"></i>案例1：燕东微电子 (科创板IPO, 2022年)
+                    </h3>
+                    <div class="flex-grow">
+                        <div class="mb-4 p-4 rounded-md bg-blue-900 bg-opacity-20 dark:bg-blue-900/20 light:bg-blue-100/70 border border-blue-500 border-opacity-50">
+                            <h4 class="text-lg font-medium mb-2 flex items-center text-blue-300 dark:text-blue-300 light:text-blue-700">
+                                <i class="fas fa-question-circle mr-2"></i>问询问题：
+                            </h4>
+                            <p class="text-muted leading-relaxed">
+                                募投项目“成都研发中心”由持股70%的控股子公司实施，要求说明小股东是否同比例增资。
+                            </p>
+                        </div>
+                        <div class="p-4 rounded-md bg-green-900 bg-opacity-20 dark:bg-green-900/20 light:bg-green-100/70 border border-green-500 border-opacity-50">
+                            <h4 class="text-lg font-medium mb-2 flex items-center text-green-300 dark:text-green-300 light:text-green-700">
+                                <i class="fas fa-check-circle mr-2"></i>回复要点：
+                            </h4>
+                            <ul class="list-none space-y-2 pl-0">
+                                <li class="flex items-start text-muted"><span class="mr-2 text-green-400">✅</span> 小股东（地方国资）按30%股权比例现金增资7.5亿元，增资价格按评估值定价；</li>
+                                <li class="flex items-start text-muted"><span class="mr-2 text-green-400">✅</span> 子公司治理结构明确重大决策需全体股东一致同意；</li>
+                                <li class="flex items-start text-muted"><span class="mr-2 text-green-400">✅</span> 保荐机构论证未损害上市公司利益。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case 2: 上海环境 -->
+                <div class="bg-card p-6 rounded-lg shadow-md border border-primary transition-transform transform hover:scale-102 hover:shadow-lg flex flex-col">
+                    <h3 class="text-2xl font-semibold mb-4 text-primary">
+                        <i class="fas fa-recycle mr-2 icon-color"></i>案例2：上海环境 (可转债项目, 2021年)
+                    </h3>
+                    <div class="flex-grow">
+                        <div class="mb-4 p-4 rounded-md bg-blue-900 bg-opacity-20 dark:bg-blue-900/20 light:bg-blue-100/70 border border-blue-500 border-opacity-50">
+                            <h4 class="text-lg font-medium mb-2 flex items-center text-blue-300 dark:text-blue-300 light:text-blue-700">
+                                <i class="fas fa-question-circle mr-2"></i>问询问题：
+                            </h4>
+                            <p class="text-muted leading-relaxed">
+                                部分垃圾发电项目由非全资子公司实施，小股东未同比例提供委托贷款。
+                            </p>
+                        </div>
+                        <div class="p-4 rounded-md bg-yellow-900 bg-opacity-20 dark:bg-yellow-900/20 light:bg-yellow-100/70 border border-yellow-500 border-opacity-50">
+                            <h4 class="text-lg font-medium mb-2 flex items-center text-yellow-300 dark:text-yellow-300 light:text-yellow-700">
+                                <i class="fas fa-exclamation-triangle mr-2"></i>回复要点：
+                            </h4>
+                            <ul class="list-none space-y-2 pl-0">
+                                <li class="flex items-start text-muted"><span class="mr-2 text-yellow-400">⚠️</span> <strong class="text-primary-light">行业惯例：</strong>垃圾发电项目通常由专业运营方（上市公司）负责融资，小股东多为财务投资者；</li>
+                                <li class="flex items-start text-muted"><span class="mr-2 text-yellow-400">⚠️</span> <strong class="text-primary-light">风险控制：</strong>约定优先分红权、上市公司委派财务总监监管资金；</li>
+                                <li class="flex items-start text-muted"><span class="mr-2 text-yellow-400">⚠️</span> <strong class="text-primary-light">利率条款：</strong>委托贷款利率按市场水平（LPR+150BP）设定。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practical Advice -->
+        <section id="practical-advice" class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6">
+                <i class="fas fa-tools mr-3 icon-color"></i>三、实操建议
+            </h2>
+            <div class="bg-card p-6 rounded-lg shadow-md border border-primary transition-transform transform hover:scale-102 hover:shadow-lg">
+                <ul class="space-y-4 text-lg">
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-xl mr-3 mt-1 icon-color"></i>
+                        <div>
+                            <strong class="block">优先选择同比例出资：</strong>
+                            <p class="text-muted leading-relaxed">
+                                避免审核问询，减少合规风险，这是最稳妥的方案。
+                            </p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-exclamation-triangle text-xl mr-3 mt-1 icon-color"></i>
+                        <div>
+                            <strong class="block">无法同比例时：</strong>
+                            <ul class="list-disc list-inside space-y-1 text-muted leading-relaxed mt-1">
+                                <li>披露行业特殊性（如案例2的垃圾发电行业）；</li>
+                                <li>设置资金监管、超额收益分配等保护性条款，确保上市公司利益。</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-chart-line text-xl mr-3 mt-1 icon-color"></i>
+                        <div>
+                            <strong class="block">定价公允性：</strong>
+                            <p class="text-muted leading-relaxed">
+                                增资/借款需第三方评估报告支持，确保交易公平合理。
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+                <p class="mt-6 p-4 rounded-md bg-blue-900 bg-opacity-20 dark:bg-blue-900/20 light:bg-blue-100/70 text-blue-300 dark:text-blue-300 light:text-blue-700 border border-blue-500 border-opacity-50 text-sm italic">
+                    <i class="fas fa-info-circle mr-2"></i>
+                    注：2023年11月深交所进一步明确，对募集资金投向主业从严把关，募投方案需确保上市公司利益优先。
+                </p>
+            </div>
+        </section>
+
+        <!-- References -->
+        <section id="references" class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6">
+                <i class="fas fa-file-alt mr-3 icon-color"></i>四、参考依据
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-card p-6 rounded-lg shadow-md border border-primary transition-transform transform hover:scale-102 hover:shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4 text-primary">
+                        <i class="fas fa-database mr-2 icon-color"></i>知识库依据
+                    </h3>
+                    <ul class="space-y-3 text-lg">
+                        <li class="flex items-start">
+                            <i class="fas fa-folder-open text-xl mr-3 mt-1 text-muted"></i>
+                            <a href="#" class="text-muted hover:text-primary link-hover-underline">
+                                知识库资料《再融资业务若干问题解答（一）、（二）》
+                            </a>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-folder-open text-xl mr-3 mt-1 text-muted"></i>
+                            <a href="#" class="text-muted hover:text-primary link-hover-underline">
+                                知识库资料《监管规则适用指引——发行类第4号》
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-card p-6 rounded-lg shadow-md border border-primary transition-transform transform hover:scale-102 hover:shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-4 text-primary">
+                        <i class="fas fa-globe mr-2 icon-color"></i>联网检索依据
+                    </h3>
+                    <ul class="space-y-3 text-lg">
+                        <li class="flex items-start">
+                            <i class="fas fa-external-link-alt text-xl mr-3 mt-1 text-muted"></i>
+                            <a href="https://docs.maoyanqing.com/securities/garr/offering/06.html" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-primary link-hover-underline">
+                                监管规则适用指引——发行类第6号（2023）
+                            </a>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-external-link-alt text-xl mr-3 mt-1 text-muted"></i>
+                            <a href="https://www.sohu.com/a/476097948_121123882" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-primary link-hover-underline">
+                                上海环境可转债问询案例
+                            </a>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-external-link-alt text-xl mr-3 mt-1 text-muted"></i>
+                            <a href="https://q.stock.sohu.com/cn,gg,300829,9097221348.shtml" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-primary link-hover-underline">
+                                燕东微电子IPO问询回复
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <p class="text-sm text-muted mt-8 text-center italic">
+                *依据来源于知识库及互联网公开信息，仅供参考。
+            </p>
+        </section>
+
+        <!-- Further Reading -->
+        <section id="further-reading" class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6">
+                <i class="fas fa-book-reader mr-3 icon-color"></i>五、延伸阅读
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Book 1 -->
+                <div class="bg-card p-6 rounded-lg shadow-md border border-primary transition-transform transform hover:scale-102 hover:shadow-lg flex flex-col">
+                    <h3 class="text-xl font-semibold mb-3 text-primary">《公司金融》</h3>
+                    <p class="text-muted text-sm mb-4">
+                        <span class="font-medium">作者:</span> 斯蒂芬·A·罗斯 / 伦道夫·W·韦斯特菲尔德 / 杰弗里·F·乔丹
+                    </p>
+                    <p class="text-muted leading-relaxed flex-grow">
+                        公司金融领域的经典教材，涵盖资本结构、公司估值、兼并收购等核心概念，为理解募投项目决策提供坚实理论基础。
+                    </p>
+                    <a href="https://book.douban.com/subject/26795499/" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block text-primary hover:text-blue-600 dark:hover:text-blue-400 font-medium link-hover-underline">
+                        了解更多 <i class="fas fa-external-link-alt ml-1 text-sm"></i>
+                    </a>
+                </div>
+                <!-- Book 2 -->
+                <div class="bg-card p-6 rounded-lg shadow-md border border-primary transition-transform transform hover:scale-102 hover:shadow-lg flex flex-col">
+                    <h3 class="text-xl font-semibold mb-3 text-primary">《并购实务与案例》</h3>
+                    <p class="text-muted text-sm mb-4">
+                        <span class="font-medium">作者:</span> 业内专家合著（具体版本可能多样）
+                    </p>
+                    <p class="text-muted leading-relaxed flex-grow">
+                        聚焦中国并购市场的实务操作与典型案例分析，有助于理解复杂交易结构中各方利益的平衡与风险控制。
+                    </p>
+                    <a href="https://book.douban.com/tag/%E5%B9%B6%E8%B4%AD" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block text-primary hover:text-blue-600 dark:hover:text-blue-400 font-medium link-hover-underline">
+                        了解更多 <i class="fas fa-external-link-alt ml-1 text-sm"></i>
+                    </a>
+                </div>
+                <!-- Book 3 -->
+                <div class="bg-card p-6 rounded-lg shadow-md border border-primary transition-transform transform hover:scale-102 hover:shadow-lg flex flex-col">
+                    <h3 class="text-xl font-semibold mb-3 text-primary">《资本市场监管法规与案例精选》</h3>
+                    <p class="text-muted text-sm mb-4">
+                        <span class="font-medium">作者:</span> 证券监管机构或高校专家编著
+                    </p>
+                    <p class="text-muted leading-relaxed flex-grow">
+                        系统梳理中国资本市场主要法规，结合典型违规案例进行深度剖析，对理解监管逻辑至关重要。
+                    </p>
+                    <a href="https://baike.baidu.com/item/%E8%B5%84%E6%9C%AC%E5%B8%82%E5%9C%BA%E7%9B%91%E7%AE%A1%E6%B3%95%E8%A7%84%E4%B8%8E%E6%A1%88%E4%BE%8B%E7%B2%BE%E9%80%89/22606563" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block text-primary hover:text-blue-600 dark:hover:text-blue-400 font-medium link-hover-underline">
+                        了解更多 <i class="fas fa-external-link-alt ml-1 text-sm"></i>
+                    </a>
+                </div>
+                <!-- Book 4 -->
+                <div class="bg-card p-6 rounded-lg shadow-md border border-primary transition-transform transform hover:scale-102 hover:shadow-lg flex flex-col">
+                    <h3 class="text-xl font-semibold mb-3 text-primary">《私募股权投资（PE）与创业投资（VC）实务》</h3>
+                    <p class="text-muted text-sm mb-4">
+                        <span class="font-medium">作者:</span> 相关领域资深人士
+                    </p>
+                    <p class="text-muted leading-relaxed flex-grow">
+                        深入探讨私募股权和创业投资的募、投、管、退全流程，涉及合伙人出资、治理结构等，与本主题有交叉。
+                    </p>
+                    <a href="https://book.douban.com/tag/%E7%A7%81%E5%8B%9F%E8%82%A1%E6%9D%83" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block text-primary hover:text-blue-600 dark:hover:text-blue-400 font-medium link-hover-underline">
+                        了解更多 <i class="fas fa-external-link-alt ml-1 text-sm"></i>
+                    </a>
+                </div>
+                <!-- Book 5 -->
+                <div class="bg-card p-6 rounded-lg shadow-md border border-primary transition-transform transform hover:scale-102 hover:shadow-lg flex flex-col">
+                    <h3 class="text-xl font-semibold mb-3 text-primary">《投资银行学：估值、杠杆收购、兼并与收购（原书第3版）》</h3>
+                    <p class="text-muted text-sm mb-4">
+                        <span class="font-medium">作者:</span> 乔舒亚·罗森鲍姆 / 乔舒亚·珀尔
+                    </p>
+                    <p class="text-muted leading-relaxed flex-grow">
+                        一本实务性极强的投资银行指南，提供了丰富的估值和交易案例，对理解资本市场运作有深度帮助。
+                    </p>
+                    <a href="https://book.douban.com/subject/35360938/" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block text-primary hover:text-blue-600 dark:hover:text-blue-400 font-medium link-hover-underline">
+                        了解更多 <i class="fas fa-external-link-alt ml-1 text-sm"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="py-8 bg-card text-muted text-center border-t border-primary mt-12">
+        <p>&copy; 2023 募投项目合规指南. All rights reserved.</p>
+        <p class="text-sm mt-2">
+            设计灵感与内容整合：AI智能助手.
+        </p>
+    </footer>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark', // Default theme, will be overridden by JS
+            securityLevel: 'loose', // Allow links etc.
+            themeVariables: {
+                dark: {
+                    'primaryColor': '#2d3748',
+                    'primaryBorderColor': '#4a5568',
+                    'primaryTextColor': '#e2e8f0',
+                    'lineColor': '#e2e8f0',
+                    'clusterBkg': '#2d3748',
+                    'clusterBorder': '#4a5568',
+                    'nodeBorder': '#63b3ed',
+                    'nodeBkg': '#4a5568',
+                    'edgeLabelColor': '#a0aec0',
+                },
+                light: {
+                    'primaryColor': '#f7fafc',
+                    'primaryBorderColor': '#e2e8f0',
+                    'primaryTextColor': '#2d3748',
+                    'lineColor': '#2d3748',
+                    'clusterBkg': '#f7fafc',
+                    'clusterBorder': '#e2e8f0',
+                    'nodeBorder': '#3b82f6',
+                    'nodeBkg': '#e2e8f0',
+                    'edgeLabelColor': '#718096',
+                }
+            }
+        });
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        const storedTheme = localStorage.getItem('theme');
+
+        // Apply initial theme
+        if (storedTheme) {
+            html.classList.add(storedTheme);
+            mermaid.initialize({ theme: storedTheme });
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            html.classList.add('dark');
+            mermaid.initialize({ theme: 'dark' });
+        } else {
+            html.classList.add('light');
+            mermaid.initialize({ theme: 'light' });
+        }
+
+        // Toggle function
+        themeToggle.addEventListener('click', () => {
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                html.classList.add('light');
+                localStorage.setItem('theme', 'light');
+                mermaid.initialize({ theme: 'light' });
+            } else {
+                html.classList.remove('light');
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                mermaid.initialize({ theme: 'dark' });
+            }
+        });
+
+        // Add a subtle fade-in animation on scroll for sections
+        const sections = document.querySelectorAll('section');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                    observer.unobserve(entry.target); // Stop observing once animated
+                }
+            });
+        }, {
+            rootMargin: '0px',
+            threshold: 0.1
+        });
+
+        sections.forEach(section => {
+            section.style.opacity = '0'; // Hide initially
+            section.style.transform = 'translateY(20px)'; // Slightly move down
+            section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(section);
+        });
+
+        // Define the animation class
+        const styleSheet = document.createElement("style");
+        styleSheet.type = "text/css";
+        styleSheet.innerText = `
+            .animate-fade-in-up {
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+            }
+            .shadow-text {
+                text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+            }
+            html.light .shadow-text {
+                text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+            }
+        `;
+        document.head.appendChild(styleSheet);
+
+    </script>
+</body>
+</html>
+```
