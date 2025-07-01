@@ -1,0 +1,500 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国A股航天企业：上市与IPO洞察</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS Framework -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Chinese & Latin characters -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base typography and transitions */
+        body {
+            font-family: 'Noto Sans SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', sans-serif;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+            line-height: 1.75; /* Enhances readability */
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Noto Serif SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.025em; /* Slightly wider spacing for headings */
+        }
+
+        /* Dark Mode Theming (Default) */
+        .dark body {
+            background-color: #0F172A; /* Deep Navy Blue */
+            color: #E2E8F0; /* Light Gray Blue */
+        }
+        .dark .bg-card-theme {
+            background-color: #1E293B; /* Darker Slate Blue for cards */
+        }
+        .dark .text-primary-theme {
+            color: #93C5FD; /* Light Blue for primary accents */
+        }
+        .dark .text-secondary-theme {
+            color: #CBD5E1; /* Muted Gray for secondary text */
+        }
+        .dark .border-line-theme {
+            border-color: #334155; /* Darker border */
+        }
+        .dark .hero-overlay {
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.95));
+        }
+
+        /* Light Mode Theming */
+        body:not(.dark) {
+            background-color: #F8FAFC; /* Very light gray */
+            color: #1E293B; /* Dark Slate Blue */
+        }
+        body:not(.dark) .bg-card-theme {
+            background-color: #FFFFFF; /* White for cards */
+        }
+        body:not(.dark) .text-primary-theme {
+            color: #1D4ED8; /* Strong Blue for primary accents */
+        }
+        body:not(.dark) .text-secondary-theme {
+            color: #475569; /* Muted Gray for secondary text */
+        }
+        body:not(.dark) .border-line-theme {
+            border-color: #E2E8F0; /* Light border */
+        }
+        body:not(.dark) .hero-overlay {
+            background: linear-gradient(to bottom, rgba(248, 250, 252, 0.7), rgba(248, 250, 252, 0.95));
+        }
+
+        /* General layout and component styles */
+        .container {
+            max-width: 1200px;
+        }
+        .section-heading {
+            position: relative;
+            padding-bottom: 0.75rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+        }
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: currentColor; /* Inherits color from text */
+            border-radius: 2px;
+        }
+        .company-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .company-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        .dark .company-card:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Mermaid specific styling to match theme */
+        .mermaid {
+            background-color: transparent !important;
+            font-family: 'Noto Sans SC', sans-serif !important;
+        }
+        .dark .mermaid .node rect, .dark .mermaid .node circle, .dark .mermaid .node polygon {
+            fill: #1E293B !important; /* Card background */
+            stroke: #334155 !important; /* Border color */
+        }
+        .dark .mermaid .node text {
+            fill: #E2E8F0 !important; /* Text color */
+        }
+        .dark .mermaid .edgePath path {
+            stroke: #64748B !important; /* Line color */
+        }
+        .dark .mermaid .edgeLabels rect {
+            fill: #1E293B !important;
+        }
+        .dark .mermaid .edgeLabels text {
+            fill: #E2E8F0 !important;
+        }
+        body:not(.dark) .mermaid .node rect, body:not(.dark) .mermaid .node circle, body:not(.dark) .mermaid .node polygon {
+            fill: #FFFFFF !important;
+            stroke: #E2E8F0 !important;
+        }
+        body:not(.dark) .mermaid .node text {
+            fill: #1E293B !important;
+        }
+        body:not(.dark) .mermaid .edgePath path {
+            stroke: #475569 !important;
+        }
+        body:not(.dark) .mermaid .edgeLabels rect {
+            fill: #FFFFFF !important;
+        }
+        body:not(.dark) .mermaid .edgeLabels text {
+            fill: #1E293B !important;
+        }
+
+        /* Custom scrollbar for aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b; /* Dark track */
+        }
+        body:not(.dark) ::-webkit-scrollbar-track {
+            background: #f1f5f9; /* Light track */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569; /* Muted thumb */
+            border-radius: 4px;
+        }
+        body:not(.dark) ::-webkit-scrollbar-thumb {
+            background: #94a3b8; /* Muted thumb */
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b; /* Darker thumb on hover */
+        }
+    </style>
+</head>
+<body class="transition-colors duration-300">
+
+    <!-- Hero Section -->
+    <header class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1541873676-e17ee92a7e4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');">
+            <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+        <div class="relative z-10 px-6 max-w-4xl">
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-4 leading-tight tracking-wide animate-fade-in-up">
+                洞察星辰：中国A股航天企业生态图谱
+            </h1>
+            <p class="text-xl md:text-2xl text-blue-200 mb-8 animate-fade-in-up delay-100">
+                探索中国航天产业的资本前沿：已上市与IPO进行中的核心企业
+            </p>
+            <button id="scroll-to-content" class="px-8 py-3 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 animate-fade-in-up delay-200">
+                <i class="fas fa-chevron-down mr-2"></i> 深入了解
+            </button>
+        </div>
+
+        <!-- Dark/Light Mode Toggle Button -->
+        <button id="theme-toggle" aria-label="Toggle theme" class="absolute top-8 right-8 p-3 rounded-full bg-gray-700 text-gray-200 dark:bg-gray-200 dark:text-gray-800 shadow-lg focus:outline-none transition-all duration-300 z-50 hover:scale-110">
+            <i class="fas fa-moon dark:hidden"></i>
+            <i class="fas fa-sun hidden dark:inline-block"></i>
+        </button>
+    </header>
+
+    <!-- Main Content -->
+    <main id="content" class="container mx-auto px-6 py-16">
+        <section class="mb-16 opacity-0 translate-y-8 transition-all duration-700 ease-out">
+            <p class="text-lg leading-relaxed text-secondary-theme">
+                根据当前可获取的公开信息（截至2025年7月），A股航天相关企业的上市及申请上市情况整理如下。需注意，航天行业涵盖卫星、火箭、雷达、材料及配套技术等领域，以下分类基于企业核心业务归属：
+            </p>
+        </section>
+
+        <!-- Section: 已上市企业 -->
+        <section class="mb-20 opacity-0 translate-y-8 transition-all duration-700 ease-out">
+            <h2 class="text-4xl text-primary-theme section-heading mb-8">
+                <i class="fas fa-rocket mr-4 text-3xl"></i>已上市的A股航天企业
+            </h2>
+            <p class="text-secondary-theme mb-8">
+                以下是A股市场中具有代表性的已上市航天相关企业，它们是中国航天产业发展的核心力量。
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Company 1: 航天科技 -->
+                <div class="bg-card-theme rounded-xl shadow-xl p-8 company-card">
+                    <h3 class="text-2xl font-bold text-primary-theme mb-2">航天科技（<span class="text-blue-400">000901</span>）</h3>
+                    <p class="text-secondary-theme mb-2">业务：航天飞行器控制系统、卫星导航及物联网技术</p>
+                    <p class="text-sm text-gray-500"><i class="fas fa-building mr-1"></i> 上市板块：深交所主板</p>
+                    <a href="https://finance.sina.com.cn/roll/2022-08-03/doc-imizmscv4678338.shtml" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-500 transition-colors text-sm"><i class="fas fa-link mr-1"></i> 来源</a>
+                </div>
+                <!-- Company 2: 中天火箭 -->
+                <div class="bg-card-theme rounded-xl shadow-xl p-8 company-card">
+                    <h3 class="text-2xl font-bold text-primary-theme mb-2">中天火箭（<span class="text-blue-400">003009</span>）</h3>
+                    <p class="text-secondary-theme mb-2">业务：固体火箭发动机及探空火箭研制</p>
+                    <p class="text-sm text-gray-500"><i class="fas fa-building mr-1"></i> 上市板块：深交所中小板</p>
+                    <a href="https://finance.sina.com.cn/roll/2022-08-03/doc-imizmscv4678338.shtml" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-500 transition-colors text-sm"><i class="fas fa-link mr-1"></i> 来源</a>
+                </div>
+                <!-- Company 3: 中国卫星 -->
+                <div class="bg-card-theme rounded-xl shadow-xl p-8 company-card">
+                    <h3 class="text-2xl font-bold text-primary-theme mb-2">中国卫星（<span class="text-blue-400">600118</span>）</h3>
+                    <p class="text-secondary-theme mb-2">业务：卫星研制、应用及空间信息服务</p>
+                    <p class="text-sm text-gray-500"><i class="fas fa-building mr-1"></i> 上市板块：上交所主板</p>
+                    <a href="https://finance.sina.com.cn/roll/2022-08-03/doc-imizmscv4678338.shtml" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-500 transition-colors text-sm"><i class="fas fa-link mr-1"></i> 来源</a>
+                </div>
+                <!-- Company 4: 中海达 -->
+                <div class="bg-card-theme rounded-xl shadow-xl p-8 company-card">
+                    <h3 class="text-2xl font-bold text-primary-theme mb-2">中海达（<span class="text-blue-400">300177</span>）</h3>
+                    <p class="text-secondary-theme mb-2">业务：北斗卫星导航定位技术及测绘装备</p>
+                    <p class="text-sm text-gray-500"><i class="fas fa-building mr-1"></i> 上市板块：深交所创业板</p>
+                    <a href="https://finance.sina.com.cn/roll/2022-08-03/doc-imizmscv4678338.shtml" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-500 transition-colors text-sm"><i class="fas fa-link mr-1"></i> 来源</a>
+                </div>
+                <!-- Company 5: 盟升电子 -->
+                <div class="bg-card-theme rounded-xl shadow-xl p-8 company-card">
+                    <h3 class="text-2xl font-bold text-primary-theme mb-2">盟升电子（<span class="text-blue-400">688311</span>）</h3>
+                    <p class="text-secondary-theme mb-2">业务：卫星导航终端及卫星通信产品</p>
+                    <p class="text-sm text-gray-500"><i class="fas fa-building mr-1"></i> 上市板块：上交所科创板</p>
+                    <a href="https://finance.sina.com.cn/roll/2022-08-03/doc-imizmscv4678338.shtml" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-500 transition-colors text-sm"><i class="fas fa-link mr-1"></i> 来源</a>
+                </div>
+                <!-- Company 6: 航天南湖 -->
+                <div class="bg-card-theme rounded-xl shadow-xl p-8 company-card">
+                    <h3 class="text-2xl font-bold text-primary-theme mb-2">航天南湖（<span class="text-blue-400">688552</span>）</h3>
+                    <p class="text-secondary-theme mb-2">业务：防空预警雷达系统（隶属航天科工集团）</p>
+                    <p class="text-sm text-gray-500 mb-2"><i class="fas fa-building mr-1"></i> 上市板块：上交所科创板</p>
+                    <p class="text-sm text-gray-500"><i class="fas fa-calendar-alt mr-1"></i> 上市时间：2023年4月获批注册</p>
+                    <a href="https://www.stcn.com/article/detail/833935.html" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-500 transition-colors text-sm"><i class="fas fa-link mr-1"></i> 来源</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: IPO申请/审核中 -->
+        <section class="mb-20 opacity-0 translate-y-8 transition-all duration-700 ease-out">
+            <h2 class="text-4xl text-primary-theme section-heading mb-8">
+                <i class="fas fa-chart-line mr-4 text-3xl"></i>已提交IPO申请或正在审核中的航天企业
+            </h2>
+            <p class="text-secondary-theme mb-8">
+                这些企业正积极寻求资本市场支持，有望成为A股航天板块的新生力量。
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Company 1: 湖南湘投金天钛业 -->
+                <div class="bg-card-theme rounded-xl shadow-xl p-8 company-card">
+                    <h3 class="text-2xl font-bold text-primary-theme mb-2">湖南湘投金天钛业</h3>
+                    <p class="text-secondary-theme mb-2">业务：航空航天用钛合金材料（卫星/火箭结构件）</p>
+                    <p class="text-sm text-gray-500 mb-2"><i class="fas fa-hourglass-half mr-1"></i> 状态：2024年11月提交IPO申请（拟募资6.62亿元）</p>
+                    <p class="text-sm text-gray-500"><i class="fas fa-code-branch mr-1"></i> 上市板块：未披露</p>
+                    <a href="https://www.chinaerospace.com/listed_company/index" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-500 transition-colors text-sm"><i class="fas fa-link mr-1"></i> 来源</a>
+                </div>
+                <!-- Company 2: 天兵科技 -->
+                <div class="bg-card-theme rounded-xl shadow-xl p-8 company-card">
+                    <h3 class="text-2xl font-bold text-primary-theme mb-2">天兵科技</h3>
+                    <p class="text-secondary-theme mb-2">业务：液体火箭研制（中标中国星网卫星发射）</p>
+                    <p class="text-sm text-gray-500 mb-2"><i class="fas fa-hourglass-half mr-1"></i> 状态：推进IPO计划（具体进展未公开）</p>
+                    <p class="text-sm text-gray-500"><i class="fas fa-info-circle mr-1"></i> 关联信息：知识库中提及其为低轨卫星互联网星座供应商</p>
+                    <p class="text-sm text-gray-500"><i class="fas fa-book-open mr-1"></i> 来源：知识库资料《商业航天企业资质要求与招股策略》</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Visualization Section -->
+        <section class="mb-20 opacity-0 translate-y-8 transition-all duration-700 ease-out">
+            <h2 class="text-4xl text-primary-theme section-heading mb-8">
+                <i class="fas fa-sitemap mr-4 text-3xl"></i>航天企业上市路径概览
+            </h2>
+            <p class="text-secondary-theme mb-8">
+                通过以下图示，直观了解A股航天企业的主要分类及其关系。
+            </p>
+            <div class="bg-card-theme rounded-xl shadow-xl p-8 flex justify-center items-center overflow-x-auto min-h-[400px]">
+                <div class="mermaid text-primary-theme w-full">
+                    graph TD
+                        A[<span class='text-xl font-bold'>A股航天企业</span>] --> B(<span class='text-lg font-semibold'>已上市企业</span>);
+                        A --> C(<span class='text-lg font-semibold'>IPO申请/审核中</span>);
+
+                        B --> B1(<span class='text-base font-medium'>航天科技</span>);
+                        B --> B2(<span class='text-base font-medium'>中天火箭</span>);
+                        B --> B3(<span class='text-base font-medium'>中国卫星</span>);
+                        B --> B4(<span class='text-base font-medium'>中海达</span>);
+                        B --> B5(<span class='text-base font-medium'>盟升电子</span>);
+                        B --> B6(<span class='text-base font-medium'>航天南湖</span>);
+
+                        C --> C1(<span class='text-base font-medium'>湖南湘投金天钛业</span>);
+                        C --> C2(<span class='text-base font-medium'>天兵科技</span>);
+
+                        linkStyle 0 stroke:#64748b,stroke-width:2px,fill:none;
+                        linkStyle 1 stroke:#64748b,stroke-width:2px,fill:none;
+                        linkStyle 2 stroke:#93c5fd,stroke-width:1.5px,fill:none;
+                        linkStyle 3 stroke:#93c5fd,stroke-width:1.5px,fill:none;
+                        linkStyle 4 stroke:#93c5fd,stroke-width:1.5px,fill:none;
+                        linkStyle 5 stroke:#93c5fd,stroke-width:1.5px,fill:none;
+                        linkStyle 6 stroke:#93c5fd,stroke-width:1.5px,fill:none;
+                        linkStyle 7 stroke:#93c5fd,stroke-width:1.5px,fill:none;
+                        linkStyle 8 stroke:#fcd34d,stroke-width:1.5px,fill:none;
+                        linkStyle 9 stroke:#fcd34d,stroke-width:1.5px,fill:none;
+
+                        classDef primaryNode fill:#3282b8,stroke:#bbe1fa,stroke-width:2px,color:#f0f0f0;
+                        class A primaryNode;
+
+                        classDef categoryNode fill:#0f4c75,stroke:#bbe1fa,stroke-width:1.5px,color:#f0f0f0;
+                        class B,C categoryNode;
+
+                        classDef companyNode fill:#1E293B,stroke:#334155,stroke-width:1px,color:#E2E8F0;
+                        class B1,B2,B3,B4,B5,B6 companyNode;
+
+                        classDef applicantNode fill:#1E293B,stroke:#334155,stroke-width:1px,color:#E2E8F0;
+                        class C1,C2 applicantNode;
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 重要说明 -->
+        <section class="mb-20 opacity-0 translate-y-8 transition-all duration-700 ease-out">
+            <h2 class="text-4xl text-primary-theme section-heading mb-8">
+                <i class="fas fa-exclamation-circle mr-4 text-3xl"></i>重要说明
+            </h2>
+            <div class="bg-card-theme rounded-xl shadow-xl p-8 border-l-4 border-blue-500">
+                <h3 class="text-2xl font-bold text-primary-theme mb-4">信息局限性</h3>
+                <ul class="list-disc pl-5 text-secondary-theme leading-relaxed space-y-2">
+                    <li>部分企业（如蓝箭航天、中科宇航）虽在知识库中被列为卫星发射服务商，但尚未公开IPO申报信息。</li>
+                    <li>北京、广东等地有超45家航空航天上市企业（2024年数据），但公开名称的头部企业有限<sup class="text-blue-400 ml-1">1</sup>。</li>
+                </ul>
+                <h3 class="text-2xl font-bold text-primary-theme mt-8 mb-4">行业动态</h3>
+                <ul class="list-disc pl-5 text-secondary-theme leading-relaxed space-y-2">
+                    <li>科创板对商业航天企业放宽要求（如未盈利企业可用第五套标准上市），未来或有更多企业申报<sup class="text-blue-400 ml-1">2</sup>。</li>
+                </ul>
+                <p class="text-secondary-theme mt-6 text-base">
+                    建议通过证监会披露系统或交易所公告获取最新IPO排队名单。如需特定企业详情，可提供名称进一步核查。
+                </p>
+                <div class="mt-6 text-sm text-gray-500 border-t border-line-theme pt-4">
+                    <p class="mb-2"><sup class="mr-1">1</sup> 来源：<a href="https://www.chinaerospace.com/article/show/19e317685476db329efcc2bbbec072a2" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-500 transition-colors">中国航空航天产业上市企业分布图</a></p>
+                    <p><sup class="mr-1">2</sup> 来源：<a href="https://finance.eastmoney.com/a/202506273441649582.html" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-500 transition-colors">科创板第五套标准正式重启</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Further Reading Section -->
+        <section class="mb-16 opacity-0 translate-y-8 transition-all duration-700 ease-out">
+            <h2 class="text-4xl text-primary-theme section-heading mb-8">
+                <i class="fas fa-book-reader mr-4 text-3xl"></i>延伸阅读
+            </h2>
+            <p class="text-secondary-theme mb-8">
+                如果您对中国航天产业感兴趣，以下推荐书籍将帮助您深入了解其发展历程、商业模式与前沿技术。
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-card-theme rounded-xl shadow-lg p-6 company-card">
+                    <h3 class="text-xl font-bold text-primary-theme mb-2">《中国航天：从钱学森到新一代航天人》</h3>
+                    <p class="text-secondary-theme text-sm">一部全面回顾中国航天事业发展历程的著作，展现了从奠基人到新一代航天人的艰辛与辉煌。</p>
+                </div>
+                <div class="bg-card-theme rounded-xl shadow-lg p-6 company-card">
+                    <h3 class="text-xl font-bold text-primary-theme mb-2">《商业航天：太空经济的崛起》</h3>
+                    <p class="text-secondary-theme text-sm">深入剖析全球及中国商业航天产业的兴起、市场机遇与挑战，探索太空经济的未来走向。</p>
+                </div>
+                <div class="bg-card-theme rounded-xl shadow-lg p-6 company-card">
+                    <h3 class="text-xl font-bold text-primary-theme mb-2">《卫星互联网：低轨卫星星座与应用》</h3>
+                    <p class="text-secondary-theme text-sm">聚焦当前热门的卫星互联网领域，介绍低轨卫星星座的构建原理、关键技术及其广阔的应用前景。</p>
+                </div>
+                <div class="bg-card-theme rounded-xl shadow-lg p-6 company-card">
+                    <h3 class="text-xl font-bold text-primary-theme mb-2">《先进航空航天材料》</h3>
+                    <p class="text-secondary-theme text-sm">探讨航空航天领域最新材料科技的进展，包括高性能合金、复合材料等，及其在飞行器设计中的应用。</p>
+                </div>
+                <div class="bg-card-theme rounded-xl shadow-lg p-6 company-card">
+                    <h3 class="text-xl font-bold text-primary-theme mb-2">《航天产业投资指南》</h3>
+                    <p class="text-secondary-theme text-sm">为投资者提供中国航天产业的投资策略与分析，涵盖市场趋势、投资机会与风险评估。</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-400 py-8 text-center text-sm border-t border-gray-700">
+        <div class="container mx-auto px-6">
+            <p>&copy; 2025 中国A股航天企业洞察. 版权所有.</p>
+            <p class="mt-2">数据更新至：2025年7月</p>
+        </div>
+    </footer>
+
+    <!-- Mermaid JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid with a base theme that we'll then override with CSS
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base', // Use 'base' and apply custom CSS for dark/light theme
+            themeVariables: {
+                // These are defaults, actual colors are controlled by our CSS
+                'fontFamily': 'Noto Sans SC, sans-serif',
+                'primaryColor': '#1e293b',
+                'primaryTextColor': '#e2e8f0',
+                'lineColor': '#64748b',
+                'secondaryColor': '#0f4c75',
+                'tertiaryColor': '#3282b8',
+                'primaryBorderColor': '#334155',
+                'secondaryBorderColor': '#bbe1fa',
+            }
+        });
+
+        // Dark/Light Mode Toggle Script
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme and update Mermaid
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+            } else {
+                htmlElement.classList.remove('dark');
+            }
+            localStorage.setItem('theme', theme);
+
+            // Re-render Mermaid to apply new CSS theme variables
+            // This is crucial because Mermaid injects SVG, which doesn't directly inherit CSS
+            // by calling `mermaid.init()` without arguments, it will re-render existing diagrams.
+            if (document.querySelector('.mermaid')) {
+                mermaid.init();
+            }
+        }
+
+        // Initialize theme based on local storage or system preference
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme) {
+            setTheme(storedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Smooth scroll for hero button
+        document.getElementById('scroll-to-content').addEventListener('click', function() {
+            document.getElementById('content').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+
+        // Intersection Observer for section fade-in animation
+        const sections = document.querySelectorAll('main section'); // Select all sections within main
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove('opacity-0', 'translate-y-8');
+                    entry.target.classList.add('fade-in-visible');
+                    observer.unobserve(entry.target); // Stop observing once animated
+                }
+            });
+        }, {
+            threshold: 0.1 // When 10% of the section is visible
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Keyframe animations for Hero section elements
+        const style = document.createElement('style');
+        style.innerHTML = `
+            /* Keyframe for hero section initial fade-in */
+            @keyframes fadeInFromBottom {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .animate-fade-in-up {
+                animation: fadeInFromBottom 1s ease-out forwards;
+                opacity: 0; /* Start invisible */
+            }
+            .animate-fade-in-up.delay-100 { animation-delay: 0.1s; }
+            .animate-fade-in-up.delay-200 { animation-delay: 0.2s; }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+```
