@@ -1,0 +1,613 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="system">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO前瞻：媒体公关与应急预案深度解析</title>
+    <meta name="description" content="基于投行专业经验，深入探讨IPO申报辅导前媒体公关团队组建与应急预案制定的必要性、实务要求及风险规避。">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    
+    <!-- Google Fonts for Noto Serif SC (Serif) and Noto Sans SC (Sans-serif) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS Variables for Theme Colors (Light & Dark) */
+        :root {
+            /* Light Mode Colors */
+            --bg-primary-light: #F8F8F8; /* Light gray background */
+            --bg-secondary-light: #FFFFFF; /* White for cards/sections */
+            --text-primary-light: #2D3748; /* Dark gray for main text */
+            --text-secondary-light: #4A5568; /* Medium gray for secondary text */
+            --accent-blue-light: #2563EB; /* Blue for headings/highlights */
+            --accent-orange-light: #EA580C; /* Orange for accents/borders */
+            --border-light: #E2E8F0; /* Light border */
+            --card-shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+            /* Dark Mode Colors */
+            --bg-primary-dark: #1A1A2E; /* Deep dark blue for background */
+            --bg-secondary-dark: #2C2C42; /* Slightly lighter dark blue for cards */
+            --text-primary-dark: #E0E0E0; /* Light gray for main text */
+            --text-secondary-dark: #A0AEC0; /* Lighter gray for secondary text */
+            --accent-blue-dark: #63B3ED; /* Lighter blue for headings/highlights */
+            --accent-orange-dark: #F6AD55; /* Lighter orange for accents/borders */
+            --border-dark: #4A4A60; /* Darker border */
+            --card-shadow-dark: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Base styles applied universally, transitioning between themes */
+        body {
+            font-family: 'Noto Sans SC', 'Noto Serif SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: var(--bg-primary-light);
+            color: var(--text-primary-light);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Applying custom variables to Tailwind-like classes for dynamic theming */
+        .bg-primary { background-color: var(--bg-primary-light); }
+        .bg-secondary-card { background-color: var(--bg-secondary-light); }
+        .text-primary { color: var(--text-primary-light); }
+        .text-secondary { color: var(--text-secondary-light); }
+        .accent-blue { color: var(--accent-blue-light); }
+        .accent-orange { color: var(--accent-orange-light); }
+        .border-color { border-color: var(--border-light); }
+        .shadow-custom { box-shadow: var(--card-shadow-light); }
+
+        /* Dark Mode Specific Styles */
+        html.dark {
+            color-scheme: dark; /* Hints browser for scrollbars, form elements */
+        }
+        html.dark body {
+            background-color: var(--bg-primary-dark);
+            color: var(--text-primary-dark);
+        }
+        html.dark .bg-primary { background-color: var(--bg-primary-dark); }
+        html.dark .bg-secondary-card { background-color: var(--bg-secondary-dark); }
+        html.dark .text-primary { color: var(--text-primary-dark); }
+        html.dark .text-secondary { color: var(--text-secondary-dark); }
+        html.dark .accent-blue { color: var(--accent-blue-dark); }
+        html.dark .accent-orange { color: var(--accent-orange-dark); }
+        html.dark .border-color { border-color: var(--border-dark); }
+        html.dark .shadow-custom { box-shadow: var(--card-shadow-dark); }
+
+        /* Typography adjustments for Chinese */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            font-weight: 700; /* Bold for headings */
+        }
+        p, li, span, a, div:not(.mermaid) {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            font-weight: 400; /* Regular for body */
+        }
+
+        /* Custom width for larger screens */
+        .max-w-7xl-custom {
+            max-width: 90rem; /* 1440px */
+        }
+
+        /* Micro-interactions */
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow-light); /* Base shadow for light mode */
+        }
+        html.dark .card-hover:hover {
+            box-shadow: var(--card-shadow-dark); /* Stronger shadow for dark mode */
+        }
+        .btn-hover {
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+        }
+        .btn-hover:hover {
+            transform: translateY(-2px);
+        }
+        .link-hover {
+            transition: color 0.3s ease, text-decoration 0.3s ease;
+        }
+        .link-hover:hover {
+            text-decoration: underline;
+        }
+
+        /* First letter drop cap style */
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 4em;
+            line-height: 1;
+            padding-right: 0.1em;
+            font-weight: 700;
+            color: var(--accent-blue-light); /* Light mode */
+        }
+        html.dark .drop-cap::first-letter {
+            color: var(--accent-blue-dark); /* Dark mode */
+        }
+
+        /* Mermaid specific styling to ensure theme consistency */
+        .mermaid-container {
+            background-color: var(--bg-secondary-light);
+            border: 1px solid var(--border-light);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        html.dark .mermaid-container {
+            background-color: var(--bg-secondary-dark);
+            border-color: var(--border-dark);
+        }
+        
+        /* Mermaid SVG element itself */
+        .mermaid svg {
+            background-color: var(--bg-secondary-light) !important;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: background-color 0.3s ease;
+        }
+        html.dark .mermaid svg {
+            background-color: var(--bg-secondary-dark) !important;
+            box-shadow: var(--card-shadow-dark);
+        }
+        /* Mermaid Nodes */
+        .mermaid .node rect,
+        .mermaid .node circle,
+        .mermaid .node ellipse,
+        .mermaid .node polygon {
+            fill: var(--bg-secondary-light) !important; /* Node background */
+            stroke: var(--accent-blue-light) !important; /* Node border */
+            stroke-width: 2px !important;
+            transition: fill 0.3s ease, stroke 0.3s ease;
+        }
+        html.dark .mermaid .node rect,
+        html.dark .mermaid .node circle,
+        html.dark .mermaid .node ellipse,
+        html.dark .mermaid .node polygon {
+            fill: var(--bg-secondary-dark) !important;
+            stroke: var(--accent-blue-dark) !important;
+        }
+        /* Mermaid Node Text */
+        .mermaid text {
+            fill: var(--text-primary-light) !important; /* Node text color */
+            font-family: 'Noto Sans SC', sans-serif !important;
+            transition: fill 0.3s ease;
+        }
+        html.dark .mermaid text {
+            fill: var(--text-primary-dark) !important;
+        }
+        /* Mermaid Edge Paths (Arrows/Lines) */
+        .mermaid .edgePath .path {
+            stroke: var(--accent-orange-light) !important; /* Line color */
+            fill: none !important;
+            stroke-width: 2px !important;
+            transition: stroke 0.3s ease;
+        }
+        html.dark .mermaid .edgePath .path {
+            stroke: var(--accent-orange-dark) !important;
+        }
+        /* Mermaid Edge Labels (Text on lines) */
+        .mermaid .edgeLabel rect {
+            fill: var(--bg-secondary-light) !important; /* Label background */
+            transition: fill 0.3s ease;
+        }
+        html.dark .mermaid .edgeLabel rect {
+            fill: var(--bg-secondary-dark) !important;
+        }
+        /* Specific Mermaid node styles applied via `style` directives in graph definition */
+        .mermaid .node.primary-node rect,
+        .mermaid .node.primary-node circle {
+            fill: var(--accent-blue-light) !important;
+            color: white !important; /* Text color inside node */
+        }
+        html.dark .mermaid .node.primary-node rect,
+        html.dark .mermaid .node.primary-node circle {
+            fill: var(--accent-blue-dark) !important;
+        }
+        .mermaid .node.success-node rect,
+        .mermaid .node.success-node circle {
+            fill: #2F855A !important; /* Green */
+            stroke: #22543D !important;
+            color: white !important;
+        }
+        html.dark .mermaid .node.success-node rect,
+        html.dark .mermaid .node.success-node circle {
+            fill: #48BB78 !important; /* Lighter green */
+            stroke: #38A169 !important;
+        }
+        .mermaid .node.warning-node rect,
+        .mermaid .node.warning-node circle {
+            fill: var(--accent-orange-light) !important;
+            stroke: var(--accent-orange-light) !important;
+            color: white !important;
+        }
+        html.dark .mermaid .node.warning-node rect,
+        html.dark .mermaid .node.warning-node circle {
+            fill: var(--accent-orange-dark) !important;
+            stroke: var(--accent-orange-dark) !important;
+        }
+    </style>
+</head>
+<body class="bg-primary text-primary antialiased">
+
+    <!-- Header / Navigation Bar -->
+    <header class="bg-secondary-card shadow-custom py-4 px-6 md:px-12 fixed top-0 left-0 w-full z-50">
+        <div class="max-w-7xl-custom mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold accent-blue hover:opacity-80 transition-opacity">
+                <i class="fas fa-chart-line mr-2"></i>IPO Insight
+            </a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#overview" class="text-secondary hover:accent-blue link-hover">概述</a>
+                <a href="#media-pr" class="text-secondary hover:accent-blue link-hover">媒体公关</a>
+                <a href="#emergency-plan" class="text-secondary hover:accent-blue link-hover">应急预案</a>
+                <a href="#recommendations" class="text-secondary hover:accent-blue link-hover">操作建议</a>
+                <a href="#further-reading" class="text-secondary hover:accent-blue link-hover">延伸阅读</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <!-- Dark Mode Toggle -->
+                <button id="theme-toggle" class="p-2 rounded-full bg-primary hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-accent-blue btn-hover">
+                    <i class="fas fa-sun text-accent-orange hidden dark:block text-lg" title="切换到亮色模式"></i>
+                    <i class="fas fa-moon text-accent-blue block dark:hidden text-lg" title="切换到暗色模式"></i>
+                </button>
+                <!-- Mobile Menu Button (Hidden on desktop) -->
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-secondary hover:text-accent-blue focus:outline-none focus:ring-2 focus:ring-accent-blue">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu (Hidden by default) -->
+    <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-full bg-secondary-card bg-opacity-95 z-40 flex flex-col items-center justify-center space-y-8 text-2xl transition-all duration-300 ease-in-out">
+        <button id="mobile-menu-close" class="absolute top-6 right-6 text-secondary hover:text-accent-blue text-3xl">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="#overview" class="text-primary hover:accent-blue link-hover" onclick="document.getElementById('mobile-menu').classList.add('hidden')">概述</a>
+        <a href="#media-pr" class="text-primary hover:accent-blue link-hover" onclick="document.getElementById('mobile-menu').classList.add('hidden')">媒体公关</a>
+        <a href="#emergency-plan" class="text-primary hover:accent-blue link-hover" onclick="document.getElementById('mobile-menu').classList.add('hidden')">应急预案</a>
+        <a href="#recommendations" class="text-primary hover:accent-blue link-hover" onclick="document.getElementById('mobile-menu').classList.add('hidden')">操作建议</a>
+        <a href="#further-reading" class="text-primary hover:accent-blue link-hover" onclick="document.getElementById('mobile-menu').classList.add('hidden')">延伸阅读</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative bg-cover bg-center h-screen flex items-center justify-center text-center p-6"
+        style="background-image: url('https://images.unsplash.com/photo-1549929314-e053a47926b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');">
+        <!-- Overlay for better text readability -->
+        <div class="absolute inset-0 bg-black opacity-70"></div>
+        <div class="relative z-10 max-w-4xl mx-auto text-white">
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 drop-cap">
+                IPO前瞻：媒体公关与应急预案深度解析
+            </h1>
+            <p class="text-xl md:text-2xl font-light mb-8 opacity-90">
+                基于投行专业经验与A股IPO实务要求，助您稳健迈向资本市场
+            </p>
+            <a href="#overview" class="inline-block bg-accent-blue text-white py-3 px-8 rounded-full text-lg font-semibold hover:bg-opacity-90 btn-hover shadow-lg">
+                <i class="fas fa-arrow-down mr-2"></i> 探索关键策略
+            </a>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl-custom mx-auto p-6 md:p-12 relative z-20 -mt-16 sm:-mt-24 md:-mt-32 lg:-mt-48">
+        <!-- Overview Section -->
+        <section id="overview" class="bg-secondary-card rounded-lg shadow-custom p-8 mb-12 transform transition-all duration-300 hover:scale-[1.005]">
+            <h2 class="text-3xl font-bold accent-blue mb-6 border-b-2 border-accent-orange pb-3">
+                <i class="fas fa-info-circle mr-3"></i> 概述：IPO申报前的关键准备
+            </h2>
+            <p class="text-lg text-secondary leading-relaxed">
+                企业在A股IPO申报辅导阶段，面临着日益严格的监管审查与复杂的市场舆情环境。
+                提前布局媒体公关策略与完善应急预案，不仅是提升企业抗风险能力的关键，更是确保IPO顺利推进的必要条件。
+                本报告将结合投行专业经验及最新实务要求，深入分析这两大核心准备工作的必要性、具体内容及操作建议。
+            </p>
+        </section>
+
+        <!-- Data Visualization Section -->
+        <section class="bg-secondary-card rounded-lg shadow-custom p-8 mb-12">
+            <h2 class="text-3xl font-bold accent-blue mb-6 border-b-2 border-accent-orange pb-3">
+                <i class="fas fa-project-diagram mr-3"></i> IPO准备核心策略概览
+            </h2>
+            <p class="text-lg text-secondary mb-6">
+                以下图表展示了IPO申报过程中，媒体公关与应急预案在风险管理中的核心地位及其关键环节。
+                （本图表为概念示意，不提供额外点击交互）
+            </p>
+            <div class="mermaid-container w-full overflow-x-auto p-4 rounded-lg">
+                <div class="mermaid text-center">
+                    graph TD
+                        subgraph "IPO 申报辅导阶段"
+                            A[IPO准备] --&gt; B(潜在风险)
+                            B --&gt; B1(舆情危机)
+                            B --&gt; B2(监管问询)
+                            B --&gt; B3(业务风险)
+                        end
+
+                        subgraph "核心应对策略"
+                            C[媒体公关团队] --&gt; C1(正面形象铺垫)
+                            C --&gt; C2(舆情监测与应对)
+                            C --&gt; C3(承销商协同)
+
+                            D[应急预案] --&gt; D1(危机沟通策略)
+                            D --&gt; D2(媒体应对流程)
+                            D --&gt; D3(监管报告机制)
+                            D --&gt; D4(内部演练)
+                        end
+
+                        B1 --&gt;|应对| C
+                        B2 --&gt;|应对| D
+                        B3 --&gt;|应对| D
+
+                        C --&gt; E(降低舆情风险)
+                        D --&gt; F(强化内控合规)
+
+                        E --&gt; G(加速申报进程)
+                        F --&gt; G(加速申报进程)
+
+                        class A primary-node;
+                        class B warning-node;
+                        class B1,B2,B3 warning-node;
+                        class C,D primary-node;
+                        class C1,C2,C3 default-node;
+                        class D1,D2,D3,D4 default-node;
+                        class E,F default-node;
+                        class G success-node;
+
+                        linkStyle 0,1,2,3,4,5,6 stroke:var(--accent-orange-light),stroke-width:2px,fill:none;
+                        linkStyle 7,8 stroke:var(--accent-blue-light),stroke-width:2px,fill:none;
+                        linkStyle 9,10 stroke:#2F855A,stroke-width:2px,fill:none;
+
+                        html.dark linkStyle 0,1,2,3,4,5,6 stroke:var(--accent-orange-dark),stroke-width:2px,fill:none;
+                        html.dark linkStyle 7,8 stroke:var(--accent-blue-dark),stroke-width:2px,fill:none;
+                </div>
+            </div>
+        </section>
+
+        <!-- Media PR Section -->
+        <section id="media-pr" class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <div class="bg-secondary-card rounded-lg shadow-custom p-8 card-hover">
+                <h3 class="text-2xl font-bold accent-blue mb-4 flex items-center">
+                    <i class="fas fa-bullhorn mr-3 text-2xl"></i> 媒体公关团队：先发制人的策略部署
+                </h3>
+                <h4 class="text-xl font-semibold text-secondary mb-3 flex items-center"><i class="fas fa-check-circle mr-2 accent-blue"></i> 必要性</h4>
+                <ul class="list-disc list-inside text-lg text-secondary space-y-2 mb-6">
+                    <li>申报辅导阶段是舆情风险高发期，负面报道直接影响审核进度。</li>
+                    <li>监管机构高度关注企业舆情动态，作为审核重要参考。</li>
+                    <li><a href="https://example.com/knowledge-base/承销发行服务" target="_blank" rel="noopener noreferrer" class="accent-blue hover:underline link-hover">承销商</a>虽协助媒体公关，但企业需提前建立自身团队主动配合。</li>
+                </ul>
+                
+                <h4 class="text-xl font-semibold text-secondary mb-3 flex items-center"><i class="fas fa-tasks mr-2 accent-blue"></i> 实务要求与协助</h4>
+                <ul class="list-disc list-inside text-lg text-secondary space-y-2">
+                    <li>**形象铺垫：** 提前释放企业亮点，如技术成果、市场地位。</li>
+                    <li>**舆情监测：** 全天候监控媒体与社交平台，预警潜在风险。</li>
+                    <li>**回应策略：** 制定规范化回应流程与话术，避免二次伤害。</li>
+                    <li>**风险规避：** 避免突发负面信息影响申报进度，防止<a href="http://mp.cnfol.com/57133/article/1712115417-141302100.html" target="_blank" rel="noopener noreferrer" class="accent-blue hover:underline link-hover">现场督导</a>。</li>
+                </ul>
+            </div>
+
+            <div class="bg-secondary-card rounded-lg shadow-custom p-8 card-hover">
+                <h3 class="text-2xl font-bold accent-blue mb-4 flex items-center">
+                    <i class="fas fa-exclamation-triangle mr-3 text-2xl"></i> 应急预案：防患于未然的风险屏障
+                </h3>
+                <h4 class="text-xl font-semibold text-secondary mb-3 flex items-center"><i class="fas fa-gavel mr-2 accent-blue"></i> 法规依据与强制性</h4>
+                <ul class="list-disc list-inside text-lg text-secondary space-y-2 mb-6">
+                    <li>根据<a href="https://www.zhonglun.com/upload/file/20250108/1736333451238039783.pdf" target="_blank" rel="noopener noreferrer" class="accent-blue hover:underline link-hover">科创板要求</a>，企业需建立“应急预案和危机响应机制”。</li>
+                    <li>无应急预案可能被监管认定为内控缺陷，阻碍IPO进程。</li>
+                    <li><i class="fas fa-info-circle mr-1 accent-orange"></i> **结论：** 必须提前制定，属于IPO准备工作的强制性组成部分。</li>
+                </ul>
+
+                <h4 class="text-xl font-semibold text-secondary mb-3 flex items-center"><i class="fas fa-list-ol mr-2 accent-blue"></i> 关键内容与覆盖范围</h4>
+                <ul class="list-disc list-inside text-lg text-secondary space-y-2">
+                    <li>**舆情危机应对：** 如技术失败、股东纠纷的媒体沟通策略。</li>
+                    <li>**监管问询响应：** 对敏感问题（如融资用途）的合规性回复。</li>
+                    <li>**业务风险披露：** 如供应链中断、重大诉讼的统一对外口径。</li>
+                    <li>**响应流程与责任人：** 明确<a href="http://www.sse.com.cn/disclosure/listedinfo/announcement/c/new/2024-04-30/601555_20240430_HL70.pdf" target="_blank" rel="noopener noreferrer" class="accent-blue hover:underline link-hover">应急领导小组</a>的启动机制和职责。</li>
+                    <li>**媒体沟通话术：** 准备常见问题（FAQ）及声明模板。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Recommendations and Risks Section -->
+        <section id="recommendations" class="bg-secondary-card rounded-lg shadow-custom p-8 mb-12">
+            <h2 class="text-3xl font-bold accent-blue mb-6 border-b-2 border-accent-orange pb-3">
+                <i class="fas fa-lightbulb mr-3"></i> 操作建议与风险提示
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-primary p-6 rounded-lg border border-color card-hover">
+                    <h3 class="text-xl font-semibold accent-blue mb-4 flex items-center">
+                        <i class="fas fa-clock mr-2"></i> 最佳时间节点
+                    </h3>
+                    <p class="text-lg text-secondary leading-relaxed">
+                        两项工作均建议在 **IPO申报辅导启动前3-6个月** 完成。
+                        确保媒体公关团队完成企业信息梳理及核心媒体对接，
+                        同时应急预案已通过内部演练，验证其有效性。
+                    </p>
+                </div>
+                <div class="bg-primary p-6 rounded-lg border border-color card-hover">
+                    <h3 class="text-xl font-semibold accent-orange mb-4 flex items-center">
+                        <i class="fas fa-shield-alt mr-2"></i> 风险规避与后果
+                    </h3>
+                    <ul class="list-disc list-inside text-lg text-secondary space-y-2">
+                        <li>**舆情风险：** 若未提前部署，突发负面舆情可能导致交易所“现场督导”，严重影响审核节奏。</li>
+                        <li>**合规风险：** 监管问询函可能要求补充说明内控制度，若无完备应急预案，将延误申报进度。</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 p-4 bg-primary rounded-lg border border-color">
+                <p class="text-secondary text-sm italic">
+                    <i class="fas fa-asterisk mr-2 accent-orange"></i> **注：**
+                    知识库资料<a href="https://example.com/knowledge-base/承销发行服务" target="_blank" rel="noopener noreferrer" class="accent-blue hover:underline link-hover">“承销发行服务”</a>显示，主承销商（如中信建投）可协助预案制定，但企业主体责任不可替代，务必积极主动。
+                </p>
+            </div>
+        </section>
+
+        <!-- Further Reading Section -->
+        <section id="further-reading" class="bg-secondary-card rounded-lg shadow-custom p-8 mb-12">
+            <h2 class="text-3xl font-bold accent-blue mb-6 border-b-2 border-accent-orange pb-3">
+                <i class="fas fa-book-open mr-3"></i> 延伸阅读：深度探索IPO与危机管理
+            </h2>
+            <p class="text-lg text-secondary mb-6">
+                为帮助您更全面地理解IPO过程中的风险管理与合规要求，我们精选了以下推荐读物或文献：
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Book 1 -->
+                <div class="bg-primary p-6 rounded-lg border border-color card-hover flex flex-col">
+                    <h3 class="text-xl font-semibold accent-blue mb-2"><i class="fas fa-gavel mr-2"></i> 《首次公开发行股票并上市管理办法》</h3>
+                    <p class="text-secondary mb-4 flex-grow">
+                        中国证监会关于A股IPO最核心的法规文件，理解上市基本门槛与程序的基础。
+                    </p>
+                    <a href="http://www.csrc.gov.cn/csrc/c101833/c101839/c102237/c102319/8470550/files/f15e839e2468453488219fbdd3f79391.pdf" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:underline link-hover self-start">
+                        <i class="fas fa-external-link-alt mr-1"></i> 阅读原文
+                    </a>
+                </div>
+                <!-- Book 2 -->
+                <div class="bg-primary p-6 rounded-lg border border-color card-hover flex flex-col">
+                    <h3 class="text-xl font-semibold accent-blue mb-2"><i class="fas fa-file-alt mr-2"></i> 《上市公司信息披露管理办法》</h3>
+                    <p class="text-secondary mb-4 flex-grow">
+                        规范上市公司信息披露行为，对企业危机公关和合规性有直接指导意义。
+                    </p>
+                    <a href="http://www.csrc.gov.cn/csrc/c101833/c101839/c102237/c102319/8470570/files/6b73a339ddb74f399f92aece1bb5ec10.pdf" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:underline link-hover self-start">
+                        <i class="fas fa-external-link-alt mr-1"></i> 阅读原文
+                    </a>
+                </div>
+                <!-- Book 3 -->
+                <div class="bg-primary p-6 rounded-lg border border-color card-hover flex flex-col">
+                    <h3 class="text-xl font-semibold accent-blue mb-2"><i class="fas fa-comment-dots mr-2"></i> 《危机公关实战：企业声誉管理与传播》</h3>
+                    <p class="text-secondary mb-4 flex-grow">
+                        一本专注于企业危机管理与媒体沟通的实战指南，提供应对突发事件的策略与技巧。
+                    </p>
+                    <a href="https://book.douban.com/subject/25894178/" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:underline link-hover self-start">
+                        <i class="fas fa-external-link-alt mr-1"></i> 豆瓣链接
+                    </a>
+                </div>
+                <!-- Book 4 -->
+                <div class="bg-primary p-6 rounded-lg border border-color card-hover flex flex-col">
+                    <h3 class="text-xl font-semibold accent-blue mb-2"><i class="fas fa-clipboard-list mr-2"></i> 《中国A股IPO实务操作指南》</h3>
+                    <p class="text-secondary mb-4 flex-grow">
+                        全面解析A股IPO流程、法律法规及实务操作，是企业上市的综合性参考手册。
+                    </p>
+                    <a href="https://www.amazon.cn/dp/B0B5P218M3" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:underline link-hover self-start">
+                        <i class="fas fa-external-link-alt mr-1"></i> 亚马逊链接
+                    </a>
+                </div>
+                <!-- Book 5 -->
+                <div class="bg-primary p-6 rounded-lg border border-color card-hover flex flex-col">
+                    <h3 class="text-xl font-semibold accent-blue mb-2"><i class="fas fa-sitemap mr-2"></i> 《公司治理与内部控制》</h3>
+                    <p class="text-secondary mb-4 flex-grow">
+                        深入探讨现代企业公司治理结构与内部控制体系建设，是防范风险的基石。
+                    </p>
+                    <a href="https://book.douban.com/subject/35368383/" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:underline link-hover self-start">
+                        <i class="fas fa-external-link-alt mr-1"></i> 豆瓣链接
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-secondary-card py-8 mt-12 text-center text-secondary text-sm shadow-inner">
+        <div class="max-w-7xl-custom mx-auto">
+            <p>&copy; 2024 IPO Insight. All rights reserved.</p>
+            <p class="mt-2">本内容仅供参考，不构成任何投资建议。</p>
+            <div class="flex justify-center space-x-4 mt-4">
+                <a href="#" class="text-secondary hover:accent-blue"><i class="fab fa-twitter text-lg"></i></a>
+                <a href="#" class="text-secondary hover:accent-blue"><i class="fab fa-linkedin-in text-lg"></i></a>
+                <a href="#" class="text-secondary hover:accent-blue"><i class="fab fa-weibo text-lg"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Theme Toggle JavaScript
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            }
+            // Re-render Mermaid graph with new theme variables
+            // Mermaid's theme variables need to be updated and re-initialized
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'base', // Use 'base' and control via themeVariables
+                fontFamily: 'Noto Sans SC, Tahoma, Arial, sans-serif',
+                themeVariables: {
+                    darkMode: htmlElement.classList.contains('dark'),
+                    lineColor: htmlElement.classList.contains('dark') ? getComputedStyle(document.documentElement).getPropertyValue('--accent-orange-dark') : getComputedStyle(document.documentElement).getPropertyValue('--accent-orange-light'),
+                    textColor: htmlElement.classList.contains('dark') ? getComputedStyle(document.documentElement).getPropertyValue('--text-primary-dark') : getComputedStyle(document.documentElement).getPropertyValue('--text-primary-light'),
+                    mainBkg: htmlElement.classList.contains('dark') ? getComputedStyle(document.documentElement).getPropertyValue('--bg-secondary-dark') : getComputedStyle(document.documentElement).getPropertyValue('--bg-secondary-light'),
+                    nodeBorder: htmlElement.classList.contains('dark') ? getComputedStyle(document.documentElement).getPropertyValue('--accent-blue-dark') : getComputedStyle(document.documentElement).getPropertyValue('--accent-blue-light'),
+                    nodeTextColor: htmlElement.classList.contains('dark') ? getComputedStyle(document.documentElement).getPropertyValue('--text-primary-dark') : getComputedStyle(document.documentElement).getPropertyValue('--text-primary-light'),
+                    primaryColor: htmlElement.classList.contains('dark') ? getComputedStyle(document.documentElement).getPropertyValue('--accent-blue-dark') : getComputedStyle(document.documentElement).getPropertyValue('--accent-blue-light'),
+                    primaryBorderColor: htmlElement.classList.contains('dark') ? getComputedStyle(document.documentElement).getPropertyValue('--accent-blue-dark') : getComputedStyle(document.documentElement).getPropertyValue('--accent-blue-light'),
+                    primaryTextColor: htmlElement.classList.contains('dark') ? '#fff' : '#fff', // Text inside primary nodes
+                },
+                flowchart: {
+                    htmlLabels: true
+                }
+            });
+            // Force redraw of mermaid diagrams by un-processing them and re-initializing
+            document.querySelectorAll('.mermaid').forEach(element => {
+                element.removeAttribute('data-processed');
+                element.innerHTML = element.dataset.mermaid; // Restore original Mermaid syntax
+            });
+            mermaid.init();
+        }
+
+        // Store original mermaid content in a data attribute to restore for re-rendering
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.mermaid').forEach(element => {
+                element.dataset.mermaid = element.innerHTML;
+            });
+
+            // Check for stored theme or system preference on load
+            const storedTheme = localStorage.getItem('theme');
+            if (storedTheme) {
+                setTheme(storedTheme);
+            } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme('dark');
+            } else {
+                setTheme('light');
+            }
+        });
+
+
+        // Toggle theme on button click
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuCloseButton = document.getElementById('mobile-menu-close');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+        });
+
+        mobileMenuCloseButton.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+
+        // Close mobile menu when a link is clicked (delegated from event listener)
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
+```
