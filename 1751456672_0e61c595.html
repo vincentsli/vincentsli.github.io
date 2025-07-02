@@ -1,0 +1,492 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中科宇航力箭二号：可回收计划深度解析</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <style>
+        /* Base styles for dark mode */
+        body {
+            font-family: "Noto Sans SC", Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: #0d0d1a; /* Deeper dark background */
+            color: #e0e0e0;
+            line-height: 1.7;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Light mode overrides */
+        html.light body {
+            background-color: #f7f9fc;
+            color: #333;
+        }
+        html.light .bg-gray-900 { background-color: #ffffff; }
+        html.light .bg-gray-800 { background-color: #f0f2f5; }
+        html.light .text-gray-100 { color: #333; }
+        html.light .text-gray-300 { color: #555; }
+        html.light .text-gray-400 { color: #777; }
+        html.light .text-purple-400 { color: #6a0dad; } /* Darker purple for contrast */
+        html.light .text-blue-400 { color: #0056b3; } /* Darker blue */
+        html.light .border-gray-700 { border-color: #ddd; }
+        html.light .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "Noto Serif SC", "Noto Sans SC", serif;
+            font-weight: 700;
+        }
+
+        /* Custom scrollbar for aesthetic */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a2e; /* Darker track */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4a4a6e; /* Muted purple */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6a6ab0; /* Lighter purple on hover */
+        }
+        html.light ::-webkit-scrollbar-track {
+            background: #f0f2f5;
+        }
+        html.light ::-webkit-scrollbar-thumb {
+            background: #c3cce0;
+        }
+        html.light ::-webkit-scrollbar-thumb:hover {
+            background: #a9b5cc;
+        }
+
+        /* Hero section specific styles */
+        .hero-background {
+            background-image: url('https://images.unsplash.com/photo-1576081491754-0694119859f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80'); /* Replace with a suitable rocket image */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            z-index: 0;
+        }
+        .hero-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(13, 13, 26, 0.6), rgba(13, 13, 26, 0.9));
+            z-index: 1;
+        }
+        html.light .hero-background::before {
+            background: linear-gradient(to bottom, rgba(247, 249, 252, 0.6), rgba(247, 249, 252, 0.9));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Subtle underline for links */
+        a {
+            text-decoration: none;
+            position: relative;
+            color: inherit;
+        }
+        a:hover {
+            color: #93c5fd; /* Light blue for hover */
+        }
+        a::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 1px;
+            display: block;
+            margin-top: 5px;
+            right: 0;
+            background: #93c5fd;
+            transition: width 0.3s ease;
+        }
+        a:hover::after {
+            width: 100%;
+            left: 0;
+            background: #93c5fd;
+        }
+        html.light a:hover {
+            color: #3b82f6;
+        }
+        html.light a::after {
+            background: #3b82f6;
+        }
+        html.light a:hover::after {
+            background: #3b82f6;
+        }
+
+        /* Highlight box for key info */
+        .highlight-box {
+            border-left: 4px solid #8b5cf6; /* Purple left border */
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+            background-color: rgba(139, 92, 246, 0.1); /* Subtle purple background */
+        }
+        html.light .highlight-box {
+            border-left: 4px solid #6d28d9;
+            background-color: rgba(109, 40, 217, 0.05);
+        }
+
+        /* Mermaid container styling */
+        .mermaid-container {
+            background-color: #1a1a2e;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+            overflow-x: auto;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        html.light .mermaid-container {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Light/Dark mode toggle button */
+        #theme-toggle {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 100;
+            background-color: rgba(63, 63, 70, 0.8); /* zinc-700 with opacity */
+            color: #d1d5db; /* gray-300 */
+            border-radius: 9999px; /* Full rounded */
+            padding: 0.75rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        #theme-toggle:hover {
+            background-color: rgba(82, 82, 91, 0.9); /* zinc-600 with opacity */
+            transform: scale(1.05);
+        }
+        html.light #theme-toggle {
+            background-color: rgba(229, 231, 235, 0.9); /* gray-200 with opacity */
+            color: #4b5563; /* gray-700 */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        html.light #theme-toggle:hover {
+            background-color: rgba(209, 213, 219, 0.9); /* gray-300 with opacity */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" aria-label="Toggle theme">
+        <i class="fas fa-sun hidden dark:inline-block"></i>
+        <i class="fas fa-moon dark:hidden"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <header class="hero-background min-h-screen flex items-center justify-center text-center text-gray-100 py-16 px-4">
+        <div class="hero-content max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight tracking-tight mb-4 animate-fade-in-up">
+                <i class="fas fa-rocket text-purple-400 mr-4"></i>中科宇航力箭二号
+            </h1>
+            <p class="text-3xl md:text-4xl font-light text-gray-300 mb-8 animate-fade-in-up delay-100">
+                中国商业航天新纪元：可回收计划深度解析
+            </p>
+            <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto animate-fade-in-up delay-200">
+                探索中科宇航在液体运载火箭可回收技术领域的最新进展、关键里程碑、行业竞争与潜在风险，为您的战略决策提供前瞻性洞察。
+            </p>
+            <div class="mt-10 animate-fade-in-up delay-300">
+                <a href="#content" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
+                    深入阅读 <i class="fas fa-chevron-down ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main id="content" class="container mx-auto px-4 py-16 md:py-24 max-w-5xl">
+
+        <!-- Core Conclusions -->
+        <section class="mb-16 md:mb-24 animate-fade-in-section">
+            <h2 class="text-4xl font-bold text-center mb-12 text-purple-400">
+                <i class="fas fa-chart-line mr-3"></i>核心结论
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gray-900 p-8 rounded-xl shadow-lg border border-gray-700 transform hover:scale-[1.01] transition duration-300 ease-in-out">
+                    <h3 class="text-2xl font-semibold mb-4 text-blue-400">
+                        <i class="fas fa-sync-alt mr-3"></i>可回收技术目标
+                    </h3>
+                    <p class="mb-4 text-gray-300"><span class="text-green-400 font-bold mr-2"><i class="fas fa-check-circle"></i></span> 力箭二号是中科宇航自主研发的中型液体火箭，**定位为可回收火箭**，计划通过技术迭代实现一级和助推器的垂直回收。</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-400 ml-4">
+                        <li><strong class="text-gray-200">2025年首飞</strong> (初始版本不可回收)</li>
+                        <li><strong class="text-gray-200">2027年</strong>完成一级和助推器回收能力验证</li>
+                        <li><strong class="text-gray-200">2028年</strong>实现捆绑助推器的首次回收</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-900 p-8 rounded-xl shadow-lg border border-gray-700 transform hover:scale-[1.01] transition duration-300 ease-in-out">
+                    <h3 class="text-2xl font-semibold mb-4 text-blue-400">
+                        <i class="fas fa-cog mr-3"></i>当前技术进展
+                    </h3>
+                    <p class="mb-4 text-gray-300"><span class="text-green-400 font-bold mr-2"><i class="fas fa-check-circle"></i></span> **2025年6月**：力箭二号一级动力系统试车成功，直接服务于**可回收关键技术** (如发动机推力调节、重复点火)。</p>
+                    <p class="text-gray-400">试验中心具备**400吨级动力系统综合测试能力**，为可回收火箭的批量生产提供支撑。</p>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 p-8 rounded-xl shadow-lg border border-gray-700 mt-8 transform hover:scale-[1.01] transition duration-300 ease-in-out">
+                <h3 class="text-2xl font-semibold mb-4 text-blue-400">
+                    <i class="fas fa-handshake mr-3"></i>竞争与政策背景
+                </h3>
+                <p class="mb-4 text-gray-300"><span class="text-green-400 font-bold mr-2"><i class="fas fa-check-circle"></i></span> 中国商业航天政策明确支持“**液体火箭+可回收**”技术方向。</p>
+                <p class="text-gray-400">中科宇航的进度落后于头部企业（如蓝箭航天朱雀三号2025年验证回收），但其技术路线符合政策优先级。</p>
+            </div>
+        </section>
+
+        <!-- Data Visualization - Mermaid Timeline -->
+        <section class="mb-16 md:mb-24 animate-fade-in-section">
+            <h2 class="text-4xl font-bold text-center mb-12 text-purple-400">
+                <i class="fas fa-project-diagram mr-3"></i>力箭二号可回收技术路线图
+            </h2>
+            <div class="mermaid-container">
+                <pre class="mermaid">
+                    timeline
+                        title 力箭二号可回收技术路线图
+                        section 规划里程碑
+                            2025年: 首飞 (初始版本不可回收)
+                            2027年: 完成一级和助推器回收能力验证
+                            2028年: 实现捆绑助推器的首次回收
+                        section 关键技术点
+                            2025年6月: 动力系统试车成功 (发动机推力调节, 重复点火)
+                        section 行业与政策
+                            政策导向: 液体火箭+可回收
+                            竞争环境: 落后于蓝箭航天朱雀三号 (2025验证回收)
+                </pre>
+            </div>
+        </section>
+
+        <!-- Risk Warnings Section -->
+        <section class="mb-16 md:mb-24 animate-fade-in-section">
+            <h2 class="text-4xl font-bold text-center mb-12 text-red-400">
+                <i class="fas fa-exclamation-triangle mr-3"></i>风险提示 (投行视角)
+            </h2>
+            <div class="bg-gray-900 p-8 rounded-xl shadow-lg border border-red-700 transform hover:scale-[1.01] transition duration-300 ease-in-out">
+                <div class="mb-6 highlight-box border-red-500">
+                    <h3 class="text-2xl font-semibold mb-2 text-red-400"><i class="fas fa-bug mr-3"></i>技术迭代风险</h3>
+                    <p class="text-gray-300">液体火箭回收涉及复杂控制算法和材料工艺，若2027年回收验证延迟，可能影响后续融资估值。</p>
+                </div>
+                <div class="highlight-box border-red-500">
+                    <h3 class="text-2xl font-semibold mb-2 text-red-400"><i class="fas fa-sack-dollar mr-3"></i>IPO申报影响</h3>
+                    <p class="text-gray-300">中科宇航若以“可回收火箭”作为核心卖点冲刺科创板，需在2025年首飞后快速推进回收试验，否则或弱于竞争对手（如蓝箭航天已启动Pre-IPO）。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- References Section -->
+        <section class="mb-16 md:mb-24 animate-fade-in-section">
+            <h2 class="text-4xl font-bold text-center mb-12 text-purple-400">
+                <i class="fas fa-book-open mr-3"></i>信息来源
+            </h2>
+            <div class="grid md:grid-cols-2 gap-8 text-gray-400">
+                <div class="bg-gray-900 p-6 rounded-xl shadow-md border border-gray-700 hover:shadow-lg transition duration-300">
+                    <h3 class="text-xl font-semibold mb-3 text-blue-400">知识库参考</h3>
+                    <ul class="space-y-2">
+                        <li><i class="fas fa-database mr-2 text-green-400"></i><a href="#" class="hover:text-white" onclick="alert('模拟链接跳转：商业航天IPO进度追踪表'); return false;">《商业航天IPO进度追踪表（2025年6月）》</a> → 标注中科宇航力箭二号回收规划时间节点。</li>
+                        <li><i class="fas fa-chart-pie mr-2 text-green-400"></i><a href="#" class="hover:text-white" onclick="alert('模拟链接跳转：2025年商业航天IPO政策可行性分析'); return false;">《2025年商业航天IPO政策可行性分析》</a> → 强调政策对液体可回收技术的倾斜。</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-xl shadow-md border border-gray-700 hover:shadow-lg transition duration-300">
+                    <h3 class="text-xl font-semibold mb-3 text-blue-400">联网参考</h3>
+                    <ul class="space-y-2">
+                        <li><i class="fas fa-globe mr-2 text-green-400"></i><a href="https://www.stdaily.com/web/gdxw/2024-05/15/content_1960478.html" target="_blank" rel="noopener noreferrer" class="hover:text-white">高质量发展调研行丨力箭二号将于2025年首飞</a></li>
+                        <li><i class="fas fa-globe mr-2 text-green-400"></i><a href="https://www.bilibili.com/read/cv34837130/" target="_blank" rel="noopener noreferrer" class="hover:text-white">中国可回收火箭——力箭二号</a></li>
+                        <li><i class="fas fa-globe mr-2 text-green-400"></i><a href="https://news.southcn.com/node_54a44f01a2/e5f49acb56.shtml" target="_blank" rel="noopener noreferrer" class="hover:text-white">涉火箭回收关键技术！力箭二号动力系统试车成功</a></li>
+                        <li><i class="fas fa-globe mr-2 text-green-400"></i><a href="http://www.news.cn/sci-tech/20250612/da243b5733754a41afc37edf075d671c/c.html" target="_blank" rel="noopener noreferrer" class="hover:text-white">力箭二号一级动力系统试车圆满成功</a></li>
+                        <li><i class="fas fa-globe mr-2 text-green-400"></i><a href="https://m.jiemian.com/article/10668319.html" target="_blank" rel="noopener noreferrer" class="hover:text-white">力箭二号液体火箭拟2025年首飞</a></li>
+                        <li><i class="fas fa-globe mr-2 text-green-400"></i><a href="https://www.sohu.com/a/907031699_122256621" target="_blank" rel="noopener noreferrer" class="hover:text-white">力箭二号试车成功！中科宇航试验中心全面竣工</a></li>
+                        <li><i class="fas fa-globe mr-2 text-green-400"></i><a href="https://m.dzplus.dzng.com/share/general/0/NEWS2461793KRLCFVWDTXATE" target="_blank" rel="noopener noreferrer" class="hover:text-white">火箭海上回收有多“硬核”？多款可回收火箭年底前首飞</a></li>
+                        <li><i class="fas fa-globe mr-2 text-green-400"></i><a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E7%A7%91%E5%AE%87%E8%88%AA" target="_blank" rel="noopener noreferrer" class="hover:text-white">中科宇航-維基百科</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Further Reading Section -->
+        <section class="animate-fade-in-section">
+            <h2 class="text-4xl font-bold text-center mb-12 text-purple-400">
+                <i class="fas fa-graduation-cap mr-3"></i>延伸阅读
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-900 p-6 rounded-xl shadow-lg border border-gray-700 transform hover:translate-y-[-5px] transition duration-300 ease-in-out">
+                    <h3 class="text-xl font-semibold mb-3 text-blue-400">1. 《埃隆·马斯克传》</h3>
+                    <p class="text-gray-400">深入了解SpaceX创始人埃隆·马斯克，学习其如何颠覆传统航天，推动可回收火箭技术，对商业航天有启发性视角。</p>
+                    <a href="https://book.douban.com/subject/36149495/" target="_blank" rel="noopener noreferrer" class="text-sm mt-3 inline-block text-purple-400 hover:text-white">查看详情 <i class="fas fa-external-link-alt ml-1"></i></a>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-xl shadow-lg border border-gray-700 transform hover:translate-y-[-5px] transition duration-300 ease-in-out">
+                    <h3 class="text-xl font-semibold mb-3 text-blue-400">2. 《商业航天：太空经济的崛起》</h3>
+                    <p class="text-gray-400">一本全面介绍全球商业航天产业发展趋势、市场机遇与挑战的著作，有助于理解行业大背景。</p>
+                    <a href="https://book.douban.com/subject/35349666/" target="_blank" rel="noopener noreferrer" class="text-sm mt-3 inline-block text-purple-400 hover:text-white">查看详情 <i class="fas fa-external-link-alt ml-1"></i></a>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-xl shadow-lg border border-gray-700 transform hover:translate-y-[-5px] transition duration-300 ease-in-out">
+                    <h3 class="text-xl font-semibold mb-3 text-blue-400">3. 《中国商业航天发展报告》</h3>
+                    <p class="text-gray-400">通常由政府或研究机构发布，提供中国商业航天政策、市场数据和企业发展情况的权威分析。</p>
+                    <a href="https://www.casc.ac.cn/html/ch/news/detail.html?id=2335" target="_blank" rel="noopener noreferrer" class="text-sm mt-3 inline-block text-purple-400 hover:text-white">查看详情 <i class="fas fa-external-link-alt ml-1"></i></a>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-xl shadow-lg border border-gray-700 transform hover:translate-y-[-5px] transition duration-300 ease-in-out">
+                    <h3 class="text-xl font-semibold mb-3 text-blue-400">4. 《火箭推进原理》</h3>
+                    <p class="text-gray-400">经典火箭推进教材，理解可回收技术背后的物理与工程挑战，适合对技术细节有兴趣的读者。</p>
+                    <a href="https://book.douban.com/subject/26915234/" target="_blank" rel="noopener noreferrer" class="text-sm mt-3 inline-block text-purple-400 hover:text-white">查看详情 <i class="fas fa-external-link-alt ml-1"></i></a>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-xl shadow-lg border border-gray-700 transform hover:translate-y-[-5px] transition duration-300 ease-in-out">
+                    <h3 class="text-xl font-semibold mb-3 text-blue-400">5. 《航天法概论》</h3>
+                    <p class="text-gray-400">探讨国内外航天活动的法律法规，理解政策对商业航天发展的规范与引导，特别是IPO和技术规范方面。</p>
+                    <a href="https://book.douban.com/subject/35472149/" target="_blank" rel="noopener noreferrer" class="text-sm mt-3 inline-block text-purple-400 hover:text-white">查看详情 <i class="fas fa-external-link-alt ml-1"></i></a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 text-center py-8 border-t border-gray-800">
+        <div class="container mx-auto px-4">
+            <p>&copy; 2023 商业航天洞察。保留所有权利。</p>
+            <p class="mt-2 text-sm">Powered by 专业前端设计与数据分析</p>
+        </div>
+    </footer>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid.js
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark', // Default theme for mermaid, will be overridden by custom CSS
+            fontFamily: '"Noto Sans SC", Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;',
+            themeVariables: {
+                darkMode: true,
+                fontFamily: '"Noto Sans SC", Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;',
+                primaryColor: '#8b5cf6', // purple-500
+                primaryTextColor: '#e0e0e0',
+                secondaryColor: '#6366f1', // indigo-500
+                secondaryTextColor: '#e0e0e0',
+                tertiaryColor: '#facc15', // yellow-400
+                tertiaryTextColor: '#1f2937',
+                lineColor: '#60a5fa', // blue-400
+                mainBkg: '#1a1a2e', // a darker background for the chart itself
+                nodeBorder: '#a78bfa', // purple-400
+                // Timeline specific variables
+                timelineLabelColor: '#60a5fa', // blue-400
+                timelineDateColor: '#e0e0e0',
+                timelineSectionColor: '#4c1d95', // deep purple
+                timelineSectionTextColor: '#e0e0e0',
+                timelineEventColor: '#8b5cf6', // purple-500
+                timelineEventTextColor: '#e0e0e0',
+            }
+        });
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        const setTheme = (theme) => {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                localStorage.setItem('theme', 'dark');
+                mermaid.initialize({ theme: 'dark' });
+            } else {
+                htmlElement.classList.add('light');
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                mermaid.initialize({ theme: 'default' }); // Mermaid's default is light
+            }
+        };
+
+        // Check for saved theme preference or system preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light'); // Default to light if no preference and system is not dark
+        }
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Optional: Animation on scroll (intersection observer)
+        const animateSections = document.querySelectorAll('.animate-fade-in-section, .animate-fade-in-up');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                } else {
+                    entry.target.classList.remove('is-visible');
+                }
+            });
+        }, {
+            threshold: 0.1, // Trigger when 10% of the element is visible
+            rootMargin: '0px 0px -50px 0px' // Adjust to trigger slightly earlier
+        });
+
+        animateSections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Define animation keyframes (add to CSS if preferred, or use Tailwind's @keyframes)
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            @keyframes fadeInUp {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .animate-fade-in-up {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            }
+            .animate-fade-in-up.delay-100 { transition-delay: 0.1s; }
+            .animate-fade-in-up.delay-200 { transition-delay: 0.2s; }
+            .animate-fade-in-up.delay-300 { transition-delay: 0.3s; }
+            .animate-fade-in-up.is-visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .animate-fade-in-section {
+                opacity: 0;
+                transition: opacity 1s ease-out;
+            }
+            .animate-fade-in-section.is-visible {
+                opacity: 1;
+            }
+        `;
+        document.head.appendChild(style);
+
+    </script>
+</body>
+</html>
+```
