@@ -1,0 +1,649 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资本公积转增股本：自然人股东免税政策深度解析</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC and Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles to override or extend Tailwind defaults */
+        :root {
+            /* Light mode variables */
+            --text-color-light: #333;
+            --bg-color-light: #f8f8f8;
+            --card-bg-light: #fff;
+            --border-color-light: #ddd;
+            --accent-color-light: #6b46c1; /* Purple-500 */
+
+            /* Dark mode variables */
+            --text-color-dark: #e2e8f0; /* slategray-200 */
+            --bg-color-dark: #1a202c; /* slategray-900 */
+            --card-bg-dark: #2d3748; /* slategray-800 */
+            --border-color-dark: #4a5568; /* slategray-600 */
+            --accent-color-dark: #81e6d9; /* Teal-300 */
+        }
+
+        /* Light mode theme application */
+        .light-mode {
+            background-color: var(--bg-color-light);
+            color: var(--text-color-light);
+        }
+        .light-mode .bg-card {
+            background-color: var(--card-bg-light);
+            border-color: var(--border-color-light);
+        }
+        .light-mode .text-accent {
+            color: var(--accent-color-light);
+        }
+        .light-mode .border-accent {
+            border-color: var(--accent-color-light);
+        }
+        .light-mode .hover\:bg-accent-dark:hover {
+            background-color: #553a99; /* A darker purple for hover */
+        }
+        .light-mode .hover\:text-accent-light:hover {
+             color: #81e6d9; /* Teal for hover */
+        }
+
+        /* Dark mode theme application */
+        .dark-mode {
+            background-color: var(--bg-color-dark);
+            color: var(--text-color-dark);
+        }
+        .dark-mode .bg-card {
+            background-color: var(--card-bg-dark);
+            border-color: var(--border-color-dark);
+        }
+        .dark-mode .text-accent {
+            color: var(--accent-color-dark);
+        }
+        .dark-mode .border-accent {
+            border-color: var(--accent-color-dark);
+        }
+        .dark-mode .hover\:bg-accent-dark:hover {
+            background-color: #6ee7b7; /* A darker teal for hover */
+        }
+         .dark-mode .hover\:text-accent-light:hover {
+             color: #6b46c1; /* Purple for hover */
+        }
+
+        /* Base body styles */
+        body {
+            font-family: "Noto Sans SC", Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            line-height: 1.8; /* Increased line height for better readability */
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Heading font styles */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "Noto Serif SC", serif;
+            font-weight: 700;
+        }
+
+        /* Custom link style for footnotes */
+        .footnote-link {
+            font-size: 0.75em;
+            vertical-align: super;
+            margin-left: 0.2em;
+            text-decoration: none;
+            color: inherit; /* Inherit color, then change on hover */
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .footnote-link:hover {
+            opacity: 1;
+            color: var(--accent-color-dark); /* Dark mode accent */
+        }
+        .light-mode .footnote-link:hover {
+             color: var(--accent-color-light); /* Light mode accent */
+        }
+
+        /* Spacing for paragraphs within content sections */
+        .content-section p {
+            margin-bottom: 1em;
+        }
+
+        /* Hero module specific styling */
+        .hero {
+            position: relative;
+            /* Background image with subtle financial theme */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1601597118029-7c8585093df0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 8rem 0; /* Increased padding for more vertical space */
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            overflow: hidden; /* Prevent content overflow during animations */
+        }
+        /* Overlay for hero background */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(26,32,44,0.8), rgba(26,32,44,0.3), rgba(26,32,44,0.8)); /* Dark overlay for dark mode */
+            z-index: 0;
+        }
+         .light-mode .hero::before {
+            background: linear-gradient(to bottom, rgba(248,248,248,0.8), rgba(248,248,248,0.3), rgba(248,248,248,0.8)); /* Light overlay for light mode */
+        }
+        .hero > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Mermaid chart container styles */
+        .mermai-chart {
+            background-color: var(--card-bg-dark);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+        .light-mode .mermai-chart {
+            background-color: var(--card-bg-light);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Mermaid styling adjustments for dark mode readability */
+        .dark-mode .mermaid {
+            filter: invert(0.9) hue-rotate(180deg); /* Adjust for dark mode visibility */
+        }
+        /* Restore original color for text in dark mode Mermaid */
+        .dark-mode .mermaid .node text,
+        .dark-mode .mermaid .edge-labels text,
+        .dark-mode .mermaid .flowchart-label {
+             fill: var(--text-color-dark) !important;
+             filter: invert(1) hue-rotate(180deg); /* Re-invert text to original color */
+        }
+        /* Node and path styling for dark mode */
+        .dark-mode .mermaid .node rect,
+        .dark-mode .mermaid .node circle,
+        .dark-mode .mermaid .node polygon {
+            stroke: var(--border-color-dark) !important;
+            fill: var(--card-bg-dark) !important;
+        }
+        .dark-mode .mermaid .edgePath .path {
+            stroke: var(--border-color-dark) !important;
+        }
+        .dark-mode .mermaid .arrowheadPath {
+            fill: var(--border-color-dark) !important;
+        }
+        .dark-mode .mermaid .edge path {
+            stroke-width: 2px; /* Make lines thicker in dark mode for better visibility */
+        }
+        .dark-mode .mermaid .edge .arrowhead {
+            fill: var(--text-color-dark) !important;
+        }
+
+        /* Mermaid styling for light mode */
+        .light-mode .mermaid {
+            filter: none; /* No inversion for light mode */
+        }
+        .light-mode .mermaid .node text,
+        .light-mode .mermaid .edge-labels text,
+        .light-mode .mermaid .flowchart-label {
+            fill: var(--text-color-light) !important;
+            filter: none;
+        }
+        .light-mode .mermaid .node rect,
+        .light-mode .mermaid .node circle,
+        .light-mode .mermaid .node polygon {
+            stroke: var(--border-color-light) !important;
+            fill: var(--card-bg-light) !important;
+        }
+        .light-mode .mermaid .edgePath .path {
+            stroke: var(--border-color-light) !important;
+        }
+        .light-mode .mermaid .arrowheadPath {
+            fill: var(--border-color-light) !important;
+        }
+        .light-mode .mermaid .edge path {
+            stroke-width: 2px; /* Make lines thicker in light mode for consistency */
+        }
+        .light-mode .mermaid .edge .arrowhead {
+            fill: var(--text-color-light) !important;
+        }
+
+        /* Scroll-to-top button */
+        #scrollTopBtn {
+            display: none; /* Hidden by default */
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: var(--accent-color-dark);
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 18px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+        }
+        .light-mode #scrollTopBtn {
+            background-color: var(--accent-color-light);
+        }
+        #scrollTopBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Subtle underline hover effect for internal links */
+        a:not(.no-underline-hover):hover {
+            text-decoration: underline;
+            text-decoration-color: var(--accent-color-dark);
+            text-underline-offset: 4px;
+        }
+        .light-mode a:not(.no-underline-hover):hover {
+            text-decoration-color: var(--accent-color-light);
+        }
+
+        /* Card hover effect */
+        .card-hover {
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .light-mode .card-hover:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Custom animation keyframes for hero module */
+        @keyframes fade-in-down {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-fade-in-down { animation: fade-in-down 0.8s ease-out forwards; }
+        .animate-fade-in-up { animation: fade-in-up 0.8s ease-out forwards; }
+        .animate-fade-in { animation: fade-in 0.8s ease-out forwards; }
+
+    </style>
+</head>
+<body class="dark-mode transition-colors duration-300">
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="fixed top-6 right-6 p-3 rounded-full shadow-lg z-50 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-dark light-mode:bg-purple-500 light-mode:text-white dark-mode:bg-teal-500 dark-mode:text-white">
+        <i class="fas fa-sun block dark:hidden"></i>
+        <i class="fas fa-moon hidden dark:block"></i>
+    </button>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTopBtn" title="回到顶部">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Hero Module -->
+    <header class="hero">
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-4 opacity-0 animate-fade-in-down">
+            资本公积转增股本：自然人股东免税政策深度解析
+        </h1>
+        <p class="text-xl md:text-2xl font-light max-w-3xl text-center px-4 mb-8 opacity-0 animate-fade-in-up">
+            精准把握政策边界，规避税务风险，助您清晰应对复杂税务规则。
+        </p>
+        <div class="mt-8 opacity-0 animate-fade-in">
+            <a href="#content" class="px-8 py-4 bg-teal-500 hover:bg-teal-600 text-white rounded-full text-lg font-semibold tracking-wide transition-all duration-300 transform hover:scale-105 shadow-lg light-mode:bg-purple-600 light-mode:hover:bg-purple-700">
+                <i class="fas fa-book-reader mr-2"></i> 开始阅读
+            </a>
+        </div>
+    </header>
+
+    <main id="content" class="container mx-auto px-6 py-16 max-w-5xl content-section">
+        <p class="text-lg md:text-xl leading-relaxed mb-10 text-center font-medium opacity-90 first-letter:text-5xl first-letter:float-left first-letter:mr-3 first-letter:font-serif first-letter:text-accent">
+            根据现行税收政策及实务操作，**自然人股东在资本公积转增股本时免征个人所得税，需同时满足以下两个条件**：
+        </p>
+
+        <!-- 法定免税情形 Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-8 text-accent">
+                <i class="fas fa-balance-scale mr-3 text-2xl"></i>一、法定免税情形
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Condition 1 Card -->
+                <div class="bg-card p-8 rounded-xl shadow-xl border-t-4 border-accent transition-all duration-300 card-hover">
+                    <h3 class="text-xl md:text-2xl font-serif font-semibold mb-4 text-white dark:text-gray-50">
+                        <i class="fas fa-building mr-2 text-accent"></i> 1. 主体限定为股份制企业
+                    </h3>
+                    <p class="text-base md:text-lg leading-relaxed opacity-90">
+                        仅适用于**股份有限公司**（含上市公司、新三板挂牌公司）的资本公积转增股本行为。
+                        <span class="font-bold text-red-400">有限责任公司</span>（含整体变更前的有限公司阶段）不适用此免税政策<a href="#footnote-1" class="footnote-link">1</a><a href="#footnote-2" class="footnote-link">2</a><a href="#footnote-3" class="footnote-link">3</a>。
+                    </p>
+                </div>
+                <!-- Condition 2 Card -->
+                <div class="bg-card p-8 rounded-xl shadow-xl border-t-4 border-accent transition-all duration-300 card-hover">
+                    <h3 class="text-xl md:text-2xl font-serif font-semibold mb-4 text-white dark:text-gray-50">
+                        <i class="fas fa-coins mr-2 text-accent"></i> 2. 资本公积来源限定为股票发行溢价
+                    </h3>
+                    <p class="text-base md:text-lg leading-relaxed opacity-90">
+                        仅限以**股票溢价发行形成的资本公积**转增股本。
+                        其他来源的资本公积（如其他资本公积、资产评估增值等）转增时需按20%税率缴纳个人所得税<a href="#footnote-1" class="footnote-link">1</a><a href="#footnote-2" class="footnote-link">2</a><a href="#footnote-4" class="footnote-link">4</a>。
+                    </p>
+                </div>
+            </div>
+            <div class="mt-8 p-6 bg-card rounded-xl shadow-md border-l-4 border-gray-500 dark:border-gray-600 text-sm md:text-base italic opacity-90">
+                <h4 class="font-semibold mb-2 text-white dark:text-gray-50">政策依据：</h4>
+                <blockquote class="border-l-4 border-accent pl-4 text-gray-400 dark:text-gray-300">
+                    <p>《国家税务总局关于股份制企业转增股本和派发红股征免个人所得税的通知》（国税发〔1997〕198号）规定：</p>
+                    <p class="mt-2">“股份制企业用股票溢价发行收入所形成的资本公积金转增股本，不属于股息、红利性质的分配，对个人取得的转增股本数额，不作为个人所得，不征收个人所得税。”<a href="#footnote-2" class="footnote-link">2</a><a href="#footnote-6" class="footnote-link">6</a></p>
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- 实务中需注意的例外 Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-8 text-accent">
+                <i class="fas fa-exclamation-triangle mr-3 text-2xl"></i>二、实务中需注意的例外
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Exception 1 Card -->
+                <div class="bg-card p-6 rounded-xl shadow-xl border-t-4 border-red-500 transition-all duration-300 card-hover">
+                    <h3 class="text-xl font-serif font-semibold mb-3 text-white dark:text-gray-50">
+                        <i class="fas fa-hand-point-right mr-2 text-red-400"></i> 1. 有限责任公司阶段转增需缴税
+                    </h3>
+                    <p class="text-base leading-relaxed opacity-90">
+                        有限公司以资本溢价（非股票发行溢价）转增资本时，自然人股东需按“利息、股息、红利所得”缴纳20%个人所得税。
+                        <strong class="text-red-300">关键区别在于企业组织形式</strong>（有限公司≠股份制企业）<a href="#footnote-3" class="footnote-link">3</a><a href="#footnote-7" class="footnote-link">7</a><a href="#footnote-9" class="footnote-link">9</a>。
+                    </p>
+                    <p class="text-sm mt-3 italic text-gray-400">
+                        *例如：天兵科技股改前为有限公司，其资本公积转增需代扣自然人股东个税*<a href="#footnote-5" class="footnote-link">5</a>。
+                    </p>
+                </div>
+                <!-- Exception 2 Card -->
+                <div class="bg-card p-6 rounded-xl shadow-xl border-t-4 border-red-500 transition-all duration-300 card-hover">
+                    <h3 class="text-xl font-serif font-semibold mb-3 text-white dark:text-gray-50">
+                        <i class="fas fa-chart-line mr-2 text-red-400"></i> 2. 非股票溢价形成的资本公积转增需缴税
+                    </h3>
+                    <p class="text-base leading-relaxed opacity-90">
+                        若资本公积来源于非股票溢价（如债务重组、政府补助等），即使企业为股份公司，转增时仍需缴税<a href="#footnote-4" class="footnote-link">4</a><a href="#footnote-13" class="footnote-link">13</a>。
+                    </p>
+                </div>
+                <!-- Exception 3 Card -->
+                <div class="bg-card p-6 rounded-xl shadow-xl border-t-4 border-red-500 transition-all duration-300 card-hover">
+                    <h3 class="text-xl font-serif font-semibold mb-3 text-white dark:text-gray-50">
+                        <i class="fas fa-map-marked-alt mr-2 text-red-400"></i> 3. 地方执行口径差异
+                    </h3>
+                    <p class="text-base leading-relaxed opacity-90">
+                        部分地区（如浙江）对有限责公司资本溢价转增参照免税处理，但存在税务风险。
+                        <strong class="text-yellow-300">稳妥做法是取得主管税务机关书面确认</strong><a href="#footnote-7" class="footnote-link">7</a><a href="#footnote-10" class="footnote-link">10</a>。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 知识库补充说明 Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-8 text-accent">
+                <i class="fas fa-info-circle mr-3 text-2xl"></i>知识库补充说明
+            </h2>
+            <div class="bg-card p-8 rounded-xl shadow-xl border-l-4 border-blue-500 dark:border-blue-600">
+                <p class="text-base md:text-lg leading-relaxed opacity-90">
+                    根据天兵科技股改备忘录（2023-11-02）：
+                </p>
+                <blockquote class="border-l-4 border-blue-400 pl-4 mt-4 text-gray-400 dark:text-gray-300">
+                    <p class="mb-2">股份制企业以股票溢价发行形成的资本公积转增股本时，自然人股东无需缴纳个人所得税。</p>
+                    <p class="mb-2">但有限公司阶段或非股票溢价形成的资本公积转增，需按20%税率代扣代缴个税<a href="#footnote-5" class="footnote-link">5</a>。</p>
+                    <p class="mb-2">涉及合伙企业股东的，其自然人合伙人需通过合伙企业代扣代缴税款<a href="#footnote-5" class="footnote-link">5</a>。</p>
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- 数据可视化：Mermaid 图表 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-8 text-accent">
+                <i class="fas fa-sitemap mr-3 text-2xl"></i>税务政策决策流程图
+            </h2>
+            <div class="mermai-chart overflow-x-auto">
+                <pre class="mermaid text-sm md:text-base">
+graph TD
+    A[资本公积转增股本] --> B{企业是否为股份有限公司?};
+    B -- 否 --> C[有限责任公司]
+    C --> D{资本公积来源于股票发行溢价?};
+    D -- 是(非上市公司) --> E[需按20%缴税 (通常不适用股票溢价)]
+    D -- 否 --> F[需按20%缴税];
+
+    B -- 是 --> G{资本公积来源于股票发行溢价?};
+    G -- 是 --> H[免征个人所得税];
+    G -- 否 --> I[需按20%缴税];
+
+    E --> J(结论: 需缴税);
+    F --> J;
+    H --> K(结论: 免税);
+    I --> J;
+
+    subgraph Legally Exempt
+        H
+    end
+
+    subgraph Taxable Scenarios
+        C
+        E
+        F
+        I
+    end
+                </pre>
+            </div>
+        </section>
+
+        <!-- 结论 Section -->
+        <section class="mb-16 text-center">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-8 text-accent">
+                <i class="fas fa-check-circle mr-3 text-2xl"></i> 结论
+            </h2>
+            <p class="text-xl md:text-2xl font-bold leading-relaxed mb-6">
+                自然人股东免缴个税仅适用于：
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+                <div class="bg-card p-6 rounded-xl shadow-xl border-b-4 border-green-500 transform transition-transform duration-300 hover:scale-105">
+                    <p class="text-lg md:text-xl font-semibold">
+                        <i class="fas fa-check-square mr-2 text-green-400"></i> ① 股份有限公司
+                    </p>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-xl border-b-4 border-green-500 transform transition-transform duration-300 hover:scale-105">
+                    <p class="text-lg md:text-xl font-semibold">
+                        <i class="fas fa-check-square mr-2 text-green-400"></i> ② 以股票溢价发行形成的资本公积
+                    </p>
+                </div>
+            </div>
+            <p class="text-lg md:text-xl font-bold leading-relaxed mt-8 text-red-400">
+                其他情况均需按20%缴税。
+            </p>
+        </section>
+
+        <!-- 延伸阅读 Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-8 text-accent">
+                <i class="fas fa-book-open mr-3 text-2xl"></i> 延伸阅读
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-card p-6 rounded-xl shadow-xl border-t-2 border-gray-600 transition-all duration-300 card-hover">
+                    <h3 class="text-xl font-serif font-semibold mb-2 text-white dark:text-gray-50">《税收筹划》</h3>
+                    <p class="text-sm opacity-80 mb-3">深入探讨企业和个人如何合法合理地进行税务规划。</p>
+                    <a href="https://baike.baidu.com/item/%E7%A8%8E%E6%94%B6%E7%AD%B9%E5%88%92/1004128" target="_blank" class="text-accent hover:text-white dark:hover:text-teal-300 transition-colors duration-200 text-sm no-underline-hover">
+                        了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                    </a>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-xl border-t-2 border-gray-600 transition-all duration-300 card-hover">
+                    <h3 class="text-xl font-serif font-semibold mb-2 text-white dark:text-gray-50">《公司上市实务》</h3>
+                    <p class="text-sm opacity-80 mb-3">全面解析公司IPO过程中涉及的法律、财务、税务等问题。</p>
+                    <a href="https://www.amazon.cn/dp/B08XJ8P6F7" target="_blank" class="text-accent hover:text-white dark:hover:text-teal-300 transition-colors duration-200 text-sm no-underline-hover">
+                        了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                    </a>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-xl border-t-2 border-gray-600 transition-all duration-300 card-hover">
+                    <h3 class="text-xl font-serif font-semibold mb-2 text-white dark:text-gray-50">《企业重组税务指南》</h3>
+                    <p class="text-sm opacity-80 mb-3">专注于企业并购、分立等重组活动中的税务处理与风险管理。</p>
+                    <a href="https://www.douban.com/book/subject/35393282/" target="_blank" class="text-accent hover:text-white dark:hover:text-teal-300 transition-colors duration-200 text-sm no-underline-hover">
+                        了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                    </a>
+                </div>
+                 <div class="bg-card p-6 rounded-xl shadow-xl border-t-2 border-gray-600 transition-all duration-300 card-hover">
+                    <h3 class="text-xl font-serif font-semibold mb-2 text-white dark:text-gray-50">《个人所得税法实务与案例精解》</h3>
+                    <p class="text-sm opacity-80 mb-3">结合最新税法规定，通过案例解析个人所得税的征管实务。</p>
+                    <a href="https://www.douban.com/book/subject/35882379/" target="_blank" class="text-accent hover:text-white dark:hover:text-teal-300 transition-colors duration-200 text-sm no-underline-hover">
+                        了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                    </a>
+                </div>
+                 <div class="bg-card p-6 rounded-xl shadow-xl border-t-2 border-gray-600 transition-all duration-300 card-hover">
+                    <h3 class="text-xl font-serif font-semibold mb-2 text-white dark:text-gray-50">《资本市场财税问题解析》</h3>
+                    <p class="text-sm opacity-80 mb-3">深度分析资本市场运作中复杂的财务和税务议题。</p>
+                    <a href="https://www.douban.com/book/subject/26966687/" target="_blank" class="text-accent hover:text-white dark:hover:text-teal-300 transition-colors duration-200 text-sm no-underline-hover">
+                        了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footnotes Section -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-serif font-bold mb-6 text-accent">
+                <i class="fas fa-info-circle mr-2 text-xl"></i> 参考资料
+            </h2>
+            <ol class="list-decimal pl-6 text-sm md:text-base text-gray-400 dark:text-gray-300">
+                <li id="footnote-1" class="mb-2">
+                    <a href="http://www.tfcjtax.com/a/202412/ty8lj4k8w3oh.shtml" target="_blank" class="text-accent hover:text-white dark:hover:text-teal-300 transition-colors duration-200">资本公积转增股本，股东无需缴纳个税</a>，天溯计量
+                </li>
+                <li id="footnote-2" class="mb-2">
+                    <a href="https://www.jingtian.com/Content/2024/04-03/1930012803.html" target="_blank" class="text-accent hover:text-white dark:hover:text-teal-300 transition-colors duration-200">简析资本公积转增股本自然人股东纳税争议</a>，竞天公诚律所
+                </li>
+                <li id="footnote-3" class="mb-2">
+                    <a href="https://www.shui5.cn/article/a7/53974.html" target="_blank" class="text-accent hover:text-white dark:hover:text-teal-300 transition-colors duration-200">资本公积转增股本个人所得税相关知识</a>，税屋
+                </li>
+                <li id="footnote-4" class="mb-2">
+                    <a href="https://www.sohu.com/a/619092376_635027" target="_blank" class="text-accent hover:text-white dark:hover:text-teal-300 transition-colors duration-200">资本公积和盈余公积转增股本是否缴税？</a>，搜狐财经
+                </li>
+                <li id="footnote-5" class="mb-2">
+                    《江苏天兵航天科技股改重点事项备忘录》（2023-11-02），中金公司项目组
+                </li>
+                <li id="footnote-6" class="mb-2">
+                    <a href="http://czt.zj.gov.cn/picture/old/P020131203575901878415.pdf" target="_blank" class="text-accent hover:text-white dark:hover:text-teal-300 transition-colors duration-200">浙江省财政厅：股权溢价转增涉税说明</a>
+                </li>
+                <li id="footnote-7" class="mb-2">
+                    <a href="https://www.zhonglun.com/research/articles/8067.html" target="_blank" class="text-accent hover:text-white dark:hover:text-teal-300 transition-colors duration-200">资本公积转增自然人股东个税问题</a>，中伦律所
+                </li>
+                <li id="footnote-9" class="mb-2">
+                    <a href="https://www.grandwaylaw.com/guofengshijiao/4615.html" target="_blank" class="text-accent hover:text-white dark:hover:text-teal-300 transition-colors duration-200">IPO企业股改个税处理小结</a>，国枫律所
+                </li>
+                <li id="footnote-10" class="mb-2">
+                    同<a href="#footnote-7" class="footnote-link">7</a>。
+                </li>
+                <li id="footnote-13" class="mb-2">
+                    同<a href="#footnote-4" class="footnote-link">4</a>。
+                </li>
+            </ol>
+        </section>
+    </main>
+
+    <footer class="py-10 text-center text-gray-500 dark:text-gray-400 text-sm border-t border-gray-700 dark:border-gray-800">
+        <p>&copy; 2024 税务政策深度解析. All rights reserved.</p>
+        <p class="mt-2">本页面仅供参考，具体操作请咨询专业税务顾问。</p>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({ startOnLoad: true });
+
+        // Theme Toggle JavaScript
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark-mode');
+                htmlElement.classList.remove('light-mode');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                htmlElement.classList.remove('dark-mode');
+                htmlElement.classList.add('light-mode');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Check for stored theme or system preference on load
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme) {
+            setTheme(storedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark'); // Default to dark mode if system prefers it
+        } else {
+            setTheme('light'); // Otherwise default to light mode
+        }
+
+        // Toggle theme on button click
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark-mode')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Scroll to Top Button JavaScript
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function() { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollTopBtn.style.display = "block";
+            } else {
+                scrollTopBtn.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Add delays to hero section animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const heroTitle = document.querySelector('.hero h1');
+            const heroSubtitle = document.querySelector('.hero p');
+            const heroButton = document.querySelector('.hero a');
+
+            // Apply animation classes after a short delay to trigger them
+            setTimeout(() => {
+                heroTitle.classList.remove('opacity-0');
+            }, 200); // 0.2s delay for title
+
+            setTimeout(() => {
+                heroSubtitle.classList.remove('opacity-0');
+            }, 400); // 0.4s delay for subtitle
+
+            setTimeout(() => {
+                heroButton.parentElement.classList.remove('opacity-0'); // Target parent div of button
+            }, 600); // 0.6s delay for button
+        });
+    </script>
+</body>
+</html>
+```
