@@ -1,0 +1,422 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO申报辅导前准备工作指南</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC and Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <style>
+        /* Base styles for Chinese fonts */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        /* Smooth scroll for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Hero section specific styles */
+        .hero-section {
+            position: relative;
+            background: linear-gradient(135deg, #1f2937 0%, #0f172a 100%); /* Dark blue/gray gradient */
+            color: white;
+            overflow: hidden;
+        }
+        /* Overlay for hero image/gradient */
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.7), rgba(30, 41, 59, 0.9));
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Custom underline for titles */
+        .title-underline {
+            position: relative;
+            display: inline-block;
+        }
+        .title-underline::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px; /* Adjust based on preference */
+            width: 80%; /* Shorter line */
+            height: 4px;
+            background-color: #4a90e2; /* Accent blue */
+            border-radius: 2px;
+            opacity: 0.7;
+            transition: width 0.3s ease-in-out;
+        }
+        .title-underline:hover::after {
+            width: 100%; /* Expand on hover */
+        }
+
+        /* Card hover effect */
+        .card-hover {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        /* Card hover effect for light mode */
+        .light .card-hover:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Read More Link Styling */
+        .read-more-link {
+            color: #4a90e2; /* Accent blue */
+            transition: color 0.2s ease-in-out, text-decoration 0.2s ease-in-out;
+        }
+        .read-more-link:hover {
+            text-decoration: underline;
+        }
+        .light .read-more-link {
+            color: #1e70bf; /* Darker blue for light mode */
+        }
+
+        /* Key highlight block for important sentences */
+        .key-highlight {
+            background-color: rgba(74, 144, 226, 0.1); /* Subtle accent color background */
+            border-left: 4px solid #4a90e2; /* Accent blue border */
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+        }
+        .light .key-highlight {
+            background-color: rgba(30, 112, 191, 0.1);
+            border-left-color: #1e70bf;
+        }
+
+        /* Mermaid diagram styling for dark/light mode */
+        .mermaid {
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: background-color 0.3s ease-in-out;
+            background-color: #282828; /* Default for dark mode */
+        }
+        html.dark .mermaid {
+            filter: invert(0.9) hue-rotate(180deg); /* Invert for dark mode */
+        }
+        html.light .mermaid {
+            background-color: #ffffff; /* White for light mode */
+            filter: none; /* No filter for light mode */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        /* Theme toggle button specific styling */
+        #theme-toggle {
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+        #theme-toggle:hover {
+            transform: scale(1.05);
+        }
+        .dark #theme-toggle {
+            background-color: #374151; /* Darker gray for dark mode */
+            color: #d1d5db; /* Lighter text */
+        }
+        .light #theme-toggle {
+            background-color: #f3f4f6; /* Light gray for light mode */
+            color: #4b5563; /* Darker text */
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 transition-colors duration-300">
+    <!-- Dark/Light Mode Toggle -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="theme-toggle" class="p-3 rounded-full shadow-lg">
+            <i class="fas fa-sun block dark:hidden"></i>
+            <i class="fas fa-moon hidden dark:block"></i>
+        </button>
+    </div>
+
+    <header class="hero-section py-20 px-4 md:px-8 lg:px-16">
+        <div class="hero-overlay"></div>
+        <div class="max-w-4xl mx-auto text-center hero-content">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
+                <span class="title-underline pb-2">IPO申报辅导前准备工作</span>
+            </h1>
+            <p class="text-xl sm:text-2xl text-gray-300 font-light mb-8">
+                关键考量：媒体公关与应急预案
+            </p>
+            <p class="text-md sm:text-lg max-w-2xl mx-auto text-gray-400">
+                本指南旨在为企业深入剖析IPO申报辅导阶段至关重要的准备工作，确保您在资本市场的征程中稳健前行。
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-16 md:py-20 max-w-4xl">
+
+        <!-- Core Conclusions Section -->
+        <section id="核心结论" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-white title-underline pb-2">
+                <i class="fas fa-check-circle mr-3 text-blue-400"></i>核心结论
+            </h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gray-800 card-hover rounded-xl shadow-lg p-6 border border-gray-700 dark:bg-gray-800 dark:border-gray-700 light:bg-gray-50 light:border-gray-200">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-bullhorn text-blue-400 text-3xl mr-4"></i>
+                        <h3 class="text-xl font-semibold text-white dark:text-white light:text-gray-800">媒体公关团队</h3>
+                    </div>
+                    <p class="text-gray-300 dark:text-gray-300 light:text-gray-700 mb-2">
+                        <span class="font-bold text-green-400 dark:text-green-400 light:text-green-600">建议提前确定</span>，但非监管强制要求。最佳实践是尽早布局。
+                    </p>
+                </div>
+                <div class="bg-gray-800 card-hover rounded-xl shadow-lg p-6 border border-gray-700 dark:bg-gray-800 dark:border-gray-700 light:bg-gray-50 light:border-gray-200">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-exclamation-triangle text-red-400 text-3xl mr-4"></i>
+                        <h3 class="text-xl font-semibold text-white dark:text-white light:text-gray-800">应急预案和具体方案</h3>
+                    </div>
+                    <p class="text-gray-300 dark:text-gray-300 light:text-gray-700 mb-2">
+                        <span class="font-bold text-purple-400 dark:text-purple-400 light:text-purple-600">必须提前准备</span>。这是管理IPO潜在风险的关键。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-t border-gray-700 my-16 dark:border-gray-700 light:border-gray-300">
+
+        <!-- Detailed Analysis Section -->
+        <section id="详细分析" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-white dark:text-white light:text-gray-800 title-underline pb-2">
+                <i class="fas fa-clipboard-list mr-3 text-blue-400"></i>详细分析
+            </h2>
+
+            <article class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6 text-white dark:text-white light:text-gray-800 leading-relaxed">
+                    1. 关于媒体公关团队
+                </h3>
+                <div class="key-highlight">
+                    <p class="text-lg font-medium dark:text-white light:text-gray-800">
+                        虽然并非硬性规定，但从风险控制和价值管理的角度来看，<strong class="text-white dark:text-white light:text-gray-900">强烈建议企业尽早规划和布局</strong>。
+                    </p>
+                </div>
+                <ul class="list-disc list-inside space-y-4 text-gray-300 dark:text-gray-300 light:text-gray-700 pl-4">
+                    <li>
+                        <i class="fas fa-lightbulb text-yellow-400 mr-2 dark:text-yellow-400 light:text-yellow-600"></i>
+                        <strong class="text-white dark:text-white light:text-gray-800">主动性与前瞻性：</strong> IPO过程漫长，企业将面临媒体和公众的持续关注。提前建立媒体关系和公关策略，有助于企业主动进行正面价值引导，而非在出现负面舆情后被动应对。
+                    </li>
+                    <li>
+                        <i class="fas fa-handshake text-green-400 mr-2 dark:text-green-400 light:text-green-600"></i>
+                        <strong class="text-white dark:text-white light:text-gray-800">与中介机构的配合：</strong> 虽然主承销商（投行）通常会提供媒体公关服务，如知识库资料<a href="https://example.com/knowledge-base/未来资本市场规划" target="_blank" class="read-more-link hover:underline">《未来资本市场规划》<i class="fas fa-external-link-alt ml-1 text-sm"></i></a>中提及的“协助贵司媒体公关”服务，但投行的介入更多是在IPO执行阶段。企业若能提前拥有自己的公关团队（内部或外部），可以更顺畅地与投行对接，确保口径一致，高效执行。
+                    </li>
+                    <li>
+                        <i class="fas fa-shield-alt text-blue-400 mr-2 dark:text-blue-400 light:text-blue-600"></i>
+                        <strong class="text-white dark:text-white light:text-gray-800">风险管理：</strong> IPO期间，任何关于公司业务、历史沿革、财务数据、关联交易等的负面报道都可能对审核进程产生实质性影响。专业的公关团队能帮助企业在辅导期乃至申报前就识别潜在舆情风险点，并进行预处理。
+                    </li>
+                </ul>
+            </article>
+
+            <article class="mb-12">
+                <h3 class="text-2xl font-semibold mb-6 text-white dark:text-white light:text-gray-800 leading-relaxed">
+                    2. 关于应急预案和具体方案
+                </h3>
+                <div class="key-highlight">
+                    <p class="text-lg font-medium dark:text-white light:text-gray-800">
+                        <strong class="text-white dark:text-white light:text-gray-900">制定应急预案和具体方案是IPO申报前的必要工作。</strong> IPO是一项高风险、高强度的系统工程，企业必须对可能出现的各类突发事件有充分的准备。
+                    </p>
+                </div>
+                <ul class="list-disc list-inside space-y-4 text-gray-300 dark:text-gray-300 light:text-gray-700 pl-4">
+                    <li>
+                        <i class="fas fa-gavel text-gray-400 mr-2 dark:text-gray-400 light:text-gray-600"></i>
+                        <strong class="text-white dark:text-white light:text-gray-800">监管要求与市场实践：</strong> 上市公司被要求建立健全的公司治理和内部控制制度，其中就包括风险应对机制。如搜索结果所示，已上市公司或大型金融机构普遍建立了《重大突发事件应急预案管理办法》及相应的应急领导小组和媒体事务管理工作小组。准备IPO的企业应参照此标准，提前建立相应机制。
+                    </li>
+                    <li>
+                        <i class="fas fa-chart-line text-yellow-400 mr-2 dark:text-yellow-400 light:text-yellow-600"></i>
+                        <strong class="text-white dark:text-white light:text-gray-800">舆情应对的必要性：</strong> IPO过程中，舆情危机是最高发的风险之一。一份有效的应急预案，需要成立专门的应急团队，包括技术、舆情分析和外联人员，并为客户制定具体的实施方案。应急预案需要明确危机发生时的响应流程、关键负责人、对外沟通口径以及与媒体的沟通策略，以正确引导舆论，维护公司形象。
+                    </li>
+                    <li>
+                        <i class="fas fa-cubes text-purple-400 mr-2 dark:text-purple-400 light:text-purple-600"></i>
+                        <strong class="text-white dark:text-white light:text-gray-800">覆盖范围全面：</strong> 应急预案不仅应包括媒体危机，还应涵盖生产安全、核心技术泄露、关键人员变动、重大诉讼、监管问询等多种潜在风险。
+                    </li>
+                </ul>
+            </article>
+
+            <p class="text-lg text-gray-300 dark:text-gray-300 light:text-gray-700 leading-relaxed mt-10">
+                <i class="fas fa-info-circle mr-2 text-blue-400 dark:text-blue-400 light:text-blue-600"></i>
+                综上所述，为了确保IPO进程的顺利推进，建议贵公司在进入申报辅导期前，就着手组建或确定媒体公关的合作团队，并协同投行、律师、会计师等中介机构，共同制定一份全面、可执行的应急预案及具体行动方案。
+            </p>
+        </section>
+
+        <hr class="border-t border-gray-700 my-16 dark:border-gray-700 light:border-gray-300">
+
+        <!-- Data Visualization Section -->
+        <section id="数据可视化" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-white dark:text-white light:text-gray-800 title-underline pb-2">
+                <i class="fas fa-project-diagram mr-3 text-blue-400"></i>关键准备工作关系图
+            </h2>
+            <div class="mermaid text-gray-900 dark:text-gray-900 light:text-gray-900">
+                graph TD
+                    A[IPO申报辅导前准备工作]
+                    A --> B(关键策略)
+
+                    B --> C[媒体公关团队]
+                    B --> D[应急预案与具体方案]
+
+                    C -- "强烈建议" --> C1(主动价值引导)
+                    C -- "协同效应" --> C2(与中介机构配合)
+                    C -- "风险识别" --> C3(舆情风险管理)
+
+                    D -- "必须准备" --> D1(应对突发事件)
+                    D -- "符合要求" --> D2(监管与市场实践)
+                    D -- "核心能力" --> D3(舆情危机应对)
+                    D -- "全面覆盖" --> D4(多维度风险管理)
+
+                    C1 & C2 & C3 & D1 & D2 & D3 & D4 --> E(确保IPO顺利推进)
+
+                    style A fill:#4a90e2,stroke:#3b82f6,stroke-width:2px,color:#fff;
+                    style B fill:#34d399,stroke:#10b981,stroke-width:2px,color:#fff;
+                    style C fill:#60a5fa,stroke:#3b82f6,stroke-width:2px,color:#fff;
+                    style D fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff;
+                    style C1 fill:#cbd5e1,stroke:#94a3b8,stroke-width:1px,color:#333;
+                    style C2 fill:#cbd5e1,stroke:#94a3b8,stroke-width:1px,color:#333;
+                    style C3 fill:#cbd5e1,stroke:#94a3b8,stroke-width:1px,color:#333;
+                    style D1 fill:#fcd34d,stroke:#fbbf24,stroke-width:1px,color:#333;
+                    style D2 fill:#fcd34d,stroke:#fbbf24,stroke-width:1px,color:#333;
+                    style D3 fill:#fcd34d,stroke:#fbbf24,stroke-width:1px,color:#333;
+                    style D4 fill:#fcd34d,stroke:#fbbf24,stroke-width:1px,color:#333;
+                    style E fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff;
+            </div>
+        </section>
+
+        <hr class="border-t border-gray-700 my-16 dark:border-gray-700 light:border-gray-300">
+
+        <!-- Extended Reading Section -->
+        <section id="延伸阅读" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-white dark:text-white light:text-gray-800 title-underline pb-2">
+                <i class="fas fa-book-open mr-3 text-blue-400"></i>延伸阅读
+            </h2>
+            <p class="text-gray-300 dark:text-gray-300 light:text-gray-700 mb-8">
+                为了更深入地理解IPO的各个环节及相关风险管理，我们为您推荐以下经典读物：
+            </p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gray-800 card-hover rounded-xl shadow-lg p-6 flex items-start border border-gray-700 dark:bg-gray-800 dark:border-gray-700 light:bg-gray-50 light:border-gray-200">
+                    <i class="fas fa-book text-blue-400 text-2xl mt-1 mr-4 dark:text-blue-400 light:text-blue-600"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold text-white dark:text-white light:text-gray-800 mb-2">《公司理财》(Corporate Finance)</h3>
+                        <p class="text-gray-300 dark:text-gray-300 light:text-gray-700 mb-2">
+                            斯蒂芬·罗斯等著。理解公司金融基础、资本结构和估值的权威教材。
+                        </p>
+                        <a href="#" class="read-more-link text-sm">了解更多 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                <div class="bg-gray-800 card-hover rounded-xl shadow-lg p-6 flex items-start border border-gray-700 dark:bg-gray-800 dark:border-gray-700 light:bg-gray-50 light:border-gray-200">
+                    <i class="fas fa-book text-blue-400 text-2xl mt-1 mr-4 dark:text-blue-400 light:text-blue-600"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold text-white dark:text-white light:text-gray-800 mb-2">《投资银行学》(Investment Banking)</h3>
+                        <p class="text-gray-300 dark:text-gray-300 light:text-gray-700 mb-2">
+                            乔尔·佩罗等著。详细介绍了投行在IPO、并购等交易中的角色和操作流程。
+                        </p>
+                        <a href="#" class="read-more-link text-sm">了解更多 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                <div class="bg-gray-800 card-hover rounded-xl shadow-lg p-6 flex items-start border border-gray-700 dark:bg-gray-800 dark:border-gray-700 light:bg-gray-50 light:border-gray-200">
+                    <i class="fas fa-book text-blue-400 text-2xl mt-1 mr-4 dark:text-blue-400 light:text-blue-600"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold text-white dark:text-white light:text-gray-800 mb-2">《危机公关管理》(Crisis Public Relations Management)</h3>
+                        <p class="text-gray-300 dark:text-gray-300 light:text-gray-700 mb-2">
+                            蒂莫西·库姆斯等著。系统探讨了企业如何有效识别、预防和应对危机。
+                        </p>
+                        <a href="#" class="read-more-link text-sm">了解更多 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                <div class="bg-gray-800 card-hover rounded-xl shadow-lg p-6 flex items-start border border-gray-700 dark:bg-gray-800 dark:border-gray-700 light:bg-gray-50 light:border-gray-200">
+                    <i class="fas fa-book text-blue-400 text-2xl mt-1 mr-4 dark:text-blue-400 light:text-blue-600"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold text-white dark:text-white light:text-gray-800 mb-2">《监管与合规》(Regulation and Compliance)</h3>
+                        <p class="text-gray-300 dark:text-gray-300 light:text-gray-700 mb-2">
+                            一本关于金融市场监管和企业合规的最新指南（具体书籍可能需搜索最新版）。
+                        </p>
+                        <a href="#" class="read-more-link text-sm">了解更多 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                <div class="bg-gray-800 card-hover rounded-xl shadow-lg p-6 flex items-start border border-gray-700 dark:bg-gray-800 dark:border-gray-700 light:bg-gray-50 light:border-gray-200">
+                    <i class="fas fa-book text-blue-400 text-2xl mt-1 mr-4 dark:text-blue-400 light:text-blue-600"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold text-white dark:text-white light:text-gray-800 mb-2">《公司治理与内部控制》(Corporate Governance and Internal Control)</h3>
+                        <p class="text-gray-300 dark:text-gray-300 light:text-gray-700 mb-2">
+                            探讨现代企业如何建立健全治理结构，防范风险，提升运营效率。
+                        </p>
+                        <a href="#" class="read-more-link text-sm">了解更多 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-900 text-gray-400 py-8 px-4 text-center border-t border-gray-700 dark:bg-gray-900 dark:border-gray-700 light:bg-gray-100 light:border-gray-200 light:text-gray-600">
+        <p>&copy; 2023 IPO准备指南. All rights reserved.</p>
+        <p class="text-sm mt-2">
+            <a href="#" class="text-blue-400 hover:underline dark:text-blue-400 light:text-blue-600">隐私政策</a> |
+            <a href="#" class="text-blue-400 hover:underline dark:text-blue-400 light:text-blue-600">使用条款</a>
+        </p>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid initialization
+        mermaid.initialize({ startOnLoad: true });
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Check for saved theme preference or system preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (prefersDark) {
+            setTheme('dark'); // Default to dark if system prefers it
+        } else {
+            setTheme('light'); // Default to light otherwise
+        }
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+    </script>
+</body>
+</html>
+```
