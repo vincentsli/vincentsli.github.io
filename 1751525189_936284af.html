@@ -1,0 +1,456 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商业航天特许管理协议：深度解析与资本运作视角</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC (Headings) and Noto Sans SC (Body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base font-family and system fallbacks as specified */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Apply Noto Serif SC for headings to give a publishing/magazine feel */
+        h1, h2, h3, .font-serif-sc {
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        /* Dark Mode default styles and transitions */
+        html.dark body {
+            background-color: #0D0D1A; /* Very dark background */
+            color: #E0E0E0; /* Light text for contrast */
+        }
+        html.dark .bg-gray-800 { /* Card backgrounds etc. */
+            background-color: #1A1A2E;
+        }
+        html.dark .bg-gray-900 { /* Footer, subtle accents */
+            background-color: #121223;
+        }
+        html.dark .border-gray-700 { /* Borders */
+            border-color: #2A2A3F;
+        }
+
+        /* Light Mode styles */
+        html:not(.dark) body {
+            background-color: #F7FAFC; /* Light background */
+            color: #2D3748; /* Dark text */
+        }
+        html:not(.dark) .bg-gray-800 {
+            background-color: #FFFFFF;
+            border: 1px solid #E2E8F0; /* Light border for cards */
+        }
+        html:not(.dark) .bg-gray-900 {
+            background-color: #EDF2F7;
+        }
+        html:not(.dark) .border-gray-700 {
+            border-color: #CBD5E0;
+        }
+
+        /* Hero Section Background Image & Overlay */
+        .hero-section {
+            background-image: url('https://images.unsplash.com/photo-1543722530-d2c324a50d1c?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Gradient overlay for text readability and depth */
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.7) 100%);
+            z-index: 1;
+        }
+
+        /* Section Header Underline Style */
+        .section-header {
+            position: relative;
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        .section-header::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background-color: #A855F7; /* Purple accent color for the underline */
+            border-radius: 9999px;
+            transition: background-color 0.3s ease;
+        }
+        html:not(.dark) .section-header::after {
+            background-color: #7C3AED; /* Darker purple for light mode */
+        }
+
+        /* Card Hover Effects */
+        .card-item {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid transparent; /* Initial transparent border */
+            transition: all 0.3s ease;
+            transform: translateY(0); /* Ensure transition on transform */
+        }
+        html.dark .card-item {
+            border-color: rgba(255, 255, 255, 0.08); /* Subtle border for dark cards */
+        }
+        html.dark .card-item:hover {
+            border-color: #A855F7; /* Purple border on hover */
+            transform: translateY(-5px); /* Lift effect */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Deeper shadow */
+        }
+        html:not(.dark) .card-item {
+            border-color: rgba(0, 0, 0, 0.08);
+        }
+        html:not(.dark) .card-item:hover {
+            border-color: #7C3AED; /* Darker purple border on hover */
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* First letter drop cap for specific paragraphs */
+        .drop-cap:first-letter {
+            float: left;
+            font-size: 4em;
+            line-height: 1;
+            font-weight: 700;
+            margin-right: 0.1em;
+            color: #A855F7; /* Purple accent for dark mode */
+        }
+        html:not(.dark) .drop-cap:first-letter {
+            color: #7C3AED; /* Darker purple for light mode */
+        }
+
+        /* Mermaid diagram styling for dark/light mode consistency */
+        html.dark .mermaid {
+            background-color: #1A1A2E !important; /* Matches card background */
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border-radius: 0.5rem !important;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important;
+        }
+        html:not(.dark) .mermaid {
+            background-color: #FFFFFF !important;
+            border: 1px solid #E2E8F0 !important;
+            border-radius: 0.5rem !important;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05) !important;
+        }
+        /* Specific text color for Mermaid elements in light mode */
+        html:not(.dark) .mermaid text {
+            fill: #2D3748 !important; /* Ensure text is dark */
+        }
+        html:not(.dark) .mermaid rect,
+        html:not(.dark) .mermaid circle,
+        html:not(.dark) .mermaid path {
+            stroke: #4A5568 !important; /* Ensure shapes have a visible border */
+        }
+    </style>
+</head>
+<body class="bg-gray-950 text-gray-200 transition-colors duration-500 min-h-screen">
+
+    <!-- Theme Switcher Button -->
+    <button id="theme-toggle" class="fixed top-4 right-4 p-3 rounded-full bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-gray-300 transition-colors duration-300 z-50 shadow-lg">
+        <i class="fas fa-moon text-lg"></i> <!-- Default to moon for dark mode -->
+    </button>
+
+    <!-- Hero Section -->
+    <header class="hero-section relative h-96 flex items-center justify-center text-center px-4 overflow-hidden">
+        <div class="hero-overlay"></div>
+        <div class="relative z-10 p-4">
+            <h1 class="text-4xl md:text-6xl font-serif-sc font-bold text-white mb-4 leading-tight drop-shadow-lg">
+                商业航天特许管理协议：深度解析与资本运作视角
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 font-light max-w-2xl mx-auto drop-shadow-md">
+                从军方发射台到A股市场：洞察潜在机遇与风险
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto px-4 py-16 max-w-4xl">
+
+        <!-- 核心背景推测 Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-serif-sc font-semibold mb-8 section-header">
+                <i class="fas fa-search-dollar text-purple-400 mr-3"></i>核心背景推测
+                <span class="text-sm text-gray-400 ml-4">(需用户验证)</span>
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1: 行业属性 -->
+                <div class="card-item p-6 rounded-lg bg-gray-800 shadow-xl">
+                    <div class="text-purple-400 text-4xl mb-4"><i class="fas fa-rocket"></i></div>
+                    <h3 class="text-xl font-serif-sc font-semibold mb-3">行业属性</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        高度指向 <strong class="text-blue-400">商业航天/军工产业链</strong>。具体场景可能涉及：
+                    </p>
+                    <ul class="list-none mt-3 space-y-2 text-gray-300 pl-0">
+                        <li class="flex items-start"><i class="fas fa-long-arrow-alt-right text-purple-400 mr-2 mt-1"></i>民营公司参与 <strong>军用发射场商业化运营</strong></li>
+                        <li class="flex items-start"><i class="fas fa-long-arrow-alt-right text-purple-400 mr-2 mt-1"></i><strong>火箭/卫星企业</strong> 需获取军方特许的发射设施使用权</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: 协议性质猜想 -->
+                <div class="card-item p-6 rounded-lg bg-gray-800 shadow-xl">
+                    <div class="text-purple-400 text-4xl mb-4"><i class="fas fa-handshake"></i></div>
+                    <h3 class="text-xl font-serif-sc font-semibold mb-3">协议性质猜想</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        “特许管理协议”更可能属于 <strong class="text-blue-400">《国家航天法》框架下的基础设施准入协议</strong>，而非普通商业特许经营，因其特征包括：
+                    </p>
+                    <ul class="list-none mt-3 space-y-2 text-gray-300 pl-0">
+                        <li class="flex items-start"><i class="fas fa-long-arrow-alt-right text-purple-400 mr-2 mt-1"></i>主体特殊性：需 <strong>军方与民用实体双签</strong></li>
+                        <li class="flex items-start"><i class="fas fa-long-arrow-alt-right text-purple-400 mr-2 mt-1"></i>核心条款聚焦 <strong>发射窗口分配、安保等级、技术保密、事故追责</strong></li>
+                        <li class="flex items-start"><i class="fas fa-long-arrow-alt-right text-purple-400 mr-2 mt-1"></i>法律依据：《武器装备科研生产许可管理条例》等</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: 资本运作关联点 -->
+                <div class="card-item p-6 rounded-lg bg-gray-800 shadow-xl">
+                    <div class="text-purple-400 text-4xl mb-4"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="text-xl font-serif-sc font-semibold mb-3">资本运作关联点</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        若涉及A股公司（如 <strong class="text-blue-400">航天科工系上市公司</strong>），需关注：
+                    </p>
+                    <ul class="list-none mt-3 space-y-2 text-gray-300 pl-0">
+                        <li class="flex items-start"><i class="fas fa-long-arrow-alt-right text-purple-400 mr-2 mt-1"></i><strong>信息披露风险</strong>：涉军协议可能仅披露框架性内容</li>
+                        <li class="flex items-start"><i class="fas fa-long-arrow-alt-right text-purple-400 mr-2 mt-1"></i><strong>估值影响</strong>：发射场使用权可确认为 <strong>特许经营权无形资产</strong></li>
+                        <li class="flex items-start"><i class="fas fa-long-arrow-alt-right text-purple-400 mr-2 mt-1"></i><strong>政策红利</strong>：2023年《关于推进商业航天发展的意见》明确鼓励</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 关键待澄清项 Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-serif-sc font-semibold mb-8 section-header">
+                <i class="fas fa-exclamation-triangle text-red-400 mr-3"></i>关键待澄清项
+                <span class="text-sm text-gray-400 ml-4">(决定分析方向)</span>
+            </h2>
+
+            <div class="p-6 rounded-lg bg-red-900/20 border border-red-700 text-red-300 mb-8 shadow-inner">
+                <p class="text-xl font-serif-sc font-semibold mb-4 drop-cap">
+                    <i class="fas fa-exclamation-circle mr-2"></i>❗ <strong class="text-red-300">请确认以下至少一项</strong>：
+                </p>
+                <div class="space-y-4 text-lg">
+                    <div>
+                        <h4 class="font-bold text-red-200 mb-2"><i class="fas fa-user-friends mr-2"></i>协议主体：</h4>
+                        <ul class="list-none space-y-2 pl-6">
+                            <li class="flex items-center"><i class="far fa-square text-red-400 mr-3"></i>政府/军方机构名称？</li>
+                            <li class="flex items-center"><i class="far fa-square text-red-400 mr-3"></i>企业方是否为上市主体（证券代码）？</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-red-200 mb-2"><i class="fas fa-briefcase mr-2"></i>业务实质：</h4>
+                        <ul class="list-none space-y-2 pl-6">
+                            <li class="flex items-center"><i class="far fa-square text-red-400 mr-3"></i>是否涉及 <strong>发射台租赁/改造</strong>？</li>
+                            <li class="flex items-center"><i class="far fa-square text-red-400 mr-3"></i>或 <strong>测控网共享</strong>？</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-red-200 mb-2"><i class="fas fa-money-bill-wave mr-2"></i>资本动作：</h4>
+                        <ul class="list-none space-y-2 pl-6">
+                            <li class="flex items-center"><i class="far fa-square text-red-400 mr-3"></i>是否关联 <strong>再融资/重组事项</strong>？</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="mt-6 text-sm text-red-400 italic">
+                    <i class="fas fa-lightbulb mr-2"></i>提示：若涉密级别过高，建议仅讨论商业航天政策红利对产业链估值提振效应（如卫星制造、火箭配套企业）。
+                </p>
+            </div>
+        </section>
+
+        <!-- 商业航天特许管理典型架构 Section (Mermaid Diagram) -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-serif-sc font-semibold mb-8 section-header">
+                <i class="fas fa-project-diagram text-green-400 mr-3"></i>商业航天特许管理典型架构
+            </h2>
+
+            <div class="mermaid p-4 bg-gray-800 rounded-lg shadow-xl overflow-x-auto transition-colors duration-300">
+                graph LR
+                A[军方/国防科工局] -->|授权| B[发射场运营方]
+                B -->|分包| C[火箭公司]
+                C -->|支付使用费| B
+                B -->|保障义务| A
+                C -->|信息披露| D[上市公司]
+                D -->|公告风险提示| E("涉密条款豁免披露")
+            </div>
+            <p class="text-sm text-gray-400 mt-4 text-center">
+                ▲ 注：此架构需以实际协议条款为准，图中箭泉航天案例可参考《中国航天》2024年第3期
+            </p>
+        </section>
+
+        <!-- 下一步建议 Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-serif-sc font-semibold mb-8 section-header">
+                <i class="fas fa-lightbulb text-yellow-400 mr-3"></i>下一步建议
+            </h2>
+            <p class="text-lg leading-relaxed text-gray-300">
+                若用户能提供更多关键词（如“文昌”“测控”“某上市公司名称”），可进一步锁定政策依据及资本运作案例。
+            </p>
+        </section>
+
+        <!-- 关键概念速览 Section (Extra Credit) -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-serif-sc font-semibold mb-8 section-header">
+                <i class="fas fa-info-circle text-blue-400 mr-3"></i>关键概念速览
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="p-6 rounded-lg bg-gray-800 shadow-lg card-item">
+                    <h3 class="text-xl font-serif-sc font-semibold text-blue-300 mb-2 flex items-center"><i class="fas fa-handshake-alt-slash mr-2"></i>特许管理协议</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        特指政府或特定机构（如军方）将其管辖下的基础设施（如航天发射场）或特定权利，以协议形式授予特定商业实体运营或使用的法律安排。与一般商业特许经营不同，它往往涉及国家战略、安全和高门槛准入。
+                    </p>
+                </div>
+                <div class="p-6 rounded-lg bg-gray-800 shadow-lg card-item">
+                    <h3 class="text-xl font-serif-sc font-semibold text-blue-300 mb-2 flex items-center"><i class="fas fa-satellite-dish mr-2"></i>商业航天</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        指由非政府实体主导或参与，以市场化机制开展的航天活动，包括火箭研发、卫星制造、发射服务、空间站运营、数据应用等。旨在推动航天技术商业化应用，降低成本，拓展应用场景。
+                    </p>
+                </div>
+                <div class="p-6 rounded-lg bg-gray-800 shadow-lg card-item">
+                    <h3 class="text-xl font-serif-sc font-semibold text-blue-300 mb-2 flex items-center"><i class="fas fa-shield-alt mr-2"></i>军民融合</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        国家战略，旨在将国防和军队现代化建设融入经济社会发展体系，同时将经济社会发展的有益成果应用于国防和军队建设。在航天领域表现为民营企业参与军工供应链、军用设施商业化利用等。
+                    </p>
+                </div>
+                <div class="p-6 rounded-lg bg-gray-800 shadow-lg card-item">
+                    <h3 class="text-xl font-serif-sc font-semibold text-blue-300 mb-2 flex items-center"><i class="fas fa-gavel mr-2"></i>《国家航天法》</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        中国正在制定的航天领域基本法律，旨在规范航天活动，保障航天事业健康发展。其中可能对发射场运营、空间碎片管理、国际合作等关键环节作出明确规定，确保国家利益和安全。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 延伸阅读 Section (Extra Credit) -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-serif-sc font-semibold mb-8 section-header">
+                <i class="fas fa-book-open text-orange-400 mr-3"></i>延伸阅读
+            </h2>
+            <ul class="list-none space-y-6">
+                <li class="flex items-start p-4 rounded-lg bg-gray-800 shadow-lg card-item">
+                    <i class="fas fa-book text-orange-400 text-3xl mr-4 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-serif-sc font-semibold text-orange-300 mb-1">《中国商业航天发展报告》</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            每年由相关机构发布，详细梳理中国商业航天政策、市场、技术与投融资动态，是了解行业全貌的重要参考。
+                        </p>
+                        <a href="https://baike.baidu.com/item/%E4%B8%AD%E5%9B%BD%E5%95%86%E4%B8%9A%E8%88%AA%E5%A4%A9%E5%8F%91%E5%B1%95%E6%8A%A5%E5%91%8A/24856754" target="_blank" class="text-blue-400 hover:underline text-sm block mt-2">了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                    </div>
+                </li>
+                <li class="flex items-start p-4 rounded-lg bg-gray-800 shadow-lg card-item">
+                    <i class="fas fa-book text-orange-400 text-3xl mr-4 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-serif-sc font-semibold text-orange-300 mb-1">《航天发射项目许可证管理暂行办法》</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            由国防科工局等部门发布，具体规定了商业航天发射活动的审批流程、资质要求等，对法律框架有深入解析。
+                        </p>
+                        <a href="http://www.cnsa.gov.cn/n6785954/n6786014/c6812836/content.html" target="_blank" class="text-blue-400 hover:underline text-sm block mt-2">了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                    </div>
+                </li>
+                <li class="flex items-start p-4 rounded-lg bg-gray-800 shadow-lg card-item">
+                    <i class="fas fa-book text-orange-400 text-3xl mr-4 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-serif-sc font-semibold text-orange-300 mb-1">《军事设施保护法》</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            虽然并非直接针对商业航天，但其中关于军事设施使用、保护和对外开放的条款，为军用发射场商业化提供了法律边界。
+                        </p>
+                        <a href="https://baike.baidu.com/item/%E5%86%9B%E4%BA%8B%E8%AE%BE%E6%96%BD%E4%BF%9D%E6%8A%A4%E6%B3%95/1041924" target="_blank" class="text-blue-400 hover:underline text-sm block mt-2">了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                    </div>
+                </li>
+                <li class="flex items-start p-4 rounded-lg bg-gray-800 shadow-lg card-item">
+                    <i class="fas fa-book text-orange-400 text-3xl mr-4 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-serif-sc font-semibold text-orange-300 mb-1">《国防工业改革与发展研究》</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            探讨军民融合背景下国防工业的体制机制改革，有助于理解军方与民营企业合作的深层逻辑和趋势。
+                        </p>
+                        <a href="https://kns.cnki.net/kns8/defaultresult/index?dbcode=CDMD&kw=%E5%9B%BD%E9%98%B2%E5%B7%A5%E4%B8%9A%E6%94%B9%E9%9D%A9%E4%B8%8E%E5%8F%91%E5%B1%95%E7%A0%94%E7%A9%B6" target="_blank" class="text-blue-400 hover:underline text-sm block mt-2">了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                    </div>
+                </li>
+                <li class="flex items-start p-4 rounded-lg bg-gray-800 shadow-lg card-item">
+                    <i class="fas fa-book text-orange-400 text-3xl mr-4 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-serif-sc font-semibold text-orange-300 mb-1">《科创板军工企业信息披露指引》</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            对于理解上市公司在涉及军工、航天业务时的信息披露边界和要求至关重要，特别是对敏感信息的处理。
+                        </p>
+                        <a href="http://www.sse.com.cn/disclosure/listedinfo/temp/c/20210201/5551989721666687.pdf" target="_blank" class="text-blue-400 hover:underline text-sm block mt-2">了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-500 text-center py-8 text-sm border-t border-gray-700 transition-colors duration-300">
+        <p>&copy; 2024 商业航天洞察. 版权所有.</p>
+    </footer>
+
+    <!-- Mermaid JS for diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // JavaScript for Dark/Light Mode Toggle and Mermaid Theme Integration
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+        const mermaidDiv = document.querySelector('.mermaid');
+
+        // Function to set the theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                themeToggleBtn.innerHTML = '<i class="fas fa-sun text-lg"></i>'; // Sun icon for light mode toggle
+                localStorage.setItem('theme', 'dark');
+                mermaid.initialize({ startOnLoad: false, theme: 'dark' }); // Set Mermaid theme to dark
+            } else {
+                htmlElement.classList.remove('dark');
+                themeToggleBtn.innerHTML = '<i class="fas fa-moon text-lg"></i>'; // Moon icon for dark mode toggle
+                localStorage.setItem('theme', 'light');
+                mermaid.initialize({ startOnLoad: false, theme: 'default' }); // Set Mermaid theme to default (light)
+            }
+            // Re-render Mermaid diagram to apply new theme
+            if (mermaidDiv) {
+                mermaidDiv.removeAttribute('data-processed'); // Clear processed flag
+                mermaid.init(undefined, mermaidDiv); // Re-initialize specific diagram
+            }
+        }
+
+        // Check for saved theme preference or system preference on load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark'); // Default to dark if system prefers dark
+        } else {
+            setTheme('light'); // Otherwise default to light
+        }
+
+        // Event listener for theme toggle button
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Initialize Mermaid after the page is fully loaded and theme is set
+        // This ensures Mermaid picks up the correct initial theme
+        window.addEventListener('load', () => {
+            const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'default';
+            mermaid.initialize({ startOnLoad: true, theme: currentTheme });
+        });
+    </script>
+</body>
+</html>
+```
