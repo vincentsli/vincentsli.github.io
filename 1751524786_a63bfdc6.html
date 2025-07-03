@@ -1,0 +1,504 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>特许管理协议：投行视角下的深度解析</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Fonts for Chinese & Fallbacks */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, serif;
+        }
+
+        /* Dark Mode Styles (default is light, will be overridden by JS) */
+        html.dark {
+            background-color: #0F172A; /* slate-950 */
+            color: #E2E8F0; /* slate-200 */
+        }
+        html.dark .text-gray-800 { color: #E2E8F0; }
+        html.dark .bg-white { background-color: #1E293B; } /* slate-800 */
+        html.dark .border-gray-200 { border-color: #334155; } /* slate-700 */
+        html.dark .shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1); }
+        html.dark .hover\:bg-gray-100:hover { background-color: #334155; }
+        html.dark .text-gray-600 { color: #CBD5E1; } /* slate-300 */
+        html.dark .text-gray-700 { color: #94A3B8; } /* slate-400 */
+        html.dark .text-gray-900 { color: #F8FAFC; } /* slate-50 */
+        html.dark .bg-gray-50 { background-color: #1A202C; } /* custom darker bg for light elements */
+        html.dark .bg-blue-50 { background-color: #1A202C; } /* custom darker bg for light elements */
+        html.dark .text-blue-700 { color: #60A5FA; } /* blue-400 */
+
+        /* Specific styles for card backgrounds and borders in dark mode */
+        html.dark .card-bg {
+            background-color: #1E293B; /* slate-800 */
+        }
+        html.dark .card-border {
+            border-color: #334155; /* slate-700 */
+        }
+        html.dark .mermaid-container {
+            background-color: #1E293B; /* slate-800 */
+            border-color: #334155; /* slate-700 */
+        }
+        html.dark .mermaid text {
+            fill: #E2E8F0 !important; /* Text color in mermaid graph */
+        }
+        html.dark .mermaid .node rect, html.dark .mermaid .node polygon {
+            fill: #334155 !important; /* Node background */
+            stroke: #64748B !important; /* Node border */
+        }
+        html.dark .mermaid .edgePaths .path {
+            stroke: #64748B !important; /* Arrow path */
+        }
+        html.dark .mermaid .edgeLabels text {
+            fill: #E2E8F0 !important; /* Edge label text */
+        }
+        html.dark .mermaid .cluster rect {
+            fill: #1E293B !important; /* Cluster background */
+            stroke: #64748B !important; /* Cluster border */
+        }
+        html.dark .mermaid .cluster text {
+            fill: #E2E8F0 !important; /* Cluster text */
+        }
+        html.dark .mermaid .flowchart-label {
+            color: #E2E8F0 !important;
+        }
+
+        /* Hero Section Gradient Overlay */
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.8));
+        }
+        html.dark .hero-overlay {
+            background: linear-gradient(to bottom, rgba(15,23,42,0.9), rgba(15,23,42,0.6) 50%, rgba(15,23,42,0.9));
+        }
+
+        /* Scroll-to-top button */
+        #scrollToTop {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        #scrollToTop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-fade-in-down { animation: fadeInDown 0.8s ease-out forwards; }
+        .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; animation-delay: 0.2s; }
+        .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; animation-delay: 0.4s; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 transition-colors duration-300">
+    <!-- Dark Mode Toggle Button -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="themeToggle" class="p-3 rounded-full bg-white dark:bg-gray-800 shadow-lg text-gray-800 dark:text-gray-200 hover:scale-105 transition-transform duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <i class="fas fa-sun hidden dark:inline"></i>
+            <i class="fas fa-moon dark:hidden"></i>
+        </button>
+    </div>
+
+    <!-- Hero Module -->
+    <header class="relative bg-gradient-to-br from-blue-700 to-indigo-900 text-white py-24 md:py-32 overflow-hidden shadow-xl">
+        <!-- Background elements for visual flair -->
+        <div class="absolute inset-0 z-0 opacity-20">
+            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                    <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                        <path d="M 10 0 L 0 0 L 0 10" fill="none" stroke="currentColor" stroke-width="0.2"></path>
+                    </pattern>
+                </defs>
+                <rect width="100" height="100" fill="url(#grid)"></rect>
+            </svg>
+        </div>
+        <div class="absolute inset-0 hero-overlay z-10"></div>
+
+        <div class="container mx-auto px-6 relative z-20 text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight tracking-wider animate-fade-in-down">
+                特许管理协议
+            </h1>
+            <h2 class="text-xl md:text-3xl font-light mb-6 opacity-90 animate-fade-in-up">
+                投行视角下的深度解析：洞悉法律本质，赋能资本运作
+            </h2>
+            <p class="max-w-3xl mx-auto text-lg md:text-xl opacity-80 animate-fade-in">
+                在资本市场的复杂语境中，<strong class="font-semibold text-teal-300">“特许管理协议”</strong>扮演着至关重要的角色。
+                本篇深度分析将从投行视角出发，为您解构其多重形态、核心特征及对A股资本运作的深远影响，
+                助您精准识别风险，把握投资机遇。
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 md:py-16 max-w-6xl">
+        <!-- Introduction -->
+        <section class="mb-16">
+            <p class="text-xl leading-relaxed text-center text-gray-700 dark:text-gray-300">
+                根据投行领域实务及A股市场资本运作经验，“特许管理协议”在不同场景下可能指向以下<strong class="text-blue-600 dark:text-blue-400">三类法律文件</strong>，需结合具体业务场景判断：
+            </p>
+        </section>
+
+        <!-- Main Content Sections -->
+        <div class="grid md:grid-cols-3 gap-8 mb-16">
+            <!-- Section 1: 市政公用事业特许经营协议 -->
+            <section class="col-span-3 lg:col-span-1 p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 transform hover:scale-102 transition-all duration-300 card-bg card-border">
+                <h3 class="text-3xl font-bold mb-6 text-blue-700 dark:text-blue-400 leading-snug">
+                    <i class="fas fa-city mr-3 text-2xl"></i> 市政公用事业特许经营协议
+                    <span class="block text-xl font-medium text-gray-600 dark:text-gray-400 mt-1">（政府合作类）</span>
+                </h3>
+                <p class="text-lg mb-4 text-gray-700 dark:text-gray-300">适用于基础设施和公共服务项目（如能源、交通、环保），核心特征包括：</p>
+                <ul class="space-y-4 text-gray-700 dark:text-gray-300">
+                    <li>
+                        <i class="fas fa-balance-scale-left text-blue-500 dark:text-blue-300 mr-2"></i>
+                        <strong class="text-gray-900 dark:text-gray-100">法律依据</strong>：依据<a href="https://www.ndrc.gov.cn/xxgk/zcfb/fzggwl/202404/P020240409586942641218.pdf" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">《基础设施和公用事业特许经营管理办法》（2024年修订）</a>，由政府通过竞争程序授权社会资本方；
+                    </li>
+                    <li>
+                        <i class="fas fa-file-contract text-blue-500 dark:text-blue-300 mr-2"></i>
+                        <strong class="text-gray-900 dark:text-gray-100">核心条款</strong>：
+                        <ul class="ml-6 mt-2 space-y-2 list-disc list-inside">
+                            <li>授予企业在约定期限内投资、建设、运营项目的 <strong class="text-purple-600 dark:text-purple-400">排他性权利</strong>（如供热、污水处理等）；</li>
+                            <li>政府方对服务定价、质量监管、公共利益保障的强制性条款；</li>
+                            <li>协议性质属于 <strong class="text-purple-600 dark:text-purple-400">行政协议</strong>，争议适用行政诉讼（最高院司法解释）。</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <i class="fas fa-chart-line text-blue-500 dark:text-blue-300 mr-2"></i>
+                        <strong class="text-gray-900 dark:text-gray-100">资本运作意义</strong>：涉及A股上市公司参与PPP项目时，需在公告中披露协议中关于 <strong class="text-purple-600 dark:text-purple-400">项目收益分配、风险承担、退出机制</strong> 等关键条款。
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Section 2: 商业特许经营合同 -->
+            <section class="col-span-3 lg:col-span-1 p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 transform hover:scale-102 transition-all duration-300 card-bg card-border">
+                <h3 class="text-3xl font-bold mb-6 text-green-700 dark:text-green-400 leading-snug">
+                    <i class="fas fa-store-alt mr-3 text-2xl"></i> 商业特许经营合同
+                    <span class="block text-xl font-medium text-gray-600 dark:text-gray-400 mt-1">（品牌授权类）</span>
+                </h3>
+                <p class="text-lg mb-4 text-gray-700 dark:text-gray-300">适用于连锁加盟、品牌授权等市场化场景：</p>
+                <ul class="space-y-4 text-gray-700 dark:text-gray-300">
+                    <li>
+                        <i class="fas fa-gavel text-green-500 dark:text-green-300 mr-2"></i>
+                        <strong class="text-gray-900 dark:text-gray-100">法律框架</strong>：受<a href="https://www.gov.cn/gongbao/content/2007/content_564109.htm" target="_blank" rel="noopener noreferrer" class="text-green-600 dark:text-green-400 hover:underline">《商业特许经营管理条例》（国务院令第485号）</a>约束；
+                    </li>
+                    <li>
+                        <i class="fas fa-clipboard-list text-green-500 dark:text-green-300 mr-2"></i>
+                        <strong class="text-gray-900 dark:text-gray-100">必备条款</strong>：
+                        <ul class="ml-6 mt-2 space-y-2 list-disc list-inside">
+                            <li>特许人（品牌方）需拥有 <strong class="text-purple-600 dark:text-purple-400">2个以上直营店且经营超1年</strong>；</li>
+                            <li>被特许人（加盟商）享有 <strong class="text-purple-600 dark:text-purple-400">单方解除权（冷静期条款）</strong>；</li>
+                            <li>强制披露经营资源（商标、专利）、收费标准、供应链信息等。</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <i class="fas fa-chart-pie text-green-500 dark:text-green-300 mr-2"></i>
+                        <strong class="text-gray-900 dark:text-gray-100">资本关注点</strong>：A股消费类企业扩张时需评估协议中 <strong class="text-purple-600 dark:text-purple-400">知识产权归属、区域保护、加盟商管理责任</strong> 对业务合规性的影响。
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Section 3: 知识产权特许使用合同 -->
+            <section class="col-span-3 lg:col-span-1 p-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 transform hover:scale-102 transition-all duration-300 card-bg card-border">
+                <h3 class="text-3xl font-bold mb-6 text-purple-700 dark:text-purple-400 leading-snug">
+                    <i class="fas fa-lightbulb mr-3 text-2xl"></i> 知识产权特许使用合同
+                    <span class="block text-xl font-medium text-gray-600 dark:text-gray-400 mt-1">（技术/版权授权）</span>
+                </h3>
+                <p class="text-lg mb-4 text-gray-700 dark:text-gray-300">常见于技术合作或软件授权：</p>
+                <ul class="space-y-4 text-gray-700 dark:text-gray-300">
+                    <li>
+                        <i class="fas fa-laptop-code text-purple-500 dark:text-purple-300 mr-2"></i>
+                        <strong class="text-gray-900 dark:text-gray-100">典型场景</strong>：
+                        <ul class="ml-6 mt-2 space-y-2 list-disc list-inside">
+                            <li>软件最终用户许可协议（EULA），如<a href="https://www.tencent.com/en-us/eula-policy.html" target="_blank" rel="noopener noreferrer" class="text-purple-600 dark:text-purple-400 hover:underline">腾讯的《最终用户特许协议》</a>；</li>
+                            <li>专利/版权许可中的版税支付机制（如<a href="https://learn.microsoft.com/zh-cn/dynamics365/finance/accounts-payable/royalty-contract" target="_blank" rel="noopener noreferrer" class="text-purple-600 dark:text-purple-400 hover:underline">微软Dynamics 365系统合同</a>）。</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <i class="fas fa-key text-purple-500 dark:text-purple-300 mr-2"></i>
+                        <strong class="text-gray-900 dark:text-gray-100">关键条款</strong>：<strong class="text-purple-600 dark:text-purple-400">使用范围限制、保密义务、数字版权管理（DRM）</strong> 等。
+                    </li>
+                </ul>
+                <div class="mt-8 p-4 bg-blue-50 dark:bg-gray-900 rounded-lg border border-blue-200 dark:border-gray-700 text-blue-700 dark:text-blue-400">
+                    <strong class="font-semibold"><i class="fas fa-lightbulb mr-2"></i>知识库关联：</strong> 当前知识库（"基金架构与资金路径示例"）未涉及特许协议，故未引用。
+                </div>
+            </section>
+        </div>
+
+        <!-- Mermaid Data Visualization -->
+        <section class="mb-16">
+            <h2 class="text-4xl font-bold text-center mb-10 text-gray-900 dark:text-gray-100">
+                <i class="fas fa-project-diagram mr-4 text-teal-600 dark:text-teal-400"></i>特许管理协议分类与关联图谱
+            </h2>
+            <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 mermaid-container overflow-x-auto">
+                <pre class="mermaid text-center dark:text-gray-200">
+                    graph TD
+                        A[“特许管理协议”] --> B(市政公用事业特许经营协议);
+                        A --> C(商业特许经营合同);
+                        A --> D(知识产权特许使用合同);
+
+                        B -- 法律依据 --> B1["《基础设施和公用事业特许经营管理办法》"];
+                        B -- 核心条款 --> B2("排他性权利 <br/> 行政协议");
+                        B -- 资本运作意义 --> B3("项目收益分配 <br/> 风险承担 <br/> 退出机制");
+
+                        C -- 法律框架 --> C1["《商业特许经营管理条例》"];
+                        C -- 必备条款 --> C2("2+直营店 <br/> 冷静期 <br/> 信息披露");
+                        C -- 资本关注点 --> C3("知识产权归属 <br/> 区域保护 <br/> 加盟商管理责任");
+
+                        D -- 典型场景 --> D1("软件EULA <br/> 专利/版权许可");
+                        D -- 关键条款 --> D2("使用范围限制 <br/> 保密义务 <br/> DRM");
+
+                        B3 -. 影响 .-> Z[“A股资本运作”];
+                        C3 -. 影响 .-> Z;
+                        D2 -. 影响 .-> Z;
+
+                        style A fill:#4A90E2,stroke:#357ABD,stroke-width:2px,color:#fff;
+                        style B fill:#28A745,stroke:#218838,stroke-width:2px,color:#fff;
+                        style C fill:#FD7E14,stroke:#E06E00,stroke-width:2px,color:#fff;
+                        style D fill:#6F42C1,stroke:#5A36A8,stroke-width:2px,color:#fff;
+                        style Z fill:#00A388,stroke:#008A74,stroke-width:2px,color:#fff;
+
+                        classDef sub_detail fill:#ECFDF5,stroke:#D1FAE5,stroke-width:1px; /* Light green for sub-details */
+                        class B1,B2,B3,C1,C2,C3,D1,D2 sub_detail;
+
+                        linkStyle 0,1,2 stroke-width:2px,stroke:#5A67D8;
+                        linkStyle 3,4,5 stroke-width:1.5px,stroke:#48BB78;
+                        linkStyle 6,7,8 stroke-width:1.5px,stroke:#F6AD55;
+                        linkStyle 9,10,11 stroke-width:1.5px,stroke:#9F7AEA;
+                        linkStyle 12,13,14 stroke-width:2px,stroke-dasharray: 5 5,stroke:#00A388; /* Dotted line for impact */
+                </pre>
+            </div>
+        </section>
+
+        <!-- Clarification Box -->
+        <section class="mb-16">
+            <div class="p-8 bg-blue-50 border-l-8 border-blue-500 dark:bg-gray-900 dark:border-blue-600 rounded-xl shadow-inner animate-fade-in-up">
+                <h2 class="text-3xl font-bold text-blue-800 dark:text-blue-300 mb-4">
+                    <i class="fas fa-exclamation-triangle mr-3 text-red-500"></i> ⚠️ 需用户澄清的信息
+                </h2>
+                <p class="text-xl leading-relaxed mb-6 text-gray-700 dark:text-gray-300">
+                    因不同协议的法律属性、监管要求及资本运作影响差异显著，请进一步明确：
+                </p>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+                    <p class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                        <i class="fas fa-search text-teal-500 mr-3"></i> 应用场景属于以下哪种？
+                    </p>
+                    <ul class="space-y-3 text-lg text-gray-700 dark:text-gray-300">
+                        <li><i class="fas fa-check-circle text-green-500 mr-2"></i> 政府基础设施项目合作</li>
+                        <li><i class="fas fa-check-circle text-green-500 mr-2"></i> 商业品牌加盟扩张</li>
+                        <li><i class="fas fa-check-circle text-green-500 mr-2"></i> 技术/知识产权授权</li>
+                    </ul>
+                    <p class="mt-6 text-lg text-gray-600 dark:text-gray-400 italic">
+                        <i class="fas fa-info-circle mr-2"></i> 若涉及具体交易（如A股公司公告披露），请提供更多背景以便精准分析协议风险点。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Further Reading -->
+        <section class="mb-16">
+            <h2 class="text-4xl font-bold text-center mb-10 text-gray-900 dark:text-gray-100">
+                <i class="fas fa-book-open mr-4 text-orange-600 dark:text-orange-400"></i> 延伸阅读
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                        1. 《基础设施和公用事业特许经营操作指南》
+                    </h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        深入了解市政特许经营项目的法律框架、实务操作及风险管理，对理解PPP项目至关重要。
+                    </p>
+                </div>
+                <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                        2. 《商业特许经营法律实务与风险防范》
+                    </h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        聚焦商业特许经营的法规要求、合同条款设计与常见法律纠纷处理，为品牌授权提供指导。
+                    </p>
+                </div>
+                <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                        3. 《公司法务与资本运作实务》
+                    </h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        从公司法务视角探讨各类协议在资本市场中的应用，包括合同管理、合规审查等。
+                    </p>
+                </div>
+                <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                        4. 《知识产权资产证券化与金融创新》
+                    </h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        探讨知识产权作为资产在金融领域的创新应用，与知识产权特许使用合同的价值紧密相关。
+                    </p>
+                </div>
+                <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow duration-300">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                        5. 《中国投行业务法律与实践》
+                    </h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        全面介绍中国投资银行业务的法律法规、操作流程及风险控制，有助于理解协议的宏观背景。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Source References -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6 border-b pb-4 border-gray-200 dark:border-gray-700">
+                <i class="fas fa-info-circle mr-3 text-blue-600 dark:text-blue-400"></i> 来源依据
+            </h2>
+            <ul class="list-none space-y-3 text-gray-700 dark:text-gray-300 text-lg">
+                <li><a href="https://www.ndrc.gov.cn/xxgk/zcfb/fzggwl/202404/P020240409586942641218.pdf" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">[^1]: 基础设施和公用事业特许经营管理办法（2024）</a></li>
+                <li><a href="https://fzzfyjy.cupl.edu.cn/info/1087/7745.htm" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">[^2]: 政府特许经营协议的性质界定</a></li>
+                <li><a href="https://www.ndrc.gov.cn/fggz/gdzctz/tzfg/202405/P020240524578849742287.doc" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">[^3]: 特许经营协议范本（2024试行版）</a></li>
+                <li><a href="https://www.zhonglun.com/research/articles/8699.html" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">[^4]: 行政协议案件法律适用</a></li>
+                <!-- Note: [^5] was for an implicit PPP announcement, not a direct link, so skipping it. -->
+                <li><a href="https://www.gov.cn/gongbao/content/2007/content_564109.htm" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">[^6]: 商业特许经营管理条例</a></li>
+                <li><a href="http://www.zclawyer.com/news/2441.html" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">[^7]: 特许经营合同冷静期条款解析</a></li>
+                <li><a href="https://www.gov.cn/gongbao/content/2012/content_2177025.htm" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">[^8]: 商业特许经营信息披露办法</a></li>
+                <!-- Note: [^9] was for an implicit A-share expansion, not a direct link, so skipping it. -->
+                <li><a href="https://www.tencent.com/en-us/eula-policy.html" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">[^10]: 腾讯最终用户特许协议</a></li>
+                <li><a href="https://learn.microsoft.com/zh-cn/dynamics365/finance/accounts-payable/royalty-contract" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">[^11]: 微软Dynamics特许使用合同</a></li>
+                <!-- Note: [^12] was for general key terms, not a direct link, so skipping it. -->
+            </ul>
+        </section>
+
+    </main>
+
+    <!-- Scroll To Top Button -->
+    <button id="scrollToTop" class="fixed bottom-6 right-6 p-4 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 z-50">
+        <i class="fas fa-arrow-up text-xl"></i>
+    </button>
+
+    <footer class="bg-gray-900 text-gray-400 py-8 text-center text-sm border-t border-gray-700">
+        <p>&copy; 2024 投行视角下的特许管理协议深度解析. All rights reserved.</p>
+        <p class="mt-2 text-xs">设计与开发：专业网页设计师与前端开发专家</p>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid Configuration (initial, will be updated by theme toggle)
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default', // Default for light theme, overridden for dark
+            themeVariables: {
+                darkMode: false,
+                primaryColor: '#F8FAFC',       // Background for nodes in light theme
+                primaryTextColor: '#1E293B',   // Text for nodes in light theme
+                lineColor: '#CBD5E1',          // Line color in light theme
+                nodeBorder: '#CBD5E1',         // Node border in light theme
+                nodeBkg: '#F8FAFC',            // Node background in light theme
+                mainBkg: '#F8FAFC',            // Main background of the graph itself
+                textColor: '#1E293B',          // General text color
+                clusterBkg: '#ECFDF5',         // Cluster background
+                clusterBorder: '#D1FAE5'       // Cluster border
+            }
+        });
+
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        // Function to apply theme and update Mermaid
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                mermaid.initialize({
+                    theme: 'dark',
+                    themeVariables: {
+                        darkMode: true,
+                        primaryColor: '#1E293B',     // Background for nodes in dark theme
+                        primaryTextColor: '#E2E8F0', // Text for nodes in dark theme
+                        lineColor: '#64748B',        // Line color in dark theme
+                        nodeBorder: '#64748B',       // Node border in dark theme
+                        nodeBkg: '#334155',          // Node background in dark theme
+                        mainBkg: '#1E293B',          // Main background of the graph itself
+                        textColor: '#E2E8F0',        // General text color
+                        clusterBkg: '#1E293B',       // Cluster background
+                        clusterBorder: '#64748B'     // Cluster border
+                    }
+                });
+            } else {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+                mermaid.initialize({
+                    theme: 'default',
+                    themeVariables: {
+                        darkMode: false,
+                        primaryColor: '#F8FAFC',
+                        primaryTextColor: '#1E293B',
+                        lineColor: '#CBD5E1',
+                        nodeBorder: '#CBD5E1',
+                        nodeBkg: '#F8FAFC',
+                        mainBkg: '#F8FAFC',
+                        textColor: '#1E293B',
+                        clusterBkg: '#ECFDF5',
+                        clusterBorder: '#D1FAE5'
+                    }
+                });
+            }
+        }
+
+        // Check for saved theme preference or system preference on load
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            applyTheme(savedTheme);
+        } else if (prefersDark) {
+            applyTheme('dark');
+        } else {
+            applyTheme('light');
+        }
+        
+        // Manual toggle click event
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                applyTheme('light');
+            } else {
+                applyTheme('dark');
+            }
+        });
+
+        // Scroll-to-top functionality
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) { // Show button after scrolling down 300px
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
+```
