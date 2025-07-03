@@ -1,0 +1,582 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOT协议冲突解析：产权归属与业务模式</title>
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts for Noto Serif SC and Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base font-family definitions */
+        html {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+        .font-serif-sc {
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        /* Dark mode styles */
+        .dark {
+            --tw-bg-opacity: 1;
+            background-color: rgb(17 24 39 / var(--tw-bg-opacity)); /* bg-gray-900 */
+            color: rgb(229 231 235 / var(--tw-text-opacity)); /* text-gray-100 */
+        }
+        .dark .text-gray-800 { color: #e5e7eb; } /* text-gray-100 equivalent */
+        .dark .text-gray-700 { color: #d1d5db; } /* text-gray-200 equivalent */
+        .dark .text-gray-600 { color: #9ca3af; } /* text-gray-400 equivalent */
+        .dark .bg-white { background-color: rgb(31 41 55 / var(--tw-bg-opacity)); } /* bg-gray-800 equivalent */
+        .dark .border-gray-200 { border-color: rgb(55 65 81 / var(--tw-border-opacity)); } /* border-gray-700 equivalent */
+        .dark .bg-blue-50 { background-color: rgb(30 58 138); } /* darker blue for accent backgrounds */
+        .dark .bg-red-50 { background-color: rgb(127 29 29); } /* darker red for accent backgrounds */
+
+        /* Mermaid container styling */
+        .mermaid-container {
+            background-color: #f9fafb; /* Light background for the chart */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #e5e7eb;
+            overflow-x: auto; /* Allow horizontal scrolling for wide charts */
+        }
+        .dark .mermaid-container {
+            background-color: #1f2937; /* Dark background for the chart in dark mode */
+            border-color: #374151;
+        }
+        /* Specific Mermaid theming for dark mode */
+        .dark .mermaid .node text,
+        .dark .mermaid .edge text {
+            fill: #e5e7eb !important; /* light text */
+        }
+        .dark .mermaid .label text {
+             fill: #e5e7eb !important; /* light text for labels */
+        }
+        .dark .mermaid .node rect {
+            fill: #374151 !important; /* dark grey node background */
+            stroke: #4b5563 !important; /* slightly lighter stroke */
+        }
+        .dark .mermaid .edge path {
+            stroke: #6b7280 !important; /* medium grey path */
+        }
+        .dark .mermaid .cluster rect {
+            fill: #1f2937 !important; /* dark grey cluster background */
+            stroke: #4b5563 !important; /* slightly lighter stroke */
+        }
+        .dark .mermaid .cluster text {
+            fill: #e5e7eb !important; /* light text for cluster titles */
+        }
+        /* Specific for diff highlighting in code blocks */
+        .diff-added {
+            background-color: #22c55e; /* green-500 */
+            padding-left: 0.5em;
+            display: block;
+            margin-left: -0.5em; /* Compensate for padding */
+        }
+        .diff-removed {
+            background-color: #ef4444; /* red-500 */
+            padding-left: 0.5em;
+            display: block;
+            margin-left: -0.5em; /* Compensate for padding */
+        }
+        .dark .diff-added {
+            background-color: #166534; /* green-700 */
+        }
+        .dark .diff-removed {
+            background-color: #b91c1c; /* red-700 */
+        }
+
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #2d3748; /* Darker track */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4a5568; /* Thumb color */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6c7a8f; /* Thumb color on hover */
+        }
+        /* For dark mode */
+        .dark ::-webkit-scrollbar-track {
+            background: #1a202c;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #4a5568;
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #6c7a8f;
+        }
+
+        /* Subtle hover effect for cards/buttons */
+        .card-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .dark .card-hover:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+        }
+        .transition-transform {
+            transition-property: transform;
+            transition-duration: 0.3s;
+            transition-timing-function: ease-out;
+        }
+        .transition-shadow {
+            transition-property: box-shadow;
+            transition-duration: 0.3s;
+            transition-timing-function: ease-out;
+        }
+
+        /* First letter drop cap effect */
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 4em; /* Adjust size as needed */
+            line-height: 0.8;
+            margin-right: 0.1em;
+            font-family: 'Noto Serif SC', serif; /* Use serif font for the drop cap */
+            color: #6366f1; /* Indigo-500 */
+        }
+        .dark .drop-cap::first-letter {
+            color: #818cf8; /* Indigo-400 */
+        }
+        .text-indigo-600 { color: #4f46e5; }
+        .dark .text-indigo-600 { color: #818cf8; } /* Indigo-400 */
+
+        /* Custom list styling */
+        .list-style-custom li {
+            position: relative;
+            padding-left: 1.75rem; /* Space for icon */
+            margin-bottom: 0.5rem;
+        }
+        .list-style-custom li .icon {
+            position: absolute;
+            left: 0;
+            top: 0.25rem; /* Adjust to vertically align with text */
+            color: #6366f1; /* Accent color for icons */
+        }
+        .dark .list-style-custom li .icon {
+            color: #818cf8; /* Accent color for icons */
+        }
+    </style>
+</head>
+<body class="transition-colors duration-300">
+    <!-- Dark/Light Mode Toggle -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="theme-toggle" class="p-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 shadow-md hover:scale-105 transition-transform">
+            <i class="fas fa-moon hidden dark:inline-block"></i>
+            <i class="fas fa-sun dark:hidden"></i>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative bg-gradient-to-br from-indigo-900 to-gray-900 text-white py-24 md:py-32 overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center opacity-10" style="background-image: url('https://images.unsplash.com/photo-1517457210874-ce44d2d6c5a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxNXx8bGF3fGVufDB8fHx8MTcwMDgxNTAzMHww&ixlib=rb-4.0.3&q=80&w=1080');"></div>
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold font-serif-sc mb-4 leading-tight drop-shadow-lg">
+                <i class="fas fa-gavel text-indigo-400 mr-4"></i>BOT协议冲突解析
+            </h1>
+            <p class="text-xl md:text-2xl font-light text-indigo-200 mb-8">
+                产权归属与业务模式的深层矛盾
+            </p>
+            <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-200 leading-relaxed">
+                深度剖析军事项目特许经营协议中，产权即时转移与BOT核心原则的冲突，以及由此引发的法律、会计与商业风险。
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto px-6 py-12 md:py-16">
+        <article class="max-w-5xl mx-auto">
+            <p class="mb-8 text-lg md:text-xl leading-relaxed text-gray-700 dark:text-gray-300 drop-cap">
+                根据协议条款描述及BOT模式的法律特征，这两条内容<strong class="text-red-500 dark:text-red-400">存在实质性冲突</strong>，主要体现在<strong class="text-indigo-500 dark:text-indigo-400">产权转移时点与BOT核心权利结构的矛盾</strong>上，具体分析如下：
+            </p>
+
+            <!-- Section: 法律冲突的核心点 -->
+            <section class="mb-12">
+                <h2 class="text-3xl md:text-4xl font-serif-sc font-bold mb-6 text-indigo-600 dark:text-indigo-400">
+                    <i class="fas fa-balance-scale mr-3 text-indigo-500 dark:text-indigo-300"></i>一、法律冲突的核心点
+                </h2>
+
+                <div class="mb-8">
+                    <h3 class="text-2xl font-serif-sc font-semibold mb-3 text-gray-800 dark:text-gray-100"><i class="fas fa-scroll mr-2 text-indigo-400"></i>1. BOT模式的法定产权逻辑</h3>
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                        标准BOT模式要求：<strong class="text-indigo-500 dark:text-indigo-400">建设期→经营期→移交期</strong> 三阶段中，项目公司在 <strong class="text-indigo-500 dark:text-indigo-400">经营期内拥有资产所有权</strong>，到期后才无偿移交政府/授权方（依据《基础设施和公用事业特许经营管理办法》第二十一条）<sup class="text-sm font-bold ml-1"><a href="#footnote1" class="text-indigo-500 hover:underline">1</a></sup>。
+                    </p>
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                        → 这是BOT模式保障投资人 <strong class="text-indigo-500 dark:text-indigo-400">回收投资的核心基础</strong>（如将资产抵押融资、计提折旧抵税等）。
+                    </p>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-2xl font-serif-sc font-semibold mb-3 text-gray-800 dark:text-gray-100"><i class="fas fa-exclamation-triangle mr-2 text-red-500"></i>2. 协议条款的越位转移（第五条）</h3>
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                        当前约定：“产权自竣工验收通过之日转移至甲方”
+                    </p>
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                        → <strong class="text-red-500 dark:text-red-400">等于跳过经营期，在建设完成时立即剥夺乙方所有权</strong>，导致：
+                    </p>
+                    <ul class="list-style-custom text-gray-700 dark:text-gray-300">
+                        <li><i class="icon fas fa-minus-circle text-red-500"></i><strong class="font-semibold">乙方丧失资产控制权</strong>：无法抵押融资或优化资产结构；</li>
+                        <li><i class="icon fas fa-minus-circle text-red-500"></i><strong class="font-semibold">会计处理困境</strong>：乙方建设投入只能费用化处理，无法资本化为固定资产/无形资产，直接削弱报表资产规模；</li>
+                        <li><i class="icon fas fa-minus-circle text-red-500"></i><strong class="font-semibold">风险收益倒挂</strong>：乙方承担全部建设成本及30年运营风险（第十三条），却无资产所有权支撑收益。</li>
+                    </ul>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-2xl font-serif-sc font-semibold mb-3 text-gray-800 dark:text-gray-100"><i class="fas fa-handshake-alt-slash mr-2 text-yellow-500"></i>3. 与BOT定义条款（BOT描述段）的冲突</h3>
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                        协议中BOT定义明确要求由乙方 <strong class="text-indigo-500 dark:text-indigo-400">“投资建设、管理和使用”</strong>，但产权即刻转移导致：
+                    </p>
+                    <ul class="list-style-custom text-gray-700 dark:text-gray-300">
+                        <li><i class="icon fas fa-times-circle text-yellow-500"></i>“管理权”虚化（甲方作为产权方可随时干预）；</li>
+                        <li><i class="icon fas fa-times-circle text-yellow-500"></i>“使用权”受限（乙方沦为事实上的 <strong class="font-semibold text-red-500 dark:text-red-400">租赁方</strong>而非特许经营者）。</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Mermaid Diagram 1: BOT 模式产权流转对比 -->
+            <section class="mb-12">
+                <h3 class="text-2xl font-serif-sc font-semibold mb-6 text-gray-800 dark:text-gray-100 text-center"><i class="fas fa-chart-network mr-2 text-indigo-400"></i>BOT模式产权流转对比图</h3>
+                <div class="mermaid-container shadow-lg">
+<pre class="mermaid">
+graph TD
+    subgraph 标准BOT模式
+        A[投资人] --> B(建设期)
+        B --> C{竣工验收}
+        C -- 通过 --> D(经营期)
+        D -- 期间产权归投资人 --> E[回收投资/收益]
+        D --> F(特许期满)
+        F -- 无偿移交 --> G[政府/授权方]
+    end
+
+    subgraph 现有协议模式
+        H[乙方] --> I(建设期)
+        I --> J{竣工验收}
+        J -- 通过;产权即刻转移 --> K[甲方]
+        K -- 甲方拥有产权 --> L(乙方30年运营)
+        L -- 风险收益倒挂 --> M[乙方损失/合规风险]
+    end
+
+    style A fill:#D1E7DD,stroke:#28a745,stroke-width:2px;
+    style G fill:#D1E7DD,stroke:#28a745,stroke-width:2px;
+    style D fill:#CDE8F9,stroke:#007bff,stroke-width:2px;
+    style E fill:#FFF3CD,stroke:#ffc107,stroke-width:2px;
+
+    style H fill:#F8D7DA,stroke:#dc3545,stroke-width:2px;
+    style K fill:#F8D7DA,stroke:#dc3545,stroke-width:2px;
+    style M fill:#F8D7DA,stroke:#dc3545,stroke-width:2px;
+    style L fill:#F8D7DA,stroke:#dc3545,stroke-width:2px;
+</pre>
+                </div>
+            </section>
+
+            <!-- Section: 资本运作与合规风险 -->
+            <section class="mb-12">
+                <h2 class="text-3xl md:text-4xl font-serif-sc font-bold mb-6 text-indigo-600 dark:text-indigo-400">
+                    <i class="fas fa-chart-line mr-3 text-indigo-500 dark:text-indigo-300"></i>二、资本运作与合规风险
+                </h2>
+
+                <div class="mb-8">
+                    <h3 class="text-2xl font-serif-sc font-semibold mb-3 text-gray-800 dark:text-gray-100"><i class="fas fa-dollar-sign mr-2 text-yellow-500"></i>1. A股IPO审核风险</h3>
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                        若乙方为拟上市主体，该条款将引发监管问询：
+                    </p>
+                    <ul class="list-style-custom text-gray-700 dark:text-gray-300">
+                        <li><i class="icon fas fa-question-circle text-yellow-500"></i><strong class="font-semibold">业务独立性</strong>：核心设施产权归属甲方，是否构成重大依赖？</li>
+                        <li><i class="icon fas fa-question-circle text-yellow-500"></i><strong class="font-semibold">资产完整性</strong>：是否符合《首发业务若干问题解答》问题54关于“主要经营资产权属清晰”的要求<sup class="text-sm font-bold ml-1"><a href="#footnote2" class="text-indigo-500 hover:underline">2</a></sup>？</li>
+                        <li><i class="icon fas fa-question-circle text-yellow-500"></i><strong class="font-semibold">持续盈利能力</strong>：无资产支撑的运营模式是否可持续？</li>
+                    </ul>
+                    <div class="bg-red-50 dark:bg-red-900 border-l-4 border-red-500 dark:border-red-600 text-red-800 dark:text-red-200 p-4 rounded-md shadow-sm mt-4 card-hover transition-transform transition-shadow">
+                        <p class="font-semibold mb-2"><i class="fas fa-exclamation-circle mr-2"></i>参考案例：2023年金达莱环保IPO被否</p>
+                        <p class="text-sm">上市委问询BOT项目资产权属及收入确认合规性，部分原因在于BOT资产权属瑕疵。<sup class="text-sm font-bold ml-1"><a href="#footnote3" class="text-red-700 dark:text-red-300 hover:underline">3</a></sup></p>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-2xl font-serif-sc font-semibold mb-3 text-gray-800 dark:text-gray-100"><i class="fas fa-funnel-dollar mr-2 text-yellow-500"></i>2. 融资估值障碍</h3>
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                        乙方无法将发射工位等核心设施 <strong class="text-red-500 dark:text-red-400">计入资产负债表</strong>，导致：
+                    </p>
+                    <ul class="list-style-custom text-gray-700 dark:text-gray-300">
+                        <li><i class="icon fas fa-times-circle text-yellow-500"></i>估值模型中缺失重资产价值（如重置成本法评估）；</li>
+                        <li><i class="icon fas fa-times-circle text-yellow-500"></i>债权融资时缺乏抵押物，融资成本上升。</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section: 条款修改方案 -->
+            <section class="mb-12">
+                <h2 class="text-3xl md:text-4xl font-serif-sc font-bold mb-6 text-indigo-600 dark:text-indigo-400">
+                    <i class="fas fa-code-branch mr-3 text-indigo-500 dark:text-indigo-300"></i>三、条款修改方案
+                </h2>
+
+                <div class="bg-blue-50 dark:bg-gray-800 p-6 rounded-lg mb-8 shadow-md card-hover transition-transform transition-shadow">
+                    <h3 class="text-2xl font-serif-sc font-semibold mb-3 text-indigo-700 dark:text-indigo-300"><i class="fas fa-star mr-2 text-indigo-500"></i>方案一：回归标准BOT产权结构（优先推荐）</h3>
+                    <div class="bg-gray-800 dark:bg-gray-900 text-gray-100 p-4 rounded-md text-sm font-mono overflow-x-auto">
+                        <pre><code><span class="diff-removed">第五条修改为：</span>
+<span class="diff-added">“乙方投资建设的专用试验设施，在特许经营期内所有权归乙方，特许经营期满后无偿移交给甲方（中心）。”</span></code></pre>
+                    </div>
+                    <p class="mt-4 text-gray-700 dark:text-gray-300 leading-relaxed">
+                        <strong class="text-indigo-600 dark:text-indigo-400">优势</strong>：
+                    </p>
+                    <ul class="list-style-custom text-gray-700 dark:text-gray-300">
+                        <li><i class="icon fas fa-check-circle text-green-500"></i>符合BOT国际惯例及中国特许经营立法精神<sup class="text-sm font-bold ml-1"><a href="#footnote4" class="text-indigo-500 hover:underline">4</a></sup>；</li>
+                        <li><i class="icon fas fa-check-circle text-green-500"></i>乙方可确认为 <strong class="font-semibold">固定资产/无形资产</strong>，按30年摊销；</li>
+                        <li><i class="icon fas fa-check-circle text-green-500"></i>保障融资能力与报表质量。</li>
+                    </ul>
+                </div>
+
+                <div class="bg-yellow-50 dark:bg-gray-800 p-6 rounded-lg mb-8 shadow-md card-hover transition-transform transition-shadow">
+                    <h3 class="text-2xl font-serif-sc font-semibold mb-3 text-yellow-700 dark:text-yellow-300"><i class="fas fa-lightbulb mr-2 text-yellow-500"></i>方案二：增设甲方回购义务（次选方案）</h3>
+                    <div class="bg-gray-800 dark:bg-gray-900 text-gray-100 p-4 rounded-md text-sm font-mono overflow-x-auto">
+                        <pre><code><span class="diff-added">第五条增加：</span>
+<span class="diff-added">“产权移交甲方后，甲方按设施评估价值__%向乙方分期支付回购款，支付周期与特许经营期同步。”</span></code></pre>
+                    </div>
+                    <p class="mt-4 text-gray-700 dark:text-gray-300 leading-relaxed">
+                        <strong class="text-yellow-600 dark:text-yellow-400">局限</strong>：
+                    </p>
+                    <ul class="list-style-custom text-gray-700 dark:text-gray-300">
+                        <li><i class="icon fas fa-exclamation-circle text-yellow-500"></i>仍无法解决经营期资产缺失问题；</li>
+                        <li><i class="icon fas fa-exclamation-circle text-yellow-500"></i>增加甲方财政压力，可能遭遇国资监管部门否决。</li>
+                    </ul>
+                </div>
+
+                <div class="bg-red-50 dark:bg-gray-800 p-6 rounded-lg mb-8 shadow-md card-hover transition-transform transition-shadow">
+                    <h3 class="text-2xl font-serif-sc font-semibold mb-3 text-red-700 dark:text-red-300"><i class="fas fa-fire mr-2 text-red-500"></i>方案三：转化业务模式定性（风险较高）</h3>
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                        若甲方坚持产权即时转移，则需：
+                    </p>
+                    <ol class="list-decimal list-inside text-gray-700 dark:text-gray-300 pl-4">
+                        <li><strong class="font-semibold">删除BOT模式描述</strong>，改为 <strong class="font-semibold">“委托建设+服务采购”模式</strong>；</li>
+                        <li><strong class="font-semibold">重订定价机制</strong>：将乙方建设投入转化为 <strong class="font-semibold">分期服务费</strong>（如按发射次数计费补偿）。</li>
+                    </ol>
+                    <p class="text-sm text-red-600 dark:text-red-400 mt-2">
+                        → 但可能导致协议性质变更，需重新审批。
+                    </p>
+                </div>
+            </section>
+
+            <!-- Mermaid Diagram 2: BOT 冲突解决方案路径图 -->
+            <section class="mb-12">
+                <h3 class="text-2xl font-serif-sc font-semibold mb-6 text-gray-800 dark:text-gray-100 text-center"><i class="fas fa-sitemap mr-2 text-indigo-400"></i>BOT冲突解决方案路径图</h3>
+                <div class="mermaid-container shadow-lg">
+<pre class="mermaid">
+flowchart TD
+    A[BOT协议产权冲突] --> B{甲方是否接受标准BOT产权?}
+    B -- 是 --> C[方案一: 回归标准BOT]
+    C --> D(符合法规, 利于融资)
+
+    B -- 否 --> E{能否增设回购义务?}
+    E -- 是 --> F[方案二: 增设回购]
+    F --> G(部分缓解, 甲方财政压力)
+
+    E -- 否; 坚持产权国有 --> H[方案三: 转化业务模式]
+    H --> I(删除BOT, 改为委托建设+服务采购)
+    I --> J{需重新审批?}
+    J -- 是 --> K(业务性质变更, 风险高)
+
+    K --> L[谈判妥协: 争取控制权/补偿]
+
+    style A fill:#F8D7DA,stroke:#dc3545,stroke-width:2px;
+    style C fill:#D1E7DD,stroke:#28a745,stroke-width:2px;
+    style F fill:#FFF3CD,stroke:#ffc107,stroke-width:2px;
+    style I fill:#F8D7DA,stroke:#dc3545,stroke-width:2px;
+    style L fill:#D6DBF8,stroke:#6610f2,stroke-width:2px;
+</pre>
+                </div>
+            </section>
+
+            <!-- Section: 冲突条款的妥协处理 -->
+            <section class="mb-12">
+                <h2 class="text-3xl md:text-4xl font-serif-sc font-bold mb-6 text-indigo-600 dark:text-indigo-400">
+                    <i class="fas fa-handshake mr-3 text-indigo-500 dark:text-indigo-300"></i>四、冲突条款的妥协处理
+                </h2>
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                    若甲方拒绝修改产权条款，乙方需至少争取：
+                </p>
+                <ul class="list-style-custom text-gray-700 dark:text-gray-300">
+                    <li>
+                        <i class="icon fas fa-check-double text-indigo-500"></i><strong class="font-semibold">经营控制权保障</strong>
+                        <p class="text-sm italic text-gray-600 dark:text-gray-400 pl-7">
+                            增补：“产权转移后，乙方在特许期内独占设施使用权、收益权及改造权，甲方不得干预”
+                        </p>
+                    </li>
+                    <li>
+                        <i class="icon fas fa-check-double text-indigo-500"></i><strong class="font-semibold">退出补偿机制</strong>
+                        <p class="text-sm italic text-gray-600 dark:text-gray-400 pl-7">
+                            新增：“协议终止时，甲方按未回收建设成本的__%补偿乙方”
+                        </p>
+                    </li>
+                    <li>
+                        <i class="icon fas fa-check-double text-indigo-500"></i><strong class="font-semibold">会计处理特别约定</strong>
+                        <p class="text-sm italic text-gray-600 dark:text-gray-400 pl-7">
+                            明确：“乙方可将建设支出资本化为 <strong class="font-semibold">特许经营权无形资产</strong>，按授权期限摊销”
+                        </p>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Conclusion -->
+            <section class="mb-12 text-center">
+                <div class="bg-blue-100 dark:bg-gray-800 p-8 rounded-lg shadow-xl border-l-4 border-indigo-500 dark:border-indigo-600">
+                    <h2 class="text-3xl font-serif-sc font-bold mb-4 text-indigo-700 dark:text-indigo-300">
+                        <i class="fas fa-check-circle mr-2 text-indigo-600"></i>结论
+                    </h2>
+                    <p class="text-lg md:text-xl text-gray-800 dark:text-gray-200 leading-relaxed mb-4">
+                        现有第五条与BOT定义存在 <strong class="text-red-500 dark:text-red-400">根本性冲突</strong>，建议按“方案一”修订。
+                    </p>
+                    <p class="text-lg md:text-xl text-gray-800 dark:text-gray-200 leading-relaxed">
+                        若甲方为军方机构需坚持产权国有，则采用“方案三”重构商业模式，避免名义BOT与实际权属割裂引发的合规风险。
+                    </p>
+                    <div class="bg-indigo-50 dark:bg-indigo-900 border-l-4 border-indigo-500 dark:border-indigo-600 text-indigo-800 dark:text-indigo-200 p-4 rounded-md shadow-sm mt-6 card-hover transition-transform transition-shadow">
+                        <p class="font-semibold mb-2"><i class="fas fa-info-circle mr-2"></i>参考案例：中国卫通（601698）</p>
+                        <p class="text-sm">中国卫通租用文昌发射工位协议中，明确区分 <strong class="font-semibold">土地所有权（国家）</strong> 与 <strong class="font-semibold">地面设施产权（企业）</strong>。<sup class="text-sm font-bold ml-1"><a href="#footnote5" class="text-indigo-700 dark:text-indigo-300 hover:underline">5</a></sup></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Source References -->
+            <section class="mb-12 text-gray-700 dark:text-gray-300 text-sm">
+                <h2 class="text-2xl font-serif-sc font-bold mb-4 text-gray-800 dark:text-gray-100">
+                    <i class="fas fa-link mr-2 text-gray-500"></i>来源依据
+                </h2>
+                <ol class="list-decimal list-outside pl-5 space-y-2">
+                    <li id="footnote1">《基础设施和公用事业特许经营管理办法》（2024修订）第二十一条：特许经营者对特许经营项目资产享有收益权，特许经营期满后应当按照协议约定移交资产。</li>
+                    <li id="footnote2">《首发业务若干问题解答（2023）》问题54：发行人应完整拥有与经营有关的土地、厂房、设备等资产所有权或使用权。</li>
+                    <li id="footnote3">江西金达莱科创板IPO终止案例：上市委问询BOT项目资产权属及收入确认合规性。<a href="http://kcb.sse.com.cn/renewal/xmxq/index.shtml?auditId=615" target="_blank" class="text-indigo-500 hover:underline">[上市委公告]</a></li>
+                    <li id="footnote4">国家发改委《BOT项目指南》：特许期内项目设施所有权归属项目公司。<a href="https://www.ndrc.gov.cn/xwdt/ztzl/ppp/zcfg/202405/t20240522_1377530.html" target="_blank" class="text-indigo-500 hover:underline">[政策解读]</a></li>
+                    <li id="footnote5">中国卫通《关于文昌发射工位合作事项的公告》（公告编号：2023-012）：公司投资建设的地面设施产权归属企业，土地为国家划拨使用。</li>
+                </ol>
+            </section>
+
+            <!-- Further Reading -->
+            <section class="mb-12">
+                <h2 class="text-2xl font-serif-sc font-bold mb-4 text-gray-800 dark:text-gray-100">
+                    <i class="fas fa-book-reader mr-2 text-indigo-500"></i>延伸阅读
+                </h2>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-6 list-none p-0">
+                    <li class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover transition-transform transition-shadow border border-gray-200 dark:border-gray-700">
+                        <h3 class="text-xl font-semibold mb-2 text-indigo-700 dark:text-indigo-300">1. Project Finance in Theory and Practice</h3>
+                        <p class="text-gray-800 dark:text-gray-200 text-base mb-2">作者：Stefano Gatti</p>
+                        <p class="text-gray-700 dark:text-gray-300 text-sm">项目融资领域的经典教材，系统阐述了项目融资的理论、结构、风险管理及案例分析，是理解BOT项目融资逻辑的基石。</p>
+                    </li>
+                    <li class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover transition-transform transition-shadow border border-gray-200 dark:border-gray-700">
+                        <h3 class="text-xl font-semibold mb-2 text-indigo-700 dark:text-indigo-300">2. Infrastructure Finance: The Business of Infrastructure Project Finance and Public-Private Partnerships</h3>
+                        <p class="text-gray-800 dark:text-gray-200 text-base mb-2">作者：Kenneth E. Scott</p>
+                        <p class="text-gray-700 dark:text-gray-300 text-sm">专注于基础设施项目的融资，深入探讨了PPP和BOT模式的商业实践、交易结构和投资考量，对理解具体应用有很大帮助。</p>
+                    </li>
+                    <li class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover transition-transform transition-shadow border border-gray-200 dark:border-gray-700">
+                        <h3 class="text-xl font-semibold mb-2 text-indigo-700 dark:text-indigo-300">3. PPP Handbook (世界银行出版)</h3>
+                        <p class="text-gray-800 dark:text-gray-200 text-base mb-2">作者：世界银行 (World Bank)</p>
+                        <p class="text-gray-700 dark:text-gray-300 text-sm">世界银行发布的关于PPP项目的指南，提供了国际PPP项目的最佳实践、政策框架、合同条款和风险分配的实用建议。</p>
+                    </li>
+                    <li class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover transition-transform transition-shadow border border-gray-200 dark:border-gray-700">
+                        <h3 class="text-xl font-semibold mb-2 text-indigo-700 dark:text-indigo-300">4. 合同法原理与案例 (中国法律出版社)</h3>
+                        <p class="text-gray-800 dark:text-gray-200 text-base mb-2">作者：梁慧星 等</p>
+                        <p class="text-gray-700 dark:text-gray-300 text-sm">中国合同法的权威著作，对合同的成立、效力、履行、变更和解除等基本原则有全面深入的阐述，有助于理解BOT协议的法律基础。</p>
+                    </li>
+                    <li class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover transition-transform transition-shadow border border-gray-200 dark:border-gray-700">
+                        <h3 class="text-xl font-semibold mb-2 text-indigo-700 dark:text-indigo-300">5. 中国A股IPO审核要点与案例分析</h3>
+                        <p class="text-gray-800 dark:text-gray-200 text-base mb-2">作者：专业机构或资深律师团队</p>
+                        <p class="text-gray-700 dark:text-gray-300 text-sm">系统梳理A股IPO审核的重点关注问题，特别是针对业务独立性、资产完整性等方面的要求，结合最新案例提供实践指导。</p>
+                    </li>
+                </ul>
+            </section>
+
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 dark:bg-gray-900 text-gray-400 py-10 text-center">
+        <p>&copy; 2024 BOT协议分析. All rights reserved.</p>
+        <p class="text-xs mt-2">Designed with <i class="fas fa-heart text-red-500"></i> by YourExpertDesigner</p>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Set initial theme based on system preference or saved preference
+        function setInitialTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                htmlElement.classList.remove('light', 'dark');
+                htmlElement.classList.add(savedTheme);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                htmlElement.classList.add('dark');
+            } else {
+                htmlElement.classList.add('light');
+            }
+        }
+
+        function toggleTheme() {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            // Re-render Mermaid charts after theme change
+            mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        }
+
+        themeToggleBtn.addEventListener('click', toggleTheme);
+
+        // Run initial theme setup
+        setInitialTheme();
+
+        // Optional: Intersection Observer for subtle scroll reveal
+        const sections = document.querySelectorAll('section');
+
+        const observerOptions = {
+            root: null, // viewport
+            rootMargin: '0px',
+            threshold: 0.1 // 10% of element visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeInUp'); // Add a class for animation
+                    observer.unobserve(entry.target); // Stop observing once animated
+                }
+            });
+        }, observerOptions);
+
+        // Add initial styles and observe
+        sections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(section);
+        });
+
+        // Define the animation class (Tailwind doesn't have it built-in directly like this)
+        // You'd typically add this to your CSS or a custom Tailwind plugin
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .animate-fadeInUp {
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+            }
+        `;
+        document.head.appendChild(style);
+
+    </script>
+</body>
+</html>
+```
