@@ -1,0 +1,595 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO尽调：非控股股东股权转让核查深度解析</title>
+    <meta name="description" content="深入解析IPO尽职调查中，非实控人、非控股股东股权转让的核查必要性、监管依据、重点内容与风险。">
+    <meta name="keywords" content="IPO, 尽职调查, 股权转让, 非控股股东, 股权清晰, 监管要求, 法律合规, 风险控制">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+
+    <style>
+        /* Custom Fonts */
+        :root {
+            --font-serif-sc: 'Noto Serif SC', 'Times New Roman', Times, serif;
+            --font-sans-sc: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            --system-fonts: Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-sans-sc);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-serif-sc);
+            font-weight: 600; /* Noto Serif SC offers various weights */
+        }
+
+        /* Dark Mode Colors */
+        .dark {
+            --color-bg-primary: #1a202c; /* gray-900 */
+            --color-bg-secondary: #2d3748; /* gray-800 */
+            --color-text-primary: #e2e8f0; /* gray-100 */
+            --color-text-secondary: #a0aec0; /* gray-400 */
+            --color-accent: #2c939e; /* Custom Teal */
+            --color-border: #4a5568; /* gray-700 */
+            --color-card-bg: #252d3a; /* Darker than bg-secondary */
+            --color-mermaid-bg: #2d3748; /* Mermaid background */
+            --color-mermaid-node: #e2e8f0; /* Mermaid node text */
+            --color-mermaid-edge: #a0aec0; /* Mermaid edge color */
+            --color-mermaid-accent: #38b2ac; /* Mermaid accent color */
+        }
+
+        /* Light Mode Colors */
+        html:not(.dark) {
+            --color-bg-primary: #ffffff;
+            --color-bg-secondary: #f7fafc; /* gray-50 */
+            --color-text-primary: #2d3748; /* gray-800 */
+            --color-text-secondary: #718096; /* gray-500 */
+            --color-accent: #0f766e; /* Darker teal for contrast */
+            --color-border: #e2e8f0; /* gray-200 */
+            --color-card-bg: #edf2f7; /* gray-100 */
+            --color-mermaid-bg: #ffffff;
+            --color-mermaid-node: #2d3748;
+            --color-mermaid-edge: #718096;
+            --color-mermaid-accent: #0f766e;
+        }
+
+        body {
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .text-primary { color: var(--color-text-primary); }
+        .text-secondary { color: var(--color-text-secondary); }
+        .text-accent { color: var(--color-accent); }
+        .bg-secondary { background-color: var(--color-bg-secondary); }
+        .border-base { border-color: var(--color-border); }
+        .card-bg { background-color: var(--color-card-bg); }
+
+        /* Custom Scrollbar for subtle styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .dark::-webkit-scrollbar-track {
+            background: #2d3748; /* gray-800 */
+        }
+        .dark::-webkit-scrollbar-thumb {
+            background-color: #4a5568; /* gray-700 */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f7fafc; /* gray-50 */
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #cbd5e0; /* gray-300 */
+            border-radius: 4px;
+        }
+
+        /* First letter drop cap */
+        .drop-cap:first-letter {
+            float: left;
+            font-size: 4.5em;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-bottom: -0.1em;
+            font-weight: 700;
+            color: var(--color-accent);
+            font-family: var(--font-serif-sc);
+        }
+
+        /* Mermaid styling for dark/light mode */
+        .mermaid {
+            background-color: var(--color-mermaid-bg) !important;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            /* This is a fallback, Mermaid-js will override styles */
+        }
+
+        .dark .mermaid .node text,
+        .dark .mermaid .edgePaths .edgeLabel text {
+            fill: var(--color-mermaid-node) !important;
+        }
+
+        .dark .mermaid .edgePaths .path {
+            stroke: var(--color-mermaid-edge) !important;
+        }
+
+        .dark .mermaid .node rect,
+        .dark .mermaid .node circle,
+        .dark .mermaid .node polygon {
+            fill: var(--color-bg-secondary) !important;
+            stroke: var(--color-accent) !important;
+            stroke-width: 2px !important;
+        }
+
+        .dark .mermaid .label text {
+            fill: var(--color-mermaid-node) !important;
+        }
+
+        /* Light mode Mermaid */
+        html:not(.dark) .mermaid .node text,
+        html:not(.dark) .mermaid .edgePaths .edgeLabel text {
+            fill: var(--color-mermaid-node) !important;
+        }
+
+        html:not(.dark) .mermaid .edgePaths .path {
+            stroke: var(--color-mermaid-edge) !important;
+        }
+
+        html:not(.dark) .mermaid .node rect,
+        html:not(.dark) .mermaid .node circle,
+        html:not(.dark) .mermaid .node polygon {
+            fill: var(--color-card-bg) !important;
+            stroke: var(--color-accent) !important;
+            stroke-width: 2px !important;
+        }
+        
+        html:not(.dark) .mermaid .label text {
+            fill: var(--color-mermaid-node) !important;
+        }
+
+        /* Specific styles for the table */
+        .styled-table th, .styled-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+        .styled-table th {
+            background-color: var(--color-card-bg);
+            color: var(--color-text-secondary);
+            font-weight: 600;
+        }
+        .styled-table tbody tr:last-child {
+            border-bottom: none;
+        }
+        .styled-table tbody tr:hover {
+            background-color: var(--color-bg-secondary);
+        }
+
+        /* Link hover effect */
+        a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: color 0.2s ease, text-decoration 0.2s ease;
+        }
+        a:hover {
+            color: var(--color-text-primary);
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body class="min-h-screen antialiased flex flex-col">
+
+    <!-- Header / Navigation -->
+    <header class="bg-secondary p-4 shadow-lg sticky top-0 z-50 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8">
+            <a href="#" class="text-2xl font-serif-sc font-bold text-accent tracking-wide hover:text-primary transition-colors">
+                <i class="fas fa-landmark mr-2"></i>合规洞察
+            </a>
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="p-2 rounded-full text-secondary hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-300">
+                    <i class="fas fa-sun text-xl dark:hidden"></i>
+                    <i class="fas fa-moon text-xl hidden dark:inline-block"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section class="relative py-24 bg-cover bg-center overflow-hidden" 
+                 style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), var(--color-bg-primary) 80%), url('https://images.unsplash.com/photo-1549646879-11531d044237?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-blend-mode: multiply;">
+            <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-80 dark:opacity-90"></div>
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif-sc font-bold text-white leading-tight mb-4 animate-fade-in-down">
+                    <i class="fas fa-scale-balanced text-accent mr-3"></i>IPO尽调：非控股股东股权转让，是核查盲区还是必查项？
+                </h1>
+                <p class="text-xl sm:text-2xl text-gray-200 mb-8 tracking-wide animate-fade-in-up">
+                    深度解析IPO股权清晰性与合规风险
+                </p>
+                <div class="bg-gray-800 bg-opacity-70 backdrop-blur-sm p-6 rounded-lg shadow-xl border border-accent/30 animate-fade-in">
+                    <p class="text-lg text-gray-200 leading-relaxed drop-cap">
+                        在IPO尽调和核查中，**非实控人、非控股股东之间的股权转让同样需要核查**，该要求具有明确的法规依据和实务必要性。以下是具体分析：
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Sections -->
+        <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <!-- Regulatory Requirements -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-serif-sc font-bold mb-6 text-accent">
+                    <i class="fas fa-gavel mr-3 opacity-80"></i>一、监管要求的全面性覆盖
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-secondary card-bg p-6 rounded-lg shadow-md border border-base hover:shadow-xl transition-all duration-300">
+                        <h3 class="text-2xl font-serif-sc font-semibold mb-3 text-primary">1. 法规依据</h3>
+                        <ul class="space-y-3 text-secondary leading-relaxed">
+                            <li><i class="fas fa-check-circle text-accent mr-2"></i>《首次公开发行股票并上市管理办法》第十二条明确要求发行人"股权清晰"，**未限定股东身份**。</li>
+                            <li><i class="fas fa-check-circle text-accent mr-2"></i>《监管规则适用指引—关于申请首发上市企业股东信息披露》规定：
+                                <blockquote class="ml-6 mt-2 p-3 border-l-4 border-accent bg-bg-secondary/50 rounded-r-md italic">
+                                    "对IPO申报前12个月内新增股东，以及申报前12个月之前入股的股东，均需核查其股权转让**价格公允性、资金来源及是否存在代持**"。
+                                    <a href="http://www.csrc.gov.cn/csrc/c101802/c7442238/content.shtml" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-primary text-sm block mt-2">
+                                        <i class="fas fa-external-link-alt mr-1"></i>证监会官方指引
+                                    </a>
+                                </blockquote>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-secondary card-bg p-6 rounded-lg shadow-md border border-base hover:shadow-xl transition-all duration-300">
+                        <h3 class="text-2xl font-serif-sc font-semibold mb-3 text-primary">2. 实务操作要求</h3>
+                        <p class="text-secondary leading-relaxed">
+                            <i class="fas fa-cogs text-accent mr-2"></i>中介机构需按《保荐人尽职调查工作准则》**逐笔穿透核查报告期内所有股权变动**，无论转让方身份。
+                            <p class="text-sm text-gray-500 mt-2 ml-6">（知识库资料《IPO项目内核流程》："历史沿革核查需覆盖全部股东变更"）</p>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Visualization - Mermaid Diagram -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-serif-sc font-bold mb-6 text-accent text-center">
+                    <i class="fas fa-project-diagram mr-3 opacity-80"></i>股权转让尽调流程概览
+                </h2>
+                <div class="mermaid-container w-full overflow-x-auto p-4 card-bg rounded-lg shadow-lg border border-base">
+                    <pre class="mermaid text-primary">
+                        graph TD
+                            A[股权转让 (无论股东身份)] --> B{发生在报告期内？};
+                            B -- 是 --> C[IPO尽调必查项];
+                            B -- 否 --> D[仍需关注，但核查侧重可能不同];
+
+                            C --> E1[监管法规要求];
+                            C --> E2[实务操作要求];
+
+                            E1 --> F1[股权清晰性原则];
+                            E1 --> F2[新增股东核查 (12个月内/之前)];
+                            E2 --> F3[逐笔穿透核查];
+                            E2 --> F4[覆盖报告期内所有股权变动];
+
+                            F1 & F2 & F3 & F4 --> G[核心核查内容];
+
+                            G -- 转让真实性 --> H1(抽屉协议/代持);
+                            G -- 定价公允性 --> H2(价格偏离/同期交易);
+                            G -- 税务合规 --> H3(个税/企业所得税完税);
+                            G -- 特殊条款 --> H4(对赌/回购权清理);
+
+                            H1 & H2 & H3 & H4 --> I[提交核心文件];
+
+                            I --> J{核查结果：股权清晰且合规？};
+                            J -- 否 --> K[重大信息披露瑕疵 / IPO风险];
+                            J -- 是 --> L[IPO进程推进];
+
+                            K --> M(问询函/暂缓审议/终止审查);
+                    </pre>
+                </div>
+            </div>
+
+            <!-- Key Due Diligence Areas -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-serif-sc font-bold mb-6 text-accent">
+                    <i class="fas fa-clipboard-list mr-3 opacity-80"></i>二、重点核查内容（与非控股股东相关）
+                </h2>
+                <div class="overflow-x-auto card-bg rounded-lg shadow-md border border-base">
+                    <table class="w-full styled-table">
+                        <thead>
+                            <tr>
+                                <th class="w-1/4">核查维度</th>
+                                <th class="w-1/2">具体事项</th>
+                                <th class="w-1/4">未核查的风险案例</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-bold text-primary"><i class="fas fa-handshake mr-2 text-accent"></i>转让真实性</td>
+                                <td class="text-secondary">是否存在抽屉协议、代持安排</td>
+                                <td class="text-sm text-gray-500">某科创板项目因小股东间代持未披露被暂缓审议 (<a href="https://www.stcn.com/article/detail/648905.html" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">证券时报案例</a>)</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-primary"><i class="fas fa-search-dollar mr-2 text-accent"></i>定价公允性</td>
+                                <td class="text-secondary">转让价格是否显著偏离净资产或同期其他交易</td>
+                                <td class="text-sm text-gray-500">非控股股东1元/股转让触发监管问询，要求说明合理性 (知识库资料《股权激励方案要素》)</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-primary"><i class="fas fa-file-invoice-dollar mr-2 text-accent"></i>税务合规</td>
+                                <td class="text-secondary">自然人股东转让是否缴纳20%个税</td>
+                                <td class="text-sm text-gray-500">2023年某创业板企业因历史小股东未完税被要求补缴+滞纳金</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-primary"><i class="fas fa-file-contract mr-2 text-accent"></i>特殊条款</td>
+                                <td class="text-secondary">是否存在对赌、回购权等影响股权稳定的安排</td>
+                                <td class="text-sm text-gray-500">非实控人间的回购条款未清理，IPO审核阶段被要求终止 (<a href="https://www.junhe.com/legal-updates/2395" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">君合律所案例</a>)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Required Documents -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-serif-sc font-bold mb-6 text-accent">
+                    <i class="fas fa-folder-open mr-3 opacity-80"></i>三、需提交的核心文件
+                </h2>
+                <div class="bg-secondary card-bg p-6 rounded-lg shadow-md border border-base">
+                    <p class="text-secondary mb-4 leading-relaxed">
+                        即使转让方为非控股股东，中介机构仍需获取：
+                    </p>
+                    <ul class="space-y-4 text-primary leading-relaxed">
+                        <li class="flex items-start">
+                            <i class="fas fa-file-alt text-accent mt-1 mr-3"></i>
+                            <span>**股权转让协议原件**（含所有附件）</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-money-check-alt text-accent mt-1 mr-3"></i>
+                            <span>**银行支付凭证**（证明价款实际支付）</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-receipt text-accent mt-1 mr-3"></i>
+                            <span>**个人所得税/企业所得税完税证明**（自然人/机构股东）</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-user-friends text-accent mt-1 mr-3"></i>
+                            <span>**转让方与受让方的关联关系声明**（排除利益输送）</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-building text-accent mt-1 mr-3"></i>
+                            <span>**工商变更登记文件**（验证法律效力）</span>
+                        </li>
+                    </ul>
+                    <blockquote class="ml-6 mt-6 p-3 border-l-4 border-gray-500 bg-bg-secondary/30 rounded-r-md text-sm text-gray-500 italic">
+                        <i class="fas fa-info-circle mr-2"></i>注：根据《公开发行证券的公司信息披露内容与格式准则第41号》第五十七条，发行人需在招股说明书中披露"**报告期内全部股权变动**"及定价依据。
+                        <a href="http://www.csrc.gov.cn/csrc/c101864/c1024664/content.shtml" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline block mt-1">
+                            <i class="fas fa-external-link-alt mr-1"></i>证监会文件
+                        </a>
+                    </blockquote>
+                </div>
+            </div>
+
+            <!-- Typical Regulatory Inquiry Example -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-serif-sc font-bold mb-6 text-accent">
+                    <i class="fas fa-question-circle mr-3 opacity-80"></i>四、典型监管问询示例
+                </h2>
+                <div class="bg-gray-800 p-6 rounded-lg shadow-md border border-base overflow-x-auto relative">
+                    <button class="absolute top-3 right-3 text-gray-400 hover:text-primary transition-colors text-sm" onclick="copyCode('inquiry-code')">
+                        <i class="fas fa-copy mr-1"></i>复制
+                    </button>
+                    <pre id="inquiry-code" class="text-gray-200 text-sm font-mono whitespace-pre-wrap break-words no-scrollbar">
+<span class="text-accent"># 创业板审核问询函（2024年案例节选）</span>
+<span class="text-blue-400">**问题5.关于历史股权转让**</span>
+发行人2022年股东A（持股3%）向B（持股2%）转让股权的价格为1元/股：
+（1）请说明转让价格显著低于同期净资产的原因；
+（2）核查转让双方是否存在关联关系或代持安排；
+（3）提供本次转让的完税凭证。
+<span class="text-yellow-400">**回复要求**</span>：保荐人及律师需逐项核查并发表明确意见（<a href="https://www.szse.cn/disclosure/supervision/inquire/index.html" target="_blank" rel="noopener noreferrer" class="text-teal-400 hover:underline">深交所案例</a>）。
+                    </pre>
+                </div>
+            </div>
+
+            <!-- Conclusion -->
+            <div class="mb-12 text-center">
+                <h2 class="text-3xl font-serif-sc font-bold mb-6 text-accent">
+                    <i class="fas fa-lightbulb mr-3 opacity-80"></i>结论
+                </h2>
+                <div class="bg-secondary card-bg p-8 rounded-lg shadow-xl border border-accent/50">
+                    <p class="text-xl font-serif-sc font-semibold text-primary leading-relaxed mb-4">
+                        **非实控人/控股股东间的股权转让协议仍是IPO尽调必查项**，因其直接关系：
+                    </p>
+                    <ul class="list-none space-y-3 text-secondary text-lg">
+                        <li class="flex items-start justify-center"><i class="fas fa-arrow-right text-accent mr-3 mt-1"></i><span>发行人股权清晰性；</span></li>
+                        <li class="flex items-start justify-center"><i class="fas fa-arrow-right text-accent mr-3 mt-1"></i><span>报告期内股权变动的合法合规性；</span></li>
+                        <li class="flex items-start justify-center"><i class="fas fa-arrow-right text-accent mr-3 mt-1"></i><span>潜在利益输送或税务风险排除。</span></li>
+                    </ul>
+                    <p class="text-lg text-primary mt-6 leading-relaxed">
+                        中介机构需以同等标准核查<strong class="text-accent">所有股东</strong>的变动，否则可能构成重大信息披露瑕疵。
+                    </p>
+                </div>
+            </div>
+
+            <!-- Key Concepts Explanation -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-serif-sc font-bold mb-6 text-accent">
+                    <i class="fas fa-book-open mr-3 opacity-80"></i>关键概念解析
+                </h2>
+                <div class="bg-secondary card-bg p-6 rounded-lg shadow-md border border-base">
+                    <h3 class="text-2xl font-serif-sc font-semibold mb-3 text-primary"><i class="fas fa-info-circle mr-2 text-accent"></i>股权清晰性</h3>
+                    <p class="text-secondary leading-relaxed mb-4">
+                        股权清晰性是IPO审核的基石要求之一，指发行人的股权结构应真实、合法、完整，不存在代持、质押、冻结等可能影响股权稳定的情形，确保发行人股权权属明确，不存在争议。无论股东身份，任何股权变动都可能对这一核心要素造成影响。
+                    </p>
+                    <h3 class="text-2xl font-serif-sc font-semibold mb-3 text-primary"><i class="fas fa-users-cog mr-2 text-accent"></i>参与方职责</h3>
+                    <ul class="list-disc list-inside space-y-2 text-secondary leading-relaxed">
+                        <li>**保荐人/律师事务所：** 进行尽职调查，核查股权真实性、合法性、合规性。</li>
+                        <li>**会计师事务所：** 关注股权转让的会计处理、税务影响及定价公允性。</li>
+                        <li>**证监会/交易所：** 负责审核，通过问询函等方式追问股权疑点，确保投资者权益。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Further Reading -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-serif-sc font-bold mb-6 text-accent">
+                    <i class="fas fa-feather-alt mr-3 opacity-80"></i>延伸阅读
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <a href="http://www.csrc.gov.cn/csrc/c101802/c7442238/content.shtml" target="_blank" rel="noopener noreferrer" class="block card-bg p-6 rounded-lg shadow-md border border-base hover:shadow-xl hover:border-accent transition-all duration-300 group">
+                        <h3 class="text-xl font-serif-sc font-semibold mb-2 text-primary group-hover:text-accent transition-colors"><i class="fas fa-file-alt mr-2"></i>《监管规则适用指引》</h3>
+                        <p class="text-secondary text-sm">
+                            证监会关于申请首发上市企业股东信息披露的详细规定，是核查股权的直接依据。
+                        </p>
+                    </a>
+                    <a href="http://www.csrc.gov.cn/csrc/c101864/c1024664/content.shtml" target="_blank" rel="noopener noreferrer" class="block card-bg p-6 rounded-lg shadow-md border border-base hover:shadow-xl hover:border-accent transition-all duration-300 group">
+                        <h3 class="text-xl font-serif-sc font-semibold mb-2 text-primary group-hover:text-accent transition-colors"><i class="fas fa-book mr-2"></i>《公开发行证券的公司信息披露内容与格式准则第41号——创业板公司招股说明书》</h3>
+                        <p class="text-secondary text-sm">
+                            规范招股说明书的编制，明确了股权变动的披露要求，强调了报告期内所有股权变动的披露。
+                        </p>
+                    </a>
+                    <a href="http://www.gov.cn/zhengce/202302/09/content_5740443.htm" target="_blank" rel="noopener noreferrer" class="block card-bg p-6 rounded-lg shadow-md border border-base hover:shadow-xl hover:border-accent transition-all duration-300 group">
+                        <h3 class="text-xl font-serif-sc font-semibold mb-2 text-primary group-hover:text-accent transition-colors"><i class="fas fa-gavel mr-2"></i>《中华人民共和国公司法》（最新修订版）</h3>
+                        <p class="text-secondary text-sm">
+                            了解公司股权设立、转让、股东权利义务等基础法律框架，特别是新《公司法》对注册资本认缴制及股东责任的最新调整。
+                        </p>
+                    </a>
+                    <a href="https://www.pevc.org.cn/a/2020/0925/4294.html" target="_blank" rel="noopener noreferrer" class="block card-bg p-6 rounded-lg shadow-md border border-base hover:shadow-xl hover:border-accent transition-all duration-300 group">
+                        <h3 class="text-xl font-serif-sc font-semibold mb-2 text-primary group-hover:text-accent transition-colors"><i class="fas fa-balance-scale mr-2"></i>《保荐人尽职调查工作准则》</h3>
+                        <p class="text-secondary text-sm">
+                            保荐机构执行尽职调查工作的具体指引，是了解尽调深度和广度的重要文件。
+                        </p>
+                    </a>
+                    <a href="https://www.law.com.cn/showarticle.asp?id=305140" target="_blank" rel="noopener noreferrer" class="block card-bg p-6 rounded-lg shadow-md border border-base hover:shadow-xl hover:border-accent transition-all duration-300 group">
+                        <h3 class="text-xl font-serif-sc font-semibold mb-2 text-primary group-hover:text-accent transition-colors"><i class="fas fa-chart-line mr-2"></i>《IPO实务与案例分析》</h3>
+                        <p class="text-secondary text-sm">
+                            非官方但实务性强的书籍或文章，通过大量案例分析帮助理解IPO审核中的具体问题和应对策略。
+                        </p>
+                    </a>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-secondary py-8 mt-12 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-secondary text-sm">
+            <p>&copy; 2024 IPO合规洞察. All rights reserved.</p>
+            <p class="mt-2">本页面内容仅供参考，不构成专业法律或投资建议。</p>
+            <div class="flex justify-center space-x-4 mt-4">
+                <a href="#" class="hover:text-accent transition-colors"><i class="fab fa-weibo text-lg"></i></a>
+                <a href="#" class="hover:text-accent transition-colors"><i class="fab fa-weixin text-lg"></i></a>
+                <a href="#" class="hover:text-accent transition-colors"><i class="fab fa-linkedin-in text-lg"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark', // Default theme, will be overridden by custom CSS
+            securityLevel: 'loose', // Allow external links and script
+            flowchart: {
+                htmlLabels: true
+            },
+            themeVariables: {
+                'darkMode': true, // This will be toggled by JS
+                'primaryColor': 'var(--color-bg-secondary)',
+                'secondaryColor': 'var(--color-card-bg)',
+                'tertiaryColor': 'var(--color-accent)',
+                'primaryBorderColor': 'var(--color-accent)',
+                'secondaryBorderColor': 'var(--color-border)',
+                'tertiaryBorderColor': 'var(--color-border)',
+                'primaryTextColor': 'var(--color-mermaid-node)',
+                'secondaryTextColor': 'var(--color-mermaid-node)',
+                'tertiaryTextColor': 'var(--color-mermaid-node)',
+                'lineColor': 'var(--color-mermaid-edge)',
+                'fontFamily': 'var(--font-sans-sc)',
+                'clusterBkg': 'var(--color-bg-secondary)',
+                'clusterBorder': 'var(--color-border)'
+            }
+        });
+
+        // Theme Toggle Functionality
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                mermaid.initialize({ theme: 'dark' });
+            } else {
+                htmlElement.classList.remove('dark');
+                mermaid.initialize({ theme: 'default' }); // Mermaid's default for light theme
+            }
+            localStorage.setItem('theme', theme);
+        }
+
+        // Check for saved theme preference or system preference on load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light'); // Explicitly set light if no preference and not dark system
+        }
+
+        // Toggle theme on button click
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+            // After changing theme, re-render mermaid charts if they don't auto-update
+            // This is often not needed with mermaid.initialize call, but good for robustness
+            // If issues, might need to re-render using mermaid.render or similar.
+            // For now, mermaid.initialize on theme change should suffice.
+            setTimeout(() => mermaid.contentLoaded(), 100); // Re-process mermaid content
+        });
+
+        // Copy code to clipboard function
+        function copyCode(elementId) {
+            const codeElement = document.getElementById(elementId);
+            const textToCopy = codeElement.innerText;
+
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const copyBtn = codeElement.previousElementSibling; // The copy button is the sibling
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check mr-1"></i>已复制';
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalText;
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                alert('复制失败，请手动复制。');
+            });
+        }
+
+        // Fade-in animation for Hero section elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const heroTitle = document.querySelector('.animate-fade-in-down');
+            const heroSubtitle = document.querySelector('.animate-fade-in-up');
+            const heroIntro = document.querySelector('.animate-fade-in');
+
+            if (heroTitle) heroTitle.style.opacity = '1';
+            if (heroSubtitle) heroSubtitle.style.opacity = '1';
+            if (heroIntro) heroIntro.style.opacity = '1';
+        });
+
+    </script>
+</body>
+</html>
+```
