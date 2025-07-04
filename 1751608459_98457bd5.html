@@ -1,0 +1,564 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>火箭发射服务：收入确认的会计准则与实务解析</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <style>
+        /* Custom base styles and font preferences */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', serif;
+            letter-spacing: -0.025em; /* Tighter letter spacing for headings */
+        }
+        /* Dark mode styles */
+        html.dark {
+            background-color: #0d1117; /* GitHub Dark Mode bg */
+            color: #c9d1d9; /* GitHub Dark Mode text */
+        }
+        html.dark .text-gray-100 { color: #c9d1d9; }
+        html.dark .text-gray-200 { color: #b1b9c2; }
+        html.dark .text-gray-800 { color: #c9d1d9; }
+        html.dark .text-gray-900 { color: #c9d1d9; }
+        html.dark .bg-white { background-color: #161b22; } /* Card bg in dark mode */
+        html.dark .bg-gray-100 { background-color: #1a202c; } /* Lighter dark bg for contrast */
+        html.dark .border-gray-200 { border-color: #30363d; }
+        html.dark .border-gray-300 { border-color: #444c56; }
+        html.dark .border-gray-700 { border-color: #444c56; }
+        html.dark a.text-blue-600 { color: #58a6ff; } /* Dark mode link color */
+        html.dark .hover\:text-blue-800:hover { color: #79c0ff; }
+        html.dark .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.5), 0 4px 6px -2px rgba(0,0,0,0.25); }
+
+        /* Light mode styles */
+        html:not(.dark) {
+            background-color: #ffffff;
+            color: #374151;
+        }
+        html:not(.dark) .text-gray-100 { color: #374151; }
+        html:not(.dark) .text-gray-200 { color: #374151; }
+        html:not(.dark) .text-gray-800 { color: #374151; }
+        html:not(.dark) .text-gray-900 { color: #1f2937; }
+        html:not(.dark) .bg-white { background-color: #ffffff; }
+        html:not(.dark) .bg-gray-100 { background-color: #f3f4f6; }
+        html:not(.dark) .border-gray-200 { border-color: #e5e7eb; }
+        html:not(.dark) .border-gray-300 { border-color: #d1d5db; }
+        html:not(.dark) .border-gray-700 { border-color: #e5e7eb; }
+        html:not(.dark) a.text-blue-600 { color: #2563eb; }
+        html:not(.dark) .hover\:text-blue-800:hover { color: #1e40af; }
+
+        /* Custom selection styles */
+        ::selection {
+            background-color: #a7f3d0; /* Tailwind emerald-200 */
+            color: #1f2937; /* Tailwind gray-900 */
+        }
+        html.dark ::selection {
+            background-color: #10b981; /* Tailwind emerald-500 */
+            color: #ffffff;
+        }
+
+        /* Mermaid container specific styling */
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 0;
+            background-color: var(--mermaid-bg-color, #1a202c); /* Default dark bg */
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        /* Custom styling for the hero background, using a subtle gradient and pattern */
+        .hero-background {
+            background-image: radial-gradient(at top left, #3b82f640, transparent 70%), url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="stars" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse"><circle fill="%23ffffff20" cx="1" cy="1" r="0.5"/></pattern></defs><rect x="0" y="0" width="100" height="100" fill="url(%23stars)"/></svg>');
+            background-size: cover, 200px 200px;
+            background-position: center;
+        }
+        html:not(.dark) .hero-background {
+            background-image: radial-gradient(at top left, #bfdbfe40, transparent 70%), url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="stars-light" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse"><circle fill="%2300000010" cx="1" cy="1" r="0.5"/></pattern></defs><rect x="0" y="0" width="100" height="100" fill="url(%23stars-light)"/></svg>');
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+
+    <!-- Header / Navigation (optional, but good for context) -->
+    <header class="p-4 flex justify-between items-center z-10 sticky top-0 bg-opacity-90 backdrop-blur-md transition-colors duration-300">
+        <div class="text-xl font-bold text-blue-400 dark:text-blue-300">
+            <i class="fas fa-rocket mr-2"></i>会计视点
+        </div>
+        <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-700 dark:hover:bg-gray-800 transition-colors duration-200">
+            <i class="fas fa-sun text-lg theme-icon hidden dark:block"></i>
+            <i class="fas fa-moon text-lg theme-icon block dark:hidden"></i>
+        </button>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative w-full overflow-hidden text-gray-100 py-24 md:py-32 hero-background">
+        <div class="absolute inset-0 bg-gradient-to-t from-gray-950 dark:from-[#0d1117] to-transparent opacity-80"></div>
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-4 tracking-tight text-white drop-shadow-lg">
+                <i class="fas fa-chart-line text-blue-400 mr-4"></i>火箭发射服务：收入确认的会计准则与实务解析
+            </h1>
+            <p class="text-xl sm:text-2xl text-gray-200 max-w-3xl mx-auto mb-8 font-light leading-relaxed">
+                深入理解控制权转移核心原则，结合合同约定，规避财报风险，实现精准合规的收入确认。
+            </p>
+            <div class="flex justify-center space-x-4">
+                <a href="#content" class="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-full shadow-lg text-white bg-blue-600 hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
+                    <i class="fas fa-angle-down mr-2"></i> 开始阅读
+                </a>
+                <a href="#mermaid-chart" class="inline-flex items-center px-8 py-3 border border-blue-600 text-base font-medium rounded-full text-blue-600 hover:text-white hover:bg-blue-600 transition-all duration-300 transform hover:scale-105">
+                    <i class="fas fa-sitemap mr-2"></i> 流程概览
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main id="content" class="container mx-auto px-6 py-16 flex-grow">
+        <article class="max-w-4xl mx-auto bg-white dark:bg-[#161b22] rounded-xl shadow-lg p-8 md:p-12 border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+            <p class="text-lg leading-relaxed mb-8 text-gray-800 dark:text-gray-200">
+                根据企业会计准则和行业实践，火箭发射服务的收入确认需遵循<strong class="font-semibold text-blue-600 dark:text-blue-400">《企业会计准则第14号——收入》</strong>（2017年修订）的核心原则，即以<strong class="font-semibold text-blue-600 dark:text-blue-400">控制权转移</strong>作为收入确认时点，并需结合合同具体约定。结合联网搜索结果及实务案例，主要分为以下两种模式：
+            </p>
+
+            <hr class="my-10 border-gray-300 dark:border-gray-700">
+
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                    <i class="fas fa-lightbulb text-blue-500 mr-3"></i> 一、收入确认的核心原则
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-gray-50 dark:bg-[#0d1117]/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow duration-300">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+                            <i class="fas fa-handshake mr-2 text-blue-500"></i> 控制权转移
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                            企业应在客户取得商品/服务控制权时确认收入（《企业会计准则第14号》第四条）。对火箭发射服务而言，控制权转移通常体现为：
+                        </p>
+                        <ul class="list-none mt-4 space-y-2 text-gray-700 dark:text-gray-300">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-emerald-500 mr-2 mt-1"></i>
+                                <span>卫星成功入轨（客户取得卫星主导权）；</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-emerald-500 mr-2 mt-1"></i>
+                                <span>发射任务通过验收（如合同约定的关键节点达成）。</span>
+                            </li>
+                        </ul>
+                        <a href="https://szfb.sz.gov.cn/attachment/0/307/307677/3081732.pdf" target="_blank" class="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 mt-4 transition-colors duration-200 text-sm">
+                            <i class="fas fa-external-link-alt mr-1"></i> 参考准则详情[^5]
+                        </a>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-[#0d1117]/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow duration-300">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+                            <i class="fas fa-sitemap mr-2 text-blue-500"></i> 履约义务识别
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                            若合同包含多项服务（如火箭制造、发射服务、在轨保障），需拆分单项履约义务，按<strong class="font-semibold text-blue-600 dark:text-blue-400">单独售价比例分摊交易价格</strong>。
+                        </p>
+                        <ul class="list-none mt-4 space-y-2 text-gray-700 dark:text-gray-300">
+                            <li class="flex items-start">
+                                <i class="fas fa-info-circle text-yellow-500 mr-2 mt-1"></i>
+                                <span>例如：定制软件开发服务的收入确认，可参照此原则进行履约义务拆分。</span>
+                            </li>
+                        </ul>
+                        <a href="http://czj.huaian.gov.cn/upload/2023-02/8840e492-46ba-4eb1-8fa4-1ef008be3ba3.pdf" target="_blank" class="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 mt-4 transition-colors duration-200 text-sm">
+                            <i class="fas fa-external-link-alt mr-1"></i> 参考应用案例[^2]
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="my-10 border-gray-300 dark:border-gray-700">
+
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                    <i class="fas fa-gavel text-blue-500 mr-3"></i> 二、具体确认方式（取决于合同条款）
+                </h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- "某一时点"确认收入 -->
+                    <div class="bg-gray-50 dark:bg-[#0d1117]/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow duration-300">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+                            <i class="fas fa-calendar-check mr-2 text-emerald-500"></i> "某一时点"确认收入 <span class="ml-2 text-sm px-2 py-0.5 bg-emerald-100 text-emerald-800 dark:bg-emerald-800 dark:text-emerald-100 rounded-full">普遍适用</span>
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                            <strong>确认时点：</strong> 发射成功并通过客户验收（如星箭分离成功、卫星入轨）。
+                        </p>
+                        <strong class="block text-gray-900 dark:text-white mb-2">依据：</strong>
+                        <ul class="list-none space-y-2 text-gray-700 dark:text-gray-300">
+                            <li class="flex items-start">
+                                <i class="fas fa-file-contract mr-2 mt-1 text-purple-500"></i>
+                                <span>合同通常约定以<strong class="font-semibold text-blue-600 dark:text-blue-400">发射结果</strong>作为付款和验收条件（例："成功入轨后X日内支付全款"）；</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-signature mr-2 mt-1 text-purple-500"></i>
+                                <span>需取得<strong class="font-semibold text-blue-600 dark:text-blue-400">客户签字的验收文件</strong>或第三方（如航天局）出具的<strong class="font-semibold text-blue-600 dark:text-blue-400">成功证明</strong>。</span>
+                            </li>
+                        </ul>
+                        <div class="mt-4 p-4 bg-blue-50 dark:bg-[#0d1117]/60 border-l-4 border-blue-500 dark:border-blue-400 rounded-md text-sm text-gray-700 dark:text-gray-300">
+                            <p class="font-semibold mb-1 flex items-center"><i class="fas fa-book-reader mr-2 text-blue-500"></i> 实务案例参考：</p>
+                            <p>
+                                广厦环能（873703）在设备销售中因"签收时点与合同约定不符"被北交所问询，强调收入确认需严格匹配合同条款。
+                            </p>
+                            <a href="#" class="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 mt-2 transition-colors duration-200 text-xs">
+                                <i class="fas fa-link mr-1"></i> 广厦环能案例[^知识库1]
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- "某一时段内"确认收入 -->
+                    <div class="bg-gray-50 dark:bg-[#0d1117]/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow duration-300">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+                            <i class="fas fa-hourglass-half mr-2 text-orange-500"></i> "某一时段内"确认收入 <span class="ml-2 text-sm px-2 py-0.5 bg-orange-100 text-orange-800 dark:bg-orange-800 dark:text-orange-100 rounded-full">特殊情形</span>
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                            <strong>适用场景：</strong> 若合同约定分阶段付款且服务周期较长（如火箭研制+发射），且满足以下任一条件：
+                        </p>
+                        <ul class="list-none space-y-2 text-gray-700 dark:text-gray-300">
+                            <li class="flex items-start">
+                                <i class="fas fa-chart-line mr-2 mt-1 text-sky-500"></i>
+                                <span>客户在服务过程中持续获得经济利益（如阶段性测试数据交付）；</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-tools mr-2 mt-1 text-sky-500"></i>
+                                <span>企业履约创造不可替代资产（如定制化火箭），且客户在履约过程中控制该资产。</span>
+                            </li>
+                        </ul>
+                        <p class="text-gray-700 dark:text-gray-300 leading-relaxed mt-4">
+                            <strong>确认方法：</strong> 按履约进度（如成本法/工作量法）分期确认收入。
+                        </p>
+                        <div class="mt-4 p-4 bg-red-50 dark:bg-[#0d1117]/60 border-l-4 border-red-500 dark:border-red-400 rounded-md text-sm text-gray-700 dark:text-gray-300">
+                            <p class="font-semibold mb-1 flex items-center"><i class="fas fa-exclamation-triangle mr-2 text-red-500"></i> 风险提示：</p>
+                            <ul class="list-none space-y-1">
+                                <li class="flex items-start"><i class="fas fa-times-circle mr-2 mt-1 text-red-500"></i> <span>需避免与合同约定的验收节点冲突（如约定"仅发射成功时付款"则不可分段确认）；</span></li>
+                                <li class="flex items-start"><i class="fas fa-times-circle mr-2 mt-1 text-red-500"></i> <span>若发射失败，前期确认收入需冲回，可能引发业绩波动（如军工企业审价调整风险）。</span></li>
+                            </ul>
+                            <a href="#" class="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 mt-2 transition-colors duration-200 text-xs">
+                                <i class="fas fa-link mr-1"></i> 宏达新材案例[^知识库2]
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="my-10 border-gray-300 dark:border-gray-700">
+
+            <!-- Data Visualization Section -->
+            <section id="mermaid-chart" class="mb-12 text-center">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 flex items-center justify-center">
+                    <i class="fas fa-bezier-curve text-blue-500 mr-3"></i> 收入确认流程示意图
+                </h2>
+                <div class="mermaid text-gray-800 dark:text-gray-200 text-sm md:text-base p-6 md:p-8 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 overflow-x-auto" style="min-height: 300px;">
+                    graph TD
+                        A[合同签订 & 履约义务识别] --> B{是否满足“某一时段内”确认条件？};
+
+                        B -- 是 --> C[客户持续获得经济利益 或 创造不可替代资产];
+                        C --> D[按履约进度分期确认收入];
+
+                        B -- 否 --> E[“某一时点”确认收入];
+                        E --> F{发射成功并客户验收};
+                        F -- 是 --> G[取得客户验收文件/成功证明];
+                        G --> H[收入确认];
+                        F -- 否 --> I[发射失败/不符验收条件];
+                        I --> J[收入不确认或前期已确认收入冲回];
+
+                        linkStyle 0 stroke:#607D8B,stroke-width:2px,fill:none;
+                        linkStyle 1 stroke:#607D8B,stroke-width:2px,fill:none;
+                        linkStyle 2 stroke:#607D8B,stroke-width:2px,fill:none;
+                        linkStyle 3 stroke:#607D8B,stroke-width:2px,fill:none;
+                        linkStyle 4 stroke:#607D8B,stroke-width:2px,fill:none;
+                        linkStyle 5 stroke:#607D8B,stroke-width:2px,fill:none;
+                        linkStyle 6 stroke:#607D8B,stroke-width:2px,fill:none;
+                        linkStyle 7 stroke:#607D8B,stroke-width:2px,fill:none;
+                </div>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mt-4">
+                    （点击图表可交互缩放）
+                </p>
+            </section>
+
+            <hr class="my-10 border-gray-300 dark:border-gray-700">
+
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                    <i class="fas fa-eye text-blue-500 mr-3"></i> 三、监管审核重点关注
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-blue-50 dark:bg-blue-900/30 rounded-lg p-6 border border-blue-200 dark:border-blue-700 hover:shadow-md transition-shadow duration-300">
+                        <h3 class="text-xl font-semibold text-blue-800 dark:text-blue-300 mb-3 flex items-center">
+                            <i class="fas fa-clipboard-check mr-2"></i> 合同条款与会计政策匹配性
+                        </h3>
+                        <ul class="list-none space-y-2 text-gray-700 dark:text-gray-300">
+                            <li class="flex items-start">
+                                <i class="fas fa-angle-right mr-2 mt-1 text-blue-500"></i>
+                                <span>收入确认时点是否与合同约定的验收/付款条款一致；</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-angle-right mr-2 mt-1 text-blue-500"></i>
+                                <span>若采用"签收确认"，需论证合理性（如行业惯例）并模拟对财报的影响（北交所对广厦环能的问询逻辑）。</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-red-50 dark:bg-red-900/30 rounded-lg p-6 border border-red-200 dark:border-red-700 hover:shadow-md transition-shadow duration-300">
+                        <h3 class="text-xl font-semibold text-red-800 dark:text-red-300 mb-3 flex items-center">
+                            <i class="fas fa-exclamation-triangle mr-2"></i> 特殊风险处理
+                        </h3>
+                        <ul class="list-none space-y-2 text-gray-700 dark:text-gray-300">
+                            <li class="flex items-start">
+                                <i class="fas fa-angle-right mr-2 mt-1 text-red-500"></i>
+                                <span><strong>发射失败条款：</strong>若合同约定"失败不付款"，则收入应在成功后才可确认；</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-angle-right mr-2 mt-1 text-red-500"></i>
+                                <span><strong>审价风险：</strong>军工客户合同若含暂定价，需披露审价周期及收入调整机制（如宏达新材案例）。</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="my-10 border-gray-300 dark:border-gray-700">
+
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                    <i class="fas fa-cogs text-blue-500 mr-3"></i> 四、操作建议
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-green-50 dark:bg-green-900/30 rounded-lg p-6 border border-green-200 dark:border-green-700 flex flex-col items-center text-center hover:shadow-md transition-shadow duration-300">
+                        <i class="fas fa-pen-nib text-4xl text-green-600 dark:text-green-400 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">合同设计阶段</h3>
+                        <p class="text-gray-700 dark:text-gray-300 text-sm">明确约定验收节点（如"卫星入轨后72小时内出具成功证明"）。</p>
+                    </div>
+                    <div class="bg-green-50 dark:bg-green-900/30 rounded-lg p-6 border border-green-200 dark:border-green-700 flex flex-col items-center text-center hover:shadow-md transition-shadow duration-300">
+                        <i class="fas fa-calculator text-4xl text-green-600 dark:text-green-400 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">财务核算</h3>
+                        <p class="text-gray-700 dark:text-gray-300 text-sm">保留完整的履约证据（发射记录、第三方验收文件）。</p>
+                    </div>
+                    <div class="bg-green-50 dark:bg-green-900/30 rounded-lg p-6 border border-green-200 dark:border-green-700 flex flex-col items-center text-center hover:shadow-md transition-shadow duration-300">
+                        <i class="fas fa-file-invoice text-4xl text-green-600 dark:text-green-400 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">信息披露</h3>
+                        <p class="text-gray-700 dark:text-gray-300 text-sm">IPO审核中需说明收入政策与同行业对比及合理性（如参考航天科技集团旗下公司模式）。</p>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="my-10 border-gray-300 dark:border-gray-700">
+
+            <!-- Further Reading Section -->
+            <section class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+                    <i class="fas fa-book-open text-blue-500 mr-3"></i> 延伸阅读
+                </h2>
+                <ul class="list-none space-y-4 text-gray-800 dark:text-gray-200">
+                    <li class="flex items-start">
+                        <i class="fas fa-bookmark text-blue-400 mr-3 mt-1"></i>
+                        <div>
+                            <span class="font-semibold text-lg">《企业会计准则第14号——收入》官方解读</span>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">深入理解新收入准则的核心理念与具体应用，是财会人员的必备资料。</p>
+                            <a href="https://szfb.sz.gov.cn/attachment/0/307/307677/3081732.pdf" target="_blank" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm transition-colors duration-200"><i class="fas fa-link mr-1"></i> 阅读原文</a>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-bookmark text-blue-400 mr-3 mt-1"></i>
+                        <div>
+                            <span class="font-semibold text-lg">IFRS 15 (IAS 15) Revenue from Contracts with Customers 官方指南</span>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">国际会计准则委员会发布的收入确认准则，与中国新收入准则高度趋同，有助于理解国际视角下的收入确认实践。</p>
+                            <a href="https://assets.kpmg.com/content/dam/kpmg/cn/pdf/zh/2017/09/an-overview-of-revised-cas-14.pdf" target="_blank" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm transition-colors duration-200"><i class="fas fa-link mr-1"></i> 阅读概览 (KPMG)</a>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-bookmark text-blue-400 mr-3 mt-1"></i>
+                        <div>
+                            <span class="font-semibold text-lg">航天、军工行业上市公司年报分析</span>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">通过实际上市公司（如航天科技集团旗下公司）的年报，学习其在特定高科技服务领域的收入确认披露与实践。</p>
+                            <a href="#" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm transition-colors duration-200"><i class="fas fa-search mr-1"></i> 检索相关年报</a>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-bookmark text-blue-400 mr-3 mt-1"></i>
+                        <div>
+                            <span class="font-semibold text-lg">四大（Big Four）会计师事务所新收入准则专题研究报告</span>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">专业的实务操作指引与案例分析，能提供更详细的实施细节和风险规避建议。</p>
+                            <a href="#" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm transition-colors duration-200"><i class="fas fa-search mr-1"></i> 搜索相关报告</a>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-bookmark text-blue-400 mr-3 mt-1"></i>
+                        <div>
+                            <span class="font-semibold text-lg">IPO审核中收入确认的监管问询案例解析</span>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">特别是针对特殊行业（如高科技、军工）的IPO案例，了解监管机构的关注点和问询模式。</p>
+                            <a href="#" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm transition-colors duration-200"><i class="fas fa-search mr-1"></i> 查找问询案例</a>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <footer class="text-center text-sm text-gray-500 dark:text-gray-400 mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+                <p>
+                    本文内容仅供参考，不构成专业会计或法律建议。具体业务请咨询专业人士。
+                </p>
+                <div class="mt-4 flex justify-center space-x-4">
+                    <a href="https://github.com/yourprofile" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="mailto:youremail@example.com" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </a>
+                </div>
+            </footer>
+        </article>
+    </main>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid with a default theme (dark mode compatible)
+        const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: currentTheme === 'dark' ? 'dark' : 'default', // 'dark' theme for dark mode, 'default' for light
+            flowchart: {
+                curve: 'basis',
+            },
+            sequence: {
+                diagramMarginX: 50,
+                diagramMarginY: 10,
+                boxTextMargin: 5,
+                noteMargin: 10,
+                messageMargin: 35,
+            },
+            themeVariables: {
+                dark: {
+                    background: '#1a202c', // Dark background for diagram
+                    mainBkg: '#1a202c',
+                    primaryColor: '#4A90E2', // Blue
+                    primaryBorderColor: '#367ACC',
+                    primaryTextColor: '#FFFFFF',
+                    secondaryColor: '#F5A623', // Orange
+                    secondaryBorderColor: '#D68E1B',
+                    secondaryTextColor: '#FFFFFF',
+                    tertiaryColor: '#50E3C2', // Teal
+                    tertiaryBorderColor: '#44CBAA',
+                    tertiaryTextColor: '#2C3E50',
+                    lineColor: '#607D8B',
+                    textColor: '#c9d1d9', // General text color
+                    // Specific overrides for states in the diagram
+                    successColor: '#7ED321', // Green for success
+                    errorColor: '#D0021B', // Red for error
+                    clusterBkg: '#161b22', // Background for clusters
+                    clusterBorder: '#444c56'
+                },
+                default: { // Light mode theme
+                    background: '#ffffff',
+                    mainBkg: '#ffffff',
+                    primaryColor: '#bfdbfe', // Light blue
+                    primaryBorderColor: '#93c5fd',
+                    primaryTextColor: '#1f2937',
+                    secondaryColor: '#fcd34d', // Light orange
+                    secondaryBorderColor: '#fbbf24',
+                    secondaryTextColor: '#1f2937',
+                    tertiaryColor: '#a7f3d0', // Light teal
+                    tertiaryBorderColor: '#6ee7b7',
+                    tertiaryTextColor: '#1f2937',
+                    lineColor: '#6b7280',
+                    textColor: '#1f2937',
+                    successColor: '#84cc16',
+                    errorColor: '#ef4444',
+                    clusterBkg: '#f3f4f6',
+                    clusterBorder: '#d1d5db'
+                }
+            }
+        });
+
+        // Theme Toggle Functionality
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                mermaid.initialize({ theme: 'dark' });
+            } else {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                mermaid.initialize({ theme: 'default' });
+            }
+            // Re-render Mermaid diagram
+            // This is a bit of a hack: destroy and re-create to force re-render with new theme
+            const mermaidContainer = document.querySelector('.mermaid');
+            const mermaidCode = mermaidContainer.innerHTML;
+            mermaidContainer.innerHTML = ''; // Clear content
+            mermaid.render('chart', mermaidCode, (svgCode) => {
+                mermaidContainer.innerHTML = svgCode;
+            });
+
+        }
+
+        // Check for saved theme preference or system preference
+        if (localStorage.getItem('theme')) {
+            applyTheme(localStorage.getItem('theme'));
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            applyTheme('dark');
+        } else {
+            applyTheme('light');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                applyTheme('light');
+            } else {
+                applyTheme('dark');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Optional: Intersection Observer for subtle fade-in effects (for sections)
+        const sections = document.querySelectorAll('section, article');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                    observer.unobserve(entry.target); // Stop observing once animated
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            section.classList.add('opacity-0', 'transform', 'translate-y-4', 'transition-all', 'duration-700');
+            observer.observe(section);
+        });
+
+        // Add Tailwind classes for fade-in effect (needs custom CSS if not defined)
+        // For this example, I'll define it in the <style> tag
+    </script>
+    <style>
+        .animate-fade-in-up {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+    </style>
+</body>
+</html>
+```
