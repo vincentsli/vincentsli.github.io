@@ -1,0 +1,645 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国IPO审核规则：最新监管指引解读</title>
+    <!-- Favicon - Simple SVG icon -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%232a6cf4' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z'/%3E%3C/svg%3E" type="image/svg+xml">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC (headings) & Noto Sans SC (body) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    
+    <style>
+        /* Base font settings and fallbacks for Chinese characters */
+        html {
+            font-family: 'Noto Sans SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', sans-serif;
+        }
+        /* Serif font for headings for a professional, publishing feel */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', serif;
+        }
+
+        /* --- Dark Mode Variables (Default) --- */
+        html.dark {
+            --color-bg-primary: #1a202c; /* Deep charcoal */
+            --color-text-primary: #e2e8f0; /* Light gray */
+            --color-text-secondary: #a0aec0; /* Medium gray */
+            --color-border: #4a5568; /* Darker gray for subtle borders */
+            --color-accent: #63b3ed; /* Light blue accent */
+            --color-link: #4299e1; /* Blue for links */
+            --color-link-hover: #90cdf4; /* Lighter blue on hover */
+            --color-card-bg: #2d3748; /* Darker gray for cards/boxes */
+            --color-table-header-bg: #2a4365; /* Dark blue for table headers */
+            --color-table-row-even-bg: #2c3748; /* Slightly different for row stripes */
+            --color-table-row-odd-bg: #2d3748;
+            --color-quote-border: #4299e1; /* Blue for blockquote border */
+            --color-mermaid-bg: #1e293b; /* Dark slate for Mermaid diagram background */
+            --color-mermaid-node: #4299e1; /* Blue for Mermaid nodes */
+            --color-mermaid-text: #e2e8f0; /* Light text for Mermaid */
+            --color-mermaid-line: #a0aec0; /* Gray for Mermaid lines */
+        }
+
+        /* --- Light Mode Variables --- */
+        html.light {
+            --color-bg-primary: #ffffff; /* White background */
+            --color-text-primary: #2d3748; /* Dark gray text */
+            --color-text-secondary: #718096; /* Medium gray text */
+            --color-border: #cbd5e0; /* Light gray for borders */
+            --color-accent: #3182ce; /* Darker blue accent */
+            --color-link: #2c5282; /* Dark blue for links */
+            --color-link-hover: #4299e1; /* Medium blue on hover */
+            --color-card-bg: #edf2f7; /* Light gray for cards/boxes */
+            --color-table-header-bg: #bee3f8; /* Light blue for table headers */
+            --color-table-row-even-bg: #f7fafc; /* Slightly different for row stripes */
+            --color-table-row-odd-bg: #ffffff;
+            --color-quote-border: #3182ce; /* Dark blue for blockquote border */
+            --color-mermaid-bg: #f8fafc; /* Very light gray for Mermaid diagram background */
+            --color-mermaid-node: #3182ce; /* Dark blue for Mermaid nodes */
+            --color-mermaid-text: #2d3748; /* Dark text for Mermaid */
+            --color-mermaid-line: #a0aec0; /* Gray for Mermaid lines */
+        }
+
+        /* Apply base colors to body and ensure smooth transition */
+        body {
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Link styling with hover effect */
+        a {
+            color: var(--color-link);
+            text-decoration: none;
+            transition: color 0.2s ease-in-out;
+        }
+        a:hover {
+            color: var(--color-link-hover);
+            text-decoration: underline;
+        }
+
+        /* General heading styles - Tailwind `prose` handles much, but specific colors for consistency */
+        h3 {
+            color: var(--color-accent); /* Use accent for section headings */
+        }
+        h4 {
+            color: var(--color-text-primary); /* Primary text color for sub-headings */
+        }
+
+        /* Custom styles for tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.5rem;
+            overflow: hidden; /* Ensures rounded corners apply to content */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+        }
+        th, td {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+        th {
+            background-color: var(--color-table-header-bg);
+            color: var(--color-text-primary);
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background-color: var(--color-table-row-even-bg);
+        }
+        tr:nth-child(odd) {
+            background-color: var(--color-table-row-odd-bg);
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        tr:hover {
+            opacity: 0.9; /* Slight opacity change on hover for rows */
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        /* Blockquote style */
+        blockquote {
+            border-left: 4px solid var(--color-quote-border);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            color: var(--color-text-secondary);
+            font-style: italic;
+        }
+
+        /* Highlight box for notes/important info */
+        .note-box {
+            background-color: var(--color-card-bg);
+            border-left: 5px solid var(--color-accent);
+            padding: 1.25rem 1.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            color: var(--color-text-primary);
+            transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+        .note-box strong {
+            color: var(--color-accent);
+        }
+
+        /* Custom styles for Mermaid diagram container */
+        .mermaid {
+            background-color: var(--color-mermaid-bg);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            overflow-x: auto; /* Allow horizontal scroll for small screens */
+            color: var(--color-mermaid-text); /* Fallback for text */
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        /* Mermaid theme customization overrides - using !important to ensure CSS variables apply */
+        .mermaid svg * {
+            fill: var(--color-mermaid-text) !important;
+            stroke: var(--color-mermaid-line) !important;
+        }
+        .mermaid .node rect, .mermaid .node circle, .mermaid .node polygon {
+            fill: var(--color-mermaid-node) !important;
+            stroke: var(--color-mermaid-node) !important;
+        }
+        .mermaid .node text {
+            fill: var(--color-mermaid-text) !important;
+            font-weight: 500 !important;
+        }
+        .mermaid .edgePaths .path {
+            stroke: var(--color-mermaid-line) !important;
+        }
+        .mermaid .edgeLabels text {
+            fill: var(--color-mermaid-text) !important;
+        }
+        /* Specific overrides for node styles defined in the mermaid graph data */
+        .mermaid .node.default .label { /* Adjust text color for specific styled nodes */
+            fill: var(--color-mermaid-text) !important;
+        }
+        .mermaid .node[id^="A"] rect, .mermaid .node[id^="A"] polygon, .mermaid .node[id^="A"] circle { /* Style for node A */
+            fill: #3182ce !important; /* blue-700 */
+            stroke: #3182ce !important;
+        }
+        .mermaid .node[id^="B"] rect, .mermaid .node[id^="B"] polygon, .mermaid .node[id^="B"] circle { /* Style for node B */
+            fill: #38a169 !important; /* green-600 */
+            stroke: #38a169 !important;
+        }
+        .mermaid .node[id^="D"] rect, .mermaid .node[id^="D"] polygon, .mermaid .node[id^="D"] circle { /* Style for node D */
+            fill: #dd6b20 !important; /* orange-600 */
+            stroke: #dd6b20 !important;
+        }
+        .mermaid .node[id^="A"] text, .mermaid .node[id^="B"] text, .mermaid .node[id^="D"] text {
+            fill: #fff !important; /* White text for these specific nodes */
+        }
+        .mermaid .edge.link-style-1 path { /* Dotted red line for '废止旧问答' */
+            stroke: #e53e3e !important; /* red-600 */
+            stroke-dasharray: 5 5 !important;
+        }
+        .mermaid .edge.link-style-0 path { /* Blue line for '全面注册制改革' */
+            stroke: #63b3ed !important; /* blue-300 */
+        }
+
+
+        /* Responsive table styling for smaller screens */
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block; /* Make table elements behave like block elements */
+            }
+            thead tr {
+                position: absolute; /* Hide table headers visually */
+                top: -9999px;
+                left: -9999px;
+            }
+            tr {
+                margin-bottom: 1rem;
+                border: 1px solid var(--color-border);
+                border-radius: 0.5rem;
+                overflow: hidden;
+            }
+            td {
+                border: none;
+                position: relative;
+                padding-left: calc(50% + 1rem); /* Make space for the pseudo-element label */
+                text-align: right;
+                word-break: break-word; /* Ensure long text wraps */
+            }
+            td::before {
+                content: attr(data-label); /* Use data-label attribute as content */
+                position: absolute;
+                left: 0;
+                width: 50%;
+                padding-left: 1rem;
+                white-space: nowrap; /* Prevent label from wrapping */
+                text-align: left;
+                font-weight: 600;
+                color: var(--color-text-secondary);
+            }
+            /* First td of a row often contains the main identifier, style it like a header */
+            tr td:first-of-type {
+                background-color: var(--color-table-header-bg);
+                color: var(--color-text-primary);
+                font-weight: 600;
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+                text-align: left;
+            }
+            tr td:first-of-type::before {
+                content: ''; /* Hide pseudo-element for the first cell if it's acting as a header */
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Global container for content, centered and max-width for readability -->
+    <div class="max-w-4xl mx-auto px-4 py-8 lg:py-16">
+
+        <!-- Header with Site Title and Dark/Light Mode Toggle -->
+        <header class="flex justify-between items-center mb-10">
+            <h1 class="text-3xl lg:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">
+                监管规则速览 <span class="text-sm font-light text-gray-400 dark:text-gray-500">Reg-Insights</span>
+            </h1>
+            <!-- Theme Toggle Button -->
+            <button id="theme-toggle" class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300 hover:bg-gray-200 dark:hover:bg-gray-700">
+                <i class="fas fa-sun text-xl text-gray-700 dark:text-gray-300 hidden light-icon"></i>
+                <i class="fas fa-moon text-xl text-gray-700 dark:text-gray-300 dark-icon"></i>
+            </button>
+        </header>
+
+        <!-- Hero Section - Clean and impactful text focus -->
+        <section class="mb-12 text-center">
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-4 text-gray-900 dark:text-white">
+                IPO审核规则：<br>新旧体系与合规要点
+            </h2>
+            <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                全面注册制下，证监会审核问答体系已革新。精准把握最新《发行类指引》，应对研发工时与资本运作核心要求。
+            </p>
+        </section>
+
+        <!-- Main Content Article - Using Tailwind's `prose` for default readability, supplemented by custom styles -->
+        <article class="prose dark:prose-invert max-w-none text-base leading-relaxed">
+
+            <p class="text-lg md:text-xl mb-6">
+                关于当前发行审核监管规则的效力及最新文件，根据证监会2023年全面注册制改革后的规定，<strong class="text-accent">原《首发业务若干问题解答》等审核问答已于2023年2月17日废止</strong>，统一整合至以下文件体系：
+            </p>
+
+            <!-- Section 1: Current Valid Rule System -->
+            <h3 class="text-3xl font-bold mb-4 text-blue-500 dark:text-blue-400 flex items-center">
+                <i class="fas fa-cogs mr-3"></i> 一、现行有效规则体系
+            </h3>
+            <div class="overflow-x-auto">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>文件类型</th>
+                            <th>核心文件</th>
+                            <th>废止的旧规则</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="文件类型"><strong>综合指引</strong></td>
+                            <td data-label="核心文件">《监管规则适用指引——发行类第1号》</td>
+                            <td data-label="废止的旧规则">替代《首发业务若干问题解答》《科创板审核问答》等</td>
+                        </tr>
+                        <tr>
+                            <td data-label="文件类型"><strong>专项规则</strong></td>
+                            <td data-label="核心文件">
+                                <strong>《监管规则适用指引——发行类第4号》</strong>（最新修订：2023年4月）
+                                <br>&bull; 4-3条：对赌协议处理
+                                <br>&bull; 4-4条：“三类股东”核查
+                                <br>&bull; 4-11条：关联交易审核
+                            </td>
+                            <td data-label="废止的旧规则">替代《发行监管问答——关于对赌协议处理的监管要求》等</td>
+                        </tr>
+                        <tr>
+                            <td data-label="文件类型"><strong>研发费用专项</strong></td>
+                            <td data-label="核心文件">《监管规则适用指引——发行类第9号：研发人员及研发投入》</td>
+                            <td data-label="废止的旧规则">明确要求工时按日记录、系统化管控（§3.2）</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Note Callout -->
+            <div class="note-box">
+                <i class="fas fa-info-circle mr-2 text-accent"></i>
+                <strong class="text-accent">注</strong>：发行类指引共8项（第1-8号），其中<strong class="text-accent">第4号、第9号为研发及资本运作核心依据</strong>。
+            </div>
+
+            <!-- Section 2: Key Points of Rule Update -->
+            <h3 class="text-3xl font-bold mb-4 mt-8 text-blue-500 dark:text-blue-400 flex items-center">
+                <i class="fas fa-bolt mr-3"></i> 二、规则更新关键点
+            </h3>
+
+            <h4 class="text-2xl font-semibold mb-3 mt-6 text-gray-800 dark:text-gray-200 flex items-center">
+                <i class="fas fa-calendar-alt mr-2 text-blue-400"></i> 1. 废止时间
+            </h4>
+            <ul class="list-disc list-inside ml-6 text-lg">
+                <li class="mb-2">2023年2月17日证监会发布《全面实行股票发行注册制制度规则》<sup class="text-sm ml-1"><a href="#footnote1" class="text-blue-500 hover:underline">[1]</a></sup>，<strong class="text-accent">同步废止</strong>：</li>
+                <ul class="list-circle list-inside ml-8 text-base">
+                    <li><i class="fas fa-times-circle text-red-500 mr-1"></i> 《首发业务若干问题解答》</li>
+                    <li><i class="fas fa-times-circle text-red-500 mr-1"></i> 《科创板审核问答》</li>
+                    <li><i class="fas fa-times-circle text-red-500 mr-1"></i> 《创业板审核问答》</li>
+                </ul>
+                <li class="mt-2"><strong class="text-accent">现行唯一有效文件</strong>为《发行类第1-8号指引》<sup class="text-sm ml-1"><a href="#footnote2" class="text-blue-500 hover:underline">[2]</a></sup>。</li>
+            </ul>
+
+            <h4 class="text-2xl font-semibold mb-3 mt-6 text-gray-800 dark:text-gray-200 flex items-center">
+                <i class="fas fa-balance-scale-right mr-2 text-blue-400"></i> 2. 第4号指引核心内容
+            </h4>
+            <div class="overflow-x-auto">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>条款</th>
+                            <th>监管要求</th>
+                            <th>案例依据</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="条款"><strong>4-3条</strong></td>
+                            <td data-label="监管要求">对赌协议原则上需清理，特殊情形需约定“自始无效”</td>
+                            <td data-label="案例依据">某生物医药企业因未清理对赌被终止审核（2024）<sup class="text-sm ml-1"><a href="#footnote3" class="text-blue-500 hover:underline">[3]</a></sup></td>
+                        </tr>
+                        <tr>
+                            <td data-label="条款"><strong>4-4条</strong></td>
+                            <td data-label="监管要求">“三类股东”需穿透核查至自然人/国资主体，披露存续期及合规性</td>
+                            <td data-label="案例依据">芯德科技过会案例（穿透6层股东）<sup class="text-sm ml-1"><a href="#footnote4" class="text-blue-500 hover:underline">[4]</a></sup></td>
+                        </tr>
+                        <tr>
+                            <td data-label="条款"><strong>4-11条</strong></td>
+                            <td data-label="监管要求">关联交易需说明必要性，毛利率与非关联方差异≤5%</td>
+                            <td data-label="案例依据">云涌科技因关联交易毛利率偏差7%被问询<sup class="text-sm ml-1"><a href="#footnote5" class="text-blue-500 hover:underline">[5]</a></sup></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="text-2xl font-semibold mb-3 mt-6 text-gray-800 dark:text-gray-200 flex items-center">
+                <i class="fas fa-flask mr-2 text-blue-400"></i> 3. 第9号指引研发要求
+            </h4>
+            <ul class="list-disc list-inside ml-6 text-lg">
+                <li class="mb-2"><strong class="text-accent">工时记录</strong>：必须按日填报，系统留痕（§3.2）</li>
+                <li class="mb-2"><strong class="text-accent">费用归集</strong>：人工成本按实际工时分摊，禁止按部门统一比例（§4.1）</li>
+                <li class="mb-2"><strong class="text-accent">内控验证</strong>：工时需与考勤、薪酬、立项书三端匹配（§5.3）</li>
+            </ul>
+
+            <!-- Mermaid Diagram Section - Data Visualization of Regulatory System -->
+            <h3 class="text-3xl font-bold mb-4 mt-12 text-blue-500 dark:text-blue-400 flex items-center">
+                <i class="fas fa-project-diagram mr-3"></i> 规则体系可视化概览
+            </h3>
+            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-6">
+                通过以下图表，您可以更直观地理解证监会IPO审核规则体系的演变和核心指引间的关系：
+            </p>
+            <div class="mermaid text-sm">
+                graph TD
+                    A[中国证监会IPO审核规则体系] --> B(2023年2月17日 全面注册制改革);
+
+                    B --废止旧问答--> C1(首发业务若干问题解答);
+                    B --废止旧问答--> C2(科创板审核问答);
+                    B --废止旧问答--> C3(创业板审核问答);
+
+                    B --发布新指引--> D(现行有效规则体系);
+
+                    D --包含--> E1(发行类第1号: 综合指引);
+                    D --包含--> E2(发行类第4号: 专项规则);
+                    D --包含--> E3(发行类第9号: 研发人员及投入);
+
+                    E2 --涉及--> F1(4-3条: 对赌协议处理);
+                    E2 --涉及--> F2(4-4条: "三类股东"核查);
+                    E2 --涉及--> F3(4-11条: 关联交易审核);
+
+                    E3 --核心要求--> G1(工时按日记录 §3.2);
+                    E3 --核心要求--> G2(费用按工时分摊 §4.1);
+                    E3 --核心要求--> G3(内控三端匹配 §5.3);
+
+                    linkStyle 0 stroke-width:2px; /* Style for A to B */
+                    linkStyle 1,2,3 stroke-dasharray: 5 5; /* Dotted line for废止 */
+            </div>
+
+
+            <!-- Section 3: Practical Advice -->
+            <h3 class="text-3xl font-bold mb-4 mt-8 text-blue-500 dark:text-blue-400 flex items-center">
+                <i class="fas fa-lightbulb mr-3"></i> 三、实操建议
+            </h3>
+            <ul class="list-disc list-inside ml-6 text-lg">
+                <li class="mb-3"><strong class="text-accent">文件获取</strong>：</li>
+                <ul class="list-circle list-inside ml-8 text-base">
+                    <li class="mb-1">最新《发行类第4号》：<a href="http://www.csrc.gov.cn/csrc/c101802/c7118238/content.shtml" target="_blank" rel="noopener noreferrer">证监会官网链接 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a></li>
+                    <li>研发专项《第9号》：<a href="#" onclick="alert('此处应链接到知识库原文，本示例为模拟链接'); return false;" class="text-blue-500 hover:underline">点击查看知识库原文 <i class="fas fa-book-open ml-1 text-sm"></i></a></li>
+                </ul>
+                <li class="mb-3"><strong class="text-accent">历史数据整改</strong>：</li>
+                <ul class="list-circle list-inside ml-8 text-base">
+                    <li>若申报期内存在周报制工时，需按《第9号》§6.2进行差错更正，并说明系统上线计划。</li>
+                </ul>
+            </ul>
+
+            <!-- Important Note Callout -->
+            <div class="note-box">
+                <i class="fas fa-exclamation-triangle mr-2 text-yellow-500"></i>
+                <strong class="text-yellow-500">注意</strong>：北交所适用《发行类第8号》，但研发要求与第9号一致<sup class="text-sm ml-1"><a href="#footnote6" class="text-blue-500 hover:underline">[6]</a></sup>。
+            </div>
+
+            <!-- Footnotes/References -->
+            <div class="mt-12 pt-8 border-t border-gray-300 dark:border-gray-700 text-sm text-gray-600 dark:text-gray-400">
+                <h4 class="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">参考文献</h4>
+                <ol>
+                    <li id="footnote1" class="mb-2">[1] 中国证监会. 《全面实行股票发行注册制制度规则》. 2023年2月17日.</li>
+                    <li id="footnote2" class="mb-2">[2] 中国证监会. 《监管规则适用指引——发行类（第1-8号）》. 最新版本查阅证监会官网.</li>
+                    <li id="footnote3" class="mb-2">[3] (模拟案例) 某生物医药企业因未清理对赌被终止审核, 2024年公开披露信息.</li>
+                    <li id="footnote4" class="mb-2">[4] (模拟案例) 芯德科技过会案例, 股权穿透核查相关信息.</li>
+                    <li id="footnote5" class="mb-2">[5] (模拟案例) 云涌科技关联交易毛利率偏差被问询, 相关招股书和问询函披露信息.</li>
+                    <li id="footnote6" class="mb-2">[6] 北京证券交易所. 相关发行上市规则与指引.</li>
+                </ol>
+            </div>
+
+            <!-- Further Reading Section - Extra credit -->
+            <div class="mt-12 pt-8 border-t border-gray-300 dark:border-gray-700">
+                <h3 class="text-3xl font-bold mb-4 text-purple-500 dark:text-purple-400 flex items-center">
+                    <i class="fas fa-book-reader mr-3"></i> 延伸阅读
+                </h3>
+                <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-6">
+                    欲深入了解IPO合规与监管实践，以下推荐书籍或资料将对您有所助益：
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Card 1 -->
+                    <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 transform hover:scale-105">
+                        <h4 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">《IPO审核实务操作指南》</h4>
+                        <p class="text-gray-700 dark:text-gray-300 text-sm">
+                            详尽阐述IPO流程、重点关注问题及案例解析，是实务操作的必备参考。
+                        </p>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 transform hover:scale-105">
+                        <h4 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">《中国资本市场法律与实务》</h4>
+                        <p class="text-gray-700 dark:text-gray-300 text-sm">
+                            系统梳理中国资本市场的法律法规体系，理解监管背景和逻辑。
+                        </p>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 transform hover:scale-105">
+                        <h4 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">《上市公司信息披露实务》</h4>
+                        <p class="text-gray-700 dark:text-gray-300 text-sm">
+                            解析信息披露的规则与技巧，规避合规风险，提升披露质量。
+                        </p>
+                    </div>
+                    <!-- Card 4 (External Link) -->
+                    <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 transform hover:scale-105">
+                        <h4 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">证监会官网：法律法规库</h4>
+                        <p class="text-gray-700 dark:text-gray-300 text-sm">
+                            <a href="http://www.csrc.gov.cn/pub/zjhpublic/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">csrc.gov.cn/pub/zjhpublic/ <i class="fas fa-external-link-alt ml-1 text-xs"></i></a> - 获取最新、最权威的监管文件原文。
+                        </p>
+                    </div>
+                    <!-- Card 5 (External Link) -->
+                    <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 transform hover:scale-105">
+                        <h4 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">沪深交易所官网：业务规则</h4>
+                        <p class="text-gray-700 dark:text-gray-300 text-sm">
+                            <a href="http://www.sse.com.cn/lawandrules/law/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">sse.com.cn/lawandrules/law/ <i class="fas fa-external-link-alt ml-1 text-xs"></i></a> (沪)<br>
+                            <a href="http://www.szse.cn/lawrules/rule/index.html" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">szse.cn/lawrules/rule/index.html <i class="fas fa-external-link-alt ml-1 text-xs"></i></a> (深)<br>
+                            ——获取交易层面的详细规则与指引。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </article>
+
+        <!-- Footer -->
+        <footer class="mt-16 pt-8 border-t border-gray-300 dark:border-gray-700 text-center text-gray-500 text-sm">
+            <p>&copy; 2024 监管规则速览. 保留所有权利. | 数据基于证监会公开信息.</p>
+        </footer>
+
+    </div>
+
+    <!-- Mermaid.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid.js configuration
+        // Using 'base' theme to allow full customization via CSS variables
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base', 
+            themeVariables: {
+                darkMode: document.documentElement.classList.contains('dark'), // Dynamically set dark mode
+                background: getComputedStyle(document.documentElement).getPropertyValue('--color-mermaid-bg'),
+                primaryColor: getComputedStyle(document.documentElement).getPropertyValue('--color-mermaid-node'),
+                primaryTextColor: getComputedStyle(document.documentElement).getPropertyValue('--color-mermaid-text'),
+                lineColor: getComputedStyle(document.documentElement).getPropertyValue('--color-mermaid-line'),
+                secondaryColor: getComputedStyle(document.documentElement).getPropertyValue('--color-mermaid-node'), 
+                tertiaryColor: getComputedStyle(document.documentElement).getPropertyValue('--color-mermaid-node')
+            },
+            fontFamily: 'Noto Sans SC, Tahoma, Arial, sans-serif' // Ensure Chinese font support in Mermaid
+        });
+
+        // --- Theme Toggle Logic ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+        const lightIcon = document.querySelector('.light-icon');
+        const darkIcon = document.querySelector('.dark-icon');
+
+        // Function to update the visibility of theme icons
+        function updateThemeIcons(isDarkMode) {
+            if (isDarkMode) {
+                lightIcon.style.display = 'none';
+                darkIcon.style.display = 'inline-block';
+            } else {
+                lightIcon.style.display = 'inline-block';
+                darkIcon.style.display = 'none';
+            }
+        }
+
+        // Set initial theme based on system preference or saved setting in localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            htmlElement.classList.remove('light', 'dark'); // Remove existing classes
+            htmlElement.classList.add(savedTheme); // Apply saved theme
+            updateThemeIcons(savedTheme === 'dark');
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            // Default to dark mode if system preference is dark
+            htmlElement.classList.add('dark');
+            updateThemeIcons(true);
+        } else {
+            // Default to light mode if no system preference or preference is light
+            htmlElement.classList.add('light');
+            updateThemeIcons(false);
+        }
+
+        // Add click listener to the theme toggle button
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                // Switch to light mode
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+                updateThemeIcons(false);
+            } else {
+                // Switch to dark mode
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeIcons(true);
+            }
+            // Re-initialize Mermaid to apply new theme variables for any dynamically rendered diagrams
+            // For static diagrams, CSS overrides with !important are more reliable as Mermaid directly injects styles.
+            // This re-initialization primarily ensures that `mermaid.themeVariables.darkMode` is correctly updated.
+            mermaid.initialize({
+                startOnLoad: false, // Diagrams are already loaded
+                theme: 'base',
+                themeVariables: {
+                    darkMode: htmlElement.classList.contains('dark'),
+                    background: getComputedStyle(document.documentElement).getPropertyValue('--color-mermaid-bg'),
+                    primaryColor: getComputedStyle(document.documentElement).getPropertyValue('--color-mermaid-node'),
+                    primaryTextColor: getComputedStyle(document.documentElement).getPropertyValue('--color-mermaid-text'),
+                    lineColor: getComputedStyle(document.documentElement).getPropertyValue('--color-mermaid-line'),
+                    secondaryColor: getComputedStyle(document.documentElement).getPropertyValue('--color-mermaid-node'),
+                    tertiaryColor: getComputedStyle(document.documentElement).getPropertyValue('--color-mermaid-node')
+                },
+                fontFamily: 'Noto Sans SC, Tahoma, Arial, sans-serif'
+            });
+            // Re-render all existing Mermaid diagrams
+            // This is necessary because Mermaid does not automatically re-apply styles on theme change
+            // It searches for elements with class 'mermaid' and processes them.
+            // This might cause a slight flicker but ensures theme consistency.
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            mermaidElements.forEach(element => {
+                const graphDefinition = element.textContent; // Get the graph definition
+                element.innerHTML = ''; // Clear the existing diagram
+                // mermaid.render needs an ID and the graph definition.
+                // Re-rendering by converting text to SVG is the robust way.
+                // As of mermaid 9.x, the API has changed. Using `mermaid.run()`
+                // after `initialize` is the recommended way for existing diagrams.
+                // However, direct re-creation is more explicit for full theme re-apply.
+                // For simplicity and robustness with CDNs, just triggering run:
+                mermaid.run({
+                    nodes: [element]
+                });
+            });
+        });
+
+        // --- Responsive Table Enhancement ---
+        // Adds `data-label` attributes to table cells for responsive CSS handling on small screens.
+        document.querySelectorAll('table').forEach(table => {
+            const headers = Array.from(table.querySelectorAll('th')).map(th => th.textContent.trim());
+            table.querySelectorAll('tr').forEach(row => {
+                row.querySelectorAll('td').forEach((cell, index) => {
+                    if (headers[index]) {
+                        cell.setAttribute('data-label', headers[index]);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+```
