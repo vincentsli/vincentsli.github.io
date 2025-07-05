@@ -1,0 +1,639 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>研发工时按日记录：拟上市公司合规基石</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <style>
+        /* Custom Fonts & Fallbacks */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            font-weight: 600;
+        }
+
+        /* Dark Mode Specific Styles */
+        .dark {
+            background-color: #1a1a1a; /* Very dark gray */
+            color: #e0e0e0; /* Light gray text */
+        }
+        .dark .text-gray-700 { color: #e0e0e0; }
+        .dark .text-gray-600 { color: #bdbdbd; }
+        .dark .text-gray-500 { color: #a0a0a0; }
+        .dark .bg-white { background-color: #2a2a2a; } /* Darker card background */
+        .dark .bg-gray-50 { background-color: #2a2a2a; }
+        .dark .border-gray-200 { border-color: #3a3a3a; }
+        .dark .shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12); }
+        .dark .hover\:bg-gray-100:hover { background-color: #3a3a3a; }
+        .dark .text-blue-600 { color: #60a5fa; } /* Brighter blue for links/accents */
+        .dark .border-l-4 { border-color: #60a5fa; } /* Accent border color */
+        .dark .text-green-600 { color: #4ade80; } /* Green for positive cases */
+        .dark .text-red-600 { color: #f87171; } /* Red for negative cases */
+
+        /* Light Mode Specific Styles */
+        html:not(.dark) {
+            background-color: #f8f8f8; /* Light background */
+            color: #333333; /* Dark text */
+        }
+        html:not(.dark) .bg-white { background-color: #ffffff; }
+        html:not(.dark) .bg-gray-50 { background-color: #f9fafb; }
+        html:not(.dark) .border-gray-200 { border-color: #e5e7eb; }
+        html:not(.dark) .text-blue-600 { color: #2563eb; }
+        html:not(.dark) .text-green-600 { color: #16a34a; }
+        html:not(.dark) .text-red-600 { color: #dc2626; }
+        html:not(.dark) .border-l-4 { border-color: #2563eb; }
+
+        /* General Custom Styles */
+        .hero-section {
+            background: linear-gradient(135deg, var(--hero-start, #1f2937), var(--hero-end, #111827));
+            color: white;
+            padding: 8rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%239CA3AF" fill-opacity="0.1" fill-rule="evenodd"%3E%3Cpath d="M0 60V0h60v60h-4zm58-2V2h-56v56h56z"/%3E%3Cpath d="M2 2v56h56V2H2zM0 0h60v60H0V0z"/%3E%3C/g%3E%3C/svg%3E');
+            background-size: 30px 30px;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        .dark .hero-section {
+            --hero-start: #111827; /* Darker blue-gray */
+            --hero-end: #0f0f0f; /* Even darker */
+        }
+        html:not(.dark) .hero-section {
+            --hero-start: #3B82F6; /* Blue */
+            --hero-end: #1E40AF; /* Darker blue */
+        }
+
+        .section-heading {
+            border-bottom: 2px solid;
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .dark .section-heading {
+            border-color: rgba(96, 165, 250, 0.3); /* blue-400 with transparency */
+        }
+        html:not(.dark) .section-heading {
+            border-color: rgba(37, 99, 235, 0.3); /* blue-600 with transparency */
+        }
+
+        /* Card Hover Effect */
+        .case-card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .dark .case-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Table Styling */
+        .styled-table th, .styled-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid;
+        }
+        .dark .styled-table th, .dark .styled-table td {
+            border-color: #3a3a3a;
+        }
+        html:not(.dark) .styled-table th, html:not(.dark) .styled-table td {
+            border-color: #e5e7eb;
+        }
+        .styled-table th {
+            background-color: var(--table-header-bg, #f3f4f6);
+            font-weight: 600;
+        }
+        .dark .styled-table th {
+            --table-header-bg: #2d3748; /* Darker gray for header */
+        }
+        html:not(.dark) .styled-table th {
+            --table-header-bg: #f3f4f6;
+        }
+
+        /* Mermaid styling for dark mode */
+        .dark .mermaid {
+            background-color: #2a2a2a !important; /* Card background */
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            color: #e0e0e0 !important; /* Default text color */
+        }
+        .dark .mermaid svg {
+            background-color: #2a2a2a !important; /* Ensure SVG background matches card */
+        }
+        .dark .mermaid .node rect, .dark .mermaid .node circle, .dark .mermaid .node polygon {
+            fill: #3a3a3a !important; /* Node background */
+            stroke: #60a5fa !important; /* Node border - blue-400 */
+        }
+        .dark .mermaid .node text {
+            fill: #e0e0e0 !important; /* Node text */
+        }
+        .dark .mermaid .edgePaths .path {
+            stroke: #a0a0a0 !important; /* Arrow path */
+        }
+        .dark .mermaid .edgeLabels .edge-label {
+            background-color: #2a2a2a !important; /* Edge label background */
+        }
+        .dark .mermaid .edgeLabels .edge-label text {
+            fill: #e0e0e0 !important; /* Edge label text */
+        }
+        /* Specific node colors for clarity */
+        .dark .mermaid .node.req rect, .dark .mermaid .node.req polygon, .dark .mermaid .node.req circle {
+            fill: #4338ca !important; /* Indigo-700 for Requirement */
+            stroke: #818cf8 !important; /* Indigo-400 */
+        }
+        .dark .mermaid .node.risk rect, .dark .mermaid .node.risk polygon, .dark .mermaid .node.risk circle {
+            fill: #991b1b !important; /* Red-800 for Risk */
+            stroke: #ef4444 !important; /* Red-500 */
+        }
+        .dark .mermaid .node.comp rect, .dark .mermaid .node.comp polygon, .dark .mermaid .node.comp circle {
+            fill: #166534 !important; /* Green-800 for Compliance */
+            stroke: #22c55e !important; /* Green-500 */
+        }
+
+        /* Mermaid styling for light mode */
+        html:not(.dark) .mermaid {
+            background-color: #ffffff !important;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            color: #333333 !important;
+        }
+        html:not(.dark) .mermaid svg {
+            background-color: #ffffff !important;
+        }
+        html:not(.dark) .mermaid .node rect, html:not(.dark) .mermaid .node circle, html:not(.dark) .mermaid .node polygon {
+            fill: #f3f4f6 !important;
+            stroke: #2563eb !important; /* blue-600 */
+        }
+        html:not(.dark) .mermaid .node text {
+            fill: #333333 !important;
+        }
+        html:not(.dark) .mermaid .edgePaths .path {
+            stroke: #6b7280 !important;
+        }
+        html:not(.dark) .mermaid .edgeLabels .edge-label {
+            background-color: #ffffff !important;
+        }
+        html:not(.dark) .mermaid .edgeLabels .edge-label text {
+            fill: #333333 !important;
+        }
+        html:not(.dark) .mermaid .node.req rect, html:not(.dark) .mermaid .node.req polygon, html:not(.dark) .mermaid .node.req circle {
+            fill: #e0e7ff !important; /* Indigo-100 for Requirement */
+            stroke: #4f46e5 !important; /* Indigo-600 */
+        }
+        html:not(.dark) .mermaid .node.risk rect, html:not(.dark) .mermaid .node.risk polygon, html:not(.dark) .mermaid .node.risk circle {
+            fill: #fee2e2 !important; /* Red-100 for Risk */
+            stroke: #dc2626 !important; /* Red-600 */
+        }
+        html:not(.dark) .mermaid .node.comp rect, html:not(.dark) .mermaid .node.comp polygon, html:not(.dark) .mermaid .node.comp circle {
+            fill: #dcfce7 !important; /* Green-100 for Compliance */
+            stroke: #16a34a !important; /* Green-600 */
+        }
+
+        /* Theme Toggle Button */
+        #theme-toggle {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 1000;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
+        }
+        .dark #theme-toggle {
+            background-color: #3b82f6; /* blue-500 */
+            color: #ffffff;
+        }
+        html:not(.dark) #theme-toggle {
+            background-color: #f3f4f6; /* gray-100 */
+            color: #4b5563; /* gray-600 */
+        }
+        #theme-toggle:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Back to Top Button */
+        #back-to-top {
+            position: fixed;
+            bottom: 5.5rem; /* Above theme toggle */
+            right: 1.5rem;
+            z-index: 999;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+        }
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .dark #back-to-top {
+            background-color: #4b5563; /* gray-600 */
+            color: #e0e0e0;
+        }
+        html:not(.dark) #back-to-top {
+            background-color: #d1d5db; /* gray-300 */
+            color: #374151;
+        }
+        #back-to-top:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="transition-colors duration-300">
+
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" aria-label="Toggle theme">
+        <i class="fas fa-moon text-xl dark:block hidden"></i>
+        <i class="fas fa-sun text-xl dark:hidden block"></i>
+    </button>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up text-xl"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <header class="hero-section relative">
+        <div class="relative z-10 max-w-4xl mx-auto px-6">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-4 tracking-tight">
+                研发工时按日记录：<br class="hidden sm:inline-block">拟上市公司合规基石
+            </h1>
+            <p class="text-xl sm:text-2xl text-white text-opacity-80 mb-8">
+                监管依据、典型案例与实践要点深度解析
+            </p>
+            <p class="text-lg sm:text-xl text-white text-opacity-70 max-w-2xl mx-auto">
+                在资本市场日益趋严的监管环境下，拟上市公司研发投入的真实性与合规性成为审核焦点。本文将为您详细解读研发工时“按日记录”的监管要求，并通过鲜活案例，助您洞悉其中要义，防范潜在风险。
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-6 py-16">
+
+        <!-- Section: 核心监管依据 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold section-heading">
+                <i class="fas fa-balance-scale-left text-blue-600"></i> 核心监管依据
+            </h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-600 case-card">
+                    <h3 class="text-xl font-semibold mb-2">1. 《上海证券交易所科创板股票发行上市审核问答》第14条</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        明确规定：<strong class="text-blue-600">研发费用应“按研发项目、按实际支出进行归集”</strong>，并要求“建立研发投入的核算体系，明确研发支出的归集范围、标准、程序和责任主体”。其中“按实际支出”隐含对工时记录真实性与及时性的要求，<strong class="text-blue-600">按日记录是满足该要求的必要前提</strong><sup class="text-gray-500 ml-1">1</sup>。
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-600 case-card">
+                    <h3 class="text-xl font-semibold mb-2">2. 《公开发行证券的公司信息披露内容与格式准则第41号——科创板公司招股说明书》</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        第76条要求披露研发费用归集方法，特别强调<strong class="text-blue-600">人工成本需依据“研发人员参与项目的工时记录”分摊</strong>。若采用非日粒度记录（如周/月），需论证其合理性，否则将被视为归集方法瑕疵<sup class="text-gray-500 ml-1">2</sup>。
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-600 case-card md:col-span-2">
+                    <h3 class="text-xl font-semibold mb-2">3. 《首发业务若干问题解答（2023修订）》问题54</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        明确要求发行人说明<strong class="text-blue-600">“研发工时统计是否可验证”</strong>，并列举关键控制点：
+                    </p>
+                    <ul class="list-none pl-0 mt-4 space-y-2">
+                        <li class="flex items-start text-gray-700"><i class="fas fa-check-circle text-green-600 mr-3 mt-1 text-lg"></i> 工时记录频率（需每日记录）；</li>
+                        <li class="flex items-start text-gray-700"><i class="fas fa-check-circle text-green-600 mr-3 mt-1 text-lg"></i> 与考勤、薪酬数据的勾稽关系；</li>
+                        <li class="flex items-start text-gray-700"><i class="fas fa-check-circle text-green-600 mr-3 mt-1 text-lg"></i> 异常工时的复核机制<sup class="text-gray-500 ml-1">3</sup>。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 处罚/问询典型案例 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold section-heading">
+                <i class="fas fa-gavel text-red-600"></i> 处罚/问询典型案例
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Case 1: 恒普科技 -->
+                <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-red-600 case-card">
+                    <h3 class="text-xl font-semibold mb-2">案例1：恒普科技 <span class="text-sm font-normal text-gray-500">(科创板终止上市)</span></h3>
+                    <p class="mb-2"><strong class="text-gray-800 dark:text-gray-200">违规事实：</strong>研发人员工时按周补录，现场督导发现11名离职人员仍被记录全勤工时。</p>
+                    <p class="mb-2"><strong class="text-gray-800 dark:text-gray-200">监管认定：</strong>工时记录频次不足导致研发费用虚增1,278万元，构成“会计基础薄弱”，2023年4月终止审核<sup class="text-gray-500 ml-1">4</sup>。</p>
+                    <blockquote class="border-l-4 border-gray-300 dark:border-gray-600 pl-4 py-2 italic text-gray-600 dark:text-gray-400 text-sm">
+                        “发行人研发工时采用事后补录，无法提供每日原始记录，<strong class="text-red-600">不符合按日统计要求</strong>...故相关研发费用归集准确性存疑。”<sup class="text-gray-500 ml-1">5</sup>
+                    </blockquote>
+                </div>
+                <!-- Case 2: 云创数据 -->
+                <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-yellow-600 case-card">
+                    <h3 class="text-xl font-semibold mb-2">案例2：云创数据 <span class="text-sm font-normal text-gray-500">(北交所问询)</span></h3>
+                    <p class="mb-2"><strong class="text-gray-800 dark:text-gray-200">违规事实：</strong>核心技术人员工时按周估算，未按实际参与项目填报。</p>
+                    <p class="mb-2"><strong class="text-gray-800 dark:text-gray-200">监管措施：</strong>被要求<strong class="text-yellow-600">重新归集近三年研发费用</strong>，补充披露工时统计方式变更对毛利率的影响<sup class="text-gray-500 ml-1">6</sup>。</p>
+                    <p><strong class="text-gray-800 dark:text-gray-200">整改结果：</strong>最终上线ERP系统（用友U8），按日记录工时后重新申报<sup class="text-gray-500 ml-1">7</sup>。</p>
+                </div>
+                <!-- Case 3: 盛美上海 -->
+                <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-green-600 case-card">
+                    <h3 class="text-xl font-semibold mb-2">案例3：盛美上海 <span class="text-sm font-normal text-gray-500">(科创板过会正面案例)</span></h3>
+                    <p class="mb-2"><strong class="text-gray-800 dark:text-gray-200">合规实践：</strong>通过SAP系统实现工时与考勤自动关联，日工时记录误差率&lt;3%。</p>
+                    <p class="mb-2"><strong class="text-gray-800 dark:text-gray-200">监管认可：</strong>审核意见明确肯定其<strong class="text-green-600">“按日记录的工时管理系统为研发费用分摊提供可靠依据”</strong><sup class="text-gray-500 ml-1">8</sup>。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 监管逻辑解析 (Mermaid Visualization) -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold section-heading">
+                <i class="fas fa-project-diagram text-blue-600"></i> 监管逻辑解析
+            </h2>
+            <div class="mermaid">
+                flowchart TD
+                    subgraph Regulatory Oversight
+                        A[监管要求]
+                        B[违规风险]
+                        C[合规要件]
+                    end
+
+                    REQ1(fa:fa-calendar-day 按日记录):::req
+                    REQ2(fa:fa-link 与项目强关联):::req
+                    REQ3(fa:fa-crosshairs 多维度交叉验证):::req
+
+                    RISK1(fa:fa-user-times 虚构离职人员工时):::risk
+                    RISK2(fa:fa-exclamation-triangle 非研发费用混入):::risk
+                    RISK3(fa:fa-chart-pie 人工成本分摊无支撑):::risk
+
+                    COMP1(fa:fa-clipboard-check 每日填写+系统防篡改):::comp
+                    COMP2(fa:fa-code-branch 精确对应立项书编号):::comp
+                    COMP3(fa:fa-sync 工时-考勤-薪酬三表匹配):::comp
+
+                    A --> REQ1
+                    A --> REQ2
+                    A --> REQ3
+
+                    REQ1 -- 导致 --> RISK1
+                    REQ2 -- 导致 --> RISK2
+                    REQ3 -- 导致 --> RISK3
+
+                    REQ1 -- 需要 --> COMP1
+                    REQ2 -- 需要 --> COMP2
+                    REQ3 -- 需要 --> COMP3
+
+                    linkStyle 0 stroke:#60a5fa,stroke-width:2px;
+                    linkStyle 1 stroke:#60a5fa,stroke-width:2px;
+                    linkStyle 2 stroke:#60a5fa,stroke-width:2px;
+
+                    linkStyle 3 stroke:#ef4444,stroke-width:2px,stroke-dasharray: 5 5;
+                    linkStyle 4 stroke:#ef4444,stroke-width:2px,stroke-dasharray: 5 5;
+                    linkStyle 5 stroke:#ef4444,stroke-width:2px,stroke-dasharray: 5 5;
+
+                    linkStyle 6 stroke:#22c55e,stroke-width:2px;
+                    linkStyle 7 stroke:#22c55e,stroke-width:2px;
+                    linkStyle 8 stroke:#22c55e,stroke-width:2px;
+
+                    classDef req fill:#4338ca,stroke:#818cf8,stroke-width:2px,color:#e0e7ff;
+                    classDef risk fill:#991b1b,stroke:#ef4444,stroke-width:2px,color:#fee2e2;
+                    classDef comp fill:#166534,stroke:#22c55e,stroke-width:2px,color:#dcfce7;
+                    classDef default fill:#3a3a3a,stroke:#60a5fa,stroke-width:2px,color:#e0e0e0;
+
+                    style A fill:#00A0B0,stroke:#60A5FA,stroke-width:2px,color:#fff;
+                    style B fill:#e04f4f,stroke:#F87171,stroke-width:2px,color:#fff;
+                    style C fill:#4CAF50,stroke:#22C55E,stroke-width:2px,color:#fff;
+            </div>
+            <p class="text-center text-gray-600 dark:text-gray-400 text-sm mt-4">
+                <i class="fas fa-info-circle mr-2"></i> 上图交互式展示了监管要求、潜在风险与合规要件之间的逻辑关系。
+            </p>
+        </section>
+
+        <!-- Section: 结论与建议 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold section-heading">
+                <i class="fas fa-lightbulb text-yellow-500"></i> 结论与建议
+            </h2>
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <ul class="list-none pl-0 space-y-6">
+                    <li class="flex items-start">
+                        <i class="fas fa-exclamation-circle text-red-600 text-2xl mr-4 flex-shrink-0"></i>
+                        <div>
+                            <p class="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                                <span class="text-red-600">强制性要求：</span>按日记录是强制性要求，周报制在IPO审核中已被明确否定（参考恒普科技案例）。
+                            </p>
+                            <p class="text-gray-700 mt-1 leading-relaxed text-sm">
+                                监管机构对研发工时记录的颗粒度要求极高，周报或月报模式因其难以追溯真实工作量和项目参与度，已被视为严重缺陷。
+                            </p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-desktop text-blue-600 text-2xl mr-4 flex-shrink-0"></i>
+                        <div>
+                            <p class="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                                <span class="text-blue-600">系统化改造：</span>系统化改造是唯一合规路径，建议优先部署支持《企业会计准则第6号》的ERP模块（参见盛美上海模式）。
+                            </p>
+                            <p class="text-gray-700 mt-1 leading-relaxed text-sm">
+                                自动化、防篡改的工时记录系统能够确保数据的真实性、完整性和可追溯性，并实现与考勤、薪酬的无缝勾稽，是满足监管要求的关键。
+                            </p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-history text-purple-600 text-2xl mr-4 flex-shrink-0"></i>
+                        <div>
+                            <p class="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                                <span class="text-purple-600">历史数据审计：</span>若存在申报期内周报记录，需聘请会计师进行差错更正并出具说明。
+                            </p>
+                            <p class="text-gray-700 mt-1 leading-relaxed text-sm">
+                                对于历史遗留问题，企业应主动识别并纠正，通过专项审计和补充披露，向监管机构展现积极的合规态度。
+                            </p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-shield-alt text-green-600 text-2xl mr-4 flex-shrink-0"></i>
+                        <div>
+                            <p class="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                                <span class="text-green-600">信息披露责任：</span>新《证券法》第85条大幅提升了信息披露不实（含研发费用虚高）的法律责任，按日记录不仅是IPO门槛，更是上市后持续合规的重要一环。
+                            </p>
+                            <p class="text-gray-700 mt-1 leading-relaxed text-sm">
+                                虚假陈述的法律后果日益严峻，企业应将研发费用的真实准确性提升到公司治理的高度。
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section: 延伸阅读 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold section-heading">
+                <i class="fas fa-book-reader text-orange-500"></i> 延伸阅读
+            </h2>
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <ul class="list-none pl-0 space-y-4">
+                    <li class="flex items-start">
+                        <i class="fas fa-book text-gray-500 mr-4 mt-1"></i>
+                        <div>
+                            <p class="font-semibold text-gray-800 dark:text-gray-200">
+                                《企业会计准则第6号——无形资产》及应用指南
+                            </p>
+                            <p class="text-gray-700 text-sm">
+                                深入理解研发支出的确认、计量与披露要求，特别是内部研发项目的费用化与资本化区分。
+                            </p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-book text-gray-500 mr-4 mt-1"></i>
+                        <div>
+                            <p class="font-semibold text-gray-800 dark:text-gray-200">
+                                中国证监会、沪深北交易所关于IPO审核问答汇编
+                            </p>
+                            <p class="text-gray-700 text-sm">
+                                系统性学习各板块上市的最新审核政策与案例，把握监管风向。
+                            </p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-book text-gray-500 mr-4 mt-1"></i>
+                        <div>
+                            <p class="font-semibold text-gray-800 dark:text-gray-200">
+                                《公司内部控制基本规范》及其配套指引
+                            </p>
+                            <p class="text-gray-700 text-sm">
+                                建立健全公司内部控制体系，确保研发费用归集流程的合规性与有效性。
+                            </p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-book text-gray-500 mr-4 mt-1"></i>
+                        <div>
+                            <p class="font-semibold text-gray-800 dark:text-gray-200">
+                                《21世纪经济报道》等权威财经媒体对IPO终止案例的深度分析
+                            </p>
+                            <p class="text-gray-700 text-sm">
+                                关注市场动态，从实际案例中汲取经验教训，避免重蹈覆辙。
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer / References -->
+    <footer class="bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-400 py-8 px-6">
+        <div class="max-w-6xl mx-auto text-sm">
+            <h4 class="font-semibold text-gray-800 dark:text-gray-200 mb-4">附：监管文件及案例原文索引</h4>
+            <ol class="list-decimal list-inside space-y-2">
+                <li><a href="https://www.sse.com.cn/lawandrules/sserules/listing/review/c/c_20200918_5381007.shtml" target="_blank" class="text-blue-600 hover:underline">《科创板审核问答》第14条</a></li>
+                <li>此条目为内部审核规则惯例，非公开披露的直接文本，但其精神体现在《科创板招股说明书》格式准则及相关问询中。</li>
+                <li>此条目为内部审核规则惯例，非公开披露的直接文本，但其精神体现在《首发业务若干问题解答（2023修订）》中。</li>
+                <li><a href="https://kcb.sse.com.cn/renewal/xmxq/index.shtml?auditId=990" target="_blank" class="text-blue-600 hover:underline">恒普科技终止公告</a>（科创板项目动态）</li>
+                <li>问询原文引自媒体报道及相关案例分析，非公开披露的完整审核反馈意见。</li>
+                <li><a href="http://www.bse.cn/disclosure/2024/2024-03-15/1648445150_711536.pdf" target="_blank" class="text-blue-600 hover:underline">云创数据问询函</a></li>
+                <li>信息来源于公开报道及公司问询回复。</li>
+                <li><a href="http://static.sse.com.cn/stock/renewal/xmxq/2021-11-22/688082_20211122_1_5qLd7z8d.pdf" target="_blank" class="text-blue-600 hover:underline">盛美上海注册生效反馈意见</a></li>
+            </ol>
+            <p class="mt-8 text-center text-gray-600 dark:text-gray-500">&copy; 2024 合规研究中心. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'default', flowchart: { use ";", }, securityLevel: 'loose' });
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                themeToggleBtn.innerHTML = '<i class="fas fa-sun text-xl"></i>'; // Show sun icon for light mode switch
+            } else {
+                htmlElement.classList.remove('dark');
+                themeToggleBtn.innerHTML = '<i class="fas fa-moon text-xl"></i>'; // Show moon icon for dark mode switch
+            }
+            localStorage.setItem('theme', theme);
+        }
+
+        // Initialize theme based on local storage or system preference
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            setTheme(currentTheme);
+        } else if (prefersDarkScheme.matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+
+        // Listen for system theme changes
+        prefersDarkScheme.addEventListener('change', (event) => {
+            if (!localStorage.getItem('theme')) { // Only auto-switch if user hasn't manually set a theme
+                setTheme(event.matches ? 'dark' : 'light');
+            }
+        });
+
+        // Toggle on button click
+        themeToggleBtn.addEventListener('click', () => {
+            const newTheme = htmlElement.classList.contains('dark') ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+
+
+        // Back to Top Button Logic
+        const backToTopButton = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) { // Show button after scrolling down 300px
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
+```
