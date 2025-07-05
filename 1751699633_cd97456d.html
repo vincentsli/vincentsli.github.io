@@ -1,0 +1,705 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拟上市公司研发工时合规指南：风险与策略</title>
+    <meta name="description" content="深入解析拟上市公司研发工时系统监管要求，评估Excel周报风险，提供合规解决方案。">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Sans SC and Noto Serif SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom Fonts for Chinese & Fallback */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", "Microsoft YaHei", Simsun, sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", "Microsoft YaHei", Simsun, sans-serif;
+        }
+
+        /* Dark Mode Colors - Default */
+        :root {
+            --bg-primary: #1a1a2e; /* Dark Blue-Purple */
+            --bg-secondary: #16213e; /* Slightly lighter */
+            --text-primary: #e0e0e0; /* Light Gray */
+            --text-secondary: #a0a0a0; /* Medium Gray */
+            --accent-color: #e94560; /* Vibrant Red-Pink */
+            --accent-dark: #b52b47;
+            --border-color: #2b3a55;
+            --card-bg: #0f3460;
+            --table-header-bg: #2b3a55;
+            --table-row-odd: #1e2a47;
+            --table-row-even: #1a223a;
+        }
+
+        /* Light Mode Colors */
+        html.light {
+            --bg-primary: #f9f9f9; /* Light Off-White */
+            --bg-secondary: #ffffff; /* White */
+            --text-primary: #333333; /* Dark Gray */
+            --text-secondary: #666666; /* Medium Gray */
+            --accent-color: #d62d20; /* Strong Red */
+            --accent-dark: #a8231a;
+            --border-color: #e0e0e0;
+            --card-bg: #f0f0f0;
+            --table-header-bg: #e8e8e8;
+            --table-row-odd: #f5f5f5;
+            --table-row-even: #ffffff;
+        }
+
+        /* Apply colors using CSS variables */
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .text-primary { color: var(--text-primary); }
+        .text-secondary { color: var(--text-secondary); }
+        .bg-card { background-color: var(--card-bg); }
+        .bg-primary { background-color: var(--bg-primary); }
+        .border-color { border-color: var(--border-color); }
+        .text-accent { color: var(--accent-color); }
+        .hover\:text-accent-dark:hover { color: var(--accent-dark); }
+        .border-accent { border-color: var(--accent-color); }
+        .bg-accent { background-color: var(--accent-color); }
+        .hover\:bg-accent-dark:hover { background-color: var(--accent-dark); }
+        .shadow-custom { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+
+        /* Specific Table Styling */
+        .styled-table thead tr {
+            background-color: var(--table-header-bg);
+            color: var(--text-primary);
+            text-align: left;
+        }
+        .styled-table th, .styled-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .styled-table tbody tr {
+            background-color: var(--table-row-even);
+        }
+        .styled-table tbody tr:nth-of-type(odd) {
+            background-color: var(--table-row-odd);
+        }
+        .styled-table tbody tr:hover {
+            background-color: var(--border-color); /* Subtle hover effect */
+            transition: background-color 0.2s ease-in-out;
+        }
+        .styled-table tbody tr:last-of-type {
+            border-bottom: 2px solid var(--accent-color);
+        }
+        
+        /* Custom styles for Hero background */
+        .hero-bg {
+            background-image: url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Unsplash: project management, teamwork */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .hero-overlay {
+            background: linear-gradient(90deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.8) 100%);
+            /* Adjusted for light mode */
+            transition: background 0.3s;
+        }
+        html.light .hero-overlay {
+            background: linear-gradient(90deg, rgba(249, 249, 249, 0.9) 0%, rgba(255, 255, 255, 0.8) 100%);
+        }
+
+        /* Scrollbar styling for a refined look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-dark);
+        }
+
+        /* Custom underline effect for links */
+        a.text-accent.link-underline {
+            position: relative;
+            display: inline-block;
+            text-decoration: none;
+        }
+        a.text-accent.link-underline::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease-out;
+        }
+        a.text-accent.link-underline:hover::after {
+            width: 100%;
+        }
+
+        /* Mermaid theme customization */
+        .mermaid {
+            background-color: var(--card-bg);
+            color: var(--text-primary);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow-x: auto; /* Ensure horizontal scroll for large diagrams */
+        }
+        html.light .mermaid .node rect,
+        html.light .mermaid .node circle,
+        html.light .mermaid .node polygon {
+            fill: #f0f0f0 !important; /* Lighter fill for nodes in light mode */
+            stroke: #d62d20 !important; /* Accent border */
+            stroke-width: 2px !important;
+        }
+        html.light .mermaid .node text {
+            fill: #333333 !important; /* Darker text */
+        }
+        html.light .mermaid .edgePath path {
+            stroke: #666666 !important; /* Darker lines */
+        }
+        html.light .mermaid .edgeLabel text {
+            fill: #333333 !important; /* Darker label text */
+        }
+        /* Dark mode mermaid (default) */
+        .mermaid .node rect,
+        .mermaid .node circle,
+        .mermaid .node polygon {
+            fill: var(--card-bg) !important;
+            stroke: var(--accent-color) !important;
+            stroke-width: 2px !important;
+        }
+        .mermaid .node text {
+            fill: var(--text-primary) !important;
+        }
+        .mermaid .edgePath path {
+            stroke: var(--text-secondary) !important;
+            stroke-width: 1.5px !important;
+        }
+        .mermaid .edgeLabel text {
+            fill: var(--text-secondary) !important;
+        }
+        .mermaid .loopText {
+            fill: var(--text-primary) !important;
+        }
+        .mermaid .labelBox {
+            background-color: var(--card-bg) !important;
+            border-color: var(--accent-color) !important;
+        }
+        .mermaid .label text {
+            fill: var(--text-primary) !important;
+        }
+        .mermaid .arrowheadPath {
+            fill: var(--text-secondary) !important;
+        }
+        .mermaid-container {
+            width: 100%;
+            overflow-x: auto; /* Allows scrolling for wide diagrams */
+        }
+    </style>
+</head>
+<body class="leading-relaxed transition-colors duration-300">
+    <!-- Theme Switcher -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="theme-toggle" class="p-3 rounded-full bg-card shadow-lg focus:outline-none focus:ring-2 focus:ring-accent-dark transform transition-transform duration-200 hover:scale-105">
+            <i class="fas fa-sun text-accent light-icon text-xl" style="display: none;"></i>
+            <i class="fas fa-moon text-accent dark-icon text-xl"></i>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero-bg text-primary py-24 md:py-32 relative overflow-hidden">
+        <div class="hero-overlay absolute inset-0"></div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">
+                <span class="text-accent">IPO</span> 研发工时合规指南
+            </h1>
+            <p class="text-xl md:text-2xl font-light text-secondary max-w-3xl mx-auto mb-8">
+                聚焦监管要求、风险防范与高效解决方案，助您稳健迈向资本市场。
+            </p>
+            <p class="text-lg text-secondary opacity-80 max-w-2xl mx-auto">
+                <i class="fas fa-info-circle mr-2"></i>
+                基于2025年7月最新监管要求，规避合规陷阱。
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+        <!-- Introduction -->
+        <section class="mb-16">
+            <div class="bg-card p-8 rounded-lg shadow-lg border-b-4 border-accent transform transition-transform duration-300 hover:scale-[1.005]">
+                <p class="text-lg text-secondary italic mb-4">
+                    “根据当前监管要求（截至2025年7月），拟上市公司的研发工时系统需满足以下核心要求，
+                    <strong class="text-accent">按周填写Excel统计表存在较大合规风险</strong>。结合监管规则、问询案例及实务操作，具体分析如下：”
+                </p>
+                <div class="border-t border-color mt-6 pt-6">
+                    <p class="text-sm text-secondary">
+                        <i class="fas fa-user-tie mr-2 text-accent"></i>
+                        <span class="font-bold">专业洞察</span>：源自对最新监管动态与IPO实践的深度分析。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 1: 研发工时系统的监管要求 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-accent mb-10 pb-4 border-b-2 border-accent">
+                <i class="fas fa-file-contract mr-3"></i>一、研发工时系统的监管要求
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Sub-section: 记录频率与实时性 -->
+                <div class="bg-card p-6 rounded-lg shadow-md border-t-4 border-accent-dark transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <h3 class="text-2xl font-semibold text-primary mb-4 flex items-center">
+                        <i class="fas fa-clock mr-3 text-accent"></i>记录频率与实时性
+                    </h3>
+                    <ul class="list-none space-y-3 text-secondary">
+                        <li><strong class="text-primary"><i class="fas fa-check-circle mr-2 text-green-500"></i>必须按日记录：</strong> 工时需“按日填报”，确保可追溯至具体研发活动。</li>
+                        <li><strong class="text-primary"><i class="fas fa-check-circle mr-2 text-green-500"></i>系统化留痕：</strong> 需通过ERP或专业系统实现：
+                            <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+                                <li>自动关联考勤数据；</li>
+                                <li>支持项目负责人实时复核；</li>
+                                <li>禁止人工篡改（保留操作日志）。</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Sub-section: 内控与验证机制 -->
+                <div class="bg-card p-6 rounded-lg shadow-md border-t-4 border-accent-dark transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <h3 class="text-2xl font-semibold text-primary mb-4 flex items-center">
+                        <i class="fas fa-shield-alt mr-3 text-accent"></i>内控与验证机制
+                    </h3>
+                    <ul class="list-none space-y-3 text-secondary mb-4">
+                        <li><strong class="text-primary"><i class="fas fa-user-check mr-2 text-green-500"></i>三级审批：</strong> 填报人、项目负责人、部门负责人逐级审批。</li>
+                        <li><strong class="text-primary"><i class="fas fa-users-cog mr-2 text-green-500"></i>核心技术人员单独标注：</strong> 其工时分配及稳定性是审核重点。</li>
+                    </ul>
+                    <h4 class="text-lg font-medium text-primary mb-2">交叉验证：</h4>
+                    <div class="overflow-x-auto">
+                        <table class="styled-table w-full text-sm">
+                            <thead>
+                                <tr>
+                                    <th class="py-2 px-3">匹配项</th>
+                                    <th class="py-2 px-3">验证目的</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i class="fas fa-book-open mr-2"></i>项目立项书</td>
+                                    <td>确认参与人员与研发内容一致性</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fas fa-calendar-check mr-2"></i>考勤记录</td>
+                                    <td>排除离职/请假期间虚报工时风险</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fas fa-money-bill-wave mr-2"></i>薪酬计算表</td>
+                                    <td>核对人工成本分摊准确性</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Sub-section: 费用归集准确性 -->
+                <div class="bg-card p-6 rounded-lg shadow-md border-t-4 border-accent-dark transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <h3 class="text-2xl font-semibold text-primary mb-4 flex items-center">
+                        <i class="fas fa-calculator mr-3 text-accent"></i>费用归集准确性
+                    </h3>
+                    <ul class="list-none space-y-3 text-secondary">
+                        <li><strong class="text-primary"><i class="fas fa-coins mr-2 text-green-500"></i>直接依据：</strong> 工时记录需作为研发费用分摊的直接依据。</li>
+                        <li><strong class="text-primary"><i class="fas fa-ban mr-2 text-red-500"></i>禁止统一分摊：</strong> 人工成本按实际参与项目的工时占比分配，<span class="text-accent font-bold">禁止按部门或人员类型统一比例分摊</span>。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Excel周报的可行性及风险 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-accent mb-10 pb-4 border-b-2 border-accent">
+                <i class="fas fa-exclamation-triangle mr-3"></i>二、Excel周报的可行性及风险
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Sub-section: 重大缺陷 -->
+                <div class="bg-card p-6 rounded-lg shadow-md border-t-4 border-red-500 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <h3 class="text-2xl font-semibold text-primary mb-4 flex items-center">
+                        <i class="fas fa-times-circle mr-3 text-red-500"></i>重大缺陷
+                    </h3>
+                    <ul class="list-none space-y-3 text-secondary">
+                        <li><strong class="text-primary"><i class="fas fa-times mr-2 text-red-500"></i>无法满足日粒度要求：</strong> 周报无法追溯每日工作内容，不符合“按日记录”监管底线。</li>
+                        <li><strong class="text-primary"><i class="fas fa-times mr-2 text-red-500"></i>缺乏系统校验：</strong> 人工填报易出现误填、无防篡改机制。</li>
+                        <li><strong class="text-primary"><i class="fas fa-times mr-2 text-red-500"></i>审核留痕不足：</strong> 难以实现三级电子审批流程，可能被认定为“基础资料缺失”。</li>
+                    </ul>
+                </div>
+
+                <!-- Sub-section: 过渡期临时方案 -->
+                <div class="bg-card p-6 rounded-lg shadow-md border-t-4 border-orange-500 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <h3 class="text-2xl font-semibold text-primary mb-4 flex items-center">
+                        <i class="fas fa-hourglass-half mr-3 text-orange-500"></i>过渡期临时方案 <span class="text-base text-secondary ml-2">(仅限小规模企业)</span>
+                    </h3>
+                    <p class="text-secondary mb-4">若短期内无法部署系统，Excel表需包含以下字段并满足条件：</p>
+                    <div class="overflow-x-auto mb-4">
+                        <table class="styled-table w-full text-sm">
+                            <thead>
+                                <tr>
+                                    <th class="py-2 px-3">必填字段</th>
+                                    <th class="py-2 px-3">补充要求</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i class="fas fa-id-card mr-2"></i>员工姓名+工号</td>
+                                    <td>与HR系统一致，标注核心技术人员</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fas fa-project-diagram mr-2"></i>研发项目编号+名称</td>
+                                    <td>与立项文件匹配</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fas fa-calendar-alt mr-2"></i><strong>每日工时</strong>（非每周）</td>
+                                    <td>精确至0.5小时，按自然日分列记录</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fas fa-tasks mr-2"></i>工作内容描述</td>
+                                    <td>具体到研发任务</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fas fa-signature mr-2"></i>复核人签字+日期</td>
+                                    <td>需项目负责人逐日签字确认</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-sm text-accent italic font-bold">
+                        <i class="fas fa-exclamation-circle mr-2"></i>必须同步推进系统建设：需在IPO申报前完成ERP系统部署。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 最低必要字段清单 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-accent mb-10 pb-4 border-b-2 border-accent">
+                <i class="fas fa-list-alt mr-3"></i>三、最低必要字段清单
+            </h2>
+            <p class="text-secondary mb-6">即使采用临时Excel方案，字段需覆盖以下维度：</p>
+            <div class="overflow-x-auto bg-card rounded-lg shadow-md p-6">
+                <table class="styled-table w-full text-base">
+                    <thead>
+                        <tr>
+                            <th class="py-3 px-4">字段类别</th>
+                            <th class="py-3 px-4">具体字段</th>
+                            <th class="py-3 px-4">监管依据</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong class="text-primary flex items-center"><i class="fas fa-user mr-2 text-blue-400"></i>人员信息</strong></td>
+                            <td>姓名、工号、部门、是否核心技术人员</td>
+                            <td class="text-secondary">[问询案例^8]</td>
+                        </tr>
+                        <tr>
+                            <td><strong class="text-primary flex items-center"><i class="fas fa-project-diagram mr-2 text-green-400"></i>项目信息</strong></td>
+                            <td>项目编号、名称、所属研发阶段（立项/试产）</td>
+                            <td class="text-secondary">《9号指引》[^1]</td>
+                        </tr>
+                        <tr>
+                            <td><strong class="text-primary flex items-center"><i class="fas fa-calendar-day mr-2 text-purple-400"></i>工时记录</strong></td>
+                            <td>日期、当日工时数、工作内容描述</td>
+                            <td class="text-secondary">现场督导要求[^3]</td>
+                        </tr>
+                        <tr>
+                            <td><strong class="text-primary flex items-center"><i class="fas fa-clipboard-check mr-2 text-orange-400"></i>审核痕迹</strong></td>
+                            <td>填报人签字、项目负责人签字、审批日期</td>
+                            <td class="text-secondary">内控指引[^5]</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-sm text-secondary mt-6 italic">
+                <i class="fas fa-lightbulb mr-2 text-accent"></i>注：缺少任一字段均可能引发问询，如2024年某软件公司因未记录“工作内容描述”被要求补充说明研发活动真实性[^9]。
+            </p>
+        </section>
+
+        <!-- Section 4: 监管处罚案例 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-accent mb-10 pb-4 border-b-2 border-accent">
+                <i class="fas fa-gavel mr-3"></i>四、监管处罚案例
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-card p-6 rounded-lg shadow-md border-t-4 border-red-600 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <h3 class="text-2xl font-semibold text-primary mb-4 flex items-center">
+                        <i class="fas fa-times-circle mr-3 text-red-600"></i>反面案例
+                    </h3>
+                    <p class="text-secondary mb-4">
+                        发行人F因研发人员“按周估算工时，未按实际参与项目填报”，被认定研发费用归集不准确，<strong class="text-accent">IPO审核终止</strong>[^1]。
+                    </p>
+                    <p class="text-sm text-secondary italic">
+                        <i class="fas fa-comment-dots mr-2"></i>启示：形式合规并非目的，实质真实性是关键。
+                    </p>
+                </div>
+                <div class="bg-card p-6 rounded-lg shadow-md border-t-4 border-green-600 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <h3 class="text-2xl font-semibold text-primary mb-4 flex items-center">
+                        <i class="fas fa-check-circle mr-3 text-green-600"></i>正面参考
+                    </h3>
+                    <p class="text-secondary mb-4">
+                        某过会企业通过ERP系统实现工时与考勤/薪酬自动关联，人工成本误差率<3%，<strong class="text-accent">获监管认可</strong>[^4]。
+                    </p>
+                    <p class="text-sm text-secondary italic">
+                        <i class="fas fa-comment-dots mr-2"></i>启示：系统化、自动化是未来趋势，大幅提升合规性和效率。
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Mermaid Data Visualization -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-accent mb-10 pb-4 border-b-2 border-accent">
+                <i class="fas fa-chart-network mr-3"></i>核心概念与关系图
+            </h2>
+            <p class="text-secondary mb-6">通过以下图表，直观理解研发工时合规的关键要素及其相互关系。</p>
+            <div class="mermaid-container">
+                <pre class="mermaid p-4 rounded-lg shadow-lg">
+graph TD
+    subgraph IPO 研发工时合规要求
+        A[监管核心要求] --> B(按日记录工时)
+        A --> C(三级审批内控)
+        A --> D(费用精准归集)
+
+        B --> B1(系统化留痕)
+        C --> C1(交叉验证)
+        C --> C2(核心技术人员标注)
+    end
+
+    subgraph Excel 周报的风险
+        E[重大缺陷] --> E1(不符日粒度要求)
+        E --> E2(缺乏系统校验)
+        E --> E3(审核留痕不足)
+        E --导致--> F(监管处罚案例: 终止审核)
+    end
+
+    subgraph 建议解决方案
+        G[合规解决方案] --> G1(立即部署专业系统)
+        G --> G2(过渡期Excel模板)
+        G --> G3(专项审计)
+    end
+
+    A --- 强制性 ---> G
+    E --- 高风险 ---> A
+    G1 --长期推荐--> A
+    G2 --临时方案--> G1
+    G3 --验证合规--> A
+
+    B --避免--> E1
+    C --避免--> E2
+    C --避免--> E3
+
+    classDef accent fill:var(--accent-color),stroke:var(--accent-dark),stroke-width:2px;
+    classDef danger fill:var(--accent-dark),stroke:#d62d20,stroke-width:2px;
+    classDef success fill:#3b82f6,stroke:#2563eb,stroke-width:2px;
+
+    class A,G accent;
+    class B,C,D,B1,C1,C2 success;
+    class E,E1,E2,E3,F danger;
+    class G1,G2,G3 success;
+                </pre>
+            </div>
+        </section>
+
+        <!-- Section 5: 建议解决方案 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-accent mb-10 pb-4 border-b-2 border-accent">
+                <i class="fas fa-lightbulb mr-3"></i>五、建议解决方案
+            </h2>
+            <div class="space-y-6 text-secondary">
+                <div class="bg-card p-6 rounded-lg shadow-md border-l-4 border-accent-dark flex items-start transform transition-all duration-300 hover:shadow-xl hover:-translate-x-1">
+                    <i class="fas fa-laptop-code text-3xl mr-4 text-accent mt-1"></i>
+                    <div>
+                        <strong class="text-xl text-primary block mb-2">1. 立即部署专业系统：</strong>
+                        优先选择支持《企业会计准则第6号》研发费用模块的ERP（如用友U8、SAP），或定制化工时管理软件。这是长期合规的根本之道。
+                    </div>
+                </div>
+                <div class="bg-card p-6 rounded-lg shadow-md border-l-4 border-accent-dark flex items-start transform transition-all duration-300 hover:shadow-xl hover:-translate-x-1">
+                    <i class="fas fa-file-excel text-3xl mr-4 text-accent mt-1"></i>
+                    <div>
+                        <strong class="text-xl text-primary block mb-2">2. 过渡期Excel模板：</strong>
+                        若短期无法部署系统，可暂时使用每日填写+签字扫描存档的Excel模板。
+                        <a href="knowledge_base://IPO%20%E6%9C%88%E5%BA%A6%E5%8A%A8%E6%80%81%EF%BC%882024%20%E5%B9%B4%205%20%E6%9C%88%EF%BC%89" class="text-accent hover:text-accent-dark font-semibold link-underline" target="_blank" rel="noopener noreferrer">点击下载合规Excel模板示例 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>。
+                        务必理解其局限性，并同步推进系统建设。
+                    </div>
+                </div>
+                <div class="bg-card p-6 rounded-lg shadow-md border-l-4 border-accent-dark flex items-start transform transition-all duration-300 hover:shadow-xl hover:-translate-x-1">
+                    <i class="fas fa-search-dollar text-3xl mr-4 text-accent mt-1"></i>
+                    <div>
+                        <strong class="text-xl text-primary block mb-2">3. 专项审计：</strong>
+                        聘请券商及会计师对历史工时进行穿行测试，修正申报期内数据，确保数据质量和一致性。
+                    </div>
+                </div>
+            </div>
+            <p class="text-lg text-secondary italic mt-10 p-6 bg-card rounded-lg shadow-inner border-t-2 border-b-2 border-color">
+                <i class="fas fa-comment-alt mr-2 text-accent"></i>
+                若需进一步评估贵司行业特性（如生物医药 VS 软件开发）对工时系统的差异化要求，请补充公司研发模式及人员规模信息。
+            </p>
+        </section>
+
+        <!-- Further Reading -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-accent mb-10 pb-4 border-b-2 border-accent">
+                <i class="fas fa-book-reader mr-3"></i>延伸阅读
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Book 1 -->
+                <div class="bg-card p-6 rounded-lg shadow-md flex flex-col items-start transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <h3 class="text-xl font-semibold text-primary mb-2 flex items-center"><i class="fas fa-book mr-2 text-blue-400"></i>《企业会计准则讲解（2023）》</h3>
+                    <p class="text-secondary text-sm mb-4">全面解读最新会计准则，特别是研发费用确认与计量部分，是理解工时归集的基石。</p>
+                    <a href="https://www.chinapost.com.cn/html1/folder/19082/10398-1.htm" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-accent-dark font-semibold link-underline mt-auto">了解更多 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>
+                </div>
+                <!-- Book 2 -->
+                <div class="bg-card p-6 rounded-lg shadow-md flex flex-col items-start transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <h3 class="text-xl font-semibold text-primary mb-2 flex items-center"><i class="fas fa-book mr-2 text-blue-400"></i>《证券法实务精要》</h3>
+                    <p class="text-secondary text-sm mb-4">从法律层面理解IPO发行上市的整体框架和监管逻辑，有助于把握工时合规的重要性。</p>
+                    <a href="https://baike.baidu.com/item/%E8%AF%81%E5%88%B8%E6%B3%95%E5%AE%9E%E5%8A%A1%E7%B2%BE%E8%A6%81/15949539" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-accent-dark font-semibold link-underline mt-auto">了解更多 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>
+                </div>
+                <!-- Book 3 -->
+                <div class="bg-card p-6 rounded-lg shadow-md flex flex-col items-start transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <h3 class="text-xl font-semibold text-primary mb-2 flex items-center"><i class="fas fa-book mr-2 text-blue-400"></i>《IPO审核关注要点与案例精选》</h3>
+                    <p class="text-secondary text-sm mb-4">通过实际案例深入分析监管机构在IPO审核中对财务、内控等方面的关注点，包括研发费用。</p>
+                    <a href="https://item.jd.com/10052341951591.html" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-accent-dark font-semibold link-underline mt-auto">了解更多 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>
+                </div>
+                <!-- Book 4 -->
+                <div class="bg-card p-6 rounded-lg shadow-md flex flex-col items-start transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <h3 class="text-xl font-semibold text-primary mb-2 flex items-center"><i class="fas fa-book mr-2 text-blue-400"></i>《企业研发项目管理》</h3>
+                    <p class="text-secondary text-sm mb-4">从项目管理角度探讨研发活动的全生命周期管理，有助于规范工时填报的底层逻辑。</p>
+                    <a href="https://item.jd.com/10023414920677.html" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-accent-dark font-semibold link-underline mt-auto">了解更多 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>
+                </div>
+                <!-- Book 5 -->
+                <div class="bg-card p-6 rounded-lg shadow-md flex flex-col items-start transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    <h3 class="text-xl font-semibold text-primary mb-2 flex items-center"><i class="fas fa-book mr-2 text-blue-400"></i>《企业内部控制基本规范及应用指引》</h3>
+                    <p class="text-secondary text-sm mb-4">了解建立健全内控体系的重要性，工时管理是其中关键一环。</p>
+                    <a href="https://baike.baidu.com/item/%E4%BC%81%E4%B8%9A%E5%86%85%E9%83%A8%E6%8E%A7%E5%88%B6%E5%9F%BA%E6%9C%AC%E8%A7%84%E8%8C%83/8720138" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-accent-dark font-semibold link-underline mt-auto">了解更多 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-secondary text-secondary py-10 text-center">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <p>&copy; 2025 某某咨询 | 版权所有。所有内容均基于公开监管文件和实践经验。</p>
+            <p class="mt-2 text-sm">
+                <i class="fas fa-exclamation-triangle mr-1 text-accent"></i>
+                本文仅供参考，不构成专业法律或财务建议。具体决策请咨询专业人士。
+            </p>
+        </div>
+    </footer>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Theme Toggle JavaScript
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const sunIcon = document.querySelector('.light-icon');
+        const moonIcon = document.querySelector('.dark-icon');
+        const htmlElement = document.documentElement;
+
+        // Check for user's preferred theme or system preference
+        const storedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        function setInitialTheme() {
+            if (storedTheme) {
+                htmlElement.classList.toggle('light', storedTheme === 'light');
+                htmlElement.classList.toggle('dark', storedTheme === 'dark');
+            } else if (systemPrefersDark) {
+                htmlElement.classList.add('dark');
+            } else {
+                htmlElement.classList.add('light');
+            }
+            updateIcon();
+            updateMermaidTheme();
+        }
+
+        function updateIcon() {
+            if (htmlElement.classList.contains('light')) {
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            } else {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            }
+        }
+
+        function updateMermaidTheme() {
+            const currentTheme = htmlElement.classList.contains('light') ? 'neutral' : 'dark'; // 'neutral' is good for light mode in mermaid
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: currentTheme,
+                themeVariables: {
+                    primaryColor: getComputedStyle(document.documentElement).getPropertyValue('--accent-color'),
+                    secondaryColor: getComputedStyle(document.documentElement).getPropertyValue('--text-primary'),
+                    tertiaryColor: getComputedStyle(document.documentElement).getPropertyValue('--card-bg'),
+                    lineColor: getComputedStyle(document.documentElement).getPropertyValue('--text-secondary'),
+                    textColor: getComputedStyle(document.documentElement).getPropertyValue('--text-primary'),
+                    // More specific overrides if needed
+                    clusterBkg: getComputedStyle(document.documentElement).getPropertyValue('--card-bg'),
+                    clusterBorder: getComputedStyle(document.documentElement).getPropertyValue('--accent-color'),
+                    mainBkg: getComputedStyle(document.documentElement).getPropertyValue('--card-bg'),
+                    nodeBorder: getComputedStyle(document.documentElement).getPropertyValue('--accent-color'),
+                    nodeTextColor: getComputedStyle(document.documentElement).getPropertyValue('--text-primary'),
+                }
+            });
+            // Re-render mermaid diagrams after theme change
+            document.querySelectorAll('.mermaid').forEach(el => {
+                mermaid.render('mermaid_diagram', el.innerText).then(({ svg, bindFunctions }) => {
+                    el.innerHTML = svg;
+                    if (bindFunctions) bindFunctions();
+                });
+            });
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            updateIcon();
+            updateMermaidTheme(); // Re-initialize Mermaid to apply new theme
+        });
+
+        // Set theme on initial load
+        document.addEventListener('DOMContentLoaded', setInitialTheme);
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) { // Only react to system changes if user hasn't set a preference
+                if (e.matches) {
+                    htmlElement.classList.remove('light');
+                    htmlElement.classList.add('dark');
+                } else {
+                    htmlElement.classList.remove('dark');
+                    htmlElement.classList.add('light');
+                }
+                updateIcon();
+                updateMermaidTheme();
+            }
+        });
+    </script>
+</body>
+</html>
+```
