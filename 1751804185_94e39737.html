@@ -1,0 +1,528 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO工时审计合规性：核心洞察与风险规避</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2336A3FF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'%3E%3C/path%3E%3Cpolyline points='14 2 14 8 20 8'%3E%3C/polyline%3E%3Cline x1='16' y1='13' x2='8' y2='13'%3E%3C/line%3E%3Cline x1='16' y1='17' x2='8' y2='17'%3E%3C/line%3E%3Cpolyline points='10 9 9 9 8 9'%3E%3C/polyline%3E%3C/svg%3E" type="image/svg+xml">
+
+    <!-- Google Fonts for Noto Serif SC and Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+
+    <style>
+        /* Base styles for dark mode by default */
+        :root {
+            --bg-color: #1a1a2e;
+            --text-color: #e0e0e0;
+            --primary-accent: #36a3ff;
+            --secondary-accent: #007bff;
+            --card-bg: #2b2b45;
+            --border-color: #4a4a6e;
+            --warning-bg: #fca5a5;
+            --warning-text: #7f1d1d;
+            --success-bg: #a7f3d0;
+            --success-text: #065f46;
+            --mermaid-bg: #22223b; /* A bit lighter than card-bg for contrast */
+            --mermaid-text: #e0e0e0;
+            --mermaid-stroke: #4a4a6e;
+        }
+
+        /* Light mode overrides */
+        html.light {
+            --bg-color: #f7f7f7;
+            --text-color: #333333;
+            --primary-accent: #007bff;
+            --secondary-accent: #36a3ff;
+            --card-bg: #ffffff;
+            --border-color: #e0e0e0;
+            --warning-bg: #fee2e2;
+            --warning-text: #ef4444;
+            --success-bg: #d1fae5;
+            --success-text: #065f46;
+            --mermaid-bg: #f0f0f0;
+            --mermaid-text: #333333;
+            --mermaid-stroke: #ccc;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-self;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-self;
+            color: var(--text-color); /* Ensure headings also adapt */
+        }
+
+        .text-primary-accent { color: var(--primary-accent); }
+        .bg-primary-accent { background-color: var(--primary-accent); }
+        .border-primary-accent { border-color: var(--primary-accent); }
+
+        .card {
+            background-color: var(--card-bg);
+            border-color: var(--border-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease-out, box-shadow 0.2s ease-out;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-hover-effect:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-separator {
+            background-color: var(--border-color);
+        }
+
+        /* Specific styles for Mermaid chart */
+        .mermaid {
+            background-color: var(--mermaid-bg) !important;
+            color: var(--mermaid-text) !important;
+            border-radius: 0.75rem; /* Equivalent to rounded-xl */
+            padding: 1.5rem; /* Equivalent to p-6 */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        html.light .mermaid {
+            background-color: var(--mermaid-bg) !important;
+            color: var(--mermaid-text) !important;
+        }
+
+        /* Adjust mermaid text and stroke colors dynamically */
+        .mermaid svg .node rect,
+        .mermaid svg .node circle,
+        .mermaid svg .node polygon {
+            fill: var(--card-bg) !important; /* Node background */
+            stroke: var(--border-color) !important; /* Node border */
+        }
+        .mermaid svg .node.risk rect,
+        .mermaid svg .node.risk circle,
+        .mermaid svg .node.risk polygon {
+            fill: var(--warning-bg) !important;
+            stroke: var(--warning-text) !important;
+        }
+        .mermaid svg .node.recommended rect,
+        .mermaid svg .node.recommended circle,
+        .mermaid svg .node.recommended polygon {
+            fill: var(--success-bg) !important;
+            stroke: var(--success-text) !important;
+        }
+
+        .mermaid svg .edgePaths .path {
+            stroke: var(--border-color) !important; /* Edge lines */
+        }
+        .mermaid svg .edgeLabels text {
+            fill: var(--text-color) !important; /* Edge labels text */
+        }
+        .mermaid svg .node text {
+            fill: var(--text-color) !important; /* Node text */
+        }
+        .mermaid svg .node.risk text {
+            fill: var(--warning-text) !important;
+        }
+        .mermaid svg .node.recommended text {
+            fill: var(--success-text) !important;
+        }
+
+        /* First letter drop cap */
+        .first-letter::first-letter {
+            float: left;
+            font-size: 4em;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            color: var(--primary-accent);
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-content {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            .grid-cols-2 {
+                grid-template-columns: 1fr;
+            }
+            .first-letter::first-letter {
+                font-size: 3em;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased leading-relaxed">
+    <!-- Dark Mode Toggle Button -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="themeToggle" class="p-3 rounded-full bg-card-bg shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary-accent transition button-hover-effect" aria-label="Toggle theme">
+            <i class="fas fa-sun text-yellow-500 dark:hidden text-lg"></i>
+            <i class="fas fa-moon text-blue-300 hidden dark:inline-block text-lg"></i>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative overflow-hidden py-24 md:py-32 bg-gradient-to-br from-indigo-900 to-purple-900 text-white shadow-2xl">
+        <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1518655248518-edcd6a89130d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'); filter: grayscale(80%);"></div>
+        <div class="container mx-auto px-6 relative z-10 text-center hero-content">
+            <h1 class="text-4xl md:text-6xl font-serif-sc font-bold mb-4 animate-fade-in-down">
+                <span class="text-primary-accent">科创板IPO工时统计表优化：</span>
+                审计合规与风险规避
+            </h1>
+            <p class="text-xl md:text-2xl font-sans-sc text-gray-200 mb-8 animate-fade-in-up">
+                专业洞察，助力企业稳健上市
+            </p>
+            <p class="max-w-3xl mx-auto text-lg md:text-xl font-sans-sc leading-relaxed animate-fade-in">
+                精确的工时记录是企业内部控制与财务透明的基石，尤其在IPO审核中，其合规性直接关系到研发费用认定与上市进程。本文将为您揭示工时统计的常见陷阱，并提供行之有效的优化策略。
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-16">
+        <!-- Section 1: 关键考量与后续行动 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-serif-sc font-semibold mb-8 text-center text-primary-accent animate-slide-in">
+                <i class="fas fa-lightbulb mr-3"></i> 关键考量：请提供修改后的文档
+            </h2>
+            <div class="bg-card-bg p-8 rounded-xl shadow-lg border border-border-color transform transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl">
+                <p class="text-lg leading-relaxed mb-6 font-sans-sc first-letter">
+                    尊敬的客户，感谢您已根据建议对工时统计表进行了修改。为了能够提供最精准、最具针对性的反馈，并确保所有建议均符合严苛的IPO审计要求（如《科创板股票发行上市审核问答》和《企业会计准则》），我**急需查阅您修改后的最新文档内容。**
+                </p>
+                <p class="text-lg leading-relaxed mb-6 font-sans-sc">
+                    您的原始表格中存在一些关键问题，例如高空值率和非标准日期格式（如“45839”等Excel序列号）。若未解决这些核心问题，后续的审计风险将持续存在。请务必提供修改后的版本，以便我们能深入分析并协助您规避潜在的内控缺陷和合规风险。
+                </p>
+                <div class="mt-8 text-center">
+                    <a href="#" class="inline-flex items-center px-8 py-4 bg-primary-accent text-white font-bold rounded-full shadow-lg hover:bg-secondary-accent transform button-hover-effect transition-all duration-300 text-lg">
+                        <i class="fas fa-upload mr-3"></i> 立即上传修改后的文档
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: 通用修改建议 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-serif-sc font-semibold mb-8 text-center text-primary-accent animate-slide-in">
+                <i class="fas fa-cogs mr-3"></i> 通用修改建议（基于原始文档与IPO要求）
+            </h2>
+            <p class="text-center text-lg mb-10 text-gray-400 font-sans-sc">
+                若您已根据之前的建议进行了修改，请对照以下**高风险遗漏项**进行再次核查。这些关键点均源自2023年科创板过会案例和最新的监管规则，是IPO审核中的常见问询点。
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Card 1: 即时补救项 -->
+                <div class="card p-8 rounded-xl shadow-lg border border-border-color">
+                    <h3 class="text-2xl font-serif-sc font-semibold mb-6 text-primary-accent">
+                        <i class="fas fa-exclamation-triangle mr-3 text-red-500"></i> 即时补救项 (常见IPO问询点)
+                    </h3>
+                    <ul class="space-y-4 text-lg leading-relaxed">
+                        <li>
+                            <i class="fas fa-calendar-alt text-secondary-accent mr-3"></i>
+                            <strong class="text-warning-text">日期列标准化:</strong> 确保所有日期格式为可读的“YYYY-MM-DD”，杜绝使用Excel序列号（如“45839”）。审计师需据此验证每日工时分配的准确性。
+                        </li>
+                        <li>
+                            <i class="fas fa-project-diagram text-secondary-accent mr-3"></i>
+                            <strong class="text-warning-text">研发项目关联性:</strong> 务必新增“研发项目编号”列，并将其与内部OA系统中的立项编号严格绑定（例如：“天火十二号-2025-001”），以此避免研发费用归集不清晰的争议，符合《高新技术企业认定管理办法》要求。
+                        </li>
+                        <li>
+                            <i class="fas fa-users-cog text-secondary-accent mr-3"></i>
+                            <strong class="text-warning-text">双跨人员拆分记录:</strong> 对于同时参与研发和生产的人员，其工时必须精确拆分并分项记录。同时，新增“任务依据单号”列，记录对应的研发立项书编号或生产订单号，确保可追溯性。
+                        </li>
+                        <li>
+                            <i class="fas fa-signature text-secondary-accent mr-3"></i>
+                            <strong class="text-warning-text">电子签名机制:</strong> 若继续使用Excel表，建议在表格中插入“填报人电子签名”和“审批人电子签名”列（可通过Excel批注、截图或嵌入图片实现），以满足《中国注册会计师审计准则第1211号》关于防篡改和可追溯性的要求。
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: 公式优化建议 -->
+                <div class="card p-8 rounded-xl shadow-lg border border-border-color">
+                    <h3 class="text-2xl font-serif-sc font-semibold mb-6 text-primary-accent">
+                        <i class="fas fa-calculator mr-3"></i> 公式优化建议 (提升数据可靠性)
+                    </h3>
+                    <p class="text-lg leading-relaxed mb-4">
+                        为防止数据录入错误和不一致，强烈建议在表格中嵌入自动校验公式。例如：
+                    </p>
+                    <div class="bg-gray-800 text-gray-200 p-4 rounded-lg font-mono text-sm overflow-x-auto mb-6">
+                        <pre><code>=IF(SUM(H2:H100)<>G2, "错误：工时合计不匹配", "")</code></pre>
+                        <p class="mt-2 text-gray-400">
+                            <i class="fas fa-info-circle mr-2"></i>
+                            <span class="text-primary-accent">说明：</span> 假设G列为“合计工时”，H列起为每日工时数据。此公式将自动检查每日工时之和是否与“合计”值吻合，若不符则给出提示。
+                        </p>
+                    </div>
+                    <p class="text-lg leading-relaxed">
+                        <i class="fas fa-hand-point-right text-secondary-accent mr-3"></i>
+                        通过此类内置校验，可大幅提升工时数据的内部控制水平和准确性，为审计提供更坚实的基础。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 过渡期风险提醒 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-serif-sc font-semibold mb-8 text-center text-primary-accent animate-slide-in">
+                <i class="fas fa-bell mr-3 text-yellow-500"></i> 过渡期风险提醒：手工记录的局限性
+            </h2>
+            <div class="bg-card-bg p-8 rounded-xl shadow-lg border border-border-color">
+                <p class="text-lg leading-relaxed mb-6 font-sans-sc">
+                    尽管对Excel表格进行优化，但**手工记录方式在科创板IPO审核中依然面临严峻挑战**。为降低风险，在尚未部署专业工时系统前，务必采取以下措施：
+                </p>
+                <ul class="space-y-4 text-lg leading-relaxed">
+                    <li class="flex items-start">
+                        <i class="fas fa-file-signature text-secondary-accent mt-1 mr-3 flex-shrink-0"></i>
+                        <span><strong class="text-red-400">按日打印与签字确认：</strong> 每日记录的工时表必须由员工亲笔签名确认，并经部门主管逐级审核签字。此为纸质记录的最低要求。</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-balance-scale text-secondary-accent mt-1 mr-3 flex-shrink-0"></i>
+                        <span><strong class="text-red-400">月末三方对账机制：</strong> 每月末，需严格核对工时表数据与考勤系统、薪酬表数据。任何差异必须在48小时内查明原因并完成更正，确保数据的一致性与准确性。</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-chart-line text-secondary-accent mt-1 mr-3 flex-shrink-0"></i>
+                        <span><strong class="text-red-400">聘请专项审计：</strong> 为增强手工记录的可信度，您可能需要额外聘请会计师事务所对工时管理内控出具专项的“内控可信度说明”（预估费用约为5-10万元/年），以降低审计风险。</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 4: 下一步操作与终极建议 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-serif-sc font-semibold mb-8 text-center text-primary-accent animate-slide-in">
+                <i class="fas fa-forward mr-3"></i> 下一步操作与终极建议
+            </h2>
+            <div class="bg-card-bg p-8 rounded-xl shadow-lg border border-border-color">
+                <ul class="space-y-6 text-lg leading-relaxed">
+                    <li class="flex items-start">
+                        <i class="fas fa-file-code text-secondary-accent mt-1 mr-3 flex-shrink-0"></i>
+                        <span><strong class="text-primary-accent">若提供修改后文档：</strong> 请尽快上传。我们将在1小时内优先处理，并提供具体的字段删减、公式调整等优化建议。</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-book-reader text-secondary-accent mt-1 mr-3 flex-shrink-0"></i>
+                        <span><strong class="text-primary-accent">若暂无法提供：</strong> 强烈建议您参考 <a href="https://vincentsli.github.io/1751802716_95c29f09.html" target="_blank" class="text-blue-400 hover:underline">科创板工时系统部署指南 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>，该网页汇总了必填字段和过会案例，对系统选型与实施具有重要指导意义。</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-database text-secondary-accent mt-1 mr-3 flex-shrink-0"></i>
+                        <span><strong class="text-primary-accent">终极建议：</strong> 尽早启动专业工时管理系统或ERP系统（例如用友BIP、SAP SuccessFactors）的部署。根据《首发业务若干问题解答》，手工记录的过渡期不应超过申报审计前的6个月，系统化管理是长久之计。</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 5: 数据可视化 - 工时审计合规性框架 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-serif-sc font-semibold mb-8 text-center text-primary-accent animate-slide-in">
+                <i class="fas fa-sitemap mr-3"></i> 工时审计合规性框架 (可视化解读)
+            </h2>
+            <p class="text-center text-lg mb-10 text-gray-400 font-sans-sc">
+                通过以下流程图，直观理解工时管理在IPO审计中的关键环节、潜在风险与合规路径。
+            </p>
+            <div class="mermaid-container bg-card-bg rounded-xl shadow-lg border border-border-color p-6 md:p-8">
+                <pre class="mermaid text-sm md:text-base">
+graph TD
+    A[IPO上市目标] --> B{工时统计表合规性};
+
+    B --&gt; C{当前挑战: Excel手工记录};
+    C --&gt; D1[风险1: 数据不准确/不一致]:::risk;
+    C --&gt; D2[风险2: 缺乏审计追踪]:::risk;
+    C --&gt; D3[风险3: 不符监管要求]:::risk;
+
+    B --&gt; E{解决方案};
+    E --&gt; F1[方案1: 优化Excel表];
+    F1 --&gt; G1[强制字段: 日期格式标准化, 研发项目编号, 任务依据单号];
+    F1 --&gt; G2[内控增强: 电子/纸质签名, 自动校验公式];
+
+    E --&gt; F2[方案2: 部署专业工时系统]:::recommended;
+    F2 --&gt; H1[优势: 数据集成, 审批流, 防篡改];
+    F2 --&gt; H2[推荐系统: ERP工时模块 (用友BIP)];
+
+    D1 & D2 & D3 --&gt; E;
+    G1 & G2 --&gt; B;
+    H1 & H2 --&gt; B;
+
+    style D1 fill:var(--warning-bg),stroke:var(--warning-text),stroke-width:2px,color:var(--warning-text);
+    style D2 fill:var(--warning-bg),stroke:var(--warning-text),stroke-width:2px,color:var(--warning-text);
+    style D3 fill:var(--warning-bg),stroke:var(--warning-text),stroke-width:2px,color:var(--warning-text);
+    classDef risk fill:var(--warning-bg),stroke:var(--warning-text),color:var(--warning-text);
+    classDef recommended fill:var(--success-bg),stroke:var(--success-text),color:var(--success-text);
+                </pre>
+            </div>
+        </section>
+
+        <!-- Section 6: 延伸阅读 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-serif-sc font-semibold mb-8 text-center text-primary-accent animate-slide-in">
+                <i class="fas fa-book-open mr-3"></i> 延伸阅读
+            </h2>
+            <p class="text-center text-lg mb-10 text-gray-400 font-sans-sc">
+                为更深入理解IPO合规与财务管理，以下是推荐的专业书籍与重要法规：
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Book 1 -->
+                <a href="https://book.douban.com/subject/35345719/" target="_blank" class="card p-6 rounded-xl shadow-lg border border-border-color flex items-start button-hover-effect">
+                    <i class="fas fa-book text-secondary-accent text-2xl mr-4 flex-shrink-0 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-serif-sc font-semibold mb-2 text-primary-accent">《公司上市操作实务与案例精选》</h3>
+                        <p class="text-gray-400 text-base">全面解析企业上市流程、关键环节及实战案例，是IPO实务的权威参考。</p>
+                    </div>
+                </a>
+                <!-- Book 2 -->
+                <a href="https://www.chinacpa.org.cn/zyyszywfb/202102/t20210201_60388.html" target="_blank" class="card p-6 rounded-xl shadow-lg border border-border-color flex items-start button-hover-effect">
+                    <i class="fas fa-gavel text-secondary-accent text-2xl mr-4 flex-shrink-0 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-serif-sc font-semibold mb-2 text-primary-accent">《中国注册会计师审计准则第1211号》</h3>
+                        <p class="text-gray-400 text-base">规范了审计过程中对舞弊风险的识别和应对，与工时记录的真实性息息相关。</p>
+                    </div>
+                </a>
+                <!-- Book 3 -->
+                <a href="http://www.most.gov.cn/ztzl/gjjsqyrd/zcfg/201612/t20161221_129486.shtml" target="_blank" class="card p-6 rounded-xl shadow-lg border border-border-color flex items-start button-hover-effect">
+                    <i class="fas fa-microchip text-secondary-accent text-2xl mr-4 flex-shrink-0 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-serif-sc font-semibold mb-2 text-primary-accent">《高新技术企业认定管理办法》</h3>
+                        <p class="text-gray-400 text-base">明确了研发费用归集与核算要求，是研发型企业工时管理的重要依据。</p>
+                    </div>
+                </a>
+                <!-- Book 4 -->
+                <a href="http://www.csrc.gov.cn/csrc/c100020/c1274719/c1451000/content.shtml" target="_blank" class="card p-6 rounded-xl shadow-lg border border-border-color flex items-start button-hover-effect">
+                    <i class="fas fa-balance-scale text-secondary-accent text-2xl mr-4 flex-shrink-0 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-serif-sc font-semibold mb-2 text-primary-accent">《科创板股票发行上市审核问答》</h3>
+                        <p class="text-gray-400 text-base">证监会发布的科创板审核官方问答，包含诸多实务操作细节和监管关注点。</p>
+                    </div>
+                </a>
+                <!-- Book 5 -->
+                <a href="http://www.mof.gov.cn/czdt/200806/t20080625_57448.htm" target="_blank" class="card p-6 rounded-xl shadow-lg border border-border-color flex items-start button-hover-effect">
+                    <i class="fas fa-building text-secondary-accent text-2xl mr-4 flex-shrink-0 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-serif-sc font-semibold mb-2 text-primary-accent">《企业内部控制基本规范及配套指引》</h3>
+                        <p class="text-gray-400 text-base">构建健全内控体系的根本指南，工时管理是其重要组成部分。</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-card-bg py-8 border-t border-border-color text-center text-gray-500 text-sm">
+        <div class="container mx-auto px-6">
+            <p>&copy; 2024 IPO审计合规性专家. 保留所有权利. | 设计与开发：专业Web设计团队</p>
+            <p class="mt-2">
+                <a href="#" class="text-blue-400 hover:underline">隐私政策</a> |
+                <a href="#" class="text-blue-400 hover:underline">服务条款</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid Configuration
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base', // Use 'base' theme and control colors via CSS variables
+            themeVariables: {
+                background: 'var(--mermaid-bg)',
+                textColor: 'var(--mermaid-text)',
+                lineColor: 'var(--mermaid-stroke)',
+                primaryColor: 'var(--primary-accent)',
+                secondaryColor: 'var(--secondary-accent)',
+                tertiaryColor: 'var(--card-bg)', // Node fill
+                primaryBorderColor: 'var(--border-color)',
+                secondaryBorderColor: 'var(--border-color)',
+                tertiaryBorderColor: 'var(--border-color)',
+                // Custom colors for specific classes in Mermaid
+                // These are usually defined in CSS directly or need more advanced theme customization
+                // For 'risk' and 'recommended' classes, we're relying on the direct CSS targeting
+            },
+            fontFamily: 'Noto Sans SC, Tahoma, Arial, sans-serif' // Ensure Chinese font support
+        });
+
+        // Theme Toggle JavaScript
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                htmlElement.classList.add('light');
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Initialize theme based on localStorage or system preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+            setTheme('light');
+        } else {
+            setTheme('dark'); // Default to dark if no preference or system is dark
+        }
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+            // Re-render Mermaid chart after theme change to apply new CSS variables
+            // This is a common workaround as Mermaid's internal theming might not react to CSS variable changes directly.
+            // However, with theme: 'base' and CSS variable overrides, it should work.
+            // If issues, uncomment: mermaid.init(undefined, '.mermaid');
+        });
+
+        // Simple scroll animation for sections
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Intersection Observer for fade-in animations (optional, for more refined loading)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-fade-in-down, .animate-fade-in-up, .animate-fade-in, .animate-slide-in').forEach(el => {
+            el.style.opacity = '0'; // Initial state for animation
+            el.style.transform = 'translateY(20px)'; // Initial state for slide-in
+            el.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+            if (el.classList.contains('animate-fade-in-down')) {
+                el.style.transform = 'translateY(-20px)';
+            } else if (el.classList.contains('animate-fade-in-up')) {
+                el.style.transform = 'translateY(20px)';
+            }
+            observer.observe(el);
+        });
+
+    </script>
+</body>
+</html>
+```
