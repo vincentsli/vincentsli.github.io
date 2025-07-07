@@ -1,0 +1,674 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公司三会合规问题与补救策略</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC (headings) and Noto Sans SC (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for Theme Management */
+        :root {
+            /* Default dark mode colors */
+            --bg-color: #1A1A2E; /* Deep Indigo */
+            --text-color: #E0E0E0; /* Light Gray */
+            --heading-color: #FFFFFF; /* White */
+            --accent-color: #6C63FF; /* Vibrant Purple */
+            --card-bg-color: #2D2D44; /* Slightly lighter Indigo */
+            --border-color: #4A4A6A; /* Muted Purple */
+            --highlight-color: #8C82FF; /* Lighter Purple */
+        }
+
+        .light {
+            /* Light mode colors */
+            --bg-color: #F8F8F8; /* Off-White */
+            --text-color: #333333; /* Dark Gray */
+            --heading-color: #1A1A2E; /* Deep Indigo */
+            --accent-color: #4A90E2; /* Bright Blue */
+            --card-bg-color: #FFFFFF; /* White */
+            --border-color: #D3D3D3; /* Light Gray */
+            --highlight-color: #6AABFF; /* Lighter Blue */
+        }
+
+        /* Base Body and Heading Styles */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+            color: var(--heading-color);
+            transition: color 0.3s ease;
+        }
+
+        /* Custom Tailwind-like classes using CSS variables */
+        .text-accent {
+            color: var(--accent-color);
+        }
+
+        .bg-card {
+            background-color: var(--card-bg-color);
+        }
+
+        .border-card {
+            border-color: var(--border-color);
+        }
+
+        .border-highlight {
+            border-color: var(--highlight-color);
+        }
+
+        .hover\:border-highlight:hover {
+            border-color: var(--highlight-color);
+        }
+
+        /* Dark Mode Toggle Specific Styles */
+        .dark-mode-toggle {
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 9999px;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .light .dark-mode-toggle {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .light .dark-mode-toggle:hover {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        /* Custom Scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+        }
+
+        /* Mermaid Specific Styling for Dark/Light Mode Harmony */
+        .mermaid {
+            background-color: var(--card-bg-color); /* Matches card background */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow-x: auto; /* Enable horizontal scrolling for large diagrams */
+        }
+        /* Override Mermaid's default colors to match our theme */
+        .mermaid g.nodes rect,
+        .mermaid g.nodes circle,
+        .mermaid g.nodes polygon {
+            stroke: var(--border-color) !important;
+            fill: var(--card-bg-color) !important;
+        }
+        .mermaid g.nodes text {
+            fill: var(--text-color) !important;
+        }
+        .mermaid .edgePaths .path {
+            stroke: var(--accent-color) !important;
+        }
+        .mermaid .edgeLabels text {
+            fill: var(--text-color) !important;
+        }
+        .mermaid .cluster rect {
+            fill: var(--card-bg-color) !important;
+            stroke: var(--border-color) !important;
+        }
+        .mermaid .cluster text {
+            fill: var(--heading-color) !important;
+        }
+        .mermaid .label text {
+            fill: var(--text-color) !important; /* Ensure text in labels is visible */
+        }
+        /* Specific styles for highlighted Mermaid nodes (used in the diagram via `style` commands) */
+        .mermaid .node.highlighted rect, .mermaid .node.highlighted circle, .mermaid .node.highlighted polygon {
+            stroke-width: 2px !important;
+        }
+    </style>
+</head>
+<body class="leading-relaxed">
+
+    <!-- Dark Mode Toggle Button -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="darkModeToggle" class="dark-mode-toggle flex items-center justify-center p-3 rounded-full shadow-lg">
+            <i class="fas fa-moon text-lg text-white dark:text-gray-300"></i>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative overflow-hidden pt-24 pb-32 text-center">
+        <div class="absolute inset-0 bg-gradient-to-br from-indigo-900 to-purple-900 dark:from-gray-900 dark:to-black opacity-80 z-0 transition-colors duration-300"></div>
+        <div class="relative z-10 max-w-4xl mx-auto px-6">
+            <h1 class="text-5xl md:text-6xl font-bold mb-4 leading-tight text-white drop-shadow-md">
+                公司三会合规问题与补救策略
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-200 mb-8 font-light italic">
+                <i class="fas fa-gavel mr-2 text-accent"></i> 确保公司治理效力的关键考量
+            </p>
+            <p class="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
+                本报告深入剖析了公司股东会、董事会、监事会（“三会”）在运作中存在的潜在问题，并提出了详细的补救措施与事后确认方案，旨在维护公司治理的法律效力与合规性。
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto px-4 py-16 max-w-7xl">
+
+        <!-- Section: 三会概述与重要性 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-6 text-accent text-center">
+                <i class="fas fa-info-circle mr-3"></i>三会概述及其在公司治理中的基石作用
+            </h2>
+            <p class="text-lg leading-relaxed mb-6 text-center max-w-3xl mx-auto">
+                “三会”即股东会、董事会和监事会，是现代公司治理结构的核心组成部分。它们各自承担着决策、执行和监督的重要职能，共同构筑了公司合法、高效运作的基石。健全的三会运作，是保障公司合法权益、吸引外部投资、乃至未来资本市场之路的必要条件。
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
+                <div class="bg-card p-6 rounded-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 border-b-4 border-accent">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-users text-4xl text-accent mr-4"></i>
+                        <h3 class="text-xl font-bold text-heading-color">股东会</h3>
+                    </div>
+                    <p class="text-gray-300">
+                        公司的权力机构，决定公司经营方针、投资计划等重大事项。
+                    </p>
+                </div>
+                <div class="bg-card p-6 rounded-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 border-b-4 border-accent">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-user-tie text-4xl text-accent mr-4"></i>
+                        <h3 class="text-xl font-bold text-heading-color">董事会</h3>
+                    </div>
+                    <p class="text-gray-300">
+                        公司的执行机构，负责日常经营管理和股东会决议的执行。
+                    </p>
+                </div>
+                <div class="bg-card p-6 rounded-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 border-b-4 border-accent">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-eye text-4xl text-accent mr-4"></i>
+                        <h3 class="text-xl font-bold text-heading-color">监事会</h3>
+                    </div>
+                    <p class="text-gray-300">
+                        公司的监督机构，监督董事、高级管理人员的履职情况及公司财务状况。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 核心问题诊断 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-6 text-accent text-center">
+                <i class="fas fa-exclamation-triangle mr-3"></i>核心问题诊断：公司三会运作中的瑕疵
+            </h2>
+            <p class="text-lg leading-relaxed mb-10 text-center max-w-3xl mx-auto">
+                根据对公司三会记录的详细审查，我们发现以下关键问题，它们可能对会议决议的法律效力构成潜在风险。
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- 股东会问题 -->
+                <div class="bg-card p-8 rounded-xl shadow-xl border border-card group hover:border-highlight transition duration-300">
+                    <h3 class="text-2xl font-bold mb-4 text-heading-color group-hover:text-accent transition duration-300">
+                        <i class="fas fa-handshake mr-2"></i> 股东会问题
+                    </h3>
+                    <ul class="space-y-4 text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-clock text-accent mt-1 mr-3 flex-shrink-0"></i>
+                            <div>
+                                <p class="font-medium text-white mb-1">通知时限不符章程：</p>
+                                <p>多次会议（如2022.01.17、2022.07.20）通知时间短于章程要求（如15天）。可能导致会议召集程序无效。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-user-check text-accent mt-1 mr-3 flex-shrink-0"></i>
+                            <div>
+                                <p class="font-medium text-white mb-1">出席股东数与签署数不一致：</p>
+                                <p>如2022.01.17（出席24名 vs 签署29名），决议记载出席人数少于实际签署股东。若未出席股东签署，可能导致表决基数错误，影响决议效力。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-calendar-times text-accent mt-1 mr-3 flex-shrink-0"></i>
+                            <div>
+                                <p class="font-medium text-white mb-1">会议召开频率不足：</p>
+                                <p>2024年度股东大会尚未召开，违反《公司法》要求每年一次的规定。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-exclamation-circle text-accent mt-1 mr-3 flex-shrink-0"></i>
+                            <div>
+                                <p class="font-medium text-white mb-1">其他程序瑕疵：</p>
+                                <p>如2024.03.20“第一次临时股东大会”届次重复，且以“股份有限公司”名义召开时公司尚未设立，可能引发合法性争议。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 董事会与监事会问题 -->
+                <div class="grid grid-cols-1 gap-8">
+                    <div class="bg-card p-8 rounded-xl shadow-xl border border-card group hover:border-highlight transition duration-300">
+                        <h3 class="text-2xl font-bold mb-4 text-heading-color group-hover:text-accent transition duration-300">
+                            <i class="fas fa-clipboard-list mr-2"></i> 董事会问题
+                        </h3>
+                        <ul class="space-y-4 text-gray-300">
+                            <li class="flex items-start">
+                                <i class="fas fa-history text-accent mt-1 mr-3 flex-shrink-0"></i>
+                                <div>
+                                    <p class="font-medium text-white mb-1">会议频率不足：</p>
+                                    <p>多个时间段（如2022上半年、2023上半年、2023下半年、2024下半年、2025上半年）缺失会议记录。未达《投资协议》每6个月一次的要求。</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-file-excel text-accent mt-1 mr-3 flex-shrink-0"></i>
+                                <div>
+                                    <p class="font-medium text-white mb-1">文件不完整：</p>
+                                    <p>现有会议（如2024.03.20第一次董事会）缺少全套文件（通知、签到册、表决票等），可能无法证明程序合规。</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-card p-8 rounded-xl shadow-xl border border-card group hover:border-highlight transition duration-300">
+                        <h3 class="text-2xl font-bold mb-4 text-heading-color group-hover:text-accent transition duration-300">
+                            <i class="fas fa-shield-alt mr-2"></i> 监事会问题
+                        </h3>
+                        <ul class="space-y-4 text-gray-300">
+                            <li class="flex items-start">
+                                <i class="fas fa-chart-line text-accent mt-1 mr-3 flex-shrink-0"></i>
+                                <div>
+                                    <p class="font-medium text-white mb-1">会议频率不足：</p>
+                                    <p>2024下半年和2025上半年缺失会议记录。未达《投资协议》及《公司法》每6个月一次的频率要求。</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-folder-open text-accent mt-1 mr-3 flex-shrink-0"></i>
+                                <div>
+                                    <p class="font-medium text-white mb-1">文件不完整：</p>
+                                    <p>如2024.03.20第一次监事会缺少会议通知、签到册等全套文件。</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 必须补签与事后确认清单 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-6 text-accent text-center">
+                <i class="fas fa-pencil-alt mr-3"></i>必须补签与事后确认清单：确保决议效力
+            </h2>
+            <p class="text-lg leading-relaxed mb-10 text-center max-w-3xl mx-auto">
+                为避免上述问题影响公司决议的法律效力，以下为必须进行补救和事后确认的关键事项：
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 股东会关键补救 -->
+                <div class="bg-card p-8 rounded-xl shadow-xl border border-card group hover:border-highlight transition duration-300">
+                    <h3 class="text-2xl font-bold mb-4 text-heading-color group-hover:text-accent transition duration-300">
+                        <i class="fas fa-signature mr-2"></i> 股东会关键补救
+                    </h3>
+                    <ul class="space-y-4 text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-file-signature text-accent mt-1 mr-3 flex-shrink-0"></i>
+                            <div>
+                                <p class="font-medium text-white mb-1">统一股东确认函：</p>
+                                <p>针对通知时限不符问题，由现有股东签署<strong class="text-highlight">统一确认函</strong>，声明对历史会议召集、召开程序无异议，以豁免瑕疵。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-user-edit text-accent mt-1 mr-3 flex-shrink-0"></i>
+                            <div>
+                                <p class="font-medium text-white mb-1">出席股东数调整确认：</p>
+                                <p>确认未出席股东是否事后签署。若是，通过<strong class="text-highlight">补充决议或声明</strong>调整出席人数为实际签署数，确保表决基数正确。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-calendar-plus text-accent mt-1 mr-3 flex-shrink-0"></i>
+                            <div>
+                                <p class="font-medium text-white mb-1">2024年度股东大会召开和文件：</p>
+                                <p>必须<strong class="text-highlight">立即召开</strong>此会议，并补充全套文件，以符合《公司法》要求。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 董事会与监事会关键补救及通用补签 -->
+                <div class="grid grid-cols-1 gap-8">
+                    <div class="bg-card p-8 rounded-xl shadow-xl border border-card group hover:border-highlight transition duration-300">
+                        <h3 class="text-2xl font-bold mb-4 text-heading-color group-hover:text-accent transition duration-300">
+                            <i class="fas fa-tasks mr-2"></i> 董事会与监事会关键补救
+                        </h3>
+                        <ul class="space-y-4 text-gray-300">
+                            <li class="flex items-start">
+                                <i class="fas fa-calendar-check text-accent mt-1 mr-3 flex-shrink-0"></i>
+                                <div>
+                                    <p class="font-medium text-white mb-1">缺失会议补开和文件补充：</p>
+                                    <p>针对缺失时间段，<strong class="text-highlight">必须补开会议或补充会议决议文件</strong>，满足频率要求。</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-file-alt text-accent mt-1 mr-3 flex-shrink-0"></i>
+                                <div>
+                                    <p class="font-medium text-white mb-1">现有会议文件完善：</p>
+                                    <p>需补充会议通知、签到册、表决票等<strong class="text-highlight">全套文件</strong>，证明程序合规。</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-card p-8 rounded-xl shadow-xl border border-card group hover:border-highlight transition duration-300">
+                        <h3 class="text-2xl font-bold mb-4 text-heading-color group-hover:text-accent transition duration-300">
+                            <i class="fas fa-clipboard-check mr-2"></i> 其他通用补签要求
+                        </h3>
+                        <ul class="space-y-4 text-gray-300">
+                            <li class="flex items-start">
+                                <i class="fas fa-hand-holding-usd text-accent mt-1 mr-3 flex-shrink-0"></i>
+                                <div>
+                                    <p class="font-medium text-white mb-1">豁免通知时限确认函：</p>
+                                    <p>针对所有临时会议，需由参会成员签署<strong class="text-highlight">豁免通知时限书面确认函</strong>。</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-box-open text-accent mt-1 mr-3 flex-shrink-0"></i>
+                                <div>
+                                    <p class="font-medium text-white mb-1">会议文件全套补充：</p>
+                                    <p>所有会议均需补充<strong class="text-highlight">全套文件</strong>（通知、议案、签到册、表决票、会议记录），确保决议真实性。</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 建议行动与投行视角 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-6 text-accent text-center">
+                <i class="fas fa-lightbulb mr-3"></i>建议行动与投行视角
+            </h2>
+            <p class="text-lg leading-relaxed mb-10 text-center max-w-3xl mx-auto">
+                从投资银行的专业视角来看，公司治理的合规性是企业价值和上市潜力的重要指标。以下是基于法律要求和市场实践的行动建议。
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-card p-6 rounded-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 border-l-4 border-highlight">
+                    <h3 class="text-xl font-bold mb-3 text-heading-color">优先级排序</h3>
+                    <p class="text-gray-300">
+                        优先处理直接影响决议效力的核心问题，如通知时限确认、出席数调整及年度会议的及时召开。
+                    </p>
+                </div>
+                <div class="bg-card p-6 rounded-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 border-l-4 border-highlight">
+                    <h3 class="text-xl font-bold mb-3 text-heading-color">法律依据与遵循</h3>
+                    <p class="text-gray-300">
+                        所有整改建议均严格依据《公司法》、《投资协议》及公司章程规定。确保每一步操作有据可依。
+                    </p>
+                </div>
+                <div class="bg-card p-6 rounded-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 border-l-4 border-highlight">
+                    <h3 class="text-xl font-bold mb-3 text-heading-color">资本市场影响</h3>
+                    <p class="text-gray-300">
+                        合规性问题在A股资本运作中（如IPO、重组）可能引致监管问询。尽早补救是维护公司信誉和价值的关键。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 关键概念关系图 (Mermaid.js) -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-6 text-accent text-center">
+                <i class="fas fa-project-diagram mr-3"></i>三会问题与补救路径可视化
+            </h2>
+            <p class="text-lg leading-relaxed mb-10 text-center max-w-3xl mx-auto">
+                通过以下关系图，直观理解公司三会问题的相互关联性及其对应的补救措施：
+            </p>
+            <div class="mermaid text-sm md:text-base">
+graph TD
+    A[公司治理不规范] --> B{三会运作问题}
+
+    B --> C1[股东会问题]
+    B --> C2[董事会问题]
+    B --> C3[监事会问题]
+
+    C1 --> D1_1[通知时限不符章程]
+    C1 --> D1_2[出席数与签署数不一致]
+    C1 --> D1_3[年度会议缺失]
+    C1 --> D1_4[其他程序瑕疵]
+
+    C2 --> D2_1[会议频率不足]
+    C2 --> D2_2[文件不完整]
+
+    C3 --> D3_1[会议频率不足]
+    C3 --> D3_2[文件不完整]
+
+    D1_1 -- 影响效力 --> E1[需补救]
+    D1_2 -- 影响效力 --> E1
+    D1_3 -- 影响效力 --> E1
+    D1_4 -- 影响效力 --> E1
+    D2_1 -- 影响效力 --> E1
+    D2_2 -- 影响效力 --> E1
+    D3_1 -- 影响效力 --> E1
+    D3_2 -- 影响效力 --> E1
+
+    E1 --> F1[统一股东确认函]
+    E1 --> F2[调整出席数或补充决议]
+    E1 --> F3[立即召开并补齐年度股东会文件]
+    E1 --> F4[补开缺失董事会/监事会]
+    E1 --> F5[补充全套会议文件]
+    E1 --> F6[豁免通知时限确认函]
+
+    F1 & F2 & F3 & F4 & F5 & F6 --> G[确保三会决议效力]
+    G --> H[提升公司合规性]
+    H --> I[利于资本市场运作]
+    I --> J[保障公司长远发展]
+
+    style A fill:#6C63FF,stroke:#6C63FF,stroke-width:2px,color:#fff
+    style B fill:#2D2D44,stroke:#4A4A6A,stroke-width:1px,color:#E0E0E0
+    style C1 fill:#2D2D44,stroke:#4A4A6A,stroke-width:1px,color:#E0E0E0
+    style C2 fill:#2D2D44,stroke:#4A4A6A,stroke-width:1px,color:#E0E0E0
+    style C3 fill:#2D2D44,stroke:#4A4A6A,stroke-width:1px,color:#E0E0E0
+
+    style D1_1 fill:#4A4A6A,stroke:#6C63FF,stroke-width:1px,color:#E0E0E0
+    style D1_2 fill:#4A4A6A,stroke:#6C63FF,stroke-width:1px,color:#E0E0E0
+    style D1_3 fill:#4A4A6A,stroke:#6C63FF,stroke-width:1px,color:#E0E0E0
+    style D1_4 fill:#4A4A6A,stroke:#6C63FF,stroke-width:1px,color:#E0E0E0
+    style D2_1 fill:#4A4A6A,stroke:#6C63FF,stroke-width:1px,color:#E0E0E0
+    style D2_2 fill:#4A4A6A,stroke:#6C63FF,stroke-width:1px,color:#E0E0E0
+    style D3_1 fill:#4A4A6A,stroke:#6C63FF,stroke-width:1px,color:#E0E0E0
+    style D3_2 fill:#4A4A6A,stroke:#6C63FF,stroke-width:1px,color:#E0E0E0
+
+    linkStyle 0 stroke:#6C63FF,stroke-width:2px;
+    linkStyle 1 stroke:#6C63FF,stroke-width:2px;
+    linkStyle 2 stroke:#6C63FF,stroke-width:2px;
+    linkStyle 3 stroke:#6C63FF,stroke-width:2px;
+
+    style E1 fill:#FF6347,stroke:#FF6347,stroke-width:2px,color:#fff
+    linkStyle 4 stroke:#FF6347,stroke-width:2px;
+    linkStyle 5 stroke:#FF6347,stroke-width:2px;
+    linkStyle 6 stroke:#FF6347,stroke-width:2px;
+    linkStyle 7 stroke:#FF6347,stroke-width:2px;
+    linkStyle 8 stroke:#FF6347,stroke-width:2px;
+    linkStyle 9 stroke:#FF6347,stroke-width:2px;
+    linkStyle 10 stroke:#FF6347,stroke-width:2px;
+    linkStyle 11 stroke:#FF6347,stroke-width:2px;
+
+    style F1 fill:#6C63FF,stroke:#6C63FF,stroke-width:2px,color:#fff
+    style F2 fill:#6C63FF,stroke:#6C63FF,stroke-width:2px,color:#fff
+    style F3 fill:#6C63FF,stroke:#6C63FF,stroke-width:2px,color:#fff
+    style F4 fill:#6C63FF,stroke:#6C63FF,stroke-width:2px,color:#fff
+    style F5 fill:#6C63FF,stroke:#6C63FF,stroke-width:2px,color:#fff
+    style F6 fill:#6C63FF,stroke:#6C63FF,stroke-width:2px,color:#fff
+
+    linkStyle 12 stroke:#6C63FF,stroke-width:2px;
+    linkStyle 13 stroke:#6C63FF,stroke-width:2px;
+    linkStyle 14 stroke:#6C63FF,stroke-width:2px;
+    linkStyle 15 stroke:#6C63FF,stroke-width:2px;
+    linkStyle 16 stroke:#6C63FF,stroke-width:2px;
+    linkStyle 17 stroke:#6C63FF,stroke-width:2px;
+
+    style G fill:#28A745,stroke:#28A745,stroke-width:2px,color:#fff
+    style H fill:#28A745,stroke:#28A745,stroke-width:2px,color:#fff
+    style I fill:#28A745,stroke:#28A745,stroke-width:2px,color:#fff
+    style J fill:#28A745,stroke:#28A745,stroke-width:2px,color:#fff
+
+    linkStyle 18 stroke:#28A745,stroke-width:2px;
+    linkStyle 19 stroke:#28A745,stroke-width:2px;
+    linkStyle 20 stroke:#28A745,stroke-width:2px;
+
+</div>
+        </section>
+
+        <!-- Section: 延伸阅读 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-6 text-accent text-center">
+                <i class="fas fa-book-open mr-3"></i>延伸阅读：深化公司治理理解
+            </h2>
+            <p class="text-lg leading-relaxed mb-10 text-center max-w-3xl mx-auto">
+                为了更全面地理解公司治理和相关法律法规，我们推荐以下书籍和资源：
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-card p-6 rounded-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 border-b-4 border-highlight">
+                    <h3 class="text-xl font-bold mb-2 text-heading-color">《公司法》释义与实务</h3>
+                    <p class="text-gray-300 text-sm">
+                        深入解读中国《公司法》的各项条款，结合案例分析，是理解公司法律基础的必备读物。
+                    </p>
+                    <a href="https://baike.baidu.com/item/%E3%80%8A%E5%85%AC%E5%8F%B8%E6%B3%95%E3%80%8B%E9%87%8A%E4%B9%89%E4%B8%8E%E5%AE%9E%E5%8A%A1/19213125" target="_blank" class="text-accent hover:underline text-sm block mt-3">
+                        了解更多 <i class="fas fa-external-link-alt ml-1"></i>
+                    </a>
+                </div>
+                <div class="bg-card p-6 rounded-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 border-b-4 border-highlight">
+                    <h3 class="text-xl font-bold mb-2 text-heading-color">《公司治理：理论与实践》</h3>
+                    <p class="text-gray-300 text-sm">
+                        系统阐述公司治理的基本理论、机制设计与国际前沿实践，有助于构建宏观认知。
+                    </p>
+                    <a href="https://book.douban.com/subject/26590204/" target="_blank" class="text-accent hover:underline text-sm block mt-3">
+                        了解更多 <i class="fas fa-external-link-alt ml-1"></i>
+                    </a>
+                </div>
+                <div class="bg-card p-6 rounded-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 border-b-4 border-highlight">
+                    <h3 class="text-xl font-bold mb-2 text-heading-color">《A股IPO审核问答精选》</h3>
+                    <p class="text-gray-300 text-sm">
+                        聚焦A股IPO审核中的常见问题和监管关注点，为拟上市公司提供实务指引。
+                    </p>
+                    <a href="https://www.chinaventure.com.cn/news/510/374026.shtml" target="_blank" class="text-accent hover:underline text-sm block mt-3">
+                        了解更多 <i class="fas fa-external-link-alt ml-1"></i>
+                    </a>
+                </div>
+                <div class="bg-card p-6 rounded-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 border-b-4 border-highlight">
+                    <h3 class="text-xl font-bold mb-2 text-heading-color">《投资银行学》</h3>
+                    <p class="text-gray-300 text-sm">
+                        全面介绍投资银行的各项业务，包括企业融资、兼并收购等，有助于理解投行在公司治理中的作用。
+                    </p>
+                    <a href="https://book.douban.com/subject/35791244/" target="_blank" class="text-accent hover:underline text-sm block mt-3">
+                        了解更多 <i class="fas fa-external-link-alt ml-1"></i>
+                    </a>
+                </div>
+                <div class="bg-card p-6 rounded-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 border-b-4 border-highlight">
+                    <h3 class="text-xl font-bold mb-2 text-heading-color">《上市公司治理准则》</h3>
+                    <p class="text-gray-300 text-sm">
+                        中国证监会发布的上市公司治理规范性文件，对公司治理结构和行为提出具体要求。
+                    </p>
+                    <a href="http://www.csrc.gov.cn/csrc/c101967/c1103254/c1110098/8500206/files/b495201d14e3415e9834168019688432.pdf" target="_blank" class="text-accent hover:underline text-sm block mt-3">
+                        了解更多 <i class="fas fa-external-link-alt ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-card py-10 text-center text-gray-400 text-sm border-t border-border">
+        <p>&copy; 2024 公司治理合规分析。所有权利保留。</p>
+        <p class="mt-2">本页面由专业AI助手为您呈现，致力于提供精确与高效的信息。</p>
+    </footer>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid initialization and dark mode integration
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark', // Default to dark theme for Mermaid, will be updated by JS
+            securityLevel: 'loose', // Allow some advanced features
+            flowchart: {
+                curve: 'basis' // Smooth curves for flowcharts
+            }
+        });
+
+        // Function to update Mermaid theme based on body class
+        function updateMermaidTheme(isDarkMode) {
+            // Set Mermaid's internal theme based on current mode
+            mermaid.initialize({ theme: isDarkMode ? 'dark' : 'default' });
+
+            // Re-render all mermaid diagrams to apply new theme styles dynamically
+            document.querySelectorAll('.mermaid').forEach(el => {
+                const graphDefinition = el.textContent; // Get the raw Mermaid definition
+                // Generate a unique ID for each render call to prevent conflicts
+                mermaid.render('mermaid-svg-' + Math.random().toString(36).substr(2, 9), graphDefinition, (svgCode, bindFunctions) => {
+                    el.innerHTML = svgCode; // Replace with new SVG
+                    if (bindFunctions) {
+                        bindFunctions(el); // Bind any event handlers (like click events on nodes)
+                    }
+                });
+            });
+        }
+
+        // Dark Mode Toggle Logic
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set the theme and update UI
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                darkModeToggle.innerHTML = '<i class="fas fa-moon text-lg text-gray-300"></i>';
+                updateMermaidTheme(true);
+            } else {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                darkModeToggle.innerHTML = '<i class="fas fa-sun text-lg text-yellow-400"></i>';
+                updateMermaidTheme(false);
+            }
+        }
+
+        // Apply saved theme preference or system preference on load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark'); // Default to dark if system preference is dark
+        } else {
+            setTheme('light'); // Default to light if no preference or system is light
+        }
+
+        // Add event listener for the toggle button
+        darkModeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+    </script>
+</body>
+</html>
+```
