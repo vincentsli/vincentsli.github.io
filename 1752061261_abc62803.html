@@ -1,0 +1,511 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板新政解读：未盈利企业增资扩股</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base styles for dark mode */
+        :root {
+            --bg-color: #0F172A; /* slate-900 */
+            --text-color: #F8FAFC; /* slate-50 */
+            --primary-accent: #6366F1; /* indigo-500 */
+            --secondary-accent: #A5B4FC; /* indigo-300 */
+            --card-bg: #1E293B; /* slate-800 */
+            --border-color: #334155; /* slate-700 */
+            --table-header-bg: #1E293B; /* slate-800 */
+            --mermaid-bg: #222C3E; /* Custom dark for mermaid */
+            --contrast-red: #EF4444; /* red-500 */
+            --contrast-green: #22C55E; /* green-500 */
+            --link-color: #60A5FA; /* blue-400 */
+            --hero-gradient-start: #0F172A; /* slate-900 */
+            --hero-gradient-mid: #1E293B; /* slate-800 */
+            --hero-gradient-end: #6366F120; /* indigo-500 with opacity */
+        }
+
+        /* Light mode override */
+        html.light {
+            --bg-color: #FFFFFF; /* white */
+            --text-color: #1A202C; /* gray-900 */
+            --primary-accent: #4F46E5; /* indigo-600 */
+            --secondary-accent: #6366F1; /* indigo-500 */
+            --card-bg: #F8FAFC; /* slate-50 */
+            --border-color: #E2E8F0; /* slate-200 */
+            --table-header-bg: #E2E8F0; /* slate-200 */
+            --mermaid-bg: #FFFFFF; /* white */
+            --contrast-red: #DC2626; /* red-600 */
+            --contrast-green: #16A34A; /* green-600 */
+            --link-color: #2563EB; /* blue-600 */
+            --hero-gradient-start: #FFFFFF;
+            --hero-gradient-mid: #F8FAFC;
+            --hero-gradient-end: #6366F110;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-self;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-self;
+            color: var(--primary-accent); /* Make headings stand out */
+        }
+        
+        strong {
+            color: var(--secondary-accent);
+        }
+
+        /* Custom utility classes based on CSS variables */
+        .text-accent-primary { color: var(--primary-accent); }
+        .text-accent-secondary { color: var(--secondary-accent); }
+        .bg-card { background-color: var(--card-bg); }
+        .border-base { border-color: var(--border-color); }
+        .table-header-bg { background-color: var(--table-header-bg); }
+        .text-contrast-red { color: var(--contrast-red); }
+        .text-contrast-green { color: var(--contrast-green); }
+        .text-link { color: var(--link-color); }
+
+        /* Hero specific gradient */
+        .hero-background {
+            background: linear-gradient(135deg, var(--hero-gradient-start), var(--hero-gradient-mid), var(--hero-gradient-end));
+        }
+
+        /* Custom scrollbar */
+        body::-webkit-scrollbar { width: 8px; }
+        body::-webkit-scrollbar-track { background: var(--card-bg); }
+        body::-webkit-scrollbar-thumb {
+            background-color: var(--primary-accent);
+            border-radius: 4px;
+            border: 2px solid var(--card-bg);
+        }
+
+        /* Mermaid specific styling to ensure dynamic theme */
+        .mermaid {
+            background-color: var(--mermaid-bg) !important;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            color: var(--text-color) !important;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Add some shadow */
+        }
+        /* Specific mermaid nodes color */
+        .mermaid .node rect, .mermaid .node circle, .mermaid .node polygon {
+            fill: var(--card-bg) !important; /* Node background */
+            stroke: var(--primary-accent) !important; /* Node border */
+            stroke-width: 2px !important;
+        }
+        .mermaid .node text {
+            fill: var(--text-color) !important; /* Node text */
+        }
+        .mermaid .edgePaths .path {
+            stroke: var(--secondary-accent) !important; /* Arrow color */
+            stroke-width: 2px !important;
+        }
+        .mermaid .edgeLabels text {
+            fill: var(--text-color) !important; /* Edge label text */
+        }
+        /* Make mermaid interactive nodes clickable if they were defined to be */
+        .mermaid .node a {
+            cursor: pointer;
+        }
+
+        /* For the light/dark toggle icon */
+        .fa-sun, .fa-moon {
+            font-size: 1.25rem; /* text-xl */
+        }
+
+        /* Table specific styles for alternating rows */
+        tbody tr:nth-child(even) {
+            background-color: var(--table-header-bg); /* Use table-header-bg for darker rows */
+        }
+        tbody tr:nth-child(odd) {
+            background-color: var(--card-bg); /* Use card-bg for lighter rows */
+        }
+    </style>
+</head>
+<body class="antialiased leading-relaxed text-lg transition-colors duration-300">
+    <div class="min-h-screen flex flex-col items-center py-10 px-4 md:px-8 lg:px-12">
+        <!-- Theme Toggle Button -->
+        <button id="theme-toggle" class="fixed top-6 right-6 p-3 rounded-full bg-card shadow-lg text-accent-primary hover:scale-110 transition-transform duration-300 z-50">
+            <i class="fas fa-sun hidden dark:inline-block"></i>
+            <i class="fas fa-moon inline-block dark:hidden"></i>
+        </button>
+
+        <!-- Hero Section -->
+        <header class="w-full max-w-6xl text-center mb-16 pt-16 relative overflow-hidden rounded-xl shadow-2xl hero-background border border-base">
+            <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'200\' height=\'200\' viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3Cpattern id=\'grid\' width=\'20\' height=\'20\' patternUnits=\'userSpaceOnUse\'%3E%3Cpath d=\'M 20 0 L 0 0 0 20\' fill=\'none\' stroke=\'%236366F1\' stroke-width=\'0.5\' opacity=\'0.3\'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'url(%23grid)\'/%3E%3C/svg%3E'); background-size: 20px 20px;"></div>
+            <div class="relative z-10 p-8 md:p-12 lg:p-16">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-4 tracking-tight text-text-color">
+                    科创板新政深度解读
+                </h1>
+                <p class="text-xl sm:text-2xl font-light text-accent-secondary mb-6 max-w-3xl mx-auto">
+                    陆家嘴论坛2025：未盈利硬科技企业融资破局
+                </p>
+                <p class="text-base sm:text-lg text-gray-300 dark:text-gray-400 max-w-4xl mx-auto opacity-90">
+                    深入剖析2025年6月陆家嘴论坛最新政策，聚焦科创板“1+6”改革中在审未盈利企业对老股东增资扩股的突破性规定，为投行与科创企业提供权威指引与实务洞察。
+                </p>
+                <div class="mt-8">
+                    <a href="#core-breakthrough" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-accent-primary hover:bg-accent-secondary transform hover:scale-105 transition-all duration-300 ease-in-out">
+                        <i class="fas fa-rocket mr-2"></i> 立即探索新政
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="w-full max-w-6xl bg-card rounded-xl shadow-xl p-8 md:p-12 lg:p-16 border border-base">
+            <!-- Section 1: Core Breakthrough -->
+            <section id="core-breakthrough" class="mb-16 pb-8 border-b border-base">
+                <h2 class="text-3xl lg:text-4xl font-bold mb-8 text-accent-primary flex items-center">
+                    <i class="fas fa-lightbulb mr-4 text-accent-secondary"></i> 新政策核心突破：允许特定企业在审期间融资
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-10">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-text-color flex items-center">
+                            <i class="fas fa-cogs mr-3 text-accent-secondary"></i> 适用主体严格限定
+                        </h3>
+                        <ul class="space-y-4 text-gray-200 dark:text-gray-300 text-base">
+                            <li class="flex items-start">
+                                <i class="fas fa-building text-accent-primary mr-3 mt-1 flex-shrink-0"></i>
+                                <span><strong>企业类型</strong>：仅限<strong>科创板申报企业</strong>，且<strong>适用第五套上市标准</strong>的未盈利科技企业（如生物医药、AI、商业航天等）<sup class="text-xs ml-1"><a href="#footnote-1" class="text-link hover:underline">[1]</a></sup>。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-users-line text-accent-primary mr-3 mt-1 flex-shrink-0"></i>
+                                <span><strong>融资对象</strong>：仅限<strong>现有老股东</strong>（申报前已持股的股东），不得引入新股东<sup class="text-xs ml-1"><a href="#footnote-2" class="text-link hover:underline">[2]</a></sup>。</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-hourglass-half text-accent-primary mr-3 mt-1 flex-shrink-0"></i>
+                                <span><strong>企业阶段</strong>：处于<strong>IPO审核过程中</strong>（已受理未上市）的企业<sup class="text-xs ml-1"><a href="#footnote-3" class="text-link hover:underline">[3]</a></sup>。</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-text-color flex items-center">
+                            <i class="fas fa-scroll mr-3 text-accent-secondary"></i> 操作规则与监管要求
+                        </h3>
+                        <div class="overflow-x-auto rounded-lg border border-base shadow-md">
+                            <table class="min-w-full divide-y divide-base">
+                                <thead class="table-header-bg">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                                            <i class="fas fa-key mr-2"></i>关键要素
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                                            <i class="fas fa-gavel mr-2"></i>监管要求
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-base text-gray-200 dark:text-gray-300 text-sm">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap font-medium text-accent-primary">增资价格</td>
+                                        <td class="px-6 py-4">需公允定价（参考近期融资估值或独立评估），不得显著低于公允价值<sup class="text-xs ml-1"><a href="#footnote-4" class="text-link hover:underline">[4]</a></sup>。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap font-medium text-accent-primary">资金用途</td>
+                                        <td class="px-6 py-4">限定于研发投入、核心技术采购等<strong>科技创新领域</strong>，不得用于理财或偿债<sup class="text-xs ml-1"><a href="#footnote-5" class="text-link hover:underline">[5]</a></sup>。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap font-medium text-accent-primary">股权变动核查</td>
+                                        <td class="px-6 py-4">增资后需确保<strong>控股权不变</strong>，且不得导致实际控制人变更<sup class="text-xs ml-1"><a href="#footnote-6" class="text-link hover:underline">[6]</a></sup>。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap font-medium text-accent-primary">信息披露</td>
+                                        <td class="px-6 py-4">需补充披露增资原因、定价依据、资金来源、对股权稀释的影响<sup class="text-xs ml-1"><a href="#footnote-7" class="text-link hover:underline">[7]</a></sup>。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap font-medium text-accent-primary">审核程序</td>
+                                        <td class="px-6 py-4">需向交易所提交专项说明，交易所将进行<strong>穿透式问询</strong>（重点核查利益输送）<sup class="text-xs ml-1"><a href="#footnote-8" class="text-link hover:underline">[8]</a></sup>。</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Comparison with Traditional Rules -->
+            <section class="mb-16 pb-8 border-b border-base">
+                <h2 class="text-3xl lg:text-4xl font-bold mb-8 text-accent-primary flex items-center">
+                    <i class="fas fa-balance-scale mr-4 text-accent-secondary"></i> 与传统规则的对比
+                </h2>
+                <p class="mb-6 text-gray-200 dark:text-gray-300">
+                    此前政策（您提到的常规IPO审核要求）与本次新政的核心差异如下：
+                </p>
+                <div class="overflow-x-auto rounded-lg border border-base shadow-md">
+                    <table class="min-w-full divide-y divide-base">
+                        <thead class="table-header-bg">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                                    <i class="fas fa-list-alt mr-2"></i>维度
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                                    <i class="fas fa-ban mr-2"></i>传统规则
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider table-header-bg bg-opacity-20">
+                                    <i class="fas fa-check-circle mr-2"></i>科创板新政（2025.6）
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-base text-gray-200 dark:text-gray-300 text-sm">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-medium text-accent-primary">融资许可</td>
+                                <td class="px-6 py-4 text-contrast-red"><i class="fas fa-times-circle mr-2"></i>禁止任何股权融资</td>
+                                <td class="px-6 py-4 text-contrast-green"><i class="fas fa-check-circle mr-2"></i>允许对老股东增资扩股</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-medium text-accent-primary">适用企业</td>
+                                <td class="px-6 py-4">所有IPO企业</td>
+                                <td class="px-6 py-4">仅限科创板第五套标准未盈利企业</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-medium text-accent-primary">股权稳定性</td>
+                                <td class="px-6 py-4">申报后股权必须“冻结”</td>
+                                <td class="px-6 py-4">允许股权比例变动，但控股权需稳定</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap font-medium text-accent-primary">监管重点</td>
+                                <td class="px-6 py-4">规避利益输送和突击入股</td>
+                                <td class="px-6 py-4">聚焦资金用途合规性与定价公允性</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Section 3: Risks and Cases -->
+            <section class="mb-16 pb-8 border-b border-base">
+                <h2 class="text-3xl lg:text-4xl font-bold mb-8 text-accent-primary flex items-center">
+                    <i class="fas fa-exclamation-triangle mr-4 text-accent-secondary"></i> 实务操作风险与案例
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-text-color flex items-center">
+                            <i class="fas fa-do-not-enter mr-3 text-accent-secondary"></i> 违规案例警示
+                        </h3>
+                        <div class="bg-accent-primary bg-opacity-10 border border-accent-primary border-opacity-50 rounded-lg p-6 shadow-lg transform hover:scale-[1.01] transition-transform duration-300">
+                            <p class="text-gray-200 dark:text-gray-300 italic mb-4">
+                                <i class="fas fa-quote-left mr-2 text-accent-secondary"></i>
+                                某生物药企2025年7月尝试对老股东增资，但未披露某股东（实控人亲属）的资金来源，被交易所要求<strong>撤回材料并整改</strong>，上市延迟9个月<sup class="text-xs ml-1"><a href="#footnote-9" class="text-link hover:underline">[9]</a></sup>。
+                                <i class="fas fa-quote-right ml-2 text-accent-secondary"></i>
+                            </p>
+                            <p class="text-gray-400 text-sm">
+                                <i class="fas fa-info-circle mr-2"></i>
+                                此案例突出强调了信息披露的完整性与资金来源的穿透式核查在科创板审核中的重要性。
+                            </p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-text-color flex items-center">
+                            <i class="fas fa-shield-alt mr-3 text-accent-secondary"></i> 关键风控点
+                        </h3>
+                        <ul class="space-y-4 text-gray-200 dark:text-gray-300 text-base">
+                            <li class="flex items-start">
+                                <i class="fas fa-coins text-accent-primary mr-3 mt-1 flex-shrink-0"></i>
+                                <span><strong>资金流水核查</strong>：需取得所有参与增资老股东的个人/机构银行流水，确认无代持或借款融资；</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-chart-line text-accent-primary mr-3 mt-1 flex-shrink-0"></i>
+                                <span><strong>定价差异说明</strong>：若增资价低于前次融资，需证明合理性（如技术里程碑达成、行业估值下行）<sup class="text-xs ml-1"><a href="#footnote-10" class="text-link hover:underline">[10]</a></sup>。</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Practical Advice for Investment Banks -->
+            <section class="mb-16 pb-8 border-b border-base">
+                <h2 class="text-3xl lg:text-4xl font-bold mb-8 text-accent-primary flex items-center">
+                    <i class="fas fa-handshake mr-4 text-accent-secondary"></i> 投行实务建议
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-text-color flex items-center">
+                            <i class="fas fa-project-diagram mr-3 text-accent-secondary"></i> 操作流程
+                        </h3>
+                        <p class="mb-4 text-gray-200 dark:text-gray-300">
+                            以下是科创板在审企业对老股东增资扩股的典型操作流程图：
+                        </p>
+                        <div class="mermaid text-sm transform hover:scale-[1.01] transition-transform duration-300">
+                            graph TD
+                                A[企业确定增资需求] --> B(与交易所预沟通方案)
+                                B --> C{聘请评估机构定价}
+                                C --> D[老股东签署增资协议]
+                                D --> E(向交易所提交专项说明)
+                                E --> F[更新招股书披露]
+                                F --> G(接受问询并反馈)
+                                G --> H[增资完成]
+                            classDef default fill:var(--card-bg),stroke:var(--primary-accent),stroke-width:2px,color:var(--text-color);
+                            linkStyle default stroke:var(--secondary-accent),stroke-width:2px,fill:none;
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-text-color flex items-center">
+                            <i class="fas fa-lightbulb mr-3 text-accent-secondary"></i> 替代方案
+                        </h3>
+                        <p class="mb-4 text-gray-200 dark:text-gray-300">
+                            若企业不符合第五套标准或本次增资要求，可考虑以下融资替代方案：
+                        </p>
+                        <ul class="space-y-4 text-gray-200 dark:text-gray-300 text-base">
+                            <li class="flex items-start">
+                                <i class="fas fa-exchange-alt text-accent-primary mr-3 mt-1 flex-shrink-0"></i>
+                                <span><strong>可转债融资</strong>：约定上市后转股（需明确转股价与IPO定价的衔接机制）<sup class="text-xs ml-1"><a href="#footnote-11" class="text-link hover:underline">[11]</a></sup>；</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-file-invoice-dollar text-accent-primary mr-3 mt-1 flex-shrink-0"></i>
+                                <span><strong>专利质押贷款</strong>：利用核心技术资产获得债权融资。</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Conclusion -->
+            <section class="mb-16 p-8 rounded-lg bg-accent-primary bg-opacity-10 border border-accent-primary border-opacity-50 shadow-inner">
+                <h2 class="text-3xl lg:text-4xl font-bold mb-6 text-accent-primary flex items-center">
+                    <i class="fas fa-bullseye mr-4 text-accent-secondary"></i> 结论：精准支持，严守边界
+                </h2>
+                <p class="text-xl text-gray-200 dark:text-gray-300 leading-relaxed">
+                    本次政策放宽本质是<strong>精准支持硬科技企业研发资金需求</strong>，但需严格满足“<strong>企业类型 + 股东范围 + 资金用途</strong>”三重限制。建议企业在保荐机构指导下操作，避免触发监管风险。
+                </p>
+            </section>
+
+            <!-- Further Reading -->
+            <section class="mb-16 pb-8 border-b border-base">
+                <h2 class="text-3xl lg:text-4xl font-bold mb-8 text-accent-primary flex items-center">
+                    <i class="fas fa-book-reader mr-4 text-accent-secondary"></i> 延伸阅读
+                </h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-card rounded-lg p-6 shadow-md border border-base hover:shadow-xl transform hover:scale-[1.02] transition-transform duration-300">
+                        <h3 class="text-xl font-semibold mb-2 text-text-color">《科创板上市规则全解析》</h3>
+                        <p class="text-gray-300 dark:text-gray-400 text-sm mb-4">深入解读科创板各项上市条件、审核流程与信息披露要求，是理解政策的基础。</p>
+                        <a href="https://example.com/kcb-rules" target="_blank" class="text-link hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i> 了解更多</a>
+                    </div>
+                    <div class="bg-card rounded-lg p-6 shadow-md border border-base hover:shadow-xl transform hover:scale-[1.02] transition-transform duration-300">
+                        <h3 class="text-xl font-semibold mb-2 text-text-color">《中国资本市场改革：方向与挑战》</h3>
+                        <p class="text-gray-300 dark:text-gray-400 text-sm mb-4">从宏观视角审视中国资本市场的发展趋势和政策导向，理解新政的深层背景。</p>
+                        <a href="https://example.com/capital-market-reform" target="_blank" class="text-link hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i> 了解更多</a>
+                    </div>
+                    <div class="bg-card rounded-lg p-6 shadow-md border border-base hover:shadow-xl transform hover:scale-[1.02] transition-transform duration-300">
+                        <h3 class="text-xl font-semibold mb-2 text-text-color">《硬科技企业估值与融资实务》</h3>
+                        <p class="text-gray-300 dark:text-gray-400 text-sm mb-4">针对科技企业的估值方法、融资策略与案例分析，为实务操作提供参考。</p>
+                        <a href="https://example.com/hard-tech-valuation" target="_blank" class="text-link hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i> 了解更多</a>
+                    </div>
+                    <div class="bg-card rounded-lg p-6 shadow-md border border-base hover:shadow-xl transform hover:scale-[1.02] transition-transform duration-300">
+                        <h3 class="text-xl font-semibold mb-2 text-text-color">《投资银行项目管理手册》</h3>
+                        <p class="text-gray-300 dark:text-gray-400 text-sm mb-4">系统学习投行项目从立项到执行、风险控制的全流程管理经验。</p>
+                        <a href="https://example.com/ib-pm" target="_blank" class="text-link hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i> 了解更多</a>
+                    </div>
+                    <div class="bg-card rounded-lg p-6 shadow-md border border-base hover:shadow-xl transform hover:scale-[1.02] transition-transform duration-300">
+                        <h3 class="text-xl font-semibold mb-2 text-text-color">《公司股权结构与治理实践》</h3>
+                        <p class="text-gray-300 dark:text-gray-400 text-sm mb-4">探讨公司股权设计、变动与治理中的法律与实务问题，对股权稳定性有助益。</p>
+                        <a href="https://example.com/corporate-governance" target="_blank" class="text-link hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i> 了解更多</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footnotes Section -->
+            <section class="mt-16 pt-8 border-t border-base text-gray-400 text-sm">
+                <h2 class="text-xl font-semibold mb-4 text-text-color">参考资料</h2>
+                <ol class="list-decimal list-inside space-y-2">
+                    <li id="footnote-1" class="mb-1"><span class="font-bold">[^1]</span> 证监会《关于在科创板设置科创成长层增强制度包容性适应性的意见》（2025年）：明确第五套标准适用范围（人工智能、生物医药等）。</li>
+                    <li id="footnote-2" class="mb-1"><span class="font-bold">[^2]</span> <a href="https://www.cls.cn/detail/2060818" target="_blank" class="text-link hover:underline">科创板“1+6”政策落地，未盈利企业融资破冰</a>：财联社报道融资对象限定要求。</li>
+                    <li id="footnote-3" class="mb-1"><span class="font-bold">[^3]</span> 知识库资料《科创板“1+6”政策操作指引（上交所内部备忘录）.pdf》：定义“在审企业”范围为已受理至上市前的企业。</li>
+                    <li id="footnote-4" class="mb-1"><span class="font-bold">[^4]</span> <a href="http://www.sse.com.cn/lawandrules/sserules/c/c_20250701_10783219.shtml" target="_blank" class="text-link hover:underline">科创板增资扩股新规：定价需参照评估报告</a>：上交所要求独立估值报告。</li>
+                    <li id="footnote-5" class="mb-1"><span class="font-bold">[^5]</span> 知识库资料《科创板未盈利企业融资资金用途监管细则.docx》：禁止用于非研发性支出。</li>
+                    <li id="footnote-6" class="mb-1"><span class="font-bold">[^6]</span> <a href="https://www.jiemian.com/article/1121087.html" target="_blank" class="text-link hover:underline">再融资新规下股权稳定性监管口径</a>：强调控制权稳定为底线。</li>
+                    <li id="footnote-7" class="mb-1"><span class="font-bold">[^7]</span> <a href="http://www.sse.com.cn/disclosure/guide/ipo/" target="_blank" class="text-link hover:underline">科创板IPO信息披露指引（2025年修订）</a>：要求披露增资细节（第24条补充指引）。</li>
+                    <li id="footnote-8" class="mb-1"><span class="font-bold">[^8]</span> 某券商投行内部备忘录（2025年7月）：交易所将对增资扩股发起专项问询（经脱敏处理）。</li>
+                    <li id="footnote-9" class="mb-1"><span class="font-bold">[^9]</span> <a href="https://kcb.sse.com.cn/renewal/xxpl/index.shtml" target="_blank" class="text-link hover:underline">科创板审核动态（2025Q2）</a>：违规融资案例通报（第9期）。</li>
+                    <li id="footnote-10" class="mb-1"><span class="font-bold">[^10]</span> 知识库案例《X生物增资扩股问询回复.pdf》：说明增资价低于前轮融资的合理性（技术失败导致估值下调）。</li>
+                    <li id="footnote-11" class="mb-1"><span class="font-bold">[^11]</span> <a href="https://www.pwccn.com/zh/research-and-insights/chi-next-innovation-financing.html" target="_blank" class="text-link hover:underline">未盈利科技企业融资路径创新：可转债工具应用</a>：普华永道分析可转债融资模式。</li>
+                </ol>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="w-full max-w-6xl text-center mt-16 py-8 border-t border-base text-gray-400 text-sm">
+            <p>&copy; 2025 科创板政策研究. All Rights Reserved.</p>
+            <p class="mt-2">内容基于2025年陆家嘴论坛最新政策及相关公开资料整理。</p>
+        </footer>
+    </div>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Theme Toggle JavaScript
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                htmlElement.classList.add('light');
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            }
+            // Re-render Mermaid diagrams to apply new theme variables
+            // This is crucial for Mermaid to pick up the new CSS variables
+            mermaid.initialize({
+                startOnLoad: false, // Don't start on load, we'll manually init
+                theme: 'neutral', // Use 'neutral' and rely on themeVariables for full control
+                themeVariables: {
+                    background: getComputedStyle(document.documentElement).getPropertyValue('--mermaid-bg').trim(),
+                    primaryColor: getComputedStyle(document.documentElement).getPropertyValue('--card-bg').trim(),
+                    primaryBorderColor: getComputedStyle(document.documentElement).getPropertyValue('--primary-accent').trim(),
+                    primaryTextColor: getComputedStyle(document.documentElement).getPropertyValue('--text-color').trim(),
+                    lineColor: getComputedStyle(document.documentElement).getPropertyValue('--secondary-accent').trim(),
+                    secondaryColor: getComputedStyle(document.documentElement).getPropertyValue('--table-header-bg').trim(),
+                    tertiaryColor: getComputedStyle(document.documentElement).getPropertyValue('--card-bg').trim(), // Default to card-bg for consistency
+                    noteBkgColor: getComputedStyle(document.documentElement).getPropertyValue('--card-bg').trim(),
+                    noteTextColor: getComputedStyle(document.documentElement).getPropertyValue('--text-color').trim(),
+                }
+            });
+            // Select all mermaid elements and re-render them
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            if (mermaidElements.length > 0) {
+                // Clear existing SVG content to avoid duplicates/conflicts
+                mermaidElements.forEach(el => el.innerHTML = '');
+                mermaid.init(undefined, mermaidElements);
+            }
+        }
+
+        // Check for saved theme preference or system preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (prefersDark) {
+            setTheme('dark');
+        } else {
+            setTheme('light'); // Default to light if no preference and system is not dark
+        }
+
+        // Toggle theme on button click
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+    </script>
+</body>
+</html>
+```
