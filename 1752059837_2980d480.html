@@ -1,0 +1,526 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上交所科创板“1+6”政策深度解读</title>
+    <meta name="description" content="深入解读上交所科创板“1+6”政策股权投资机构座谈会内容，分析对中国科技金融市场的深远影响。">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    
+    <!-- Google Fonts for Noto Serif SC (headings) and Noto Sans SC (body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS Variables for Theme Management */
+        :root {
+            /* Light Mode Variables */
+            --bg-primary-light: #F8FAFC; /* Slate-50 */
+            --text-primary-light: #1A202C; /* Gray-900 */
+            --bg-card-light: #FFFFFF;
+            --text-muted-light: #4A5568; /* Gray-600 */
+            --border-light: #E2E8F0; /* Gray-200 */
+            --accent-light: #3B82F6; /* Blue-500 */
+            --hero-overlay-light-start: rgba(248, 250, 252, 0.6);
+            --hero-overlay-light-end: rgba(248, 250, 252, 0.9);
+
+            /* Dark Mode Variables (Default if no .light class) */
+            --bg-primary-dark: #1A1A1A; /* Deep Dark Grey */
+            --text-primary-dark: #E0E0E0; /* Off-white */
+            --bg-card-dark: #282828; /* Slightly lighter dark */
+            --text-muted-dark: #A0AEC0; /* Gray-400 */
+            --border-dark: #4A4A4A; /* Darker grey border */
+            --accent-dark: #00BFFF; /* Deep Sky Blue / Cyan-400 equivalent */
+            --hero-overlay-dark-start: rgba(26, 26, 26, 0.6);
+            --hero-overlay-dark-end: rgba(26, 26, 26, 0.9);
+        }
+
+        /* Base styles applied to body */
+        body {
+            font-family: "Noto Sans SC", Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            @apply text-base; /* Tailwind base font size */
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Headings use Noto Serif SC */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "Noto Serif SC", serif;
+            @apply font-bold;
+        }
+
+        /* Theme-dependent styles using CSS variables */
+        .light {
+            background-color: var(--bg-primary-light);
+            color: var(--text-primary-light);
+        }
+        .light .bg-card { background-color: var(--bg-card-light); }
+        .light .text-primary { color: var(--text-primary-light); }
+        .light .text-muted { color: var(--text-muted-light); }
+        .light .border-card { border-color: var(--border-light); }
+        .light .text-accent { color: var(--accent-light); }
+        .light .btn-primary { background-color: var(--accent-light); color: white; }
+        .light a { color: var(--accent-light); }
+        .light .hero-overlay { background: linear-gradient(to bottom, var(--hero-overlay-light-start), var(--hero-overlay-light-end)); }
+        .light .mermaid-container { background-color: var(--bg-card-light); box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); }
+
+
+        .dark { /* Default mode if no .light class on html */
+            background-color: var(--bg-primary-dark);
+            color: var(--text-primary-dark);
+        }
+        .dark .bg-card { background-color: var(--bg-card-dark); }
+        .dark .text-primary { color: var(--text-primary-dark); }
+        .dark .text-muted { color: var(--text-muted-dark); }
+        .dark .border-card { border-color: var(--border-dark); }
+        .dark .text-accent { color: var(--accent-dark); }
+        .dark .btn-primary { background-color: var(--accent-dark); color: var(--bg-primary-dark); }
+        .dark a { color: var(--accent-dark); }
+        .dark .hero-overlay { background: linear-gradient(to bottom, var(--hero-overlay-dark-start), var(--hero-overlay-dark-end)); }
+        .dark .mermaid-container { background-color: var(--bg-card-dark); box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3); }
+
+        /* Custom animations for Hero section */
+        @keyframes fadeInMoveUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+            animation: fadeInMoveUp 0.8s ease-out forwards;
+            opacity: 0; /* Hidden by default */
+        }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+
+        /* Custom animation for section titles (underline effect) */
+        .group .relative span span {
+            transition: transform 0.3s ease;
+        }
+        .group:hover .relative span span {
+            transform: scaleX(1);
+        }
+    </style>
+</head>
+<body class="dark">
+    <!-- Theme Switcher Button -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button id="theme-toggle" class="p-3 rounded-full bg-card shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent">
+            <i class="fas fa-sun text-accent text-xl hidden dark:block"></i>
+            <i class="fas fa-moon text-accent text-xl block dark:hidden"></i>
+        </button>
+    </div>
+
+    <!-- Header & Hero Section -->
+    <header class="relative w-full h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <!-- Background Image: Abstract tech-finance visual to set the tone -->
+            <img src="https://images.unsplash.com/photo-1579547621430-1b203c9b7e7a?auto=format&fit=crop&q=80&w=1920&h=1080&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                 alt="Abstract tech finance background representing data and growth" 
+                 class="w-full h-full object-cover opacity-30">
+            <!-- Gradient Overlay for readability -->
+            <div class="hero-overlay absolute inset-0"></div>
+        </div>
+        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+            <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-primary leading-tight mb-4 animate-fade-in-up">
+                科创板“1+6”政策深化：<br class="hidden sm:inline">股权投资机构座谈会深度解读
+            </h1>
+            <p class="text-lg sm:text-xl lg:text-2xl text-muted font-light mb-8 animate-fade-in-up delay-100">
+                —— 资本市场赋能科技创新新篇章 ——
+            </p>
+            <p class="text-md sm:text-lg text-muted max-w-2xl mx-auto mb-10 opacity-0 animate-fade-in-up delay-200">
+                2025年7月5日，上海证券交易所召开重要座谈会，就科创板最新“1+6”政策与股权投资机构展开深入交流。本次会议不仅是政策宣贯，更是凝聚市场共识、加速科技与资本融合的关键一步。
+            </p>
+            <a href="#summary" class="btn-primary py-3 px-8 rounded-full inline-flex items-center space-x-2 text-lg font-medium shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 opacity-0 animate-fade-in-up delay-300">
+                <i class="fas fa-angle-double-down"></i>
+                <span>探索解读</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content Sections -->
+    <main class="container mx-auto px-6 py-16 lg:py-24 max-w-6xl">
+        <!-- Section 1: 座谈会主要内容总结 -->
+        <section id="summary" class="mb-16">
+            <h2 class="text-3xl lg:text-4xl text-primary font-bold mb-10 text-center relative group">
+                <span class="inline-block relative pb-2">
+                    <i class="fas fa-bullhorn text-accent mr-3"></i>
+                    座谈会主要内容总结
+                    <span class="absolute bottom-0 left-0 w-full h-1 bg-accent transform scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></span>
+                </span>
+            </h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Card 1: 政策宣贯与改革目标 -->
+                <div class="bg-card p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 border border-card">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-lightbulb text-accent text-3xl mr-4"></i>
+                        <h3 class="text-xl font-semibold text-primary">政策宣贯与改革目标</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-muted space-y-2 text-md leading-relaxed">
+                        <li>重点宣传科创板“1+6”政策，强化服务科技自立自强。</li>
+                        <li>加速打通股权投资“募投管退”循环。</li>
+                        <li>降低科技企业融资成本，提升对硬科技支持。</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: 股权投资机构的反馈与共识 -->
+                <div class="bg-card p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 border border-card">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-handshake text-accent text-3xl mr-4"></i>
+                        <h3 class="text-xl font-semibold text-primary">机构反馈与共识</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-muted space-y-2 text-md leading-relaxed">
+                        <li>政策提升机构“心气”，坚定“投早、投小、投长、投硬科技”。</li>
+                        <li>鼓励为科技型企业提供全生命周期服务。</li>
+                        <li>优化退出机制，增强投资信心和市场流动性。</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: 市场影响与协同效应 -->
+                <div class="bg-card p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 border border-card">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-chart-line text-accent text-3xl mr-4"></i>
+                        <h3 class="text-xl font-semibold text-primary">市场影响与协同效应</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-muted space-y-2 text-md leading-relaxed">
+                        <li>促进“科技-产业-金融”良性循环。</li>
+                        <li>提升科技型企业家信心，推动硬科技企业融资。</li>
+                        <li>助力股权投资机构募资，提振市场。</li>
+                    </ul>
+                </div>
+
+                <!-- Card 4: 后续行动与监管合作 -->
+                <div class="bg-card p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 border border-card">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-cogs text-accent text-3xl mr-4"></i>
+                        <h3 class="text-xl font-semibold text-primary">后续行动与监管合作</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-muted space-y-2 text-md leading-relaxed">
+                        <li>上交所将与机构加强合作，全国重点省市举办宣介会。</li>
+                        <li>建立反馈机制，邀请机构参与政策细则优化。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: 专业分析 -->
+        <section id="analysis" class="mb-16">
+            <h2 class="text-3xl lg:text-4xl text-primary font-bold mb-10 text-center relative group">
+                <span class="inline-block relative pb-2">
+                    <i class="fas fa-brain text-accent mr-3"></i>
+                    专业分析：投行与市场专家视角
+                    <span class="absolute bottom-0 left-0 w-full h-1 bg-accent transform scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></span>
+                </span>
+            </h2>
+
+            <div class="bg-card p-8 rounded-lg shadow-lg border border-card">
+                <div class="mb-6">
+                    <h3 class="text-2xl font-semibold text-primary mb-3">
+                        <i class="fas fa-arrow-right text-accent text-xl mr-2"></i>政策意义
+                    </h3>
+                    <p class="text-muted leading-relaxed text-lg">
+                        科创板“1+6”政策是A股资本运作的关键改革，聚焦注册制深化和投资者保护，符合国家科技自立自强战略。作为投行从业者，我认为这将降低Pre-IPO企业融资门槛，利好硬科技赛道（如人工智能、新能源），但需关注政策落地的执行风险（如估值泡沫）。
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold text-primary mb-3">
+                        <i class="fas fa-chart-area text-accent text-xl mr-2"></i>市场影响
+                    </h3>
+                    <p class="text-muted leading-relaxed text-lg">
+                        短期内可能吸引更多PE/VC资金流入科创板，长期看需警惕一级市场过热。建议投资者关注政策配套细则的出台（如上交所官网公告）。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 核心概念可视化 (Mermaid.js) -->
+        <section id="visualization" class="mb-16">
+            <h2 class="text-3xl lg:text-4xl text-primary font-bold mb-10 text-center relative group">
+                <span class="inline-block relative pb-2">
+                    <i class="fas fa-project-diagram text-accent mr-3"></i>
+                    核心概念关系图
+                    <span class="absolute bottom-0 left-0 w-full h-1 bg-accent transform scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></span>
+                </span>
+            </h2>
+            <div class="mermaid-container w-full overflow-x-auto p-4 md:p-6 lg:p-8 rounded-lg">
+                <div class="mermaid">
+                    graph TD
+                        A["科创板 '1+6' 政策"] -- 目的 --> B[强化服务科技自立自强]
+                        A -- 作用于 --> C[股权投资机构]
+                        A -- 促进 --> D[市场良性循环]
+
+                        B -- 路径 --> B1[打通"募投管退"循环]
+                        B -- 效应 --> B2[降低融资成本]
+                        B -- 重点 --> B3[支持硬科技]
+
+                        C -- 反馈 --> C1[提升"心气"]
+                        C -- 策略调整 --> C2[投早投小投长投硬科技]
+                        C -- 结果 --> C3[优化退出机制]
+                        C -- 愿景 --> C4[提供全生命周期服务]
+
+                        D -- 驱动 --> D1[科技-产业-金融良性循环]
+                        D -- 信心增强 --> D2[提升企业家信心]
+                        D -- 资金流动 --> D3[助力机构募资规模扩大]
+
+                        E[上交所后续行动] -- 包含 --> E1[全国宣介会]
+                        E -- 包含 --> E2[建立反馈机制]
+
+                        A --- E
+                        B1 --- C3
+                        C1 & C2 & C4 --- B3
+                        B --- D1
+                        C --- D
+
+                        style A fill:#00BFFF,stroke:#00BFFF,stroke-width:2px,color:#1A1A1A
+                        style B fill:#3B82F6,stroke:#3B82F6,stroke-width:1px,color:#FFFFFF
+                        style C fill:#3B82F6,stroke:#3B82F6,stroke-width:1px,color:#FFFFFF
+                        style D fill:#3B82F6,stroke:#3B82F6,stroke-width:1px,color:#FFFFFF
+                        style E fill:#3B82F6,stroke:#3B82F6,stroke-width:1px,color:#FFFFFF
+
+                        linkStyle 0 stroke:#00BFFF,stroke-width:2px;
+                        linkStyle 1 stroke:#00BFFF,stroke-width:2px;
+                        linkStyle 2 stroke:#00BFFF,stroke-width:2px;
+                        linkStyle 3 stroke:#3B82F6;
+                        linkStyle 4 stroke:#3B82F6;
+                        linkStyle 5 stroke:#3B82F6;
+                        linkStyle 6 stroke:#3B82F6;
+                        linkStyle 7 stroke:#3B82F6;
+                        linkStyle 8 stroke:#3B82F6;
+                        linkStyle 9 stroke:#3B82F6;
+                        linkStyle 10 stroke:#3B82F6;
+                        linkStyle 11 stroke:#3B82F6;
+                        linkStyle 12 stroke:#3B82F6;
+                        linkStyle 13 stroke:#3B82F6;
+                        linkStyle 14 stroke:#3B82F6;
+                        linkStyle 15 stroke:#3B82F6;
+                        linkStyle 16 stroke:#3B82F6;
+                        linkStyle 17 stroke:#3B82F6;
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: 补充信息：关键概念解析 -->
+        <section id="additional-info" class="mb-16">
+            <h2 class="text-3xl lg:text-4xl text-primary font-bold mb-10 text-center relative group">
+                <span class="inline-block relative pb-2">
+                    <i class="fas fa-info-circle text-accent mr-3"></i>
+                    补充信息：关键概念解析
+                    <span class="absolute bottom-0 left-0 w-full h-1 bg-accent transform scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></span>
+                </span>
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-card p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 border border-card">
+                    <h3 class="text-xl font-semibold text-primary mb-3"><i class="fas fa-cubes text-accent mr-2"></i>科创板“1+6”政策</h3>
+                    <p class="text-muted leading-relaxed text-md">
+                        指科创板深化改革的一揽子政策。其中“1”通常指一个核心的改革方向或目标，例如服务国家科技创新战略；“6”则代表围绕核心目标制定的六项配套细则，可能涵盖发行上市、并购重组、退市机制、投资者保护、股权激励以及信息披露等方面的具体优化措施。这些政策旨在进一步提升科创板的包容性和市场化水平。
+                    </p>
+                </div>
+                <div class="bg-card p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 border border-card">
+                    <h3 class="text-xl font-semibold text-primary mb-3"><i class="fas fa-sync-alt text-accent mr-2"></i>“募投管退”循环</h3>
+                    <p class="text-muted leading-relaxed text-md">
+                        是股权投资机构运作的四大核心环节：<br>
+                        <strong class="text-primary">募（Fundraising）：</strong>募集资金，设立基金。<br>
+                        <strong class="text-primary">投（Investment）：</strong>对目标企业进行投资。<br>
+                        <strong class="text-primary">管（Management）：</strong>投后管理，赋能企业成长。<br>
+                        <strong class="text-primary">退（Exit）：</strong>通过IPO、并购、回购等方式退出投资，实现收益。
+                        <br>打通这一循环意味着政策旨在解决各环节痛点，提升效率。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: 延伸阅读 -->
+        <section id="further-reading" class="mb-16">
+            <h2 class="text-3xl lg:text-4xl text-primary font-bold mb-10 text-center relative group">
+                <span class="inline-block relative pb-2">
+                    <i class="fas fa-book-open text-accent mr-3"></i>
+                    延伸阅读
+                    <span class="absolute bottom-0 left-0 w-full h-1 bg-accent transform scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"></span>
+                </span>
+            </h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Book 1 -->
+                <div class="bg-card p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-start space-x-4 border border-card">
+                    <i class="fas fa-book text-accent text-2xl mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold text-primary mb-1">《科创板制度创新与实践》</h3>
+                        <p class="text-muted text-md mb-2">深入剖析科创板从设立到运行的各项制度设计及市场影响。</p>
+                        <a href="https://search.jd.com/Search?keyword=%E7%A7%91%E5%88%9B%E6%9D%BF%E5%88%B6%E5%BA%A6%E5%88%9B%E6%96%B0%E4%B8%8E%E5%AE%9E%E8%B7%B5" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline text-sm">
+                            <i class="fas fa-external-link-alt mr-1"></i>查看详情
+                        </a>
+                    </div>
+                </div>
+                <!-- Book 2 -->
+                <div class="bg-card p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-start space-x-4 border border-card">
+                    <i class="fas fa-book text-accent text-2xl mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold text-primary mb-1">《中国私募股权投资发展报告》</h3>
+                        <p class="text-muted text-md mb-2">全面了解中国私募股权市场的发展趋势、政策环境与投资策略。</p>
+                        <a href="https://search.jd.com/Search?keyword=%E4%B8%AD%E5%9B%BD%E7%A7%81%E5%8B%9F%E8%82%A1%E6%9D%83%E6%8A%95%E8%B5%84%E5%8F%91%E5%B1%95%E6%8A%A5%E5%91%8A" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline text-sm">
+                            <i class="fas fa-external-link-alt mr-1"></i>查看详情
+                        </a>
+                    </div>
+                </div>
+                <!-- Book 3 -->
+                <div class="bg-card p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-start space-x-4 border border-card">
+                    <i class="fas fa-book text-accent text-2xl mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold text-primary mb-1">《硬科技投资：中国新经济的引擎》</h3>
+                        <p class="text-muted text-md mb-2">探讨硬科技领域的投资机遇、风险和未来发展方向。</p>
+                        <a href="https://search.jd.com/Search?keyword=%E7%A1%AC%E7%A7%91%E6%8A%80%E6%8A%95%E8%B5%84" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline text-sm">
+                            <i class="fas fa-external-link-alt mr-1"></i>查看详情
+                        </a>
+                    </div>
+                </div>
+                 <!-- Book 4 -->
+                <div class="bg-card p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-start space-x-4 border border-card">
+                    <i class="fas fa-book text-accent text-2xl mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold text-primary mb-1">《注册制下A股IPO实务》</h3>
+                        <p class="text-muted text-md mb-2">解析注册制改革对A股IPO流程、审核和发行带来的影响。</p>
+                        <a href="https://search.jd.com/Search?keyword=%E6%B3%A8%E5%86%8C%E5%88%B6%E4%B8%8BA%E8%82%A1IPO%E5%AE%9E%E5%8A%A1" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline text-sm">
+                            <i class="fas fa-external-link-alt mr-1"></i>查看详情
+                        </a>
+                    </div>
+                </div>
+                <!-- Book 5 -->
+                <div class="bg-card p-6 rounded-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-start space-x-4 border border-card">
+                    <i class="fas fa-book text-accent text-2xl mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold text-primary mb-1">《金融科技与未来投资》</h3>
+                        <p class="text-muted text-md mb-2">探讨金融科技如何重塑投资行业，提升效率和决策质量。</p>
+                        <a href="https://search.jd.com/Search?keyword=%E9%87%91%E8%9E%8D%E7%A7%91%E6%8A%80%E4%B8%8E%E6%9C%AA%E6%9D%A5%E6%8A%95%E8%B5%84" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline text-sm">
+                            <i class="fas fa-external-link-alt mr-1"></i>查看详情
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: References / 脚注 -->
+        <section id="references" class="mb-16">
+            <h2 class="text-2xl font-bold text-primary mb-6">
+                <i class="fas fa-link text-accent mr-2"></i>
+                参考来源
+            </h2>
+            <ol class="list-decimal list-outside text-muted text-md space-y-2 pl-5 leading-relaxed">
+                <li><span class="text-primary">[^1]</span> 知识库检索关键词：上交所、科创板、“1+6”政策、股权投资机构、座谈会、2025年7月（知识库中未匹配到具体资料全名，故主要依赖联网搜索）。</li>
+                <li><span class="text-primary">[^2]</span> <a href="https://www.sse.com.cn/aboutus/mediacenter/hotandd/c/c_20250705_10784028.shtml" target="_blank" rel="noopener noreferrer" class="hover:underline">上交所召开落实科创板“1+6”政策股权投资机构座谈会</a>：上海证券交易所官网报道，强调政策目标和市场宣贯。</li>
+                <li><span class="text-primary">[^3]</span> <a href="https://www.163.com/dy/article/K3MQMMFG05198CJN.html" target="_blank" rel="noopener noreferrer" class="hover:underline">上交所召开落实科创板“1+6”政策股权投资机构座谈会</a>：网易新闻，引用机构反馈。</li>
+                <li><span class="text-primary">[^4]</span> <a href="https://www.163.com/dy/article/K3MRC9ST0512B07B.html" target="_blank" rel="noopener noreferrer" class="hover:underline">上交所召开落实科创板“1+6”政策股权投资机构座谈会</a>：网易新闻，讨论退出机制优化。</li>
+                <li><span class="text-primary">[^5]</span> <a href="http://jjckb.xinhuanet.com/20250705/3d89fbedd0ce41b89663caaf18385a29/c.html" target="_blank" rel="noopener noreferrer" class="hover:underline">上交所召开落实科创板“1+6”政策股权投资机构座谈会</a>：经济参考报，分析市场信心提升。</li>
+                <li><span class="text-primary">[^6]</span> <a href="https://finance.sina.com.cn/stock/focus/2025-07-04/doc-infeieun7596987.shtml" target="_blank" rel="noopener noreferrer" class="hover:underline">2025创投半年报</a>：新浪财经，提供募资数据背景。</li>
+                <li><span class="text-primary">[^7]</span> <a href="https://www.stocke.com.cn/main/a/20250704/7813547.shtml" target="_blank" rel="noopener noreferrer" class="hover:underline">上交所：启动科创板改革政策宣介会</a>：浙商证券，报道后续行动。</li>
+                <li><span class="text-primary">[^8]</span> <a href="https://news.cnyes.com/news/id/6041191" target="_blank" rel="noopener noreferrer" class="hover:underline">《中國要聞》上交所召開落實科创板「1+6」政策保薦機構座談會</a>：钜亨网，强调监管合作。</li>
+            </ol>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-card text-muted py-8 text-center border-t border-card">
+        <div class="container mx-auto px-6">
+            <p>&copy; 2025 科创板政策深度解读. All rights reserved.</p>
+            <p class="mt-2 text-sm">此页面内容为AI根据公开信息整理，仅供参考。</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Theme Toggle -->
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+            } else {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+            }
+            localStorage.setItem('theme', theme);
+            initializeMermaid(); // Re-initialize Mermaid to apply new theme
+        }
+
+        // Check for saved theme preference or system preference on load
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (prefersDark) {
+            setTheme('dark'); // Default to dark if system prefers dark
+        } else {
+            setTheme('light'); // Default to light if system prefers light
+        }
+
+        // Event listener for theme toggle button
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+    </script>
+
+    <!-- JavaScript for Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid with theme based on current mode
+        function initializeMermaid() {
+            const isDarkMode = document.documentElement.classList.contains('dark');
+            mermaid.initialize({
+                startOnLoad: false, // Will render manually for theme changes
+                theme: isDarkMode ? 'dark' : 'default', // 'dark' theme for dark mode, 'default' for light
+                securityLevel: 'loose', // Allows for more complex diagrams, be cautious with untrusted input
+                themeVariables: {
+                    background: isDarkMode ? '#282828' : '#FFFFFF', /* Matches --bg-card */
+                    mainBkg: isDarkMode ? '#282828' : '#FFFFFF',
+                    nodeBorder: isDarkMode ? '#4A4A4A' : '#E2E8F0',
+                    nodeTextColor: isDarkMode ? '#E0E0E0' : '#1A202C',
+                    clusterBkg: isDarkMode ? '#3A3A3A' : '#F0F4F8',
+                    clusterBorder: isDarkMode ? '#6A6A6A' : '#CBD5E0',
+                    lineColor: isDarkMode ? '#00BFFF' : '#3B82F6', /* Matches accent color */
+                    textColor: isDarkMode ? '#E0E0E0' : '#1A202C',
+                    primaryColor: isDarkMode ? '#00BFFF' : '#3B82F6',
+                    primaryBorderColor: isDarkMode ? '#00BFFF' : '#3B82F6',
+                    secondaryColor: isDarkMode ? '#6A6A6A' : '#EDF2F7',
+                    tertiaryColor: isDarkMode ? '#4A4A4A' : '#A0AEC0'
+                },
+                flowchart: {
+                    diagramPadding: 20,
+                    nodeSpacing: 80,
+                    rankSpacing: 100
+                }
+            });
+
+            // Find all mermaid elements and render them
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            mermaidElements.forEach(element => {
+                // Clear existing SVG to prevent duplicates if re-rendering
+                element.innerHTML = element.dataset.graph || element.innerHTML;
+                mermaid.render('graphDiv' + Math.random().toString(36).substr(2, 9), element.innerHTML)
+                    .then(({ svg, bindFunctions }) => {
+                        element.innerHTML = svg;
+                        if (bindFunctions) {
+                            bindFunctions();
+                        }
+                    })
+                    .catch(error => console.error("Mermaid rendering error:", error));
+            });
+        }
+
+        // Call initializeMermaid after the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', initializeMermaid);
+    </script>
+</body>
+</html>
+```
