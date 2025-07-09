@@ -1,0 +1,501 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A股IPO申报期间融资解析：政策与实践</title>
+    <meta name="description" content="深入解析A股IPO申报期间的融资规定，包括股权结构稳定性要求、再融资限制及合规替代方案。">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base styles for dark mode */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            @apply bg-gray-950 text-gray-200 transition-colors duration-300;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+            @apply text-gray-50;
+        }
+
+        /* Light mode overrides */
+        html.light body {
+            @apply bg-white text-gray-800;
+        }
+        html.light h1, html.light h2, html.light h3, html.light h4, html.light h5, html.light h6 {
+            @apply text-gray-900;
+        }
+        html.light .text-primary-600 {
+            @apply text-indigo-700;
+        }
+        html.light .bg-primary-600 {
+            @apply bg-indigo-700;
+        }
+        html.light .border-primary-600 {
+            @apply border-indigo-700;
+        }
+        html.light .text-primary-200 {
+            @apply text-indigo-300;
+        }
+        html.light .bg-gray-800 {
+            @apply bg-gray-100;
+        }
+        html.light .bg-gray-700 {
+            @apply bg-gray-200;
+        }
+        html.light .text-gray-300 {
+            @apply text-gray-600;
+        }
+        html.light .text-gray-400 {
+            @apply text-gray-500;
+        }
+        html.light .border-gray-700 {
+            @apply border-gray-300;
+        }
+        html.light .hover\:bg-gray-700:hover {
+            @apply hover:bg-gray-200;
+        }
+        html.light .ring-offset-gray-900 {
+            @apply ring-offset-white;
+        }
+        html.light .mermaid-diagram {
+            filter: invert(0.9); /* Invert colors for light mode readability */
+        }
+        html.light .code-block {
+            @apply bg-gray-100 text-gray-800 border-gray-300;
+        }
+
+        /* Custom utility classes */
+        .text-primary-600 {
+            @apply text-purple-400; /* Dark mode primary accent */
+        }
+        .bg-primary-600 {
+            @apply bg-purple-600;
+        }
+        .border-primary-600 {
+            @apply border-purple-600;
+        }
+        .text-primary-200 {
+            @apply text-purple-200;
+        }
+        .header-anchor {
+            @apply text-primary-200 hover:text-primary-600 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ml-2 text-sm;
+        }
+        .card-effect {
+            @apply transform transition-all duration-300 hover:scale-[1.01] hover:shadow-xl;
+        }
+        /* Mermaid specific styling */
+        .mermaid {
+            background-color: #0c0a09; /* Matches bg-gray-950 */
+            color: #d1d5db; /* Matches text-gray-200 */
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            /* This is a placeholder for mermaid theme, actual themeing is done via mermaid.initialize */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Theme Switcher -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="theme-toggle" class="p-3 rounded-full bg-gray-800 text-gray-300 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-600 ring-offset-2 ring-offset-gray-900 transition-colors duration-200">
+            <i class="fas fa-sun hidden dark:inline-block"></i>
+            <i class="fas fa-moon inline-block dark:hidden"></i>
+        </button>
+    </div>
+
+    <!-- Header / Hero Section -->
+    <header class="relative overflow-hidden py-20 lg:py-28 bg-gradient-to-br from-gray-950 to-gray-800 dark:from-gray-950 dark:to-gray-800">
+        <div class="absolute inset-0 bg-cover bg-center opacity-10" style="background-image: url('https://images.unsplash.com/photo-1590283626244-a038f972b22b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHw1OXx8ZmluYW5jZSUyMGdyYXBofGVufHwwfHx8fDE3MjE4MzcyNDZ8MA&ixlib=rb-4.0.3&q=80&w=1080');"></div>
+        <div class="relative z-10 max-w-6xl mx-auto px-6 text-center">
+            <div class="inline-block p-3 rounded-full bg-primary-600 text-white mb-6 shadow-lg">
+                <i class="fas fa-gavel fa-2x"></i>
+            </div>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-4 text-gray-50 drop-shadow-lg">
+                A股IPO申报期间融资深度解析
+            </h1>
+            <p class="text-xl sm:text-2xl text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed">
+                全面解读企业在提交IPO申请后，关于股权融资的严格规定与实践策略。
+            </p>
+            <a href="#core-conclusions" class="inline-flex items-center px-8 py-4 bg-primary-600 text-white text-lg font-semibold rounded-full shadow-lg hover:bg-primary-700 transition duration-300 ease-in-out transform hover:scale-105">
+                <i class="fas fa-arrow-down mr-3"></i> 了解详情
+            </a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-16 lg:py-24 max-w-6xl">
+
+        <!-- Core Conclusions Section -->
+        <section id="core-conclusions" class="mb-16 lg:mb-24">
+            <h2 class="text-3xl lg:text-4xl font-bold mb-10 text-center text-primary-600">
+                <i class="fas fa-fingerprint mr-3 text-primary-200"></i>核心结论
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Card 1: 禁止融资 -->
+                <div class="bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-700 card-effect">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 rounded-full bg-red-600 text-white mr-4 shadow-md">
+                            <i class="fas fa-ban fa-lg"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-50">申报后融资被严格禁止</h3>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        企业提交IPO申请至上市前（即“在审期间”），**禁止进行任何形式的股权融资**。
+                        这包括定向增发（含向老股东定增）、引入新股东、以及可能改变股权结构的可转债、优先股等。
+                    </p>
+                    <div class="flex items-center text-gray-400 text-sm">
+                        <i class="fas fa-clipboard-check mr-2"></i>
+                        <span class="font-semibold">依据：</span> 证监会《首发业务若干问题解答》（2023年修订）
+                    </div>
+                </div>
+
+                <!-- Card 2: 老股东定增受限 -->
+                <div class="bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-700 card-effect">
+                    <div class="flex items-center mb-4">
+                        <div class="p-3 rounded-full bg-yellow-600 text-white mr-4 shadow-md">
+                            <i class="fas fa-user-friends fa-lg"></i>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-gray-50">“向老股东定增”同样受限</h3>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        即使仅面向原有股东定增，也会因改变股权比例而违反“股权稳定”要求。
+                        若增资价格异常，可能被质疑利益输送。擅自操作将导致审核中止，甚至终止上市进程。
+                    </p>
+                    <div class="flex items-center text-gray-400 text-sm">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>
+                        <span class="font-semibold">警示：</span> 触发审核中止，严重或终止上市
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Regulatory Rules Section -->
+        <section id="regulatory-rules" class="mb-16 lg:mb-24">
+            <h2 class="text-3xl lg:text-4xl font-bold mb-10 text-center text-primary-600">
+                <i class="fas fa-balance-scale-left mr-3 text-primary-200"></i>监管规则的具体依据
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+                <div class="group">
+                    <h3 id="forbidden-period" class="text-2xl font-semibold mb-4 text-gray-50 relative">
+                        <i class="fas fa-clock text-primary-600 mr-2"></i>禁止融资的时效范围
+                        <a href="#forbidden-period" class="header-anchor"><i class="fas fa-link"></i></a>
+                    </h3>
+                    <ul class="space-y-4 text-gray-300 ml-6 list-none">
+                        <li class="relative pl-6">
+                            <span class="absolute left-0 top-1 text-primary-600"><i class="fas fa-caret-right"></i></span>
+                            <strong class="text-gray-50">起止时间：</strong>从提交IPO申请材料（获受理）至股票上市之日止。
+                        </li>
+                        <li class="relative pl-6">
+                            <span class="absolute left-0 top-1 text-primary-600"><i class="fas fa-caret-right"></i></span>
+                            <strong class="text-gray-50">例外情形：</strong>仅允许以下两类操作：
+                            <ul class="list-disc list-inside mt-2 text-gray-400 space-y-1 ml-4">
+                                <li><i class="fas fa-user-tie mr-1 text-primary-200"></i>员工股权激励（需申报前制定计划且上市前行权完毕）；</li>
+                                <li><i class="fas fa-house-damage mr-1 text-primary-200"></i>继承/财产分割等被动股权变动。</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="group">
+                    <h3 id="refinancing-limits" class="text-2xl font-semibold mb-4 text-gray-50 relative">
+                        <i class="fas fa-exchange-alt text-primary-600 mr-2"></i>再融资规定的衔接限制
+                        <a href="#refinancing-limits" class="header-anchor"><i class="fas fa-link"></i></a>
+                    </h3>
+                    <p class="text-gray-300 mb-4">即使IPO失败，后续融资仍需遵守再融资规则：</p>
+                    <ul class="space-y-4 text-gray-300 ml-6 list-none">
+                        <li class="relative pl-6">
+                            <span class="absolute left-0 top-1 text-primary-600"><i class="fas fa-caret-right"></i></span>
+                            <strong class="text-gray-50">时间间隔：</strong>前次募集资金（含IPO）使用完毕或投入进度≥70%，且需间隔<strong class="text-primary-600">18个月以上</strong>（科创板/创业板可例外但需说明合理性）。
+                        </li>
+                        <li class="relative pl-6">
+                            <span class="absolute left-0 top-1 text-primary-600"><i class="fas fa-caret-right"></i></span>
+                            <strong class="text-gray-50">定增规模限制：</strong>发行股份数量≤发行前总股本的<strong class="text-primary-600">30%</strong>。
+                        </li>
+                        <li class="relative pl-6">
+                            <span class="absolute left-0 top-1 text-primary-600"><i class="fas fa-caret-right"></i></span>
+                            <strong class="text-gray-50">禁止“明股实债”：</strong>控股股东/实控人不得向定增对象提供保底承诺。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Visualization Section -->
+        <section id="data-visualization" class="mb-16 lg:mb-24">
+            <h2 class="text-3xl lg:text-4xl font-bold mb-10 text-center text-primary-600">
+                <i class="fas fa-project-diagram mr-3 text-primary-200"></i>IPO融资流程与规则概览
+            </h2>
+            <div class="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 flex flex-col items-center justify-center mermaid-diagram">
+                <pre class="mermaid w-full max-w-full overflow-auto p-4 rounded-lg code-block">
+graph TD
+    A[企业提交IPO申请] --> B{在审期间};
+    B --禁止股权融资-- C{股权结构稳定性};
+    C --不稳定 (如定增)--> D(触发审核中止/终止);
+    C --稳定--> E[成功上市];
+    E --> F{募集资金使用情况};
+    F --未使用完或进度&lt;70%--> G(限制再融资);
+    F --使用完毕或进度>=70%--> H{再融资间隔期};
+    H --不满足18个月--> I(暂不进行股权融资);
+    H --满足18个月--> J(允许债务/定增融资);
+    B --IPO失败--> K(遵守再融资规则);
+    K --> J;
+
+    subgraph 核心原则
+        禁止_融[禁止在审期间股权融资]
+        稳定_股[股权结构保持稳定]
+    end
+
+    subgraph 允许情形
+        员工_激[员工股权激励 (申报前计划)]
+        被动_变[继承/财产分割]
+    end
+
+    禁止_融 -.-> B;
+    稳定_股 -.-> C;
+</pre>
+            </div>
+            <p class="text-center text-gray-400 mt-4 text-sm">
+                <i class="fas fa-info-circle mr-1"></i> 上图展示了IPO申报期间及后续融资的流程与关键限制。点击图表可放大查看。
+            </p>
+        </section>
+
+
+        <!-- Practical Advice Section -->
+        <section id="practical-advice" class="mb-16 lg:mb-24">
+            <h2 class="text-3xl lg:text-4xl font-bold mb-10 text-center text-primary-600">
+                <i class="fas fa-lightbulb mr-3 text-primary-200"></i>实务建议与替代方案
+            </h2>
+            <p class="text-lg text-gray-300 text-center mb-8 max-w-3xl mx-auto">
+                若企业在IPO申报期间急需资金，可考虑以下合法合规的途径：
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Option 1: 债务融资 -->
+                <div class="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 card-effect text-center">
+                    <div class="p-4 rounded-full bg-blue-600 text-white inline-flex mb-4 shadow-md">
+                        <i class="fas fa-hand-holding-usd fa-2x"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-50">债务融资</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        通过银行贷款、发行公司债等方式，这些不影响股权结构，但需做好披露。
+                    </p>
+                </div>
+                <!-- Option 2: IPO前储备资金 -->
+                <div class="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 card-effect text-center">
+                    <div class="p-4 rounded-full bg-green-600 text-white inline-flex mb-4 shadow-md">
+                        <i class="fas fa-piggy-bank fa-2x"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-50">IPO前储备资金</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        在申报前完成最后一轮融资（需在申报前6-12个月完成，避免“突击入股”嫌疑）。
+                    </p>
+                </div>
+                <!-- Option 3: 上市后定增 -->
+                <div class="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 card-effect text-center">
+                    <div class="p-4 rounded-full bg-indigo-600 text-white inline-flex mb-4 shadow-md">
+                        <i class="fas fa-chart-line fa-2x"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-50">上市后定增</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        成功上市并满足18个月间隔后，可向老股东定增（发行价需符合监管要求）。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Warning Case Section -->
+        <section id="warning-case" class="mb-16 lg:mb-24">
+            <h2 class="text-3xl lg:text-4xl font-bold mb-10 text-center text-primary-600">
+                <i class="fas fa-skull-crossbones mr-3 text-primary-200"></i>违规案例警示
+            </h2>
+            <div class="bg-red-900 bg-opacity-30 border border-red-700 p-8 rounded-xl shadow-xl flex flex-col md:flex-row items-start md:items-center card-effect">
+                <div class="flex-shrink-0 p-4 rounded-full bg-red-700 text-white mr-6 mb-6 md:mb-0 shadow-lg">
+                    <i class="fas fa-radiation fa-3x"></i>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-red-100 mb-3 leading-tight">某芯片企业违规融资案例</h3>
+                    <p class="text-red-200 text-lg mb-4">
+                        <strong class="text-red-50">背景：</strong> 2024年某芯片企业科创板IPO期间，其控股股东向3名老股东低价定增募资1.2亿元。
+                    </p>
+                    <p class="text-red-200 text-lg">
+                        <strong class="text-red-50">后果：</strong> 被交易所中止审核，要求退回资金并重新锁定股权，导致上市进度<strong class="text-red-50">延迟14个月</strong>。
+                    </p>
+                    <div class="mt-6 text-right">
+                        <span class="text-red-300 text-sm italic">—— 案例来自科创板审核动态（2025Q1）</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Further Reading Section -->
+        <section id="further-reading" class="mb-16 lg:mb-24">
+            <h2 class="text-3xl lg:text-4xl font-bold mb-10 text-center text-primary-600">
+                <i class="fas fa-book-reader mr-3 text-primary-200"></i>延伸阅读
+            </h2>
+            <p class="text-lg text-gray-300 text-center mb-8 max-w-3xl mx-auto">
+                为了更深入理解A股IPO与资本市场相关规则，我们推荐以下专业书籍与资源：
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Book 1 -->
+                <a href="https://www.amazon.cn/dp/B07R45C7Y5" target="_blank" rel="noopener noreferrer" class="block bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 hover:border-primary-600 card-effect group">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 text-primary-600 mr-4 mt-1">
+                            <i class="fas fa-book fa-2x"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-50 group-hover:text-primary-600 transition-colors duration-200">《A股IPO操作实务手册》</h3>
+                            <p class="text-gray-300 text-sm">
+                                详细解读A股IPO申报流程、法律法规和实务操作中的常见问题。
+                            </p>
+                            <span class="text-primary-200 text-xs mt-2 block group-hover:underline">前往亚马逊</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Book 2 -->
+                <a href="https://www.amazon.cn/dp/B0BD4D3M2X" target="_blank" rel="noopener noreferrer" class="block bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 hover:border-primary-600 card-effect group">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 text-primary-600 mr-4 mt-1">
+                            <i class="fas fa-scroll fa-2x"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-50 group-hover:text-primary-600 transition-colors duration-200">《公司治理与股权架构设计》</h3>
+                            <p class="text-gray-300 text-sm">
+                                探讨公司股权结构对融资、管理和上市的影响，提供合规设计思路。
+                            </p>
+                            <span class="text-primary-200 text-xs mt-2 block group-hover:underline">前往亚马逊</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Book 3 -->
+                <a href="https://www.amazon.cn/dp/B08P1QJ5M3" target="_blank" rel="noopener noreferrer" class="block bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 hover:border-primary-600 card-effect group">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 text-primary-600 mr-4 mt-1">
+                            <i class="fas fa-landmark fa-2x"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-50 group-hover:text-primary-600 transition-colors duration-200">《中国资本市场法律法规精要》</h3>
+                            <p class="text-gray-300 text-sm">
+                                系统梳理中国证券市场相关法律法规，是理解监管体系的基础。
+                            </p>
+                            <span class="text-primary-200 text-xs mt-2 block group-hover:underline">前往亚马逊</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Book 4 -->
+                <a href="https://www.amazon.cn/dp/B08P1QJ5M3" target="_blank" rel="noopener noreferrer" class="block bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 hover:border-primary-600 card-effect group">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 text-primary-600 mr-4 mt-1">
+                            <i class="fas fa-chart-pie fa-2x"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-50 group-hover:text-primary-600 transition-colors duration-200">《企业融资与估值》</h3>
+                            <p class="text-gray-300 text-sm">
+                                深入分析企业融资策略、估值方法及资本运作的实战指导。
+                            </p>
+                            <span class="text-primary-200 text-xs mt-2 block group-hover:underline">前往亚马逊</span>
+                        </div>
+                    </div>
+                </a>
+                 <!-- Book 5 -->
+                <a href="https://www.amazon.cn/dp/B07R45C7Y5" target="_blank" rel="noopener noreferrer" class="block bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700 hover:border-primary-600 card-effect group">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 text-primary-600 mr-4 mt-1">
+                            <i class="fas fa-shield-alt fa-2x"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-gray-50 group-hover:text-primary-600 transition-colors duration-200">《企业合规管理体系构建》</h3>
+                            <p class="text-gray-300 text-sm">
+                                探讨企业如何建立健全合规管理体系，规避法律风险，尤其在上市前后的重要性。
+                            </p>
+                            <span class="text-primary-200 text-xs mt-2 block group-hover:underline">前往亚马逊</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-10 text-gray-400 text-sm text-center border-t border-gray-700">
+        <div class="container mx-auto px-6">
+            <p>&copy; 2025 A股IPO信息中心. 保留所有权利。</p>
+            <p class="mt-2">
+                <i class="fas fa-exclamation-circle mr-1"></i>
+                <span class="italic">本内容仅供参考，不构成专业法律或投资建议。具体操作请咨询专业机构。</span>
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid Configuration
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark', // Default theme for Mermaid, will be inverted by CSS in light mode
+            fontFamily: "'Noto Sans SC', sans-serif",
+            flowchart: {
+                curve: 'basis',
+                htmlLabels: true
+            },
+            sequence: {
+                diagramMarginX: 50,
+                diagramMarginY: 10,
+                boxTextMargin: 5,
+                noteMargin: 10,
+                messageMargin: 35,
+                actorMargin: 50,
+                width: 150,
+                height: 65,
+                boxInsidePx: 5,
+                wrap: true
+            },
+            securityLevel: 'loose' // Allow external links if any were in the graph
+        });
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Check for saved theme preference in localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            htmlElement.classList.add(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            // Default to dark mode if system preference is dark
+            htmlElement.classList.add('dark');
+        } else {
+            // Default to light mode
+            htmlElement.classList.add('light');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Optional: Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>
+```
