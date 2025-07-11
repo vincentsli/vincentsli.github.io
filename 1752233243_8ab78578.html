@@ -1,0 +1,539 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板上市合规证明深度解析：实务指南</title>
+    <meta name="description" content="科创板拟上市公司合规要点、流程及风险规避实务指南，涵盖主管部门、审核标准与最新监管要求。">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base styles for dark mode */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: #1a1a2e; /* Dark background */
+            color: #e0e0e0; /* Light text */
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Light mode styles */
+        html.light body {
+            background-color: #f8f8f8; /* Light background */
+            color: #333333; /* Dark text */
+        }
+
+        /* Specific text colors for light mode */
+        html.light .text-indigo-400 { color: #6366f1; /* Darker indigo for headings */ }
+        html.light .text-gray-100 { color: #1f2937; } /* Darker text for hero */
+        html.light .text-gray-400 { color: #6b7280; } /* Darker text for subtitles */
+        html.light .border-indigo-500 { border-color: #6366f1; }
+        html.light .bg-indigo-900 { background-color: #e0eeef; } /* Lighter background for callouts */
+        html.light .bg-gray-800 { background-color: #e5e7eb; } /* Lighter background for code/mermaid */
+        html.light .bg-gray-900 { background-color: #f3f4f6; } /* Lighter overall background */
+        html.light .bg-gray-700 { background-color: #d1d5db; } /* Lighter table borders */
+        html.light .table-header { background-color: #eef2ff; } /* Light table header */
+        html.light .table-row-even { background-color: #f9fafb; } /* Light even row */
+        html.light .text-gray-500 { color: #6b7280; } /* Footer text */
+
+        h1, h2, h3, h4 {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 700;
+        }
+
+        /* Custom scrollbar for better aesthetics in dark mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #2d2d4d; /* Darker track */
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #5a5a8a; /* Indigo-like thumb */
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7b7bb0; /* Lighter on hover */
+        }
+
+        /* Mermaid specific styling */
+        .mermaid {
+            background-color: #2a2a4a !important; /* Dark background for Mermaid */
+            color: #e0e0e0 !important; /* Light text for Mermaid */
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow-x: auto; /* Ensure horizontal scroll for large diagrams */
+        }
+
+        html.light .mermaid {
+            background-color: #f0f0f0 !important; /* Light background for Mermaid */
+            color: #333333 !important; /* Dark text for Mermaid */
+        }
+
+        /* For Mermaid nodes and links in dark mode */
+        .mermaid .node rect, .mermaid .node circle, .mermaid .node polygon {
+            fill: #3e3e6b !important; /* Darker node background */
+            stroke: #6a6ad0 !important; /* Accent border */
+            stroke-width: 2px !important;
+        }
+
+        .mermaid .node text {
+            fill: #e0e0e0 !important; /* Light text */
+            font-weight: 500 !important;
+        }
+
+        .mermaid .edgePaths .edgeLabel text {
+            fill: #e0e0e0 !important;
+        }
+
+        .mermaid .edgePaths .path {
+            stroke: #7b7bb0 !important; /* Accent lines */
+            stroke-width: 1.5px !important;
+        }
+
+        /* For Mermaid nodes and links in light mode */
+        html.light .mermaid .node rect, html.light .mermaid .node circle, html.light .mermaid .node polygon {
+            fill: #ffffff !important; /* Lighter node background */
+            stroke: #6366f1 !important; /* Accent border */
+        }
+
+        html.light .mermaid .node text {
+            fill: #333333 !important; /* Dark text */
+        }
+
+        html.light .mermaid .edgePaths .edgeLabel text {
+            fill: #333333 !important;
+        }
+
+        html.light .mermaid .edgePaths .path {
+            stroke: #6366f1 !important; /* Accent lines */
+        }
+
+        /* General link styling */
+        a {
+            color: #818cf8; /* Light indigo for links */
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: #a78bfa; /* Lighter purple on hover */
+            text-decoration: underline;
+        }
+
+        html.light a {
+            color: #4f46e5; /* Darker indigo for links in light mode */
+        }
+
+        html.light a:hover {
+            color: #312e81; /* Even darker on hover in light mode */
+        }
+
+        .table-striped tbody tr:nth-child(odd) {
+            background-color: rgba(255, 255, 255, 0.05); /* Subtle stripe in dark mode */
+        }
+        html.light .table-striped tbody tr:nth-child(odd) {
+            background-color: rgba(0, 0, 0, 0.03); /* Subtle stripe in light mode */
+        }
+        .table-striped tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.1); /* Hover effect */
+        }
+        html.light .table-striped tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        /* First letter drop cap */
+        .drop-cap:first-letter {
+            float: left;
+            font-size: 4em;
+            line-height: 1;
+            margin-right: 0.1em;
+            font-family: 'Noto Serif SC', serif;
+            color: #a78bfa; /* Purple accent for drop cap */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        html.light .drop-cap:first-letter {
+            color: #6366f1; /* Indigo accent for drop cap in light mode */
+            text-shadow: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-900 text-gray-100 transition-colors duration-300">
+
+    <!-- Header and Dark Mode Toggle -->
+    <header class="relative py-4 px-6 bg-gray-800 shadow-lg z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-indigo-400">科创板合规速查</h1>
+            <button id="theme-toggle" class="p-2 rounded-full bg-gray-700 hover:bg-gray-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <i class="fas fa-sun text-yellow-300 dark:hidden" aria-hidden="true"></i>
+                <i class="fas fa-moon text-indigo-300 hidden dark:inline-block" aria-hidden="true"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-indigo-900 to-gray-900 py-20 px-6 sm:px-10 overflow-hidden shadow-xl">
+        <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M100 0L0 100H100V0Z\' fill=\'%235C4B99\'/%3E%3Cpath d=\'M0 0L100 100V0H0Z\' fill=\'%233B2B6B\'/%3E%3C/svg%3E'); background-size: 20px 20px;"></div>
+        <div class="max-w-6xl mx-auto relative z-10 text-center">
+            <h2 class="text-5xl sm:text-6xl font-extrabold text-white leading-tight mb-4 tracking-tight drop-cap">科创板上市合规证明深度解析</h2>
+            <p class="text-xl sm:text-2xl text-indigo-200 font-light mb-8 max-w-3xl mx-auto">
+                <i class="fas fa-lightbulb mr-2 opacity-80"></i>拟上市公司合规要点、流程及风险规避实务指南
+            </p>
+            <p class="text-base sm:text-lg text-gray-300 leading-relaxed max-w-4xl mx-auto">
+                基于科创板上市审核要求及投行实务操作（截至2025年7月），本指南详细梳理了拟上市公司需取得的各项合规证明，助您精准把握IPO核心环节，规避潜在风险。
+            </p>
+        </div>
+    </section>
+
+    <main class="max-w-6xl mx-auto py-12 px-6 sm:px-10 lg:px-6">
+
+        <!-- Mermaid Diagram -->
+        <section class="mb-16">
+            <h3 class="text-3xl font-bold text-indigo-400 mb-6 text-center">
+                <i class="fas fa-project-diagram mr-2"></i>科创板IPO合规证明关键路径
+            </h3>
+            <div class="mermaid-container bg-gray-800 p-6 rounded-lg shadow-xl">
+                <div class="mermaid">
+                    graph TD
+                        A[IPO 准备] --> B{合规证明需求};
+                        B --> C(主管部门及证明类型);
+                        B --> D(合规证明开具流程);
+                        B --> E(关键审核标准);
+                        B --> F(风险规避建议);
+
+                        C --> C1(市场监管);
+                        C --> C2(税务);
+                        C --> C3(生态环境);
+                        C --> C4(应急管理/消防);
+                        C --> C5(海关/外汇);
+                        C --> C6(网信办/工信部);
+                        C --> C7(行业主管部门);
+                        C --> C8(特殊主体要求);
+
+                        D --> D1(材料准备);
+                        D --> D2(申请方式);
+                        D --> D3(审核重点);
+
+                        E --> E1(重大违法行为界定);
+                        E --> E2(科创板专项要求);
+
+                        F --> F1(历史问题处理);
+                        F --> F2(证明交叉验证);
+
+                        C1 & C2 & C3 & C4 & C5 & C6 & C7 & C8 & D1 & D2 & D3 & E1 & E2 & F1 & F2 --> G[提交申报材料];
+                        G --> H(交易所审核);
+                        H --> I(注册成功 / 顺利上市);
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 1: 主管部门及证明类型 -->
+        <section class="mb-16">
+            <h3 class="text-3xl font-bold text-indigo-400 mb-6 border-b border-gray-700 pb-4">
+                <i class="fas fa-building mr-2"></i>一、主管部门及证明类型
+            </h3>
+            <div class="overflow-x-auto shadow-md rounded-lg">
+                <table class="w-full text-sm text-left text-gray-300 border-collapse table-striped">
+                    <thead class="text-xs text-gray-400 uppercase bg-gray-800 table-header">
+                        <tr>
+                            <th scope="col" class="py-3 px-4 border-b border-gray-700">主管部门</th>
+                            <th scope="col" class="py-3 px-4 border-b border-gray-700">证明内容</th>
+                            <th scope="col" class="py-3 px-4 border-b border-gray-700">审核标准</th>
+                            <th scope="col" class="py-3 px-4 border-b border-gray-700">法律依据</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-row-even">
+                            <td class="py-3 px-4 border-b border-gray-700">市场监管部门</td>
+                            <td class="py-3 px-4 border-b border-gray-700">工商登记、股权变更、行政处罚等合规证明</td>
+                            <td class="py-3 px-4 border-b border-gray-700">无重大虚假注册、抽逃出资等违法行为；近36个月无单次罚没款≥5万元的处罚</td>
+                            <td class="py-3 px-4 border-b border-gray-700">《公司法》《公司登记管理条例》</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 border-b border-gray-700">税务机关</td>
+                            <td class="py-3 px-4 border-b border-gray-700">纳税合规证明（含社保缴纳）</td>
+                            <td class="py-3 px-4 border-b border-gray-700">无重大偷逃税行为；补缴税款不超过当期利润5%；社保缴纳覆盖率达90%以上</td>
+                            <td class="py-3 px-4 border-b border-gray-700">《税收征收管理法》《科创板注册管理办法》</td>
+                        </tr>
+                        <tr class="table-row-even">
+                            <td class="py-3 px-4 border-b border-gray-700">生态环境部门</td>
+                            <td class="py-3 px-4 border-b border-gray-700">环评批复、排污许可、环保处罚记录</td>
+                            <td class="py-3 px-4 border-b border-gray-700">无重大环境事故；近36个月无单次≥10万元环保罚款或责令停产停业处罚</td>
+                            <td class="py-3 px-4 border-b border-gray-700">《环境影响评价法》《科创板环保核查规定》</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 border-b border-gray-700">应急管理/消防部门</td>
+                            <td class="py-3 px-4 border-b border-gray-700">安全生产许可、消防验收证明</td>
+                            <td class="py-3 px-4 border-b border-gray-700">近3年无重大安全事故；消防设施验收合格</td>
+                            <td class="py-3 px-4 border-b border-gray-700">《安全生产法》《消防法》</td>
+                        </tr>
+                        <tr class="table-row-even">
+                            <td class="py-3 px-4 border-b border-gray-700">海关/外汇管理部门</td>
+                            <td class="py-3 px-4 border-b border-gray-700">进出口合规、外汇登记证明</td>
+                            <td class="py-3 px-4 border-b border-gray-700">无走私、逃汇等行为；跨境收支符合外汇管理规定</td>
+                            <td class="py-3 px-4 border-b border-gray-700">《海关法》《外汇管理条例》</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 border-b border-gray-700">网信办/工信部门</td>
+                            <td class="py-3 px-4 border-b border-gray-700">数据安全合规证明（涉及用户数据的互联网企业必需）</td>
+                            <td class="py-3 px-4 border-b border-gray-700">符合《网络安全法》《数据安全法》要求；无重大数据泄露事件</td>
+                            <td class="py-3 px-4 border-b border-gray-700"><a href="#footnote-1" class="text-sm">Result 5<sup>[^1]</sup></a></td>
+                        </tr>
+                        <tr class="table-row-even">
+                            <td class="py-3 px-4 border-b border-gray-700">行业主管部门</td>
+                            <td class="py-3 px-4 border-b border-gray-700">业务资质许可（如医药企业的GMP认证、金融企业的金融牌照）</td>
+                            <td class="py-3 px-4 border-b border-gray-700">主营业务资质持续有效</td>
+                            <td class="py-3 px-4 border-b border-gray-700"><a href="#footnote-2" class="text-sm">Result 8<sup>[^2]</sup></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="bg-indigo-900 bg-opacity-30 border-l-4 border-indigo-500 p-6 mt-8 rounded-lg shadow-inner">
+                <p class="text-indigo-200 font-semibold text-lg mb-2"><i class="fas fa-map-pin mr-2 text-indigo-400"></i>特殊主体要求：</p>
+                <ul class="list-disc list-inside space-y-2 text-gray-200">
+                    <li><strong class="text-indigo-300">实际控制人/董监高</strong>：需开具无证券市场禁入证明（证监会出具）</li>
+                    <li><strong class="text-indigo-300">子公司</strong>：合并报表范围内所有主体均需覆盖（尤其重要子公司）</li>
+                    <li><strong class="text-indigo-300">军工企业</strong>：需附加《国防科工局涉密信息豁免批复》（若涉及军工业务）<a href="#" class="text-sm text-gray-400 hover:text-gray-200 ml-1">[知识库：IPO 申报材料清单]</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 2: 合规证明开具流程 -->
+        <section class="mb-16">
+            <h3 class="text-3xl font-bold text-indigo-400 mb-6 border-b border-gray-700 pb-4">
+                <i class="fas fa-stream mr-2"></i>二、合规证明开具流程
+            </h3>
+            <ol class="list-decimal list-outside pl-6 space-y-6 text-gray-200">
+                <li>
+                    <strong class="text-indigo-300 text-xl block mb-2">材料准备</strong>
+                    <ul class="list-disc list-inside ml-4 space-y-1">
+                        <li>公司证照、法定代表人身份证</li>
+                        <li>授权委托书（经办人用）</li>
+                        <li>申请函（说明用途为“科创板上市”）</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong class="text-indigo-300 text-xl block mb-2">申请方式</strong>
+                    <ul class="list-disc list-inside ml-4 space-y-1">
+                        <li><strong class="text-indigo-300">线上</strong>：部分省市开通政务平台（如上海“一网通办”）</li>
+                        <li><strong class="text-indigo-300">线下</strong>：主管部门窗口提交（需预留<strong class="text-yellow-300">15–30天</strong>处理周期）</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong class="text-indigo-300 text-xl block mb-2">审核重点</strong>
+                    <ul class="list-disc list-inside ml-4 space-y-1">
+                        <li>证明需明确表述 <strong class="text-yellow-300">“未发现重大违法违规行为”</strong>（模糊表述可能被交易所反馈）</li>
+                        <li>有效期通常为<strong class="text-yellow-300">30天</strong>，需与申报时间匹配<a href="#footnote-3" class="text-sm ml-1">Result 1<sup>[^3]</sup></a></li>
+                    </ul>
+                </li>
+            </ol>
+        </section>
+
+        <!-- Section 3: 关键审核标准 -->
+        <section class="mb-16">
+            <h3 class="text-3xl font-bold text-indigo-400 mb-6 border-b border-gray-700 pb-4">
+                <i class="fas fa-clipboard-check mr-2"></i>三、关键审核标准
+            </h3>
+            <ol class="list-decimal list-outside pl-6 space-y-6 text-gray-200">
+                <li>
+                    <strong class="text-indigo-300 text-xl block mb-2">重大违法行为的界定</strong>（否决红线）
+                    <ul class="list-disc list-inside ml-4 space-y-1">
+                        <li>行政处罚：单次罚没款≥营收/净利润的5%或≥50万元<a href="#footnote-4" class="text-sm ml-1">Result 3<sup>[^4]</sup></a></li>
+                        <li>刑事犯罪：实际控制人/核心管理层涉及经济类犯罪</li>
+                        <li>合规证明未覆盖报告期全程（通常需覆盖申报前36个月）</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong class="text-indigo-300 text-xl block mb-2">科创板专项要求</strong>
+                    <ul class="list-disc list-inside ml-4 space-y-1">
+                        <li><strong class="text-indigo-300">数据合规</strong>：需说明数据收集、使用合法<a href="#footnote-1" class="text-sm ml-1">Result 5<sup>[^1]</sup></a></li>
+                        <li><strong class="text-indigo-300">科创属性证明</strong>：研发费用占比≥5%或专利≥5项<a href="#footnote-5" class="text-sm ml-1">Result 7<sup>[^5]</sup></a></li>
+                        <li><strong class="text-indigo-300">板块定位说明</strong>：2025年新增要求（江苏证监局窗口指导）<a href="#" class="text-sm text-gray-400 hover:text-gray-200 ml-1">[知识库：辅导验收材料清单]</a></li>
+                    </ul>
+                </li>
+            </ol>
+        </section>
+
+        <!-- Section 4: 风险规避建议 -->
+        <section class="mb-16">
+            <h3 class="text-3xl font-bold text-indigo-400 mb-6 border-b border-gray-700 pb-4">
+                <i class="fas fa-shield-alt mr-2"></i>四、风险规避建议
+            </h3>
+            <ol class="list-decimal list-outside pl-6 space-y-6 text-gray-200">
+                <li>
+                    <strong class="text-indigo-300 text-xl block mb-2">历史问题处理</strong>
+                    <ul class="list-disc list-inside ml-4 space-y-1">
+                        <li>若存在行政处罚，需取得主管部门的 <strong class="text-yellow-300">《不属于重大违法违规证明》</strong><a href="#footnote-3" class="text-sm ml-1">Result 1<sup>[^3]</sup></a></li>
+                        <li>补缴税款需附税务机关出具的 <strong class="text-yellow-300">“无主观故意”</strong> 说明</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong class="text-indigo-300 text-xl block mb-2">证明交叉验证</strong>
+                    <ul class="list-disc list-inside ml-4 space-y-1">
+                        <li>工商处罚记录需与信用中国（<a href="https://www.creditchina.gov.cn" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:underline">www.creditchina.gov.cn</a>）公示信息一致</li>
+                        <li>环保处罚需与 <strong class="text-indigo-300">“生态环境部企业环境信用平台”</strong> 数据匹配</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <div class="bg-red-900 bg-opacity-30 border-l-4 border-red-500 p-6 mt-8 rounded-lg shadow-inner">
+                <p class="text-red-300 font-semibold text-lg mb-2"><i class="fas fa-exclamation-triangle mr-2 text-red-400"></i>实务提示：</p>
+                <ul class="list-disc list-inside space-y-2 text-gray-200">
+                    <li>交易所审核中<strong class="text-red-300">约40%的反馈问题涉及合规证明完整性</strong>（如遗漏子公司、证明过期等）<a href="#footnote-6" class="text-sm ml-1">Result 9<sup>[^6]</sup></a></li>
+                    <li>2025年已出现因 <strong class="text-red-300">“数据合规证明缺失”</strong> 终止审核案例（某AI企业）<a href="#footnote-7" class="text-sm ml-1">Result 20<sup>[^7]</sup></a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Footnotes -->
+        <section class="mb-16 text-sm text-gray-400">
+            <h3 class="text-xl font-bold text-indigo-400 mb-4 border-b border-gray-700 pb-2">
+                <i class="fas fa-book-open mr-2"></i>脚注来源：
+            </h3>
+            <ol class="list-decimal list-outside pl-6 space-y-2">
+                <li id="footnote-1"><a href="https://www.zhonglun.com/research/articles/8415.html" target="_blank" rel="noopener noreferrer">健康医疗企业IPO数据合规重点问题与应对（上） - 中伦律师事务所</a></li>
+                <li id="footnote-2"><a href="https://www.hairunlawyer.com/Content/2023/04-26/1855091962.html" target="_blank" rel="noopener noreferrer">科创板IPO企业知识产权合规核心问题研究 - 海润天睿律师事务所</a></li>
+                <li id="footnote-3"><a href="https://www.chancebridge.com/Upload/1595416615.pdf" target="_blank" rel="noopener noreferrer">[PDF] 科创板审核法律问题要点分析 - 卓纬律师事务所</a></li>
+                <li id="footnote-4"><a href="https://zhuanlan.zhihu.com/p/397905484" target="_blank" rel="noopener noreferrer">科创板上市条件、流程及申报指南 - 知乎专栏</a></li>
+                <li id="footnote-5"><a href="https://www.jiayuan-law.com/newsletter_detail.php?newsId=1023" target="_blank" rel="noopener noreferrer">科创板第五套上市标准：生物医药企业适用情况 - 嘉源律师事务所</a></li>
+                <li id="footnote-6"><a href="https://www.allbrightlaw.com/CN/10475/1a7dd938fb6b8eea.aspx" target="_blank" rel="noopener noreferrer">上市公司与IPO信息披露所涉数据合规问询重点 - 锦天城律师事务所</a></li>
+                <li id="footnote-7"><a href="https://www.zhonglun.com/research/articles/8415.html" target="_blank" rel="noopener noreferrer">健康医疗企业IPO数据合规重点问题与应对（上） - 中伦律师事务所</a></li>
+            </ol>
+            <p class="mt-4">更多操作细节可参考：<a href="https://www.sse.com.cn/lawandrules/sselawsrules/repeal/rules/c/10118921/files/9bd863640cc44cfb8db0a7e756df68dc.pdf" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:underline">上海证券交易所科创板股票上市规则（2023年修订）</a>。</p>
+        </section>
+
+        <!-- Further Reading -->
+        <section class="mb-16">
+            <h3 class="text-3xl font-bold text-indigo-400 mb-6 border-b border-gray-700 pb-4">
+                <i class="fas fa-book-reader mr-2"></i>延伸阅读
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <h4 class="text-xl font-semibold text-indigo-300 mb-2">《IPO全流程操作实务与案例精解》</h4>
+                    <p class="text-gray-300 text-sm">全面解析企业从股改、辅导到发行上市的全过程，是IPO实务操作的入门与进阶指南。</p>
+                    <a href="#" class="mt-3 inline-block text-sm text-indigo-400 hover:underline"><i class="fas fa-external-link-alt mr-1"></i>查看详情</a>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <h4 class="text-xl font-semibold text-indigo-300 mb-2">《企业合规管理体系构建与运行指南》</h4>
+                    <p class="text-gray-300 text-sm">系统介绍如何建立健全企业内部合规管理体系，对于IPO前的合规建设具有指导意义。</p>
+                    <a href="#" class="mt-3 inline-block text-sm text-indigo-400 hover:underline"><i class="fas fa-external-link-alt mr-1"></i>查看详情</a>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <h4 class="text-xl font-semibold text-indigo-300 mb-2">《科创板审核问答与案例解析》</h4>
+                    <p class="text-gray-300 text-sm">聚焦科创板独特的审核逻辑和问询重点，通过真实案例分析帮助企业理解监管要求。</p>
+                    <a href="#" class="mt-3 inline-block text-sm text-indigo-400 hover:underline"><i class="fas fa-external-link-alt mr-1"></i>查看详情</a>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <h4 class="text-xl font-semibold text-indigo-300 mb-2">《数据安全法释义与应用》</h4>
+                    <p class="text-gray-300 text-sm">深入解读中国数据安全法律框架，对于涉及用户数据的互联网和科技企业至关重要。</p>
+                    <a href="#" class="mt-3 inline-block text-sm text-indigo-400 hover:underline"><i class="fas fa-external-link-alt mr-1"></i>查看详情</a>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <h4 class="text-xl font-semibold text-indigo-300 mb-2">《公司法》和《证券法》权威解读</h4>
+                    <p class="text-gray-300 text-sm">作为中国资本市场基石法律，理解其最新修订和权威解读是所有拟上市公司法务合规的基础。</p>
+                    <a href="#" class="mt-3 inline-block text-sm text-indigo-400 hover:underline"><i class="fas fa-external-link-alt mr-1"></i>查看详情</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-8 px-6 text-center text-gray-500 text-sm">
+        <p>&copy; 2025 科创板合规中心. 版权所有.</p>
+        <p class="mt-2">免责声明：本页面内容仅供参考，不构成任何法律或投资建议。具体事项请咨询专业人士。</p>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark', // Default theme for Mermaid
+            securityLevel: 'loose', // Allow external links if any
+            flowchart: {
+                curve: 'linear',
+                // defaultRenderer: 'elk' // Use 'elk' for better layout, but might be heavier
+            }
+        });
+
+        // Dark/Light Mode Toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                localStorage.setItem('theme', 'dark');
+                // Update Mermaid theme
+                mermaid.initialize({ theme: 'dark' });
+            } else {
+                htmlElement.classList.add('light');
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                // Update Mermaid theme
+                mermaid.initialize({ theme: 'default' }); // 'default' for light theme in Mermaid
+            }
+        }
+
+        // Initial theme setting based on localStorage or system preference
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme) {
+            setTheme(storedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark'); // System prefers dark
+        } else {
+            setTheme('light'); // Default to light if no preference
+        }
+
+        // Toggle button event listener
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+            // After changing theme, re-render mermaid to apply theme change
+            // This is a workaround as theme change isn't dynamic for already rendered graphs
+            // A more robust solution might require re-drawing the specific diagram
+            const mermaidDiv = document.querySelector('.mermaid');
+            if (mermaidDiv) {
+                const originalContent = mermaidDiv.innerHTML;
+                mermaidDiv.innerHTML = ''; // Clear content
+                // Small delay to ensure clear
+                setTimeout(() => {
+                    mermaidDiv.innerHTML = originalContent; // Restore content to trigger re-render
+                }, 50);
+            }
+        });
+
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80, // Adjust for fixed header
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+```
