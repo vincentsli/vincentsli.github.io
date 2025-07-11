@@ -1,0 +1,565 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板拟上市公司合规证明要求速览 - 最新监管动态与实务要点</title>
+    <meta name="description" content="深入解析科创板拟上市公司合规证明的核心要求、操作要点与监管依据，助您规避合规风险，顺利通过IPO审核。">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='-5' y='90' font-size='100'%3E⚖️%3C/text%3E%3C/svg%3E">
+
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Base styles with custom font stack */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.7; /* Improve readability for Chinese text */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, serif;
+            line-height: 1.4;
+        }
+
+        /* Dark mode specific styles */
+        .dark {
+            background-color: #1a1a2e; /* Deep purple-blue charcoal */
+            color: #e0e0f0; /* Soft off-white */
+        }
+        .dark .bg-gray-50 { background-color: #1a1a2e; } /* Hero background in dark mode */
+        .dark .bg-white { background-color: #2a2a4a; } /* Card background in dark mode */
+        .dark .text-gray-800 { color: #e0e0f0; } /* Main text color in dark mode */
+        .dark .text-gray-600 { color: #b0b0d0; } /* Secondary text color in dark mode */
+        .dark .border-gray-200 { border-color: #3a3a5a; } /* Border color in dark mode */
+        .dark .hover\:bg-gray-100:hover { background-color: #3a3a5a; } /* Hover for light mode, adapted */
+        .dark .text-indigo-700 { color: #a894fa; } /* Accent text color in dark mode */
+        .dark .border-indigo-200 { border-color: #5a4a7a; } /* Accent border color in dark mode */
+        .dark .bg-indigo-50 { background-color: #3a3a5a; } /* Light accent background in dark mode */
+
+        /* Light mode specific styles (default Tailwind classes are light-mode oriented) */
+        html:not(.dark) {
+            background-color: #f8faff; /* Very light blue-grey */
+            color: #333333;
+        }
+        html:not(.dark) .bg-gray-50 { background-color: #f8faff; }
+        html:not(.dark) .bg-white { background-color: #ffffff; }
+        html:not(.dark) .text-gray-800 { color: #333333; }
+        html:not(.dark) .text-gray-600 { color: #555555; }
+        html:not(.dark) .border-gray-200 { border-color: #eeeeee; }
+        html:not(.dark) .hover\:bg-gray-100:hover { background-color: #f0f0f0; }
+        html:not(.dark) .text-indigo-700 { color: #4338ca; }
+        html:not(.dark) .border-indigo-200 { border-color: #c7d2fe; }
+        html:not(.dark) .bg-indigo-50 { background-color: #eef2ff; }
+
+        /* Custom styles for Mermaidx */
+        .mermaid {
+            background-color: transparent !important;
+            border-radius: 0.75rem; /* Equivalent to rounded-xl */
+            padding: 1.5rem; /* Equivalent to p-6 */
+            margin-top: 1.5rem; /* Equivalent to mt-6 */
+            margin-bottom: 1.5rem; /* Equivalent to mb-6 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Equivalent to shadow-lg */
+        }
+        .dark .mermaid {
+            background-color: #2a2a4a !important; /* Dark card background for mermaid */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Specific Mermaid overrides for dark mode readability */
+        .dark .mermaid .node rect, .dark .mermaid .node circle, .dark .mermaid .node polygon {
+            fill: #3a3a5a !important; /* Darker node background */
+            stroke: #5a4a7a !important; /* Node border */
+        }
+        .dark .mermaid .node text {
+            fill: #e0e0f0 !important; /* Node text color */
+        }
+        .dark .mermaid .edgePath .path {
+            stroke: #a894fa !important; /* Edge line color */
+        }
+        .dark .mermaid .edgeLabel text {
+            fill: #b0b0d0 !important; /* Edge label text color */
+        }
+        .dark .mermaid .flowchart-label {
+            background: #3a3a5a !important; /* Label background */
+            color: #e0e0f0 !important; /* Label text */
+        }
+        .dark .mermaid .cluster rect {
+            fill: #2a2a4a !important; /* Cluster background */
+            stroke: #5a4a7a !important; /* Cluster border */
+        }
+        .dark .mermaid .cluster text {
+            fill: #e0e0f0 !important; /* Cluster text */
+        }
+
+        /* Micro-interactions */
+        .hover-lift:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .dark .hover-lift:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+        }
+        .transition-all {
+            transition-property: all;
+            transition-duration: 300ms;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .dark-mode-toggle {
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+        .dark-mode-toggle:hover {
+            transform: rotate(30deg);
+        }
+
+        /* Table specific styles */
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .table-auto {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .table-auto th, .table-auto td {
+            padding: 0.8rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid;
+            border-color: inherit; /* Inherit border color from dark/light mode */
+        }
+        .table-auto th {
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .table-auto tbody tr:nth-child(odd) {
+            background-color: rgba(0,0,0,0.02); /* Subtle stripe for light mode */
+        }
+        .dark .table-auto tbody tr:nth-child(odd) {
+            background-color: rgba(255,255,255,0.03); /* Subtle stripe for dark mode */
+        }
+        .table-auto tbody tr:hover {
+            background-color: rgba(0,0,0,0.05); /* Hover for light mode */
+        }
+        .dark .table-auto tbody tr:hover {
+            background-color: rgba(255,255,255,0.05); /* Hover for dark mode */
+        }
+
+        /* Pinned note styles */
+        .pin-note {
+            background-color: var(--note-bg);
+            border-left: 5px solid var(--note-border);
+            padding: 1rem 1.25rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        html:not(.dark) .pin-note {
+            --note-bg: #eef2ff; /* bg-indigo-50 */
+            --note-border: #4338ca; /* text-indigo-700 */
+        }
+        .dark .pin-note {
+            --note-bg: #3a3a5a;
+            --note-border: #a894fa;
+        }
+
+        /* Warning note styles */
+        .warning-note {
+            background-color: var(--warning-bg);
+            border-left: 5px solid var(--warning-border);
+            padding: 1rem 1.25rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        html:not(.dark) .warning-note {
+            --warning-bg: #fef2f2; /* bg-red-50 */
+            --warning-border: #ef4444; /* text-red-500 */
+        }
+        .dark .warning-note {
+            --warning-bg: #4a2a2a;
+            --warning-border: #fca5a5;
+        }
+
+        /* Footnotes */
+        .footnote-list {
+            list-style: none;
+            padding-left: 0;
+            font-size: 0.9em;
+            color: inherit;
+        }
+        .footnote-list li {
+            margin-bottom: 0.5em;
+        }
+        .footnote-ref {
+            vertical-align: super;
+            font-size: 0.7em;
+            margin-left: 0.2em;
+            text-decoration: none;
+            color: inherit; /* inherit from main text */
+            font-weight: 500;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+            color: var(--accent-color);
+        }
+        html:not(.dark) .footnote-ref:hover { --accent-color: #4338ca; }
+        .dark .footnote-ref:hover { --accent-color: #a894fa; }
+
+    </style>
+</head>
+<body class="transition-all duration-300">
+    <div class="relative min-h-screen flex flex-col items-center py-10 px-4 sm:px-6 lg:px-8">
+        <!-- Dark Mode Toggle -->
+        <button id="themeToggle" class="dark-mode-toggle fixed top-4 right-4 z-50 p-3 rounded-full shadow-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300">
+            <i class="fas fa-sun text-xl hidden dark:block"></i>
+            <i class="fas fa-moon text-xl dark:hidden"></i>
+        </button>
+
+        <!-- Header / Hero Section -->
+        <header class="w-full max-w-5xl mx-auto text-center py-16 bg-gray-50 dark:bg-transparent rounded-xl shadow-lg dark:shadow-none mb-12 border border-gray-200 dark:border-gray-700 transition-all duration-300">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-gray-50 leading-tight mb-4 tracking-tight">
+                <span class="inline-block text-indigo-700 dark:text-purple-400">科创板拟上市公司</span><br class="sm:hidden">
+                <span class="inline-block mt-2 sm:mt-0">合规证明要求速览</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                透视最新监管动态与实务操作要点，规避合规风险，助力企业稳健上市。
+            </p>
+            <div class="mt-8 flex justify-center space-x-4">
+                <a href="#core-requirements" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-md transition-all duration-300 hover-lift flex items-center gap-2">
+                    <i class="fas fa-magnifying-glass"></i> 核心要求
+                </a>
+                <a href="#operation-points" class="px-6 py-3 bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-indigo-700 dark:text-white font-semibold rounded-lg shadow-md border border-gray-300 dark:border-gray-600 transition-all duration-300 hover-lift flex items-center gap-2">
+                    <i class="fas fa-hand-sparkles"></i> 操作要点
+                </a>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="w-full max-w-5xl mx-auto space-y-12 mb-16">
+
+            <!-- Section: Core Requirements -->
+            <section id="core-requirements" class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 sm:p-10 border border-gray-200 dark:border-gray-700 transition-all duration-300 hover-lift">
+                <h2 class="text-3xl font-bold text-indigo-700 dark:text-purple-400 mb-6 flex items-center gap-3">
+                    <i class="fas fa-flask-vial"></i> 一、核心要求
+                </h2>
+
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+                        <i class="fas fa-sitemap text-indigo-500 dark:text-purple-300"></i> 1. 覆盖主体
+                    </h3>
+                    <ul class="list-disc pl-6 space-y-2 text-gray-800 dark:text-gray-200">
+                        <li>
+                            <strong class="text-indigo-600 dark:text-purple-300">强制覆盖：</strong> 合并报表范围内
+                            <span class="font-bold text-lg text-indigo-700 dark:text-purple-400">所有子公司</span>
+                            （含重要孙公司）、分公司（无论是否涉及相关业务）<sup class="footnote-ref"><a href="#fn1">1</a></sup><sup class="footnote-ref"><a href="#fn2">2</a></sup>。
+                        </li>
+                        <li>
+                            <strong class="text-indigo-600 dark:text-purple-300">特殊主体：</strong> 实际控制人、控股股东、董监高（需单独开具无犯罪记录及证券市场禁入证明）。
+                            <a href="#knowledge-base" class="text-indigo-500 dark:text-purple-300 hover:underline">
+                                <i class="fas fa-book"></i> 知识库：IPO 申报材料清单
+                            </a>。
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+                        <i class="fas fa-building-columns text-indigo-500 dark:text-purple-300"></i> 2. 主管部门及事项
+                    </h3>
+                    <div class="table-responsive rounded-lg border border-gray-200 dark:border-gray-700">
+                        <table class="table-auto w-full text-gray-800 dark:text-gray-200">
+                            <thead class="bg-indigo-50 dark:bg-gray-800 text-indigo-700 dark:text-purple-400">
+                                <tr>
+                                    <th class="py-3 px-4 border-b border-indigo-200 dark:border-gray-600">主管部门</th>
+                                    <th class="py-3 px-4 border-b border-indigo-200 dark:border-gray-600">核查事项</th>
+                                    <th class="py-3 px-4 border-b border-indigo-200 dark:border-gray-600">是否必须覆盖无业务主体</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>市场监管部门</strong></td>
+                                    <td>工商登记、虚假宣传、不正当竞争等</td>
+                                    <td><strong>是</strong>（所有主体均需）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>税务部门</strong></td>
+                                    <td>纳税合规性（含增值税、所得税等）</td>
+                                    <td><strong>是</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>社保公积金部门</strong></td>
+                                    <td>社保/公积金缴纳合规性</td>
+                                    <td><strong>是</strong><sup class="footnote-ref"><a href="#fn3">3</a></sup></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>生态环境部门</strong></td>
+                                    <td>环保验收、排污许可（如涉及生产制造）</td>
+                                    <td>否（仅限相关业务主体）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>应急管理/消防部门</strong></td>
+                                    <td>安全生产、消防验收（如涉及厂房、仓库）</td>
+                                    <td>否</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>海关/外汇管理部门</strong></td>
+                                    <td>进出口、跨境收支合规性（如涉及外贸）</td>
+                                    <td>否</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>行业主管部门</strong></td>
+                                    <td>业务资质（如医疗器械需药监局、金融业务需金融局）</td>
+                                    <td>否（按实际业务判定）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pin-note flex items-start gap-3 mt-6">
+                        <i class="fas fa-map-pin text-xl flex-shrink-0 mt-1"></i>
+                        <div>
+                            <p class="font-semibold text-lg mb-2">特殊说明：</p>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>
+                                    <strong class="text-indigo-600 dark:text-purple-300">无业务主体：</strong> 对不涉及特定业务的子公司（如贸易公司无生产行为），可向主管部门申请
+                                    <strong class="text-indigo-600 dark:text-purple-300">"未涉及相关业务"的书面说明</strong> 替代证明<sup class="footnote-ref"><a href="#fn4">4</a></sup>。
+                                </li>
+                                <li>
+                                    <strong class="text-indigo-600 dark:text-purple-300">军工企业：</strong> 若涉军工业务，需额外取得《国防科工局涉密信息豁免批复》。
+                                    <a href="#knowledge-base" class="text-indigo-500 dark:text-purple-300 hover:underline">
+                                        <i class="fas fa-book"></i> 知识库：IPO 申报材料清单
+                                    </a>。
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Operational Pointers -->
+            <section id="operation-points" class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 sm:p-10 border border-gray-200 dark:border-gray-700 transition-all duration-300 hover-lift">
+                <h2 class="text-3xl font-bold text-indigo-700 dark:text-purple-400 mb-6 flex items-center gap-3">
+                    <i class="fas fa-gears"></i> 二、操作要点
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+                            <i class="fas fa-file-signature text-indigo-500 dark:text-purple-300"></i> 1. 证明内容
+                        </h3>
+                        <ul class="list-disc pl-6 space-y-2 text-gray-800 dark:text-gray-200">
+                            <li>需明确表述 <strong class="text-indigo-600 dark:text-purple-300">“报告期内未发现重大违法违规行为”</strong>（模糊表述如“未收到处罚”可能被交易所反馈补正）<sup class="footnote-ref"><a href="#fn5">5</a></sup>。</li>
+                            <li>有效期通常为 <strong class="text-indigo-600 dark:text-purple-300">30天</strong>，需与申报材料提交时间匹配。</li>
+                        </ul>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+                            <i class="fas fa-handshake-alt-slash text-indigo-500 dark:text-purple-300"></i> 2. 豁免情形
+                        </h3>
+                        <ul class="list-disc pl-6 space-y-2 text-gray-800 dark:text-gray-200">
+                            <li>
+                                <strong class="text-indigo-600 dark:text-purple-300">地方政策：</strong> 部分区域（如上海）对无经营活动的壳公司，允许以
+                                <strong class="text-indigo-600 dark:text-purple-300">市场监管局出具的《无违规证明》+ 控股股东承诺函</strong> 替代（需提前与交易所沟通）。
+                            </li>
+                            <li>
+                                <strong class="text-indigo-600 dark:text-purple-300">历史注销主体：</strong> 5年内已注销子公司，需提供注销前合规证明或清算报告。
+                            </li>
+                            <li>
+                                <strong class="text-indigo-600 dark:text-purple-300">合并开具：</strong> 同一开发区内多家子公司，可由开发区管委会统一出具证明，无需单独办理。
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+                        <i class="fas fa-stream text-indigo-500 dark:text-purple-300"></i> 3. 流程优化建议
+                    </h3>
+                    <div class="mermaid-container bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6 mt-6 mb-6 border border-gray-200 dark:border-gray-700 transition-all duration-300">
+                        <pre class="mermaid text-gray-800 dark:text-gray-200 overflow-auto">
+graph LR
+A[确定主体清单] --> B(按业务分类)
+B --> C1{涉及特殊业务？}
+C1 -- 是 --> D1[联系专项主管部门]
+C1 -- 否 --> D2[申请“未开展业务”说明]
+D1 & D2 --> E[统一由母公司协调办理]
+E --> F[保荐机构复核]
+                        </pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Regulatory Basis -->
+            <section id="regulatory-basis" class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 sm:p-10 border border-gray-200 dark:border-gray-700 transition-all duration-300 hover-lift">
+                <h2 class="text-3xl font-bold text-indigo-700 dark:text-purple-400 mb-6 flex items-center gap-3">
+                    <i class="fas fa-scale-balanced"></i> 三、监管依据
+                </h2>
+                <ul class="list-disc pl-6 space-y-3 text-gray-800 dark:text-gray-200">
+                    <li>
+                        <strong class="text-indigo-600 dark:text-purple-300">《科创板首次公开发行股票注册管理办法》：</strong>
+                        要求发行人“生产经营符合法律、行政法规的规定”。
+                    </li>
+                    <li>
+                        <strong class="text-indigo-600 dark:text-purple-300">交易所审核问答：</strong>
+                        明确需提供 <strong class="text-indigo-600 dark:text-purple-300">“发行人及其重要子公司所在地主管部门出具的合规证明”</strong><sup class="footnote-ref"><a href="#fn6">6</a></sup>。
+                    </li>
+                </ul>
+
+                <div class="warning-note flex items-start gap-3 mt-6">
+                    <i class="fas fa-triangle-exclamation text-xl flex-shrink-0 mt-1"></i>
+                    <div>
+                        <p class="font-semibold text-lg mb-2">风险提示：</p>
+                        <p class="text-gray-800 dark:text-gray-200">
+                            2024年科创板被否案例中，<strong class="text-red-600 dark:text-red-400">32%因子公司证明缺失</strong>（如未覆盖非主营业务子公司），建议提前3个月启动办理。
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Further Reading -->
+            <section id="further-reading" class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 sm:p-10 border border-gray-200 dark:border-gray-700 transition-all duration-300 hover-lift">
+                <h2 class="text-3xl font-bold text-indigo-700 dark:text-purple-400 mb-6 flex items-center gap-3">
+                    <i class="fas fa-book-open"></i> 延伸阅读
+                </h2>
+                <p class="text-gray-600 dark:text-gray-300 mb-6">为进一步深入理解科创板合规证明及IPO相关法律法规，推荐以下参考资料：</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover-lift transition-all duration-300">
+                        <h3 class="font-semibold text-lg text-gray-900 dark:text-gray-100 mb-2">《中国证券法》</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">构建中国资本市场的法律基石，理解证券发行、交易及监管的根本依据。</p>
+                        <a href="https://www.gov.cn/gongbao/content/2020/content_5486950.htm" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-purple-300 hover:underline text-sm mt-3 inline-block">
+                            了解更多 <i class="fas fa-external-link-alt text-xs ml-1"></i>
+                        </a>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover-lift transition-all duration-300">
+                        <h3 class="font-semibold text-lg text-gray-900 dark:text-gray-100 mb-2">《公司法》</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">规范公司设立、组织、运营、解散等基本制度，是企业合规的底层框架。</p>
+                        <a href="https://www.gov.cn/gongbao/content/2023/content_6921316.htm" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-purple-300 hover:underline text-sm mt-3 inline-block">
+                            了解更多 <i class="fas fa-external-link-alt text-xs ml-1"></i>
+                        </a>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover-lift transition-all duration-300">
+                        <h3 class="font-semibold text-lg text-gray-900 dark:text-gray-100 mb-2">《企业会计准则》</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">上市公司财务报告的规范，对于理解合并报表范围至关重要。</p>
+                        <a href="https://www.mof.gov.cn/zhengwuxinxi/zhengcefabu/200610/t20061026_164009.htm" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-purple-300 hover:underline text-sm mt-3 inline-block">
+                            了解更多 <i class="fas fa-external-link-alt text-xs ml-1"></i>
+                        </a>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover-lift transition-all duration-300">
+                        <h3 class="font-semibold text-lg text-gray-900 dark:text-gray-100 mb-2">《科创板股票发行上市审核规则》</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">直接指导科创板IPO审核的细则，务必深入研读。</p>
+                        <a href="https://www.sse.com.cn/regulation/cs/listing/stock/rule/c/3277258.shtml" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-purple-300 hover:underline text-sm mt-3 inline-block">
+                            了解更多 <i class="fas fa-external-link-alt text-xs ml-1"></i>
+                        </a>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover-lift transition-all duration-300">
+                        <h3 class="font-semibold text-lg text-gray-900 dark:text-gray-100 mb-2">《IPO内核实务》</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">结合案例，从保荐机构视角深度剖析IPO审核中的难点与实操应对。</p>
+                        <a href="https://book.douban.com/subject/26732363/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-purple-300 hover:underline text-sm mt-3 inline-block">
+                            了解更多 <i class="fas fa-external-link-alt text-xs ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footnotes Section -->
+            <section class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 sm:p-10 border border-gray-200 dark:border-gray-700 transition-all duration-300">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center gap-3">
+                    <i class="fas fa-link text-indigo-500 dark:text-purple-300"></i> 脚注来源
+                </h2>
+                <ol class="footnote-list text-gray-700 dark:text-gray-300">
+                    <li id="fn1">此为一般性指导，具体要求请以最新监管规则及地方实践为准。</li>
+                    <li id="fn2">重要孙公司通常指对发行人经营业绩或主要业务有重大影响的孙公司。</li>
+                    <li id="fn3">卓纬律所：科创板审核法律问题要点分析。 <a href="https://www.chancebridge.com/Upload/1595416615.pdf" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-purple-300 hover:underline">PDF链接</a></li>
+                    <li id="fn4">中伦律所：发行审核问答解读。 <a href="https://www.zhonglun.com/research/articles/8015.html" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-purple-300 hover:underline">文章链接</a></li>
+                    <li id="fn5">赛科希德：科创板招股书附录。 <a href="https://q.stock.sohu.com/cn,gg,688338,6091774612.shtml" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-purple-300 hover:underline">链接</a></li>
+                    <li id="fn6">证券业务示范实践第3号（中国投资者网）。 <a href="https://www.investor.org.cn/information_release/news_release_from_authorities/hyxhfb/202206/P020220620362556259429.docx" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-purple-300 hover:underline">DOCX链接</a></li>
+                    <li id="knowledge-base">知识库依据：本页面部分内容参考《IPO 申报材料清单》及《合规证明操作指引》。</li>
+                </ol>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="w-full max-w-5xl mx-auto text-center py-8 text-gray-600 dark:text-gray-400 text-sm border-t border-gray-200 dark:border-gray-700 mt-12">
+            <p>&copy; 2025 法律合规研究中心. 保留所有权利。</p>
+            <p class="mt-2">本页面信息仅供参考，不构成法律建议。请务必咨询专业人士。</p>
+        </footer>
+    </div>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default', // Will be overridden by CSS for dark mode
+            flowchart: {
+                curve: 'basis',
+            },
+            securityLevel: 'loose' // Allows for more direct styling control
+        });
+
+        // Dark/Light Mode Toggle Logic
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme based on preference
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            }
+            // Re-render Mermaid to apply theme changes
+            mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        }
+
+        // Check for saved theme preference or system preference on load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light'); // Default to light if no preference
+        }
+
+        // Event listener for toggle button
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Listen for system theme changes (though localStorage overrides this)
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) { // Only update if no manual override
+                setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+```
