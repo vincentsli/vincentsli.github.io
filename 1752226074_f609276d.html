@@ -1,0 +1,670 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>证监会离职人员 IPO 限制深度解析</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%236EE7B7' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z'/%3E%3C/svg%3E" type="image/svg+xml">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <style>
+        /* Custom CSS Variables for Dark/Light Mode */
+        :root {
+            /* Light Mode */
+            --bg-primary: #FFFFFF;
+            --text-primary: #334155; /* slate-700 */
+            --text-heading: #1E293B; /* slate-900 */
+            --accent-light: #065F46; /* emerald-800 */
+            --accent-dark: #6EE7B7; /* emerald-300 */
+            --border-color: #E2E8F0; /* slate-200 */
+            --card-bg: #F8FAFC; /* slate-50 */
+            --shadow-color: rgba(0, 0, 0, 0.05);
+            --table-header-bg: #F1F5F9; /* slate-100 */
+            --blockquote-border: #94A3B8; /* slate-400 */
+        }
+
+        .dark {
+            /* Dark Mode */
+            --bg-primary: #1E293B; /* slate-900 */
+            --text-primary: #E2E8F0; /* slate-200 */
+            --text-heading: #FFFFFF;
+            --accent-light: #6EE7B7; /* emerald-300 */
+            --accent-dark: #065F46; /* emerald-800 */
+            --border-color: #475569; /* slate-600 */
+            --card-bg: #334155; /* slate-700 */
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --table-header-bg: #475569; /* slate-600 */
+            --blockquote-border: #94A3B8; /* slate-400 */
+        }
+
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', serif;
+            color: var(--text-heading);
+        }
+
+        .text-accent-light { color: var(--accent-light); }
+        .bg-accent-light { background-color: var(--accent-light); }
+        .border-accent-light { border-color: var(--accent-light); }
+
+        .text-accent-dark { color: var(--accent-dark); }
+        .bg-accent-dark { background-color: var(--accent-dark); }
+        .border-accent-dark { border-color: var(--accent-dark); }
+
+        .bg-card { background-color: var(--card-bg); }
+        .border-base { border-color: var(--border-color); }
+
+        /* Custom scrollbar for subtle appearance */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-light);
+        }
+
+        /* Hero section background effect */
+        .hero-background {
+            position: relative;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, rgba(30, 41, 59, 0.9) 50%, var(--bg-primary) 100%);
+        }
+        .dark .hero-background {
+            background: linear-gradient(135deg, #1A1A2E 0%, #0F172A 50%, #1A1A2E 100%); /* Deeper dark for hero in dark mode */
+        }
+        .hero-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239CA3AF' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M0 0h3v3H0V0zm3 3h3v3H3V3z'/%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        /* Specific styles for Mermaid.js dark mode */
+        .mermaid {
+            background-color: var(--card-bg) !important;
+            border-radius: 0.75rem; /* Equivalent to rounded-xl */
+            padding: 1.5rem; /* Equivalent to p-6 */
+            box-shadow: 0 4px 6px -1px var(--shadow-color), 0 2px 4px -1px var(--shadow-color);
+        }
+
+        .dark .mermaid-dark-theme-override .node rect,
+        .dark .mermaid-dark-theme-override .node circle,
+        .dark .mermaid-dark-theme-override .node polygon,
+        .dark .mermaid-dark-theme-override .node path {
+            fill: var(--card-bg) !important;
+            stroke: var(--border-color) !important;
+        }
+        .dark .mermaid-dark-theme-override .edgePaths .path {
+            stroke: var(--text-primary) !important;
+            fill: none !important;
+        }
+        .dark .mermaid-dark-theme-override .edgeLabels .edgeLabel text {
+            fill: var(--text-primary) !important;
+        }
+        .dark .mermaid-dark-theme-override .node text {
+            fill: var(--text-primary) !important;
+        }
+        .dark .mermaid-dark-theme-override .cluster text {
+            fill: var(--text-primary) !important;
+        }
+        .dark .mermaid-dark-theme-override .label text {
+            fill: var(--text-primary) !important;
+        }
+        .dark .mermaid-dark-theme-override .cluster rect {
+            fill: var(--bg-primary) !important;
+            stroke: var(--border-color) !important;
+        }
+        .dark .mermaid-dark-theme-override g.node rect.clickable {
+            cursor: pointer;
+            stroke: var(--accent-light) !important; /* Highlight clickable nodes */
+        }
+        .dark .mermaid-dark-theme-override g.node rect.clickable:hover {
+            fill: var(--accent-dark) !important;
+        }
+
+        /* Basic table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            box-shadow: 0 4px 6px -1px var(--shadow-color), 0 2px 4px -1px var(--shadow-color);
+            border-radius: 0.75rem;
+            overflow: hidden; /* Ensures rounded corners apply */
+        }
+        th, td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        th {
+            background-color: var(--table-header-bg);
+            color: var(--text-heading);
+            font-weight: 600;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        tr:nth-child(even) {
+            background-color: var(--card-bg); /* Zebra striping */
+        }
+        tr:hover {
+            background-color: rgba(var(--accent-light-rgb-val), 0.1); /* Subtle hover for rows */
+        }
+
+        /* Blockquote style */
+        blockquote {
+            border-left: 4px solid var(--blockquote-border);
+            padding-left: 1.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+<body class="bg-primary text-primary transition-colors duration-300">
+
+    <!-- Theme Toggle & Navbar Placeholder -->
+    <header class="py-4 px-6 md:px-12 flex justify-between items-center z-50 relative">
+        <a href="#" class="text-xl font-bold text-heading hover:text-accent-light transition-colors duration-300">
+            <i class="fas fa-gavel text-accent-light mr-2"></i>合规指南
+        </a>
+        <button id="theme-toggle" class="p-2 rounded-full bg-card hover:bg-border-base transition-all duration-300 ease-in-out shadow-md">
+            <i class="fas fa-sun text-accent-light dark:hidden"></i>
+            <i class="fas fa-moon text-accent-light hidden dark:inline-block"></i>
+        </button>
+    </header>
+
+    <main class="container mx-auto px-6 md:px-12 lg:px-24 py-8">
+
+        <!-- Hero Section -->
+        <section class="hero-background relative overflow-hidden rounded-xl shadow-2xl mb-16 py-16 px-8 md:px-16 text-center">
+            <div class="relative z-10">
+                <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-4 text-heading drop-shadow-md">
+                    证监会离职人员 IPO 限制深度解析
+                </h1>
+                <p class="text-xl md:text-2xl font-medium text-accent-light mb-8 opacity-90 drop-shadow-sm">
+                    透视最新规定：持股与任职合规要点
+                </p>
+                <p class="max-w-3xl mx-auto text-lg md:text-xl text-primary opacity-80 leading-relaxed">
+                    根据现行有效规定（截至2025年7月），拟上市公司对证监会离职人员的限制主要涉及持股和任职两方面，本文将详细解读最新监管要求与合规实践。
+                </p>
+                <a href="#content-start" class="mt-10 inline-block px-8 py-4 bg-accent-light text-white font-bold rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 ease-out">
+                    <i class="fas fa-scroll mr-2"></i> 开始阅读
+                </a>
+            </div>
+        </section>
+
+        <div id="content-start" class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            <!-- Main Content Area -->
+            <div class="lg:col-span-2 space-y-12">
+
+                <!-- Section: 持股限制 -->
+                <section id="holding-restrictions" class="bg-card p-8 rounded-xl shadow-lg border border-base hover:border-accent-light transition-all duration-300">
+                    <h2 class="text-3xl font-bold mb-6 text-heading">
+                        <i class="fas fa-hand-holding-usd text-accent-light mr-3"></i>一、持股限制
+                    </h2>
+                    <p class="text-lg mb-6 leading-relaxed">
+                        依据《证监会系统离职人员入股拟上市企业监管规定（试行）》（2024年9月6日发布，2024年10月8日施行）：
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- Card: 入股禁止期分类 -->
+                        <div class="bg-primary p-6 rounded-lg shadow-md border border-base">
+                            <h3 class="text-xl font-semibold mb-4 text-heading">
+                                <i class="fas fa-hourglass-half text-accent-light mr-2"></i>1. 入股禁止期分类
+                            </h3>
+                            <ul class="space-y-3 text-primary">
+                                <li class="flex items-start">
+                                    <i class="fas fa-angle-right text-accent-light mt-1 mr-2"></i>
+                                    <div>
+                                        <strong class="text-heading">发行监管岗位或会管干部：</strong>离职前五年内曾任职发行监管岗，或离职前属会管干部的，<span class="text-accent-light font-bold">禁止期为离职后10年内</span>（原为3年）。
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-angle-right text-accent-light mt-1 mr-2"></i>
+                                    <div>
+                                        <strong class="text-heading">其他离职人员：</strong>
+                                        <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+                                            <li>处级及以上：<span class="text-accent-light font-bold">禁止期为离职后5年内</span>（原为3年）；</li>
+                                            <li>处级以下：<span class="text-accent-light font-bold">禁止期为离职后4年内</span>（原为2年）。</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Card: 穿透核查范围扩大 -->
+                        <div class="bg-primary p-6 rounded-lg shadow-md border border-base">
+                            <h3 class="text-xl font-semibold mb-4 text-heading">
+                                <i class="fas fa-sitemap text-accent-light mr-2"></i>2. 穿透核查范围扩大
+                            </h3>
+                            <p class="text-primary leading-relaxed">
+                                从严审核范围从离职人员本人扩大至其<strong class="text-accent-light">父母、配偶、子女及其配偶</strong>的持股。
+                            </p>
+                            <p class="text-sm mt-3 opacity-70">
+                                <i class="fas fa-info-circle mr-1"></i> 这意味着监管对关联方持股的审查更加严格，需全面披露。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card: 不当入股情形 -->
+                    <div class="bg-primary p-6 rounded-lg shadow-md border border-base mt-6">
+                        <h3 class="text-xl font-semibold mb-4 text-heading">
+                            <i class="fas fa-exclamation-triangle text-red-500 mr-2"></i>3. 不当入股情形<span class="text-sm text-primary ml-2">(需清理)</span>
+                        </h3>
+                        <ul class="space-y-2 text-primary">
+                            <li class="flex items-center"><i class="fas fa-circle-notch text-accent-light mr-2 text-xs"></i>利用原职务影响谋取投资机会；</li>
+                            <li class="flex items-center"><i class="fas fa-circle-notch text-accent-light mr-2 text-xs"></i>入股过程存在利益输送；</li>
+                            <li class="flex items-center"><i class="fas fa-circle-notch text-accent-light mr-2 text-xs"></i>入股资金违法违规等。</li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-dashed border-border-color">
+                        <h3 class="text-xl font-semibold mb-4 text-heading">
+                            <i class="fas fa-search-dollar text-accent-light mr-2"></i>中介核查要求
+                        </h3>
+                        <p class="text-primary leading-relaxed">
+                            保荐机构及律师需对离职人员入股背景、资金来源、价格公允性等开展<strong class="text-accent-light">穿透核查</strong>，并提交专项说明。
+                        </p>
+                        <blockquote class="text-primary opacity-80 mt-4 text-sm">
+                            <i class="fas fa-quote-left text-accent-light mr-2"></i> 中介机构的核查责任显著增加，必须确保核查程序完备、结论明确。否则可能面临监管机构的质疑与退回。
+                        </blockquote>
+                    </div>
+                </section>
+
+                <!-- Section: 任职限制 -->
+                <section id="employment-restrictions" class="bg-card p-8 rounded-xl shadow-lg border border-base hover:border-accent-light transition-all duration-300">
+                    <h2 class="text-3xl font-bold mb-6 text-heading">
+                        <i class="fas fa-briefcase text-accent-light mr-3"></i>二、任职限制
+                    </h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- Card: 直接任职限制 -->
+                        <div class="bg-primary p-6 rounded-lg shadow-md border border-base">
+                            <h3 class="text-xl font-semibold mb-4 text-heading">
+                                <i class="fas fa-user-times text-red-500 mr-2"></i>1. 直接任职限制
+                            </h3>
+                            <ul class="space-y-2 text-primary">
+                                <li class="flex items-start">
+                                    <i class="fas fa-angle-right text-accent-light mt-1 mr-2"></i>
+                                    <div>
+                                        <strong class="text-heading">发行监管相关岗位：</strong>离职人员禁止在拟上市公司担任与发行、上市审核直接相关的职务（如董秘、证券事务代表等）。
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-angle-right text-accent-light mt-1 mr-2"></i>
+                                    <div>
+                                        <strong class="text-heading">其他岗位：</strong>无明文禁止，但需符合《公司法》《证券法》对高管任职资格的要求（如无市场禁入、无重大失信记录等）。
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Card: 间接影响 -->
+                        <div class="bg-primary p-6 rounded-lg shadow-md border border-base">
+                            <h3 class="text-xl font-semibold mb-4 text-heading">
+                                <i class="fas fa-link text-accent-light mr-2"></i>2. 间接影响
+                            </h3>
+                            <ul class="space-y-2 text-primary">
+                                <li class="flex items-start">
+                                    <i class="fas fa-angle-right text-accent-light mt-1 mr-2"></i>
+                                    <div>
+                                        若离职人员通过直系亲属持股或任职，可能触发中介机构对<strong class="text-accent-light">“潜在利益输送”</strong>的核查；
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-angle-right text-accent-light mt-1 mr-2"></i>
+                                    <div>
+                                        在内部控制有效性评估中，关联任职可能被质疑独立性。
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section: 数据可视化 -->
+                <section id="data-visualization" class="bg-card p-8 rounded-xl shadow-lg border border-base hover:border-accent-light transition-all duration-300">
+                    <h2 class="text-3xl font-bold mb-6 text-heading">
+                        <i class="fas fa-chart-network text-accent-light mr-3"></i>证监会离职人员限制框架
+                    </h2>
+                    <p class="text-primary mb-4 leading-relaxed">
+                        以下图表直观展示了证监会离职人员在拟上市公司持股和任职限制的关键概念及其相互关系：
+                    </p>
+                    <div class="mermaid mermaid-dark-theme-override text-primary transition-all duration-300">
+                        graph TD
+                            A[拟上市公司 IPO] --> B(证监会离职人员限制)
+
+                            B --> C(持股限制)
+                            C --> C1[入股禁止期分类]
+                            C1 --> C1a(10年: 发行监管岗/会管干部)
+                            C1 --> C1b(5年: 处级及以上)
+                            C1 --> C1c(4年: 处级以下)
+
+                            C --> C2[穿透核查范围扩大]
+                            C2 --> C2a(本人 + 父母/配偶/子女及其配偶)
+
+                            C --> C3[不当入股情形]
+                            C3 --> C3a(利用职务影响)
+                            C3 --> C3b(利益输送)
+                            C3 --> C3c(资金违法违规)
+
+                            C --> C4[中介核查要求]
+                            C4 --> C4a(背景/资金/公允性穿透核查)
+                            C4 --> C4b(提交专项说明)
+
+                            B --> D(任职限制)
+                            D --> D1[直接任职限制]
+                            D1 --> D1a(禁止: 发行监管相关岗位)
+                            D1 --> D1b(允许: 其他岗位<br/>&符高管资格)
+
+                            D --> D2[间接影响]
+                            D2 --> D2a(触发利益输送核查)
+                            D2 --> D2b(质疑内控独立性)
+
+                            style A fill:#065F46,stroke:#6EE7B7,stroke-width:2px,color:#FFF
+                            style C fill:#334155,stroke:#6EE7B7
+                            style D fill:#334155,stroke:#6EE7B7
+                            linkStyle 0 stroke:#6EE7B7,stroke-width:2px
+                            linkStyle 1 stroke:#6EE7B7,stroke-width:2px
+
+                            classDef accentNode fill:#6EE7B7,stroke:#065F46,color:#FFF;
+                            class C1a,C1b,C1c,C2a,C3a,C3b,C3c,C4a,C4b,D1a,D1b,D2a,D2b accentNode;
+                    </div>
+                </section>
+
+                <!-- Section: 关键概念解析 -->
+                <section id="key-concepts" class="bg-card p-8 rounded-xl shadow-lg border border-base hover:border-accent-light transition-all duration-300">
+                    <h2 class="text-3xl font-bold mb-6 text-heading">
+                        <i class="fas fa-lightbulb text-accent-light mr-3"></i>关键概念解析
+                    </h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-heading">穿透核查 (Penetrating Verification)</h3>
+                            <p class="text-primary leading-relaxed">
+                                指通过股权层层追溯，直至最终出资人或实际控制人的核查方式。在证监会离职人员入股监管中，这意味着不仅要核查离职人员本人，还要对其父母、配偶、子女及其配偶的持股情况进行深入审查，确保资金来源合规、入股过程透明，杜绝任何形式的利益输送或规避行为。
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-heading">会管干部 (Commission-managed Cadres)</h3>
+                            <p class="text-primary leading-relaxed">
+                                特指证监会系统内由会党委直接管理、任命的干部，通常包括各部门、各派出机构、会管单位的主要负责人及其他重要岗位领导。这类干部因其更高的职务级别和更广泛的影响力，其离职后的限制期也更为严格。
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section: 规定出处清单 -->
+                <section id="references" class="bg-card p-8 rounded-xl shadow-lg border border-base hover:border-accent-light transition-all duration-300">
+                    <h2 class="text-3xl font-bold mb-6 text-heading">
+                        <i class="fas fa-book-reader text-accent-light mr-3"></i>三、规定出处清单
+                    </h2>
+                    <div class="overflow-x-auto">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>文件名称/来源</th>
+                                    <th>关键条款</th>
+                                    <th>链接</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="footnote-1">
+                                    <td>《证监会系统离职人员入股拟上市企业监管规定（试行）》</td>
+                                    <td>入股禁止期、穿透范围、核查要求</td>
+                                    <td><a href="http://www.csrc.gov.cn/csrc/c101981/c7476259/7476259/files/附1.证监会系统离职人员入股拟上市企业监管规定（试行）.pdf" target="_blank" rel="noopener noreferrer" class="text-accent-light hover:underline"><i class="fas fa-external-link-alt mr-1"></i>证监会公告</a></td>
+                                </tr>
+                                <tr id="footnote-5">
+                                    <td>《监管规则适用指引——发行类第2号》</td>
+                                    <td>不当入股情形定义及清理要求</td>
+                                    <td><a href="https://www.cfachina.org/industrydynamics/industrynews/202409/t20240906_75713.html" target="_blank" rel="noopener noreferrer" class="text-accent-light hover:underline"><i class="fas fa-external-link-alt mr-1"></i>证监会指引</a></td>
+                                </tr>
+                                <tr id="footnote-8">
+                                    <td>《证券基金经营机构董事、监事、高级管理人员及从业人员监督管理办法》</td>
+                                    <td>金融机构高管任职资格</td>
+                                    <td><a href="https://law.pkulaw.com/chinalaw/1b47d6a8b1465064bdfb.html" target="_blank" rel="noopener noreferrer" class="text-accent-light hover:underline"><i class="fas fa-external-link-alt mr-1"></i>司法部法规</a></td>
+                                </tr>
+                                <tr id="footnote-7">
+                                    <td>深交所《发行上市审核动态》</td>
+                                    <td>中介核查实操要求</td>
+                                    <td><a href="http://docs.static.szse.cn/www/disclosure/notice/general/W020240704582087473192.pdf" target="_blank" rel="noopener noreferrer" class="text-accent-light hover:underline"><i class="fas fa-external-link-alt mr-1"></i>审核要点</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Sidebar / Conclusion & Further Reading -->
+            <div class="lg:col-span-1 space-y-12">
+                <!-- Section: 结论 -->
+                <section class="bg-card p-8 rounded-xl shadow-lg border border-base hover:border-accent-light transition-all duration-300 sticky top-8">
+                    <h2 class="text-3xl font-bold mb-6 text-heading">
+                        <i class="fas fa-check-circle text-accent-light mr-3"></i>结论
+                    </h2>
+                    <ul class="space-y-4 text-primary leading-relaxed">
+                        <li class="flex items-start">
+                            <i class="fas fa-dot-circle text-accent-light mt-1 mr-2 text-sm"></i>
+                            <div>
+                                <strong class="text-heading">持股限制是核心，</strong>禁止期按职务层级划分（4-10年不等），且覆盖直系亲属；
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-dot-circle text-accent-light mt-1 mr-2 text-sm"></i>
+                            <div>
+                                <strong class="text-heading">任职限制</strong>聚焦发行相关岗位，其他岗位需满足一般高管资格要求；
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-dot-circle text-accent-light mt-1 mr-2 text-sm"></i>
+                            <div>
+                                <strong class="text-heading">中介责任：</strong>对离职人员入股及关联任职需“程序完备、结论明确”核查。
+                            </div>
+                        </li>
+                    </ul>
+                    <blockquote class="text-primary opacity-80 mt-6 text-sm">
+                        <i class="fas fa-exclamation-circle text-yellow-500 mr-2"></i> 注：若涉及历史股权架构或特殊案例，建议结合具体股东背景、离职时间及职务层级逐案分析。
+                    </blockquote>
+                </section>
+
+                <!-- Section: 延伸阅读 -->
+                <section id="further-reading" class="bg-card p-8 rounded-xl shadow-lg border border-base hover:border-accent-light transition-all duration-300">
+                    <h2 class="text-3xl font-bold mb-6 text-heading">
+                        <i class="fas fa-bookmark text-accent-light mr-3"></i>延伸阅读
+                    </h2>
+                    <p class="text-primary mb-4 leading-relaxed">
+                        为更深入理解中国资本市场监管与IPO合规，推荐以下书籍或论文：
+                    </p>
+                    <ul class="space-y-6 text-primary">
+                        <li class="flex items-start">
+                            <i class="fas fa-book-open text-accent-light mt-1 mr-3 text-lg"></i>
+                            <div>
+                                <strong class="text-heading">《中国证券法精解》</strong> <br/>
+                                <span class="text-sm opacity-80">深入解析中国证券法律体系，是理解IPO法规的基石。</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-book-open text-accent-light mt-1 mr-3 text-lg"></i>
+                            <div>
+                                <strong class="text-heading">《首次公开发行股票并上市实务指南》</strong> <br/>
+                                <span class="text-sm opacity-80">实务操作层面解读IPO流程与合规要点，对拟上市公司有直接指导意义。</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-book-open text-accent-light mt-1 mr-3 text-lg"></i>
+                            <div>
+                                <strong class="text-heading">《资本市场法律与监管》</strong> <br/>
+                                <span class="text-sm opacity-80">探讨资本市场监管的理论与实践，有助于把握监管趋势。</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-book-open text-accent-light mt-1 mr-3 text-lg"></i>
+                            <div>
+                                <strong class="text-heading">《中国上市公司股权结构与公司治理》</strong> <br/>
+                                <span class="text-sm opacity-80">理解股权架构、关联交易对公司治理的影响，与穿透核查等规定紧密相关。</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-book-open text-accent-light mt-1 mr-3 text-lg"></i>
+                            <div>
+                                <strong class="text-heading">证监会官方网站法规库</strong> <br/>
+                                <span class="text-sm opacity-80">获取最新、最权威的法规文件，是合规工作的首要信息源。</span>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footnotes Section -->
+    <section id="footnotes" class="container mx-auto px-6 md:px-12 lg:px-24 py-8 mt-16 border-t border-border-color">
+        <h2 class="text-2xl font-bold mb-6 text-heading">
+            <i class="fas fa-superscript text-accent-light mr-2"></i>脚注
+        </h2>
+        <ol class="list-decimal list-outside pl-5 space-y-2 text-primary text-sm">
+            <li><a href="#footnote-1" class="text-accent-light hover:underline">《证监会系统离职人员入股拟上市企业监管规定（试行）》</a>，证监会，2024年。</li>
+            <li>第九条（一）款，入股禁止期定义。</li>
+            <li>第九条（二）款，职务层级与禁止期对应关系。</li>
+            <li>第二条，穿透核查范围扩大至直系亲属。</li>
+            <li><a href="#footnote-5" class="text-accent-light hover:underline">《监管规则适用指引——发行类第2号》</a>，证监会，2021年。</li>
+            <li>第十条，中介机构核查要求。</li>
+            <li><a href="#footnote-7" class="text-accent-light hover:underline">深交所《发行上市审核动态》</a>，2024年第3期。</li>
+            <li><a href="#footnote-8" class="text-accent-light hover:underline">《公司法》第146条</a>，高管任职资格负面清单。</li>
+            <li>《上市公司治理准则》第三章，独立性要求。</li>
+        </ol>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-card text-primary text-center py-8 mt-12 border-t border-border-color shadow-inner">
+        <p class="text-sm opacity-70">
+            &copy; 2025 合规指南. 版权所有. 本页面内容仅供参考，不构成法律意见。
+        </p>
+        <p class="text-xs opacity-60 mt-2">
+            设计与开发采用 Tailwind CSS, Font Awesome, Mermaid.js
+        </p>
+    </footer>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Set Mermaid theme based on current mode
+        function setMermaidTheme(isDarkMode) {
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: isDarkMode ? 'dark' : 'default',
+                themeVariables: {
+                    lineColor: isDarkMode ? 'var(--text-primary)' : '#334155', // Adjust edge color
+                    textColor: isDarkMode ? 'var(--text-primary)' : '#334155', // Adjust text color
+                    mainBkg: isDarkMode ? 'var(--card-bg)' : 'var(--card-bg)', // Node background
+                    nodeBorder: isDarkMode ? 'var(--border-color)' : 'var(--border-color)', // Node border
+                    clusterBkg: isDarkMode ? 'var(--bg-primary)' : 'var(--bg-primary)', // Cluster background
+                    clusterBorder: isDarkMode ? 'var(--border-color)' : 'var(--border-color)' // Cluster border
+                },
+                flowchart: {
+                    curve: 'linear', // Makes lines straight
+                    htmlLabels: true
+                }
+            });
+            // Re-render Mermaid diagrams if they are already on the page
+            if (document.querySelectorAll('.mermaid').length > 0) {
+                 mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+            }
+        }
+
+        // Dark Mode / Light Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                localStorage.setItem('theme', 'dark');
+                setMermaidTheme(true);
+            } else {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+                setMermaidTheme(false);
+            }
+        }
+
+        // Initial theme setting based on localStorage or system preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (prefersDark) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+
+        // Event listener for theme toggle button
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) { // Only auto-switch if no manual override
+                setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+
+        // Initialize Mermaid after the DOM is ready and theme is set
+        document.addEventListener('DOMContentLoaded', () => {
+            setMermaidTheme(htmlElement.classList.contains('dark'));
+        });
+
+        // Get RGB value for accent-light for dynamic opacity in CSS
+        const style = getComputedStyle(document.documentElement);
+        const accentLightColor = style.getPropertyValue('--accent-light');
+        // Convert to RGB, assuming format like #RRGGBB or rgb(R, G, B)
+        let accentLightRgb = '0,0,0'; // Default
+        if (accentLightColor.startsWith('#')) {
+            const hex = accentLightColor.substring(1);
+            const r = parseInt(hex.substring(0, 2), 16);
+            const g = parseInt(hex.substring(2, 4), 16);
+            const b = parseInt(hex.substring(4, 6), 16);
+            accentLightRgb = `${r},${g},${b}`;
+        } else if (accentLightColor.startsWith('rgb')) {
+            accentLightRgb = accentLightColor.match(/\d+/g).join(',');
+        }
+        document.documentElement.style.setProperty('--accent-light-rgb-val', accentLightRgb);
+
+    </script>
+</body>
+</html>
+```
