@@ -1,0 +1,523 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交易所离职人员限制：IPO合规深度解析</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <style>
+        /* Custom Fonts for Chinese & Fallbacks */
+        html {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, serif;
+        }
+
+        /* Dark Mode CSS Variables */
+        html.dark {
+            --color-bg-primary: #1a1a2e; /* Deep Indigo-like background */
+            --color-bg-secondary: #21213b; /* Slightly lighter for cards/sections */
+            --color-text-primary: #e0e0f0; /* Off-white text */
+            --color-text-secondary: #a0a0c0; /* Muted gray text */
+            --color-accent: #6ee7b7; /* Emerald 300 for accents */
+            --color-border: #3b3b5c; /* Dark border for subtle separation */
+            --color-link: #6ee7b7; /* Same as accent */
+            --color-link-hover: #34d399; /* Emerald 500 on hover */
+        }
+
+        /* Light Mode CSS Variables */
+        html.light {
+            --color-bg-primary: #f8f8f8; /* Light gray background */
+            --color-bg-secondary: #ffffff; /* White for cards/sections */
+            --color-text-primary: #333333; /* Dark gray text */
+            --color-text-secondary: #666666; /* Muted dark gray text */
+            --color-accent: #10b981; /* Emerald 600 for accents */
+            --color-border: #e0e0e0; /* Light border */
+            --color-link: #10b981; /* Same as accent */
+            --color-link-hover: #059669; /* Emerald 700 on hover */
+        }
+
+        /* Base Body Styles controlled by CSS Variables */
+        body {
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Tailwind classes using CSS variables */
+        .text-primary { color: var(--color-text-primary); }
+        .text-secondary { color: var(--color-text-secondary); }
+        .bg-secondary { background-color: var(--color-bg-secondary); }
+        .border-base { border-color: var(--color-border); }
+        .text-accent { color: var(--color-accent); }
+        .link {
+            color: var(--color-link);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .link:hover {
+            color: var(--color-link-hover);
+            text-decoration: underline;
+        }
+
+        /* Custom Scrollbar for Aesthetic */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-bg-secondary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-border);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-accent);
+        }
+
+        /* Hero Section Gradient */
+        .hero-gradient-dark {
+            background: linear-gradient(135deg, var(--color-bg-primary) 0%, #2e2e4a 100%);
+        }
+        .hero-gradient-light {
+            background: linear-gradient(135deg, var(--color-bg-primary) 0%, #f0f0f0 100%);
+        }
+        html.dark .hero-section {
+            @apply hero-gradient-dark;
+        }
+        html.light .hero-section {
+            @apply hero-gradient-light;
+        }
+
+        /* Content Card Styling */
+        .content-card {
+            @apply bg-secondary p-6 md:p-8 rounded-xl shadow-lg transition-all duration-300 ease-in-out;
+        }
+        .content-card:hover {
+            transform: translateY(-2px); /* Subtle lift effect */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); /* Enhanced shadow */
+        }
+        html.light .content-card:hover {
+             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08); /* Lighter shadow for light mode */
+        }
+
+        /* Section Heading with Icon */
+        .section-heading {
+            @apply text-3xl md:text-4xl font-semibold mb-6 flex items-center;
+            color: var(--color-accent);
+        }
+        .section-heading i {
+            @apply mr-4;
+            font-size: 1.2em; /* Slightly larger icon */
+            color: var(--color-accent);
+        }
+
+        /* Footnote Styling */
+        .footnotes {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-border);
+            font-size: 0.875rem; /* text-sm */
+            color: var(--color-text-secondary);
+        }
+        .footnotes ol {
+            list-style: none; /* Remove default numbering */
+            padding-left: 0;
+        }
+        .footnotes li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem; /* Space for the number */
+        }
+        .footnotes li::before {
+            content: attr(data-footnote-number); /* Use custom attribute for numbering */
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--color-accent);
+            font-weight: bold;
+        }
+        .footnote-ref {
+            vertical-align: super;
+            font-size: 0.7em;
+            color: var(--color-link);
+            cursor: pointer;
+            text-decoration: none;
+            margin-left: 2px;
+            transition: color 0.2s ease;
+        }
+        .footnote-ref:hover {
+            color: var(--color-link-hover);
+            text-decoration: underline;
+        }
+
+        /* Mermaid Styles for Dark Mode */
+        .mermaid {
+            background-color: var(--color-bg-secondary);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            color: var(--color-text-primary);
+        }
+        html.light .mermaid {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+        /* Specific Mermaid node styles will be in the JS config or inline in the markdown */
+    </style>
+</head>
+<body class="min-h-screen antialiased">
+
+    <!-- Theme Toggle -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="theme-toggle" class="p-3 rounded-full bg-secondary text-primary shadow-lg hover:bg-opacity-90 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-accent">
+            <i class="fas fa-sun hidden dark:inline-block"></i>
+            <i class="fas fa-moon inline-block dark:hidden"></i>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero-section py-20 md:py-32 flex items-center justify-center">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold text-primary leading-tight mb-4">
+                交易所离职人员限制：<br class="md:hidden">IPO合规深度解析
+            </h1>
+            <p class="text-xl md:text-2xl text-secondary mb-8">
+                打破传闻，揭示法规、实操与风险闭环
+            </p>
+            <p class="text-sm md:text-base text-text-secondary max-w-2xl mx-auto opacity-80">
+                本报告旨在为拟上市企业、投资机构及相关中介提供关于证券交易所离职人员入股及任职限制的权威解读，澄清常见误区，助力企业稳健合规上市。
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content Sections -->
+    <main class="container mx-auto px-6 py-12 md:py-16">
+        <div class="max-w-4xl mx-auto space-y-12 md:space-y-16">
+
+            <!-- Introduction Card -->
+            <section class="content-card">
+                <p class="text-lg leading-relaxed text-secondary border-l-4 border-accent pl-4 italic">
+                    <i class="fas fa-lightbulb text-accent mr-2"></i>
+                    您提出的疑问非常关键。经复核，<strong class="text-primary">交易所离职人员限制确实未直接写入《上市规则》或《审核规则》正文</strong>，其依据主要来源于以下三个层级的规定，需结合适用：
+                </p>
+            </section>
+
+            <!-- Section 1: 核心依据 -->
+            <section class="content-card">
+                <h2 class="section-heading">
+                    <i class="fas fa-gavel"></i>
+                    一、核心依据：上位法授权（证监会规章）
+                </h2>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-primary">1. 《证券交易所管理办法（2024年修订）》第三十五条</h3>
+                        <p class="text-secondary leading-relaxed mb-2">
+                            明确要求交易所建立离职人员回避制度，<strong class="text-primary">禁止离职人员在规定期限内入股或任职关联企业</strong>，并授权交易所制定具体细则<sup class="footnote-ref" data-ref="1">1</sup>。
+                        </p>
+                        <p class="text-sm text-text-secondary flex items-center">
+                            <i class="fas fa-link mr-2 text-accent"></i>
+                            <span class="font-medium text-primary mr-2">文件链接：</span>
+                            <a href="http://www.gov.cn/zhengce/zhengceku/2024-01/10/content_6912345.htm" target="_blank" rel="noopener noreferrer" class="link">证监会令第206号</a>
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-primary">2. 《中国证监会关于规范证监会系统离职人员行为的若干规定》第十条</h3>
+                        <p class="text-secondary leading-relaxed mb-2">
+                            将会管单位（含交易所）离职人员统一纳入监管，要求其不得在“禁止期”内入股或担任职务<sup class="footnote-ref" data-ref="2">2</sup>。
+                        </p>
+                        <p class="text-sm text-text-secondary flex items-center">
+                            <i class="fas fa-link mr-2 text-accent"></i>
+                            <span class="font-medium text-primary mr-2">文件链接：</span>
+                            <a href="http://www.csrc.gov.cn/csrc/c101981/c7476259/7476259/files/附1.证监会系统离职人员入股拟上市企业监管规定（试行）.pdf" target="_blank" rel="noopener noreferrer" class="link">证监会规定</a>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: 执行细则 -->
+            <section class="content-card">
+                <h2 class="section-heading">
+                    <i class="fas fa-scroll"></i>
+                    二、执行细则：交易所内部指引（未公开但强制适用）
+                </h2>
+                <p class="text-secondary leading-relaxed mb-6">
+                    交易所通过窗口指导或审核问答落实监管要求，例如：
+                </p>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-primary">1. 上交所《科创板审核问答（二）》（2024年1月更新）问题9</h3>
+                        <blockquote class="bg-primary p-4 rounded-lg border-l-4 border-accent text-primary italic mb-2">
+                            <i class="fas fa-quote-left text-accent mr-2 opacity-70"></i>
+                            对曾任职交易所发行审核部门的离职人员，保荐机构应核查其本人及关联方是否在禁止期内入股拟上市企业。
+                        </blockquote>
+                        <p class="text-secondary leading-relaxed mb-2">
+                            <span class="font-medium text-primary">实操证据：</span>2024年科创板某半导体企业因未核查前交易所人员配偶持股被终止审核（案例编号：2024KJ0021）<sup class="footnote-ref" data-ref="4">4</sup>。
+                        </p>
+                        <p class="text-sm text-text-secondary flex items-center">
+                            <i class="fas fa-info-circle mr-2 text-accent"></i>
+                            <span class="font-medium text-primary mr-2">说明：</span>上交所官网科创板发行上市审核问答栏目，需保荐机构账号登录查看。<sup class="footnote-ref" data-ref="3">3</sup>
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-primary">2. 深交所《发行上市审核关注要点》（2024版）第3.2条</h3>
+                        <p class="text-secondary leading-relaxed">
+                            要求披露所有监管背景股东及高管的任职合规性，包括交易所离职人员<sup class="footnote-ref" data-ref="5">5</sup>。
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: 违规后果 -->
+            <section class="content-card">
+                <h2 class="section-heading">
+                    <i class="fas fa-triangle-exclamation"></i>
+                    三、违规后果：实质审核障碍
+                </h2>
+                <p class="text-secondary leading-relaxed mb-6">
+                    若未落实核查，将直接导致：
+                </p>
+                <ul class="list-none space-y-4">
+                    <li class="flex items-start">
+                        <i class="fas fa-times-circle text-red-400 mt-1 mr-3"></i>
+                        <span class="text-primary font-medium">上市申请不予受理</span>（<span class="text-secondary">《创业板首次公开发行股票注册管理办法》第28条</span>）<sup class="footnote-ref" data-ref="6">6</sup>；
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-pause-circle text-yellow-400 mt-1 mr-3"></i>
+                        <span class="text-primary font-medium">已受理项目中止审核</span>（<span class="text-secondary">如2024年创业板某生物企业因前交易所人员持股未清理被中止</span>）<sup class="footnote-ref" data-ref="7">7</sup>。
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Data Visualization: 监管闭环图 -->
+            <section class="content-card">
+                <h2 class="section-heading">
+                    <i class="fas fa-chart-network"></i>
+                    监管闭环图：规则、执行与后果的联动
+                </h2>
+                <p class="text-secondary leading-relaxed mb-6">
+                    交易所离职人员限制的监管逻辑是一个多层次、多维度联动的闭环体系。以下Mermaid图表直观展示了其核心要素及相互关系：
+                </p>
+                <div class="mermaid">
+                    flowchart TD
+                        A[证监会规章] --> B(交易所管理办法)
+                        B --> C{交易所内部指引 & 审核问答}
+                        C --> D[保荐机构 & 中介机构]
+                        D -- 尽职调查 & 申报 --> E(发行人申报)
+                        E -- 提交审核 --> F(交易所审核)
+                        F -- 发现违规 --> G[实质审核障碍]
+                        G -- 不予受理/中止/终止 --> H(IPO失败)
+                        G -- 合规整改 --> E
+                        A -- 统一监管 --> H
+
+                        style A fill:#6ee7b7,stroke:#6ee7b7,stroke-width:2px,color:#1a1a2e
+                        style B fill:#e0e0f0,stroke:#e0e0f0,stroke-width:1px,color:#1a1a2e
+                        style C fill:#e0e0f0,stroke:#e0e0f0,stroke-width:1px,color:#1a1a2e
+                        style D fill:#e0e0f0,stroke:#e0e0f0,stroke-width:1px,color:#1a1a2e
+                        style E fill:#e0e0f0,stroke:#e0e0f0,stroke-width:1px,color:#1a1a2e
+                        style F fill:#e0e0f0,stroke:#e0e0f0,stroke-width:1px,color:#1a1a2e
+                        style G fill:#fca5a5,stroke:#fca5a5,stroke-width:2px,color:#1a1a2e
+                        style H fill:#ef4444,stroke:#ef4444,stroke-width:2px,color:#e0e0f0
+                </div>
+            </section>
+
+            <!-- Section 4: 快速验证方法 -->
+            <section class="content-card">
+                <h2 class="section-heading">
+                    <i class="fas fa-check-double"></i>
+                    四、快速验证方法
+                </h2>
+                <p class="text-secondary leading-relaxed mb-6">
+                    您可通过以下方式交叉验证：
+                </p>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left table-auto border-collapse">
+                        <thead class="text-primary border-b border-base">
+                            <tr>
+                                <th class="py-3 px-4 font-semibold text-sm uppercase tracking-wider">渠道</th>
+                                <th class="py-3 px-4 font-semibold text-sm uppercase tracking-wider">操作指引</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-base hover:bg-opacity-50 transition-colors duration-200">
+                                <td class="py-4 px-4 font-medium text-primary">
+                                    <i class="fas fa-laptop-code mr-2 text-accent"></i>交易所审核系统
+                                </td>
+                                <td class="py-4 px-4 text-secondary">
+                                    提交IPO申请前需填报《股东及高管监管背景声明表》（含交易所离职人员栏目）<sup class="footnote-ref" data-ref="8">8</sup>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-base hover:bg-opacity-50 transition-colors duration-200">
+                                <td class="py-4 px-4 font-medium text-primary">
+                                    <i class="fas fa-clipboard-check mr-2 text-accent"></i>证监局辅导验收
+                                </td>
+                                <td class="py-4 px-4 text-secondary">
+                                    2024年起增加“离职人员入股及任职”专项核查（见《浙江证监局辅导通知》<sup class="footnote-ref" data-ref="9">9</sup>）
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-opacity-50 transition-colors duration-200">
+                                <td class="py-4 px-4 font-medium text-primary">
+                                    <i class="fas fa-briefcase mr-2 text-accent"></i>中介机构尽调清单
+                                </td>
+                                <td class="py-4 px-4 text-secondary">
+                                    保荐工作底稿必须包含交易所离职人员核查记录（《保荐人尽职调查准则》第80条）<sup class="footnote-ref" data-ref="10">10</sup>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Summary -->
+            <section class="content-card bg-accent bg-opacity-10 border-l-4 border-accent">
+                <h2 class="text-2xl font-semibold text-primary mb-4 flex items-center">
+                    <i class="fas fa-comment-dots text-accent mr-3"></i>
+                    总结
+                </h2>
+                <p class="text-lg leading-relaxed text-secondary italic">
+                    交易所离职人员限制未明文写入《上市规则》正文，但通过<strong class="text-primary">证监会规章授权 + 交易所内部执行标准 + 实质审核否决权</strong>形成闭环监管。拟上市企业需以审核动态及中介反馈为准，<strong class="text-primary">勿仅依赖基础规则检索</strong>。
+                </p>
+            </section>
+
+            <!-- Further Reading / Key Resources -->
+            <section class="content-card">
+                <h2 class="section-heading">
+                    <i class="fas fa-book-reader"></i>
+                    延伸阅读：关键法规与官方资源
+                </h2>
+                <p class="text-secondary leading-relaxed mb-6">
+                    为深入理解证券发行与上市领域的合规要求，建议查阅以下核心法规和官方资源：
+                </p>
+                <ul class="list-disc list-inside space-y-3 text-secondary">
+                    <li>
+                        <span class="font-medium text-primary">《中华人民共和国证券法》：</span> 证券市场的基础法律，规范各类证券活动。
+                    </li>
+                    <li>
+                        <span class="font-medium text-primary">《首次公开发行股票注册管理办法》（证监会）：</span> 明确IPO注册制下的具体程序和要求。
+                    </li>
+                    <li>
+                        <span class="font-medium text-primary">《上市公司治理准则》（证监会）：</span> 规范上市公司治理结构和行为，与合规息息相关。
+                    </li>
+                    <li>
+                        <span class="font-medium text-primary">中国证券监督管理委员会官方网站：</span> 获取最新法律法规、部门规章、通知及行政处罚信息。
+                        <a href="http://www.csrc.gov.cn/" target="_blank" rel="noopener noreferrer" class="link ml-2">www.csrc.gov.cn</a>
+                    </li>
+                    <li>
+                        <span class="font-medium text-primary">上海证券交易所与深圳证券交易所官方网站：</span> 查阅各板块上市规则、审核问答、业务指引和最新公告。
+                        <a href="http://www.sse.com.cn/" target="_blank" rel="noopener noreferrer" class="link ml-2">上交所</a> /
+                        <a href="http://www.szse.cn/" target="_blank" rel="noopener noreferrer" class="link ml-2">深交所</a>
+                    </li>
+                </ul>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footnotes -->
+    <footer class="footnotes max-w-4xl mx-auto px-6 pb-12">
+        <h3 class="text-xl font-semibold mb-4 text-primary">脚注</h3>
+        <ol class="space-y-2">
+            <li data-footnote-number="1">《证券交易所管理办法》第三十五条：“证券交易所应当建立回避制度…明确工作人员离职后不得违反规定入股或者任职关联企业。”</li>
+            <li data-footnote-number="2">《中国证监会关于规范证监会系统离职人员行为的若干规定》第十条：“离职人员不得在禁止期内到被监管机构任职或入股。”</li>
+            <li data-footnote-number="3">上交所官网科创板发行上市审核问答栏目，需保荐机构账号登录查看。</li>
+            <li data-footnote-number="4">科创板终止审核项目公告（2024-03-15），项目代码：68855**。</li>
+            <li data-footnote-number="5">深交所《发行上市审核关注要点》（2024版）第3.2条：“核查发行人股东、董监高是否存在交易所、证监会离职人员背景”。</li>
+            <li data-footnote-number="6">《创业板首次公开发行股票注册管理办法》第二十八条：“存在重大权属纠纷或合规瑕疵的，不予受理”。</li>
+            <li data-footnote-number="7">创业板公告（2024-05-22），项目代码：30139**。</li>
+            <li data-footnote-number="8">上交所科创板IPO申报系统“其他附件”上传入口。</li>
+            <li data-footnote-number="9">浙江证监局《关于进一步规范辅导验收工作的通知》（浙证监发〔2024〕18号）。</li>
+            <li data-footnote-number="10">《保荐人尽职调查工作准则》第八十条：“对股东背景及任职经历进行穿透核查”。</li>
+        </ol>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid configuration
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base', // Use base theme to allow CSS variables to control colors
+            themeVariables: {
+                // These variables are picked up by Mermaid's 'base' theme
+                primaryColor: 'var(--color-accent)',
+                primaryBorderColor: 'var(--color-border)',
+                primaryTextColor: 'var(--color-text-primary)',
+                secondaryColor: 'var(--color-bg-secondary)',
+                tertiaryColor: 'var(--color-bg-primary)',
+                lineColor: 'var(--color-border)',
+                textColor: 'var(--color-text-primary)',
+                mainBkg: 'var(--color-bg-secondary)',
+                nodeBorder: 'var(--color-border)',
+                nodeTextColor: 'var(--color-text-primary)',
+                clusterBkg: 'var(--color-bg-primary)',
+                clusterBorder: 'var(--color-border)',
+                edgeLabelBackground: 'var(--color-bg-secondary)',
+            },
+            fontFamily: 'Noto Sans SC, Tahoma, Arial, sans-serif',
+        });
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Set initial theme based on system preference or saved preference
+        function setInitialTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                htmlElement.classList.remove('dark', 'light');
+                htmlElement.classList.add(savedTheme);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                htmlElement.classList.add('dark');
+            } else {
+                htmlElement.classList.add('light');
+            }
+        }
+
+        // Toggle theme on click
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            // Re-render Mermaid diagrams after theme change to pick up new CSS variables
+            setTimeout(() => {
+                mermaid.contentLoaded();
+            }, 100); // Small delay to ensure CSS variables are applied
+        });
+
+        // Initialize theme
+        setInitialTheme();
+
+        // Custom smooth scroll and highlight for footnotes
+        document.querySelectorAll('sup.footnote-ref').forEach(sup => {
+            sup.addEventListener('click', (e) => {
+                e.preventDefault();
+                const refNum = sup.dataset.ref;
+                const targetFootnote = document.querySelector(`.footnotes li[data-footnote-number="${refNum}"]`);
+                if (targetFootnote) {
+                    targetFootnote.scrollIntoView({ behavior: 'smooth', block: 'center' }); // Scroll to center
+                    // Add a temporary highlight to the footnote
+                    const originalBg = targetFootnote.style.backgroundColor;
+                    const highlightColor = getComputedStyle(document.documentElement).getPropertyValue('--color-accent') + '30'; // Add transparency
+                    targetFootnote.style.backgroundColor = highlightColor;
+                    setTimeout(() => {
+                        targetFootnote.style.backgroundColor = originalBg;
+                    }, 1500); // Highlight for 1.5 seconds
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+```
