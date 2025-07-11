@@ -1,0 +1,677 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>金融监管离职人员合规指引 - 深度解析</title>
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2363B3ED' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 13.9 13 14.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 1.09-.44 2.09-1.17 2.83z'/%3E%3C/svg%3E" type="image/svg+xml">
+
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts (Noto Serif SC for headings, Noto Sans SC for body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS for theme variables, fonts, and specific styles -->
+    <style>
+        /* CSS Variables for Theme */
+        :root {
+            --color-primary-dark: #0F172A; /* slate-900 */
+            --color-secondary-dark: #1E293B; /* slate-800 */
+            --color-text-dark: #CBD5E1; /* slate-300 */
+            --color-heading-dark: #F8FAFC; /* slate-50 */
+            --color-accent: #63B3ED; /* blue-400 */
+            --color-accent-light: #90CDF4; /* blue-300 */
+
+            --color-primary-light: #F8FAFC; /* slate-50 */
+            --color-secondary-light: #F1F5F9; /* slate-100 */
+            --color-text-light: #475569; /* slate-600 */
+            --color-heading-light: #0F172A; /* slate-900 */
+        }
+
+        /* Default Dark Mode Styles */
+        html.dark {
+            --bg-primary: var(--color-primary-dark);
+            --bg-secondary: var(--color-secondary-dark);
+            --text-color: var(--color-text-dark);
+            --heading-color: var(--color-heading-dark);
+            --border-color: #334155; /* slate-700 */
+            --card-bg: var(--color-secondary-dark);
+        }
+
+        /* Light Mode Styles */
+        html.light {
+            --bg-primary: var(--color-primary-light);
+            --bg-secondary: var(--color-secondary-light);
+            --text-color: var(--color-text-light);
+            --heading-color: var(--color-heading-light);
+            --border-color: #E2E8F0; /* slate-200 */
+            --card-bg: #FFFFFF; /* white */
+        }
+
+        /* Base Body Styles */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Heading Font Styles */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, serif;
+            color: var(--heading-color);
+            transition: color 0.3s ease;
+        }
+
+        /* Link Styles */
+        a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        a:hover {
+            color: var(--color-accent-light);
+        }
+
+        /* Hero Section Background & Overlay */
+        .hero-section {
+            background-image: url('https://source.unsplash.com/random/1600x900/?abstract,finance,data,technology'); /* Dynamic abstract background */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.95) 70%, rgba(15, 23, 42, 1) 100%); /* Dark mode specific overlay */
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+        html.light .hero-overlay {
+            background: linear-gradient(to bottom, rgba(248, 250, 252, 0.8) 0%, rgba(248, 250, 252, 0.95) 70%, rgba(248, 250, 252, 1) 100%);
+        }
+
+        /* Card Styles */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Tailwind's shadow-lg equivalent */
+            transform: translateY(-2px); /* Subtle lift effect */
+        }
+        html.dark .card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3), 0 4px 6px -2px rgba(0,0,0,0.15); /* Darker shadow for dark mode */
+        }
+        html.light .card:hover {
+             box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); /* Lighter shadow for light mode */
+        }
+
+
+        /* Custom Table Styles */
+        .table-custom {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-custom th, .table-custom td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .table-custom th {
+            background-color: var(--bg-secondary);
+            font-weight: 600;
+        }
+
+        /* First letter drop cap */
+        .drop-cap::first-letter {
+            float: left;
+            font-family: 'Noto Serif SC';
+            font-size: 3.5em; /* Adjust as needed */
+            line-height: 1;
+            margin-right: 0.1em;
+            margin-top: 0.05em; /* Fine-tune vertical alignment */
+            color: var(--color-accent);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        html.light .drop-cap::first-letter {
+             text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+
+        /* Responsive table for small screens */
+        @media (max-width: 768px) {
+            .table-custom thead {
+                display: none; /* Hide header on small screens */
+            }
+            .table-custom, .table-custom tbody, .table-custom tr, .table-custom td {
+                display: block; /* Make cells stack */
+            }
+            .table-custom tr {
+                margin-bottom: 1rem;
+                border: 1px solid var(--border-color);
+                border-radius: 0.5rem;
+                padding: 0.5rem;
+            }
+            .table-custom td {
+                border-bottom: none;
+                text-align: right;
+                padding: 0.5rem 1rem;
+                position: relative;
+                padding-left: 50%; /* Space for pseudo-element label */
+            }
+            .table-custom td::before {
+                content: attr(data-label); /* Use data-label for content */
+                position: absolute;
+                left: 1rem;
+                width: calc(50% - 1.5rem);
+                padding-right: 1rem;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: 600;
+                color: var(--heading-color);
+            }
+        }
+
+        /* Mermaid Styling Overrides */
+        .mermaid {
+            background-color: var(--card-bg) !important;
+            border: 1px solid var(--border-color) !important;
+            border-radius: 0.75rem !important;
+            padding: 1.5rem !important;
+            overflow-x: auto;
+            text-align: center;
+        }
+
+        /* Dark Mode Mermaid Node/Text Colors */
+        html.dark .mermaid .node rect, html.dark .mermaid .node circle, html.dark .mermaid .node polygon, html.dark .mermaid .node path {
+            fill: #1E293B !important; /* slate-800 */
+            stroke: #334155 !important; /* slate-700 */
+            stroke-width: 2px !important;
+        }
+        html.dark .mermaid .node text {
+            fill: #F8FAFC !important; /* slate-50 */
+        }
+        html.dark .mermaid .edge path {
+            stroke: #64748B !important; /* slate-500 */
+        }
+        html.dark .mermaid .edgeCommands circle {
+            stroke: #64748B !important; /* slate-500 */
+            fill: #1E293B !important;
+        }
+        html.dark .mermaid .label text {
+            fill: #F8FAFC !important;
+        }
+        html.dark .mermaid .arrowheadPath {
+            fill: #64748B !important;
+        }
+        html.dark .mermaid .flowchart-label {
+            fill: #F8FAFC !important;
+        }
+        html.dark .mermaid .cluster rect {
+            fill: #334155 !important; /* slate-700 for clusters */
+            stroke: #475569 !important; /* slate-600 */
+        }
+        html.dark .mermaid .cluster text {
+            fill: #CBD5E1 !important; /* slate-300 */
+        }
+
+        /* Light Mode Mermaid Node/Text Colors */
+        html.light .mermaid .node rect, html.light .mermaid .node circle, html.light .mermaid .node polygon, html.light .mermaid .node path {
+            fill: #FFFFFF !important; /* white */
+            stroke: #E2E8F0 !important; /* slate-200 */
+            stroke-width: 2px !important;
+        }
+        html.light .mermaid .node text {
+            fill: #0F172A !important; /* slate-900 */
+        }
+        html.light .mermaid .edge path {
+            stroke: #94A3B8 !important; /* slate-400 */
+        }
+        html.light .mermaid .edgeCommands circle {
+            stroke: #94A3B8 !important; /* slate-400 */
+            fill: #F1F5F9 !important; /* slate-100 */
+        }
+        html.light .mermaid .label text {
+            fill: #0F172A !important;
+        }
+        html.light .mermaid .arrowheadPath {
+            fill: #94A3B8 !important;
+        }
+        html.light .mermaid .flowchart-label {
+            fill: #0F172A !important;
+        }
+        html.light .mermaid .cluster rect {
+            fill: #F1F5F9 !important; /* slate-100 for clusters */
+            stroke: #CBD5E1 !important; /* slate-300 */
+        }
+        html.light .mermaid .cluster text {
+            fill: #475569 !important; /* slate-600 */
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .animate-fade-in-down { animation: fadeInDown 0.8s ease-out forwards; }
+        .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+        .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
+
+        .hero-section h1 { animation-delay: 0.1s; }
+        .hero-section p:nth-of-type(1) { animation-delay: 0.3s; }
+        .hero-section p:nth-of-type(2) { animation-delay: 0.5s; }
+    </style>
+</head>
+<body class="antialiased leading-relaxed min-h-screen">
+
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="fixed bottom-6 right-6 p-3 rounded-full shadow-lg bg-blue-600 text-white dark:bg-gray-700 dark:text-white transition-all duration-300 hover:scale-105 z-50">
+        <i class="fas fa-sun hidden dark:block"></i>
+        <i class="fas fa-moon block dark:hidden"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <header class="hero-section text-white py-24 md:py-32 relative overflow-hidden">
+        <div class="hero-overlay z-10"></div>
+        <div class="container mx-auto px-6 relative z-20 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                <i class="fas fa-gavel text-blue-400 mr-3"></i> 中国金融监管离职人员合规指引
+            </h1>
+            <p class="text-xl md:text-2xl text-blue-200 mb-8">
+                交易所及其他监管机构任职与持股限制深度解析
+            </p>
+            <p class="max-w-2xl mx-auto text-lg opacity-90">
+                深入剖析中国资本市场监管框架下，离职人员在拟上市公司任职与持股的复杂合规要求，助您精准规避风险。
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto px-6 py-12 md:py-16 relative z-10">
+        <section class="max-w-4xl mx-auto mb-16 card p-8 rounded-lg shadow-xl opacity-0">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-8 text-center text-blue-400">
+                <i class="fas fa-balance-scale mr-2"></i> 核心洞察：监管离职人员合规框架
+            </h2>
+            <p class="text-lg leading-relaxed mb-6 drop-cap">
+                关于交易所及其他金融监管机构离职人员在拟上市公司的任职及持股限制，现行规定与证监会离职人员管理框架类似但存在差异。了解这些细微之处对于拟上市企业的合规至关重要。本文将为您详细解读各项规定及依据，并提示潜在的实操风险。
+            </p>
+
+            <div class="mermaid-container mt-10 p-4 rounded-lg shadow-inner">
+                <h3 class="text-xl font-semibold mb-4 text-center text-blue-400">
+                    <i class="fas fa-sitemap mr-2"></i> 监管离职人员合规核查流程图
+                </h3>
+                <div class="mermaid text-center">
+                    graph TD
+                        A[拟上市企业合规核查] --> B{离职人员背景？}
+
+                        B -- 是 --> C[监管机构类型]
+                        B -- 否 --> D[无需特殊限制]
+
+                        C --> E[交易所]
+                        C --> F[其他金融监管机构]
+
+                        E --> G{交易所离职部门/岗位？}
+                        G -- 发行审核部门 --> H[持股限制：10年禁止期 + 关联方]
+                        G -- 其他岗位 --> I[持股限制：5年/3年禁止期]
+
+                        E --> J{拟任职务？}
+                        J -- 直接相关(董秘/证券事务) --> K[任职限制：禁止担任]
+                        J -- 其他岗位 --> L[任职限制：披露合理性，评估利益冲突]
+
+                        F --> M[是否为金融类公司？]
+                        M -- 是 --> N[任职限制：符合高管任职资格]
+                        M -- 否 --> O[无专项任职限制]
+
+                        F --> P[是否涉及政府产业基金投资？]
+                        P -- 是 --> Q[持股/任职限制：离职3年内不得兼职]
+                        P -- 否 --> R[无专项持股限制]
+
+                        subgraph 关键核查要点
+                            S[穿透式核查]
+                            T[入股价格公允性与资金来源]
+                            U[披露利益冲突风险]
+                        end
+
+                        H -- 核查 --> S
+                        I -- 核查 --> S
+                        S -- 关联方核查 --> T
+                        L -- 重点关注 --> U
+                        Q -- 关注 --> U
+
+                        style A fill:#3b82f6,stroke:#3b82f6,stroke-width:2px,color:#fff
+                        style B fill:#eab308,stroke:#eab308,stroke-width:2px,color:#fff
+                        style D fill:#10b981,stroke:#10b981,stroke-width:2px,color:#fff
+                        style E fill:#06b6d4,stroke:#06b6d4,stroke-width:2px,color:#fff
+                        style F fill:#06b6d4,stroke:#06b6d4,stroke-width:2px,color:#fff
+                        style H fill:#ef4444,stroke:#ef4444,stroke-width:2px,color:#fff
+                        style K fill:#ef4444,stroke:#ef4444,stroke-width:2px,color:#fff
+                        style Q fill:#ef4444,stroke:#ef4444,stroke-width:2px,color:#fff
+                        style I fill:#f97316,stroke:#f97316,stroke-width:2px,color:#fff
+                        style L fill:#f97316,stroke:#f97316,stroke-width:2px,color:#fff
+                        style N fill:#22c55e,stroke:#22c55e,stroke-width:2px,color:#fff
+                        style O fill:#22c55e,stroke:#22c55e,stroke-width:2px,color:#fff
+                        style R fill:#22c55e,stroke:#22c55e,stroke-width:2px,color:#fff
+                        style S fill:#8b5cf6,stroke:#8b5cf6,stroke-width:2px,color:#fff
+                        style T fill:#8b5cf6,stroke:#8b5cf6,stroke-width:2px,color:#fff
+                        style U fill:#8b5cf6,stroke:#8b5cf6,stroke-width:2px,color:#fff
+                </div>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            <!-- Section: 交易所离职人员的限制 -->
+            <div class="card p-8 rounded-lg shadow-xl opacity-0">
+                <h3 class="text-2xl font-semibold mb-6 text-blue-400">
+                    <i class="fas fa-landmark mr-2"></i> 一、交易所离职人员的限制
+                </h3>
+                <div class="mb-6">
+                    <h4 class="text-xl font-medium mb-3 text-white">1. 持股限制 <i class="fas fa-chart-pie ml-2 text-cyan-400"></i></h4>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>
+                            <p><strong class="text-blue-300">沪深交易所：</strong></p>
+                            <ul class="list-circle pl-6 space-y-1">
+                                <li><strong class="text-orange-400">发行审核部门离职人员：</strong> <span class="font-bold">禁止期10年</span>（与证监会发行监管岗同标准），本人及父母、配偶、子女及其配偶禁止入股拟上市企业。</li>
+                                <li><strong class="text-yellow-400">其他岗位离职人员：</strong> 处级及以上：禁止期5年；处级以下：禁止期3年。</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p><strong class="text-blue-300">北交所：</strong> 执行与沪深交易所相同标准（《北京证券交易所股票上市规则》第4.1.8条）。</p>
+                        </li>
+                    </ul>
+                    <p class="mt-4 p-3 bg-gray-800 rounded-md border border-gray-700 text-gray-300">
+                        <i class="fas fa-search text-purple-400 mr-2"></i> <strong class="text-white">核查要求：</strong> 保荐机构需对交易所离职人员入股开展<strong class="text-purple-300">穿透式核查</strong>，重点核查入股价格公允性及资金来源合法性。
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-medium mb-3 text-white">2. 任职限制 <i class="fas fa-user-tie ml-2 text-cyan-400"></i></h4>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li><strong class="text-orange-400">直接禁止岗位：</strong> 禁止在拟上市公司担任与<strong class="font-bold">发行上市、信息披露直接相关</strong>的职务（如董秘、证券事务代表、核心技术人员）。</li>
+                        <li><strong class="text-yellow-400">其他岗位：</strong> 无明文禁止，但需披露离职人员任职的合理性，并评估是否存在利益冲突。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Section: 其他金融监管机构离职人员限制 -->
+            <div class="card p-8 rounded-lg shadow-xl opacity-0">
+                <h3 class="text-2xl font-semibold mb-6 text-blue-400">
+                    <i class="fas fa-building-columns mr-2"></i> 二、其他金融监管机构离职人员限制
+                </h3>
+                <div class="mb-6">
+                    <h4 class="text-xl font-medium mb-3 text-white">1. 央行、银保监会（金融监管总局）、外管局 <i class="fas fa-money-check-dollar ml-2 text-cyan-400"></i></h4>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>
+                            <p><strong class="text-blue-300">持股限制：</strong> 无针对拟上市企业的专项禁止规定，但需符合《商业银行股权管理暂行办法》等对金融机构股东资质的要求（如无重大失信、无非法资金等）。</p>
+                        </li>
+                        <li>
+                            <p><strong class="text-blue-300">任职限制：</strong> 若拟上市企业为金融类公司（如银行、保险），需满足《金融机构董事、监事和高级管理人员任职资格管理办法》的许可要求。</p>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xl font-medium mb-3 text-white">2. 财政部、发改委 <i class="fas fa-file-invoice-dollar ml-2 text-cyan-400"></i></h4>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>
+                            <p>无直接限制，但若涉及<strong class="font-bold">政府产业基金投资</strong>，需符合《政府投资基金暂行管理办法》对“官员兼职”的禁止性规定（如在职及离职3年内不得在基金投资企业任职）。</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 规定依据及来源 -->
+        <section class="max-w-4xl mx-auto mb-16 card p-8 rounded-lg shadow-xl opacity-0">
+            <h3 class="text-2xl font-semibold mb-6 text-blue-400 text-center">
+                <i class="fas fa-book-open mr-2"></i> 三、规定依据及来源
+            </h3>
+            <div class="overflow-x-auto">
+                <table class="table-custom min-w-full">
+                    <thead>
+                        <tr>
+                            <th>监管机构</th>
+                            <th>文件名称</th>
+                            <th>关键条款</th>
+                            <th>链接/来源</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="ref-1">
+                            <td data-label="监管机构"><strong>沪深交易所</strong></td>
+                            <td data-label="文件名称">《证券交易所管理办法（2024年修订）》第三十五条,《上海证券交易所股票上市规则（2024年修订）》第3.1.8条, 深交所《创业板股票发行上市审核规则》第3.2.5条, 《上海证券交易所科创板股票发行上市审核问答（二）》问题9, 沪深交易所《发行上市审核动态》2024年第2期</td>
+                            <td data-label="关键条款">离职人员入股限制；穿透式核查</td>
+                            <td data-label="链接/来源"><a href="http://www.sse.com.cn/lawandrules/sserules/main/listing/stock/c/c_20240111_5770634.shtml" target="_blank" rel="noopener noreferrer">上交所规则 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a></td>
+                        </tr>
+                        <tr id="ref-2">
+                            <td data-label="监管机构"><strong>北交所</strong></td>
+                            <td data-label="文件名称">《北京证券交易所股票上市规则》</td>
+                            <td data-label="关键条款">第4.1.8条（离职人员核查要求）</td>
+                            <td data-label="链接/来源"><a href="http://www.bse.cn/rule/listed/202401/t20240111_3588.html" target="_blank" rel="noopener noreferrer">北交所规则 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a></td>
+                        </tr>
+                        <tr id="ref-3">
+                            <td data-label="监管机构"><strong>金融监管总局</strong></td>
+                            <td data-label="文件名称">《金融机构董事、监事和高级管理人员任职资格管理办法》</td>
+                            <td data-label="关键条款">第八条（高管任职负面清单）</td>
+                            <td data-label="链接/来源"><a href="https://www.cbirc.gov.cn/cn/view/pages/ItemDetail.html?docId=1170303" target="_blank" rel="noopener noreferrer">金融监管总局令 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a></td>
+                        </tr>
+                        <tr id="ref-4">
+                            <td data-label="监管机构"><strong>财政部</strong></td>
+                            <td data-label="文件名称">《政府投资基金暂行管理办法》</td>
+                            <td data-label="关键条款">第二十一条（公务员兼职限制）</td>
+                            <td data-label="链接/来源"><a href="http://www.mof.gov.cn/gkml/caizhengwengao/wg2023/wg202302/202306/t20230612_3888797.htm" target="_blank" rel="noopener noreferrer">财政部文件 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a></td>
+                        </tr>
+                        <tr id="ref-5">
+                            <td data-label="监管机构"><strong>证监会</strong></td>
+                            <td data-label="文件名称">《上市公司治理准则》第六十二条</td>
+                            <td data-label="关键条款">职务独立性要求</td>
+                            <td data-label="链接/来源">（无直接链接，请查阅证监会官网）</td>
+                        </tr>
+                        <tr id="ref-6">
+                            <td data-label="监管机构"><strong>银保监会</strong></td>
+                            <td data-label="文件名称">《商业银行股权管理暂行办法》第十条</td>
+                            <td data-label="关键条款">股东资质负面清单</td>
+                            <td data-label="链接/来源">（已整合至金融监管总局）</td>
+                        </tr>
+                        <tr id="ref-7">
+                            <td data-label="监管机构"><strong>证监会</strong></td>
+                            <td data-label="文件名称">《公开发行证券的公司信息披露内容与格式准则第1号》第四十五条</td>
+                            <td data-label="关键条款">关联方认定范围</td>
+                            <td data-label="链接/来源">（无直接链接，请查阅证监会官网）</td>
+                        </tr>
+                        <tr id="ref-8">
+                            <td data-label="监管机构"><strong>浙江证监局</strong></td>
+                            <td data-label="文件名称">《关于进一步压实拟上市企业信息披露责任的通知》（浙证监发〔2024〕45号）</td>
+                            <td data-label="关键条款">股东及高管监管背景声明</td>
+                            <td data-label="链接/来源">（地方证监局文件，请查阅浙江证监局官网）</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-sm text-gray-400 mt-4">
+                * 请注意：以上链接及关键条款仅供参考，请以官方最新发布为准。
+            </p>
+        </section>
+
+        <!-- Section: 实操风险提示 -->
+        <section class="max-w-4xl mx-auto mb-16 card p-8 rounded-lg shadow-xl opacity-0">
+            <h3 class="text-2xl font-semibold mb-6 text-blue-400 text-center">
+                <i class="fas fa-exclamation-triangle mr-2"></i> 四、实操风险提示
+            </h3>
+            <ul class="space-y-6">
+                <li class="flex items-start">
+                    <span class="text-orange-400 text-2xl mr-4 mt-1"><i class="fas fa-fingerprint"></i></span>
+                    <div>
+                        <h4 class="text-xl font-medium text-white mb-2">穿透核查的扩展性</h4>
+                        <p class="text-gray-300">交易所离职人员的<strong class="text-yellow-300">配偶、子女</strong>入股，可能被监管要求说明“资金来源”及“价格公允性”（参考2024年科创板某芯片企业案例）。</p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-orange-400 text-2xl mr-4 mt-1"><i class="fas fa-exchange-alt"></i></span>
+                    <div>
+                        <h4 class="text-xl font-medium text-white mb-2">任职的间接影响</h4>
+                        <p class="text-gray-300">若离职人员担任<strong class="text-yellow-300">供应商/客户高管</strong>，可能触发关联交易审查（《公开发行证券的公司信息披露内容与格式准则第1号》第45条）。</p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-orange-400 text-2xl mr-4 mt-1"><i class="fas fa-chart-line"></i></span>
+                    <div>
+                        <h4 class="text-xl font-medium text-white mb-2">动态监管趋势</h4>
+                        <p class="text-gray-300">2024年多地证监局要求拟上市企业提交《股东及高管监管背景声明》，覆盖所有金融监管机构离职人员。请持续关注<strong class="text-yellow-300">财政部牵头制定的统一金融监管机构离职人员管理办法</strong>，预计2025年底出台。</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="max-w-4xl mx-auto mb-16 card p-8 rounded-lg shadow-xl border-l-4 border-blue-500 opacity-0">
+            <h3 class="text-2xl font-semibold mb-6 text-blue-400 text-center">
+                <i class="fas fa-clipboard-check mr-2"></i> 结论与建议
+            </h3>
+            <p class="text-lg leading-relaxed text-gray-300 mb-4">
+                交易所离职人员限制严格对标证监会标准，其他监管机构无专项限制但需符合行业通用规定。
+            </p>
+            <p class="text-lg leading-relaxed text-gray-300">
+                拟上市企业需重点防范<strong class="text-green-400">入股合规性</strong>及<strong class="text-green-400">利益冲突风险</strong>，中介机构核查应覆盖至配偶、子女等关联方。
+            </p>
+            <div class="mt-6 text-right text-gray-400 text-sm italic">
+                <i class="fas fa-lightbulb mr-1"></i> 合规为基，行稳致远。
+            </div>
+        </section>
+
+        <!-- Further Reading -->
+        <section class="max-w-4xl mx-auto mb-16 card p-8 rounded-lg shadow-xl opacity-0">
+            <h3 class="text-2xl font-semibold mb-6 text-blue-400 text-center">
+                <i class="fas fa-book-reader mr-2"></i> 进一步阅读
+            </h3>
+            <ul class="space-y-4 text-gray-300">
+                <li>
+                    <strong class="text-white">1. 《中华人民共和国证券法》：</strong> 资本市场的基础法律，了解证券发行、交易及监管的根本框架。
+                    <a href="http://www.npc.gov.cn/npc/c30834/201912/11bf90b16a444d4791b7d597086ce880.shtml" target="_blank" rel="noopener noreferrer" class="ml-2 text-blue-400 hover:text-blue-300"><i class="fas fa-link"></i></a>
+                </li>
+                <li>
+                    <strong class="text-white">2. 《中华人民共和国公司法》：</strong> 规范公司设立、组织、运营和解散的基本法律，是理解公司治理和股权结构的基础。
+                    <a href="http://www.npc.gov.cn/npc/c30834/202312/03e481c0338740c0b7d5a570c9186638.shtml" target="_blank" rel="noopener noreferrer" class="ml-2 text-blue-400 hover:text-blue-300"><i class="fas fa-link"></i></a>
+                </li>
+                <li>
+                    <strong class="text-white">3. 《首次公开发行股票并上市管理办法》：</strong> 证监会关于A股IPO的核心法规，明确了企业上市的各项条件和程序。
+                    <a href="http://www.csrc.gov.cn/csrc/c101966/c103130/c1274154/4802871/content.shtml" target="_blank" rel="noopener noreferrer" class="ml-2 text-blue-400 hover:text-blue-300"><i class="fas fa-link"></i></a>
+                </li>
+                <li>
+                    <strong class="text-white">4. 沪深北交易所上市审核问答及指引：</strong> 各交易所发布的具体操作性指引，对于理解实际审核标准和案例具有重要参考价值。建议前往各交易所官网查阅最新版本。
+                    <a href="http://www.sse.com.cn/lawandrules/sserules/main/listing/stock/c/c_20240111_5770634.shtml" target="_blank" rel="noopener noreferrer" class="ml-2 text-blue-400 hover:text-blue-300"><i class="fas fa-link"></i></a>
+                </li>
+                <li>
+                    <strong class="text-white">5. 知名律所/券商年度IPO合规报告：</strong> 行业专业机构会定期发布针对IPO市场、合规要点及最新监管动态的分析报告，具有很强的实务指导意义。建议关注中金、中信、君合、金杜等机构的出版物。
+                    <a href="https://www.google.com/search?q=IPO%E5%90%88%E8%A7%84%E6%8A%A5%E5%91%8A+%E5%BE%8B%E6%89%80%E5%88%B8%E5%95%86" target="_blank" rel="noopener noreferrer" class="ml-2 text-blue-400 hover:text-blue-300"><i class="fas fa-link"></i></a>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-gray-500 text-sm border-t border-gray-700 mt-12">
+        <p>&copy; 2024 金融合规智库. 保留所有权利。</p>
+    </footer>
+
+    <!-- Mermaid.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid.js configuration
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark', // Default theme, will be overridden by custom CSS based on html class
+            flowchart: {
+                curve: 'basis',
+                htmlLabels: true
+            },
+            mindmap: {
+                maxTextLength: 60
+            },
+            securityLevel: 'loose' // Allows more flexibility for custom styles
+        });
+
+        // Theme Toggle JavaScript
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme and re-render Mermaid
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                htmlElement.classList.add('light');
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            }
+            // Re-render Mermaid to apply new theme colors
+            // Use setTimeout to ensure DOM is updated before re-rendering
+            setTimeout(() => {
+                mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+            }, 50);
+        }
+
+        // Check for saved theme or system preference on load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark'); // Default to dark if system preference is dark
+        } else {
+            setTheme('light'); // Default to light if no preference
+        }
+
+        // Toggle theme on button click
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Add scroll-based fade-in animation for content sections
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('main section');
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in-up');
+                        entry.target.classList.remove('opacity-0'); // Ensure it's visible
+                        observer.unobserve(entry.target); // Stop observing once animated
+                    }
+                });
+            }, {
+                threshold: 0.1, // Trigger when 10% of the section is visible
+                rootMargin: "0px 0px -50px 0px" // Adjust for smoother staggered appearance
+            });
+
+            sections.forEach(section => {
+                section.classList.add('opacity-0'); // Hide initially
+                observer.observe(section);
+            });
+        });
+
+    </script>
+</body>
+</html>
+```
