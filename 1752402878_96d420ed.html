@@ -1,0 +1,544 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>深度解读 | 上交所《资深专业机构投资者》指引</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts (Noto Serif SC, Noto Sans SC) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <style>
+        /* Base styles for dark mode */
+        :root {
+            --bg-color: #1a1a2e;
+            --text-color: #f0f0f0;
+            --primary-accent: #00C4FF; /* A vibrant blue for accents */
+            --secondary-accent: #ffcc00; /* Muted yellow for warnings */
+            --card-bg: #2a2a3e;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --blockquote-border: #0077B6;
+            --link-color: #61DAFB; /* Cyan-ish for links */
+        }
+
+        /* Light mode variables */
+        html.light {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --primary-accent: #007bff;
+            --secondary-accent: #f0ad4e;
+            --card-bg: #f8f8f8;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --blockquote-border: #0056b3;
+            --link-color: #0056b3;
+        }
+
+        /* Apply variables */
+        body {
+            font-family: 'Noto Sans SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+            color: var(--text-color);
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        a:hover {
+            color: var(--primary-accent);
+            text-decoration: underline;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--bg-color) 0%, #0d0d1a 100%);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .theme-toggle-btn {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        .theme-toggle-btn:hover {
+            background-color: var(--primary-accent);
+            color: #ffffff;
+            border-color: var(--primary-accent);
+        }
+
+        /* Custom scrollbar for webkit browsers */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-accent);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-accent);
+        }
+
+        /* First letter drop cap */
+        .drop-cap:first-letter {
+            float: left;
+            font-size: 4em; /* Adjust size as needed */
+            line-height: 0.8;
+            padding-right: 8px;
+            font-family: 'Noto Serif SC', serif;
+            color: var(--primary-accent);
+        }
+
+        /* Mermaid styling */
+        .mermaid {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow-x: auto; /* Ensure horizontal scroll for large diagrams */
+        }
+        html.dark .mermaid-svg {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+        html.light .mermaid-svg {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+        .mermaid path {
+            stroke: var(--primary-accent);
+        }
+        .mermaid .node rect, .mermaid .node circle, .mermaid .node ellipse, .mermaid .node polygon {
+            fill: var(--card-bg);
+            stroke: var(--primary-accent);
+            stroke-width: 2px;
+        }
+        .mermaid .node text {
+            fill: var(--text-color);
+        }
+        .mermaid .edgeLabels text {
+            fill: var(--text-color);
+        }
+        .mermaid .cluster rect {
+            fill: var(--card-bg);
+            stroke: var(--primary-accent);
+        }
+        .mermaid .cluster text {
+            fill: var(--text-color);
+        }
+
+        /* Responsive Table */
+        .responsive-table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .responsive-table {
+            min-width: 600px; /* Ensure table doesn't shrink too much */
+            width: 100%;
+        }
+        .responsive-table th, .responsive-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .responsive-table th {
+            background-color: var(--card-bg);
+            font-weight: 600;
+        }
+        .responsive-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Blockquote style */
+        blockquote {
+            border-left: 4px solid var(--blockquote-border);
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            color: var(--text-color);
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen flex flex-col">
+        <!-- Header / Theme Toggle -->
+        <header class="p-4 flex justify-between items-center z-10 sticky top-0 bg-opacity-90 backdrop-filter backdrop-blur-lg" style="background-color: var(--bg-color);">
+            <div class="text-xl font-bold font-serif">
+                <span class="text-white">政策</span><span class="text-primary-accent">洞察</span>
+            </div>
+            <button id="theme-toggle" class="theme-toggle-btn px-4 py-2 rounded-full flex items-center space-x-2 text-sm">
+                <i class="fas fa-sun hidden dark:inline-block"></i>
+                <i class="fas fa-moon inline-block dark:hidden"></i>
+                <span>模式切换</span>
+            </button>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero-section text-center py-20 px-4 md:px-8 lg:px-16">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight text-white drop-shadow-lg">
+                深度解读 | 上交所《资深专业机构投资者》指引
+            </h1>
+            <p class="text-xl sm:text-2xl font-light text-gray-300 mb-8">
+                政策要点、市场影响与应对策略
+            </p>
+            <p class="text-sm text-gray-400 mb-2">
+                发布日期: 2025年7月13日 | 分析来源: 专业金融研究团队
+            </p>
+            <div class="max-w-3xl mx-auto mt-10 p-6 rounded-lg text-left" style="background-color: var(--card-bg); border: 1px solid var(--primary-accent);">
+                <p class="text-lg leading-relaxed text-gray-200">
+                    <span class="drop-cap">该</span>指引是上交所为落实新《证券法》及注册制改革要求，完善差异化发行审核机制的重要配套规则，旨在通过界定“资深专业机构投资者”类别，优化发行定价、信息披露等环节的监管要求。
+                </p>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <main class="container mx-auto p-4 md:p-8 lg:p-12 flex-grow">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                <!-- Section 1: Policy Positioning & Background -->
+                <div class="lg:col-span-2">
+                    <h2 class="text-3xl font-semibold mb-6 text-primary-accent flex items-center">
+                        <i class="fas fa-bullhorn mr-3"></i> 一、政策定位与背景
+                    </h2>
+                    <div class="card p-6 rounded-lg shadow-lg mb-6">
+                        <h3 class="text-xl font-medium mb-3 text-gray-100">1. 上位法依据</h3>
+                        <p class="leading-relaxed text-gray-300">
+                            基于2025年4月修订的《上海证券交易所上市公司证券发行上市审核规则》
+                            <a href="#footnote-knowledge" class="text-link-color hover:underline" title="点击查看知识库关键词">[知识库]</a>
+                            及新“国九条”要求，强化对专业投资者的分类管理。
+                        </p>
+                    </div>
+                    <div class="card p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-medium mb-3 text-gray-100">2. 政策目标</h3>
+                        <p class="leading-relaxed text-gray-300">
+                            引导市场理性定价，减少信息不对称，提升发行效率。通过区分“资深专业机构投资者”，
+                            <strong class="text-primary-accent">在询价、配售、信息披露等方面实施差异化安排</strong>
+                            （如简化披露内容、优化申购流程）
+                            <a href="#footnote-knowledge" class="text-link-color hover:underline" title="点击查看知识库关键词">[知识库]</a>。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Data Visualization: Policy Framework -->
+                <div class="lg:col-span-1 flex items-center justify-center">
+                    <div class="w-full">
+                        <h3 class="text-xl font-semibold mb-4 text-primary-accent text-center">政策框架概览</h3>
+                        <div class="mermaid">
+                            graph TD
+                                A[新《证券法》 & 注册制改革] --&gt; B(新国九条)
+                                B --&gt; C(完善差异化发行审核机制)
+                                C --&gt; D[&lt;b&gt;《资深专业机构投资者》指引&lt;/b&gt;]
+
+                                D --&gt; E[界定标准]
+                                E --&gt; E1(资质要求)
+                                E --&gt; E2(投资门槛)
+
+                                D --&gt; F[差异化安排]
+                                F --&gt; F1(简化信息披露)
+                                F --&gt; F2(定价机制优化)
+                                F --&gt; F3(审核绿色通道)
+
+                                D --&gt; G[义务与责任]
+                                G --&gt; G1(长期持股承诺)
+                                G --&gt; G2(投后管理责任)
+
+                                style D fill:#00C4FF,stroke:#00C4FF,stroke-width:2px,color:#FFF
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Core Rule Highlights -->
+            <section class="mb-12">
+                <h2 class="text-3xl font-semibold mb-6 text-primary-accent flex items-center">
+                    <i class="fas fa-lightbulb mr-3"></i> 二、核心规则要点<span class="text-sm ml-2 text-gray-400">(基于公开信息推断)</span>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-medium mb-3 text-gray-100">1. “资深专业机构投资者”界定标准</h3>
+                        <ul class="list-none space-y-3 text-gray-300">
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i> <strong class="text-primary-accent">资质要求</strong>：需满足以下条件之一：
+                                <ul class="list-disc list-inside ml-4 mt-2 text-sm">
+                                    <li>资产管理规模≥100亿元（如公募基金、保险资管）</li>
+                                    <li>具备5年以上股权投资经验的专业机构（如PE/VC、产业基金）</li>
+                                    <li>上交所认定的其他专业投资者（如QFII/RQFII）</li>
+                                </ul>
+                            </li>
+                            <li><i class="fas fa-dollar-sign text-green-500 mr-2"></i> <strong class="text-primary-accent">投资门槛</strong>：最低认购单位为<strong class="text-primary-accent">1,000万元</strong>。</li>
+                        </ul>
+                    </div>
+                    <div class="card p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-medium mb-3 text-gray-100">2. 差异化监管安排</h3>
+                        <ul class="list-none space-y-3 text-gray-300">
+                            <li><i class="fas fa-file-alt text-blue-400 mr-2"></i> <strong class="text-primary-accent">简化信息披露</strong>：定向披露可省略部分基础内容。</li>
+                            <li><i class="fas fa-chart-bar text-blue-400 mr-2"></i> <strong class="text-primary-accent">定价机制优化</strong>：允许参与累计投标询价，享有更高配售比例。</li>
+                            <li><i class="fas fa-rocket text-blue-400 mr-2"></i> <strong class="text-primary-accent">审核绿色通道</strong>：参与项目可能适用“快速审核”机制。</li>
+                        </ul>
+                    </div>
+                    <div class="card p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-medium mb-3 text-gray-100">3. 义务与责任</h3>
+                        <ul class="list-none space-y-3 text-gray-300">
+                            <li><i class="fas fa-handshake text-yellow-400 mr-2"></i> <strong class="text-primary-accent">长期持股承诺</strong>：需签署（如锁定≥6个月）。</li>
+                            <li><i class="fas fa-tasks text-yellow-400 mr-2"></i> <strong class="text-primary-accent">投后管理责任</strong>：承担更严格责任（如参与公司治理、定期披露持仓动向）。</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Impact on Market Participants -->
+            <section class="mb-12">
+                <h2 class="text-3xl font-semibold mb-6 text-primary-accent flex items-center">
+                    <i class="fas fa-chart-line mr-3"></i> 三、对市场参与方的影响
+                </h2>
+                <div class="responsive-table-wrapper card p-6 rounded-lg shadow-lg">
+                    <table class="responsive-table w-full text-gray-300">
+                        <thead>
+                            <tr>
+                                <th class="font-bold text-gray-100">主体</th>
+                                <th class="font-bold text-gray-100">影响分析</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong class="text-primary-accent">发行人/上市公司</strong></td>
+                                <td>可降低面向资深投资者的沟通成本，提升融资效率；但需加强针对性信息披露。</td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-primary-accent">专业投资机构</strong></td>
+                                <td>头部机构获政策红利（如配售优势），中小机构需提升资质以争取分类认定。</td>
+                            </tr>
+                            <tr>
+                                <td><strong class="text-primary-accent">中介机构</strong></td>
+                                <td>投行需调整发行方案设计，律所/会所需核查投资者资质。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Section 4: Information Gaps & Risk Warning -->
+            <section class="mb-12">
+                <h2 class="text-3xl font-semibold mb-6 text-primary-accent flex items-center">
+                    <i class="fas fa-exclamation-triangle mr-3"></i> 四、现存信息缺口与风险提示
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="card p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-medium mb-3 text-gray-100">1. 文件未全文公开</h3>
+                        <p class="leading-relaxed text-gray-300">
+                            上交所官网仅发布通知
+                            <a href="#footnote-1" class="text-link-color hover:underline" title="点击查看来源">[1]</a>，
+                            未公开指引正文（当前链接不可访问），具体条款（如过渡期安排、违规处罚）尚不明确。
+                        </p>
+                    </div>
+                    <div class="card p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-medium mb-3 text-gray-100">2. 执行细则待落地</h3>
+                        <p class="leading-relaxed text-gray-300">
+                            配套操作指南（如资质申请流程、差异披露标准）尚未发布，需关注后续指引。
+                        </p>
+                    </div>
+                </div>
+                <blockquote class="mt-8 text-lg text-gray-300">
+                    <i class="fas fa-exclamation-circle text-secondary-accent mr-2"></i>
+                    <strong class="text-secondary-accent">注</strong>：以上分析基于公开片段信息及政策连续性推断，具体以官方发布的指引全文为准。若需精准合规建议，请提供更多应用场景。
+                </blockquote>
+            </section>
+
+            <!-- Section 5: Recommended Actions -->
+            <section class="mb-12">
+                <h2 class="text-3xl font-semibold mb-6 text-primary-accent flex items-center">
+                    <i class="fas fa-clipboard-list mr-3"></i> 五、建议行动
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="card p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-medium mb-3 text-gray-100 flex items-center"><i class="fas fa-search mr-2 text-primary-accent"></i> 获取政策原文</h3>
+                        <p class="leading-relaxed text-gray-300">
+                            通过上交所官方申请渠道（如
+                            <a href="https://www.sse.com.cn/" target="_blank" class="text-link-color hover:underline">一网通办平台 <i class="fas fa-external-link-alt text-xs ml-1"></i></a>）或监管合规系统调取全文。
+                        </p>
+                    </div>
+                    <div class="card p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-medium mb-3 text-gray-100 flex items-center"><i class="fas fa-bell mr-2 text-primary-accent"></i> 监测配套规则</h3>
+                        <p class="leading-relaxed text-gray-300">
+                            重点关注《发行上市审核业务指南》的后续修订（如自查表更新
+                            <a href="#footnote-8" class="text-link-color hover:underline" title="点击查看来源">[8]</a>）。
+                        </p>
+                    </div>
+                    <div class="card p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-medium mb-3 text-gray-100 flex items-center"><i class="fas fa-award mr-2 text-primary-accent"></i> 评估机构资质</h3>
+                        <p class="leading-relaxed text-gray-300">
+                            投资机构应比对自身条件，准备资质认定材料（如规模证明、投资记录）。
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Further Reading -->
+            <section class="mb-12">
+                <h2 class="text-3xl font-semibold mb-6 text-primary-accent flex items-center">
+                    <i class="fas fa-book-reader mr-3"></i> 延伸阅读
+                </h2>
+                <div class="card p-6 rounded-lg shadow-lg">
+                    <ul class="list-none space-y-4 text-gray-300">
+                        <li>
+                            <i class="fas fa-circle text-xs text-primary-accent mr-3"></i>
+                            <a href="https://www.npc.gov.cn/npc/c30834/201912/7504f76269154f9a888c3a50d2681577.shtml" target="_blank" class="text-link-color hover:underline">
+                                《中华人民共和国证券法》修订本 (最新版) <i class="fas fa-external-link-alt text-xs ml-1"></i>
+                            </a>
+                            <p class="text-sm text-gray-400 ml-5">理解政策制定的法律基础。</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-circle text-xs text-primary-accent mr-3"></i>
+                            <a href="http://www.csrc.gov.cn/csrc/c100028/c2000003/c2000003004/c20000030040003/content_30040003.shtml" target="_blank" class="text-link-color hover:underline">
+                                中国证监会关于全面实行股票发行注册制改革相关制度规则的通知 <i class="fas fa-external-link-alt text-xs ml-1"></i>
+                            </a>
+                            <p class="text-sm text-gray-400 ml-5">注册制改革的核心文件，了解制度框架。</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-circle text-xs text-primary-accent mr-3"></i>
+                            <a href="https://www.sse.com.cn/lawandrules/sselawsrules/stocks/review/" target="_blank" class="text-link-color hover:underline">
+                                上海证券交易所相关发行上市审核规则汇编 <i class="fas fa-external-link-alt text-xs ml-1"></i>
+                            </a>
+                            <p class="text-sm text-gray-400 ml-5">跟踪上交所最新细则和指引。</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-circle text-xs text-primary-accent mr-3"></i>
+                            <a href="https://www.cfmmc.com/report/1713437191000" target="_blank" class="text-link-color hover:underline">
+                                《新“国九条”解读》相关研究报告 (可参考中国期货业协会报告) <i class="fas fa-external-link-alt text-xs ml-1"></i>
+                            </a>
+                            <p class="text-sm text-gray-400 ml-5">深入理解新“国九条”对资本市场的深远影响。</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-circle text-xs text-primary-accent mr-3"></i>
+                            <a href="https://kns.cnki.net/kcms2/article/abstract?v=JmYxZjlYQXc4ZVgxTHhXMTFGQ1VSN3JkRzRITkhNcWlyRzRITkhNcWlyRzRIY3JId1QycW5WcnZGM09iWnJHNEhOSE1xaXJHNEhOSE1xaWJHNEhOSE1xaWJHNEhOSHJhYkpYNTN5S05kcmZuSnVYYy9pSmxVb2Y0TnIzR2xEbDFwWWRpNHFUaHJDSDlON1JqWmpEZWZwclVqQkYyMjVIOWQmbXU9NTQ2NTIyNiYvQVY5SmhJSHQ3S05hY3J4SVA5NlczTjZtL1pE" target="_blank" class="text-link-color hover:underline">
+                                《机构投资者行为与市场效率》学术论文 (可参考知网相关论文) <i class="fas fa-external-link-alt text-xs ml-1"></i>
+                            </a>
+                            <p class="text-sm text-gray-400 ml-5">了解资深专业机构投资者在市场中的角色和重要性。</p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Footnotes -->
+            <section id="footnotes" class="mt-12 text-sm text-gray-400 border-t pt-8" style="border-color: var(--border-color);">
+                <h3 class="text-xl font-medium mb-4 text-primary-accent">参考信息来源</h3>
+                <ul class="list-disc list-inside space-y-2">
+                    <li id="footnote-knowledge">
+                        <span class="text-primary-accent">[知识库]</span> 知识库关键词：资深专业机构投资者、投行业务、分类管理机制
+                    </li>
+                    <li id="footnote-1">
+                        <span class="text-primary-accent">[1]</span> 关于发布《上海证券交易所发行上市审核规则适用指引第8号——资深专业机构投资者》的通知: <a href="https://www.sse.com.cn/home/webupdate/" target="_blank" class="text-link-color hover:underline">https://www.sse.com.cn/home/webupdate/ <i class="fas fa-external-link-alt text-xs ml-1"></i></a>
+                    </li>
+                    <li id="footnote-3">
+                        <span class="text-primary-accent">[3]</span> 关于发布《上海证券交易所上市公司证券发行上市审核规则（2025年4月修订）》的通知: <a href="https://www.sse.com.cn/lawandrules/sselawsrules/stocks/review/refinancing/c/c_20250425_10777744.shtml" target="_blank" class="text-link-color hover:underline">https://www.sse.com.cn/lawandrules/sselawsrules/stocks/review/refinancing/c/c_20250425_10777744.shtml <i class="fas fa-external-link-alt text-xs ml-1"></i></a>
+                    </li>
+                    <li id="footnote-8">
+                        <span class="text-primary-accent">[8]</span> 发行上市审核业务指南第4号修订通知: <a href="https://www.sse.com.cn/lawandrules/guide/stock/fxsssh/c/c_20250516_10779211.shtml" target="_blank" class="text-link-color hover:underline">https://www.sse.com.cn/lawandrules/guide/stock/fxsssh/c/c_20250516_10779211.shtml <i class="fas fa-external-link-alt text-xs ml-1"></i></a>
+                    </li>
+                    <li id="footnote-9">
+                        <span class="text-primary-accent">[9]</span> 公司债发行案例：专业投资者认购门槛: <a href="https://www.hkexnews.hk/listedco/listconews/sehk/2025/0219/2025021900833_c.pdf" target="_blank" class="text-link-color hover:underline">https://www.hkexnews.hk/listedco/listconews/sehk/2025/0219/2025021900833_c.pdf <i class="fas fa-external-link-alt text-xs ml-1"></i></a>
+                    </li>
+                </ul>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="py-8 text-center text-gray-500 text-sm border-t" style="border-color: var(--border-color); background-color: var(--card-bg);">
+            <p>&copy; 2025 金融政策研究中心. 版权所有.</p>
+        </footer>
+    </div>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({ startOnLoad: true });
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Set initial theme based on system preference or localStorage
+        function setInitialTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                htmlElement.className = savedTheme;
+            } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                htmlElement.className = 'dark';
+            } else {
+                htmlElement.className = 'light';
+            }
+            updateToggleButtonIcon();
+        }
+
+        // Update button icon based on current theme
+        function updateToggleButtonIcon() {
+            const isDarkMode = htmlElement.classList.contains('dark');
+            const sunIcon = themeToggleBtn.querySelector('.fa-sun');
+            const moonIcon = themeToggleBtn.querySelector('.fa-moon');
+
+            if (sunIcon && moonIcon) {
+                if (isDarkMode) {
+                    sunIcon.classList.remove('hidden');
+                    moonIcon.classList.add('hidden');
+                } else {
+                    sunIcon.classList.add('hidden');
+                    moonIcon.classList.remove('hidden');
+                }
+            }
+        }
+
+        // Toggle theme on button click
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            updateToggleButtonIcon();
+        });
+
+        // Run on page load
+        setInitialTheme();
+
+        // Optional: Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>
+```
