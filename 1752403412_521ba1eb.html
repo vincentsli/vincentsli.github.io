@@ -1,0 +1,745 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上交所重磅发布：资深专业机构投资者指引深度解读</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Fonts */
+        :root {
+            --font-serif-sc: 'Noto Serif SC', 'Source Han Serif SC', 'FangSong', 'STFangsong', 'Times New Roman', serif;
+            --font-sans-sc: 'Noto Sans SC', 'Source Han Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", Simsun, sans-serif;
+            
+            /* Dark Mode Variables */
+            --primary-dark-bg: hsl(220, 10%, 10%); /* Very dark blue-gray */
+            --secondary-dark-bg: hsl(220, 10%, 15%); /* Slightly lighter dark background */
+            --text-light: hsl(210, 20%, 90%); /* Off-white for main text */
+            --text-secondary-light: hsl(210, 30%, 75%); /* Lighter gray for secondary text */
+            --accent-blue: hsl(200, 70%, 50%); /* Vibrant blue for accents */
+            --accent-gold: hsl(40, 70%, 60%); /* Subtle gold for highlights */
+
+            /* Light Mode Variables */
+            --primary-light-bg: hsl(0, 0%, 98%); /* Near white */
+            --secondary-light-bg: hsl(0, 0%, 100%); /* Pure white */
+            --text-dark: hsl(220, 10%, 20%); /* Dark gray for main text */
+            --text-secondary-dark: hsl(220, 10%, 35%); /* Lighter dark gray for secondary text */
+        }
+
+        /* Dark Mode defaults */
+        body {
+            font-family: var(--font-sans-sc);
+            background-color: var(--primary-dark-bg);
+            color: var(--text-light);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-serif-sc);
+            color: var(--accent-blue);
+        }
+
+        /* Tailwind classes using CSS variables */
+        .text-accent-blue { color: var(--accent-blue); }
+        .bg-secondary-dark { background-color: var(--secondary-dark-bg); }
+        .text-text-secondary { color: var(--text-secondary-light); }
+        .border-accent-blue { border-color: var(--accent-blue); }
+
+        /* Light Mode overrides */
+        html.light body {
+            background-color: var(--primary-light-bg);
+            color: var(--text-dark);
+        }
+        html.light h1, html.light h2, html.light h3, html.light h4, html.light h5, html.light h6 {
+            color: var(--accent-blue);
+        }
+        html.light .text-accent-blue { color: var(--accent-blue); }
+        html.light .bg-secondary-dark { background-color: var(--secondary-light-bg); }
+        html.light .text-text-secondary { color: var(--text-secondary-dark); }
+        html.light .border-accent-blue { border-color: var(--accent-blue); }
+        /* Specific dark mode Tailwind classes that need light mode overrides */
+        html.light .dark\:text-text-light { color: var(--text-dark); }
+        html.light .dark\:bg-secondary-dark { background-color: var(--secondary-light-bg); }
+        html.light .dark\:border-accent-blue { border-color: var(--accent-blue); }
+        html.light .dark\:shadow-lg { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+        html.light .dark\:hover\:bg-gray-700:hover { background-color: #f0f0f0; } /* Subtle hover for light mode */
+        html.light .dark\:bg-gray-800 { background-color: #f9f9f9; }
+
+
+        /* Custom styles for Hero Section */
+        .hero-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://source.unsplash.com/1600x900/?finance,city,abstract,futuristic'); /* Dynamic, abstract background */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 50vh; /* Adjust height for impact */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3); /* Dark overlay */
+            z-index: -1;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(var(--accent-blue), 0.5), 0 0 20px rgba(var(--accent-blue), 0.3); /* Glow effect */
+        }
+
+        .hero-subtitle {
+            font-size: 1.75rem;
+            font-weight: 500;
+            margin-top: 1rem;
+            color: var(--text-light);
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+        }
+
+        /* Mermaid container style */
+        .mermaid-container {
+            background-color: var(--secondary-dark-bg);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            border: 1px solid rgba(var(--accent-blue), 0.3);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        /* Responsive table */
+        .responsive-table-wrapper {
+            overflow-x: auto;
+            margin-top: 1.5rem;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(var(--text-secondary-light), 0.2);
+        }
+
+        .responsive-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        .responsive-table th,
+        .responsive-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(var(--text-secondary-light), 0.1);
+        }
+
+        .responsive-table th {
+            background-color: rgba(var(--accent-blue), 0.1);
+            color: var(--accent-blue);
+            font-weight: 600;
+            position: sticky;
+            top: 0; /* Make header sticky */
+        }
+
+        .responsive-table tbody tr:nth-child(odd) {
+            background-color: rgba(var(--secondary-dark-bg), 0.5);
+        }
+
+        .responsive-table tbody tr:hover {
+            background-color: rgba(var(--accent-blue), 0.15);
+            transition: background-color 0.2s ease;
+        }
+
+        html.light .responsive-table th {
+            background-color: rgba(var(--accent-blue), 0.1);
+            color: var(--accent-blue);
+        }
+        html.light .responsive-table tbody tr:nth-child(odd) {
+            background-color: rgba(var(--primary-light-bg), 0.5);
+        }
+        html.light .responsive-table tbody tr:hover {
+            background-color: rgba(var(--accent-blue), 0.1);
+        }
+
+
+        /* Custom quotes */
+        blockquote {
+            border-left: 4px solid var(--accent-gold);
+            padding-left: 1.5rem;
+            margin-left: 1rem;
+            margin-right: 1rem;
+            font-style: italic;
+            color: var(--text-secondary-light);
+            line-height: 1.75;
+            font-size: 1.05rem;
+        }
+
+        blockquote p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Subtle scroll effect */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Dark/Light Mode Toggle Button */
+        #theme-toggle {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 1000;
+            padding: 0.75rem;
+            border-radius: 9999px; /* Fully rounded */
+            background-color: var(--secondary-dark-bg);
+            border: 1px solid rgba(var(--text-secondary-light), 0.2);
+            color: var(--accent-blue);
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #theme-toggle:hover {
+            background-color: rgba(var(--accent-blue), 0.15);
+            transform: scale(1.05);
+        }
+        html.light #theme-toggle {
+            background-color: var(--primary-light-bg);
+            color: var(--accent-blue);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        html.light #theme-toggle:hover {
+            background-color: rgba(var(--accent-blue), 0.05);
+        }
+
+        /* Refine mermaid styling for dark/light mode */
+        /* These styles will be injected by Mermaid but we can influence them */
+        .mermaid svg {
+            font-family: var(--font-sans-sc) !important;
+        }
+
+        /* Dark Mode Mermaid Styles */
+        html.dark .mermaid .node rect,
+        html.dark .mermaid .node circle,
+        html.dark .mermaid .node polygon {
+            fill: var(--primary-dark-bg) !important;
+            stroke: var(--accent-blue) !important;
+            stroke-width: 2px !important;
+        }
+
+        html.dark .mermaid .edgePath .path {
+            stroke: var(--text-secondary-light) !important;
+        }
+
+        html.dark .mermaid .edgeLabel {
+            background-color: var(--primary-dark-bg) !important;
+            color: var(--text-light) !important;
+        }
+
+        html.dark .mermaid .node text {
+            fill: var(--text-light) !important;
+        }
+
+        html.dark .mermaid .cluster rect {
+            fill: var(--secondary-dark-bg) !important;
+            stroke: var(--text-secondary-light) !important;
+            stroke-dasharray: 5 5 !important;
+        }
+
+        html.dark .mermaid .cluster text {
+            fill: var(--text-light) !important;
+        }
+
+        /* Light Mode Mermaid Overrides */
+        html.light .mermaid .node rect,
+        html.light .mermaid .node circle,
+        html.light .mermaid .node polygon {
+            fill: var(--primary-light-bg) !important;
+            stroke: var(--accent-blue) !important;
+            stroke-width: 2px !important;
+        }
+
+        html.light .mermaid .edgePath .path {
+            stroke: var(--text-dark) !important;
+        }
+
+        html.light .mermaid .edgeLabel {
+            background-color: var(--primary-light-bg) !important;
+            color: var(--text-dark) !important;
+        }
+
+        html.light .mermaid .node text {
+            fill: var(--text-dark) !important;
+        }
+
+        html.light .mermaid .cluster rect {
+            fill: var(--secondary-light-bg) !important;
+            stroke: var(--text-secondary-dark) !important;
+            stroke-dasharray: 5 5 !important;
+        }
+
+        html.light .mermaid .cluster text {
+            fill: var(--text-dark) !important;
+        }
+
+        /* Scrollbar styling for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--primary-dark-bg);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-blue);
+            border-radius: 10px;
+            border: 2px solid var(--primary-dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-gold);
+        }
+
+        html.light ::-webkit-scrollbar-track {
+            background: var(--primary-light-bg);
+        }
+
+        html.light ::-webkit-scrollbar-thumb {
+            background: var(--accent-blue);
+            border: 2px solid var(--primary-light-bg);
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-subtitle {
+                font-size: 1.25rem;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+            h3 {
+                font-size: 1.5rem;
+            }
+            .responsive-table th, .responsive-table td {
+                padding: 0.75rem;
+            }
+            blockquote {
+                margin-left: 0.5rem;
+                margin-right: 0.5rem;
+                padding-left: 1rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <button id="theme-toggle" aria-label="Toggle theme">
+        <i class="fas fa-sun text-xl" id="sun-icon"></i>
+        <i class="fas fa-moon text-xl hidden" id="moon-icon"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <header class="hero-section text-white relative">
+        <div class="container mx-auto px-4 py-20 relative z-10">
+            <h1 class="hero-title font-serif-sc mb-4 animate-on-scroll">
+                上交所重磅发布：资深专业机构投资者指引深度解读
+            </h1>
+            <p class="hero-subtitle font-sans-sc max-w-3xl mx-auto animate-on-scroll delay-150">
+                洞悉新规，赋能资本市场长期健康发展
+            </p>
+            <p class="mt-8 text-lg font-sans-sc max-w-4xl mx-auto text-text-secondary animate-on-scroll delay-300">
+                2025年7月11日，上海证券交易所正式发布《发行上市审核规则适用指引第8号——资深专业机构投资者》，标志着注册制改革的又一关键深化。本指引旨在引导长期资本入市，遏制短期套利，并进一步压实中介机构责任，对中国资本市场的发展具有深远影响。
+            </p>
+            <span class="absolute bottom-4 right-4 text-sm text-gray-400">Published: 2025-07-13</span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-16 max-w-6xl">
+
+        <section class="mb-12 animate-on-scroll">
+            <h2 class="text-3xl font-serif-sc mb-6 flex items-center">
+                <i class="fas fa-lightbulb text-accent-blue mr-3"></i>
+                一、出台背景与目的
+            </h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-secondary-dark p-8 rounded-lg shadow-lg border border-accent-blue border-opacity-20 hover:shadow-xl transform hover:-translate-y-1 transition duration-300">
+                    <h3 class="text-2xl font-serif-sc mb-4 text-accent-blue flex items-center">
+                        <i class="fas fa-link text-lg mr-2"></i>政策衔接
+                    </h3>
+                    <p class="text-text-light leading-relaxed">
+                        配合科创板深化改革的配套措施，落实证监会关于优化发行审核监管的要求（如强化专业投资者市场定价功能）。
+                    </p>
+                </div>
+                <div class="bg-secondary-dark p-8 rounded-lg shadow-lg border border-accent-blue border-opacity-20 hover:shadow-xl transform hover:-translate-y-1 transition duration-300">
+                    <h3 class="text-2xl font-serif-sc mb-4 text-accent-blue flex items-center">
+                        <i class="fas fa-hand-point-right text-lg mr-2"></i>问题导向
+                    </h3>
+                    <p class="text-text-light leading-relaxed">
+                        解决IPO/再融资项目中机构投资者突击入股、短期套利、代持等问题，压实中介机构核查责任。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12 animate-on-scroll">
+            <h2 class="text-3xl font-serif-sc mb-6 flex items-center">
+                <i class="fas fa-cogs text-accent-blue mr-3"></i>
+                二、核心规则要点
+            </h2>
+
+            <div class="bg-secondary-dark p-8 rounded-lg shadow-lg border border-accent-blue border-opacity-20 mb-8">
+                <h3 class="text-2xl font-serif-sc mb-4 text-accent-blue flex items-center">
+                    <i class="fas fa-user-tie text-lg mr-2"></i>1. 定义“资深专业机构投资者”
+                </h3>
+                <p class="text-text-light leading-relaxed mb-4">需同时满足以下条件：</p>
+                <blockquote>
+                    <p><i class="fas fa-check-circle text-accent-blue mr-2"></i><strong>资质要求</strong>：持牌金融机构（公募基金、券商资管、保险资管等）、备案私募基金管理人、QFII/RQFII等。</p>
+                    <p><i class="fas fa-check-circle text-accent-blue mr-2"></i><strong>投资规模门槛</strong>：</p>
+                    <ul class="list-disc list-inside ml-8 text-text-light">
+                        <li><i class="fas fa-coins text-accent-gold mr-2"></i><strong>持续持有发行人股份≥3%</strong>，或</li>
+                        <li><i class="fas fa-chart-line text-accent-gold mr-2"></i><strong>持有市值≥5亿元</strong>（以公告日前20个交易日平均市值计算）。</li>
+                    </ul>
+                    <p><i class="fas fa-check-circle text-accent-blue mr-2"></i><strong>持股期限</strong>：截至发行申请受理日，<strong>连续持有股份≥12个月</strong>（排除突击入股）。</p>
+                </blockquote>
+            </div>
+
+            <div class="bg-secondary-dark p-8 rounded-lg shadow-lg border border-accent-blue border-opacity-20 mb-8">
+                <h3 class="text-2xl font-serif-sc mb-4 text-accent-blue flex items-center">
+                    <i class="fas fa-search-dollar text-lg mr-2"></i>2. 穿透核查要求
+                </h3>
+                <blockquote>
+                    <p><i class="fas fa-level-down-alt text-accent-gold mr-2"></i>对多层嵌套产品，保荐机构需穿透至 <strong>最终出资人</strong>（自然人、国资、上市公司等）核查资金来源与合规性。</p>
+                    <p><i class="fas fa-ban text-red-500 mr-2"></i>明确禁止通过 <strong>股份代持、收益权转让</strong> 等方式规避资质审查。</p>
+                </blockquote>
+            </div>
+
+            <div class="bg-secondary-dark p-8 rounded-lg shadow-lg border border-accent-blue border-opacity-20 mb-8">
+                <h3 class="text-2xl font-serif-sc mb-4 text-accent-blue flex items-center">
+                    <i class="fas fa-handshake text-lg mr-2"></i>3. 审核程序便利化
+                </h3>
+                <blockquote>
+                    <p><i class="fas fa-stream text-accent-gold mr-2"></i>符合定义的投资者参与战略配售或询价报价，可简化说明文件（如免于提交部分尽调底稿）。</p>
+                    <p><i class="fas fa-calculator text-accent-gold mr-2"></i>其认购意向书或投资分析报告可作为发行定价的参考依据。</p>
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- Mermaid Diagram for Visualization -->
+        <section class="mb-12 animate-on-scroll">
+            <h2 class="text-3xl font-serif-sc mb-6 flex items-center">
+                <i class="fas fa-project-diagram text-accent-blue mr-3"></i>
+                资深专业机构投资者认定核心要素图
+            </h2>
+            <div class="mermaid-container">
+                <div class="mermaid">
+                    graph TD
+                        A[《资深专业机构投资者指引》]<style A fill:var(--accent-blue),stroke:var(--accent-blue),stroke-width:2px; font-weight:bold; color:var(--text-light);</style>
+                        A --- B{资深专业机构投资者认定}
+                        B -- 需同时满足 --> C(资质要求)<style C fill:var(--secondary-dark-bg),stroke:var(--accent-blue),stroke-width:2px; color:var(--text-light);</style>
+                        B -- 需同时满足 --> D(投资规模门槛)<style D fill:var(--secondary-dark-bg),stroke:var(--accent-blue),stroke-width:2px; color:var(--text-light);</style>
+                        B -- 需同时满足 --> E(持股期限)<style E fill:var(--secondary-dark-bg),stroke:var(--accent-blue),stroke-width:2px; color:var(--text-light);</style>
+
+                        C --- C1[持牌金融机构 (公募、券商资管、保险资管等)]<style C1 fill:var(--primary-dark-bg),stroke:var(--text-secondary-light); color:var(--text-light);</style>
+                        C --- C2[备案私募基金管理人]<style C2 fill:var(--primary-dark-bg),stroke:var(--text-secondary-light); color:var(--text-light);</style>
+                        C --- C3[QFII/RQFII]<style C3 fill:var(--primary-dark-bg),stroke:var(--text-secondary-light); color:var(--text-light);</style>
+
+                        D --- D1[持续持有发行人股份 ≥ 3%]<style D1 fill:var(--primary-dark-bg),stroke:var(--text-secondary-light); color:var(--text-light);</style>
+                        D --- D2[持有市值 ≥ 5亿元 (公告日前20个交易日平均)]<style D2 fill:var(--primary-dark-bg),stroke:var(--text-secondary-light); color:var(--text-light);</style>
+
+                        E --- E1[连续持股 ≥ 12个月 (截至受理日)]<style E1 fill:var(--primary-dark-bg),stroke:var(--text-secondary-light); color:var(--text-light);</style>
+
+                        subgraph 政策意图
+                            F[引导长期资本入市] --> G[注册制配套深化]
+                            G --> H[监管精细化]
+                        end
+                        A -- 促进 --> F
+                        A -- 支撑 --> G
+                        A -- 强化 --> H
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12 animate-on-scroll">
+            <h2 class="text-3xl font-serif-sc mb-6 flex items-center">
+                <i class="fas fa-chart-bar text-accent-blue mr-3"></i>
+                三、对市场参与主体的影响
+            </h2>
+            <div class="responsive-table-wrapper dark:border-gray-700">
+                <table class="responsive-table dark:bg-gray-800 dark:text-gray-200">
+                    <thead>
+                        <tr>
+                            <th class="dark:text-accent-blue dark:bg-gray-900">主体</th>
+                            <th class="dark:text-accent-blue dark:bg-gray-900">影响分析</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>发行人</strong> <i class="fas fa-building text-accent-gold ml-2"></i></td>
+                            <td>
+                                <span class="block">利好长期合作机构：绑定符合资质的投资者可增强市场信心。</span>
+                                <span class="block text-sm text-text-secondary">但需提前规划股权结构（避免短期入股导致的审核障碍）。</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>投行/保荐机构</strong> <i class="fas fa-chart-pie text-accent-gold ml-2"></i></td>
+                            <td>
+                                <span class="block">尽调责任加重：需建立投资者穿透核查机制，重点关注持股期限与资金来源。</span>
+                                <span class="block text-sm text-text-secondary">需更新尽调清单及工作底稿标准。</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>机构投资者</strong> <i class="fas fa-users text-accent-gold ml-2"></i></td>
+                            <td>
+                                <span class="block">分化效应明显：</span>
+                                <ul class="list-disc list-inside ml-4 text-text-light">
+                                    <li><i class="fas fa-check-circle text-green-500 mr-1"></i><strong>合规机构</strong>：享受审核便利，提升报价竞争力。</li>
+                                    <li><i class="fas fa-times-circle text-red-500 mr-1"></i><strong>短期套利型机构</strong>：需调整投资策略（如延长锁定期）。</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="mb-12 animate-on-scroll">
+            <h2 class="text-3xl font-serif-sc mb-6 flex items-center">
+                <i class="fas fa-bullseye text-accent-blue mr-3"></i>
+                四、政策意图与行业趋势
+            </h2>
+            <ul class="space-y-4 text-text-light leading-relaxed text-lg">
+                <li class="flex items-start">
+                    <i class="fas fa-arrow-right text-accent-gold mr-3 mt-1 text-base"></i>
+                    <div>
+                        <strong>引导长期资本入市</strong>：通过门槛设置鼓励机构专注企业长期价值，削弱Pre-IPO套利动机。
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-arrow-right text-accent-gold mr-3 mt-1 text-base"></i>
+                    <div>
+                        <strong>注册制配套深化</strong>：与科创板“未盈利企业上市”“科创成长层”等改革协同，提升专业投资者在定价环节的作用。
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-arrow-right text-accent-gold mr-3 mt-1 text-base"></i>
+                    <div>
+                        <strong>监管精细化</strong>：对“伪专业机构”形成挤出效应，推动一级市场投资行为规范化。
+                    </div>
+                </li>
+            </ul>
+            <div class="mt-8 p-6 bg-secondary-dark rounded-lg border border-accent-blue border-opacity-20 flex items-center">
+                <i class="fas fa-exclamation-triangle text-accent-gold text-2xl mr-4"></i>
+                <p class="text-text-secondary text-base">
+                    <strong>提示</strong>：根据文件生效时间（2025年7月13日），新申报的IPO/再融资项目需直接适用此指引，已受理项目可能需补充核查说明。如需操作细则（如穿透核查方法、备案材料清单），建议查阅上交所官网全文或咨询合规部门。
+                </p>
+            </div>
+        </section>
+
+        <!-- Further Reading -->
+        <section class="mb-12 animate-on-scroll">
+            <h2 class="text-3xl font-serif-sc mb-6 flex items-center">
+                <i class="fas fa-book-open text-accent-blue mr-3"></i>
+                延伸阅读
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-secondary-dark p-6 rounded-lg shadow-md border border-accent-blue border-opacity-20 flex flex-col justify-between hover:shadow-xl transform hover:-translate-y-1 transition duration-300">
+                    <div>
+                        <h3 class="text-xl font-serif-sc text-accent-blue mb-2">《聪明的投资者》</h3>
+                        <p class="text-text-secondary text-sm mb-3">by 本杰明·格雷厄姆</p>
+                        <p class="text-text-light text-base leading-relaxed">价值投资的圣经，强调长期持有和安全边际，与新规引导长期投资的理念高度契合。</p>
+                    </div>
+                    <a href="https://www.amazon.cn/dp/B002B4N3K6" target="_blank" class="mt-4 text-accent-blue hover:text-accent-gold flex items-center">
+                        了解更多 <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                    </a>
+                </div>
+                <div class="bg-secondary-dark p-6 rounded-lg shadow-md border border-accent-blue border-opacity-20 flex flex-col justify-between hover:shadow-xl transform hover:-translate-y-1 transition duration-300">
+                    <div>
+                        <h3 class="text-xl font-serif-sc text-accent-blue mb-2">《战胜华尔街》</h3>
+                        <p class="text-text-secondary text-sm mb-3">by 彼得·林奇</p>
+                        <p class="text-text-light text-base leading-relaxed">一位杰出基金经理的投资哲学和方法，帮助理解机构投资者如何在市场中寻找机会。</p>
+                    </div>
+                    <a href="https://www.amazon.cn/dp/B005H24L7K" target="_blank" class="mt-4 text-accent-blue hover:text-accent-gold flex items-center">
+                        了解更多 <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                    </a>
+                </div>
+                <div class="bg-secondary-dark p-6 rounded-lg shadow-md border border-accent-blue border-opacity-20 flex flex-col justify-between hover:shadow-xl transform hover:-translate-y-1 transition duration-300">
+                    <div>
+                        <h3 class="text-xl font-serif-sc text-accent-blue mb-2">《穿透：中国股权投资实务》</h3>
+                        <p class="text-text-secondary text-sm mb-3">by 梁爽 等</p>
+                        <p class="text-text-light text-base leading-relaxed">深入剖析中国股权投资的实际操作、风险控制与合规要求，与新规的穿透核查要求密切相关。</p>
+                    </div>
+                    <a href="https://book.douban.com/subject/35349580/" target="_blank" class="mt-4 text-accent-blue hover:text-accent-gold flex items-center">
+                        了解更多 <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                    </a>
+                </div>
+                <div class="bg-secondary-dark p-6 rounded-lg shadow-md border border-accent-blue border-opacity-20 flex flex-col justify-between hover:shadow-xl transform hover:-translate-y-1 transition duration-300">
+                    <div>
+                        <h3 class="text-xl font-serif-sc text-accent-blue mb-2">《中国资本市场改革》</h3>
+                        <p class="text-text-secondary text-sm mb-3">by 吴晓求 等</p>
+                        <p class="text-text-light text-base leading-relaxed">探讨中国资本市场发展历程、改革方向与制度建设，有助于理解监管政策的宏观背景。</p>
+                    </div>
+                    <a href="https://book.douban.com/subject/35760840/" target="_blank" class="mt-4 text-accent-blue hover:text-accent-gold flex items-center">
+                        了解更多 <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                    </a>
+                </div>
+                <div class="bg-secondary-dark p-6 rounded-lg shadow-md border border-accent-blue border-opacity-20 flex flex-col justify-between hover:shadow-xl transform hover:-translate-y-1 transition duration-300">
+                    <div>
+                        <h3 class="text-xl font-serif-sc text-accent-blue mb-2">《机构投资者（年度）报告》</h3>
+                        <p class="text-text-secondary text-sm mb-3">by 中国基金业协会 / 其他权威机构</p>
+                        <p class="text-text-light text-base leading-relaxed">了解中国机构投资者发展现状、规模结构、投资行为及面临挑战的权威数据与分析。</p>
+                    </div>
+                    <a href="https://www.amac.org.cn/yjcg/yjjb/" target="_blank" class="mt-4 text-accent-blue hover:text-accent-gold flex items-center">
+                        了解更多 <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footnotes / References -->
+        <section class="mt-16 text-text-secondary text-sm border-t border-accent-blue border-opacity-20 pt-8 animate-on-scroll">
+            <h3 class="text-lg font-serif-sc mb-4 text-accent-blue">参考文献：</h3>
+            <ol class="list-decimal list-outside ml-6 space-y-2">
+                <li><span class="font-bold">上交所官方文件：</span><a href="https://www.sse.com.cn/lawandrules/sselawsrules/stocks/review/firstepisode/c/c_20250711_10784558.shtml" target="_blank" class="text-accent-blue hover:underline">《发行上市审核规则适用指引第8号》</a></li>
+                <li><span class="font-bold">上交所：</span><a href="https://www.sse.com.cn/lawandrules/sselawsrules/latest/" target="_blank" class="text-accent-blue hover:underline">最新规则发布目录</a></li>
+                <li><span class="font-bold">每经网：</span><a href="https://www.nbd.com.cn/articles/2025-07-13/3942350.html" target="_blank" class="text-accent-blue hover:underline">资深专业机构投资者认定标准细化</a></li>
+                <li><span class="font-bold">第一财经：</span><a href="https://www.yicai.com/brief/102720225.html" target="_blank" class="text-accent-blue hover:underline">持续持有3%股份或5亿市值的投资者认定</a></li>
+                <li><span class="font-bold">21财经：</span><a href="https://www.21jingji.com/article/20250713/herald/1c0c7392b0f4bbdde4e4a2bfe0aba4c9.html" target="_blank" class="text-accent-blue hover:underline">科创板"1+6"配套规则</a></li>
+            </ol>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-secondary-dark text-text-secondary py-8 text-center text-sm mt-16 border-t border-accent-blue border-opacity-10">
+        <p>&copy; 2025 资本市场洞察。保留所有权利。</p>
+        <p class="mt-2">本页面内容仅供参考，不构成投资建议。</p>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid Configuration
+        // Initial setup for Mermaid, theme will be updated by JS based on user preference
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark', // Default theme for Mermaid, will be overridden by JS
+            fontFamily: getComputedStyle(document.documentElement).getPropertyValue('--font-sans-sc').split(',')[0],
+            securityLevel: 'loose', 
+            flowchart: {
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+                localStorage.setItem('theme', 'dark');
+                mermaid.initialize({ theme: 'dark' }); // Set Mermaid to dark theme
+            } else {
+                htmlElement.classList.add('light');
+                htmlElement.classList.remove('dark');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+                localStorage.setItem('theme', 'light');
+                mermaid.initialize({ theme: 'default' }); // Set Mermaid to default (light) theme
+            }
+            // Re-render mermaid diagrams after theme change to apply new theme styles
+            document.querySelectorAll('.mermaid').forEach(element => {
+                const graphDefinition = element.innerText; // Get the raw graph definition
+                element.innerHTML = ''; // Clear existing SVG
+                // Generate a unique ID for each chart for mermaid.render
+                mermaid.render('mermaid-chart-' + Math.random().toString(36).substr(2, 9), graphDefinition)
+                       .then(({ svg }) => {
+                           element.innerHTML = svg;
+                       });
+            });
+        }
+
+        // Check for saved theme or system preference on load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+            setTheme('light');
+        } else {
+            setTheme('dark'); // Default to dark if no preference is found
+        }
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Micro-interactions: Animate on scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Stop observing once visible
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Delay for hero section elements to create a staggered entrance effect
+        document.querySelectorAll('.hero-section .animate-on-scroll').forEach((el, i) => {
+            el.style.transitionDelay = `${i * 0.15}s`;
+        });
+    </script>
+</body>
+</html>
+```
