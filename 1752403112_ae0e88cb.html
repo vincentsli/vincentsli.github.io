@@ -1,0 +1,545 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>沪深交易所最新指引解读：《资深专业机构投资者》新规深度剖析</title>
+    <meta name="description" content="深度解析上海证券交易所2024年4月30日发布的《资深专业机构投资者》指引，涵盖政策定位、核心门槛、市场影响及实务操作建议。">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+
+    <style>
+        /* Custom Fonts for Chinese & English/Numbers */
+        html {
+            font-family: "Noto Sans SC", Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+        .font-serif-sc {
+            font-family: "Noto Serif SC", Times New Roman, "FangSong", serif;
+        }
+
+        /* Dark Mode Specific Styles */
+        .dark {
+            --color-bg-primary: #1a1a2e; /* Dark background */
+            --color-bg-secondary: #27283c; /* Slightly lighter dark for cards/sections */
+            --color-text-primary: #e0e0e0; /* Light text */
+            --color-text-secondary: #b0b0b0; /* Muted text */
+            --color-accent: #6c63ff; /* Purple/Indigo accent */
+            --color-accent-light: #8e88ff; /* Lighter accent for highlights */
+            --color-border: #444455; /* Subtle border */
+            --color-table-header-bg: #32324a; /* Table header background */
+            --color-table-row-stripe: #202035; /* Table row stripe */
+            --color-warning-bg: #4a3a1f; /* Darker amber for warning */
+            --color-warning-text: #f0c987; /* Lighter amber for warning text */
+            --color-note-bg: #2a3d4f; /* Darker blue for note */
+            --color-note-text: #a0d3e8; /* Lighter blue for note text */
+        }
+
+        /* Light Mode Specific Styles */
+        html:not(.dark) {
+            --color-bg-primary: #f8faff;
+            --color-bg-secondary: #ffffff;
+            --color-text-primary: #333333;
+            --color-text-secondary: #666666;
+            --color-accent: #4a90e2;
+            --color-accent-light: #70b3fa;
+            --color-border: #e0e0e0;
+            --color-table-header-bg: #eaf2fb;
+            --color-table-row-stripe: #f5f8fc;
+            --color-warning-bg: #fffbe6;
+            --color-warning-text: #cc8400;
+            --color-note-bg: #e6f7ff;
+            --color-note-text: #0056b3;
+        }
+
+        /* Apply variables */
+        body {
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--color-text-primary);
+        }
+        a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        a:hover {
+            color: var(--color-accent-light);
+            text-decoration: underline;
+        }
+        .text-secondary {
+            color: var(--color-text-secondary);
+        }
+        .border-color {
+            border-color: var(--color-border);
+        }
+        .bg-secondary {
+            background-color: var(--color-bg-secondary);
+        }
+        .bg-table-header {
+            background-color: var(--color-table-header-bg);
+        }
+        .bg-table-row-stripe:nth-child(even) {
+            background-color: var(--color-table-row-stripe);
+        }
+        .callout-warning {
+            background-color: var(--color-warning-bg);
+            color: var(--color-warning-text);
+            border-left: 4px solid var(--color-warning-text);
+        }
+        .callout-note {
+            background-color: var(--color-note-bg);
+            color: var(--color-note-text);
+            border-left: 4px solid var(--color-note-text);
+        }
+
+        /* Custom Styles for Readability */
+        .content-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        .first-letter-dropcap::first-letter {
+            float: left;
+            font-size: 4.5rem;
+            line-height: 1;
+            margin-right: 0.5rem;
+            font-weight: 700;
+            color: var(--color-accent);
+        }
+
+        /* Mermaid styling for dark mode */
+        .dark .mermaid {
+            filter: invert(0.9) hue-rotate(180deg); /* Adjusts colors for dark mode readability */
+        }
+    </style>
+</head>
+<body class="leading-relaxed transition-colors duration-300">
+
+    <!-- Header / Navigation -->
+    <header class="fixed top-0 left-0 right-0 bg-opacity-95 bg-bg-primary z-50 py-4 shadow-lg border-b border-color">
+        <div class="content-container flex justify-between items-center px-4">
+            <h1 class="text-xl md:text-2xl font-bold font-serif-sc text-accent-light">投行智库</h1>
+            <button id="theme-toggle" class="p-2 rounded-full hover:bg-bg-secondary focus:outline-none focus:ring-2 focus:ring-accent-light transition-all duration-200">
+                <i class="fas fa-moon text-text-primary text-lg"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Module -->
+    <section class="relative bg-bg-secondary pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-gradient-to-br from-purple-900 to-indigo-900 filter blur-3xl z-0"></div>
+        <div class="absolute inset-0 opacity-5 bg-dots z-0" style="background-image: radial-gradient(#6c63ff 1px, transparent 1px); background-size: 20px 20px;"></div>
+
+        <div class="content-container relative z-10 text-center">
+            <h2 class="text-3xl md:text-5xl font-bold mb-4 leading-tight font-serif-sc text-accent-light drop-shadow-lg">
+                <i class="fas fa-landmark text-3xl md:text-4xl mr-3 opacity-80"></i>
+                沪深交易所最新指引解读
+            </h2>
+            <p class="text-xl md:text-2xl mb-8 text-text-secondary leading-relaxed tracking-wide font-serif-sc italic">
+                《发行上市审核规则适用指引第8号——资深专业机构投资者》新规深度剖析
+            </p>
+            <p class="text-base md:text-lg max-w-3xl mx-auto text-text-primary leading-relaxed first-letter-dropcap">
+                根据上海证券交易所于<strong class="text-accent-light">2024年4月30日正式发布</strong>的《发行上市审核规则适用指引第8号——资深专业机构投资者》（以下简称《指引》），结合投行业务实践，对该新规的核心要点及影响分析如下：
+            </p>
+            <div class="mt-8 text-sm text-text-secondary">
+                <span class="mr-4"><i class="fas fa-calendar-alt mr-1"></i> 发布日期: 2024年4月30日</span>
+                <span><i class="fas fa-file-alt mr-1"></i> 政策来源: 上海证券交易所</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="content-container py-12 md:py-16">
+
+        <!-- Section: Policy Positioning -->
+        <section class="mb-12">
+            <h3 class="text-2xl md:text-3xl font-semibold mb-6 font-serif-sc border-b border-color pb-3">
+                <i class="fas fa-cogs text-accent mr-3"></i>一、政策定位与适用范围
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="p-6 rounded-lg bg-bg-secondary shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <h4 class="text-xl font-semibold mb-3 text-accent-light">1. 精准服务未盈利科技企业</h4>
+                    <ul class="list-none space-y-3 pl-0 text-text-primary">
+                        <li><i class="far fa-dot-circle text-accent-light mr-2"></i>专门针对适用<strong class="text-accent-light">科创板第五套上市标准</strong>的发行人（市值≥40亿元+核心技术突出+暂未盈利）。</li>
+                        <li><i class="far fa-dot-circle text-accent-light mr-2"></i><strong class="text-accent-light">非强制性</strong>：鼓励发行人自主认定并披露资深专业机构投资者，未认定不影响申报（第2、9条）。</li>
+                    </ul>
+                </div>
+                <div class="p-6 rounded-lg bg-bg-secondary shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <h4 class="text-xl font-semibold mb-3 text-accent-light">2. 政策目标</h4>
+                    <ul class="list-none space-y-3 pl-0 text-text-primary">
+                        <li><i class="far fa-bullseye text-accent-light mr-2"></i>通过专业投资者的市场筛选机制，<strong class="text-accent-light">辅助判断企业的技术价值和成长性</strong>（起草说明）；</li>
+                        <li><i class="far fa-bullseye text-accent-light mr-2"></i>平衡未盈利企业的上市包容性与风险防范（如生物医药、芯片设计等长周期行业）。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Core Thresholds -->
+        <section class="mb-12">
+            <h3 class="text-2xl md:text-3xl font-semibold mb-6 font-serif-sc border-b border-color pb-3">
+                <i class="fas fa-shield-alt text-accent mr-3"></i>二、"资深专业机构投资者"的四大核心门槛
+            </h3>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Institution Types -->
+                <div class="bg-bg-secondary rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow duration-300">
+                    <h4 class="text-xl font-semibold mb-4 text-accent-light"><i class="fas fa-building mr-2"></i>（一）机构类型 <span class="text-sm text-text-secondary">(第3条)</span></h4>
+                    <ul class="list-none space-y-3 pl-0 text-text-primary">
+                        <li><i class="fas fa-check-circle text-green-500 mr-2"></i><strong class="text-accent-light">持牌/备案机构</strong>：
+                            <ul class="list-disc list-inside ml-4 text-text-secondary">
+                                <li>私募股权/创投基金管理人（中基协登记）；</li>
+                                <li>券商私募子公司、另类子公司、公募基金私募股权子公司；</li>
+                            </ul>
+                        </li>
+                        <li><i class="fas fa-check-circle text-green-500 mr-2"></i><strong class="text-accent-light">政府背景基金</strong>：
+                            <ul class="list-disc list-inside ml-4 text-text-secondary">
+                                <li>政府投资基金、产业基金、引导基金；</li>
+                            </ul>
+                        </li>
+                        <li><i class="fas fa-check-circle text-green-500 mr-2"></i><strong class="text-accent-light">产业链核心企业</strong>：
+                            <ul class="list-disc list-inside ml-4 text-text-secondary">
+                                <li>掌握关键技术的链主企业及其投资机构；</li>
+                            </ul>
+                        </li>
+                        <li><i class="fas fa-check-circle text-green-500 mr-2"></i><strong class="text-accent-light">监管认定的其他机构</strong>。</li>
+                    </ul>
+                </div>
+
+                <!-- Investment Experience -->
+                <div class="bg-bg-secondary rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow duration-300">
+                    <h4 class="text-xl font-semibold mb-4 text-accent-light"><i class="fas fa-chart-line mr-2"></i>（二）投资经验 <span class="text-sm text-text-secondary">(第4条)</span></h4>
+                    <ul class="list-none space-y-3 pl-0 text-text-primary">
+                        <li><i class="fas fa-star text-yellow-400 mr-2"></i><strong class="text-accent-light">退出案例要求</strong>：近5年至少 <strong class="text-yellow-400 text-lg">5家科创板上市</strong> 或 <strong class="text-yellow-400 text-lg">10家境内外主要交易所上市</strong> 的被投科技企业；</li>
+                        <li><i class="fas fa-info-circle text-blue-400 mr-2"></i><strong class="text-accent-light">豁免条款</strong>：政府基金、产业链企业可凭专业投资记录替代数量要求。</li>
+                    </ul>
+                </div>
+
+                <!-- Compliance -->
+                <div class="bg-bg-secondary rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow duration-300">
+                    <h4 class="text-xl font-semibold mb-4 text-accent-light"><i class="fas fa-balance-scale-right mr-2"></i>（三）合规性 <span class="text-sm text-text-secondary">(第5条)</span></h4>
+                    <p class="mb-3 text-text-primary">最近3年无以下情形：</p>
+                    <ul class="list-none space-y-3 pl-0 text-text-primary">
+                        <li><i class="fas fa-times-circle text-red-500 mr-2"></i>受行政处罚或刑事责任；</li>
+                        <li><i class="fas fa-times-circle text-red-500 mr-2"></i>涉嫌犯罪/违法违规被立案侦查且无结论。</li>
+                    </ul>
+                </div>
+
+                <!-- Shareholding & Independence -->
+                <div class="bg-bg-secondary rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow duration-300 lg:col-span-2">
+                    <h4 class="text-xl font-semibold mb-4 text-accent-light"><i class="fas fa-handshake mr-2"></i>（四）持股要求与独立性 <span class="text-sm text-text-secondary">(第6-7条)</span></h4>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full rounded-lg overflow-hidden border border-color">
+                            <thead>
+                                <tr class="bg-table-header text-left text-text-secondary uppercase text-sm">
+                                    <th class="py-3 px-4 font-bold">要求</th>
+                                    <th class="py-3 px-4 font-bold">具体标准</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-table-row-stripe">
+                                    <td class="py-3 px-4"><strong class="text-accent-light">入股时间</strong></td>
+                                    <td class="py-3 px-4">早于上市申报日≥24个月</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4"><strong class="text-accent-light">持股比例/金额</strong></td>
+                                    <td class="py-3 px-4">持续持有≥3%股份 <strong class="text-accent-light">或</strong> 投资额≥5亿元</td>
+                                </tr>
+                                <tr class="bg-table-row-stripe">
+                                    <td class="py-3 px-4"><strong class="text-accent-light">独立性</strong></td>
+                                    <td class="py-3 px-4">非发行人关联方控制（排除控股股东/实控人/董监高控制的机构）</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4"><strong class="text-accent-light">国企特殊情形</strong></td>
+                                    <td class="py-3 px-4">同国资控制不直接否定独立性，但需排除高管交叉任职</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="mt-4 text-sm text-text-secondary italic">
+                        <span class="font-bold text-accent-light">注：</span>仅因投资产生的关联关系不否定独立性（如财务投资后成为关联方）。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Disclosure and Verification -->
+        <section class="mb-12">
+            <h3 class="text-2xl md:text-3xl font-semibold mb-6 font-serif-sc border-b border-color pb-3">
+                <i class="fas fa-clipboard-list text-accent mr-3"></i>三、发行人的披露与核查义务 <span class="text-sm text-text-secondary">(第8条)</span>
+            </h3>
+            <p class="mb-4 text-text-primary">发行人需在招股书中披露：</p>
+            <ul class="list-none space-y-3 pl-0 text-text-primary mb-6">
+                <li><i class="fas fa-angle-right text-accent-light mr-2"></i><strong class="text-accent-light">投资者资质依据</strong>：机构类型、投资经验证明；</li>
+                <li><i class="fas fa-angle-right text-accent-light mr-2"></i><strong class="text-accent-light">入股细节</strong>：时间、价格、比例、金额；</li>
+                <li><i class="fas fa-angle-right text-accent-light mr-2"></i><strong class="text-accent-light">合规性声明</strong>：无代持、利益输送、商业腐败；</li>
+                <li><i class="fas fa-angle-right text-accent-light mr-2"></i><strong class="text-accent-light">自愿承诺</strong>：延长锁定期等（如有）。</li>
+            </ul>
+            <p class="bg-bg-secondary p-4 rounded-lg shadow-inner text-text-primary">
+                <strong class="text-accent-light"><i class="fas fa-users-cog mr-2"></i>中介责任</strong>：保荐人、律师需对上述内容<strong class="text-accent-light">审慎核查</strong>并确保真实性。
+            </p>
+        </section>
+
+        <!-- Section: Regulatory Intent and Market Impact -->
+        <section class="mb-12">
+            <h3 class="text-2xl md:text-3xl font-semibold mb-6 font-serif-sc border-b border-color pb-3">
+                <i class="fas fa-chart-bar text-accent mr-3"></i>四、监管意图与市场影响
+            </h3>
+            <div class="overflow-x-auto">
+                <table class="min-w-full rounded-lg overflow-hidden border border-color">
+                    <thead>
+                        <tr class="bg-table-header text-left text-text-secondary uppercase text-sm">
+                            <th class="py-3 px-4 font-bold">维度</th>
+                            <th class="py-3 px-4 font-bold">关键分析</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-table-row-stripe">
+                            <td class="py-3 px-4"><strong class="text-accent-light">审核导向</strong></td>
+                            <td class="py-3 px-4">将专业投资者背书作为<strong class="text-accent-light">辅助判断企业成长性的参考因素</strong>（非上市条件）</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4"><strong class="text-accent-light">发行人影响</strong></td>
+                            <td class="py-3 px-4">吸引知名机构投资可提升过会信心，但需承担更严披露义务</td>
+                        </tr>
+                        <tr class="bg-table-row-stripe">
+                            <td class="py-3 px-4"><strong class="text-accent-light">投资机构影响</strong></td>
+                            <td class="py-3 px-4">头部PE/VC、政府基金获政策红利，中小机构需积累退出案例</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4"><strong class="text-accent-light">违规成本</strong></td>
+                            <td class="py-3 px-4">代持、利益输送等行为将面临监管措施/纪律处分（第11条）</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section: Practical Advice -->
+        <section class="mb-12">
+            <h3 class="text-2xl md:text-3xl font-semibold mb-6 font-serif-sc border-b border-color pb-3">
+                <i class="fas fa-lightbulb text-accent mr-3"></i>五、实务操作建议
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-6 rounded-lg bg-bg-secondary shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <h4 class="text-xl font-semibold mb-3 text-accent-light"><i class="fas fa-building mr-2"></i>发行人</h4>
+                    <ul class="list-none space-y-3 pl-0 text-text-primary text-sm md:text-base">
+                        <li><i class="fas fa-angle-right text-accent-light mr-2"></i>提前24个月引入符合标准的投资者（如头部PE、政府基金）；</li>
+                        <li><i class="fas fa-angle-right text-accent-light mr-2"></i>在招股书“发行人基本情况”章节专设披露模块。</li>
+                    </ul>
+                </div>
+                <div class="p-6 rounded-lg bg-bg-secondary shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <h4 class="text-xl font-semibold mb-3 text-accent-light"><i class="fas fa-chart-pie mr-2"></i>投资机构</h4>
+                    <ul class="list-none space-y-3 pl-0 text-text-primary text-sm md:text-base">
+                        <li><i class="fas fa-angle-right text-accent-light mr-2"></i>整理近5年科创板/境外上市退出案例清单；</li>
+                        <li><i class="fas fa-angle-right text-accent-light mr-2"></i>避免入股后与发行人形成非投资性关联关系。</li>
+                    </ul>
+                </div>
+                <div class="p-6 rounded-lg bg-bg-secondary shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <h4 class="text-xl font-semibold mb-3 text-accent-light"><i class="fas fa-laptop-code mr-2"></i>中介机构</h4>
+                    <ul class="list-none space-y-3 pl-0 text-text-primary text-sm md:text-base">
+                        <li><i class="fas fa-angle-right text-accent-light mr-2"></i>重点核查投资者持股连续性（申报前24个月无减持）；</li>
+                        <li><i class="fas fa-angle-right text-accent-light mr-2"></i>取得投资者无违规书面承诺。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Policy Limitations -->
+        <section class="mb-12">
+            <h3 class="text-2xl md:text-3xl font-semibold mb-6 font-serif-sc border-b border-color pb-3">
+                <i class="fas fa-exclamation-triangle text-accent mr-3"></i>六、政策局限性
+            </h3>
+            <ul class="list-none space-y-4 pl-0 text-text-primary">
+                <li><i class="fas fa-minus-circle text-red-500 mr-2"></i><strong class="text-accent-light">非普惠性</strong>：5家科创板/10家上市的高门槛将多数中小机构排除在外；</li>
+                <li><i class="fas fa-minus-circle text-red-500 mr-2"></i><strong class="text-accent-light">非决定性</strong>：仅作为审核参考，不替代科创属性评价（如研发投入、专利数量）；</li>
+                <li><i class="fas fa-minus-circle text-red-500 mr-2"></i><strong class="text-accent-light">披露风险</strong>：涉及商业秘密时可申请豁免，但需证明必要性（第10条）。</li>
+            </ul>
+        </section>
+
+        <!-- Callout/Important Note -->
+        <div class="callout-warning p-6 rounded-lg mb-12 shadow-md">
+            <p class="text-lg font-bold"><i class="fas fa-triangle-exclamation mr-2"></i>重要提示</p>
+            <p class="mt-2 text-base">
+                新规自发布日（2024年4月30日）起施行，适用于此后申报的科创板第五套标准企业。对于4月30日前已申报但尚未过会的定增项目，若想适用新规需撤回后重新申报。政策全文可通过上交所官网查询：<a href="https://www.sse.com.cn/lawandrules/guide/stock/fxsssh/c/c_20240430_10777744.shtml" target="_blank" rel="noopener noreferrer" class="underline hover:no-underline text-warning-text">上交所官网链接 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>。
+            </p>
+        </div>
+
+        <!-- Data Visualization (Mermaid.js) -->
+        <section class="mb-12 bg-bg-secondary p-8 rounded-lg shadow-md">
+            <h3 class="text-2xl md:text-3xl font-semibold mb-6 font-serif-sc border-b border-color pb-3">
+                <i class="fas fa-sitemap text-accent mr-3"></i>《资深专业机构投资者》指引核心框架
+            </h3>
+            <div class="mermaid text-center">
+                graph TD
+                    A[《指引第8号》正式发布 2024.4.30] --> B(政策定位与目标)
+                    B --> B1(精准服务未盈利科技企业)
+                    B --> B2(辅助判断技术价值与成长性)
+
+                    A --> C(资深专业机构投资者核心门槛)
+                    C --> C1[机构类型]
+                    C --> C2[投资经验]
+                    C --> C3[合规性]
+                    C --> C4[持股要求与独立性]
+
+                    C --> D(发行人/中介机构披露与核查义务)
+                    D --> D1(发行人披露内容)
+                    D --> D2(中介机构审慎核查)
+
+                    D --> E(监管意图与市场影响)
+                    E --> E1(审核导向: 辅助判断)
+                    E --> E2(发行人影响: 提升信心/更严披露)
+                    E --> E3(投资机构影响: 头部获利/中小积累)
+                    E --> E4(违规成本: 监管/纪律处分)
+
+                    E --> F(实务操作建议)
+                    F --> F1(发行人策略: 提前引入/专设披露)
+                    F --> F2(投资机构策略: 整理案例/规避关联)
+                    F --> F3(中介机构职责: 核查持股/承诺)
+
+                    F --> G(政策局限性)
+                    G --> G1(非普惠性: 高门槛)
+                    G --> G2(非决定性: 不替代科创属性)
+                    G --> G3(披露风险: 商业秘密豁免)
+
+                    style A fill:#6c63ff,stroke:#6c63ff,stroke-width:2px,color:#fff
+                    style B fill:#32324a,stroke:#6c63ff,stroke-width:1px,color:#e0e0e0
+                    style C fill:#32324a,stroke:#6c63ff,stroke-width:1px,color:#e0e0e0
+                    style D fill:#32324a,stroke:#6c63ff,stroke-width:1px,color:#e0e0e0
+                    style E fill:#32324a,stroke:#6c63ff,stroke-width:1px,color:#e0e0e0
+                    style F fill:#32324a,stroke:#6c63ff,stroke-width:1px,color:#e0e0e0
+                    style G fill:#32324a,stroke:#6c63ff,stroke-width:1px,color:#e0e0e0
+
+                    linkStyle 0 stroke:#6c63ff,stroke-width:1.5px,fill:none;
+                    linkStyle 1 stroke:#6c63ff,stroke-width:1.5px,fill:none;
+                    linkStyle 2 stroke:#6c63ff,stroke-width:1.5px,fill:none;
+                    linkStyle 3 stroke:#6c63ff,stroke-width:1.5px,fill:none;
+                    linkStyle 4 stroke:#6c63ff,stroke-width:1.5px,fill:none;
+                    linkStyle 5 stroke:#6c63ff,stroke-width:1.5px,fill:none;
+                    linkStyle 6 stroke:#6c63ff,stroke-width:1.5px,fill:none;
+
+                    classDef sub-node fill:#27283c,stroke:#444455,stroke-width:1px,color:#b0b0b0
+                    class B1,B2,C1,C2,C3,C4,D1,D2,E1,E2,E3,E4,F1,F2,F3,G1,G2,G3 sub-node
+            </div>
+        </section>
+
+        <!-- Further Reading -->
+        <section class="mb-12 bg-bg-secondary p-8 rounded-lg shadow-md">
+            <h3 class="text-2xl md:text-3xl font-semibold mb-6 font-serif-sc border-b border-color pb-3">
+                <i class="fas fa-book-open text-accent mr-3"></i>延伸阅读
+            </h3>
+            <ul class="list-none space-y-4 pl-0 text-text-primary">
+                <li><i class="fas fa-chevron-right text-accent-light mr-2"></i>
+                    <strong class="text-accent-light">《证券法》</strong>：中国资本市场基础法律，理解监管框架的基石。
+                </li>
+                <li><i class="fas fa-chevron-right text-accent-light mr-2"></i>
+                    <strong class="text-accent-light">《聪明的投资者》(The Intelligent Investor)</strong> - 本杰明·格雷厄姆：价值投资的圣经，虽非直接探讨法规，但其投资哲学与长期主义与政策鼓励的专业投资有共通之处。
+                </li>
+                <li><i class="fas fa-chevron-right text-accent-light mr-2"></i>
+                    <strong class="text-accent-light">《非理性繁荣》(Irrational Exuberance)</strong> - 罗伯特·希勒：洞察市场泡沫的经典著作，对于理解政策如何平衡创新包容与风险防范提供宏观视角。
+                </li>
+                <li><i class="fas fa-chevron-right text-accent-light mr-2"></i>
+                    <strong class="text-accent-light">《高盛文化》(The Last Tycoons)</strong> - 查尔斯·埃利斯：深入了解顶级投行如何运作，可间接理解专业机构在市场中的作用。
+                </li>
+                <li><i class="fas fa-chevron-right text-accent-light mr-2"></i>
+                    <strong class="text-accent-light">《风险投资史》(VC: An American History)</strong> - 马丁·肯尼/约翰·伯顿：了解风险投资行业的起源与发展，有助于理解PE/VC机构在科技企业成长中的角色。
+                </li>
+            </ul>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-bg-secondary text-text-secondary py-8 text-center text-sm border-t border-color">
+        <div class="content-container">
+            <p>&copy; 2024 投行智库. All rights reserved. | 数据来源: 上海证券交易所</p>
+            <p class="mt-2">本网页内容仅供参考，不构成任何投资建议。</p>
+        </div>
+    </footer>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid.js configuration for dark mode
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base', // Use 'base' theme to allow custom CSS styling
+            themeVariables: {
+                darkMode: document.documentElement.classList.contains('dark'),
+                // Define colors for dark mode. These are overridden by the CSS filter but good for consistency.
+                primaryColor: '#6c63ff',
+                primaryTextColor: '#e0e0e0',
+                primaryBorderColor: '#6c63ff',
+                lineColor: '#6c63ff',
+                secondaryColor: '#27283c',
+                tertiaryColor: '#1a1a2e',
+                fontFamily: '"Noto Sans SC", Tahoma, Arial, sans-serif'
+            }
+        });
+
+        // Theme toggle functionality
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Set initial theme based on system preference or saved preference
+        function getPreferredTheme() {
+            if (localStorage.getItem('theme')) {
+                return localStorage.getItem('theme');
+            }
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        function setTheme(theme) {
+            htmlElement.className = theme;
+            localStorage.setItem('theme', theme);
+            updateThemeToggleIcon(theme);
+            // Re-render Mermaid diagrams for theme change
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'base',
+                themeVariables: {
+                    darkMode: theme === 'dark',
+                    primaryColor: theme === 'dark' ? '#6c63ff' : '#4a90e2',
+                    primaryTextColor: theme === 'dark' ? '#e0e0e0' : '#333333',
+                    primaryBorderColor: theme === 'dark' ? '#6c63ff' : '#4a90e2',
+                    lineColor: theme === 'dark' ? '#6c63ff' : '#4a90e2',
+                    secondaryColor: theme === 'dark' ? '#27283c' : '#ffffff',
+                    tertiaryColor: theme === 'dark' ? '#1a1a2e' : '#f8faff',
+                    fontFamily: '"Noto Sans SC", Tahoma, Arial, sans-serif'
+                }
+            });
+            mermaid.render('id', document.querySelector('.mermaid').innerText);
+        }
+
+        function updateThemeToggleIcon(theme) {
+            const icon = themeToggleBtn.querySelector('i');
+            if (theme === 'dark') {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            } else {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        }
+
+        // Apply initial theme
+        setTheme(getPreferredTheme());
+
+        // Toggle theme on button click
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+    </script>
+</body>
+</html>
+```
