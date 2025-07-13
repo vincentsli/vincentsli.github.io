@@ -1,0 +1,560 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上交所《资深专业机构投资者》指引深度解读</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts for Noto Serif SC (Serif for Headings) and Noto Sans SC (Sans-serif for Body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for Dark Mode (Default) */
+        :root {
+            --bg-primary: #0a0a0a; /* Darkest background */
+            --bg-secondary: #1a1a1a; /* Lighter background for cards/sections */
+            --text-primary: #e2e8f0; /* Light text for main content */
+            --text-secondary: #94a3b8; /* Muted text for secondary info/footnotes */
+            --accent-color: #38bdf8; /* Sky blue for accents and headings */
+            --border-color: #334155; /* Slate-700 for borders/dividers */
+            --highlight-bg: #0c4a6e; /* Darker blue for hover/highlight background */
+        }
+
+        /* CSS Variables for Light Mode */
+        html.light {
+            --bg-primary: #f8fafc; /* Lightest background */
+            --bg-secondary: #ffffff; /* White background for cards/sections */
+            --text-primary: #1e293b; /* Dark text for main content */
+            --text-secondary: #475569; /* Muted text for secondary info/footnotes */
+            --accent-color: #0284c7; /* Sky blue for accents and headings */
+            --border-color: #e2e8f0; /* Slate-200 for borders/dividers */
+            --highlight-bg: #e0f2fe; /* Lighter blue for hover/highlight background */
+        }
+
+        /* Base styles using CSS variables */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for theme change */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+            color: var(--accent-color);
+        }
+
+        /* Apply custom variable colors to Tailwind classes where needed */
+        .bg-primary { background-color: var(--bg-primary); }
+        .bg-secondary { background-color: var(--bg-secondary); }
+        .text-primary { color: var(--text-primary); }
+        .text-secondary { color: var(--text-secondary); }
+        .text-accent { color: var(--accent-color); }
+        .border-color { border-color: var(--border-color); }
+        .bg-highlight { background-color: var(--highlight-bg); }
+
+        /* First letter drop cap effect */
+        .first-letter::first-letter {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 3.5rem; /* Large font size */
+            line-height: 0.8; /* Adjust line height to align */
+            float: left; /* Make it float to the left */
+            margin-right: 0.5rem; /* Spacing after the letter */
+            color: var(--accent-color);
+            padding-top: 0.5rem; /* Align with text baseline */
+        }
+
+        /* Responsive Table Styles */
+        .responsive-table-wrapper {
+            overflow-x: auto; /* Enable horizontal scrolling on small screens */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        }
+        .responsive-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .responsive-table th,
+        .responsive-table td {
+            padding: 0.75rem; /* Tailwind's p-3 */
+            text-align: left;
+            border-bottom: 1px solid var(--border-color); /* Subtle border between rows */
+        }
+        .responsive-table th {
+            background-color: var(--bg-secondary); /* Slightly different background for header */
+            color: var(--accent-color);
+            font-weight: 600; /* font-semibold */
+        }
+        .responsive-table tbody tr:nth-child(odd) {
+            background-color: var(--bg-primary); /* Zebra striping */
+        }
+        .responsive-table tbody tr:nth-child(even) {
+            background-color: var(--bg-secondary);
+        }
+        .responsive-table tbody tr:hover {
+            background-color: var(--highlight-bg); /* Highlight row on hover */
+            cursor: pointer;
+        }
+
+        /* Tooltip Styles */
+        .tooltip-container {
+            position: relative;
+            display: inline-block; /* Allows text flow around it */
+            cursor: help; /* Indicate interactiveness */
+            border-bottom: 1px dashed var(--text-secondary); /* Subtle underline */
+        }
+        .tooltip-text {
+            visibility: hidden;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 10px;
+            position: absolute;
+            z-index: 10;
+            bottom: 125%; /* Position above the text */
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s, visibility 0.3s;
+            white-space: nowrap; /* Prevent text wrapping */
+            font-size: 0.875rem; /* text-sm */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            border: 1px solid var(--border-color);
+        }
+        .tooltip-container:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        .tooltip-text::after { /* Arrow for tooltip */
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: var(--bg-secondary) transparent transparent transparent;
+        }
+
+        /* Mermaid container styling */
+        .mermaid-container {
+            background-color: var(--bg-secondary);
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 1.5rem; /* p-6 */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            overflow-x: auto; /* Enable horizontal scrolling for smaller screens */
+            display: flex; /* Centers content horizontally within its overflow context */
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="bg-primary text-primary min-h-screen flex flex-col items-center py-8 px-4 sm:px-6 lg:px-8">
+
+    <!-- Dark/Light Mode Toggle Button -->
+    <button id="theme-toggle" class="fixed bottom-4 right-4 z-50 p-3 rounded-full bg-accent text-white shadow-lg hover:bg-sky-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-opacity-75" aria-label="Toggle dark/light mode">
+        <i class="fas fa-moon text-lg" id="theme-icon"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <header class="w-full max-w-6xl relative overflow-hidden rounded-xl shadow-2xl mb-12 transform hover:scale-[1.005] transition-transform duration-500 ease-out">
+        <!-- Background gradient overlay for readability -->
+        <div class="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800 opacity-90 backdrop-blur-sm z-0"></div>
+        <!-- Background image - subtle financial theme -->
+        <img src="https://images.unsplash.com/photo-1590283603472-a4005b63b655?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&h=600&fit=crop&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&blend=000000&sat=-100&bri=-30" alt="Financial Market Background" class="absolute inset-0 w-full h-full object-cover opacity-30 z-0">
+
+        <div class="relative z-10 p-8 md:p-16 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold text-accent mb-4 leading-tight drop-shadow-lg">
+                <i class="fas fa-chart-line mr-4"></i>
+                上交所新规深度解读
+            </h1>
+            <p class="text-xl md:text-3xl text-gray-200 font-semibold mb-6 drop-shadow-md">
+                《发行上市审核规则适用指引第8号——资深专业机构投资者》分析
+            </p>
+            <p class="text-md md:text-lg text-gray-300 max-w-3xl mx-auto italic">
+                “以市场化机制替代行政审核，推动资本聚焦硬科技赛道。”
+            </p>
+        </div>
+    </header>
+
+    <main class="w-full max-w-4xl bg-secondary rounded-xl shadow-xl p-6 md:p-10 lg:p-12 border border-color transform hover:shadow-2xl transition-all duration-300 ease-out">
+
+        <section id="introduction" class="mb-10 pb-8 border-b border-color">
+            <h2 class="text-3xl font-bold mb-4 text-accent"><i class="fas fa-bullhorn mr-3"></i>引言</h2>
+            <p class="text-lg leading-relaxed text-primary first-letter">
+                基于上交所官方发布信息及公开市场资料，现对《发行上市审核规则适用指引第8号——资深专业机构投资者》进行专业分析如下。此指引是科创板第五套上市标准的重要配套政策，旨在进一步深化注册制改革，优化资本市场生态，引导更多社会资本投向高新技术和战略性新兴产业。
+            </p>
+        </section>
+
+        <section id="core-policies" class="mb-10 pb-8 border-b border-color">
+            <h2 class="text-3xl font-bold mb-6 text-accent"><i class="fas fa-key mr-3"></i>一、核心政策要点</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-6 bg-primary rounded-lg border border-color shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <h3 class="text-xl font-semibold mb-3 text-accent"><i class="fas fa-users mr-2"></i>适用对象</h3>
+                    <p class="text-primary leading-relaxed mb-2">
+                        仅适用于<strong class="font-bold text-blue-300">科创板第五套上市标准</strong>的申报企业。
+                    </p>
+                    <p class="text-sm text-secondary italic">
+                        （即未盈利科技创新企业，侧重市值与研发能力）
+                    </p>
+                    <p class="text-sm text-secondary mt-2">
+                        <a href="#footnote-1" class="text-blue-500 hover:underline">[^1]</a>
+                        <a href="#footnote-2" class="text-blue-500 hover:underline">[^2]</a>
+                    </p>
+                </div>
+                <div class="p-6 bg-primary rounded-lg border border-color shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <h3 class="text-xl font-semibold mb-3 text-accent"><i class="fas fa-magnifying-glass-dollar mr-2"></i>认定标准细化</h3>
+                    <p class="text-primary leading-relaxed mb-2">
+                        资深专业机构投资者需满足以下条件之一<a href="#footnote-1" class="text-blue-500 hover:underline">[^1]</a><a href="#footnote-2" class="text-blue-500 hover:underline">[^2]</a>：
+                    </p>
+                    <ul class="list-disc list-inside text-primary space-y-1 ml-4">
+                        <li><strong class="font-bold text-blue-300">持股门槛</strong>：持续持有发行人<span class="text-2xl font-bold text-green-400">3%以上股份</span>；</li>
+                        <li><strong class="font-bold text-blue-300">投资额门槛</strong>：对发行人累计投资额<span class="text-2xl font-bold text-green-400">≥5亿元</span>。</li>
+                    </ul>
+                    <p class="text-sm text-secondary italic mt-2">
+                        注：此标准旨在筛选具备长期投资能力和风险承受能力的机构，避免短期套利资金干扰。
+                    </p>
+                </div>
+                <div class="md:col-span-2 p-6 bg-primary rounded-lg border border-color shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <h3 class="text-xl font-semibold mb-3 text-accent"><i class="fas fa-lightbulb mr-2"></i>政策目的</h3>
+                    <ul class="list-disc list-inside text-primary space-y-2 ml-4">
+                        <li>
+                            <strong class="font-bold text-blue-300">提升审核效率</strong>：允许企业以专业投资者持股证明其技术价值和市场认可度，部分替代传统盈利指标；
+                        </li>
+                        <li>
+                            <strong class="font-bold text-blue-300">强化风险定价</strong>：通过专业投资者的深度参与，降低未盈利企业的估值偏差和信息不对称风险<a href="#footnote-9" class="text-blue-500 hover:underline">[^9]</a>。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="market-impact" class="mb-10 pb-8 border-b border-color">
+            <h2 class="text-3xl font-bold mb-6 text-accent"><i class="fas fa-chart-pie mr-3"></i>二、对市场主体的影响</h2>
+            <div class="responsive-table-wrapper rounded-lg shadow-md border border-color">
+                <table class="responsive-table w-full text-primary">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-3 font-semibold text-accent bg-primary rounded-tl-lg">主体</th>
+                            <th class="px-4 py-3 font-semibold text-accent bg-primary rounded-tr-lg">影响分析</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="px-4 py-3 font-medium">
+                                <i class="fas fa-building-columns mr-2 text-blue-400"></i>
+                                拟上市企业
+                            </td>
+                            <td class="px-4 py-3">利好硬科技企业（如生物医药、半导体）：拓宽未盈利企业上市路径，加速融资进程。</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 font-medium">
+                                <i class="fas fa-handshake mr-2 text-blue-400"></i>
+                                专业投资者
+                            </td>
+                            <td class="px-4 py-3">提高投资门槛：需满足长期持股或大额投资要求，倒逼机构深化尽调和投后管理。</td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 py-3 font-medium">
+                                <i class="fas fa-sitemap mr-2 text-blue-400"></i>
+                                中介机构
+                            </td>
+                            <td class="px-4 py-3">新增核查义务：需验证投资者资质及持股稳定性，并披露其与发行人的关联关系<a href="#footnote-knowledge-1" class="text-blue-500 hover:underline">[^知识库1]</a>。</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="rule-alignment" class="mb-10 pb-8 border-b border-color">
+            <h2 class="text-3xl font-bold mb-6 text-accent"><i class="fas fa-link mr-3"></i>三、与既有规则的衔接</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-6 bg-primary rounded-lg border border-color shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <h3 class="text-xl font-semibold mb-3 text-accent"><i class="fas fa-arrows-split-up-and-merge mr-2"></i>差异化监管</h3>
+                    <p class="text-primary leading-relaxed">
+                        科创板企业若因研发投入较高（近三年累计研发投入/营收≥15%或总额≥3亿元）未达分红要求，可豁免ST风险警示<a href="#footnote-knowledge-2" class="text-blue-500 hover:underline">[^知识库2]</a>，与本指引共同体现对科创企业的包容性。
+                    </p>
+                </div>
+                <div class="p-6 bg-primary rounded-lg border border-color shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <h3 class="text-xl font-semibold mb-3 text-accent"><i class="fas fa-lock mr-2"></i>锁定期要求</h3>
+                    <p class="text-primary leading-relaxed">
+                        专业投资者所持股份需承诺<strong class="font-bold text-red-400">上市后12个月锁定期</strong>（<span class="tooltip-container">知识库《发行上市审核规则适用指引自查表》第43条<span class="tooltip-text">《发行上市审核规则适用指引自查表》第43条明确了专业投资者的股份锁定安排及穿透核查要求。</span></span>），防止上市后集中抛售。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="potential-risks" class="mb-10 pb-8 border-b border-color">
+            <h2 class="text-3xl font-bold mb-6 text-accent"><i class="fas fa-triangle-exclamation mr-3"></i>四、潜在风险提示</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-6 bg-primary rounded-lg border border-color shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <h3 class="text-xl font-semibold mb-3 text-accent"><i class="fas fa-shield-halved mr-2"></i>规避监管风险</h3>
+                    <p class="text-primary leading-relaxed">
+                        需防范企业通过“突击入股”或“代持”满足投资者资质要求，交易所明确要求穿透核查最终出资人<a href="#footnote-knowledge-3" class="text-blue-500 hover:underline">[^知识库3]</a>。
+                    </p>
+                </div>
+                <div class="p-6 bg-primary rounded-lg border border-color shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <h3 class="text-xl font-semibold mb-3 text-accent"><i class="fas fa-hand-holding-dollar mr-2"></i>责任匹配问题</h3>
+                    <p class="text-primary leading-relaxed">
+                        专业投资者需承担持续督导义务，若企业上市后出现技术失败或经营风险，投资者可能面临声誉损失及监管问责。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="policy-significance" class="mb-10 pb-8 border-b border-color">
+            <h2 class="text-3xl font-bold mb-6 text-accent"><i class="fas fa-brain mr-3"></i>五、政策意义</h2>
+            <ul class="list-disc list-inside text-primary space-y-3 ml-4">
+                <li>
+                    <strong class="font-bold text-blue-300">注册制深化</strong>：通过市场化机制（专业投资者背书）替代行政审核，契合注册制改革方向；
+                </li>
+                <li>
+                    <strong class="font-bold text-blue-300">生态优化</strong>：推动资本聚焦硬科技赛道，促进“投早投小”与长期价值投资<a href="#footnote-9" class="text-blue-500 hover:underline">[^9]</a>。
+                </li>
+            </ul>
+        </section>
+
+        <section id="conclusion" class="mb-10 pb-8 border-b border-color">
+            <h2 class="text-3xl font-bold mb-6 text-accent"><i class="fas fa-clipboard-check mr-3"></i>结论</h2>
+            <p class="text-lg leading-relaxed text-primary p-4 bg-primary rounded-lg border border-color shadow-sm">
+                该指引是科创板第五套标准的重要配套政策，通过量化专业投资者的资质要求，平衡了未盈利企业上市便利性与投资者保护。未来需关注交易所对投资者“持续持有”及“穿透核查”的执行尺度。
+            </p>
+        </section>
+
+        <!-- Mermaid Data Visualization -->
+        <section id="conceptual-map" class="mb-10 pb-8 border-b border-color">
+            <h2 class="text-3xl font-bold mb-6 text-accent"><i class="fas fa-sitemap mr-3"></i>概念关系图</h2>
+            <p class="text-primary leading-relaxed mb-4">
+                以下Mermaid图表直观展示了《指引第8号》的核心概念及其相互关系：
+            </p>
+            <div class="mermaid-container">
+                <pre class="mermaid" data-theme="dark">
+graph TD
+    A["《指引第8号》"] --> B(适用对象);
+    A --> C(认定标准);
+    A --> D(政策目的);
+    A --> E(市场主体影响);
+    A --> F(与既有规则衔接);
+    A --> G(潜在风险);
+    A --> H(政策意义);
+
+    B -- 科创板第五套企业 --> B1(未盈利科技创新);
+    C -- 满足其一 --> C1(持股门槛: ≥3%股份);
+    C -- 或 --> C2(投资额门槛: ≥5亿);
+    D --> D1(提升审核效率);
+    D --> D2(强化风险定价);
+    E --> E1(拟上市企业);
+    E --> E2(专业投资者);
+    E --> E3(中介机构);
+    F --> F1(差异化监管: 研发投入豁免ST);
+    F --> F2(锁定期要求: 12个月);
+    G --> G1(规避监管风险);
+    G --> G2(责任匹配问题);
+    H --> H1(注册制深化);
+    H --> H2(生态优化);
+
+    linkStyle 0 stroke:#94a3b8,stroke-width:1.5px;
+    linkStyle 1 stroke:#94a3b8,stroke-width:1.5px;
+    linkStyle 2 stroke:#94a3b8,stroke-width:1.5px;
+    linkStyle 3 stroke:#94a3b8,stroke-width:1.5px;
+    linkStyle 4 stroke:#94a3b8,stroke-width:1.5px;
+    linkStyle 5 stroke:#94a3b8,stroke-width:1.5px;
+    linkStyle 6 stroke:#94a3b8,stroke-width:1.5px;
+    linkStyle 7 stroke:#94a3b8,stroke-width:1.5px;
+    linkStyle 8 stroke:#94a3b8,stroke-width:1.5px;
+    linkStyle 9 stroke:#94a3b8,stroke-width:1.5px;
+    linkStyle 10 stroke:#94a3b8,stroke-width:1.5px;
+    linkStyle 11 stroke:#94a3b8,stroke-width:1.5px;
+    linkStyle 12 stroke:#94a3b8,stroke-width:1.5px;
+    linkStyle 13 stroke:#94a3b8,stroke-width:1.5px;
+    linkStyle 14 stroke:#94a3b8,stroke-width:1.5px;
+    linkStyle 15 stroke:#94a3b8,stroke-width:1.5px;
+    linkStyle 16 stroke:#94a3b8,stroke-width:1.5px;
+    linkStyle 17 stroke:#94a3b8,stroke-width:1.5px;
+    linkStyle 18 stroke:#94a3b8,stroke-width:1.5px;
+    linkStyle 19 stroke:#94a3b8,stroke-width:1.5px;
+    linkStyle 20 stroke:#94a3b8,stroke-width:1.5px;
+    linkStyle 21 stroke:#94a3b8,stroke-width:1.5px;
+    linkStyle 22 stroke:#94a3b8,stroke-width:1.5px;
+    linkStyle 23 stroke:#94a3b8,stroke-width:1.5px;
+                </pre>
+            </div>
+        </section>
+
+        <!-- Extended Reading Section -->
+        <section id="further-reading" class="mb-10 pb-8 border-b border-color">
+            <h2 class="text-3xl font-bold mb-6 text-accent"><i class="fas fa-book-open-reader mr-3"></i>延伸阅读</h2>
+            <p class="text-primary leading-relaxed mb-4">
+                为深入理解中国资本市场与科创板相关政策，推荐以下书籍或资源：
+            </p>
+            <ul class="list-disc list-inside text-primary space-y-4 ml-4">
+                <li>
+                    <strong class="font-bold text-blue-300">《投资银行学》</strong>
+                    <span class="text-sm text-secondary block pl-4">
+                        经典教材，系统阐述投资银行的业务、理论与实践，是理解IPO和资本运作的基础。
+                    </span>
+                </li>
+                <li>
+                    <strong class="font-bold text-blue-300">《公司金融》</strong>
+                    <span class="text-sm text-secondary block pl-4">
+                        涵盖公司估值、资本结构、融资决策等核心概念，对理解企业上市逻辑至关重要。
+                    </span>
+                </li>
+                <li>
+                    <strong class="font-bold text-blue-300">《风险投资与私募股权》</strong>
+                    <span class="text-sm text-secondary block pl-4">
+                        深度解析PE/VC的投资策略、尽职调查与退出机制，与专业机构投资者角色紧密相关。
+                    </span>
+                </li>
+                <li>
+                    <strong class="font-bold text-blue-300">《中国资本市场发展报告》</strong>
+                    <span class="text-sm text-secondary block pl-4">
+                        权威报告，定期更新中国资本市场的最新发展、改革动态及政策解读，提供宏观视角。
+                    </span>
+                </li>
+                <li>
+                    <strong class="font-bold text-blue-300">《注册制改革与中国资本市场发展》</strong>
+                    <span class="text-sm text-secondary block pl-4">
+                        探讨中国注册制改革的背景、意义、挑战与影响，有助于理解科创板政策的深层逻辑。
+                    </span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Footnotes / References -->
+        <section id="footnotes" class="mt-10 pt-8 border-t border-color text-sm text-secondary">
+            <h2 class="text-xl font-semibold mb-4 text-accent"><i class="fas fa-info-circle mr-2"></i>参考资料与脚注</h2>
+            <ol class="list-decimal list-outside ml-6 space-y-2">
+                <li id="footnote-1" class="text-secondary">
+                    <span class="font-bold">[1]</span>
+                    <a href="https://www.nbd.com.cn/articles/2025-07-13/3942350.html" target="_blank" class="text-blue-500 hover:underline">上交所：资深专业机构投资者认定标准细化（每日经济新闻）</a>
+                </li>
+                <li id="footnote-2" class="text-secondary">
+                    <span class="font-bold">[2]</span>
+                    <a href="https://www.fx678.com/C/20250713/202507131515262067.html" target="_blank" class="text-blue-500 hover:underline">认定标准明确：持续持股3%或投资额5亿元（汇通网）</a>
+                </li>
+                <li id="footnote-9" class="text-secondary">
+                    <span class="font-bold">[9]</span>
+                    <a href="https://m.sohu.com/a/913451717_120988576?scm=10001.325_13-325_13.0.0.5_32" target="_blank" class="text-blue-500 hover:underline">引入专业投资者制度优化审核资源配置（搜狐）</a>
+                </li>
+                <li id="footnote-knowledge-1" class="text-secondary">
+                    <span class="font-bold">[知识库1]</span>
+                    《发行上市审核规则适用指引自查表》第16条：要求核查主要投资者背景及关联关系。
+                </li>
+                <li id="footnote-knowledge-2" class="text-secondary">
+                    <span class="font-bold">[知识库2]</span>
+                    《沪深交易所分红监管修订对比》：明确科创板企业研发投入达标可豁免ST。
+                </li>
+                <li id="footnote-knowledge-3" class="text-secondary">
+                    <span class="font-bold">[知识库3]</span>
+                    《发行上市审核规则适用指引自查表》第43条：锁定安排及穿透核查要求。
+                </li>
+            </ol>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full max-w-4xl mt-12 text-center text-secondary text-sm border-t border-color pt-8">
+        <p>&copy; 2025 资本市场政策研究中心. All rights reserved.</p>
+        <p class="mt-2">免责声明：本页面内容仅供参考，不构成投资建议。</p>
+    </footer>
+
+    <!-- Mermaid JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Theme Toggle JavaScript
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlElement = document.documentElement;
+        const mermaidPre = document.querySelector('.mermaid');
+
+        // Define Mermaid theme variables for both light and dark modes
+        const mermaidThemes = {
+            dark: {
+                startOnLoad: true,
+                theme: 'dark',
+                themeVariables: {
+                    'darkMode': true,
+                    'background': '#1a1a1a', /* --bg-secondary */
+                    'primaryColor': '#0a0a0a', /* --bg-primary */
+                    'secondaryColor': '#38bdf8', /* --accent-color */
+                    'tertiaryColor': '#e2e8f0', /* --text-primary */
+                    'lineColor': '#94a3b8', /* --text-secondary */
+                    'textColor': '#e2e8f0', /* --text-primary */
+                    'noteBkgColor': '#0c4a6e', /* --highlight-bg */
+                    'noteBorderColor': '#38bdf8' /* --accent-color */
+                }
+            },
+            light: {
+                startOnLoad: true,
+                theme: 'default', // Mermaid's default is light
+                themeVariables: {
+                    'darkMode': false,
+                    'background': '#ffffff', /* --bg-secondary */
+                    'primaryColor': '#f8fafc', /* --bg-primary */
+                    'secondaryColor': '#0284c7', /* --accent-color */
+                    'tertiaryColor': '#1e293b', /* --text-primary */
+                    'lineColor': '#475569', /* --text-secondary */
+                    'textColor': '#1e293b', /* --text-primary */
+                    'noteBkgColor': '#e0f2fe', /* --highlight-bg */
+                    'noteBorderColor': '#0284c7' /* --accent-color */
+                }
+            }
+        };
+
+        // Function to update icon and Mermaid theme based on current theme
+        function updateThemeIconAndMermaid(theme) {
+            if (theme === 'dark') {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                if (mermaidPre) mermaidPre.setAttribute('data-theme', 'dark');
+                mermaid.initialize(mermaidThemes.dark);
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                if (mermaidPre) mermaidPre.setAttribute('data-theme', 'light');
+                mermaid.initialize(mermaidThemes.light);
+            }
+            // Re-render Mermaid diagrams to apply new theme
+            mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        }
+
+        // Check for saved theme preference or system preference on load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            htmlElement.classList.add(savedTheme);
+            updateThemeIconAndMermaid(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            htmlElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+            updateThemeIconAndMermaid('dark');
+        } else {
+            // Default to light mode if no preference and system is not dark
+            htmlElement.classList.add('light');
+            localStorage.setItem('theme', 'light');
+            updateThemeIconAndMermaid('light');
+        }
+
+        // Toggle theme on button click
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+                updateThemeIconAndMermaid('light');
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeIconAndMermaid('dark');
+            }
+        });
+    </script>
+</body>
+</html>
+```
