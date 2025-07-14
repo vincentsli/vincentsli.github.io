@@ -1,0 +1,515 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拟上市企业合规证明：深度解析与补充指南</title>
+    <meta name="description" content="深度解析拟上市企业合规证明，补充除15个主管部门外的关键监管机构要求，助您全面掌握上市合规要点。">
+    <meta name="keywords" content="拟上市, IPO, 合规证明, 监管机构, 上市合规, 企业上市, 法律合规">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+
+    <style>
+        /* Base styles and Chinese font fallback */
+        body {
+            font-family: 'Noto Sans SC', 'Tahoma', 'Arial', 'Roboto', "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", "Simsun", sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', 'Tahoma', 'Arial', 'Roboto', "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", "Simsun", serif;
+            letter-spacing: 0.02em; /* Slightly wider spacing for headings */
+        }
+
+        /* Dark Mode specific styles */
+        .dark {
+            --bg-color-primary: #121212;
+            --bg-color-secondary: #1a1a1a;
+            --text-color-primary: #E0E0E0;
+            --text-color-secondary: #B0B0B0;
+            --accent-color: #93C5FD; /* light blue for accent */
+            --border-color: #333333;
+            --card-bg: #222222;
+        }
+
+        /* Light Mode specific styles */
+        .light {
+            --bg-color-primary: #F9FAFB;
+            --bg-color-secondary: #FFFFFF;
+            --text-color-primary: #333333;
+            --text-color-secondary: #555555;
+            --accent-color: #2563EB; /* darker blue for accent */
+            --border-color: #E5E7EB;
+            --card-bg: #F3F4F6;
+        }
+
+        body {
+            background-color: var(--bg-color-primary);
+            color: var(--text-color-primary);
+        }
+
+        .text-secondary {
+            color: var(--text-color-secondary);
+        }
+
+        .bg-secondary {
+            background-color: var(--bg-color-secondary);
+        }
+
+        .border-base {
+            border-color: var(--border-color);
+        }
+
+        .text-accent {
+            color: var(--accent-color);
+        }
+
+        .bg-card {
+            background-color: var(--card-bg);
+        }
+
+        /* Custom styles for Mermaid */
+        .mermaid {
+            background-color: var(--card-bg) !important;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            color: var(--text-color-primary) !important; /* Ensure text is visible */
+        }
+
+        .dark .mermaid-main-font {
+            fill: var(--text-color-primary) !important;
+            color: var(--text-color-primary) !important;
+        }
+
+        .light .mermaid-main-font {
+            fill: var(--text-color-primary) !important;
+            color: var(--text-color-primary) !important;
+        }
+
+        /* Mermaid node and edge styling for dark mode */
+        .dark .node rect, .dark .node circle, .dark .node ellipse, .dark .node polygon {
+            fill: var(--bg-color-secondary) !important;
+            stroke: var(--accent-color) !important;
+        }
+        .dark .node text {
+            fill: var(--text-color-primary) !important;
+        }
+        .dark .edgePaths .path {
+            stroke: var(--text-color-secondary) !important;
+        }
+        .dark .edgeLabel text {
+            fill: var(--text-color-secondary) !important;
+        }
+
+        /* Mermaid node and edge styling for light mode */
+        .light .node rect, .light .node circle, .light .node ellipse, .light .node polygon {
+            fill: var(--card-bg) !important;
+            stroke: var(--accent-color) !important;
+        }
+        .light .node text {
+            fill: var(--text-color-primary) !important;
+        }
+        .light .edgePaths .path {
+            stroke: var(--text-color-secondary) !important;
+        }
+        .light .edgeLabel text {
+            fill: var(--text-color-secondary) !important;
+        }
+
+        /* Scrollbar styles for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color-secondary);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-color-secondary);
+        }
+    </style>
+</head>
+<body class="leading-relaxed antialiased">
+    <div class="min-h-screen flex flex-col">
+        <!-- Dark/Light Mode Toggle -->
+        <button id="theme-toggle" class="fixed bottom-6 right-6 p-3 rounded-full shadow-lg z-50 transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-accent"
+                style="background-color: var(--card-bg); color: var(--text-color-primary);">
+            <i class="fas fa-sun text-xl hidden dark:block"></i>
+            <i class="fas fa-moon text-xl block light:hidden"></i>
+        </button>
+
+        <!-- Hero Section -->
+        <header class="relative overflow-hidden pt-24 pb-32 bg-secondary text-center shadow-lg border-b border-base">
+            <div class="absolute inset-0 opacity-10" style="background-image: url('https://images.unsplash.com/photo-1543286386-713ed008886c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size: cover; background-position: center;"></div>
+            <div class="relative z-10 max-w-4xl mx-auto px-6">
+                <h1 class="text-5xl md:text-6xl font-extrabold mb-4 text-accent drop-shadow-lg">
+                    拟上市企业合规证明
+                </h1>
+                <p class="text-2xl md:text-3xl text-secondary mb-8">
+                    <span class="font-bold text-lg md:text-xl">15部门之外的补充指南</span><br class="md:hidden">
+                    <span class="text-lg md:text-xl">助您全面掌握上市合规要点</span>
+                </p>
+                <p class="text-base md:text-lg max-w-2xl mx-auto text-secondary-light">
+                    企业上市是一项复杂而严谨的工程，合规性是其基石。除了常见主管部门的证明，针对特定行业和业务模式，还需补充何种证明？本指南为您深度解析。
+                </p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow container mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-3 gap-10">
+            <!-- Left Column for Content -->
+            <section class="lg:col-span-2 space-y-12">
+
+                <!-- Introduction -->
+                <article class="bg-card p-8 rounded-2xl shadow-xl border border-base">
+                    <h2 class="text-3xl font-bold mb-6 text-accent flex items-center">
+                        <i class="fas fa-question-circle mr-3"></i> 现有清单是否足够？
+                    </h2>
+                    <p class="text-lg leading-relaxed text-secondary-light">
+                        根据现有信息及实务经验，除图片所列15个主管部门外，<strong class="text-accent font-semibold">仍有其他需要补充的合规证明</strong>，具体需结合企业行业特性和业务模式判断。以下为补充部门及适用情形：
+                    </p>
+                </article>
+
+                <!-- Section: 需补充的合规证明主管部门 -->
+                <article class="bg-card p-8 rounded-2xl shadow-xl border border-base">
+                    <h2 class="text-3xl font-bold mb-6 text-accent flex items-center">
+                        <i class="fas fa-clipboard-list mr-3"></i> 需补充的合规证明主管部门
+                    </h2>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-base-light rounded-lg overflow-hidden">
+                            <thead class="bg-secondary">
+                                <tr>
+                                    <th scope="col" class="px-6 py-4 text-left text-sm font-medium text-text-secondary uppercase tracking-wider">
+                                        部门名称
+                                    </th>
+                                    <th scope="col" class="px-6 py-4 text-left text-sm font-medium text-text-secondary uppercase tracking-wider">
+                                        适用情形
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-base-light">
+                                <tr class="hover:bg-secondary-lighter transition-colors duration-200">
+                                    <td class="px-6 py-4 whitespace-nowrap text-lg font-medium text-accent flex items-center"><i class="fas fa-coins mr-2 text-base"></i>金融监管机构<span class="text-sm ml-2 text-text-secondary">（央行/银保监会/地方金融局）</span></td>
+                                    <td class="px-6 py-4 text-text-primary text-base">从事金融、支付、融资担保等业务的主体</td>
+                                </tr>
+                                <tr class="hover:bg-secondary-lighter transition-colors duration-200">
+                                    <td class="px-6 py-4 whitespace-nowrap text-lg font-medium text-accent flex items-center"><i class="fas fa-globe mr-2 text-base"></i>网信办/通管局</td>
+                                    <td class="px-6 py-4 text-text-primary text-base">涉及互联网信息服务、数据安全、APP运营等业务的主体（如平台企业、大数据公司）</td>
+                                </tr>
+                                <tr class="hover:bg-secondary-lighter transition-colors duration-200">
+                                    <td class="px-6 py-4 whitespace-nowrap text-lg font-medium text-accent flex items-center"><i class="fas fa-pills mr-2 text-base"></i>药品监管部门<span class="text-sm ml-2 text-text-secondary">（药监局）</span></td>
+                                    <td class="px-6 py-4 text-text-primary text-base">从事药品、医疗器械研发/生产/经营的主体</td>
+                                </tr>
+                                <tr class="hover:bg-secondary-lighter transition-colors duration-200">
+                                    <td class="px-6 py-4 whitespace-nowrap text-lg font-medium text-accent flex items-center"><i class="fas fa-graduation-cap mr-2 text-base"></i>教育主管部门</td>
+                                    <td class="px-6 py-4 text-text-primary text-base">涉及教育服务、培训业务的主体</td>
+                                </tr>
+                                <tr class="hover:bg-secondary-lighter transition-colors duration-200">
+                                    <td class="px-6 py-4 whitespace-nowrap text-lg font-medium text-accent flex items-center"><i class="fas fa-theater-masks mr-2 text-base"></i>文化主管部门<span class="text-sm ml-2 text-text-secondary">（文旅局）</span></td>
+                                    <td class="px-6 py-4 text-text-primary text-base">从事出版、影视、游戏、演出等文化业务的主体</td>
+                                </tr>
+                                <tr class="hover:bg-secondary-lighter transition-colors duration-200">
+                                    <td class="px-6 py-4 whitespace-nowrap text-lg font-medium text-accent flex items-center"><i class="fas fa-seedling mr-2 text-base"></i>农业主管部门<span class="text-sm ml-2 text-text-secondary">（农业农村局）</span></td>
+                                    <td class="px-6 py-4 text-text-primary text-base">涉及种子、农药、兽药生产或农业产业化经营的主体</td>
+                                </tr>
+                                <tr class="hover:bg-secondary-lighter transition-colors duration-200">
+                                    <td class="px-6 py-4 whitespace-nowrap text-lg font-medium text-accent flex items-center"><i class="fas fa-industry mr-2 text-base"></i>特定行业监管部门</td>
+                                    <td class="px-6 py-4 text-text-primary text-base">
+                                        <ul class="list-disc list-inside space-y-1">
+                                            <li>能源企业 <span class="text-sm text-text-secondary">→ 能源局</span></li>
+                                            <li>烟草企业 <span class="text-sm text-text-secondary">→ 烟草专卖局</span></li>
+                                            <li>电信企业 <span class="text-sm text-text-secondary">→ 工信部</span></li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <!-- Section: 对现有清单的补充说明 -->
+                <article class="bg-card p-8 rounded-2xl shadow-xl border border-base">
+                    <h2 class="text-3xl font-bold mb-6 text-accent flex items-center">
+                        <i class="fas fa-info-circle mr-3"></i> 对现有清单的补充说明
+                    </h2>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-angle-right text-accent mt-1 mr-3"></i>
+                            <div>
+                                <strong class="text-accent text-lg">行业特殊监管：</strong> 清单中的“综合执法部门”仅覆盖一般性行政处罚核查，<strong class="font-semibold text-text-primary">行业专属监管部门（如药监局、金融局等）的合规证明不可或缺</strong>。
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-angle-right text-accent mt-1 mr-3"></i>
+                            <div>
+                                <strong class="text-accent text-lg">地域差异：</strong> 部分地区可能要求补充 <strong class="font-semibold text-text-primary">“水务部门”（水资源使用）</strong>、“气象部门”（防雷验收）等证明，需根据当地政策调整。
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-angle-right text-accent mt-1 mr-3"></i>
+                            <div>
+                                <strong class="text-accent text-lg">数据与网络安全：</strong> 若企业处理敏感数据（如个人信息、地图数据），<strong class="font-semibold text-text-primary">网信部门及公安机关的网络安全合规证明</strong>日益重要。
+                            </div>
+                        </li>
+                    </ul>
+                </article>
+
+                <!-- Section: 实务建议 -->
+                <article class="bg-card p-8 rounded-2xl shadow-xl border border-base">
+                    <h2 class="text-3xl font-bold mb-6 text-accent flex items-center">
+                        <i class="fas fa-lightbulb mr-3"></i> 实务建议
+                    </h2>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-cogs text-accent mt-1 mr-3"></i>
+                            <div>
+                                <strong class="text-accent text-lg">动态调整原则：</strong> 合规证明清单需根据企业 <strong class="font-semibold text-text-primary">主营业务、资质许可、行业监管强度</strong> 动态补充，避免套用模板。
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-comments text-accent mt-1 mr-3"></i>
+                            <div>
+                                <strong class="text-accent text-lg">提前沟通中介机构：</strong> 保荐机构及律师通常会基于企业具体情况，<strong class="font-semibold text-text-primary">增加行业专属监管部门</strong>的合规证明要求。
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-newspaper text-accent mt-1 mr-3"></i>
+                            <div>
+                                <strong class="text-accent text-lg">关注新规动向：</strong> 例如数据安全法生效后，数据密集型企业需新增网信部门证明；平台经济企业需补充市场监管总局关于垄断合规的确认。
+                            </div>
+                        </li>
+                    </ul>
+                </article>
+
+                <!-- Conclusion -->
+                <article class="bg-card p-8 rounded-2xl shadow-xl border border-base">
+                    <h2 class="text-3xl font-bold mb-6 text-accent flex items-center">
+                        <i class="fas fa-check-circle mr-3"></i> 结论
+                    </h2>
+                    <p class="text-lg leading-relaxed font-bold text-text-primary">
+                        图片清单是基础框架，但拟上市企业（尤其金融、医疗、TMT、教育等强监管行业）<strong class="text-accent">必须补充行业专属监管部门的合规证明</strong>，否则可能构成上市实质障碍。建议企业协同中介机构制定定制化清单。
+                    </p>
+                </article>
+
+            </section>
+
+            <!-- Right Column for Data Visualization & Further Reading -->
+            <aside class="lg:col-span-1 space-y-12">
+                <!-- Data Visualization with Mermaid -->
+                <div class="bg-card p-8 rounded-2xl shadow-xl border border-base">
+                    <h3 class="text-2xl font-bold mb-6 text-accent flex items-center">
+                        <i class="fas fa-sitemap mr-3"></i> 合规证明体系概览
+                    </h3>
+                    <div class="mermaid-graph text-text-primary flex justify-center" id="compliance-flowchart">
+                        graph TD
+                            A[现有15项基础合规证明] --> B(是否足够？);
+                            B -- 否 --> C(需要补充);
+
+                            C --> C1[金融监管机构];
+                            C --> C2[网信办/通管局];
+                            C --> C3[药品监管部门];
+                            C --> C4[教育主管部门];
+                            C --> C5[文化主管部门];
+                            C --> C6[农业主管部门];
+                            C --> C7[特定行业监管部门];
+
+                            C --> D{补充说明};
+                            D --> D1[行业特殊监管];
+                            D --> D2[地域差异];
+                            D --> D3[数据与网络安全];
+
+                            D --> E{实务建议};
+                            E --> E1[动态调整原则];
+                            E --> E2[提前沟通中介机构];
+                            E --> E3[关注新规动向];
+
+                            E --> F[结论: 结合行业定制清单];
+
+                        style A fill:#93C5FD,stroke:#93C5FD,stroke-width:2px,color:#121212
+                        style B fill:#FCD34D,stroke:#FCD34D,stroke-width:2px,color:#121212
+                        style C fill:#93C5FD,stroke:#93C5FD,stroke-width:2px,color:#121212
+                        style F fill:#34D399,stroke:#34D399,stroke-width:2px,color:#121212
+
+                        classDef defaultNode fill:var(--card-bg),stroke:var(--accent-color),stroke-width:1px,color:var(--text-color-primary);
+                        classDef diamondNode fill:var(--card-bg),stroke:var(--accent-color),stroke-width:1px,color:var(--text-color-primary);
+                        classDef edgeLine stroke:var(--text-color-secondary),stroke-width:1px;
+                        linkStyle default stroke:var(--text-color-secondary);
+                    </div>
+                </div>
+
+                <!-- Further Reading -->
+                <div class="bg-card p-8 rounded-2xl shadow-xl border border-base">
+                    <h3 class="text-2xl font-bold mb-6 text-accent flex items-center">
+                        <i class="fas fa-book-open mr-3"></i> 延伸阅读
+                    </h3>
+                    <ul class="space-y-4">
+                        <li>
+                            <p class="font-semibold text-lg text-text-primary">《中国企业IPO法律实务指引》</p>
+                            <p class="text-sm text-text-secondary">深入解析中国A股、港股、美股上市的法律流程、风险与挑战。侧重于实务操作和案例分析，是企业法务和投行从业者的必备手册。</p>
+                            <a href="#" class="text-accent hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i>查看详情</a>
+                        </li>
+                        <li>
+                            <p class="font-semibold text-lg text-text-primary">《上市公司合规管理白皮书》</p>
+                            <p class="text-sm text-text-secondary">由权威机构发布，系统阐述上市公司合规管理体系的构建、运行和评估，涵盖公司治理、信息披露、反腐败等多个方面。</p>
+                            <a href="#" class="text-accent hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i>查看详情</a>
+                        </li>
+                        <li>
+                            <p class="font-semibold text-lg text-text-primary">《数据安全法与个人信息保护法解读》</p>
+                            <p class="text-sm text-text-secondary">详细解读中国最新数据法律法规，对大数据、互联网企业的数据合规提供权威指引，对拟上市企业的数据治理具有重要参考价值。</p>
+                            <a href="#" class="text-accent hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i>查看详情</a>
+                        </li>
+                        <li>
+                            <p class="font-semibold text-lg text-text-primary">《IPO审核案例精选与分析》</p>
+                            <p class="text-sm text-text-secondary">通过真实案例剖析证监会和交易所的审核重点与否决原因，帮助拟上市企业规避雷区，提高过会率。</p>
+                            <a href="#" class="text-accent hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i>查看详情</a>
+                        </li>
+                        <li>
+                            <p class="font-semibold text-lg text-text-primary">《行业监管政策汇编（年度更新）》</p>
+                            <p class="text-sm text-text-secondary">汇总特定行业的最新监管政策、法规和指导意见，对于强监管行业的拟上市企业尤其重要，需持续关注。</p>
+                            <a href="#" class="text-accent hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i>查看详情</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-secondary text-center py-8 border-t border-base mt-12">
+            <p class="text-sm text-secondary">&copy; 2023 拟上市企业合规指南. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid Configuration
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark', // Default to dark theme for Mermaid
+            securityLevel: 'loose', // Allow custom styling
+            flowchart: {
+                htmlLabels: true
+            },
+            themeVariables: {
+                // Common variables
+                fontFamily: "'Noto Sans SC', 'Tahoma', 'Arial', 'Roboto', 'Helvetica Neue', sans-serif",
+                fontSize: '14px',
+
+                // Dark theme variables
+                dark: {
+                    background: '#222222', // Match --card-bg
+                    primaryColor: '#1a1a1a', // Match --bg-color-secondary
+                    primaryBorderColor: '#93C5FD', // Match --accent-color
+                    primaryTextColor: '#E0E0E0', // Match --text-color-primary
+                    secondaryColor: '#121212', // Match --bg-color-primary
+                    secondaryBorderColor: '#B0B0B0', // Match --text-color-secondary
+                    secondaryTextColor: '#E0E0E0', // Match --text-color-primary
+                    tertiaryColor: '#333333',
+                    tertiaryBorderColor: '#555555',
+                    tertiaryTextColor: '#E0E0E0',
+                    lineColor: '#B0B0B0', // Match --text-color-secondary
+                    nodeBorder: '#93C5FD', // Accent
+                    nodeTextColor: '#E0E0E0', // Primary text
+                    edgeColor: '#B0B0B0', // Secondary text
+                },
+                // Light theme variables (will be dynamically set)
+                light: {
+                    background: '#F3F4F6', // Match --card-bg
+                    primaryColor: '#FFFFFF', // Match --bg-color-secondary
+                    primaryBorderColor: '#2563EB', // Match --accent-color
+                    primaryTextColor: '#333333', // Match --text-color-primary
+                    secondaryColor: '#F9FAFB', // Match --bg-color-primary
+                    secondaryBorderColor: '#555555', // Match --text-color-secondary
+                    secondaryTextColor: '#333333', // Match --text-color-primary
+                    tertiaryColor: '#E5E7EB',
+                    tertiaryBorderColor: '#BBBBBB',
+                    tertiaryTextColor: '#333333',
+                    lineColor: '#555555', // Match --text-color-secondary
+                    nodeBorder: '#2563EB', // Accent
+                    nodeTextColor: '#333333', // Primary text
+                    edgeColor: '#555555', // Secondary text
+                }
+            }
+        });
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            htmlElement.className = theme;
+            localStorage.setItem('theme', theme);
+            // Update Mermaid theme dynamically
+            if (theme === 'dark') {
+                mermaid.initialize({ theme: 'dark' });
+            } else {
+                mermaid.initialize({ theme: 'default' }); // default for light theme in mermaid
+            }
+            // Re-render Mermaid diagram
+            document.getElementById('compliance-flowchart').removeAttribute('data-processed');
+            mermaid.init(undefined, document.getElementById('compliance-flowchart'));
+        }
+
+        // Check for saved theme or system preference on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme('dark'); // Default to dark if system prefers
+            } else {
+                setTheme('light'); // Fallback to light
+            }
+        });
+
+        // Toggle theme on button click
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Add subtle fade-in on scroll (Intersection Observer)
+        const sections = document.querySelectorAll('article, .mermaid-graph');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-4');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            section.classList.add('transition-all', 'duration-700', 'ease-out', 'opacity-0', 'translate-y-4');
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
+```
