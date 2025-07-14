@@ -1,0 +1,643 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拟上市企业合规深度解析：土地与规划</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233B82F6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'%3E%3C/path%3E%3C/svg%3E" type="image/svg+xml">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <style>
+        /* Custom Font Stack */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-self;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-self;
+        }
+
+        /* Dark Mode Specific Styles */
+        .dark body {
+            background-color: #0A0A0A; /* Deeper dark background */
+            color: #E0E0E0;
+        }
+        .dark .bg-hero-dark {
+            background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+        }
+        .dark .card {
+            background-color: #1A1A1A;
+            border-color: #333333;
+        }
+        .dark .table-header {
+            background-color: #262626;
+            color: #F3F4F6;
+        }
+        .dark .table-row {
+            background-color: #1A1A1A;
+        }
+        .dark .table-row:nth-child(even) {
+            background-color: #1F1F1F;
+        }
+        .dark .border-primary {
+            border-color: #4B5563; /* Gray-600 */
+        }
+        .dark .text-primary-light {
+            color: #9CA3AF; /* Gray-400 */
+        }
+        .dark .text-accent {
+            color: #60A5FA; /* Blue-400 */
+        }
+        .dark .text-highlight {
+            color: #DC2626; /* Red-600 */
+        }
+        .dark .text-success {
+            color: #10B981; /* Green-500 */
+        }
+        .dark .text-info {
+            color: #3B82F6; /* Blue-500 */
+        }
+        .dark .bg-info-light {
+            background-color: rgba(59, 130, 246, 0.1); /* Blue-500 with opacity */
+        }
+        .dark .bg-danger-light {
+            background-color: rgba(220, 38, 38, 0.1); /* Red-600 with opacity */
+        }
+        .dark .border-divider {
+            border-color: #333333;
+        }
+        .dark .mermaid-diagram {
+            background-color: #1A1A1A !important;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Light Mode Specific Styles (defaults from Tailwind, override where needed) */
+        .light body {
+            background-color: #F9FAFB; /* Light background */
+            color: #1F2937;
+        }
+        .light .bg-hero-light {
+            background-color: rgba(255, 255, 255, 0.7); /* Light overlay */
+        }
+        .light .card {
+            background-color: #FFFFFF;
+            border-color: #E5E7EB;
+        }
+        .light .table-header {
+            background-color: #F3F4F6;
+            color: #374151;
+        }
+        .light .table-row {
+            background-color: #FFFFFF;
+        }
+        .light .table-row:nth-child(even) {
+            background-color: #F9FAFB;
+        }
+        .light .border-primary {
+            border-color: #D1D5DB; /* Gray-300 */
+        }
+        .light .text-primary-light {
+            color: #6B7280; /* Gray-500 */
+        }
+        .light .text-accent {
+            color: #2563EB; /* Blue-600 */
+        }
+        .light .text-highlight {
+            color: #B91C1C; /* Red-700 */
+        }
+        .light .text-success {
+            color: #059669; /* Green-600 */
+        }
+        .light .text-info {
+            color: #2563EB; /* Blue-600 */
+        }
+        .light .bg-info-light {
+            background-color: rgba(37, 99, 235, 0.1);
+        }
+        .light .bg-danger-light {
+            background-color: rgba(185, 28, 28, 0.1);
+        }
+        .light .border-divider {
+            border-color: #E5E7EB;
+        }
+        .light .mermaid-diagram {
+            background-color: #F9FAFB !important;
+            border: 1px solid #E5E7EB;
+        }
+
+        /* Generic styles for both modes */
+        .card {
+            border-width: 1px;
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .table-row td {
+            padding: 1rem;
+            vertical-align: top;
+        }
+        .table-row th {
+            padding: 1rem;
+            text-align: left;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        /* Custom styles for Mermaid diagram text color in dark mode */
+        .dark .mermaid text {
+            fill: #E0E0E0 !important;
+        }
+        .dark .mermaid .edge-label {
+            fill: #E0E0E0 !important;
+        }
+        .dark .mermaid .node rect, .dark .mermaid .node circle, .dark .mermaid .node polygon {
+            stroke: #60A5FA !important; /* Accent blue for borders */
+            fill: #1A1A1A !important; /* Dark card background */
+        }
+        .dark .mermaid .node.current rect, .dark .mermaid .node.current circle {
+            stroke: #10B981 !important; /* Success green */
+            fill: #1A1A1A !important;
+        }
+        .dark .mermaid .edge path {
+            stroke: #9CA3AF !important; /* Gray for lines */
+        }
+        .dark .mermaid .label rect {
+            fill: #1A1A1A !important; /* Ensure label backgrounds are dark */
+        }
+        /* Light mode Mermaid */
+        .light .mermaid text {
+            fill: #1F2937 !important;
+        }
+        .light .mermaid .edge-label {
+            fill: #1F2937 !important;
+        }
+        .light .mermaid .node rect, .light .mermaid .node circle, .light .mermaid .node polygon {
+            stroke: #2563EB !important;
+            fill: #FFFFFF !important;
+        }
+        .light .mermaid .node.current rect, .light .mermaid .node.current circle {
+            stroke: #059669 !important;
+            fill: #FFFFFF !important;
+        }
+        .light .mermaid .edge path {
+            stroke: #6B7280 !important;
+        }
+        .light .mermaid .label rect {
+            fill: #FFFFFF !important;
+        }
+        .mermaid {
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen transition-colors duration-300">
+
+    <!-- Theme Switcher -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="theme-toggle" class="p-3 rounded-full bg-gray-700 text-gray-200 shadow-lg hover:bg-gray-600 transition-colors duration-300">
+            <i class="fas fa-sun hidden dark:inline-block"></i>
+            <i class="fas fa-moon inline-block dark:hidden"></i>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative bg-gradient-to-br from-gray-800 to-gray-900 min-h-screen-1/2 flex items-center justify-center text-center p-8 overflow-hidden dark:bg-gradient-to-br dark:from-gray-950 dark:to-black">
+        <!-- Background Overlay for text readability -->
+        <div class="absolute inset-0 bg-hero-dark light:bg-hero-light"></div>
+        <div class="relative z-10 max-w-4xl mx-auto text-white">
+            <h1 class="text-5xl md:text-6xl font-bold mb-4 leading-tight tracking-tight animate-fade-in-up">
+                <i class="fas fa-gavel text-accent mr-3"></i> 拟上市企业合规深度解析
+            </h1>
+            <p class="text-xl md:text-2xl font-light opacity-90 mb-8 animate-fade-in-up delay-200">
+                土地与规划合规：不容忽视的IPO关键环节
+            </p>
+            <p class="text-base md:text-lg font-normal opacity-80 max-w-2xl mx-auto animate-fade-in-up delay-400">
+                深入剖析拟上市企业合规证明体系中，土地与规划部门证明的缺失风险与实务要点。
+            </p>
+            <a href="#main-content" class="inline-block mt-10 px-8 py-3 bg-accent text-white font-semibold rounded-full shadow-lg hover:bg-blue-600 transition-all duration-300 transform hover:scale-105 animate-bounce-in delay-600">
+                立即探索 <i class="fas fa-arrow-down ml-2"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="max-w-7xl mx-auto p-4 md:p-8 space-y-12 my-12 animate-fade-in">
+
+        <!-- Introduction -->
+        <section class="card p-8 rounded-xl shadow-xl border-primary">
+            <p class="text-lg leading-relaxed text-primary-light">
+                根据拟上市企业常规合规证明要求及实务经验，原始15个主管部门清单中**未直接包含土地与规划主管部门**（原始清单详见前期提供的图片），但这两类证明在IPO审核中至关重要。以下是具体分析及补充建议：
+            </p>
+        </section>
+
+        <!-- Section 1: 土地与规划主管部门的定位 -->
+        <section class="space-y-6">
+            <h2 class="text-3xl font-bold text-accent mb-6 flex items-center">
+                <i class="fas fa-map-marked-alt mr-3"></i> 一、土地与规划主管部门的定位
+            </h2>
+            <div class="table-container bg-opacity-70 rounded-lg shadow-md overflow-hidden">
+                <table class="min-w-full divide-y divide-gray-700 dark:divide-gray-600">
+                    <thead class="table-header">
+                        <tr>
+                            <th scope="col" class="py-3 px-6 text-xs font-medium uppercase tracking-wider">部门类型</th>
+                            <th scope="col" class="py-3 px-6 text-xs font-medium uppercase tracking-wider">主管部门名称</th>
+                            <th scope="col" class="py-3 px-6 text-xs font-medium uppercase tracking-wider">职责范围</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-700 dark:divide-gray-600">
+                        <tr class="table-row hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors duration-200">
+                            <td class="whitespace-nowrap font-semibold">土地管理</td>
+                            <td>自然资源局（原国土局）</td>
+                            <td>负责土地权属登记、用地审批、土地出让合同履行核查、闲置土地处罚记录等</td>
+                        </tr>
+                        <tr class="table-row hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors duration-200">
+                            <td class="whitespace-nowrap font-semibold">规划管理</td>
+                            <td>自然资源局（原规划局）</td>
+                            <td>核发建设项目规划许可证、验收规划落实情况、查处违建行为等</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="mt-4 text-sm text-primary-light italic">
+                <i class="fas fa-info-circle mr-2 text-info"></i>
+                <span class="font-bold">注</span>：2018年机构改革后，绝大多数地区已将
+                <span class="text-accent font-semibold">国土、规划职能整合至自然资源局</span>，部分市县仍保留独立"规划与自然资源分局"。
+            </p>
+        </section>
+
+        <hr class="border-divider my-10">
+
+        <!-- Section 2: 原始清单的覆盖情况分析 -->
+        <section class="space-y-6">
+            <h2 class="text-3xl font-bold text-accent mb-6 flex items-center">
+                <i class="fas fa-chart-pie mr-3"></i> 二、原始清单的覆盖情况分析
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card p-6 rounded-lg shadow-md border-primary bg-danger-light">
+                    <h3 class="text-xl font-semibold mb-3 text-highlight flex items-center">
+                        <i class="fas fa-exclamation-triangle mr-2"></i> 明确缺失项
+                    </h3>
+                    <p class="text-primary-light">
+                        原始15个部门包含市场监管、税务、环保、应急管理等<span class="font-semibold">通用监管部门</span>，但未单独列出
+                        <span class="text-highlight font-semibold">自然资源局（土地/规划）</span>这一关键部门。
+                    </p>
+                </div>
+                <div class="card p-6 rounded-lg shadow-md border-primary bg-info-light">
+                    <h3 class="text-xl font-semibold mb-3 text-info flex items-center">
+                        <i class="fas fa-search mr-2"></i> 可能存在的间接覆盖
+                    </h3>
+                    <ul class="list-none space-y-2 text-primary-light">
+                        <li>
+                            <i class="fas fa-chevron-right text-info text-sm mr-2"></i>
+                            <span class="font-semibold">住建部门</span>：仅涉及施工许可、工程验收等环节，
+                            <span class="text-highlight font-semibold">不覆盖土地权属与规划合规性</span>核心事项；
+                        </li>
+                        <li>
+                            <i class="fas fa-chevron-right text-info text-sm mr-2"></i>
+                            <span class="font-semibold">发改委</span>：负责项目立项（即"企业投资项目备案证"），但
+                            <span class="text-highlight font-semibold">不替代规划许可及土地合规证明</span>。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-divider my-10">
+
+        <!-- Section 3: 土地与规划证明的IPO审核必要性 -->
+        <section class="space-y-6">
+            <h2 class="text-3xl font-bold text-accent mb-6 flex items-center">
+                <i class="fas fa-balance-scale mr-3"></i> 三、土地与规划证明的IPO审核必要性
+            </h2>
+            <div class="table-container bg-opacity-70 rounded-lg shadow-md overflow-hidden">
+                <table class="min-w-full divide-y divide-gray-700 dark:divide-gray-600">
+                    <thead class="table-header">
+                        <tr>
+                            <th scope="col" class="py-3 px-6 text-xs font-medium uppercase tracking-wider">证明文件类型</th>
+                            <th scope="col" class="py-3 px-6 text-xs font-medium uppercase tracking-wider">审核要点</th>
+                            <th scope="col" class="py-3 px-6 text-xs font-medium uppercase tracking-wider">缺失风险案例</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-700 dark:divide-gray-600">
+                        <tr class="table-row hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors duration-200">
+                            <td class="font-semibold">土地使用权证/不动产证</td>
+                            <td>验证资产权属完整性，核查是否存在抵押、查封等限制</td>
+                            <td class="text-highlight"><i class="fas fa-exclamation-circle mr-2"></i>某制造业企业因集体建设用地手续不全被否</td>
+                        </tr>
+                        <tr class="table-row hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors duration-200">
+                            <td class="font-semibold">建设用地规划许可证</td>
+                            <td>确保项目用地性质与规划一致（如工业用地不得用于商业开发）</td>
+                            <td class="text-highlight"><i class="fas fa-exclamation-circle mr-2"></i>某文旅项目因擅自变更用地性质遭行政处罚，IPO终止</td>
+                        </tr>
+                        <tr class="table-row hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors duration-200">
+                            <td class="font-semibold">建设工程规划许可证</td>
+                            <td>确认建筑物面积、高度、密度等符合规划控制要求</td>
+                            <td class="text-highlight"><i class="fas fa-exclamation-circle mr-2"></i>科创板企业因超规划建设被要求拆除违规建筑，上市进程延迟1.5年</td>
+                        </tr>
+                        <tr class="table-row hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors duration-200">
+                            <td class="font-semibold">规划验收合格证</td>
+                            <td>证明项目竣工后实际建设与规划审批一致</td>
+                            <td class="text-highlight"><i class="fas fa-exclamation-circle mr-2"></i>房地产企业因验收未通过影响收入确认，不符合发行条件</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card p-6 mt-6 rounded-lg shadow-md border-primary bg-info-light">
+                <h3 class="text-lg font-semibold text-info flex items-center mb-2">
+                    <i class="fas fa-book-open mr-2"></i> 法规依据
+                </h3>
+                <p class="text-primary-light">
+                    《首次公开发行股票并上市管理办法》第十三条明确要求发行人"资产完整，业务及人员、财务、机构独立"——
+                    <span class="text-accent font-semibold">土地与规划合规性直接关系资产完整性认定</span>。
+                </p>
+            </div>
+        </section>
+
+        <hr class="border-divider my-10">
+
+        <!-- Section 4: 解决方案建议 -->
+        <section class="space-y-6">
+            <h2 class="text-3xl font-bold text-accent mb-6 flex items-center">
+                <i class="fas fa-lightbulb mr-3"></i> 四、解决方案建议
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="card p-6 rounded-lg shadow-md border-primary">
+                    <h3 class="text-xl font-semibold mb-3 text-info flex items-center">
+                        <i class="fas fa-list-check mr-2"></i> 必补主管部门
+                    </h3>
+                    <p class="text-primary-light mb-2">在合规证明清单中<span class="font-semibold text-accent">新增"自然资源局"</span>，获取以下核心文件：</p>
+                    <ul class="list-disc list-inside text-primary-light space-y-1">
+                        <li>土地权属无争议证明</li>
+                        <li>无闲置土地处罚证明</li>
+                        <li>建设项目规划许可及验收合规证明</li>
+                        <li>无违建处罚记录证明</li>
+                    </ul>
+                </div>
+                <div class="card p-6 rounded-lg shadow-md border-primary">
+                    <h3 class="text-xl font-semibold mb-3 text-info flex items-center">
+                        <i class="fas fa-globe-americas mr-2"></i> 地域特殊情形
+                    </h3>
+                    <ul class="list-disc list-inside text-primary-light space-y-1">
+                        <li>
+                            <span class="font-semibold">直辖市/计划单列市</span>：需同时取得 <span class="text-accent font-semibold">市、区两级自然资源局</span> 证明（如上海需浦东新区规资局+上海市规资局）；
+                        </li>
+                        <li>
+                            <span class="font-semibold">开发区内企业</span>：补充 <span class="text-accent font-semibold">开发区管委会规划建设部门</span> 的合规确认。
+                        </li>
+                    </ul>
+                </div>
+                <div class="card p-6 rounded-lg shadow-md border-primary">
+                    <h3 class="text-xl font-semibold mb-3 text-info flex items-center">
+                        <i class="fas fa-clipboard-check mr-2"></i> 中介机构核查要求
+                    </h3>
+                    <p class="text-primary-light">
+                        保荐机构需实地查验 <span class="font-semibold text-accent">"五证"原件</span>（建设用地规划许可证、土地使用权证、建设工程规划许可证、施工许可证、竣工验收备案表），确保账载土地与规划文件匹配。
+                    </p>
+                </div>
+            </div>
+            <div class="card p-6 mt-6 rounded-lg shadow-md border-primary bg-danger-light">
+                <h3 class="text-lg font-semibold text-highlight flex items-center mb-2">
+                    <i class="fas fa-fingerprint mr-2"></i> 实务提示
+                </h3>
+                <p class="text-primary-light">
+                    若企业涉及用地性质变更（如工改商）、历史遗留无证房产等问题，须提前由律师出具
+                    <span class="text-highlight font-semibold">专项合规法律意见</span> 并取得主管部门兜底证明，否则构成上市实质障碍。
+                </p>
+            </div>
+        </section>
+
+        <hr class="border-divider my-10">
+
+        <!-- Data Visualization: Mermaid Diagram -->
+        <section class="space-y-6">
+            <h2 class="text-3xl font-bold text-accent mb-6 flex items-center">
+                <i class="fas fa-sitemap mr-3"></i> 关键环节关系图
+            </h2>
+            <div class="mermaid-diagram text-center overflow-x-auto">
+                <pre class="mermaid">
+                    graph TD
+                        A[原始清单] --> B{是否包含土地/规划?};
+                        B -- 否 --> C(明确缺失);
+                        B -- 是 --> D(已覆盖);
+
+                        C --> E[自然资源局职责];
+                        E -- 涵盖 --> E1(土地管理)
+                        E -- 涵盖 --> E2(规划管理);
+
+                        E1 -- 影响 --> F1[资产完整性];
+                        E2 -- 影响 --> F2[项目合规性];
+
+                        F1 -- 缺失导致 --> G(IPO审核风险);
+                        F2 -- 缺失导致 --> G;
+
+                        G --> H(上市终止/延迟);
+
+                        subgraph 解决方案
+                            I[新增自然资源局] --> J(获取土地权属证明);
+                            I --> K(获取规划合规证明);
+                            I --> L(解决特殊地域问题);
+                            I --> M(配合中介机构核查);
+                        end
+
+                        J & K & L & M -- 最终目标 --> N(顺利IPO);
+
+                        click J "alert('土地权属证明包括：土地使用权证/不动产证、无闲置土地处罚证明等。');"
+                        click K "alert('规划合规证明包括：建设用地规划许可证、建设工程规划许可证、规划验收合格证、无违建处罚记录证明等。');"
+                </pre>
+            </div>
+            <p class="text-sm text-primary-light italic text-center mt-4">
+                <i class="fas fa-lightbulb mr-2 text-info"></i>
+                点击图表中特定节点可查看更多信息。此图直观展示了土地与规划部门在IPO合规中的关键地位及其相互关系。
+            </p>
+        </section>
+
+        <hr class="border-divider my-10">
+
+        <!-- Conclusion -->
+        <section class="card p-8 rounded-xl shadow-xl border-primary bg-info-light">
+            <h2 class="text-3xl font-bold text-accent mb-6 flex items-center">
+                <i class="fas fa-check-circle mr-3"></i> 结论
+            </h2>
+            <p class="text-lg leading-relaxed text-primary-light">
+                原始15个主管部门清单<span class="text-highlight font-semibold">未包含土地与规划监管部门（自然资源局）</span>，该遗漏可能对资产密集型或地产相关企业构成重大审核风险。
+                <span class="text-accent font-semibold">务必补充自然资源局的合规证明</span>，并结合项目实际情况匹配省/市/区级管辖权限。
+            </p>
+        </section>
+
+        <hr class="border-divider my-10">
+
+        <!-- Further Reading -->
+        <section class="space-y-6">
+            <h2 class="text-3xl font-bold text-accent mb-6 flex items-center">
+                <i class="fas fa-book-reader mr-3"></i> 进一步阅读
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card p-6 rounded-lg shadow-md border-primary">
+                    <h3 class="text-xl font-semibold mb-2 text-info">《中国企业IPO法律实务指引》</h3>
+                    <p class="text-primary-light text-sm mb-3">一本全面介绍中国企业境内外上市法律实务的指南，涵盖IPO全流程及常见法律问题。</p>
+                    <a href="#" class="text-accent hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i> 了解更多</a>
+                </div>
+                <div class="card p-6 rounded-lg shadow-md border-primary">
+                    <h3 class="text-xl font-semibold mb-2 text-info">《首次公开发行股票并上市管理办法》</h3>
+                    <p class="text-primary-light text-sm mb-3">中国证监会发布的最核心IPO法规，详细规定了上市的条件、程序和信息披露要求。</p>
+                    <a href="#" class="text-accent hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i> 了解更多</a>
+                </div>
+                <div class="card p-6 rounded-lg shadow-md border-primary">
+                    <h3 class="text-xl font-semibold mb-2 text-info">《中华人民共和国土地管理法》及相关法规解读</h3>
+                    <p class="text-primary-light text-sm mb-3">深入解读中国土地管理的基本法律、法规及政策，是理解土地合规的基石。</p>
+                    <a href="#" class="text-accent hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i> 了解更多</a>
+                </div>
+                <div class="card p-6 rounded-lg shadow-md border-primary">
+                    <h3 class="text-xl font-semibold mb-2 text-info">《企业合规管理体系构建与实务》</h3>
+                    <p class="text-primary-light text-sm mb-3">从管理学角度探讨企业如何建立健全合规体系，防范各类风险，提升治理水平。</p>
+                    <a href="#" class="text-accent hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i> 了解更多</a>
+                </div>
+                <div class="card p-6 rounded-lg shadow-md border-primary">
+                    <h3 class="text-xl font-semibold mb-2 text-info">《公司股权架构与风险控制》</h3>
+                    <p class="text-primary-light text-sm mb-3">分析公司股权结构设计与风险防范，与IPO中的资产完整性和独立性要求紧密相关。</p>
+                    <a href="#" class="text-accent hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i> 了解更多</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 text-center p-8 mt-12 dark:bg-black">
+        <p>&copy; 2023 IPO合规研究中心. All rights reserved.</p>
+        <p class="mt-2 text-sm">免责声明：本内容仅供参考，不构成法律意见。</p>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid Configuration
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base', // Use base theme and apply custom CSS for dark/light mode
+            themeVariables: {
+                // These will be overridden by custom CSS for better control
+                // Keeping them here as a fallback or for other elements
+                darkMode: document.documentElement.classList.contains('dark'),
+                primaryColor: '#60A5FA', // Accent blue
+                primaryTextColor: '#E0E0E0',
+                lineColor: '#9CA3AF',
+                secondaryColor: '#1A1A1A',
+                tertiaryColor: '#1A1A1A'
+            }
+        });
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Check for saved theme preference in localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            htmlElement.classList.remove('light', 'dark');
+            htmlElement.classList.add(savedTheme);
+            updateMermaidTheme(savedTheme === 'dark');
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            // Default to system preference if no saved theme
+            htmlElement.classList.add('dark');
+            updateMermaidTheme(true);
+        } else {
+            htmlElement.classList.add('light');
+            updateMermaidTheme(false);
+        }
+
+        function updateMermaidTheme(isDark) {
+            if (isDark) {
+                mermaid.initialize({
+                    theme: 'base',
+                    themeVariables: {
+                        darkMode: true,
+                        primaryColor: '#60A5FA',
+                        primaryTextColor: '#E0E0E0',
+                        lineColor: '#9CA3AF',
+                        secondaryColor: '#1A1A1A',
+                        tertiaryColor: '#1A1A1A'
+                    }
+                });
+            } else {
+                mermaid.initialize({
+                    theme: 'base',
+                    themeVariables: {
+                        darkMode: false,
+                        primaryColor: '#2563EB',
+                        primaryTextColor: '#1F2937',
+                        lineColor: '#6B7280',
+                        secondaryColor: '#FFFFFF',
+                        tertiaryColor: '#FFFFFF'
+                    }
+                });
+            }
+            // Re-render all mermaid diagrams
+            // A small delay might be needed to ensure DOM is ready for re-render
+            setTimeout(() => {
+                const mermaidElements = document.querySelectorAll('.mermaid');
+                mermaidElements.forEach(el => {
+                    const graphDefinition = el.textContent;
+                    el.removeAttribute('data-processed'); // Remove data-processed to force re-render
+                    el.innerHTML = ''; // Clear previous SVG
+                    mermaid.render('graph' + Date.now(), graphDefinition).then(({ svg }) => {
+                        el.innerHTML = svg;
+                    });
+                });
+            }, 100);
+        }
+
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+                updateMermaidTheme(false);
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateMermaidTheme(true);
+            }
+        });
+
+        // Simple scroll animation (fade-in for sections)
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('!opacity-100', '!translate-y-0');
+                } else {
+                    entry.target.classList.remove('!opacity-100', '!translate-y-0');
+                }
+            });
+        }, { threshold: 0.1 }); // Trigger when 10% of the section is visible
+
+        sections.forEach(section => {
+            section.classList.add('opacity-0', 'translate-y-4', 'transition-all', 'duration-700', 'ease-out');
+            observer.observe(section);
+        });
+
+        // Add bounce-in animation for hero cta
+        const heroCta = document.querySelector('.animate-bounce-in');
+        if (heroCta) {
+            heroCta.style.animationDelay = '0.6s'; // Delay matches CSS
+            heroCta.classList.add('opacity-0', 'scale-0'); // Initial state
+            setTimeout(() => {
+                heroCta.classList.remove('opacity-0', 'scale-0');
+                heroCta.classList.add('transition-all', 'duration-700', 'ease-out', 'transform', 'scale-100', 'opacity-100');
+            }, 100); // Small delay to allow CSS to apply before removing initial state
+        }
+    </script>
+</body>
+</html>
+```
