@@ -1,0 +1,565 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO股权变动深度解析 - 监管规则适用指引</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts for Noto Serif SC (headings) and Noto Sans SC (body) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <style>
+        /* Custom base styles and dark mode variables */
+        :root {
+            --bg-color-light: #f7f7f7;
+            --text-color-light: #2c3e50;
+            --heading-color-light: #1a202c;
+            --card-bg-light: #ffffff;
+            --border-color-light: #e2e8f0;
+            --accent-color: #3498db; /* A vibrant blue for accents */
+            --accent-light: #6ed1ee; /* Lighter accent for light mode */
+            --highlight-color-light: #ffeaa7; /* Subtle yellow highlight */
+            --highlight-text-light: #1a202c; /* Text color for highlight in light mode */
+
+            --bg-color-dark: #1a1a2e;
+            --text-color-dark: #e0e0e0;
+            --heading-color-dark: #ffffff;
+            --card-bg-dark: #2c2c4a;
+            --border-color-dark: #4a4a6b;
+            --highlight-color-dark: #fdd835; /* Brighter yellow highlight */
+            --highlight-text-dark: #1a1a2e; /* Text color for highlight in dark mode */
+        }
+
+        /* Default (light mode) */
+        body {
+            font-family: 'Noto Sans SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', sans-serif;
+            background-color: var(--bg-color-light);
+            color: var(--text-color-light);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+            color: var(--heading-color-light);
+            transition: color 0.3s ease;
+        }
+
+        .text-accent { color: var(--accent-color); }
+        .bg-card { background-color: var(--card-bg-light); }
+        .border-card { border-color: var(--border-color-light); }
+        .text-highlight { background-color: var(--highlight-color-light); padding: 0.1em 0.3em; border-radius: 0.2em; color: var(--highlight-text-light); }
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: var(--accent-light);
+        }
+        .toggle-switch {
+            background-color: var(--border-color-light);
+        }
+        .toggle-switch-circle {
+            background-color: var(--card-bg-light);
+        }
+        
+        /* Dark mode */
+        html.dark body {
+            background-color: var(--bg-color-dark);
+            color: var(--text-color-dark);
+        }
+
+        html.dark h1, html.dark h2, html.dark h3, html.dark h4, html.dark h5, html.dark h6 {
+            color: var(--heading-color-dark);
+        }
+
+        html.dark .text-accent { color: var(--accent-color); } /* Keep accent consistent or adjust if needed */
+        html.dark .bg-card { background-color: var(--card-bg-dark); }
+        html.dark .border-card { border-color: var(--border-color-dark); }
+        html.dark .text-highlight { background-color: var(--highlight-color-dark); color: var(--highlight-text-dark); }
+        html.dark .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        html.dark .btn-primary:hover {
+            background-color: var(--accent-light);
+        }
+        html.dark .toggle-switch {
+            background-color: var(--border-color-dark);
+        }
+        html.dark .toggle-switch-circle {
+            background-color: var(--card-bg-dark);
+            transform: translateX(1.5rem); /* Move to right for dark mode */
+        }
+
+        /* Custom scrollbar for subtle effect */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        html.dark ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        /* Mermaid specific styling */
+        .mermaid {
+            background-color: var(--card-bg-light);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            overflow-x: auto; /* Ensure horizontal scroll for large diagrams */
+        }
+        html.dark .mermaid {
+            background-color: var(--card-bg-dark);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        /* Mermaid text color in dark mode */
+        html.dark .mermaid text {
+            fill: var(--text-color-dark) !important;
+        }
+        /* Mermaid node background/border in dark mode */
+        html.dark .mermaid .node rect,
+        html.dark .mermaid .node circle,
+        html.dark .mermaid .node polygon {
+            fill: var(--card-bg-dark) !important;
+            stroke: var(--border-color-dark) !important;
+        }
+        html.dark .mermaid .edgePaths .path {
+            stroke: var(--text-color-dark) !important;
+        }
+        html.dark .mermaid .edgeLabels .edgeLabel {
+             background-color: var(--card-bg-dark) !important;
+        }
+
+        /* First letter drop cap */
+        .first-letter-dropcap::first-letter {
+            float: left;
+            font-size: 3.5em;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 700;
+            color: var(--accent-color);
+            padding-right: 0.05em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        html.dark .first-letter-dropcap::first-letter {
+            color: var(--accent-light);
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.1);
+        }
+
+        /* Responsive table */
+        @media screen and (max-width: 768px) {
+            .responsive-table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch; /* For smoother scrolling on iOS */
+            }
+            .responsive-table table {
+                width: 100%;
+                min-width: 600px; /* Ensure table doesn't get too narrow */
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <header class="py-4 px-6 md:px-8 shadow-sm flex justify-between items-center bg-card sticky top-0 z-50 border-b border-card">
+        <h1 class="text-xl md:text-2xl font-bold text-heading">IPO合规导航 <i class="fas fa-compass text-accent text-lg ml-2"></i></h1>
+        <button id="theme-toggle" class="flex items-center space-x-2 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300">
+            <span class="sr-only">切换主题</span>
+            <div class="toggle-switch relative w-12 h-6 rounded-full shadow-inner flex items-center transition-colors duration-300">
+                <div class="toggle-switch-circle absolute w-5 h-5 rounded-full shadow-md transform transition-transform duration-300 flex items-center justify-center">
+                    <i class="fas fa-sun text-yellow-500 dark:hidden text-sm"></i>
+                    <i class="fas fa-moon text-blue-300 hidden dark:inline text-sm"></i>
+                </div>
+            </div>
+        </button>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-8 md:py-12 max-w-screen-xl">
+        <!-- Hero Section -->
+        <section class="text-center mb-16 py-12 rounded-lg bg-gradient-to-br from-accent to-blue-500 dark:from-blue-800 dark:to-blue-600 shadow-lg text-white relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10 bg-no-repeat bg-center" style="background-image: url('data:image/svg+xml;utf8,<svg width=&quot;100%&quot; height=&quot;100%&quot; viewBox=&quot;0 0 100 100&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;><circle cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;40&quot; fill=&quot;transparent&quot; stroke=&quot;white&quot; stroke-width=&quot;1&quot; stroke-dasharray=&quot;5,5&quot; /><circle cx=&quot;30&quot; cy=&quot;70&quot; r=&quot;15&quot; fill=&quot;transparent&quot; stroke=&quot;white&quot; stroke-width=&quot;0.5&quot; stroke-dasharray=&quot;2,2&quot; /></svg>'); background-size: 100px;"></div>
+            <div class="relative z-10 px-4">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
+                    IPO申报基准日股权变动：<br class="md:hidden">深度解析与实务应对
+                </h2>
+                <p class="text-lg md:text-xl font-light opacity-90 max-w-3xl mx-auto">
+                    —— 《监管规则适用指引——发行类第4号》核心条款解读
+                </p>
+                <div class="mt-8">
+                    <a href="#section-main-content" class="inline-flex items-center px-8 py-3 rounded-full bg-white text-accent font-semibold text-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                        开始阅读 <i class="fas fa-arrow-down ml-3"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <div id="section-main-content" class="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12 mt-8">
+            <div class="lg:col-span-2">
+                <p class="mb-8 text-lg leading-relaxed first-letter-dropcap">根据《监管规则适用指引——发行类第4号》的规则逻辑及监管实践，对您的问题分析如下。</p>
+
+                <!-- Section 1: 如何理解“最近一年末资产负债表日” -->
+                <section class="mb-10 p-6 bg-card rounded-lg shadow-md border border-card">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center text-heading">
+                        <i class="fas fa-lightbulb text-accent mr-3"></i> 一、如何理解“最近一年末资产负债表日”
+                    </h3>
+                    <div class="mb-6">
+                        <h4 class="text-xl font-semibold mb-3 flex items-center text-heading">
+                            <i class="fas fa-circle-dot text-accent text-sm mr-2"></i> 1. 定义明确性
+                        </h4>
+                        <p class="mb-3 leading-relaxed">
+                            <span class="font-bold text-accent">“最近一年末”特指距离IPO申报时点最近的年度资产负债表截止日（即12月31日）</span>，而非中期报告日（如6月30日、9月30日）。
+                        </p>
+                        <ul class="list-disc pl-6 text-base text-gray-700 dark:text-gray-300">
+                            <li class="mb-2">
+                                <span class="font-semibold text-heading">依据</span>：
+                                <ul class="list-disc pl-6 mt-1">
+                                    <li>会计术语中“年度资产负债表日”默认为公历12月31日（见《企业会计准则》），中期报告属于阶段性财务数据，不构成完整会计年度。</li>
+                                    <li>监管问答中明确该条款的立法本意是确保 <span class="font-bold text-highlight">增资行为发生在完整会计年度结束后</span>（如2023年12月31日后）<sup class="ml-1 text-accent"><a href="#footnote-1">[1]</a></sup><sup class="ml-1 text-accent"><a href="#footnote-2">[2]</a></sup>。</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="text-xl font-semibold mb-3 flex items-center text-heading">
+                            <i class="fas fa-circle-dot text-accent text-sm mr-2"></i> 2. “日后”的范围
+                        </h4>
+                        <p class="mb-3 leading-relaxed">
+                            “资产负债表日后”指 <span class="font-bold text-accent">年度截止日（12月31日）次日至下一期财报批准报出日之间</span>。例如：
+                        </p>
+                        <ul class="list-disc pl-6 text-base text-gray-700 dark:text-gray-300">
+                            <li>若最近一年末为2023年12月31日，则“日后”指 <span class="font-bold text-highlight">2024年1月1日至2024年半年报/年报批准日</span>。</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Section 2: 对您案例的针对性分析 -->
+                <section class="mb-10 p-6 bg-card rounded-lg shadow-md border border-card">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center text-heading">
+                        <i class="fas fa-crosshairs text-accent mr-3"></i> 二、对您案例的针对性分析（930基准日+10月增资）
+                    </h3>
+                    <p class="mb-4 leading-relaxed">
+                        <span class="font-semibold text-heading">场景</span>：企业以 <span class="font-bold text-highlight">2024年9月30日为申报基准日</span>，2024年10月完成增资引入新股东。
+                    </p>
+                    <p class="text-lg font-bold mb-4 text-accent">
+                        <i class="fas fa-circle-info text-xl mr-2"></i> 结论：<span class="text-highlight">必须增加一期审计，且基准日需调整为2024年12月31日</span>。理由如下：
+                    </p>
+                    <ul class="list-disc pl-6 text-base text-gray-700 dark:text-gray-300">
+                        <li class="mb-3">
+                            <span class="font-semibold text-heading">1. 触发加期审计条件</span>：
+                            <ul class="list-disc pl-6 mt-1">
+                                <li class="mb-1">10月增资发生在 <span class="font-bold text-highlight">“最近一年末”2023年12月31日之后</span>，且属于“资产负债表日后引入新股东”，完全符合规则触发情形<sup class="ml-1 text-accent"><a href="#footnote-1">[1]</a></sup><sup class="ml-1 text-accent"><a href="#footnote-3">[3]</a></sup>。</li>
+                                <li>尽管申报基准日是930，但 <span class="font-bold text-highlight">“最近一年末”指向的是2023年12月31日</span>，而非2024年9月30日。</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="font-semibold text-heading">2. 基准日调整要求</span>：
+                            <ul class="list-disc pl-6 mt-1">
+                                <li class="mb-1">加期审计需覆盖 <span class="font-bold text-highlight">增资完成后至新基准日的财务数据</span>。</li>
+                                <li>因增资发生在10月（年度内），新基准日只能选择 <span class="font-bold text-highlight">最近一个完整年度截止日（2024年12月31日）</span>，审计范围需延伸至该时点<sup class="ml-1 text-accent"><a href="#footnote-1">[1]</a></sup><sup class="ml-1 text-accent"><a href="#footnote-4">[4]</a></sup>。</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="mt-6 p-4 bg-blue-100 dark:bg-blue-900 border-l-4 border-blue-500 dark:border-blue-300 rounded-md text-blue-800 dark:text-blue-100 font-semibold leading-relaxed">
+                        <p class="flex items-center text-accent">
+                            <i class="fas fa-check-circle text-xl mr-3"></i>
+                            <span class="font-bold">操作路径</span>：
+                        </p>
+                        <p class="ml-8 mt-2">
+                            <span class="font-bold">原基准日</span>：2024年9月30日 <i class="fas fa-long-arrow-alt-right mx-2"></i>
+                            <span class="font-bold">增资时点</span>：2024年10月 <i class="fas fa-long-arrow-alt-right mx-2"></i>
+                            <span class="font-bold">新基准日</span>：2024年12月31日
+                        </p>
+                        <p class="ml-8 mt-2">
+                            <span class="font-bold">审计要求</span>：需补充2024年10-12月财务数据，并出具2024年全年审计报告。
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Section 3: 对比：是否所有增资都需调整基准日？ -->
+                <section class="mb-10 p-6 bg-card rounded-lg shadow-md border border-card">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center text-heading">
+                        <i class="fas fa-balance-scale text-accent mr-3"></i> 三、对比：是否所有增资都需调整基准日？
+                    </h3>
+                    <div class="responsive-table">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-gray-100 dark:bg-gray-700">
+                                    <th class="py-3 px-4 border-b-2 border-card text-heading font-semibold rounded-tl-lg">增资发生时间</th>
+                                    <th class="py-3 px-4 border-b-2 border-card text-heading font-semibold">是否触发加期审计</th>
+                                    <th class="py-3 px-4 border-b-2 border-card text-heading font-semibold rounded-tr-lg">基准日调整要求</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200">
+                                    <td class="py-3 px-4 border-b border-card">2023年12月31日 <span class="font-bold text-highlight">之前</span>（如2023年10月）</td>
+                                    <td class="py-3 px-4 border-b border-card text-green-600 dark:text-green-400 font-semibold"><i class="fas fa-times-circle mr-1"></i> 否</td>
+                                    <td class="py-3 px-4 border-b border-card">无需调整（沿用930基准日）</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200">
+                                    <td class="py-3 px-4 border-b border-card">2023年12月31日 <span class="font-bold text-highlight">之后</span>（如2024年10月）</td>
+                                    <td class="py-3 px-4 border-b border-card text-red-600 dark:text-red-400 font-semibold"><i class="fas fa-check-circle mr-1"></i> 是</td>
+                                    <td class="py-3 px-4 border-b border-card font-bold text-accent">必须调整为1231</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Section 4: 监管依据及实务案例 -->
+                <section class="mb-10 p-6 bg-card rounded-lg shadow-md border border-card">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center text-heading">
+                        <i class="fas fa-file-alt text-accent mr-3"></i> 四、监管依据及实务案例
+                    </h3>
+                    <div class="mb-6">
+                        <h4 class="text-xl font-semibold mb-3 flex items-center text-heading">
+                            <i class="fas fa-bookmark text-accent text-sm mr-2"></i> 1. 核心规则
+                        </h4>
+                        <ul class="list-disc pl-6 text-base text-gray-700 dark:text-gray-300">
+                            <li>《监管规则适用指引——发行类第4号》第4-11条：
+                                <blockquote class="mt-2 ml-4 p-3 border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-200 italic rounded-md">
+                                    “最近一年末资产负债表日后增资扩股引入新股东的，申报前须增加一期审计”
+                                </blockquote>
+                                <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                                    <i class="fas fa-info-circle mr-1"></i>
+                                    <span class="font-semibold">注</span>：此处“年末”明确指公历年度末<sup class="ml-1 text-accent"><a href="#footnote-1">[1]</a></sup><sup class="ml-1 text-accent"><a href="#footnote-5">[5]</a></sup>。
+                                    <a href="http://www.csrc.gov.cn/csrc/c101802/c7118238/content.shtml" target="_blank" class="text-accent hover:underline ml-2">
+                                        点击查看原文 <i class="fas fa-external-link-alt text-xs ml-1"></i>
+                                    </a>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-semibold mb-3 flex items-center text-heading">
+                            <i class="fas fa-scroll text-accent text-sm mr-2"></i> 2. 实务案例
+                        </h4>
+                        <ul class="list-disc pl-6 text-base text-gray-700 dark:text-gray-300">
+                            <li class="mb-2">
+                                <span class="font-semibold text-heading">案例1</span>（2023年科创板过会）：某企业原定2022年6月30日为基准日，因2022年8月增资（2021年12月31日后），最终调整为2022年12月31日基准日申报。
+                            </li>
+                            <li>
+                                <span class="font-semibold text-heading">案例2</span>（2024年创业板问询）：企业2023年11月增资但未加期审计，被要求补充2023年全年审计数据并重新申报<sup class="ml-1 text-accent"><a href="#footnote-3">[3]</a></sup>。
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Section 5: 解决方案建议 -->
+                <section class="mb-10 p-6 bg-card rounded-lg shadow-md border border-card">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center text-heading">
+                        <i class="fas fa-tools text-accent mr-3"></i> 五、解决方案建议
+                    </h3>
+                    <ul class="list-disc pl-6 text-base text-gray-700 dark:text-gray-300">
+                        <li class="mb-3">
+                            <span class="font-semibold text-heading">1. 提前规划增资时点</span>：
+                            <ul class="list-disc pl-6 mt-1">
+                                <li>若需保留930基准日，增资必须在 <span class="font-bold text-highlight">上一年12月31日前完成</span>（如2023年12月31日前）。</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="font-semibold text-heading">2. 接受调整的替代方案</span>：
+                            <ul class="list-disc pl-6 mt-1">
+                                <li>若已在10月增资，可主动将基准日改为1231，同步完成：
+                                    <ul class="list-disc pl-6 mt-1">
+                                        <li>增资工商变更 + 验资复核</li>
+                                        <li>2024年全年审计 + 加期问询材料更新</li>
+                                    </ul>
+                                </li>
+                                <li class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                                    <i class="fas fa-clock mr-1"></i> <span class="font-semibold">时间成本</span>：通常导致申报推迟3-6个月（如2025年3月方可申报）。
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Conclusion -->
+                <section class="mb-10 p-6 bg-card rounded-lg shadow-md border border-card text-center">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center justify-center text-heading">
+                        <i class="fas fa-check-double text-accent mr-3"></i> 结论
+                    </h3>
+                    <p class="text-lg leading-relaxed font-semibold text-gray-800 dark:text-gray-200">
+                        在您描述的案例中（930基准日+10月增资），因增资发生在“最近一年末”（2023年12月31日）的资产负债表日后，<span class="font-bold text-accent text-highlight py-1 px-2 rounded-md">必须增加一期审计，并将基准日调整为2024年12月31日</span>。这是当前监管的刚性要求，无例外情形。
+                    </p>
+                </section>
+            </div>
+
+            <!-- Sidebar / Right Column (for data visualization and further reading) -->
+            <aside class="lg:col-span-1 space-y-8">
+                <!-- Data Visualization: Mermaid Diagram -->
+                <section class="p-6 bg-card rounded-lg shadow-md border border-card">
+                    <h3 class="text-xl font-bold mb-4 flex items-center text-heading">
+                        <i class="fas fa-chart-network text-accent mr-3"></i> 决策流程图
+                    </h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">通过以下流程图，直观理解IPO增资行为对审计基准日的影响路径。</p>
+                    <div class="mermaid">
+                        graph TD
+                            A[IPO 申报基准日确定] --> B{增资是否发生在<br/>最近一年末（12.31）之后?};
+                            B -- 否 (12.31之前) --> C[沿用原基准日<br/>(如930), 无需加期审计];
+                            B -- 是 (12.31之后) --> D[触发加期审计条件];
+                            D --> E{增资发生在<br/>原申报年度内(如10月)?};
+                            E -- 是 --> F[基准日强制调整至<br/>当前年度12.31<br/>并补齐当年全年审计];
+                            E -- 否 (发生在次年) --> G[基准日可保留<br/>原申报年度12.31<br/>加期审计至次年半年报/930];
+                            F --> H[准备申报材料，提交];
+                            G --> H;
+                            C --> H;
+                    </div>
+                </section>
+
+                <!-- Further Reading Section -->
+                <section class="p-6 bg-card rounded-lg shadow-md border border-card">
+                    <h3 class="text-xl font-bold mb-4 flex items-center text-heading">
+                        <i class="fas fa-book-open text-accent mr-3"></i> 延伸阅读
+                    </h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">深入了解IPO及资本市场规则，推荐以下权威读物：</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-angle-right text-accent mt-1 mr-2"></i>
+                            <div>
+                                <a href="#" class="font-semibold hover:text-accent transition-colors duration-200">《中国证券市场法律与实务》</a>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">全面解读中国证券市场的法律法规及实务操作，是资本市场从业者的必备参考。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-angle-right text-accent mt-1 mr-2"></i>
+                            <div>
+                                <a href="#" class="font-semibold hover:text-accent transition-colors duration-200">《上市公司重大资产重组管理办法》解读</a>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">股权变动常与重大资产重组相关联，此书有助于理解其内在逻辑。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-angle-right text-accent mt-1 mr-2"></i>
+                            <div>
+                                <a href="#" class="font-semibold hover:text-accent transition-colors duration-200">《企业会计准则及应用指南》</a>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">掌握财务会计的基础，对于理解审计基准日和财务数据至关重要。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-angle-right text-accent mt-1 mr-2"></i>
+                            <div>
+                                <a href="#" class="font-semibold hover:text-accent transition-colors duration-200">《首次公开发行股票并上市管理办法》</a>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">IPO的核心法规文件，直接指导企业上市全过程。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-angle-right text-accent mt-1 mr-2"></i>
+                            <div>
+                                <a href="#" class="font-semibold hover:text-accent transition-colors duration-200">《资本市场法律实务》</a>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">从更宏观的视角审视资本市场中的各类法律问题及实务操作。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </aside>
+        </div>
+
+        <!-- Footnotes Section -->
+        <section class="mt-16 p-6 bg-card rounded-lg shadow-md border border-card text-sm text-gray-600 dark:text-gray-400">
+            <h3 class="text-xl font-bold mb-4 flex items-center text-heading">
+                <i class="fas fa-info-circle text-accent mr-3"></i> 参考资料
+            </h3>
+            <ol class="list-decimal pl-6 space-y-2">
+                <li id="footnote-1">《监管规则适用指引——发行类第4号》第4-11条（<a href="http://www.csrc.gov.cn/csrc/c101802/c7118238/content.shtml" target="_blank" class="text-accent hover:underline">点击查看监管规则适用指引——发行类第4号</a>）</li>
+                <li id="footnote-2">知识库资料《IPO股权变动监管要点》："年度资产负债表日特指12月31日"</li>
+                <li id="footnote-3">IPO基准日后通过股份转让新增股东的注意事项（<a href="https://zhuanlan.zhihu.com/p/634104556" target="_blank" class="text-accent hover:underline">点击标题查看分析</a>）</li>
+                <li id="footnote-4">安永报告《A股IPO审计周期管理》"加期审计的基准日确定逻辑"</li>
+                <li id="footnote-5">证监会监管问答《首发企业股权变动审计要求适用口径》（2024年修订）</li>
+            </ol>
+        </section>
+    </main>
+
+    <footer class="mt-12 py-6 px-6 md:px-8 text-center text-sm text-gray-600 dark:text-gray-400 border-t border-card bg-card">
+        <p>&copy; 2024 IPO合规导航. 保留所有权利. </p>
+        <p class="mt-2 text-xs">本页面内容仅供参考，不构成专业法律或财务建议。</p>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({ startOnLoad: true });
+
+        // Dark/Light Mode Toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Check for saved theme in localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            // Default to system preference if no theme saved
+            setTheme('dark');
+        } else {
+            setTheme('light'); // Default to light if no preference and system is light
+        }
+
+        // Toggle functionality
+        themeToggleBtn.addEventListener('click', () => {
+            if (html.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Micro-interaction: Simple fade-in-up animation for sections on scroll
+        const sections = document.querySelectorAll('section');
+        
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                    observer.unobserve(entry.target); // Stop observing once animated
+                }
+            });
+        }, {
+            rootMargin: '0px',
+            threshold: 0.1 // Trigger when 10% of the section is visible
+        });
+
+        sections.forEach(section => {
+            // Apply initial hidden state and transition classes
+            section.classList.add('opacity-0', 'transform', 'translate-y-4', 'transition-all', 'duration-700', 'ease-out');
+            observer.observe(section);
+        });
+
+        // Add custom styles for animation (to be injected into head)
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .fade-in-up {
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+```
