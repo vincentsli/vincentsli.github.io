@@ -1,0 +1,650 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO股本变更：申报基准日后合规指南</title>
+    <meta name="description" content="深入解析拟IPO企业在申报基准日后股本变更的监管规则、允许情形与禁止事项，助您合规高效推进IPO进程。">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%236366F1' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z'/%3E%3C/svg%3E" type="image/svg+xml">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <style>
+        /* Custom Fonts & Base Styles */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            line-height: 1.65; /* Better readability */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', serif;
+            font-weight: 600;
+        }
+
+        /* Dark Mode Specific Styles */
+        .dark {
+            background-color: #0d1117; /* GitHub Dark Mode bg */
+            color: #c9d1d9; /* GitHub Dark Mode text */
+        }
+        .dark .bg-white { background-color: #0d1117; }
+        .dark .text-gray-900 { color: #c9d1d9; }
+        .dark .bg-gray-100 { background-color: #161b22; } /* Card background */
+        .dark .text-gray-800 { color: #c9d1d9; }
+        .dark .text-gray-600 { color: #8b949e; } /* Subtler text */
+        .dark .border-gray-200 { border-color: #30363d; }
+        .dark .shadow-md { box-shadow: 0 4px 6px -1px rgba(0,0,0,0.2), 0 2px 4px -1px rgba(0,0,0,0.12); } /* Darker shadows */
+        .dark .hover\:bg-gray-50:hover { background-color: #1f2731; } /* Hover for dark cards */
+        .dark .hover\:text-blue-600:hover { color: #58a6ff; } /* Link hover for dark */
+        .dark .text-blue-500 { color: #58a6ff; } /* Default link color for dark */
+        .dark table { border-color: #30363d; }
+        .dark th, .dark td { border-color: #30363d; }
+        .dark th { background-color: #1f2731; } /* Table header background */
+        .dark tbody tr:nth-child(odd) { background-color: #161b22; } /* Zebra striping */
+        .dark tbody tr:nth-child(even) { background-color: #0d1117; }
+        .dark tbody tr:hover { background-color: #2b3543; } /* Table row hover */
+
+        /* Light Mode Specific Styles (default Tailwind is mostly light) */
+        .light {
+            background-color: #ffffff;
+            color: #1a202c;
+        }
+        .light .bg-gray-100 { background-color: #f7fafc; }
+        .light .text-gray-600 { color: #4a5568; }
+        .light .hover\:bg-gray-50:hover { background-color: #f9fafb; }
+        .light .hover\:text-blue-600:hover { color: #2b6cb0; }
+        .light .text-blue-500 { color: #4299e1; }
+        .light th { background-color: #edf2f7; }
+        .light tbody tr:nth-child(odd) { background-color: #ffffff; }
+        .light tbody tr:nth-child(even) { background-color: #f7fafc; }
+        .light tbody tr:hover { background-color: #ebf8ff; }
+
+
+        /* Custom underline for links */
+        a {
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+        }
+        a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: currentColor;
+            transition: width 0.3s ease-in-out;
+        }
+        a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero section background gradient */
+        .hero-bg {
+            background-image: radial-gradient(at 20% 70%, #1f2937 0%, transparent 50%),
+                              radial-gradient(at 80% 30%, #374151 0%, transparent 50%);
+            background-size: cover;
+            background-position: center;
+        }
+        .dark .hero-bg {
+            background-image: radial-gradient(at 20% 70%, #171d24 0%, transparent 50%),
+                              radial-gradient(at 80% 30%, #202730 0%, transparent 50%);
+        }
+
+        /* Mermaid container styling */
+        .mermaid-container {
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 1.5rem; /* p-6 */
+            margin-top: 2rem; /* mt-8 */
+            background-color: #1f2731; /* bg-gray-800 equivalent for dark */
+            border: 1px solid #30363d; /* border-gray-700 equivalent */
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); /* shadow-xl */
+            overflow-x: auto; /* For mobile scroll */
+        }
+        .light .mermaid-container {
+            background-color: #f9fafb; /* Light bg */
+            border: 1px solid #e2e8f0; /* Light border */
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+        }
+
+        /* Custom styles for Mermaid */
+        .mermaid {
+            background-color: transparent !important; /* Ensure transparent background for mermaid itself */
+        }
+        .dark .mermaid .node rect, .dark .mermaid .node polygon, .dark .mermaid .node circle {
+            fill: #374151 !important; /* Dark node background */
+            stroke: #4f46e5 !important; /* Indigo border for nodes */
+            stroke-width: 2px !important;
+        }
+        .dark .mermaid .node text {
+            fill: #c9d1d9 !important; /* Light text for nodes */
+        }
+        .dark .mermaid .edgePath path.path {
+            stroke: #8b949e !important; /* Gray lines for edges */
+        }
+        .dark .mermaid .edgeLabels .edgeLabel {
+            fill: #8b949e !important; /* Gray text for edge labels */
+        }
+        .dark .mermaid .arrowheadPath {
+            fill: #8b949e !important; /* Gray arrowheads */
+        }
+        /* Style for special nodes in dark mode */
+        .dark .mermaid .node.style-A rect, .dark .mermaid .node.style-A polygon { fill: #4f46e5 !important; stroke: #4f46e5 !important; color: #fff !important; } /* Indigo for start */
+        .dark .mermaid .node.style-B rect, .dark .mermaid .node.style-B polygon { fill: #3b82f6 !important; stroke: #3b82f6 !important; color: #fff !important; } /* Blue for decision */
+        .dark .mermaid .node.style-C rect, .dark .mermaid .node.style-C polygon { fill: #10b981 !important; stroke: #10b981 !important; color: #fff !important; } /* Emerald for allowed */
+        .dark .mermaid .node.style-D rect, .dark .mermaid .node.style-D polygon { fill: #10b981 !important; stroke: #10b981 !important; color: #fff !important; }
+        .dark .mermaid .node.style-E rect, .dark .mermaid .node.style-E polygon { fill: #f59e0b !important; stroke: #f59e0b !important; color: #fff !important; } /* Amber for warning/action */
+        .dark .mermaid .node.style-F rect, .dark .mermaid .node.style-F polygon { fill: #22c55e !important; stroke: #22c55e !important; color: #fff !important; } /* Green for success */
+        .dark .mermaid .node.style-G rect, .dark .mermaid .node.style-G polygon { fill: #06b6d4 !important; stroke: #06b6d4 !important; color: #fff !important; } /* Cyan for audit period */
+        .dark .mermaid .node.style-H rect, .dark .mermaid .node.style-H polygon { fill: #0ea5e9 !important; stroke: #0ea5e9 !important; color: #fff !important; }
+        .dark .mermaid .node.style-I rect, .dark .mermaid .node.style-I polygon { fill: #0ea5e9 !important; stroke: #0ea5e9 !important; color: #fff !important; }
+        .dark .mermaid .node.style-J rect, .dark .mermaid .node.style-J polygon { fill: #f59e0b !important; stroke: #f59e0b !important; color: #fff !important; }
+        .dark .mermaid .node.style-K rect, .dark .mermaid .node.style-K polygon { fill: #22c55e !important; stroke: #22c55e !important; color: #fff !important; }
+        .dark .mermaid .node.style-L rect, .dark .mermaid .node.style-L polygon { fill: #ef4444 !important; stroke: #ef4444 !important; color: #fff !important; } /* Red for failure */
+        .dark .mermaid .node.style-M rect, .dark .mermaid .node.style-M polygon { fill: #6366f1 !important; stroke: #6366f1 !important; color: #fff !important; } /* Indigo for post-reg */
+        .dark .mermaid .node.style-N rect, .dark .mermaid .node.style-N polygon { fill: #ef4444 !important; stroke: #ef4444 !important; color: #fff !important; }
+        .dark .mermaid .node.style-O rect, .dark .mermaid .node.style-O polygon { fill: #ef4444 !important; stroke: #ef4444 !important; color: #fff !important; }
+        .dark .mermaid .node.style-P rect, .dark .mermaid .node.style-P polygon { fill: #1C64F2 !important; stroke: #1C64F2 !important; color: #fff !important; } /* Strong blue for final success */
+        .dark .mermaid .node.style-Q rect, .dark .mermaid .node.style-Q polygon { fill: #71717A !important; stroke: #71717A !important; color: #fff !important; } /* Gray for final failure */
+
+
+        /* Light mode specific mermaid styles (override general mermaid and then target special nodes) */
+        .light .mermaid .node rect, .light .mermaid .node polygon, .light .mermaid .node circle {
+            fill: #e0e7ff !important; /* Light node background */
+            stroke: #6366f1 !important; /* Indigo border for nodes */
+            stroke-width: 2px !important;
+        }
+        .light .mermaid .node text {
+            fill: #1a202c !important; /* Dark text for nodes */
+        }
+        .light .mermaid .edgePath path.path {
+            stroke: #4a5568 !important; /* Dark gray lines for edges */
+        }
+        .light .mermaid .edgeLabels .edgeLabel {
+            fill: #4a5568 !important; /* Dark gray text for edge labels */
+        }
+        .light .mermaid .arrowheadPath {
+            fill: #4a5568 !important; /* Dark gray arrowheads */
+        }
+        /* Style for special nodes in light mode */
+        .light .mermaid .node.style-A rect, .light .mermaid .node.style-A polygon { fill: #4f46e5 !important; stroke: #4f46e5 !important; color: #fff !important; } /* Indigo for start */
+        .light .mermaid .node.style-B rect, .light .mermaid .node.style-B polygon { fill: #3b82f6 !important; stroke: #3b82f6 !important; color: #fff !important; } /* Blue for decision */
+        .light .mermaid .node.style-C rect, .light .mermaid .node.style-C polygon { fill: #10b981 !important; stroke: #10b981 !important; color: #fff !important; } /* Emerald for allowed */
+        .light .mermaid .node.style-D rect, .light .mermaid .node.style-D polygon { fill: #10b981 !important; stroke: #10b981 !important; color: #fff !important; }
+        .light .mermaid .node.style-E rect, .light .mermaid .node.style-E polygon { fill: #f59e0b !important; stroke: #f59e0b !important; color: #fff !important; } /* Amber for warning/action */
+        .light .mermaid .node.style-F rect, .light .mermaid .node.style-F polygon { fill: #22c55e !important; stroke: #22c55e !important; color: #fff !important; } /* Green for success */
+        .light .mermaid .node.style-G rect, .light .mermaid .node.style-G polygon { fill: #06b6d4 !important; stroke: #06b6d4 !important; color: #fff !important; } /* Cyan for audit period */
+        .light .mermaid .node.style-H rect, .light .mermaid .node.style-H polygon { fill: #0ea5e9 !important; stroke: #0ea5e9 !important; color: #fff !important; }
+        .light .mermaid .node.style-I rect, .light .mermaid .node.style-I polygon { fill: #0ea5e9 !important; stroke: #0ea5e9 !important; color: #fff !important; }
+        .light .mermaid .node.style-J rect, .light .mermaid .node.style-J polygon { fill: #f59e0b !important; stroke: #f59e0b !important; color: #fff !important; }
+        .light .mermaid .node.style-K rect, .light .mermaid .node.style-K polygon { fill: #22c55e !important; stroke: #22c55e !important; color: #fff !important; }
+        .light .mermaid .node.style-L rect, .light .mermaid .node.style-L polygon { fill: #ef4444 !important; stroke: #ef4444 !important; color: #fff !important; } /* Red for failure */
+        .light .mermaid .node.style-M rect, .light .mermaid .node.style-M polygon { fill: #6366f1 !important; stroke: #6366f1 !important; color: #fff !important; } /* Indigo for post-reg */
+        .light .mermaid .node.style-N rect, .light .mermaid .node.style-N polygon { fill: #ef4444 !important; stroke: #ef4444 !important; color: #fff !important; }
+        .light .mermaid .node.style-O rect, .light .mermaid .node.style-O polygon { fill: #ef4444 !important; stroke: #ef4444 !important; color: #fff !important; }
+        .light .mermaid .node.style-P rect, .light .mermaid .node.style-P polygon { fill: #1C64F2 !important; stroke: #1C64F2 !important; color: #fff !important; } /* Strong blue for final success */
+        .light .mermaid .node.style-Q rect, .light .mermaid .node.style-Q polygon { fill: #71717A !important; stroke: #71717A !important; color: #fff !important; } /* Gray for final failure */
+
+    </style>
+</head>
+<body class="transition-colors duration-300">
+
+    <!-- Header / Navigation (Optional, but useful for dark/light toggle) -->
+    <header class="relative z-10 py-4 px-6 md:px-8 lg:px-12 flex justify-end items-center">
+        <button id="theme-toggle" class="p-2 rounded-full text-gray-400 hover:text-blue-500 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200">
+            <i class="fas fa-sun text-xl hidden dark:block"></i>
+            <i class="fas fa-moon text-xl block dark:hidden"></i>
+        </button>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg py-20 md:py-24 text-center relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-6 relative z-10">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+                IPO股本变更：申报基准日后合规指南
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto mb-8">
+                深入解析拟IPO企业在申报基准日后股本变更的监管规则、允许情形与禁止事项，助您合规高效推进IPO进程。理解关键节点，规避潜在风险，是企业成功上市的基石。
+            </p>
+            <div class="flex justify-center space-x-4">
+                <a href="#content" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-transform transform hover:scale-105">
+                    <i class="fas fa-scroll mr-2"></i> 开始阅读
+                </a>
+                <a href="#mermaid-diagram" class="inline-flex items-center px-6 py-3 border border-gray-600 text-base font-medium rounded-full shadow-sm text-gray-300 bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-transform transform hover:scale-105">
+                    <i class="fas fa-chart-pie mr-2"></i> 监管图解
+                </a>
+            </div>
+        </div>
+        <!-- Abstract financial patterns (optional) -->
+        <div class="absolute inset-0 opacity-10">
+            <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                    <pattern id="pattern-circles" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+                        <circle cx="5" cy="5" r="1.5" fill="#4f46e5" opacity="0.3"></circle>
+                    </pattern>
+                </defs>
+                <rect x="0" y="0" width="100" height="100" fill="url(#pattern-circles)"></rect>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main id="content" class="container mx-auto px-6 py-12 md:py-16 max-w-4xl">
+        <article class="prose dark:prose-invert prose-lg leading-relaxed">
+            <p class="text-xl text-gray-300 mb-8 tracking-wide">
+                根据现行A股IPO监管规则，<strong class="font-bold text-blue-400">拟IPO企业在申报基准日后可以变更股本，但有严格限制和程序要求</strong>，核心依据及操作要点如下：
+            </p>
+
+            <!-- 可变更的情形及最晚时点 -->
+            <section class="mb-12 p-6 rounded-xl bg-gray-800 border border-gray-700 shadow-lg">
+                <h2 class="text-3xl font-semibold mb-6 flex items-center text-blue-400">
+                    <i class="fas fa-check-circle mr-3 text-2xl"></i> 一、可变更的情形及最晚时点
+                </h2>
+
+                <div class="mb-8">
+                    <h3 class="text-2xl font-medium mb-4 flex items-center text-blue-300">
+                        <i class="fas fa-file-invoice mr-2 text-xl"></i> 1. 申报前变更
+                    </h3>
+                    <ul class="list-none space-y-4 pl-0">
+                        <li class="flex items-start">
+                            <i class="fas fa-clock text-blue-400 mt-1 mr-3 text-lg flex-shrink-0"></i>
+                            <div>
+                                <strong class="text-gray-200">最晚时点</strong>：需在 <strong class="text-blue-400">IPO材料申报前</strong> 完成变更。
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-balance-scale text-blue-400 mt-1 mr-3 text-lg flex-shrink-0"></i>
+                            <div>
+                                <strong class="text-gray-200">依据</strong>：
+                                <ul class="list-disc list-inside space-y-2 ml-4 text-gray-300">
+                                    <li>根据《监管规则适用指引——发行类第4号》1-3条<sup><a href="#footnote-1" class="text-blue-500 hover:text-blue-400 transition-colors">1</a></sup><sup><a href="#footnote-2" class="text-blue-500 hover:text-blue-400 transition-colors">2</a></sup>，若在 <strong class="text-blue-400">最近一期资产负债表日后</strong>（即申报基准日后）发生增资扩股引入新股东或股本变动，发行人 <strong class="text-blue-400">须增加一期审计</strong>（即补充截止变更后最新一期的财务数据）。</li>
+                                    <li>例如：以2023年12月31日为申报基准日，若在2024年1月增资，则需补充2024年1-6月的半年报审计数据<sup><a href="#footnote-1" class="text-blue-500 hover:text-blue-400 transition-colors">1</a></sup><sup><a href="#footnote-3" class="text-blue-500 hover:text-blue-400 transition-colors">3</a></sup>。</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-medium mb-4 flex items-center text-blue-300">
+                        <i class="fas fa-user-shield mr-2 text-xl"></i> 2. 审核期间变更（谨慎操作）
+                    </h3>
+                    <ul class="list-none space-y-4 pl-0">
+                        <li class="flex items-start">
+                            <i class="fas fa-hourglass-half text-blue-400 mt-1 mr-3 text-lg flex-shrink-0"></i>
+                            <div>
+                                <strong class="text-gray-200">最晚时点</strong>：理论上可延续至 <strong class="text-blue-400">证监会注册前</strong>，但需满足：
+                                <ul class="list-disc list-inside space-y-2 ml-4 text-gray-300">
+                                    <li>股本变动 <strong class="text-blue-400">不涉及实际控制人变更</strong>；</li>
+                                    <li><strong class="text-blue-400">不新增股东</strong>（如资本公积转增股本、未分配利润送股等同比例变动）；</li>
+                                    <li>履行 <strong class="text-blue-400">信息披露义务</strong>，并获交易所审核通过<sup><a href="#footnote-1" class="text-blue-500 hover:text-blue-400 transition-colors">1</a></sup><sup><a href="#footnote-4" class="text-blue-500 hover:text-blue-400 transition-colors">4</a></sup>。</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-exclamation-triangle text-red-400 mt-1 mr-3 text-lg flex-shrink-0"></i>
+                            <div>
+                                <strong class="text-red-400">风险提示</strong>：审核期间变更可能延长问询周期，且需重新验资并更新招股书。
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 禁止变更的情形 -->
+            <section class="mb-12 p-6 rounded-xl bg-gray-800 border border-gray-700 shadow-lg">
+                <h2 class="text-3xl font-semibold mb-6 flex items-center text-red-400">
+                    <i class="fas fa-ban mr-3 text-2xl"></i> 二、禁止变更的情形
+                </h2>
+                <p class="text-gray-300 mb-4">若出现以下情况，可能导致 <strong class="text-red-400">IPO进程中止或失败</strong>：</p>
+                <ul class="list-none space-y-4 pl-0">
+                    <li class="flex items-start">
+                        <i class="fas fa-times-circle text-red-400 mt-1 mr-3 text-lg flex-shrink-0"></i>
+                        <div>
+                            <strong class="text-gray-200">申报后引入新股东</strong>：
+                            <p class="ml-4 text-gray-300">根据《证券期货法律适用意见第17号》<sup><a href="#footnote-5" class="text-blue-500 hover:text-blue-400 transition-colors">5</a></sup>，<strong class="text-red-400">IPO材料申报后至发行前</strong>，除员工持股计划或继承等法定情形外，<strong class="text-red-400">不得新增股东</strong>（包括增资或老股转让）。</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-times-circle text-red-400 mt-1 mr-3 text-lg flex-shrink-0"></i>
+                        <div>
+                            <strong class="text-gray-200">导致控制权变更的股本变动</strong>：
+                            <p class="ml-4 text-gray-300">任何可能引起实际控制人变化的操作（如突击增资稀释控股比例）均被视为 <strong class="text-red-400">实质性障碍</strong><sup><a href="#footnote-1" class="text-blue-500 hover:text-blue-400 transition-colors">1</a></sup><sup><a href="#footnote-2" class="text-blue-500 hover:text-blue-400 transition-colors">2</a></sup>。</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- 依据的监管规则 -->
+            <section class="mb-12 p-6 rounded-xl bg-gray-800 border border-gray-700 shadow-lg">
+                <h2 class="text-3xl font-semibold mb-6 flex items-center text-purple-400">
+                    <i class="fas fa-landmark-dome mr-3 text-2xl"></i> 三、依据的监管规则
+                </h2>
+                <div class="mb-8">
+                    <h3 class="text-2xl font-medium mb-4 flex items-center text-purple-300">
+                        <i class="fas fa-file-alt mr-2 text-xl"></i> 1. 核心文件
+                    </h3>
+                    <ul class="list-none space-y-4 pl-0">
+                        <li class="flex items-start">
+                            <i class="fas fa-book-open text-purple-400 mt-1 mr-3 text-lg flex-shrink-0"></i>
+                            <div>
+                                <strong class="text-gray-200">《监管规则适用指引——发行类第4号》</strong>（证监会）<sup><a href="#footnote-1" class="text-blue-500 hover:text-blue-400 transition-colors">1</a></sup>：明确申报基准日后增资需加期审计。
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-gavel text-purple-400 mt-1 mr-3 text-lg flex-shrink-0"></i>
+                            <div>
+                                <strong class="text-gray-200">《证券期货法律适用意见第17号》</strong>（证监会）<sup><a href="#footnote-5" class="text-blue-500 hover:text-blue-400 transition-colors">5</a></sup>：规定申报后6个月内增资的股份需锁定36个月。
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-medium mb-4 flex items-center text-purple-300">
+                        <i class="fas fa-lightbulb mr-2 text-xl"></i> 2. 实务操作
+                    </h3>
+                    <ul class="list-none space-y-4 pl-0">
+                        <li class="flex items-start">
+                            <i class="fas fa-comments text-purple-400 mt-1 mr-3 text-lg flex-shrink-0"></i>
+                            <div>
+                                <strong class="text-gray-200">交易所窗口指导要求</strong>：审核期间股本变动需提前沟通，且变动后 <strong class="text-purple-400">每股收益、净资产等关键指标仍须符合发行条件</strong>。
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 结论表格 -->
+            <section class="mb-12 p-6 rounded-xl bg-gray-800 border border-gray-700 shadow-lg" id="mermaid-diagram">
+                <h2 class="text-3xl font-semibold mb-6 flex items-center text-green-400">
+                    <i class="fas fa-chart-line mr-3 text-2xl"></i> 四、结论与可视化
+                </h2>
+                <div class="overflow-x-auto rounded-lg border border-gray-700 mb-8">
+                    <table class="min-w-full divide-y divide-gray-700">
+                        <thead class="bg-gray-700">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">场景</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">是否可变更</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">最晚时点</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">操作要求</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700">
+                            <tr class="bg-gray-800 hover:bg-gray-700 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-200">申报基准日后、申报前</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-green-400 font-medium"><i class="fas fa-check-circle mr-2"></i> 可变更</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-200">IPO材料正式递交前</td>
+                                <td class="px-6 py-4 text-gray-200">加审一期财报，更新法律文件</td>
+                            </tr>
+                            <tr class="bg-gray-900 hover:bg-gray-700 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-200">交易所审核期间</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-yellow-400 font-medium"><i class="fas fa-exclamation-circle mr-2"></i> 有限变更</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-200">证监会注册批复前</td>
+                                <td class="px-6 py-4 text-gray-200">仅限同比例变动，需交易所审核同意</td>
+                            </tr>
+                            <tr class="bg-gray-800 hover:bg-gray-700 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-200">证监会注册后至发行前</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-red-400 font-medium"><i class="fas fa-times-circle mr-2"></i> 不可变更</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-200">不适用</td>
+                                <td class="px-6 py-4 text-gray-200">任何变动均需重新申报</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="text-2xl font-medium mb-4 flex items-center text-green-300">
+                    <i class="fas fa-project-diagram mr-2 text-xl"></i> IPO股本变更决策流程图
+                </h3>
+                <div class="mermaid-container">
+                    <div class="mermaid">
+                        graph TD
+                            A[申报基准日] --> B{股本变更时点?};
+
+                            B -- 申报前 --> C[申报前变更];
+                            C --> D[增资/新股东引入];
+                            D --> E[加期审计<br>更新法律文件];
+                            E --> F[可继续IPO];
+
+                            B -- 审核期间 --> G[审核期间变更];
+                            G --> H{是否同比例变动<br>且不新增股东?};
+                            H -- 是 --> I[报监管沟通<br>交易所审核同意];
+                            I --> J[可能延长问询周期<br>需更新招股书];
+                            J --> K[可继续IPO];
+                            H -- 否 --> L[中止或失败];
+
+                            B -- 注册后至发行前 --> M[注册后至发行前];
+                            M --> N[不可变更];
+                            N --> O[重新申报<br>或中止];
+
+                            F -- 成功 --> P(上市);
+                            K -- 成功 --> P;
+                            L -- 失败 --> Q(IPO失败);
+                            O -- 失败 --> Q;
+
+                            click A "alert('IPO申报的财务基准日期，此日期后股本变动影响申报。')"
+                            click B "alert('股本变动的时间点是决定合规性的关键。')"
+                            click C "alert('在正式递交IPO材料之前完成股本变更。')"
+                            click D "alert('新增股东或增资操作。')"
+                            click E "alert('需要对最新财务数据进行审计，并更新所有相关法律文件。')"
+                            click F "alert('完成加期审计和文件更新后，可继续IPO流程。')"
+                            click G "alert('交易所受理后至证监会注册前的期间。')"
+                            click H "alert('判断是否为同比例股权调整，且没有引入新的股东。')"
+                            click I "alert('需要提前与监管机构沟通并获得交易所的审核同意。')"
+                            click J "alert('可能导致审核周期延长，并需要对招股书进行更新和补充。')"
+                            click K "alert('若符合条件且获得批准，可继续IPO流程。')"
+                            click L "alert('任何不符合监管要求的股本变动都可能导致IPO进程的中止或失败。')"
+                            click M "alert('证监会注册批复后至股票正式发行上市前的期间。')"
+                            click N "alert('在此阶段，股本结构原则上是锁定的，不能变更。')"
+                            click O "alert('任何变动都需要重新申报，或直接导致IPO失败。')"
+                            click P "alert('企业成功在证券交易所挂牌上市。')"
+                            click Q "alert('IPO申请被撤回、终止或被否决。')"
+
+                            style A fill:#4F46E5,stroke:#4F46E5,color:#fff,stroke-width:2px;
+                            style B fill:#3B82F6,stroke:#3B82F6,color:#fff;
+                            style C fill:#10B981,stroke:#10B981,color:#fff;
+                            style D fill:#10B981,stroke:#10B981,color:#fff;
+                            style E fill:#F59E0B,stroke:#F59E0B,color:#fff;
+                            style F fill:#22C55E,stroke:#22C55E,color:#fff;
+                            style G fill:#06B6D4,stroke:#06B6D4,color:#fff;
+                            style H fill:#0EA5E9,stroke:#0EA5E9,color:#fff;
+                            style I fill:#0EA5E9,stroke:#0EA5E9,color:#fff;
+                            style J fill:#F59E0B,stroke:#F59E0B,color:#fff;
+                            style K fill:#22C55E,stroke:#22C55E,color:#fff;
+                            style L fill:#EF4444,stroke:#EF4444,color:#fff;
+                            style M fill:#6366F1,stroke:#6366F1,color:#fff;
+                            style N fill:#EF4444,stroke:#EF4444,color:#fff;
+                            style O fill:#EF4444,stroke:#EF4444,color:#fff;
+                            style P fill:#1C64F2,stroke:#1C64F2,color:#fff,stroke-width:2px;
+                            style Q fill:#71717A,stroke:#71717A,color:#fff,stroke-width:2px;
+                    </div>
+                </div>
+            </section>
+
+            <!-- 建议 -->
+            <section class="mb-12 p-6 rounded-xl bg-gray-800 border border-gray-700 shadow-lg">
+                <h2 class="text-3xl font-semibold mb-6 flex items-center text-indigo-400">
+                    <i class="fas fa-star mr-3 text-2xl"></i> 建议
+                </h2>
+                <p class="text-gray-300">
+                    拟IPO企业应在 <strong class="text-indigo-400">申报基准日前完成股本结构设计</strong>，基准日后变动需评估时间成本（加期审计至少3-6个月）并提前与中介机构、监管沟通。
+                </p>
+            </section>
+
+            <!-- References/Footnotes -->
+            <section class="mb-12 p-6 rounded-xl bg-gray-800 border border-gray-700 shadow-lg">
+                <h2 class="text-3xl font-semibold mb-6 flex items-center text-gray-300">
+                    <i class="fas fa-link mr-3 text-2xl"></i> 参考资料
+                </h2>
+                <ol class="list-none space-y-4 pl-0 text-gray-400 text-sm">
+                    <li id="footnote-1" class="flex items-start">
+                        <span class="mr-2 text-gray-500">[^1]:</span>
+                        <div>
+                            《监管规则适用指引——发行类第4号》第1-3条
+                            <a href="http://www.csrc.gov.cn/csrc/c101864/c1570929/content.shtml" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-400 transition-colors">（点击查看监管规则适用指引——发行类第4号 <i class="fas fa-external-link-alt ml-1 text-xs"></i>）</a>
+                        </div>
+                    </li>
+                    <li id="footnote-2" class="flex items-start">
+                        <span class="mr-2 text-gray-500">[^2]:</span>
+                        <div>
+                            知识库资料《A股IPO规则要点解析》第三章"申报基准日后的股权变动限制"
+                        </div>
+                    </li>
+                    <li id="footnote-3" class="flex items-start">
+                        <span class="mr-2 text-gray-500">[^3]:</span>
+                        <div>
+                            IPO基准日后通过股份转让新增股东的注意事项
+                            <a href="https://zhuanlan.zhihu.com/p/634104556" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-400 transition-colors">（点击标题查看分析 <i class="fas fa-external-link-alt ml-1 text-xs"></i>）</a>
+                        </div>
+                    </li>
+                    <li id="footnote-4" class="flex items-start">
+                        <span class="mr-2 text-gray-500">[^4]:</span>
+                        <div>
+                            德勤报告《食品与餐饮企业资本化指引》"股本变动的时点要求"
+                            <a href="https://www2.deloitte.com/content/dam/Deloitte/cn/Documents/audit/deloitte-cn-audit-guidelines-for-the-capitalization-of-food-and-catering-chain-enterprises-issue4-zh-231225.pdf" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-400 transition-colors">（点击标题查看原文 <i class="fas fa-external-link-alt ml-1 text-xs"></i>）</a>
+                        </div>
+                    </li>
+                    <li id="footnote-5" class="flex items-start">
+                        <span class="mr-2 text-gray-500">[^5]:</span>
+                        <div>
+                            《证券期货法律适用意见第17号》关于突击入股的锁定要求
+                            <a href="https://zhuanlan.zhihu.com/p/637268197" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-400 transition-colors">（点击标题查看解读 <i class="fas fa-external-link-alt ml-1 text-xs"></i>）</a>
+                        </div>
+                    </li>
+                </ol>
+            </section>
+
+            <!-- Further Reading -->
+            <section class="mb-12 p-6 rounded-xl bg-gray-800 border border-gray-700 shadow-lg">
+                <h2 class="text-3xl font-semibold mb-6 flex items-center text-orange-400">
+                    <i class="fas fa-book-reader mr-3 text-2xl"></i> 进一步阅读
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-4 rounded-lg bg-gray-900 border border-gray-700 hover:bg-gray-700 transition-colors duration-200 transform hover:-translate-y-1 shadow-md">
+                        <h3 class="text-xl font-medium mb-2 text-gray-100 flex items-center"><i class="fas fa-gavel mr-2 text-orange-300"></i> 《中国证券法》</h3>
+                        <p class="text-gray-400 text-sm">理解中国资本市场运行的法律基石，包括证券发行、交易及信息披露等核心法规。</p>
+                        <a href="https://baike.baidu.com/item/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E8%AF%81%E5%88%B8%E6%B3%95/1041933" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-400 transition-colors text-sm">查看详情 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                    </div>
+                    <div class="p-4 rounded-lg bg-gray-900 border border-gray-700 hover:bg-gray-700 transition-colors duration-200 transform hover:-translate-y-1 shadow-md">
+                        <h3 class="text-xl font-medium mb-2 text-gray-100 flex items-center"><i class="fas fa-clipboard-check mr-2 text-orange-300"></i> 《A股IPO操作实务》</h3>
+                        <p class="text-gray-400 text-sm">一本专注于A股上市流程与操作细节的实务指南，提供从准备到发行各阶段的专业建议。</p>
+                        <a href="https://book.douban.com/subject/35345702/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-400 transition-colors text-sm">查看详情 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                    </div>
+                    <div class="p-4 rounded-lg bg-gray-900 border border-gray-700 hover:bg-gray-700 transition-colors duration-200 transform hover:-translate-y-1 shadow-md">
+                        <h3 class="text-xl font-medium mb-2 text-gray-100 flex items-center"><i class="fas fa-users-cog mr-2 text-orange-300"></i> 《股权设计与公司治理》</h3>
+                        <p class="text-gray-400 text-sm">探讨企业股权结构设计、股东权利义务以及公司治理机制如何影响企业发展和上市合规性。</p>
+                        <a href="https://book.douban.com/subject/35359757/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-400 transition-colors text-sm">查看详情 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                    </div>
+                    <div class="p-4 rounded-lg bg-gray-900 border border-gray-700 hover:bg-gray-700 transition-colors duration-200 transform hover:-translate-y-1 shadow-md">
+                        <h3 class="text-xl font-medium mb-2 text-gray-100 flex items-center"><i class="fas fa-calculator mr-2 text-orange-300"></i> 《财务报告分析与估值》</h3>
+                        <p class="text-gray-400 text-sm">深入浅出地讲解如何解读财务报表，评估企业价值，这对于理解IPO财务要求至关重要。</p>
+                        <a href="https://book.douban.com/subject/26915152/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-400 transition-colors text-sm">查看详情 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                    </div>
+                    <div class="p-4 rounded-lg bg-gray-900 border border-gray-700 hover:bg-gray-700 transition-colors duration-200 transform hover:-translate-y-1 shadow-md">
+                        <h3 class="text-xl font-medium mb-2 text-gray-100 flex items-center"><i class="fas fa-chart-area mr-2 text-orange-300"></i> 《公司并购重组与资本运作》</h3>
+                        <p class="text-gray-400 text-sm">了解企业在IPO前后的资本运作策略，包括并购、重组等对股本结构和上市进程的影响。</p>
+                        <a href="https://book.douban.com/subject/35345700/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-400 transition-colors text-sm">查看详情 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-10 text-center text-gray-500 text-sm border-t border-gray-700 mt-12">
+        <p>&copy; 2024 IPO合规指南. All rights reserved.</p>
+        <p class="mt-2">本页面仅供参考，不构成专业法律或投资建议。</p>
+    </footer>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Theme toggle functionality
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Check for saved theme preference or system preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            htmlElement.classList.remove('light', 'dark');
+            htmlElement.classList.add(savedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            htmlElement.classList.add('dark');
+        } else {
+            htmlElement.classList.add('light'); // Default to light if no preference
+        }
+
+        // Apply Mermaid theme based on current mode
+        const applyMermaidTheme = () => {
+            const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'default';
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: currentTheme,
+                flowchart: {
+                    use    curve: 'basis'
+                },
+                themeVariables: {
+                    darkMode: htmlElement.classList.contains('dark') ? true : false,
+                    background: htmlElement.classList.contains('dark') ? '#0d1117' : '#ffffff',
+                    primaryColor: htmlElement.classList.contains('dark') ? '#1f2731' : '#e0e7ff',
+                    primaryBorderColor: htmlElement.classList.contains('dark') ? '#4f46e5' : '#6366f1',
+                    lineColor: htmlElement.classList.contains('dark') ? '#8b949e' : '#4a5568',
+                    textColor: htmlElement.classList.contains('dark') ? '#c9d1d9' : '#1a202c',
+                    mainBkg: htmlElement.classList.contains('dark') ? '#0d1117' : '#ffffff',
+                    nodeBorder: htmlElement.classList.contains('dark') ? '#4f46e5' : '#6366f1',
+                    // Specific node colors for Mermaid can be overridden via CSS as done above
+                }
+            });
+        };
+
+        // Initial Mermaid render
+        applyMermaidTheme();
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            // Re-render Mermaid to apply new theme
+            applyMermaidTheme();
+        });
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (!localStorage.getItem('theme')) { // Only react if user hasn't manually set a preference
+                if (event.matches) {
+                    htmlElement.classList.remove('light');
+                    htmlElement.classList.add('dark');
+                } else {
+                    htmlElement.classList.remove('dark');
+                    htmlElement.classList.add('light');
+                }
+                applyMermaidTheme();
+            }
+        });
+
+        // Smooth scroll for hero buttons
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>
+```
