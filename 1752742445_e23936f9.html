@@ -1,0 +1,487 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板拟上市公司股权激励新解：第二类限制性股票可行性分析</title>
+    <meta name="description" content="深入解读科创板拟上市公司采用第二类限制性股票进行股权激励的政策、实践与合规要点。">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC and Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <style>
+        /* Custom Fonts & Base Styles */
+        html {
+            font-family: 'Noto Sans SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', sans-serif;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', serif;
+        }
+
+        /* Dark Mode Styles */
+        .dark {
+            --tw-bg-opacity: 1;
+            background-color: #0d1117; /* Darker background inspired by GitHub dark mode */
+            color: #c9d1d9; /* Lighter text for contrast */
+        }
+        .dark .text-gray-900 { color: #c9d1d9; }
+        .dark .text-gray-700 { color: #a6adb5; }
+        .dark .text-gray-500 { color: #8b949e; }
+        .dark .border-gray-200 { border-color: #21262d; }
+        .dark .bg-white { background-color: #161b22; }
+        .dark .bg-gray-100 { background-color: #161b22; }
+        .dark .bg-gray-50 { background-color: #161b22; }
+        .dark .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15); }
+        .dark a { color: #58a6ff; } /* Blue for links in dark mode */
+        .dark a:hover { color: #79c0ff; }
+        .dark .bg-blue-600 { background-color: #388bfd; }
+        .dark .bg-blue-600:hover { background-color: #58a6ff; }
+        .dark .border-blue-500 { border-color: #388bfd; }
+
+        /* Light Mode Styles (default, override by dark class) */
+        :root {
+            --tw-bg-opacity: 1;
+            background-color: #ffffff;
+            color: #1f2937;
+        }
+        .light .text-gray-900 { color: #1f2937; }
+        .light .text-gray-700 { color: #374151; }
+        .light .text-gray-500 { color: #6b7280; }
+        .light .border-gray-200 { border-color: #e5e7eb; }
+        .light .bg-white { background-color: #ffffff; }
+        .light .bg-gray-100 { background-color: #f3f4f6; }
+        .light .bg-gray-50 { background-color: #f9fafb; }
+        .light a { color: #2563eb; }
+        .light a:hover { color: #1d4ed8; }
+        .light .bg-blue-600 { background-color: #2563eb; }
+        .light .bg-blue-600:hover { background-color: #1d4ed8; }
+        .light .border-blue-500 { border-color: #2563eb; }
+
+        /* Custom scrollbar for dark mode */
+        .dark::-webkit-scrollbar {
+            width: 8px;
+        }
+        .dark::-webkit-scrollbar-track {
+            background: #161b22;
+        }
+        .dark::-webkit-scrollbar-thumb {
+            background-color: #4a5568;
+            border-radius: 4px;
+            border: 2px solid #161b22;
+        }
+        .dark::-webkit-scrollbar-thumb:hover {
+            background-color: #646e7e;
+        }
+
+        /* Hero module specific styles */
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(29, 78, 216, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .dark .hero-gradient {
+            background: linear-gradient(135deg, rgba(30, 60, 110, 0.4) 0%, rgba(60, 40, 90, 0.4) 100%);
+        }
+
+        /* Mermaid container for styling */
+        .mermaid-container {
+            overflow-x: auto;
+            background-color: var(--tw-bg-gray-100, #f3f4f6); /* Tailwind bg-gray-100 */
+            padding: 1.5rem; /* p-6 */
+            border-radius: 0.75rem; /* rounded-xl */
+            border: 1px solid var(--tw-border-gray-200, #e5e7eb); /* Tailwind border-gray-200 */
+            box-shadow: var(--tw-shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)); /* Tailwind shadow-lg */
+            margin-top: 2rem; /* mt-8 */
+            margin-bottom: 2rem; /* mb-8 */
+        }
+        .dark .mermaid-container {
+            background-color: #161b22; /* Dark equivalent for bg-gray-100 */
+            border-color: #21262d; /* Dark equivalent for border-gray-200 */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15); /* Darker shadow */
+        }
+
+        /* Micro-interactions */
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.2), 0 5px 10px -2px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+        .dark .card-hover:hover {
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.4), 0 5px 10px -2px rgba(0, 0, 0, 0.2);
+        }
+        .transition-all-300 {
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Specific Mermaid styles for Dark Mode */
+        .dark .mermaid .node rect {
+            fill: #21262d; /* Darker node background */
+            stroke: #388bfd; /* Blue border */
+        }
+        .dark .mermaid .node text {
+            fill: #c9d1d9; /* Light text */
+        }
+        .dark .mermaid .edgePaths .path {
+            stroke: #8b949e; /* Gray lines */
+        }
+        .dark .mermaid .edgeLabels .label text {
+            fill: #8b949e; /* Gray text for labels */
+        }
+        .dark .mermaid .subgraph rect {
+            fill: #161b22; /* Subgraph background */
+            stroke: #4a5568; /* Subgraph border */
+        }
+        .dark .mermaid .subgraph .title text {
+            fill: #c9d1d9; /* Subgraph title */
+        }
+        /* Specific highlight colors for Mermaid (match highlight classDef) */
+        .dark .mermaid .node.highlight rect {
+            fill: #584b1a; /* Darker yellow/orange for highlights */
+            stroke: #a2760f;
+        }
+        .dark .mermaid .node.highlight text {
+            fill: #fff; /* White text on highlights */
+        }
+        .dark .mermaid .flowchart-link.path.linkStyle-6,
+        .dark .mermaid .flowchart-link.path.linkStyle-7,
+        .dark .mermaid .flowchart-link.path.linkStyle-8 {
+            stroke: #e67e22 !important; /* Orange links */
+        }
+        .dark .mermaid .flowchart-link.path.linkStyle-9,
+        .dark .mermaid .flowchart-link.path.linkStyle-10,
+        .dark .mermaid .flowchart-link.path.linkStyle-11,
+        .dark .mermaid .flowchart-link.path.linkStyle-12 {
+            stroke: #58a6ff !important; /* Blue links */
+        }
+
+        /* Custom styles for mermaid, to override light mode defaults */
+        .mermaid svg {
+            font-family: 'Noto Sans SC', sans-serif; /* Ensure mermaid uses Noto Sans SC */
+        }
+    </style>
+</head>
+<body class="min-h-screen antialiased transition-colors duration-300">
+
+    <!-- Theme Switcher -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="theme-toggle" class="p-3 rounded-full bg-blue-600 text-white shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 transition-all-300">
+            <i class="fas fa-sun hidden dark:block"></i>
+            <i class="fas fa-moon block dark:hidden"></i>
+        </button>
+    </div>
+
+    <!-- Hero Module -->
+    <header class="relative overflow-hidden pt-20 pb-20 md:pt-32 md:pb-32 text-white shadow-xl">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1549923746-c502d488b0f1?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-900 to-purple-900 opacity-75"></div>
+        </div>
+        <div class="relative z-10 max-w-7xl mx-auto px-6 text-center hero-gradient p-8 rounded-xl shadow-2xl">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">
+                <i class="fas fa-lightbulb text-yellow-300 mr-4"></i>
+                科创板拟上市公司股权激励新解
+            </h1>
+            <h2 class="text-2xl md:text-4xl font-semibold mb-6 text-blue-200">
+                第二类限制性股票可行性分析
+            </h2>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-200">
+                深入解读政策、实践与合规要点，为拟上市公司提供清晰指引。
+            </p>
+            <p class="text-sm md:text-base mt-6 text-gray-300">
+                <i class="fas fa-info-circle mr-2"></i>本文基于科创板现行规则及市场实践，旨在阐明拟上市公司采用第二类限制性股票激励方案的可行性及注意事项。
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto px-6 py-12 md:py-16">
+        <!-- Introduction -->
+        <section class="mb-12">
+            <p class="text-lg leading-relaxed text-gray-700 dark:text-gray-300 text-center mx-auto max-w-4xl">
+                根据科创板现行规则及市场实践，<strong class="text-blue-600 dark:text-blue-400">拟上市公司在IPO申报前可以设计包含第二类限制性股票的股权激励方案，但需满足特定条件且在上市后方可执行归属</strong>。具体分析如下：
+            </p>
+            <hr class="my-10 border-t-2 border-blue-500 dark:border-blue-700 w-24 mx-auto rounded-full">
+        </section>
+
+        <!-- 1. 政策允许性 -->
+        <section class="mb-12 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg card-hover transition-all-300">
+            <h3 class="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-4 flex items-center">
+                <i class="fas fa-clipboard-check mr-3 text-2xl"></i>1. 政策允许性
+            </h3>
+            <div class="space-y-4 text-lg text-gray-700 dark:text-gray-300">
+                <p class="leading-relaxed">科创板明确允许上市公司采用<strong class="text-purple-600 dark:text-purple-400">第二类限制性股票</strong>作为激励工具，其特点是：</p>
+                <ul class="list-disc pl-8 space-y-2">
+                    <li><strong class="text-gray-900 dark:text-white">授予时无需出资</strong>：激励对象在授予日仅获得股票归属资格，无需立即出资；</li>
+                    <li><strong class="text-gray-900 dark:text-white">归属时出资购股</strong>：满足行权条件（如业绩考核、服务期限）后，激励对象按授予价格购买公司增发股票<sup class="text-blue-500 dark:text-blue-300">[^1][^2]</sup>。</li>
+                </ul>
+                <p class="leading-relaxed"><strong class="text-gray-900 dark:text-white">依据文件</strong>：<br>
+                    《上海证券交易所科创板上市公司自律监管指南第4号——股权激励信息披露》（2025年4月修订）明确定义了第二类限制性股票的"归属"机制及操作流程<sup class="text-blue-500 dark:text-blue-300">[^7]</sup>。
+                </p>
+            </div>
+        </section>
+
+        <!-- 2. 拟上市阶段的特殊限制 -->
+        <section class="mb-12 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg card-hover transition-all-300">
+            <h3 class="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-4 flex items-center">
+                <i class="fas fa-gavel mr-3 text-2xl"></i>2. 拟上市阶段的特殊限制
+            </h3>
+            <div class="space-y-4 text-lg text-gray-700 dark:text-gray-300">
+                <p class="leading-relaxed">虽政策允许设计此类方案，但拟上市公司需注意：</p>
+                <ul class="list-disc pl-8 space-y-2">
+                    <li><strong class="text-gray-900 dark:text-white">方案设计阶段</strong>：IPO申报前可制定激励计划，但<strong class="text-red-500 dark:text-red-400">实际归属（股票登记）需在上市后进行</strong>。例如：
+                        <ul class="list-circle pl-6 mt-1 text-base">
+                            <li>激励计划需在招股说明书中披露，并明确归属条件与上市后实施安排<sup class="text-blue-500 dark:text-blue-300">[^1][^6]</sup>。</li>
+                        </ul>
+                    </li>
+                    <li><strong class="text-gray-900 dark:text-white">审核关注点</strong>：监管机构可能关注以下问题：
+                        <ul class="list-circle pl-6 mt-1 text-base">
+                            <li>股份支付费用是否足额计提（影响净利润）；</li>
+                            <li>激励对象是否包含实控人亲属（科创板允许，但需披露合理性）<sup class="text-blue-500 dark:text-blue-300">[^3][^15]</sup>；</li>
+                            <li>激励总量是否超股本总额的10%（科创板上限）<sup class="text-blue-500 dark:text-blue-300">[^3]</sup>。</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Data Visualization (Mermaid Chart) -->
+        <section class="mb-12">
+            <h3 class="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-6 text-center flex items-center justify-center">
+                <i class="fas fa-chart-line mr-3 text-2xl"></i>第二类限制性股票激励方案流程图
+            </h3>
+            <div class="mermaid-container">
+                <pre class="mermaid text-sm leading-relaxed whitespace-pre-wrap">
+graph TD
+    subgraph 激励方案生命周期 [科创板第二类限制性股票]
+        A[拟上市公司] -- 规划 --> B(方案设计阶段);
+        B -- 写入招股书 --> C(IPO申报);
+        C -- 接受 --> D(监管机构审核);
+        D -- 关注重点 --> D1(股份支付计提);
+        D -- 关注重点 --> D2(激励对象范围);
+        D -- 关注重点 --> D3(激励总量);
+        D -- 审核通过 --> E(上市成功);
+        E -- 实施 --> F(归属执行阶段);
+        F -- 满足条件 --> G(激励对象出资购股);
+        G -- 完成 --> H(股权登记);
+    end
+
+    subgraph 第二类限制性股票特性
+        I[授予时：无需出资] --> J[归属时：按授予价购股];
+    end
+
+    B --- I;
+
+    classDef stage fill:#2c3e50,stroke:#3498db,stroke-width:2px,color:#ecf0f1;
+    classDef highlight fill:#f39c12,stroke:#e67e22,stroke-width:2px,color:#ecf0f1;
+    classDef process fill:#34495e,stroke:#2980b9,stroke-width:2px,color:#ecf0f1;
+    classDef decision fill:#e74c3c,stroke:#c0392b,stroke-width:2px,color:#ecf0f1;
+    class A,E,H stage;
+    class B,F process;
+    class C,D decision;
+    class D1,D2,D3 highlight;
+    class I,J process;
+                </pre>
+            </div>
+        </section>
+
+        <!-- 3. 市场实践案例 -->
+        <section class="mb-12 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg card-hover transition-all-300">
+            <h3 class="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-4 flex items-center">
+                <i class="fas fa-handshake mr-3 text-2xl"></i>3. 市场实践案例
+            </h3>
+            <div class="space-y-4 text-lg text-gray-700 dark:text-gray-300">
+                <p class="leading-relaxed">多家科创板公司在上市后迅速实施第二类限制性股票计划，例如：</p>
+                <ul class="list-disc pl-8 space-y-2">
+                    <li><strong class="text-gray-900 dark:text-white">高华科技（688539）</strong>：2025年发布限制性股票激励计划，明确采用第二类限制性股票，归属条件与上市后业绩挂钩<sup class="text-blue-500 dark:text-blue-300">[^10]</sup>。</li>
+                    <li><strong class="text-gray-900 dark:text-white">拓荆科技（688072）</strong>：2025年激励草案显示，其工具为"第二类限制性股票"，归属安排分4年执行<sup class="text-blue-500 dark:text-blue-300">[^11]</sup>。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 4. 操作建议 -->
+        <section class="mb-12 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg card-hover transition-all-300">
+            <h3 class="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-4 flex items-center">
+                <i class="fas fa-lightbulb mr-3 text-2xl"></i>4. 操作建议
+            </h3>
+            <div class="space-y-4 text-lg text-gray-700 dark:text-gray-300">
+                <ul class="list-disc pl-8 space-y-2">
+                    <li><strong class="text-gray-900 dark:text-white">拟上市阶段</strong>：建议在IPO申报前完成激励方案设计，明确授予价格、归属条件、锁定期等条款，并在招股书中详细披露<sup class="text-blue-500 dark:text-blue-300">[^1][^6]</sup>。</li>
+                    <li><strong class="text-gray-900 dark:text-white">避免踩坑</strong>：
+                        <ul class="list-circle pl-6 mt-1 text-base">
+                            <li>归属期不得与定期报告窗口期重合（如年报前30日内禁止归属）<sup class="text-blue-500 dark:text-blue-300">[^16]</sup>；</li>
+                            <li>上市前需完成股份支付处理，避免影响审核。</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="mb-12 p-6 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900 dark:to-purple-900 rounded-xl shadow-xl border border-blue-300 dark:border-blue-700 text-center">
+            <h3 class="text-3xl font-bold text-blue-800 dark:text-blue-300 mb-4 flex items-center justify-center">
+                <i class="fas fa-check-circle mr-3 text-2xl"></i>结论
+            </h3>
+            <p class="text-xl leading-relaxed text-gray-800 dark:text-gray-200">
+                科创板拟上市公司<strong class="text-blue-700 dark:text-blue-200">可参考第二类限制性股票设计股权激励方案</strong>，但实际股票归属需待上市后实施。方案设计需符合《科创板上市规则》及监管指南要求，并提前规划股份支付费用和披露安排<sup class="text-blue-500 dark:text-blue-300">[^1][^7][^15]</sup>。建议聘请专业券商及律师团队协助合规落地。
+            </p>
+            <p class="text-sm mt-6 text-gray-600 dark:text-gray-400">
+                <i class="fas fa-exclamation-triangle mr-2"></i>注：政策动态性强，请以最新监管问答为准（截至2025年7月）。
+            </p>
+        </section>
+
+        <!-- Supplementary Information -->
+        <section class="mb-12 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg card-hover transition-all-300">
+            <h3 class="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-6 flex items-center">
+                <i class="fas fa-book-open mr-3 text-2xl"></i>关键概念速览
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-gray-700 dark:text-gray-300">
+                <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+                    <h4 class="font-semibold text-xl mb-2 text-gray-900 dark:text-white">股份支付 (Share-based Payment)</h4>
+                    <p class="text-base leading-relaxed">企业为获取职工或其他方提供服务而授予权益工具或承担以权益工具为基础的负债而发生的交易。在股权激励中，需将激励成本计入费用，对净利润产生影响。</p>
+                </div>
+                <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+                    <h4 class="font-semibold text-xl mb-2 text-gray-900 dark:text-white">锁定期 (Lock-up Period)</h4>
+                    <p class="text-base leading-relaxed">激励对象获授的股份在特定时间内不能转让的限制。此举旨在稳定公司股权结构，并与激励对象的长期利益绑定。</p>
+                </div>
+                <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600">
+                    <h4 class="font-semibold text-xl mb-2 text-gray-900 dark:text-white">归属 (Vesting)</h4>
+                    <p class="text-base leading-relaxed">激励对象满足预设条件（如服务年限、业绩目标）后，正式获得股权或行权资格的过程。第二类限制性股票的“归属”特指在满足条件后出资购股并获得所有权。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Further Reading -->
+        <section class="mb-12 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg card-hover transition-all-300">
+            <h3 class="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-6 flex items-center">
+                <i class="fas fa-glasses mr-3 text-2xl"></i>延伸阅读推荐
+            </h3>
+            <div class="space-y-4 text-lg text-gray-700 dark:text-gray-300">
+                <p>为深入理解科创板股权激励及相关法律财务问题，推荐以下资料：</p>
+                <ul class="list-disc pl-8 space-y-3">
+                    <li>
+                        <strong class="text-gray-900 dark:text-white">《上市公司股权激励法律实务指南》</strong>
+                        <p class="text-base text-gray-600 dark:text-gray-400 mt-1">全面涵盖股权激励的法律框架、操作流程、各类工具特点及合规要求。</p>
+                    </li>
+                    <li>
+                        <strong class="text-gray-900 dark:text-white">《科创板、创业板上市公司股权激励操作实务》</strong>
+                        <p class="text-base text-gray-600 dark:text-gray-400 mt-1">针对科创板和创业板的股权激励特点，提供实务操作指引和案例分析。</p>
+                    </li>
+                    <li>
+                        <strong class="text-gray-900 dark:text-white">上海证券交易所官方网站 - 科创板自律监管规则专区</strong>
+                        <p class="text-base text-gray-600 dark:text-gray-400 mt-1">最权威的政策发布和解读平台，建议定期查阅最新《自律监管指南》和监管问答。<br><a href="https://www.sse.com.cn/lawandrules/guide/stock/kcbxxpljg/" target="_blank" class="text-blue-500 hover:underline">访问上交所官网</a> <i class="fas fa-external-link-alt ml-1 text-sm"></i></p>
+                    </li>
+                    <li>
+                        <strong class="text-gray-900 dark:text-white">中国证监会官方网站 - 法律法规库</strong>
+                        <p class="text-base text-gray-600 dark:text-gray-400 mt-1">获取证券发行、上市及监管相关的基础法律法规。<br><a href="http://www.csrc.gov.cn/csrc/c101979/list_jlfg.shtml" target="_blank" class="text-blue-500 hover:underline">访问证监会官网</a> <i class="fas fa-external-link-alt ml-1 text-sm"></i></p>
+                    </li>
+                    <li>
+                        <strong class="text-gray-900 dark:text-white">知名律所、会计师事务所发布的股权激励白皮书或专题文章</strong>
+                        <p class="text-base text-gray-600 dark:text-gray-400 mt-1">如金杜律师事务所、君合律师事务所、安永、德勤等专业机构定期发布的股权激励研究报告，提供最新市场动态与合规建议。</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- References -->
+        <section class="mt-12 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
+                <i class="fas fa-link mr-3 text-xl"></i>参考文献
+            </h3>
+            <ol class="list-decimal pl-8 space-y-2 text-gray-700 dark:text-gray-300 text-base">
+                <li><a href="https://www.huiyelaw.com/news-3004.html" target="_blank" class="text-blue-500 hover:underline">全面注册制下（拟）上市公司股权激励合规与审核要点（下），汇业律师事务所，2023年</a></li>
+                <li><a href="#" target="_blank" class="text-blue-500 hover:underline" onclick="return false;">（原始内容中未提供，此处作为占位符，可根据实际内容补充）</a></li>
+                <li><a href="https://news.cnstock.com/kcb,tt-202212-4996325.htm" target="_blank" class="text-blue-500 hover:underline">第二类限制性股票成科创板创业板公司股权激励主流工具，中国证券网，2022年</a></li>
+                <li><a href="#" target="_blank" class="text-blue-500 hover:underline" onclick="return false;">（原始内容中未提供，此处作为占位符，可根据实际内容补充）</a></li>
+                <li><a href="#" target="_blank" class="text-blue-500 hover:underline" onclick="return false;">（原始内容中未提供，此处作为占位符，可根据实际内容补充）</a></li>
+                <li><a href="#" target="_blank" class="text-blue-500 hover:underline" onclick="return false;">（原始内容中未提供，此处作为占位符，可根据实际内容补充）</a></li>
+                <li><a href="https://www.sse.com.cn/lawandrules/guide/stock/kcbxxpljg/c/c_20250425_10777780.shtml" target="_blank" class="text-blue-500 hover:underline">科创板上市公司自律监管指南第4号——股权激励信息披露，上交所，2025年修订</a></li>
+                <li><a href="#" target="_blank" class="text-blue-500 hover:underline" onclick="return false;">（原始内容中未提供，此处作为占位符，可根据实际内容补充）</a></li>
+                <li><a href="#" target="_blank" class="text-blue-500 hover:underline" onclick="return false;">（原始内容中未提供，此处作为占位符，可根据实际内容补充）</a></li>
+                <li><a href="http://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=688539&id=11238180" target="_blank" class="text-blue-500 hover:underline">高华科技：2025年限制性股票激励计划(草案)，新浪财经，2025年</a></li>
+                <li><a href="https://pdf.dfcfw.com/pdf/H2_AN202503051644082627_1.pdf" target="_blank" class="text-blue-500 hover:underline">拓荆科技2025年限制性股票激励计划（草案），东方财富网，2025年</a></li>
+                <li><a href="#" target="_blank" class="text-blue-500 hover:underline" onclick="return false;">（原始内容中未提供，此处作为占位符，可根据实际内容补充）</a></li>
+                <li><a href="#" target="_blank" class="text-blue-500 hover:underline" onclick="return false;">（原始内容中未提供，此处作为占位符，可根据实际内容补充）</a></li>
+                <li><a href="#" target="_blank" class="text-blue-500 hover:underline" onclick="return false;">（原始内容中未提供，此处作为占位符，可根据实际内容补充）</a></li>
+                <li><a href="https://www.gdlianyue.com/news_view.php?id=325" target="_blank" class="text-blue-500 hover:underline">科创板的“股权激励”有哪些特殊点，广东连越律师事务所，2023年</a></li>
+                <li><a href="https://zhuanlan.zhihu.com/p/580494364" target="_blank" class="text-blue-500 hover:underline">第二类限制性股票归属三大注意事项，知乎专栏，2023年</a></li>
+            </ol>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-8 text-center text-sm dark:bg-gray-900">
+        <p>&copy; 2025 股权激励分析. 版权所有.</p>
+        <p class="mt-2">致力于提供专业的Web设计与开发服务。</p>
+    </footer>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default', // Will be overridden by CSS
+            flowchart: {
+                htmlLabels: true,
+                curve: 'basis'
+            },
+            securityLevel: 'loose'
+        });
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Check for saved theme preference or system preference
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+            htmlElement.classList.add('dark');
+        } else {
+            htmlElement.classList.add('light');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            // Re-render Mermaid diagrams to apply new theme if necessary
+            // Mermaid's theme 'default' is handled by CSS overrides, so usually no re-render needed.
+            // But if it was using 'dark' or 'forest' from mermaid, this would be crucial.
+            // mermaid.init(); // This might re-initialize all diagrams, potentially slower.
+            // A more specific re-render might be needed for complex dynamic themes.
+            // For this setup, custom CSS handles the theme switch for Mermaid directly.
+        });
+
+        // Ensure Mermaid rerenders if content loads dynamically or theme changes visually break it
+        // This is a fallback and generally not needed if CSS is correctly overriding mermaid's default styles
+        window.addEventListener('load', () => {
+            mermaid.init();
+        });
+
+        // Observe theme changes from system (if user doesn't manually set)
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+            if (!localStorage.getItem('theme')) { // Only react if no manual override
+                if (event.matches) {
+                    htmlElement.classList.remove('light');
+                    htmlElement.classList.add('dark');
+                } else {
+                    htmlElement.classList.remove('dark');
+                    htmlElement.classList.add('light');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+```
