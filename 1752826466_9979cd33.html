@@ -1,0 +1,435 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO股本变更：深入解析</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <style>
+        /* Custom Font Family Definition */
+        html {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, serif;
+        }
+
+        /* Dark Mode Specific Styles */
+        .dark {
+            --tw-bg-opacity: 1;
+            background-color: #1a202c; /* neutral-900 */
+            color: #e2e8f0; /* neutral-100 */
+        }
+        .dark .bg-gray-50 { background-color: #2d3748; /* neutral-800 */ }
+        .dark .text-gray-800 { color: #e2e8f0; }
+        .dark .text-gray-600 { color: #a0aec0; }
+        .dark .border-gray-200 { border-color: #4a5568; }
+        .dark .shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.24); }
+        .dark .prose a { color: #93c5fd; /* blue-300 */ }
+        .dark .prose a:hover { color: #60a5fa; /* blue-400 */ }
+        .dark .prose h2, .dark .prose h3 { color: #cbd5e0; /* neutral-200 */ }
+        .dark .prose strong { color: #e2e8f0; }
+        .dark .prose blockquote { border-left-color: #4a5568; color: #a0aec0; }
+        .dark .mermaid-container { background-color: #2d3748; border-color: #4a5568; }
+        .dark .mode-toggle-btn {
+            background-color: #4a5568;
+            color: #e2e8f0;
+            border-color: #4a5568;
+        }
+        .dark .mode-toggle-btn:hover {
+            background-color: #616e7f;
+        }
+
+        /* Light Mode Specific Styles (default Tailwind if no .dark is present) */
+        body {
+            --tw-bg-opacity: 1;
+            background-color: #f7fafc; /* neutral-50 */
+            color: #2d3748; /* neutral-800 */
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .light .bg-gray-50 { background-color: #f9fafb; /* neutral-50 */ }
+        .light .text-gray-800 { color: #2d3748; }
+        .light .text-gray-600 { color: #4a5568; }
+        .light .border-gray-200 { border-color: #e2e8f0; }
+        .light .prose a { color: #3b82f6; /* blue-500 */ }
+        .light .prose a:hover { color: #2563eb; /* blue-600 */ }
+        .light .prose h2, .light .prose h3 { color: #1a202c; /* neutral-900 */ }
+        .light .prose strong { color: #1a202c; }
+        .light .prose blockquote { border-left-color: #cbd5e0; color: #718096; }
+        .light .mermaid-container { background-color: #ffffff; border-color: #e2e8f0; }
+        .light .mode-toggle-btn {
+            background-color: #e2e8f0;
+            color: #2d3748;
+            border-color: #e2e8f0;
+        }
+        .light .mode-toggle-btn:hover {
+            background-color: #cbd5e0;
+        }
+
+        /* Custom styles for Hero background */
+        .hero-background {
+            background: linear-gradient(135deg, var(--hero-start-color), var(--hero-end-color));
+        }
+        .dark .hero-background {
+            --hero-start-color: #1f2a37; /* Darker blue-gray */
+            --hero-end-color: #0f172a; /* Even darker slate */
+        }
+        .light .hero-background {
+            --hero-start-color: #e0f2f7; /* Light blue */
+            --hero-end-color: #e6fffa; /* Lighter teal */
+        }
+
+        /* Fine-tune typography for enhanced readability */
+        .prose p {
+            line-height: 1.8;
+            margin-bottom: 1em;
+        }
+        .prose ul, .prose ol {
+            line-height: 1.8;
+            margin-bottom: 1em;
+            padding-left: 1.5em;
+        }
+        .prose li {
+            margin-bottom: 0.5em;
+        }
+        .prose h2, .prose h3 {
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+        .prose blockquote {
+            padding-left: 1em;
+            border-left-width: 4px;
+            font-style: italic;
+        }
+
+        /* Micro-interactions */
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease-in-out;
+        }
+        .dark .card-hover:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+        }
+
+        .link-hover:hover {
+            text-decoration: underline;
+            opacity: 0.8;
+            transition: opacity 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="transition-colors duration-300">
+    <!-- Mode Toggle Button -->
+    <button id="modeToggle" class="mode-toggle-btn fixed top-4 right-4 p-3 rounded-full shadow-lg z-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 transition-all duration-300">
+        <i class="fas fa-sun text-xl"></i>
+    </button>
+
+    <header class="hero-background py-20 px-4 sm:px-6 lg:px-8 text-center shadow-lg">
+        <div class="max-w-4xl mx-auto">
+            <div class="mb-6">
+                <i class="fas fa-chart-line text-blue-400 text-6xl md:text-7xl mb-4 animate-bounce-slow"></i>
+            </div>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-4 tracking-tight">
+                拟IPO企业申报基准日后股本变更
+            </h1>
+            <p class="text-xl sm:text-2xl text-blue-100 font-light mb-8">
+                深入解析A股IPO审核中股本变动的可行性、监管依据与最晚时点
+            </p>
+            <div class="flex justify-center items-center space-x-4 text-blue-200 text-sm">
+                <span><i class="fas fa-calendar-alt mr-2"></i>更新于 2024年7月25日</span>
+                <span><i class="fas fa-building mr-2"></i>A股IPO观察室</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <div class="max-w-4xl mx-auto prose dark:prose-dark lg:prose-xl">
+            <p class="lead text-lg md:text-xl font-medium text-gray-800 dark:text-gray-200 mb-8">
+                根据A股IPO相关监管规则及实务操作，拟IPO企业在<strong class="text-blue-500 dark:text-blue-300">申报基准日后仍可进行股本变更</strong>，但需满足严格条件和程序要求。
+            </p>
+
+            <!-- Mermaid Chart for Visualizing Concepts -->
+            <h2 class="text-3xl font-semibold mb-6 flex items-center">
+                <i class="fas fa-sitemap text-blue-500 dark:text-blue-300 mr-3"></i>
+                核心概念关系图
+            </h2>
+            <div class="mermaid-container bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 mb-12 overflow-x-auto">
+                <pre class="mermaid text-sm md:text-base">
+graph TD
+    A[拟IPO企业申报基准日后股本变更] --> B{是否可行?};
+
+    B --> C1[可行: 受限条件]
+    C1 --> C1a(充分披露);
+    C1 --> C1b(合规核查);
+    C1 --> C1c(股权稳定);
+
+    B --> C2[不可行: 禁止性情形]
+    C2 --> C2a(股权清晰性受损);
+    C2 --> C2b(控制权稳定性受影响);
+    C2 --> C2c(新增股东未核查);
+
+    A --> D{最晚时点?};
+    D --> D1[上市委审议前];
+    D --> D2[监管红线: 注册后/发行前];
+
+    A --> E{主要依据?};
+    E --> E1(监管逻辑: 股权稳定性 & 信息及时性);
+    E --> E2(核心文件: 《监管指引》《管理办法》);
+
+    A --> F{风险提示?};
+    F --> F1(变动必要性/合理性);
+    F --> F2(影响财务数据可比性);
+    F --> F3(需延长申报文件有效期);
+
+    style A fill:#3498DB,stroke:#3498DB,stroke-width:2px,color:#fff
+    style B fill:#F39C12,stroke:#F39C12,stroke-width:2px,color:#fff
+    style C1 fill:#2ECC71,stroke:#2ECC71,stroke-width:2px,color:#fff
+    style C2 fill:#E74C3C,stroke:#E74C3C,stroke-width:2px,color:#fff
+    style D fill:#9B59B6,stroke:#9B59B6,stroke-width:2px,color:#fff
+    style D1 fill:#8E44AD,stroke:#8E44AD,stroke-width:2px,color:#fff
+    style D2 fill:#C0392B,stroke:#C0392B,stroke-width:2px,color:#fff
+    style E fill:#1ABC9C,stroke:#1ABC9C,stroke-width:2px,color:#fff
+    style E1 fill:#16A085,stroke:#16A085,stroke-width:2px,color:#fff
+    style E2 fill:#16A085,stroke:#16A085,stroke-width:2px,color:#fff
+    style F fill:#F1C40F,stroke:#F1C40F,stroke-width:2px,color:#fff
+    style F1 fill:#F39C12,stroke:#F39C12,stroke-width:2px,color:#fff
+    style F2 fill:#F39C12,stroke:#F39C12,stroke-width:2px,color:#fff
+    style F3 fill:#F39C12,stroke:#F39C12,stroke-width:2px,color:#fff
+                </pre>
+            </div>
+
+            <h2 class="text-3xl font-semibold mb-6 flex items-center">
+                <i class="fas fa-check-circle text-green-500 dark:text-green-300 mr-3"></i>
+                一、股本变更的可行性及依据
+            </h2>
+            <div class="mb-8 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-inner border border-gray-200 dark:border-gray-700 card-hover">
+                <h3 class="text-xl font-semibold mb-3 text-blue-600 dark:text-blue-400">1. 允许变更的监管逻辑：</h3>
+                <p>
+                    申报基准日（通常指招股说明书引用的财务报告截止日）并非股本变更的绝对禁止时点。根据<a href="#footnote1" class="link-hover">《监管规则适用指引——关于申请首发上市企业股东信息披露》<sup>[1]</sup></a>及实务案例，监管核心关注<strong>股权稳定性</strong>和<strong>信息披露及时性</strong>。若企业在审核期间发生股本变动（如增资、股权转让），需履行以下义务：
+                </p>
+                <ul class="list-disc list-inside mt-4 space-y-2 text-gray-700 dark:text-gray-300">
+                    <li><i class="fas fa-file-alt text-blue-500 mr-2"></i><strong>补充披露</strong>：更新招股说明书，说明变更原因、定价依据及对股权结构的影响；</li>
+                    <li><i class="fas fa-search text-blue-500 mr-2"></i><strong>核查要求</strong>：保荐机构和律师需对变更合规性、是否涉及利益输送等发表明确意见<sup>[2]</sup>。</li>
+                </ul>
+            </div>
+
+            <div class="mb-8 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-inner border border-gray-200 dark:border-gray-700 card-hover">
+                <h3 class="text-xl font-semibold mb-3 text-red-600 dark:text-red-400">2. 禁止性情形：</h3>
+                <p>
+                    若股本变更导致以下问题，可能被认定为不符合发行条件：
+                </p>
+                <ul class="list-disc list-inside mt-4 space-y-2 text-gray-700 dark:text-gray-300">
+                    <li><i class="fas fa-exclamation-triangle text-red-500 mr-2"></i>股权清晰性受损（如代持未清理）；</li>
+                    <li><i class="fas fa-lock-open text-red-500 mr-2"></i>控制权稳定性受影响（如实际控制人变更）；</li>
+                    <li><i class="fas fa-user-plus text-red-500 mr-2"></i>新增股东未按“申报前12个月”规则核查（适用于基准日后至提交申请期间的新股东）<sup>[3]</sup>。</li>
+                </ul>
+            </div>
+
+            <h2 class="text-3xl font-semibold mb-6 flex items-center">
+                <i class="fas fa-clock text-purple-500 dark:text-purple-300 mr-3"></i>
+                二、最晚可变更时点
+            </h2>
+            <div class="mb-8 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-inner border border-gray-200 dark:border-gray-700 card-hover">
+                <h3 class="text-xl font-semibold mb-3 text-blue-600 dark:text-blue-400">1. 实务中的截止时点：</h3>
+                <ul class="list-disc list-inside mt-4 space-y-2 text-gray-700 dark:text-gray-300">
+                    <li><i class="fas fa-gavel text-purple-500 mr-2"></i><strong>提交上市委审议前</strong>（即“上会前”）：此为最晚可操作窗口。例如：
+                        <ul class="list-circle list-inside ml-6 mt-2 space-y-1">
+                            <li>在审期间因员工持股计划、小额融资等需调整股本的，需在上市委会议前更新申报材料并获交易所认可<sup>[4]</sup>。</li>
+                            <li>案例参考：部分科创板企业在问询阶段完成增资（如基准日后引入战投），但需说明“未导致控制权变动”<sup>[5]</sup>。</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="mb-8 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-inner border border-gray-200 dark:border-gray-700 card-hover">
+                <h3 class="text-xl font-semibold mb-3 text-red-600 dark:text-red-400">2. 监管红线：</h3>
+                <p>
+                    若在<strong>证监会同意注册后、发行前</strong>发生股本变动，将导致发行中止甚至撤销注册，因股权结构必须与注册文件一致<sup>[6]</sup>。
+                </p>
+            </div>
+
+            <h2 class="text-3xl font-semibold mb-6 flex items-center">
+                <i class="fas fa-balance-scale text-yellow-500 dark:text-yellow-300 mr-3"></i>
+                三、依据及风险提示
+            </h2>
+            <div class="mb-8 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-inner border border-gray-200 dark:border-gray-700 card-hover">
+                <h3 class="text-xl font-semibold mb-3 text-blue-600 dark:text-blue-400">1. 核心监管文件：</h3>
+                <ul class="list-disc list-inside mt-4 space-y-2 text-gray-700 dark:text-gray-300">
+                    <li><i class="fas fa-scroll text-yellow-500 mr-2"></i><a href="http://www.csrc.gov.cn/csrc/c101864/c1570929/content.shtml" target="_blank" rel="noopener noreferrer" class="link-hover">《监管规则适用指引——上市类第1号》</a>明确：资产重组或股权变动需由中介机构核查并披露是否涉及私募备案等合规问题<sup>[7]</sup>。</li>
+                    <li><i class="fas fa-gavel text-yellow-500 mr-2"></i><a href="http://www.csrc.gov.cn/csrc/c101864/c1570929/content.shtml" target="_blank" rel="noopener noreferrer" class="link-hover">《首次公开发行股票并上市管理办法》</a>第十三条：要求发行人股权清晰，控股股东/受控股东所持股份无重大权属纠纷<sup>[8]</sup>。</li>
+                </ul>
+            </div>
+
+            <div class="mb-8 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-inner border border-gray-200 dark:border-gray-700 card-hover">
+                <h3 class="text-xl font-semibold mb-3 text-red-600 dark:text-red-400">2. 风险提示：</h3>
+                <p>
+                    基准日后变更股本可能引发监管问询重点：
+                </p>
+                <ul class="list-disc list-inside mt-4 space-y-2 text-gray-700 dark:text-gray-300">
+                    <li><i class="fas fa-question-circle text-red-500 mr-2"></i>变动必要性及合理性（例如是否存在突击入股）；</li>
+                    <li><i class="fas fa-chart-pie text-red-500 mr-2"></i>是否影响财务数据可比性（如每股收益摊薄）；</li>
+                    <li><i class="fas fa-calendar-check text-red-500 mr-2"></i>是否需延长申报文件有效期（如审计报告过期需重审）<sup>[9]</sup>。</li>
+                </ul>
+            </div>
+
+            <hr class="my-10 border-t-2 border-gray-300 dark:border-gray-600">
+
+            <h2 class="text-3xl font-semibold mb-6 flex items-center">
+                <i class="fas fa-lightbulb text-indigo-500 dark:text-indigo-300 mr-3"></i>
+                结论
+            </h2>
+            <div class="p-6 bg-gradient-to-r from-blue-500 to-blue-700 dark:from-blue-600 dark:to-blue-800 text-white rounded-lg shadow-xl mb-12">
+                <p class="text-xl md:text-2xl font-bold text-center">
+                    <i class="fas fa-check-double mr-3"></i>
+                    <strong>申报基准日后股本可变更，但最晚需于上市委审议前完成，且需满足充分披露、合规核查及股权稳定三项要求。</strong>
+                </p>
+                <p class="mt-4 text-md md:text-lg text-center font-light">
+                    实务中建议提前与交易所预沟通，避免因程序瑕疵影响审核进度。
+                </p>
+            </div>
+
+            <!-- Footnotes Section -->
+            <div class="mt-12 text-sm text-gray-600 dark:text-gray-400">
+                <h3 class="text-lg font-semibold mb-4 border-b pb-2 border-gray-300 dark:border-gray-600">参考文献：</h3>
+                <ol class="list-decimal pl-5 space-y-2">
+                    <li id="footnote1">知识库资料《监管规则适用指引——关于申请首发上市企业股东信息披露》：明确申报前12个月内新增股东的核查要求。</li>
+                    <li id="footnote2">联网搜索标题《全面注册制下拟IPO企业上市审核期间能否发生股权变动产生新股东？》：<a href="https://www.dehenglaw.com/CN/tansuocontent/0008/028373/7.aspx?MID=0902&AID=" target="_blank" rel="noopener noreferrer" class="link-hover">点击查看</a>：分析审核期间股权变动的监管逻辑。</li>
+                    <li id="footnote3">联网搜索标题《IPO基准日后通过股份转让新增股东的注意事项》：<a href="https://zhuanlan.zhihu.com/p/634104556" target="_blank" rel="noopener noreferrer" class="link-hover">点击查看</a>：说明新增股东的核查程序。</li>
+                    <li id="footnote4">联网搜索标题《A股IPO审核法律问题关注要点系列（一）股改流程及注意事项》：<a href="https://www.lawlawing.com/community/492425" target="_blank" rel="noopener noreferrer" class="link-hover">点击查看</a>：提及股改基准日与IPO申报数据的衔接。</li>
+                    <li id="footnote5">知识库资料《监管规则适用指引——上市类第1号》第三节：涉及股权变动的信息披露义务：<a href="http://www.csrc.gov.cn/csrc/c101864/c1570929/content.shtml" target="_blank" rel="noopener noreferrer" class="link-hover">点击查看</a>。</li>
+                    <li id="footnote6">《证券发行与承销管理办法》第二十四条：注册后至发行前期间发行人不得进行重大权益变动。</li>
+                    <li id="footnote7">知识库资料《监管规则适用指引——上市类第1号》第一条：资产重组中股权变动的核查要求：<a href="http://www.csrc.gov.cn/csrc/c101864/c1570929/content.shtml" target="_blank" rel="noopener noreferrer" class="link-hover">点击查看</a>。</li>
+                    <li id="footnote8">《首次公开发行股票并上市管理办法》（证监会令第196号）第十三条。</li>
+                    <li id="footnote9">联网搜索标题《拟上市公司如何进行股改？》：<a href="https://www.sohu.com/a/793473855_99901597" target="_blank" rel="noopener noreferrer" class="link-hover">点击查看</a>：强调股改基准日与报告期规划的关联风险。</li>
+                </ol>
+            </div>
+
+            <!-- Further Reading Section -->
+            <div class="mt-16 bg-gray-100 dark:bg-gray-800 p-8 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
+                <h2 class="text-3xl font-semibold mb-6 flex items-center text-gray-800 dark:text-gray-200">
+                    <i class="fas fa-book-open text-teal-500 dark:text-teal-300 mr-3"></i>
+                    进一步阅读
+                </h2>
+                <p class="text-gray-700 dark:text-gray-300 mb-6">
+                    为了更全面深入地理解IPO股本变更及相关法规，我们推荐以下经典书籍或重要文件：
+                </p>
+                <ul class="list-none space-y-6">
+                    <li class="flex items-start text-gray-800 dark:text-gray-200">
+                        <i class="fas fa-book text-teal-500 dark:text-teal-300 text-2xl mr-4 mt-1 flex-shrink-0"></i>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-1">《中华人民共和国证券法》</h4>
+                            <p class="text-gray-600 dark:text-gray-400">中国资本市场的基本法律，理解所有证券活动的基石。</p>
+                            <a href="https://baike.baidu.com/item/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E8%AF%81%E5%88%B8%E6%B3%95/88629" target="_blank" rel="noopener noreferrer" class="text-blue-500 dark:text-blue-300 link-hover text-sm">了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                        </div>
+                    </li>
+                    <li class="flex items-start text-gray-800 dark:text-gray-200">
+                        <i class="fas fa-gavel text-teal-500 dark:text-teal-300 text-2xl mr-4 mt-1 flex-shrink-0"></i>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-1">《首次公开发行股票并上市管理办法》</h4>
+                            <p class="text-gray-600 dark:text-gray-400">中国证监会关于A股IPO最核心、最具体的规范性文件。</p>
+                            <a href="http://www.csrc.gov.cn/csrc/c101864/c1570929/content.shtml" target="_blank" rel="noopener noreferrer" class="text-blue-500 dark:text-blue-300 link-hover text-sm">官方链接 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                        </div>
+                    </li>
+                    <li class="flex items-start text-gray-800 dark:text-gray-200">
+                        <i class="fas fa-building text-teal-500 dark:text-teal-300 text-2xl mr-4 mt-1 flex-shrink-0"></i>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-1">《中华人民共和国公司法》</h4>
+                            <p class="text-gray-600 dark:text-gray-400">规定公司设立、组织、运营、解散的基本法律，是股权变更的基础。</p>
+                            <a href="https://baike.baidu.com/item/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%85%AC%E5%8F%B8%E6%B3%95/24434" target="_blank" rel="noopener noreferrer" class="text-blue-500 dark:text-blue-300 link-hover text-sm">了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                        </div>
+                    </li>
+                    <li class="flex items-start text-gray-800 dark:text-gray-200">
+                        <i class="fas fa-clipboard-list text-teal-500 dark:text-teal-300 text-2xl mr-4 mt-1 flex-shrink-0"></i>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-1">《监管规则适用指引——上市类第1号》</h4>
+                            <p class="text-gray-600 dark:text-gray-400">证监会针对上市审核具体问题的操作性指引，文中多次引用的重要文件。</p>
+                            <a href="http://www.csrc.gov.cn/csrc/c101864/c1570929/content.shtml" target="_blank" rel="noopener noreferrer" class="text-blue-500 dark:text-blue-300 link-hover text-sm">官方链接 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                        </div>
+                    </li>
+                    <li class="flex items-start text-gray-800 dark:text-gray-200">
+                        <i class="fas fa-chart-area text-teal-500 dark:text-teal-300 text-2xl mr-4 mt-1 flex-shrink-0"></i>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-1">《IPO内核实务问答》或相关券商/律所实务指引</h4>
+                            <p class="text-gray-600 dark:text-gray-400">市场中介机构结合最新审核动态和案例，发布的实操性问答与解析，具有很强的参考价值。</p>
+                            <span class="text-gray-500 text-sm">（建议搜索“IPO审核要点”、“IPO实务操作指南”等关键词获取最新版本）</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 dark:bg-gray-900 text-gray-300 py-8 px-4 sm:px-6 lg:px-8 text-center text-sm shadow-inner">
+        <p>&copy; 2024 A股IPO观察室. All rights reserved.</p>
+        <p class="mt-2">免责声明：本内容仅供参考，不构成任何法律或投资建议。</p>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({ startOnLoad: true });
+
+        // Dark/Light Mode Toggle Logic
+        const modeToggle = document.getElementById('modeToggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                modeToggle.innerHTML = '<i class="fas fa-sun text-xl"></i>'; // Sun icon for dark mode
+            } else {
+                htmlElement.classList.remove('dark');
+                modeToggle.innerHTML = '<i class="fas fa-moon text-xl"></i>'; // Moon icon for light mode
+            }
+            localStorage.setItem('theme', theme);
+        }
+
+        // Check for saved theme or system preference on load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+
+        // Toggle theme on button click
+        modeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Optional: Animation for hero icon
+        // Define a simple keyframe animation in CSS for this
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes bounce-slow {
+                0%, 100% {
+                    transform: translateY(0);
+                }
+                50% {
+                    transform: translateY(-10px);
+                }
+            }
+            .animate-bounce-slow {
+                animation: bounce-slow 3s infinite ease-in-out;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+```
