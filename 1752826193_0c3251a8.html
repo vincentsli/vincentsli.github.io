@@ -1,0 +1,595 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板股权激励：第二类限制性股票深度解析</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC and Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <style>
+        /* Base font styles, ensuring smooth antialiasing */
+        html {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-family: 'Noto Sans SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', sans-serif;
+        }
+        /* Specific font for serif headings */
+        .font-serif-sc {
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        /* CSS Variables for Dynamic Theming */
+        :root {
+            --color-bg-primary: #1a202c; /* Default Dark Mode */
+            --color-bg-secondary: #2d3748;
+            --color-text-primary: #f7fafc;
+            --color-text-secondary: #cbd5e0;
+            --color-accent: #34d399; /* Emerald Green */
+            --color-border: #4a5568;
+            --hero-bg-overlay: rgba(26, 32, 44, 0.8);
+            --hero-bg-gradient-top: rgba(26, 32, 44, 0.5);
+            --hero-bg-gradient-bottom: transparent;
+        }
+
+        /* Light Mode Specific Styles */
+        html.light {
+            --color-bg-primary: #ffffff;
+            --color-bg-secondary: #f7fafc;
+            --color-text-primary: #2d3748;
+            --color-text-secondary: #4a5568;
+            --color-accent: #059669; /* Darker Emerald for contrast */
+            --color-border: #e2e8f0;
+            --hero-bg-overlay: rgba(255, 255, 255, 0.7);
+            --hero-bg-gradient-top: rgba(255, 255, 255, 0.5);
+            --hero-bg-gradient-bottom: transparent;
+        }
+
+        /* Apply CSS variables to elements */
+        body {
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--color-text-primary);
+        }
+        a {
+            color: var(--color-accent);
+            transition: color 0.2s ease;
+        }
+        a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        .card {
+            background-color: var(--color-bg-secondary);
+            border-color: var(--color-border);
+            transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .border-color-default {
+            border-color: var(--color-border);
+        }
+        .text-color-primary {
+            color: var(--color-text-primary);
+        }
+        .text-color-secondary {
+            color: var(--color-text-secondary);
+        }
+        .text-color-accent {
+            color: var(--color-accent);
+        }
+
+        /* Hero section specific background */
+        .hero-bg {
+            background-image: url('https://images.unsplash.com/photo-1590283626296-17b51b74542d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80'); /* Abstract circuit board/data flow */
+            background-size: cover;
+            background-position: center;
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, var(--hero-bg-gradient-bottom), var(--hero-bg-gradient-top)), var(--hero-bg-overlay);
+            z-index: 1; /* Below text content */
+        }
+        .hero-bg > div { /* Target the content div */
+            position: relative;
+            z-index: 2; /* Above the overlay */
+        }
+
+        /* Micro-interactions */
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Tailwind shadow-lg */
+        }
+        .icon-bounce:hover {
+            animation: bounce 0.6s infinite alternate;
+        }
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-5px); }
+        }
+
+        /* Custom Drop Cap */
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 3.5em; /* Larger size */
+            line-height: 0.8;
+            padding-right: 0.1em;
+            margin-top: 0.05em;
+            font-family: 'Noto Serif SC', serif; /* Use serif font for drop cap */
+            color: var(--color-accent); /* Accent color for emphasis */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+        }
+
+        /* Scroll reveal animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fadeInUp {
+            animation: fadeInUp 0.7s ease-out forwards;
+        }
+
+        /* Mermaid container styling */
+        .mermaid-container {
+            background-color: var(--color-bg-secondary);
+            padding: 1.5rem;
+            border-radius: 0.75rem; /* Rounded corners */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Shadow for depth */
+            border: 1px solid var(--color-border);
+            overflow-x: auto; /* Enable horizontal scrolling for large diagrams */
+            min-height: 300px; /* Ensure space for diagram before load */
+            display: flex;
+            justify-content: center; /* Center diagram horizontally */
+            align-items: center; /* Center diagram vertically */
+        }
+        .mermaid-container svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-bg-secondary);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-accent);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: color-mix(in srgb, var(--color-accent) 80%, #000000); /* Slightly darker on hover */
+        }
+    </style>
+</head>
+<body class="antialiased leading-relaxed">
+    <!-- Theme Toggle Button -->
+    <button id="themeToggle" class="fixed bottom-6 right-6 p-3 rounded-full shadow-lg z-50 transition-all duration-300 ease-in-out hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-emerald-500 text-white dark:bg-gray-700 dark:text-gray-100 dark:focus:ring-gray-500">
+        <i class="fas fa-sun block dark:hidden"></i>
+        <i class="fas fa-moon hidden dark:block"></i>
+    </button>
+
+    <!-- Hero Module -->
+    <header class="hero-bg py-24 md:py-32 lg:py-48 text-center relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <h1 class="font-serif-sc text-5xl md:text-6xl lg:text-7xl font-bold mb-4 drop-shadow-lg text-color-primary">
+                科创板股权激励：<br class="md:hidden">第二类限制性股票深度解析
+            </h1>
+            <p class="text-xl md:text-2xl font-sans-sc text-color-secondary mb-8 max-w-3xl mx-auto drop-shadow-md">
+                拟上市公司如何利用创新工具吸引与留住核心人才
+            </p>
+            <p class="text-md md:text-lg max-w-2xl mx-auto text-color-secondary italic opacity-90">
+                “在高速发展的科创舞台，股权激励不仅仅是留才，更是激发创新潜能、实现企业与人才共赢的战略基石。”
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-16 md:py-24">
+        <!-- Core Summary Section -->
+        <section class="mb-16 md:mb-24">
+            <h2 class="font-serif-sc text-4xl font-semibold mb-8 text-color-primary relative">
+                <span class="inline-block pb-2 border-b-4 border-emerald-400">核心摘要</span>
+                <i class="fas fa-lightbulb text-emerald-400 absolute -bottom-2 -left-2 text-2xl opacity-70"></i>
+            </h2>
+            <div class="bg-color-secondary p-8 rounded-lg shadow-xl border border-color-default card-hover">
+                <p class="text-xl leading-relaxed text-color-primary drop-cap">
+                    根据科创板现行规则及市场实践，**科创板拟上市公司可以在IPO申报前设计包含第二类限制性股票的股权激励方案，但需满足特定条件且在上市后方可执行归属**。本文将深入分析其政策依据、操作要点、风险规避及市场实践案例，为拟上市公司提供清晰指引。
+                </p>
+            </div>
+        </section>
+
+        <!-- Main Content Sections: Policy, Restrictions, Cases -->
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 md:mb-24">
+            <!-- 1. 政策允许性 Card -->
+            <div class="card p-6 rounded-lg shadow-md border card-hover">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-check-circle text-emerald-400 text-3xl mr-4 icon-bounce"></i>
+                    <h3 class="font-serif-sc text-2xl font-medium text-color-primary">1. 政策允许性</h3>
+                </div>
+                <p class="text-color-secondary mb-4">
+                    科创板明确允许采用**第二类限制性股票**作为激励工具，其核心特点是：
+                </p>
+                <ul class="list-disc pl-6 text-color-secondary space-y-2">
+                    <li><span class="font-semibold text-color-primary">授予时无需出资</span>：激励对象在授予日仅获得股票归属资格，无需立即出资；</li>
+                    <li><span class="font-semibold text-color-primary">归属时出资购股</span>：满足行权条件（如业绩考核、服务期限）后，按授予价格购买公司增发股票<sup class="ml-1"><a href="#ref-1" class="text-emerald-400 hover:underline" aria-label="Reference 1">[1]</a><a href="#ref-2" class="text-emerald-400 hover:underline" aria-label="Reference 2">[2]</a></sup>。</li>
+                </ul>
+                <p class="text-color-secondary text-sm mt-4">
+                    依据文件：<br>
+                    《上海证券交易所科创板上市公司自律监管指南第4号——股权激励信息披露》（2025年4月修订）明确定义了第二类限制性股票的"归属"机制
+                    (<a href="https://www.sse.com.cn/lawandrules/guide/stock/kcbxxpljg/c/c_20250425_10777780.shtml" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">点击查看知识库资料<i class="fas fa-external-link-alt ml-1 text-xs"></i></a>)<sup class="ml-1"><a href="#ref-7" class="text-emerald-400 hover:underline" aria-label="Reference 7">[7]</a></sup>。
+                </p>
+            </div>
+
+            <!-- 2. 拟上市阶段的特殊限制 Card -->
+            <div class="card p-6 rounded-lg shadow-md border card-hover">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-exclamation-triangle text-red-400 text-3xl mr-4 icon-bounce"></i>
+                    <h3 class="font-serif-sc text-2xl font-medium text-color-primary">2. 拟上市阶段的特殊限制</h3>
+                </div>
+                <p class="text-color-secondary mb-4">
+                    虽政策允许设计此类方案，但拟上市公司需注意：
+                </p>
+                <ul class="list-disc pl-6 text-color-secondary space-y-2">
+                    <li><span class="font-semibold text-color-primary">方案设计阶段</span>：IPO申报前可制定激励计划，但**实际归属（股票登记）需在上市后进行**。例如：
+                        <ul class="list-circle pl-6 mt-1 text-sm">
+                            <li>激励计划需在招股说明书中披露，并明确归属条件与上市后实施安排<sup class="ml-1"><a href="#ref-1" class="text-emerald-400 hover:underline" aria-label="Reference 1">[1]</a><a href="#ref-6" class="text-emerald-400 hover:underline" aria-label="Reference 6">[6]</a></sup>。</li>
+                        </ul>
+                    </li>
+                    <li><span class="font-semibold text-color-primary">审核关注点</span>：
+                        <ul class="list-circle pl-6 mt-1 text-sm">
+                            <li>股份支付费用是否足额计提（影响净利润）；</li>
+                            <li>激励对象是否包含实控人亲属（科创板允许，但需披露合理性）<sup class="ml-1"><a href="#ref-3" class="text-emerald-400 hover:underline" aria-label="Reference 3">[3]</a><a href="#ref-15" class="text-emerald-400 hover:underline" aria-label="Reference 15">[15]</a></sup>；</li>
+                            <li>激励总量是否超股本总额的10%（科创板上限）<sup class="ml-1"><a href="#ref-3" class="text-emerald-400 hover:underline" aria-label="Reference 3">[3]</a></sup>。</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 3. 市场实践案例 Card -->
+            <div class="card p-6 rounded-lg shadow-md border card-hover">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-chart-line text-blue-400 text-3xl mr-4 icon-bounce"></i>
+                    <h3 class="font-serif-sc text-2xl font-medium text-color-primary">3. 市场实践案例</h3>
+                </div>
+                <p class="text-color-secondary mb-4">
+                    多家科创板公司在上市后实施第二类限制性股票计划，例如：
+                </p>
+                <ul class="list-disc pl-6 text-color-secondary space-y-3">
+                    <li>
+                        <span class="font-semibold text-color-primary">高华科技（688539）</span>：2025年发布限制性股票激励计划，明确采用第二类限制性股票，归属条件与上市后业绩挂钩
+                        (<a href="http://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=688539&id=11238180" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">点击查看公告原文<i class="fas fa-external-link-alt ml-1 text-xs"></i></a>)<sup class="ml-1"><a href="#ref-10" class="text-emerald-400 hover:underline" aria-label="Reference 10">[10]</a></sup>。
+                    </li>
+                    <li>
+                        <span class="font-semibold text-color-primary">乐鑫科技（688018）</span>：作为首批科创板公司，其激励对象包含核心技术人员及外籍员工，突破传统A股限制<sup class="ml-1"><a href="#ref-12" class="text-emerald-400 hover:underline" aria-label="Reference 12">[12]</a></sup>。
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Data Visualization Section -->
+        <section class="mb-16 md:mb-24">
+            <h2 class="font-serif-sc text-4xl font-semibold mb-8 text-color-primary relative">
+                <span class="inline-block pb-2 border-b-4 border-emerald-400">股权激励方案设计流程图</span>
+                <i class="fas fa-project-diagram text-emerald-400 absolute -bottom-2 -left-2 text-2xl opacity-70"></i>
+            </h2>
+            <div class="mermaid-container">
+                <pre class="mermaid text-sm">
+graph TD
+    A[拟上市公司] -- 启动 --> B(设计股权激励方案);
+    B -- 决策 --> C{采用第二类限制性股票?};
+    C -- 是 --> D[IPO申报前完成设计];
+    D -- 需披露 --> E(招股书披露);
+    D -- 前提 --> F{满足特定条件?};
+    F -- 是 --> G[上市后执行归属];
+    G -- 持续 --> H(持续合规与管理);
+    C -- 否 --> I[考虑其他激励工具];
+    F -- 否 --> J[方案调整/风险规避];
+
+    subgraph 关键条件与关注点
+        K[股份支付足额计提]
+        L[激励对象范围与总量限制]
+        M[税务衔接与递延纳税]
+        N[业绩考核与服务期限]
+    end
+
+    B -- 考量 --> K;
+    B -- 考量 --> L;
+    B -- 考量 --> M;
+    F -- 关联 --> N;
+
+    style A fill:#D4EDDA,stroke:#28A745,stroke-width:2px,color:#1A202C
+    style G fill:#D4EDDA,stroke:#28A745,stroke-width:2px,color:#1A202C
+    style C fill:#FFF3CD,stroke:#B45309,stroke-width:2px,color:#1A202C
+    style F fill:#FFF3CD,stroke:#B45309,stroke-width:2px,color:#1A202C
+    style I fill:#F8D7DA,stroke:#DC3545,stroke-width:2px,color:#1A202C
+    style J fill:#F8D7DA,stroke:#DC3545,stroke-width:2px,color:#1A202C
+    style K fill:#CCE5FF,stroke:#007BFF,stroke-width:1px,color:#1A202C
+    style L fill:#CCE5FF,stroke:#007BFF,stroke-width:1px,color:#1A202C
+    style M fill:#CCE5FF,stroke:#007BFF,stroke-width:1px,color:#1A202C
+    style N fill:#CCE5FF,stroke:#007BFF,stroke-width:1px,color:#1A202C
+
+    linkStyle 0 stroke:#28A745,stroke-width:2px;
+    linkStyle 1 stroke:#28A745,stroke-width:2px;
+    linkStyle 2 stroke:#059669,stroke-width:2px,fill:none,stroke-dasharray: 5 5;
+    linkStyle 3 stroke:#28A745,stroke-width:2px;
+    linkStyle 4 stroke:#28A745,stroke-width:2px;
+    linkStyle 5 stroke:#059669,stroke-width:2px,fill:none,stroke-dasharray: 5 5;
+    linkStyle 6 stroke:#28A745,stroke-width:2px;
+    linkStyle 7 stroke:#28A745,stroke-width:2px;
+    linkStyle 8 stroke:#DC3545,stroke-width:2px;
+    linkStyle 9 stroke:#DC3545,stroke-width:2px;
+    linkStyle 10 stroke:#007BFF,stroke-width:1px,stroke-dasharray: 3 3;
+    linkStyle 11 stroke:#007BFF,stroke-width:1px,stroke-dasharray: 3 3;
+    linkStyle 12 stroke:#007BFF,stroke-width:1px,stroke-dasharray: 3 3;
+    linkStyle 13 stroke:#007BFF,stroke-width:1px,stroke-dasharray: 3 3;
+                </pre>
+            </div>
+        </section>
+
+        <!-- 4. 操作建议 Section -->
+        <section class="mb-16 md:mb-24">
+            <h2 class="font-serif-sc text-4xl font-semibold mb-8 text-color-primary relative">
+                <span class="inline-block pb-2 border-b-4 border-emerald-400">4. 操作建议</span>
+                <i class="fas fa-cogs text-emerald-400 absolute -bottom-2 -left-2 text-2xl opacity-70"></i>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card p-6 rounded-lg shadow-md border card-hover">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-pencil-ruler text-orange-400 text-2xl mr-3 icon-bounce"></i>
+                        <h3 class="font-sans-sc text-2xl font-medium text-color-primary">方案设计要点</h3>
+                    </div>
+                    <ul class="list-disc pl-6 text-color-secondary space-y-2">
+                        <li>授予价格可自主定价（如不低于上市后首日收盘价的50%）<sup class="ml-1"><a href="#ref-2" class="text-emerald-400 hover:underline" aria-label="Reference 2">[2]</a></sup>；</li>
+                        <li>可纳入实控人亲属、外籍员工等特殊对象（需论证必要性）<sup class="ml-1"><a href="#ref-3" class="text-emerald-400 hover:underline" aria-label="Reference 3">[3]</a><a href="#ref-15" class="text-emerald-400 hover:underline" aria-label="Reference 15">[15]</a></sup>。</li>
+                    </ul>
+                </div>
+                <div class="card p-6 rounded-lg shadow-md border card-hover">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-shield-alt text-teal-400 text-2xl mr-3 icon-bounce"></i>
+                        <h3 class="font-sans-sc text-2xl font-medium text-color-primary">风险规避</h3>
+                    </div>
+                    <ul class="list-disc pl-6 text-color-secondary space-y-2">
+                        <li>确保股份支付费用在IPO前足额计提，避免影响审核；</li>
+                        <li>明确约定归属条件与上市时间挂钩（如"公司上市满12个月后"）<sup class="ml-1"><a href="#ref-1" class="text-emerald-400 hover:underline" aria-label="Reference 1">[1]</a><a href="#ref-6" class="text-emerald-400 hover:underline" aria-label="Reference 6">[6]</a></sup>。</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 p-6 rounded-lg shadow-md border bg-color-secondary card-hover">
+                <h3 class="font-sans-sc text-2xl font-medium text-color-primary mb-3"><i class="fas fa-clipboard-check text-emerald-400 mr-2"></i>税务衔接提示</h3>
+                <p class="text-color-secondary">
+                    虽然科创板允许更灵活的方案，但拟上市公司若计划适用财税〔2016〕101号文的递延纳税优惠，必须确保服务期不低于三年。建议企业在方案确定前与当地税务机关提前沟通备案。
+                </p>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="mb-16 md:mb-24 text-center">
+            <h2 class="font-serif-sc text-4xl font-semibold mb-8 text-color-primary relative inline-block">
+                <span class="inline-block pb-2 border-b-4 border-emerald-400">结论</span>
+                <i class="fas fa-bookmark text-emerald-400 absolute -bottom-2 -left-2 text-2xl opacity-70"></i>
+            </h2>
+            <div class="bg-color-secondary p-8 rounded-lg shadow-xl border card-hover">
+                <p class="text-xl leading-relaxed text-color-primary">
+                    科创板拟上市公司**可参考第二类限制性股票设计股权激励方案**，但需遵循两大原则：<br>
+                    <i class="fas fa-check-square text-emerald-400 mr-2"></i>**方案制定在IPO前，归属执行在上市后**；<br>
+                    <i class="fas fa-check-square text-emerald-400 mr-2"></i>**严格满足信息披露与股份支付处理要求**。
+                </p>
+                <p class="text-lg mt-6 text-color-secondary italic">
+                    建议参考《科创板上市公司自律监管指南第4号》及高华科技等案例，并提前与中介机构、交易所沟通方案细节<sup class="ml-1"><a href="#ref-1" class="text-emerald-400 hover:underline" aria-label="Reference 1">[1]</a><a href="#ref-7" class="text-emerald-400 hover:underline" aria-label="Reference 7">[7]</a><a href="#ref-10" class="text-emerald-400 hover:underline" aria-label="Reference 10">[10]</a></sup>。
+                </p>
+            </div>
+        </section>
+
+        <!-- Further Reading -->
+        <section class="mb-16 md:mb-24">
+            <h2 class="font-serif-sc text-4xl font-semibold mb-8 text-color-primary relative">
+                <span class="inline-block pb-2 border-b-4 border-emerald-400">延伸阅读</span>
+                <i class="fas fa-book-open text-emerald-400 absolute -bottom-2 -left-2 text-2xl opacity-70"></i>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card p-6 rounded-lg shadow-md border card-hover">
+                    <h3 class="font-sans-sc text-xl font-medium text-color-primary mb-2">1. 《股权激励实务指南》</h3>
+                    <p class="text-color-secondary text-sm">
+                        全面深入地探讨股权激励的理论、设计、实施与管理，是企业制定激励方案的重要参考。
+                    </p>
+                    <a href="#" class="text-emerald-400 hover:underline text-sm mt-2 block" target="_blank" rel="noopener noreferrer"><i class="fas fa-link mr-1"></i> 了解更多</a>
+                </div>
+                <div class="card p-6 rounded-lg shadow-md border card-hover">
+                    <h3 class="font-sans-sc text-xl font-medium text-color-primary mb-2">2. 《公司法》及相关司法解释</h3>
+                    <p class="text-color-secondary text-sm">
+                        股权激励方案必须在《中华人民共和国公司法》框架下进行，理解其对股份发行、股东权利等规定至关重要。
+                    </p>
+                    <a href="#" class="text-emerald-400 hover:underline text-sm mt-2 block" target="_blank" rel="noopener noreferrer"><i class="fas fa-link mr-1"></i> 了解更多</a>
+                </div>
+                <div class="card p-6 rounded-lg shadow-md border card-hover">
+                    <h3 class="font-sans-sc text-xl font-medium text-color-primary mb-2">3. 《证券法》与上市规则</h3>
+                    <p class="text-color-secondary text-sm">
+                        了解证券发行、交易及信息披露的法律法规，特别是科创板上市规则中对股权激励的具体要求。
+                    </p>
+                    <a href="#" class="text-emerald-400 hover:underline text-sm mt-2 block" target="_blank" rel="noopener noreferrer"><i class="fas fa-link mr-1"></i> 了解更多</a>
+                </div>
+                <div class="card p-6 rounded-lg shadow-md border card-hover">
+                    <h3 class="font-sans-sc text-xl font-medium text-color-primary mb-2">4. 《科创板股票发行上市审核问答》</h3>
+                    <p class="text-color-secondary text-sm">
+                        上海证券交易所发布的官方问答，提供了科创板IPO审核中的具体关注点和解答，包括股权激励问题。
+                    </p>
+                    <a href="https://www.sse.com.cn/lawandrules/guide/stock/kcbxxpljg/c/c_20250425_10777780.shtml" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline text-sm mt-2 block"><i class="fas fa-external-link-alt mr-1"></i> 查看指南</a>
+                </div>
+                <div class="card p-6 rounded-lg shadow-md border card-hover">
+                    <h3 class="font-sans-sc text-xl font-medium text-color-primary mb-2">5. 《中国资本市场股权激励制度研究》</h3>
+                    <p class="text-color-secondary text-sm">
+                        学术性研究，深入分析中国股权激励制度的发展、特点及未来趋势，提供理论支撑。
+                    </p>
+                    <a href="#" class="text-emerald-400 hover:underline text-sm mt-2 block" target="_blank" rel="noopener noreferrer"><i class="fas fa-link mr-1"></i> 了解更多</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footnotes -->
+        <section class="mt-16 pt-8 border-t border-color-default">
+            <h2 class="font-serif-sc text-xl font-semibold mb-6 text-color-primary">参考文献</h2>
+            <ol class="list-decimal pl-6 text-color-secondary text-sm space-y-2">
+                <li id="ref-1"><a href="https://www.huiyelaw.com/news-3004.html" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">全面注册制下（拟）上市公司股权激励合规与审核要点（下）</a></li>
+                <li id="ref-2"><a href="https://news.cnstock.com/kcb,tt-202212-4996325.htm" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">第二类限制性股票成科创板创业板公司股权激励主流工具</a></li>
+                <li id="ref-3"><a href="https://pdf.dfcfw.com/pdf/H301_AP202308291596285681_1.pdf" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">股权激励政策持续完善，第二类限制性股票迅速发展</a></li>
+                <li id="ref-6"><a href="https://www.dehenglaw.com/CN/tansuocontent/0008/016645/7.aspx" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">科创板拟IPO企业股权激励审核规则的创新与实践</a></li>
+                <li id="ref-7"><a href="https://www.sse.com.cn/lawandrules/guide/stock/kcbxxpljg/c/c_20250425_10777780.shtml" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">科创板上市公司自律监管指南第4号——股权激励信息披露（2025年4月修订）</a></li>
+                <li id="ref-10"><a href="http://money.finance.sina.com.cn/corp/view/vCB_AllBulletinDetail.php?stockid=688539&id=11238180" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">高华科技：2025年限制性股票激励计划(草案)</a></li>
+                <li id="ref-12"><a href="https://www.lingdongweilai.com/content/2020091401.html" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">从科创板上市公司看股权激励创新</a></li>
+                <li id="ref-15"><a href="http://www.lawyers.org.cn/info/4894120c13214d46ba203cac43534bb4" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:underline">科创板拟上市公司股权激励政策解读</a></li>
+            </ol>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-color-secondary py-10 border-t border-color-default text-center text-color-secondary text-sm">
+        <div class="container mx-auto px-6">
+            <p>&copy; 2024 科创板股权激励研究. All rights reserved.</p>
+            <p class="mt-2">本页面信息仅供参考，不构成任何法律或投资建议。</p>
+        </div>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        /**
+         * Theme Toggle and Mermaid.js Integration
+         */
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        // Function to update Mermaid theme based on the current HTML theme
+        function updateMermaidTheme(theme) {
+            const isDark = theme === 'dark';
+            const config = {
+                startOnLoad: true, // Auto-render Mermaid diagrams on load
+                theme: isDark ? 'dark' : 'default', // 'dark' or 'default' (light) Mermaid themes
+                themeVariables: {
+                    // General colors
+                    'darkMode': isDark,
+                    'lineColor': isDark ? '#CBD5E0' : '#4a5568', // General line color
+
+                    // Node and Text Colors
+                    'primaryColor': isDark ? '#1A202C' : '#ffffff', // Background for primary nodes
+                    'primaryBorderColor': isDark ? '#34d399' : '#059669', // Border for primary nodes
+                    'primaryTextColor': isDark ? '#F7FAFC' : '#2d3748', // Text for primary nodes
+
+                    'secondaryColor': isDark ? '#2D3748' : '#f7fafc', // Background for secondary nodes (e.g., K, L, M, N)
+                    'secondaryBorderColor': isDark ? '#60A5FA' : '#2563eb', // Border for secondary nodes
+                    'secondaryTextColor': isDark ? '#F7FAFC' : '#2d3748', // Text for secondary nodes
+
+                    'tertiaryColor': isDark ? '#4A5568' : '#e2e8f0', // Background for tertiary nodes (e.g., I, J)
+                    'tertiaryBorderColor': isDark ? '#FCD34D' : '#b45309', // Border for tertiary nodes (decision points)
+                    'tertiaryTextColor': isDark ? '#1A202C' : '#2d3748', // Text for tertiary nodes (decision points)
+
+                    // Diagram specific colors
+                    'mainBkg': isDark ? '#2D3748' : '#f7fafc', // Main diagram background
+                    'nodeBorder': isDark ? '#4A5568' : '#e2e8f0', // General node border
+                    'clusterBkg': isDark ? '#2D3748' : '#f7fafc', // Subgraph background
+                    'clusterBorder': isDark ? '#34d399' : '#059669', // Subgraph border
+
+                    // Link/Arrow Colors (Mermaid 'relationColor' overrides general lineColor for arrows)
+                    'relationColor': isDark ? '#34d399' : '#059669', // Main arrow color
+                }
+            };
+            mermaid.initialize(config);
+
+            // Re-render Mermaid charts if they are already present
+            document.querySelectorAll('.mermaid').forEach(async (el, index) => {
+                const graphDefinition = el.textContent;
+                if (graphDefinition && graphDefinition.trim() !== '') {
+                    try {
+                        const { svg, bindFunctions } = await mermaid.render(`chart-${index}-${theme}`, graphDefinition);
+                        el.innerHTML = svg; // Replace <pre> content with SVG
+                        if (bindFunctions) bindFunctions();
+                    } catch (error) {
+                        console.error('Mermaid render error:', error);
+                        el.innerHTML = `<p class="text-red-500">图表渲染失败，请检查语法。</p>`;
+                    }
+                }
+            });
+        }
+
+        // Initial theme setup on page load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            htmlElement.classList.add(savedTheme);
+            updateMermaidTheme(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            // System prefers dark mode
+            htmlElement.classList.add('dark');
+            updateMermaidTheme('dark');
+        } else {
+            // System prefers light mode or no preference, default to light
+            htmlElement.classList.add('light');
+            updateMermaidTheme('light');
+        }
+
+        // Event listener for theme toggle button
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+                updateMermaidTheme('light');
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateMermaidTheme('dark');
+            }
+        });
+
+        /**
+         * Scroll Reveal Effect
+         */
+        const sections = document.querySelectorAll('main > section'); // Target main content sections
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeInUp');
+                    entry.target.classList.remove('opacity-0', 'translate-y-4'); // Remove initial hidden state classes
+                    observer.unobserve(entry.target); // Stop observing once animated
+                }
+            });
+        }, {
+            rootMargin: '0px',
+            threshold: 0.1 // Trigger when 10% of the section is visible
+        });
+
+        // Add initial classes for animation and observe each section
+        sections.forEach(section => {
+            section.classList.add('opacity-0', 'translate-y-4');
+            observer.observe(section);
+        });
+
+        // Ensure drop cap styling is applied correctly on initial load, especially for SSR/CSR inconsistencies
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropCapElement = document.querySelector('.drop-cap');
+            if (dropCapElement && dropCapElement.innerText.length > 0) {
+                // Force a reflow or re-render if needed (often not necessary but can help edge cases)
+                dropCapElement.style.display = 'none';
+                dropCapElement.offsetHeight; // Trigger reflow
+                dropCapElement.style.display = '';
+            }
+        });
+    </script>
+</body>
+</html>
+```
