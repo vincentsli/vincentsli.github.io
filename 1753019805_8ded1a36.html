@@ -1,0 +1,523 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拟上市公司股权代持还原：申报基准日前的必要性</title>
+    <meta name="description" content="深入解析拟上市公司股权代持还原的监管要求、操作实践与风险规避，助您理解A股IPO合规核心要点。">
+
+    <!-- Google Fonts for Noto Serif SC (Serif for headings) and Noto Sans SC (Sans-serif for body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Custom CSS for base styles and theme -->
+    <style>
+        /* Base font settings and custom font families for Tailwind */
+        html {
+            /* Fallback fonts for Chinese characters, as specified */
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            scroll-behavior: smooth; /* Smooth scroll for anchor links */
+        }
+        /* Custom font classes for improved readability */
+        .font-serif-sc {
+            font-family: 'Noto Serif SC', serif;
+        }
+        .font-sans-sc {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+
+        /* Dark Mode Specific CSS Variables */
+        html.dark {
+            --color-primary-bg: #1A1A2E; /* Deep navy background */
+            --color-secondary-bg: #16213E; /* Slightly lighter navy for cards */
+            --color-text-primary: #E0E0E0; /* Off-white text */
+            --color-text-secondary: #B0B0B0; /* Muted gray text */
+            --color-accent: #0F3460; /* Deep blue accent (for buttons, etc.) */
+            --color-highlight: #7E57C2; /* Vibrant purple for key elements/headings */
+            --color-border: #2A3B5B; /* Subtle border color */
+            --color-link: #8CD7F2; /* Light blue for links */
+            --color-link-hover: #5DBBEF; /* Brighter blue on link hover */
+            /* Mermaid specific colors for dark theme */
+            --color-mermaid-bg: #16213E;
+            --color-mermaid-text: #E0E0E0;
+            --color-mermaid-border: #4A5B7B;
+            --color-mermaid-link: #8CD7F2;
+            --color-mermaid-fill: #2A3B5B;
+            --color-mermaid-stroke: #4A5B7B;
+            --color-mermaid-label: #E0E0E0;
+        }
+
+        /* Light Mode Specific CSS Variables */
+        html:not(.dark) {
+            --color-primary-bg: #F5F7FA; /* Light gray background */
+            --color-secondary-bg: #FFFFFF; /* White for cards */
+            --color-text-primary: #333333; /* Dark gray text */
+            --color-text-secondary: #666666; /* Muted dark text */
+            --color-accent: #CCE2FF; /* Light blue accent */
+            --color-highlight: #673AB7; /* Deeper purple for highlights */
+            --color-border: #E0E0E0; /* Light border */
+            --color-link: #3B82F6; /* Standard blue for links */
+            --color-link-hover: #2563EB; /* Darker blue on link hover */
+            /* Mermaid specific colors for light theme */
+            --color-mermaid-bg: #FFFFFF;
+            --color-mermaid-text: #333333;
+            --color-mermaid-border: #CCCCCC;
+            --color-mermaid-link: #3B82F6;
+            --color-mermaid-fill: #E0E0E0;
+            --color-mermaid-stroke: #A0A0A0;
+            --color-mermaid-label: #333333;
+        }
+
+        /* Apply CSS variables to common elements */
+        body {
+            background-color: var(--color-primary-bg);
+            color: var(--color-text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for theme change */
+        }
+        .text-primary { color: var(--color-text-primary); }
+        .text-secondary { color: var(--color-text-secondary); }
+        .bg-card { background-color: var(--color-secondary-bg); }
+        .border-base { border-color: var(--color-border); }
+        .text-highlight { color: var(--color-highlight); }
+        .bg-accent { background-color: var(--color-accent); }
+        .text-link { color: var(--color-link); }
+
+        /* Mermaid container and basic styling */
+        .mermaid {
+            background-color: var(--color-mermaid-bg);
+            color: var(--color-mermaid-text);
+            border: 1px solid var(--color-mermaid-border);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Hero section background overlay for better text contrast */
+        .hero-overlay {
+            background-image: linear-gradient(to bottom, rgba(26, 26, 46, 0.7), rgba(22, 33, 62, 0.9));
+            transition: background-image 0.3s ease;
+        }
+        html:not(.dark) .hero-overlay {
+            background-image: linear-gradient(to bottom, rgba(245, 247, 250, 0.7), rgba(255, 255, 255, 0.9));
+        }
+
+        /* Micro-interactions */
+        .card-hover {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
+            border-color: var(--color-highlight);
+        }
+        .btn-hover {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .btn-hover:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.2);
+        }
+        a.link-effect {
+            transition: color 0.2s ease-in-out, text-decoration 0.2s ease-in-out, transform 0.2s ease-in-out;
+        }
+        a.link-effect:hover {
+            color: var(--color-link-hover);
+            text-decoration: underline;
+            transform: translateX(2px);
+        }
+
+        /* Custom footnote styling */
+        .footnote-ref {
+            font-size: 0.7em;
+            vertical-align: super;
+            color: var(--color-highlight);
+            cursor: pointer;
+            text-decoration: none;
+            margin-left: 2px;
+            transition: color 0.2s ease;
+        }
+        .footnote-ref:hover {
+            color: var(--color-link-hover);
+        }
+        .footnote-item {
+            font-size: 0.9em;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+        .footnote-item a {
+            color: var(--color-link);
+            text-decoration: none;
+        }
+        .footnote-item a:hover {
+            text-decoration: underline;
+        }
+        .footnote-back-link {
+            font-size: 0.8em;
+            margin-left: 5px;
+            color: var(--color-highlight);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .footnote-back-link:hover {
+            text-decoration: underline;
+            color: var(--color-link-hover);
+        }
+    </style>
+</head>
+<body class="font-sans-sc transition-colors duration-300">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header with Theme Toggle -->
+        <header class="py-4 px-6 md:px-8 border-b border-base flex justify-between items-center sticky top-0 z-50 bg-primary-bg transition-colors duration-300">
+            <div class="text-lg font-bold text-highlight font-serif-sc">IPO 合规洞察</div>
+            <button id="theme-toggle" class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-highlight bg-accent btn-hover transition-transform duration-200 ease-in-out">
+                <i class="fas fa-moon text-white dark:hidden"></i>
+                <i class="fas fa-sun text-white hidden dark:inline-block"></i>
+            </button>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="relative w-full h-96 flex items-center justify-center text-center overflow-hidden bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1549247775-eb238466b0a1?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8ptot-pagefHx8fGVufDB8fHx8fA%3D%3D');">
+            <div class="hero-overlay absolute inset-0 z-10"></div>
+            <div class="relative z-20 text-white p-4 max-w-4xl mx-auto">
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight font-serif-sc drop-shadow-lg">
+                    拟上市公司股权代持还原：<br>申报基准日前的必要性
+                </h1>
+                <p class="text-lg md:text-xl font-light mb-6 opacity-90 drop-shadow-md">
+                    A股IPO合规审核的核心要点与风险规避
+                </p>
+                <a href="#main-content" class="inline-block bg-highlight text-white px-8 py-3 rounded-full text-lg font-semibold tracking-wide shadow-xl hover:shadow-2xl btn-hover transition-all duration-300 ease-in-out">
+                    <i class="fas fa-arrow-circle-down mr-2"></i> 深入了解
+                </a>
+            </div>
+        </section>
+
+        <main id="main-content" class="container mx-auto px-4 py-12 md:py-16 flex-grow">
+            <!-- Direct Answer Section -->
+            <section class="bg-card rounded-xl shadow-xl p-8 mb-12 border border-base card-hover">
+                <h2 class="text-3xl font-bold mb-6 text-highlight font-serif-sc flex items-center">
+                    <i class="fas fa-check-circle text-4xl mr-4 opacity-80"></i> 直接回答
+                </h2>
+                <div class="leading-relaxed text-lg text-primary">
+                    <p class="mb-4">
+                        <strong class="text-2xl text-highlight">是的，拟上市公司直接持股的代持还原（包括实控人股权）必须在申报基准日前完成。</strong>
+                    </p>
+                    <p class="mb-2">
+                        这是因为股权清晰是A股IPO的法定发行条件，监管要求在申报基准日（即财务报告审计基准日）时，公司的股权结构必须稳定、权属无争议，不存在任何代持情形。
+                    </p>
+                    <p>
+                        如果代持还原发生在申报基准日之后，可能导致股权状态在基准日时不真实、不准确，从而违反信息披露要求，增加审核风险。
+                    </p>
+                </div>
+            </section>
+
+            <!-- Reasons Analysis Section -->
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold mb-8 text-primary font-serif-sc text-center">
+                    <i class="fas fa-chart-line text-highlight mr-3"></i> 原因深入分析
+                </h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Reason 1: Regulatory Requirements -->
+                    <article class="bg-card rounded-xl shadow-lg p-7 border border-base card-hover">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-balance-scale text-highlight text-3xl mr-4 opacity-80"></i>
+                            <h3 class="text-xl font-semibold text-primary font-serif-sc">监管规则要求“提交申请前”解除代持</h3>
+                        </div>
+                        <p class="text-secondary leading-relaxed mb-3">
+                            根据<strong class="text-primary">《监管规则适用指引—关于申请首发上市企业股东信息披露》</strong>（证监会2021年2月发布）第一条，发行人必须在提交上市申请前依法解除所有股份代持关系。
+                        </p>
+                        <p class="text-secondary leading-relaxed">
+                            这条规则强调“提交申请前”，但申报基准日是IPO材料的核心时间点。如果代持还原未在基准日前完成，可能导致基准日股权记录不实，无法满足要求<sup id="fnref1" class="footnote-ref"><a href="#footnote-1">[1]</a></sup><sup id="fnref2" class="footnote-ref"><a href="#footnote-2">[2]</a></sup>。
+                        </p>
+                    </article>
+
+                    <!-- Reason 2: Equity Clarity -->
+                    <article class="bg-card rounded-xl shadow-lg p-7 border border-base card-hover">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-sitemap text-highlight text-3xl mr-4 opacity-80"></i>
+                            <h3 class="text-xl font-semibold text-primary font-serif-sc">股权清晰是IPO发行条件</h3>
+                        </div>
+                        <p class="text-secondary leading-relaxed mb-3">
+                            <strong class="text-primary">《首次公开发行股票并上市管理办法》</strong>第十三条规定，发行人必须“股权清晰，控股股东和受控股股东、实际控制人支配的股东持有的发行人股份不存在重大权属纠纷”。
+                        </p>
+                        <p class="text-secondary leading-relaxed">
+                            实控人股权代持尤其敏感，因为它直接涉及控制权稳定性。未在基准日前清理可能被视为潜在权属纠纷，从而导致IPO被否或延迟<sup id="fnref5" class="footnote-ref"><a href="#footnote-5">[5]</a></sup>。
+                        </p>
+                    </article>
+
+                    <!-- Reason 3: Practical Operations -->
+                    <article class="bg-card rounded-xl shadow-lg p-7 border border-base card-hover">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-cogs text-highlight text-3xl mr-4 opacity-80"></i>
+                            <h3 class="text-xl font-semibold text-primary font-serif-sc">实践操作的考量因素</h3>
+                        </div>
+                        <p class="text-secondary leading-relaxed mb-3">
+                            申报基准日后的股权变动，可能引发监管对“突击入股”或利益输送的质疑。
+                        </p>
+                        <p class="text-secondary leading-relaxed">
+                            中介机构在基准日后进行尽职调查时，需确保股权结构在此时间点已固化。代持还原延迟可能导致审计报告、法律意见书等文件出现矛盾，增加问询风险<sup id="fnref10" class="footnote-ref"><a href="#footnote-10">[10]</a></sup>。
+                        </p>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Mermaid Data Visualization -->
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold mb-8 text-primary font-serif-sc text-center">
+                    <i class="fas fa-project-diagram text-highlight mr-3"></i> 股权代持还原：关键节点与风险视图
+                </h2>
+                <div class="mermaid-container overflow-x-auto">
+                    <!-- Mermaid diagram for dark mode -->
+                    <div class="mermaid mermaid-diagram-dark hidden dark:block p-6">
+                        graph TD
+                            A[企业拟上市] --> B(申报基准日 <br> <small>通常为12月31日</small>)
+                            B --> C{股权结构核查}
+                            C -- 必须在基准日前完成 --> D[代持还原清理 <br> <small>股权清晰、无争议</small>]
+                            D --> E(提交上市申请 <br> <small>含招股书、审计报告</small>)
+                            E --> F{证监会/交易所审核}
+                            F -- 未还原或存疑 --> G[IPO审核受阻]
+                            G -- 严重者 --> H(IPO中止/被否)
+                            D -- 合规且清晰 --> I[顺利进入审核]
+
+                            subgraph 核心发行条件
+                                J[股权清晰]
+                                K[不存在重大权属纠纷]
+                            end
+
+                            J --> D
+                            K --> D
+
+                            subgraph 监管依据
+                                L[《监管规则适用指引》]
+                                M[《首次公开发行股票并上市管理办法》]
+                            end
+
+                            L --> C
+                            M --> C
+
+                            classDef default fill:#2A3B5B,stroke:#4A5B7B,stroke-width:2px,color:#E0E0E0;
+                            classDef highlight fill:#7E57C2,stroke:#A057C2,stroke-width:2px,color:#FFFFFF;
+                            class D highlight;
+                            class G highlight;
+                            class H highlight;
+                            linkStyle default stroke:var(--color-mermaid-link),stroke-width:2px;
+                    </div>
+                    <!-- Mermaid diagram for light mode -->
+                    <div class="mermaid mermaid-diagram-light hidden p-6">
+                        graph TD
+                            A[企业拟上市] --> B(申报基准日 <br> <small>通常为12月31日</small>)
+                            B --> C{股权结构核查}
+                            C -- 必须在基准日前完成 --> D[代持还原清理 <br> <small>股权清晰、无争议</small>]
+                            D --> E(提交上市申请 <br> <small>含招股书、审计报告</small>)
+                            E --> F{证监会/交易所审核}
+                            F -- 未还原或存疑 --> G[IPO审核受阻]
+                            G -- 严重者 --> H(IPO中止/被否)
+                            D -- 合规且清晰 --> I[顺利进入审核]
+
+                            subgraph 核心发行条件
+                                J[股权清晰]
+                                K[不存在重大权属纠纷]
+                            end
+
+                            J --> D
+                            K --> D
+
+                            subgraph 监管依据
+                                L[《监管规则适用指引》]
+                                M[《首次公开发行股票并上市管理办法》]
+                            end
+
+                            L --> C
+                            M --> C
+
+                            classDef default fill:#E0E0E0,stroke:#A0A0A0,stroke-width:2px,color:#333333;
+                            classDef highlight fill:#673AB7,stroke:#9C27B0,stroke-width:2px,color:#FFFFFF;
+                            class D highlight;
+                            class G highlight;
+                            class H highlight;
+                            linkStyle default stroke:var(--color-mermaid-link),stroke-width:2px;
+                    </div>
+                </div>
+            </section>
+
+            <!-- Suggestions Section -->
+            <section class="bg-card rounded-xl shadow-xl p-8 mb-12 border border-base card-hover">
+                <h2 class="text-3xl font-bold mb-6 text-primary font-serif-sc flex items-center">
+                    <i class="fas fa-lightbulb text-highlight text-4xl mr-4 opacity-80"></i> 专家建议
+                </h2>
+                <ul class="space-y-4 text-lg text-secondary">
+                    <li class="flex items-start">
+                        <i class="fas fa-clock text-highlight text-xl mr-3 mt-1 flex-shrink-0"></i>
+                        <div>
+                            <strong class="text-primary">及时处理：</strong>在申报基准日前完成所有代持还原，确保股权变更的工商登记、资金流水、协议文件等完备，并通过中介机构访谈和核查确认无纠纷。
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-file-alt text-highlight text-xl mr-3 mt-1 flex-shrink-0"></i>
+                        <div>
+                            <strong class="text-primary">披露要求：</strong>解除后需在招股说明书中详细披露，包括代持原因、还原过程及税务处理（如适用）。
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-exclamation-triangle text-highlight text-xl mr-3 mt-1 flex-shrink-0"></i>
+                        <div>
+                            <strong class="text-primary">例外情况：</strong>理论上，基准日后的微小调整可能获监管谅解，但需充分论证合理性。实践中，监管对此类例外审核严格，不建议尝试。
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-question-circle text-highlight text-xl mr-3 mt-1 flex-shrink-0"></i>
+                        <div class="text-secondary italic">
+                            如您需要具体案例或进一步操作细节，请提供公司背景或代持细节，我将针对性地分析。
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Further Reading Section -->
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold mb-8 text-primary font-serif-sc text-center">
+                    <i class="fas fa-book-open text-highlight mr-3"></i> 延伸阅读
+                </h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-card rounded-xl shadow-lg p-7 border border-base card-hover">
+                        <h3 class="text-xl font-semibold mb-2 text-primary font-serif-sc">《首次公开发行股票并上市管理办法》及配套规则解读</h3>
+                        <p class="text-secondary mb-3">官方对IPO法规的权威解读，是理解A股上市规则的基础，深入学习必备。</p>
+                        <a href="#" class="text-link hover:text-link-hover link-effect transition-all duration-200 ease-in-out">了解更多 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>
+                    </div>
+                    <div class="bg-card rounded-xl shadow-lg p-7 border border-base card-hover">
+                        <h3 class="text-xl font-semibold mb-2 text-primary font-serif-sc">《中国证券市场法律法规全书》</h3>
+                        <p class="text-secondary mb-3">全面的法律工具书，涵盖与IPO相关的各项法律条款和细则，实践者的案头必备。</p>
+                        <a href="#" class="text-link hover:text-link-hover link-effect transition-all duration-200 ease-in-out">了解更多 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>
+                    </div>
+                    <div class="bg-card rounded-xl shadow-lg p-7 border border-base card-hover">
+                        <h3 class="text-xl font-semibold mb-2 text-primary font-serif-sc">《公司上市操作实务与案例精析》</h3>
+                        <p class="text-secondary mb-3">从实务角度剖析公司上市的各个环节，包含股权架构处理的经典案例，提供操作指导。</p>
+                        <a href="#" class="text-link hover:text-link-hover link-effect transition-all duration-200 ease-in-out">了解更多 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>
+                    </div>
+                    <div class="bg-card rounded-xl shadow-lg p-7 border border-base card-hover">
+                        <h3 class="text-xl font-semibold mb-2 text-primary font-serif-sc">《中国证券法》</h3>
+                        <p class="text-secondary mb-3">中国证券市场的基础法律，理解股权、证券发行、信息披露等核心规定的基石。</p>
+                        <a href="#" class="text-link hover:text-link-hover link-effect transition-all duration-200 ease-in-out">了解更多 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>
+                    </div>
+                    <div class="bg-card rounded-xl shadow-lg p-7 border border-base card-hover">
+                        <h3 class="text-xl font-semibold mb-2 text-primary font-serif-sc">《IPO内核实务》</h3>
+                        <p class="text-secondary mb-3">从监管机构内核审查的视角，揭示IPO过程中常见问题和审核重点，助您预判风险。</p>
+                        <a href="#" class="text-link hover:text-link-hover link-effect transition-all duration-200 ease-in-out">了解更多 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footnotes -->
+            <section id="footnotes" class="mt-16 pt-8 border-t border-base">
+                <h2 class="text-2xl font-bold mb-6 text-primary font-serif-sc">
+                    <i class="fas fa-info-circle text-highlight mr-2"></i> 参考来源
+                </h2>
+                <ol class="list-decimal list-inside space-y-3">
+                    <li id="footnote-1" class="footnote-item">
+                        联网搜索：<strong class="text-primary">申请首发上市企业股东核查的规定和做法以及对企业的若干建议</strong>（海润天睿律师事务所），该文详细解析了代持还原的监管要求，包括必须在提交申请前解除代持。
+                        <a href="https://www.hairunlawyer.com/Content/2021/07-14/0924365261.html" target="_blank" rel="noopener noreferrer" class="link-effect">来源链接 <i class="fas fa-external-link-alt text-xs"></i></a>
+                        <a href="#fnref1" class="footnote-back-link"><i class="fas fa-angle-up"></i></a>
+                    </li>
+                    <li id="footnote-2" class="footnote-item">
+                        联网搜索：<strong class="text-primary">代持股还原涉税风险与合规操作指引</strong>（拜伦斯智税），引用《监管规则适用指引》第一条，强调拟上市公司代持还原的操作时限。
+                        <a href="http://www.bls-it.com/page106?article_id=618" target="_blank" rel="noopener noreferrer" class="link-effect">来源链接 <i class="fas fa-external-link-alt text-xs"></i></a>
+                        <a href="#fnref2" class="footnote-back-link"><i class="fas fa-angle-up"></i></a>
+                    </li>
+                    <li id="footnote-5" class="footnote-item">
+                        联网搜索：<strong class="text-primary">从两则案例看上市公司股权代持的法律风险</strong>（睿扬律师事务所），分析代持协议无效风险及IPO前清理必要性。
+                        <a href="https://www.ruiyanglawyer.com/Home/ResearchInfo/e809070b-091a-4879-a5ca-c310ccb92880" target="_blank" rel="noopener noreferrer" class="link-effect">来源链接 <i class="fas fa-external-link-alt text-xs"></i></a>
+                        <a href="#fnref5" class="footnote-back-link"><i class="fas fa-angle-up"></i></a>
+                    </li>
+                    <li id="footnote-10" class="footnote-item">
+                        联网搜索：<strong class="text-primary">IPO基准日后通过股份转让新增股东的注意事项</strong>（知乎专栏），讨论基准日后股权变动的监管审慎性。
+                        <a href="https://zhuanlan.zhihu.com/p/634104556" target="_blank" rel="noopener noreferrer" class="link-effect">来源链接 <i class="fas fa-external-link-alt text-xs"></i></a>
+                        <a href="#fnref10" class="footnote-back-link"><i class="fas fa-angle-up"></i></a>
+                    </li>
+                </ol>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="py-8 text-center text-secondary text-sm border-t border-base mt-12 bg-card transition-colors duration-300">
+            <p>&copy; 2023 IPO合规洞察. All rights reserved. | 由专业AI助手提供 | <a href="#" class="text-link hover:text-link-hover link-effect">隐私政策</a></p>
+        </footer>
+    </div>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid initialization and theme application
+        function initializeMermaid() {
+            const isDarkMode = document.documentElement.classList.contains('dark');
+            const darkMermaidDiv = document.querySelector('.mermaid-diagram-dark');
+            const lightMermaidDiv = document.querySelector('.mermaid-diagram-light');
+
+            if (isDarkMode) {
+                // Ensure only dark mode diagram is visible and re-render it
+                darkMermaidDiv.classList.remove('hidden');
+                lightMermaidDiv.classList.add('hidden');
+                mermaid.initialize({ startOnLoad: false, theme: 'dark' }); // StartOnLoad false to manually control render
+                // Force re-render if it was already processed, to apply theme changes
+                if (darkMermaidDiv.dataset.processed === 'true') {
+                    darkMermaidDiv.removeAttribute('data-processed');
+                }
+                mermaid.init(undefined, darkMermaidDiv);
+            } else {
+                // Ensure only light mode diagram is visible and re-render it
+                lightMermaidDiv.classList.remove('hidden');
+                darkMermaidDiv.classList.add('hidden');
+                mermaid.initialize({ startOnLoad: false, theme: 'default' }); // 'default' for light mode
+                // Force re-render if it was already processed, to apply theme changes
+                if (lightMermaidDiv.dataset.processed === 'true') {
+                    lightMermaidDiv.removeAttribute('data-processed');
+                }
+                mermaid.init(undefined, lightMermaidDiv);
+            }
+        }
+
+        // Dark/Light Mode Toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+            } else {
+                htmlElement.classList.remove('dark');
+            }
+            localStorage.setItem('theme', theme);
+            initializeMermaid(); // Re-initialize Mermaid to apply new theme
+        }
+
+        // Check system preference or saved preference on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else if (prefersDark) {
+                setTheme('dark');
+            } else {
+                setTheme('light');
+            }
+        });
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        });
+
+        // Initial mermaid render based on the theme set during DOMContentLoaded
+        // This is called once by setTheme, so no need for an extra call here.
+    </script>
+</body>
+</html>
+```
