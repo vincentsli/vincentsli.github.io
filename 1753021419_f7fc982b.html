@@ -1,0 +1,626 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A股IPO股权代持还原：深度解析与实践指南</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC (Headings) & Noto Sans SC (Body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Define custom CSS variables for theme colors */
+        :root {
+            /* Dark Mode Defaults */
+            --bg-primary: #1A1A2E; /* Deep Blue/Purple */
+            --bg-secondary: #0F1E3D; /* Slightly lighter deep blue */
+            --text-primary: #E0E0E0; /* Light gray */
+            --text-secondary: #B0B0B0; /* Muted gray */
+            --accent-color: #5D93E8; /* A vibrant blue for accents */
+            --highlight-color: #E84560; /* A reddish-pink for emphasis */
+            --border-color: #2F4D7D; /* Darker blue for borders */
+            --code-bg: #2C395B; /* Code block background */
+        }
+
+        /* Light Mode Variables */
+        .light {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F0F4F8; /* Light gray-blue */
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --accent-color: #3F51B5; /* Indigo */
+            --highlight-color: #FF5722; /* Deep Orange */
+            --border-color: #DDE1E8;
+            --code-bg: #E8ECF0;
+        }
+
+        /* Base Body and Font Styling */
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Noto Sans SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Headings Font Styling */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+            color: var(--highlight-color); /* Headings use highlight color */
+        }
+
+        /* Element Specific Color Mapping */
+        .header-bg {
+            background-color: var(--bg-secondary);
+        }
+        .card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+        }
+        .text-accent-custom {
+            color: var(--accent-color);
+        }
+        .text-highlight-custom {
+            color: var(--highlight-color);
+        }
+        .bg-highlight-custom {
+            background-color: var(--highlight-color);
+        }
+        .bg-accent-custom {
+            background-color: var(--accent-color);
+        }
+        .border-accent-custom {
+            border-color: var(--accent-color);
+        }
+        .border-highlight-custom {
+            border-color: var(--highlight-color);
+        }
+        .text-secondary-custom {
+            color: var(--text-secondary);
+        }
+        .code-block {
+            background-color: var(--code-bg);
+            border-left: 4px solid var(--highlight-color);
+            color: var(--text-primary);
+        }
+
+        /* Micro-interactions */
+        a:hover, button:hover {
+            opacity: 0.9; /* Slightly reduce opacity on hover */
+            transition: opacity 0.2s ease;
+        }
+        .card {
+            transform: translateY(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px); /* Lift card slightly */
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2); /* Deeper shadow for dark mode */
+        }
+        .light .card:hover { /* Lighter shadow for light mode */
+             box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Mermaid Chart Specific Styling */
+        .mermaid {
+            background-color: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .light .mermaid {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+        }
+        /* Override Mermaid default colors using CSS variables */
+        .mermaid svg {
+            background-color: var(--bg-secondary) !important;
+        }
+        /* Nodes */
+        .mermaid .node rect, .mermaid .node circle, .mermaid .node polygon {
+            fill: var(--accent-color) !important;
+            stroke: var(--highlight-color) !important;
+            stroke-width: 2px !important;
+        }
+        .mermaid .node text {
+            fill: var(--text-primary) !important;
+        }
+        /* Edges */
+        .mermaid .edgePath .path {
+            stroke: var(--text-secondary) !important;
+            stroke-width: 2px !important;
+        }
+        .mermaid .edgeLabel text {
+            fill: var(--text-secondary) !important;
+            background-color: var(--bg-secondary) !important;
+        }
+        /* Clusters */
+        .mermaid .cluster rect {
+            fill: var(--bg-primary) !important;
+            stroke: var(--border-color) !important;
+        }
+        .mermaid .cluster text {
+            fill: var(--text-secondary) !important;
+        }
+        /* Specific node styles defined in Mermaid graph */
+        .mermaid .node.defaultNode .label text { color: var(--text-primary) !important; }
+
+    </style>
+</head>
+<body class="antialiased leading-relaxed">
+    <!-- Header/Navigation Bar -->
+    <header class="header-bg py-4 sticky top-0 z-50 shadow-xl">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-highlight-custom font-serif-sc tracking-wide">
+                IPO 法务前沿
+            </a>
+            <!-- Theme Toggle Button -->
+            <button id="theme-toggle" class="p-3 rounded-full focus:outline-none focus:ring-2 focus:ring-accent-custom hover:bg-bg-primary transition-colors duration-300">
+                <i class="fas fa-moon text-text-primary text-xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        <!-- Hero Section -->
+        <section class="text-center mb-16 px-4 py-8 bg-gradient-to-br from-bg-primary to-bg-secondary rounded-lg shadow-2xl border border-border-color">
+            <h1 class="text-5xl md:text-6xl font-serif-sc font-extrabold leading-tight mb-4 text-highlight-custom drop-shadow-lg">
+                <i class="fas fa-gavel text-4xl md:text-5xl mr-3 text-accent-custom"></i>拟上市公司股权代持还原
+            </h1>
+            <p class="text-2xl md:text-3xl text-text-secondary-custom mb-8 font-serif-sc italic">
+                A股IPO审核核心要点：申报基准日前必须完成？
+            </p>
+            <p class="text-lg md:text-xl text-text-primary max-w-3xl mx-auto leading-relaxed opacity-90">
+                本报告深入解析A股IPO中股权代持还原的监管要求、实务操作及风险规避策略，尤其聚焦实际控制人股权代持的合规性与时限要求，助您理解上市之路的关键障碍与解决方案。
+            </p>
+            <div class="mt-10 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <a href="#conclusion" class="bg-highlight-custom text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-opacity-90 transition-all duration-300 shadow-lg transform hover:scale-105">
+                    <i class="fas fa-bullseye mr-2"></i>直达结论
+                </a>
+                <a href="#mermaid-chart" class="bg-accent-custom text-text-primary px-8 py-3 rounded-full font-bold text-lg hover:bg-opacity-90 transition-all duration-300 shadow-lg transform hover:scale-105">
+                    <i class="fas fa-chart-network mr-2"></i>可视化流程
+                </a>
+            </div>
+        </section>
+
+        <hr class="border-t-2 border-border-color my-16 opacity-70">
+
+        <!-- Main Content Grid -->
+        <section id="content" class="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
+            <!-- Left Column for Main Content -->
+            <div class="lg:col-span-2 space-y-12">
+                <!-- Section 1: Regulatory Requirements -->
+                <div>
+                    <h2 class="text-4xl font-serif-sc font-bold mb-8 text-highlight-custom flex items-center">
+                        <i class="fas fa-balance-scale-left mr-4 text-accent-custom text-5xl"></i>一、监管规则：明确要求申报前清理代持
+                    </h2>
+                    <div class="space-y-8 text-text-primary text-lg leading-relaxed">
+                        <div class="card p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+                            <h3 class="text-2xl font-serif-sc font-semibold mb-4 text-accent-custom flex items-center">
+                                <i class="fas fa-check-circle mr-3"></i>股权清晰是发行条件
+                            </h3>
+                            <p class="mb-3 opacity-90">
+                                根据<span class="font-bold text-highlight-custom">《首次公开发行股票并上市管理办法》第十二条</span>及<span class="font-bold text-highlight-custom">《首次公开发行股票注册管理办法》第十二条</span>，发行人需满足“股权清晰”的核心条件。这意味着，公司股权结构必须真实、明确，控股股东及实际控制人支配的股份不得存在重大权属纠纷。代持关系与此原则相悖，必须在提交申请前依法解除。
+                            </p>
+                            <p class="mb-3 opacity-90">
+                                <i class="fas fa-info-circle text-accent-custom mr-2"></i><span class="font-bold">重要依据：</span><a href="http://www.csrc.gov.cn/csrc/c100107/c1447185/1447185/files/%E9%A6%96%E5%8F%91%E4%B8%9A%E5%8A%A1%E8%8B%A5%E5%B9%B2%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94.doc" target="_blank" class="text-highlight-custom hover:underline">《首发业务若干问题解答》</a>明确规定：“发行人历史沿革中存在股份代持等情形的，应当在提交申请前依法解除。”
+                            </p>
+                        </div>
+
+                        <div class="card p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+                            <h3 class="text-2xl font-serif-sc font-semibold mb-4 text-accent-custom flex items-center">
+                                <i class="fas fa-exclamation-triangle mr-3"></i>涉及实控人股权的代持风险更高
+                            </h3>
+                            <p class="mb-3 opacity-90">
+                                若实际控制人股权存在代持，这在IPO审核中属于<span class="font-bold text-highlight-custom">高风险区域</span>，其潜在风险远超普通股东代持：
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 text-text-secondary-custom opacity-90 pl-4">
+                                <li><i class="fas fa-lock mr-2 text-accent-custom"></i>可能导致控制权稳定性存疑，对公司治理结构构成威胁。</li>
+                                <li><i class="fas fa-money-bill-wave mr-2 text-accent-custom"></i>易引发利益输送、规避监管等质疑，损害公众投资者利益。</li>
+                                <li><i class="fas fa-search mr-2 text-accent-custom"></i>在审核中必然成为<span class="font-bold text-highlight-custom">重点关注问题</span>，如<span class="font-bold text-highlight-custom">涧光股份IPO被否案例</span>就与此紧密相关，其严重性不容忽视。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Practical Operations & Time Limits -->
+                <div>
+                    <h2 class="text-4xl font-serif-sc font-bold mb-8 text-highlight-custom flex items-center">
+                        <i class="fas fa-hourglass-start mr-4 text-accent-custom text-5xl"></i>二、实务操作：代持还原时限与例外情形
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-text-primary text-lg leading-relaxed">
+                        <div class="card p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+                            <h3 class="text-2xl font-serif-sc font-semibold mb-4 text-accent-custom flex items-center">
+                                <i class="fas fa-clock mr-3"></i>申报基准日为最后期限
+                            </h3>
+                            <p class="mb-3 opacity-90">
+                                所有股权代持，特别是涉及实际控制人股权的代持，必须在<span class="font-bold text-highlight-custom">审计报告基准日（即申报基准日）前</span>彻底完成还原。这意味着，在该日期后提交的招股说明书，其股权结构必须是清晰无代持的合法状态。
+                            </p>
+                            <p class="mb-3 opacity-90">
+                                还原后，招股说明书中需完整披露代持的形成背景、解除过程、资金流水、税费缴纳情况及当事人的无纠纷承诺，确保透明度。
+                            </p>
+                            <div class="mt-4">
+                                <p class="font-bold text-text-primary mb-2 flex items-center"><i class="fas fa-lightbulb mr-2 text-highlight-custom"></i>案例佐证：</p>
+                                <ul class="list-disc list-inside space-y-2 text-text-secondary-custom opacity-90 pl-4">
+                                    <li><i class="fas fa-check-double mr-2 text-accent-custom"></i><span class="font-bold">纳微科技（688690）</span>：其代持还原在申报基准日前完成，并通过<span class="font-bold text-highlight-custom">公证提存</span>解决部分无法联系实际持有人的股权，展示了特殊情况下的处理方式。</li>
+                                    <li><i class="fas fa-check-double mr-2 text-accent-custom"></i><span class="font-bold">海科新源（创业板过会）</span>：其1.87%的代持股权在基准日前成功清理。</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="card p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+                            <h3 class="text-2xl font-serif-sc font-semibold mb-4 text-accent-custom flex items-center">
+                                <i class="fas fa-ban mr-3"></i>未清理的例外情形与高风险
+                            </h3>
+                            <p class="mb-3 opacity-90">
+                                理论上，仅在<span class="font-bold text-highlight-custom">极特殊情形</span>下，部分代持可暂缓清理，但这需满足极为严格的条件，且仅限于<span class="font-bold text-highlight-custom">不影响控制权的极小比例股权</span>：
+                            </p>
+                            <ul class="list-disc list-inside space-y-2 text-text-secondary-custom opacity-90 pl-4">
+                                <li><i class="fas fa-percentage mr-2 text-accent-custom"></i><span class="font-bold text-text-primary">代持比例极小</span>（通常≤5%），且绝不影响公司的控制权。</li>
+                                <li><i class="fas fa-exclamation-circle mr-2 text-accent-custom"></i><span class="font-bold text-text-primary">存在客观障碍</span>（如实际持有人失联或身处境外），并已采取可行的替代措施（如提存公证或司法确权）。</li>
+                                <li><i class="fas fa-file-contract mr-2 text-accent-custom"></i><span class="font-bold text-text-primary">充分披露</span>所有细节，且相关方均已出具<span class="font-bold text-highlight-custom">无纠纷承诺</span>（可参考安井食品间接股东代持案例）。</li>
+                            </ul>
+                            <div class="mt-4 p-4 bg-red-900 bg-opacity-30 rounded-lg border border-red-700 text-red-300 flex items-start">
+                                <i class="fas fa-skull-crossbones text-2xl mr-3 mt-1 text-red-200"></i>
+                                <div class="flex-1">
+                                    <span class="font-bold text-white mr-1">特别强调：</span>
+                                    <span class="font-serif-sc font-extrabold text-xl text-highlight-custom mr-2">实际控制人直接持股的代持</span>
+                                    <span class="font-bold text-white">一般不适用此例外条款</span>，因为其直接关系到公司的控制权和稳定性，被监管机构视为IPO的实质性障碍。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Solutions & Intermediary Review -->
+                <div>
+                    <h2 class="text-4xl font-serif-sc font-bold mb-8 text-highlight-custom flex items-center">
+                        <i class="fas fa-cogs mr-4 text-accent-custom text-5xl"></i>三、解决方案：还原操作与中介核查重点
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-text-primary text-lg leading-relaxed">
+                        <div class="card p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+                            <h3 class="text-2xl font-serif-sc font-semibold mb-4 text-accent-custom flex items-center">
+                                <i class="fas fa-clipboard-list mr-3"></i>还原操作要点
+                            </h3>
+                            <p class="mb-3 opacity-90">
+                                股权代持还原并非简单的股权转让，而是一个涉及法律、税务、工商等多方面的复杂流程，需遵循严谨程序：
+                            </p>
+                            <ol class="list-decimal list-inside space-y-3 text-text-secondary-custom opacity-90 pl-4">
+                                <li><i class="fas fa-file-signature mr-2 text-accent-custom"></i><span class="font-bold text-text-primary">签署《代持解除协议》：</span>这是还原的法律基础，需明确约定代持关系解除、股权归属，并随后办理相关工商变更登记。</li>
+                                <li><i class="fas fa-hand-holding-usd mr-2 text-accent-custom"></i><span class="font-bold text-text-primary">支付还原对价并完税：</span>若涉及股权转让对价支付，需确保资金流转真实、合法，并依法足额缴纳相关税费（如个人所得税、印花税等）。这是税务合规的关键。</li>
+                                <li><i class="fas fa-building mr-2 text-accent-custom"></i><span class="font-bold text-text-primary">办理工商变更：</span>向市场监督管理部门及时申请变更股东名册及公司章程，使公司公示信息与实际股权结构一致。</li>
+                            </ol>
+                            <p class="mt-4 opacity-90">
+                                <span class="font-bold text-highlight-custom flex items-center"><i class="fas fa-search-plus mr-2"></i>证据链构建：</span>
+                                需提供完整的出资凭证、银行流水、完税证明等，形成闭环证据链，以证明还原的真实性和合法性。
+                            </p>
+                            <p class="mt-2 opacity-90">
+                                <span class="font-bold text-highlight-custom flex items-center"><i class="fas fa-handshake mr-2"></i>纠纷排查：</span>
+                                所有相关股东应出具<span class="font-bold text-text-primary">无争议承诺函</span>，确保代持解除过程合法有效，不存在潜在争议或权属纠纷隐患。
+                            </p>
+                        </div>
+
+                        <div class="card p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+                            <h3 class="text-2xl font-serif-sc font-semibold mb-4 text-accent-custom flex items-center">
+                                <i class="fas fa-user-tie mr-3"></i>中介机构核查要求
+                            </h3>
+                            <p class="mb-3 opacity-90">
+                                保荐人及律师在IPO申报中将对代持问题进行全面、穿透式核查，确保股权的真实性和合规性，核查要点包括：
+                            </p>
+                            <ul class="list-disc list-inside space-y-3 text-text-secondary-custom opacity-90 pl-4">
+                                <li><i class="fas fa-question-circle mr-2 text-accent-custom"></i><span class="font-bold text-text-primary">代持背景合理性：</span>核查代持形成的具体原因，如规避持股限制、员工激励初期不便显名等，并判断其合理性及合法性。</li>
+                                <li><i class="fas fa-money-check-alt mr-2 text-accent-custom"></i><span class="font-bold text-text-primary">资金流转真实性：</span>验证股权对价支付的资金来源、流向，确保交易真实、公允，无利益输送的嫌疑。</li>
+                                <li><i class="fas fa-percent mr-2 text-accent-custom"></i><span class="font-bold text-text-primary">税务缴纳合规性：</span>核实还原过程中涉及的各项税费是否已足额、及时缴纳，避免税务风险。</li>
+                                <li><i class="fas fa-gavel mr-2 text-accent-custom"></i><span class="font-bold text-text-primary">潜在纠纷风险：</span>通过访谈、查询、出具承诺函等方式，全面排除潜在的股权权属纠纷或争议。</li>
+                            </ul>
+                            <p class="mt-4 opacity-90">
+                                <span class="font-bold text-highlight-custom flex items-center"><i class="fas fa-book-reader mr-2"></i>知识库依据：</span>
+                                <a href="http://www.haiwen-law.com/upload/pdf/202207/A%E8%82%A1IPO%E4%B9%8B%E8%B7%AF%E7%B3%BB%E5%88%97%EF%BC%9A%E8%82%A1%E6%9D%83%E4%BB%A3%E6%8C%81%E6%A0%B8%E6%9F%A5%E8%A6%81%E7%82%B9%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%B7%AF%E5%BE%84.pdf" target="_blank" class="text-highlight-custom hover:underline">《A股IPO之路系列：股权代持核查要点及解决路径》</a>等权威文件均明确指出，申报前清理是硬性要求。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column for Sidebar (Core Concepts) -->
+            <div class="lg:col-span-1 border-l-2 border-border-color pl-8 hidden lg:block">
+                <div class="sticky top-28 py-4">
+                    <h3 class="text-2xl font-serif-sc font-bold mb-6 text-accent-custom border-b border-border-color pb-3">
+                        <i class="fas fa-brain mr-2"></i>核心概念速览
+                    </h3>
+                    <div class="space-y-6 text-text-secondary-custom text-base opacity-90">
+                        <div class="p-5 rounded-lg bg-bg-secondary border border-border-color shadow-md">
+                            <p class="font-bold text-text-primary mb-2 flex items-center text-lg"><i class="fas fa-lightbulb mr-2 text-highlight-custom"></i>股权清晰</p>
+                            <p>指公司股权归属明确、权责分明，不存在重大权属纠纷或潜在争议，是IPO的基本发行条件之一。</p>
+                        </div>
+                        <div class="p-5 rounded-lg bg-bg-secondary border border-border-color shadow-md">
+                            <p class="font-bold text-text-primary mb-2 flex items-center text-lg"><i class="fas fa-calendar-alt mr-2 text-highlight-custom"></i>申报基准日</p>
+                            <p>指IPO申请材料中审计报告的截止日期，在该日期前所有重大合规事项（如代持还原）必须处理完毕，是时间上的“死线”。</p>
+                        </div>
+                        <div class="p-5 rounded-lg bg-bg-secondary border border-border-color shadow-md">
+                            <p class="font-bold text-text-primary mb-2 flex items-center text-lg"><i class="fas fa-user-secret mr-2 text-highlight-custom"></i>股权代持</p>
+                            <p>指实际出资人委托他人名义持有股权，实际持有人与名义持有人不一致，是IPO审核中的高风险和重点关注领域。</p>
+                        </div>
+                        <div class="p-5 rounded-lg bg-bg-secondary border border-border-color shadow-md">
+                            <p class="font-bold text-text-primary mb-2 flex items-center text-lg"><i class="fas fa-microscope mr-2 text-highlight-custom"></i>穿透核查</p>
+                            <p>指监管机构或中介机构不仅审查表面股权结构，还会追溯到实际出资人，核实股权的真实性及是否存在隐性代持。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-t-2 border-border-color my-16 opacity-70">
+
+        <!-- Conclusion Section -->
+        <section id="conclusion" class="text-center mb-16 px-4">
+            <h2 class="text-4xl font-serif-sc font-bold mb-10 text-highlight-custom flex items-center justify-center">
+                <i class="fas fa-check-circle mr-4 text-accent-custom text-5xl"></i>结论与核心建议
+            </h2>
+            <div class="card p-10 rounded-xl shadow-2xl max-w-5xl mx-auto border-2 border-accent-custom transform hover:scale-[1.01] transition-transform duration-300">
+                <p class="text-xl md:text-2xl font-serif-sc text-text-primary leading-relaxed mb-6">
+                    <span class="text-highlight-custom font-extrabold text-3xl md:text-4xl drop-shadow-sm">核心结论：</span>
+                    <span class="font-bold text-accent-custom">拟上市公司实际控制人直接持股的股权代持，必须且强制性地在申报基准日前完成还原。</span>这是确保股权清晰、公司治理稳定的硬性要求，不容妥协。
+                </p>
+                <p class="text-lg md:text-xl text-text-secondary-custom leading-relaxed mb-6 opacity-90">
+                    若未能按时清理或未能充分、真实披露，将极大地增加审核问询的广度和深度，甚至可能直接导致上市申请被否决，如<span class="font-bold text-highlight-custom">涧光股份案例</span>所警示，这将给企业带来巨大损失。
+                </p>
+                <p class="text-lg md:text-xl text-text-secondary-custom leading-relaxed opacity-90">
+                    虽然存在极少数例外情形（通常仅针对极小比例且不影响控制权的间接代持），但对于核心的实际控制人股权，监管层持有<span class="font-bold text-highlight-custom">零容忍态度</span>。因此，拟上市公司应将股权代持的识别与清理作为IPO准备工作的重中之重，尽早、彻底处理，确保股权结构的清晰、稳定与合规，为IPO之路排除重大障碍。
+                </p>
+                <a href="#top" class="mt-8 inline-block bg-highlight-custom text-white px-8 py-3 rounded-full font-bold hover:bg-opacity-90 transition-all duration-300 shadow-md transform hover:scale-105">
+                    <i class="fas fa-arrow-up mr-2"></i>返回顶部
+                </a>
+            </div>
+        </section>
+
+        <hr class="border-t-2 border-border-color my-16 opacity-70">
+
+        <!-- Mermaid Data Visualization -->
+        <section id="mermaid-chart" class="mb-16 px-4">
+            <h2 class="text-4xl font-serif-sc font-bold mb-8 text-highlight-custom flex items-center justify-center text-center">
+                <i class="fas fa-project-diagram mr-4 text-accent-custom text-5xl"></i>股权代持还原决策与风险流程图
+            </h2>
+            <div class="mermaid w-full overflow-x-auto p-8 border-2 border-accent-custom">
+                graph TD
+                    subgraph IPO 股权合规流程
+                        A[拟上市公司 IPO 准备启动] --> B{是否存在股权代持?};
+                        B -- 是 --> C[代持清理需求];
+                        B -- 否 --> D[股权清晰，风险低];
+                    end
+
+                    subgraph 代持清理路径
+                        C --> E{是否涉及实际控制人股权?};
+                        E -- 是 --> F[强制：申报基准日前必须完成还原];
+                        E -- 否 --> G{代持比例是否极小 (&le;5%) 且不影响控制权?};
+                        G -- 是 --> H[考虑替代措施 (极特殊情形)];
+                        G -- 否 --> F; /* 非实控人但比例大或影响控制权，也需强制还原 */
+                    end
+
+                    subgraph 还原操作要点
+                        F --> F1(签署《代持解除协议》);
+                        F --> F2(支付还原对价并完税);
+                        F --> F3(办理工商变更);
+                        F1 & F2 & F3 --> F_end[还原完成并披露];
+                    end
+
+                    subgraph 替代措施 (仅限极特殊情况)
+                        H --> H1(客观障碍: 实际持有人失联/无法联系);
+                        H1 --> H2(采取措施: 公证提存 / 司法确权);
+                        H2 --> H3(严格披露并承诺无纠纷);
+                        H3 --> F_end; /* 最终也需达到“无纠纷”状态 */
+                    end
+
+                    subgraph 潜在风险
+                        F -- 未按时还原/披露不充分 --> I[高风险: 上市实质性障碍];
+                        I --> J(审核问询焦点扩大);
+                        J --> K(IPO 申请被否);
+                        K -- 典型案例 --> L(涧光股份IPO被否);
+                    end
+
+                    D --> M[继续IPO流程];
+                    F_end --> M;
+
+                    style A fill:#0F1E3D,stroke:#E84560,stroke-width:2px,color:#E0E0E0;
+                    style B fill:#5D93E8,stroke:#0F1E3D,stroke-width:2px,color:#fff;
+                    style C fill:#E84560,stroke:#0F1E3D,stroke-width:2px,color:#fff;
+                    style D fill:#22bb33,stroke:#1A1A2E,stroke-width:2px,color:#fff; /* Green for success */
+                    style E fill:#5D93E8,stroke:#0F1E3D,stroke-width:2px,color:#fff;
+                    style F fill:#E84560,stroke:#0F1E3D,stroke-width:3px,color:#fff; /* Emphasize mandatory */
+                    style G fill:#5D93E8,stroke:#0F1E3D,stroke-width:2px,color:#fff;
+                    style H fill:#5D93E8,stroke:#0F1E3D,stroke-width:2px,color:#fff;
+                    style I fill:#DC143C,stroke:#0F1E3D,stroke-width:3px,color:#fff; /* Red for high risk */
+                    style J fill:#FFD700,stroke:#0F1E3D,color:#333; /* Yellow for warning */
+                    style K fill:#DC143C,stroke:#0F1E3D,stroke-width:3px,color:#fff;
+                    style L fill:#A52A2A,stroke:#0F1E3D,color:#fff; /* Dark red for failed case */
+                    style M fill:#22bb33,stroke:#1A1A2E,stroke-width:2px,color:#fff;
+
+                    linkStyle 1 stroke:#E84560,stroke-width:2px,fill:none; /* B -- 是 --> C */
+                    linkStyle 2 stroke:#22bb33,stroke-width:2px,fill:none; /* B -- 否 --> D */
+                    linkStyle 5 stroke:#E84560,stroke-width:2px,fill:none; /* E -- 是 --> F */
+                    linkStyle 6 stroke:#5D93E8,stroke-width:2px,fill:none; /* E -- 否 --> G */
+                    linkStyle 8 stroke:#5D93E8,stroke-width:2px,fill:none; /* G -- 是 --> H */
+                    linkStyle 9 stroke:#E84560,stroke-width:2px,fill:none; /* G -- 否 --> F */
+                    linkStyle 13 stroke:#DC143C,stroke-width:2px,fill:none; /* F -- 未按时还原/披露不充分 --> I */
+            </div>
+        </section>
+
+        <hr class="border-t-2 border-border-color my-16 opacity-70">
+
+        <!-- Further Reading Section -->
+        <section class="mb-16 px-4">
+            <h2 class="text-4xl font-serif-sc font-bold mb-8 text-highlight-custom flex items-center justify-center">
+                <i class="fas fa-book-open mr-4 text-accent-custom text-5xl"></i>延伸阅读推荐
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-text-primary text-lg leading-relaxed">
+                <!-- Book/Resource Card 1 -->
+                <div class="card p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+                    <h3 class="text-xl font-serif-sc font-semibold mb-2 text-accent-custom">
+                        《A股IPO之路系列：股权代持核查要点及解决路径》
+                    </h3>
+                    <p class="text-text-secondary-custom mb-3 text-base opacity-90">
+                        <i class="fas fa-bookmark mr-1"></i> 海问律师事务所
+                    </p>
+                    <p class="text-text-primary text-base opacity-90">
+                        系统阐述IPO股权代持的监管要求、核查重点及实务操作中常见的解决方案，具高度参考价值。
+                    </p>
+                    <a href="http://www.haiwen-law.com/upload/pdf/202207/A%E8%82%A1IPO%E4%B9%8B%E8%B7%AF%E7%B3%BB%E5%88%97%EF%BC%9A%E8%82%A1%E6%9D%83%E4%BB%A3%E6%8C%81%E6%A0%B8%E6%9F%A5%E8%A6%81%E7%82%B9%E5%8F%8A%E8%A7%A3%E5%86%B3%E8%B7%AF%E5%BE%84.pdf" target="_blank" class="text-highlight-custom mt-4 inline-block hover:underline text-base font-medium">
+                        <i class="fas fa-external-link-alt mr-1"></i> 阅读原文
+                    </a>
+                </div>
+                <!-- Book/Resource Card 2 -->
+                <div class="card p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+                    <h3 class="text-xl font-serif-sc font-semibold mb-2 text-accent-custom">
+                        《首发业务若干问题解答》
+                    </h3>
+                    <p class="text-text-secondary-custom mb-3 text-base opacity-90">
+                        <i class="fas fa-bookmark mr-1"></i> 中国证监会
+                    </p>
+                    <p class="text-text-primary text-base opacity-90">
+                        官方指导文件，其中对股权清晰、代持清理等问题有明确的原则性要求和解释，是监管红线的直接体现。
+                    </p>
+                    <a href="http://www.csrc.gov.cn/csrc/c100107/c1447185/1447185/files/%E9%A6%96%E5%8F%91%E4%B8%9A%E5%8A%A1%E8%8B%A5%E5%B9%B2%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94.doc" target="_blank" class="text-highlight-custom mt-4 inline-block hover:underline text-base font-medium">
+                        <i class="fas fa-external-link-alt mr-1"></i> 阅读原文
+                    </a>
+                </div>
+                <!-- Book/Resource Card 3 -->
+                <div class="card p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+                    <h3 class="text-xl font-serif-sc font-semibold mb-2 text-accent-custom">
+                        《拟IPO企业股权代持实务解析》
+                    </h3>
+                    <p class="text-text-secondary-custom mb-3 text-base opacity-90">
+                        <i class="fas fa-bookmark mr-1"></i> 德恒律师事务所
+                    </p>
+                    <p class="text-text-primary text-base opacity-90">
+                        从律师实务角度剖析股权代持问题，包含核查重点、法律风险及合规建议，对实操有指导意义。
+                    </p>
+                    <a href="https://www.deheheng.com/yjy/lssd/28452.html" target="_blank" class="text-highlight-custom mt-4 inline-block hover:underline text-base font-medium">
+                        <i class="fas fa-external-link-alt mr-1"></i> 阅读原文
+                    </a>
+                </div>
+                <!-- Book/Resource Card 4 -->
+                <div class="card p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+                    <h3 class="text-xl font-serif-sc font-semibold mb-2 text-accent-custom">
+                        《代持股还原涉税风险与合规操作指引》
+                    </h3>
+                    <p class="text-text-secondary-custom mb-3 text-base opacity-90">
+                        <i class="fas fa-bookmark mr-1"></i> 华税律师事务所
+                    </p>
+                    <p class="text-text-primary text-base opacity-90">
+                        深入探讨股权代持还原过程中的税务处理问题，为避免税务风险提供专业指导。
+                    </p>
+                    <a href="http://www.bls-it.com/page106?article_id=618" target="_blank" class="text-highlight-custom mt-4 inline-block hover:underline text-base font-medium">
+                        <i class="fas fa-external-link-alt mr-1"></i> 阅读原文
+                    </a>
+                </div>
+                <!-- Book/Resource Card 5 -->
+                <div class="card p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+                    <h3 class="text-xl font-serif-sc font-semibold mb-2 text-accent-custom">
+                        《公司法学（最新版）》
+                    </h3>
+                    <p class="text-text-secondary-custom mb-3 text-base opacity-90">
+                        <i class="fas fa-bookmark mr-1"></i> 王保树 (主编)
+                    </p>
+                    <p class="text-text-primary text-base opacity-90">
+                        作为公司法领域的权威教材，深入理解股权、公司治理、法律责任等基本原则，是处理复杂股权问题的基石。
+                    </p>
+                    <span class="text-text-secondary-custom mt-4 inline-block text-base opacity-60 cursor-not-allowed">
+                        <i class="fas fa-external-link-alt mr-1"></i> 暂无在线链接
+                    </span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="header-bg py-8 text-center text-text-secondary-custom text-sm">
+        <div class="container mx-auto px-4">
+            <p>&copy; 2023 IPO 法律合规专家. All rights reserved.</p>
+            <p class="mt-2 opacity-80">本页面信息仅供参考，不构成法律建议。如有具体问题，请咨询专业律师或机构。</p>
+        </div>
+    </footer>
+
+    <!-- Mermaid JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid with a default theme (will be updated by theme toggle)
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark', // Initial theme for Mermaid
+            flowchart: {
+                curve: 'basis', // Smooth curves for flowcharts
+            },
+            securityLevel: 'loose' // Allows certain unsafe features if needed (e.g., clickable links in nodes)
+        });
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement; // The <html> tag
+        const iconElement = themeToggle.querySelector('i'); // The moon/sun icon
+
+        /**
+         * Sets the current theme (dark or light) on the HTML element.
+         * Also updates the theme toggle icon and Mermaid chart theme.
+         * @param {string} theme - 'dark' or 'light'
+         */
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                iconElement.classList.remove('fa-sun');
+                iconElement.classList.add('fa-moon');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                iconElement.classList.remove('fa-moon');
+                iconElement.classList.add('fa-sun');
+                localStorage.setItem('theme', 'light');
+            }
+            // Re-initialize Mermaid to apply theme changes
+            // Using a timeout to ensure CSS variables are applied before Mermaid re-renders
+            setTimeout(() => {
+                mermaid.initialize({ theme: theme });
+                mermaid.init(undefined, '.mermaid'); // Re-render all mermaid blocks
+            }, 100);
+        }
+
+        // Check for saved theme preference or system preference on load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark'); // Default to dark if system prefers dark mode
+        } else {
+            setTheme('light'); // Fallback to light mode
+        }
+
+        // Add event listener for the theme toggle button
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Optional: Observe HTML class changes to react to external theme changes (though less common for a single page)
+        // This is primarily useful if other scripts or browser extensions might change the theme classes.
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === 'class' && mutation.target === htmlElement) {
+                    const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+                    // Only re-set if the theme class actually changed
+                    if (localStorage.getItem('theme') !== currentTheme) {
+                        setTheme(currentTheme);
+                    }
+                }
+            });
+        });
+        observer.observe(htmlElement, { attributes: true });
+
+    </script>
+</body>
+</html>
+```
