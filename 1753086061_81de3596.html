@@ -1,0 +1,610 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>九天行歌：中国商业航天核心部件的探索者</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <style>
+        /* Custom Font Definitions */
+        :root {
+            --font-serif-sc: "Noto Serif SC", serif;
+            --font-sans-sc: "Noto Sans SC", sans-serif;
+            --font-fallback: Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+        .font-heading {
+            font-family: var(--font-serif-sc), var(--font-fallback);
+        }
+        .font-body {
+            font-family: var(--font-sans-sc), var(--font-fallback);
+        }
+
+        /* Dark Mode Specific Styles */
+        .dark body {
+            background-color: #0d1117; /* GitHub Dark BG */
+            color: #c9d1d9; /* GitHub Dark Text */
+        }
+        .dark .bg-card {
+            background-color: #161b22; /* Slightly lighter dark for cards */
+        }
+        .dark .border-primary {
+            border-color: #21262d; /* Darker border */
+        }
+        .dark .text-primary {
+            color: #58a6ff; /* GitHub Blue for links/accents */
+        }
+        .dark .text-secondary {
+            color: #8b949e; /* Muted text */
+        }
+        .dark .text-highlight {
+            color: #79c0ff; /* Brighter blue for highlights */
+        }
+        .dark .text-accent {
+            color: #a371f7; /* Purple accent */
+        }
+        .dark table th, .dark table td {
+            border-color: #30363d; /* Dark table borders */
+        }
+
+        /* Light Mode Specific Styles (defaults are mostly light, but ensure consistency) */
+        body {
+            background-color: #ffffff;
+            color: #333333;
+        }
+        .bg-card {
+            background-color: #f8f8f8;
+        }
+        .border-primary {
+            border-color: #e0e0e0;
+        }
+        .text-primary {
+            color: #007bff;
+        }
+        .text-secondary {
+            color: #6c757d;
+        }
+        .text-highlight {
+            color: #0056b3;
+        }
+        .text-accent {
+            color: #6f42c1;
+        }
+
+        /* General styles */
+        .container {
+            max-width: 1200px;
+        }
+        h1 { font-size: 3.5rem; line-height: 1.1; }
+        h2 { font-size: 2.5rem; line-height: 1.2; }
+        h3 { font-size: 1.875rem; line-height: 1.3; }
+        h4 { font-size: 1.5rem; line-height: 1.4; }
+        p, li, table { font-size: 1.1rem; line-height: 1.8; }
+
+        /* Custom Scrollbar for aesthetic */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-card);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Micro-interactions */
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Tailwind's shadow-md */
+        }
+        .dark .card-hover:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+        }
+        .transition-transform {
+            transition-property: transform;
+            transition-duration: 300ms;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-hover:hover {
+            transform: scale(1.05);
+        }
+
+        /* Hero section background with subtle gradient overlay */
+        .hero-background {
+            background-image: linear-gradient(to bottom, rgba(13, 17, 23, 0.6) 0%, rgba(13, 17, 23, 0.9) 100%), url('https://images.unsplash.com/photo-1541804925-fb309534571b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80'); /* Replace with a high-res space/rocket image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .dark .hero-background {
+            background-image: linear-gradient(to bottom, rgba(13, 17, 23, 0.6) 0%, rgba(13, 17, 23, 0.95) 100%), url('https://images.unsplash.com/photo-1541804925-fb309534571b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+        }
+
+        /* Mermaid Chart Styling */
+        .mermaid {
+            background-color: #161b22 !important; /* Card background for dark mode */
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            overflow-x: auto; /* Enable horizontal scroll for large diagrams */
+            color: #c9d1d9 !important; /* Ensure text is readable */
+        }
+        .dark .mermaid .node rect, .dark .mermaid .node polygon {
+            fill: #21262d !important; /* Node background in dark mode */
+            stroke: #30363d !important; /* Node border in dark mode */
+        }
+        .dark .mermaid .edgePaths .path {
+            stroke: #8b949e !important; /* Edge lines in dark mode */
+        }
+        .dark .mermaid .edgeLabels .label {
+            background-color: #161b22 !important; /* Label background in dark mode */
+            color: #c9d1d9 !important; /* Label text in dark mode */
+        }
+        .dark .mermaid .node text {
+            fill: #c9d1d9 !important; /* Node text in dark mode */
+        }
+
+        /* Footnotes specific styling */
+        .footnote-list {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color, #e0e0e0);
+        }
+        .dark .footnote-list {
+             border-top-color: #30363d;
+        }
+        .footnote-list li {
+            margin-bottom: 0.5rem;
+        }
+        .footnote-ref {
+            vertical-align: super;
+            font-size: 0.75em;
+            line-height: 0;
+            position: relative;
+            top: -0.5em;
+            color: inherit; /* Ensure link color adapts to theme */
+        }
+
+    </style>
+</head>
+<body class="font-body transition-colors duration-300">
+    <!-- Dark Mode Toggle Button -->
+    <button id="themeToggle" class="fixed bottom-6 right-6 p-3 rounded-full bg-slate-700 text-white shadow-lg z-50 hover:bg-slate-600 transition-colors duration-200 btn-hover">
+        <i class="fas fa-moon dark:hidden"></i>
+        <i class="fas fa-sun hidden dark:inline-block"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <header class="hero-background text-white py-24 md:py-32 flex items-center justify-center text-center px-4">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="font-heading text-5xl md:text-6xl lg:text-7xl font-bold mb-6 drop-shadow-lg animate-fade-in-up">
+                九天行歌：中国商业航天核心部件的探索者
+            </h1>
+            <p class="text-xl md:text-2xl lg:text-3xl font-light opacity-90 mb-8 tracking-wide animate-fade-in-up delay-200">
+                深耕液体火箭核心部件制造，助力中国商业航天迈向星辰大海
+            </p>
+            <a href="#overview" class="inline-block bg-sky-600 hover:bg-sky-700 text-white text-lg font-semibold py-3 px-8 rounded-full shadow-lg transition-all duration-300 btn-hover animate-fade-in-up delay-400">
+                深入了解 <i class="fas fa-arrow-down ml-2"></i>
+            </a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-16 md:py-24">
+
+        <!-- Company Overview Section -->
+        <section id="overview" class="mb-16 md:mb-24">
+            <h2 class="font-heading text-primary text-4xl font-bold mb-8 text-center"><i class="fas fa-info-circle mr-3 text-highlight"></i>公司概况</h2>
+            <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+                <div class="bg-card p-8 rounded-xl shadow-xl card-hover transition-transform border-primary border">
+                    <h3 class="font-heading text-accent text-2xl font-semibold mb-6"><i class="fas fa-building mr-2"></i>基本信息</h3>
+                    <ul class="list-none space-y-4">
+                        <li>
+                            <strong class="text-highlight"><i class="fas fa-calendar-alt mr-2"></i>成立时间：</strong>2019年
+                        </li>
+                        <li>
+                            <strong class="text-highlight"><i class="fas fa-map-marker-alt mr-2"></i>总部位置：</strong>北京（研发总部位于大兴区，生产基地位于山东烟台海阳市）<sup class="footnote-ref"><a href="#fn1">[1]</a></sup><sup class="footnote-ref"><a href="#fn5">[5]</a></sup>
+                        </li>
+                        <li>
+                            <strong class="text-highlight"><i class="fas fa-users mr-2"></i>员工规模：</strong>200余人（截至2025年初）<sup class="footnote-ref"><a href="#fn2">[2]</a></sup>
+                        </li>
+                        <li>
+                            <strong class="text-highlight"><i class="fas fa-dollar-sign mr-2"></i>融资进展：</strong>
+                            <ul class="list-disc list-inside ml-4 mt-2 text-secondary">
+                                <li>**A++轮融资**（2025年1月）：超亿元，由北京低空经济基金领投<sup class="footnote-ref"><a href="#fn6">[6]</a></sup></li>
+                                <li>**B轮融资**（2024年）：获顺禧基金投资，加速核心部件研发<sup class="footnote-ref"><a href="#fn1">[1]</a></sup></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-card p-8 rounded-xl shadow-xl card-hover transition-transform border-primary border">
+                    <h3 class="font-heading text-accent text-2xl font-semibold mb-6"><i class="fas fa-rocket mr-2"></i>核心定位</h3>
+                    <p class="text-lg leading-relaxed">
+                        国内<strong class="text-highlight text-xl">唯一专注于液体火箭推进剂贮箱商业化制造</strong>的企业，定位为商业航天产业链中游核心部件供应商<sup class="footnote-ref"><a href="#fn17">[17]</a></sup>。
+                        <br><br>
+                        作为深空探索的基石，九天行歌致力于为中国商业航天提供高性能、高可靠性的关键组件，构建坚实的供应链支撑。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Business Analysis Section -->
+        <section id="business" class="mb-16 md:mb-24">
+            <h2 class="font-heading text-primary text-4xl font-bold mb-8 text-center"><i class="fas fa-cogs mr-3 text-highlight"></i>主营业务分析</h2>
+            <p class="text-lg leading-relaxed mb-10 text-center text-secondary">
+                九天行歌聚焦于<strong class="text-highlight">液体运载火箭核心系统及关键部件</strong>的研发与生产，具体分为三类业务：
+            </p>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse table-auto">
+                    <thead>
+                        <tr class="bg-primary text-white">
+                            <th class="p-4 rounded-tl-lg font-heading font-semibold">业务板块</th>
+                            <th class="p-4 font-heading font-semibold">核心产品/服务</th>
+                            <th class="p-4 font-heading font-semibold">技术特点</th>
+                            <th class="p-4 rounded-tr-lg font-heading font-semibold">行业地位</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-card border-primary border-b">
+                            <td class="p-4 font-semibold text-accent">液体火箭贮箱</td>
+                            <td class="p-4">常温/低温推进剂贮箱（可重复使用）</td>
+                            <td class="p-4">突破低温材料焊接、密封等工艺难题</td>
+                            <td class="p-4">国内唯一实现商业化生产的民营企业<sup class="footnote-ref"><a href="#fn17">[17]</a></sup></td>
+                        </tr>
+                        <tr class="bg-card border-primary border-b">
+                            <td class="p-4 font-semibold text-accent">火箭结构件</td>
+                            <td class="p-4">箭体结构、燃料输送管路、级间段</td>
+                            <td class="p-4">采用柔性设计适配多规格箭体<sup class="footnote-ref"><a href="#fn20">[20]</a></sup></td>
+                            <td class="p-4">支撑多型号火箭通用化需求</td>
+                        </tr>
+                        <tr class="bg-card">
+                            <td class="p-4 font-semibold text-accent rounded-bl-lg">动力子系统装配</td>
+                            <td class="p-4">火箭标准动力子级总装、测试及地面试验设备</td>
+                            <td class="p-4">集成燃料供应与控制系统</td>
+                            <td class="p-4 rounded-br-lg">提供“货架式”单机供应服务<sup class="footnote-ref"><a href="#fn7">[7]</a></sup><sup class="footnote-ref"><a href="#fn11">[11]</a></sup></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Business Highlights & Barriers Section -->
+        <section id="highlights" class="mb-16 md:mb-24">
+            <h2 class="font-heading text-primary text-4xl font-bold mb-8 text-center"><i class="fas fa-star mr-3 text-highlight"></i>业务亮点与壁垒</h2>
+            <div class="grid md:grid-cols-3 gap-8 lg:gap-12">
+                <div class="bg-card p-8 rounded-xl shadow-xl card-hover transition-transform border-primary border">
+                    <h3 class="font-heading text-accent text-2xl font-semibold mb-6"><i class="fas fa-flask mr-2"></i>技术壁垒</h3>
+                    <ul class="list-disc list-inside space-y-3 pl-4">
+                        <li>
+                            <strong class="text-highlight">低温贮箱技术：</strong>攻克液氧/液氢（-183℃至-253℃）极端环境下的材料耐低温性与结构稳定性，技术难度居产业链顶端<sup class="footnote-ref"><a href="#fn5">[5]</a></sup><sup class="footnote-ref"><a href="#fn17">[17]</a></sup>。
+                        </li>
+                        <li>
+                            <strong class="text-highlight">工艺创新：</strong>实现大直径级间段立式制造，提升生产效率30%以上<sup class="footnote-ref"><a href="#fn20">[20]</a></sup>。
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-card p-8 rounded-xl shadow-xl card-hover transition-transform border-primary border">
+                    <h3 class="font-heading text-accent text-2xl font-semibold mb-6"><i class="fas fa-chart-line mr-2"></i>商业化进展</h3>
+                    <ul class="list-disc list-inside space-y-3 pl-4">
+                        <li>
+                            <strong class="text-highlight">客户覆盖：</strong>为国内头部商业火箭公司（如蓝箭航天、星际荣耀）提供贮箱及箭体配套<sup class="footnote-ref"><a href="#fn1">[1]</a></sup><sup class="footnote-ref"><a href="#fn7">[7]</a></sup>。
+                        </li>
+                        <li>
+                            <strong class="text-highlight">产能布局：</strong>烟台基地规划年产50套贮箱产线，2026年投产后可满足10次以上中型火箭发射需求<sup class="footnote-ref"><a href="#fn17">[17]</a></sup>。
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-card p-8 rounded-xl shadow-xl card-hover transition-transform border-primary border">
+                    <h3 class="font-heading text-accent text-2xl font-semibold mb-6"><i class="fas fa-gavel mr-2"></i>政策驱动</h3>
+                    <ul class="list-disc list-inside space-y-3 pl-4">
+                        <li>
+                            北京低空经济基金战略投资，契合国家低空经济战略规划（2024-2030年）<sup class="footnote-ref"><a href="#fn6">[6]</a></sup>。
+                        </li>
+                        <li>
+                            <strong class="text-highlight">商业火箭发射需求爆发：</strong>预计2026年起年均发射量突破50次，核心部件市场规模超百亿<sup class="footnote-ref"><a href="#fn6">[6]</a></sup><sup class="footnote-ref"><a href="#fn18">[18]</a></sup>。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Risks & Challenges Section -->
+        <section id="risks" class="mb-16 md:mb-24">
+            <h2 class="font-heading text-primary text-4xl font-bold mb-8 text-center"><i class="fas fa-exclamation-triangle mr-3 text-red-500"></i>风险与挑战</h2>
+            <div class="bg-card p-8 rounded-xl shadow-xl border-primary border">
+                <ul class="list-disc list-inside space-y-4 pl-4">
+                    <li>
+                        <strong class="text-highlight">供应链依赖：</strong>高端材料（如高强铝合金、复合材料）受国际制裁影响，国产替代进度存在不确定性。
+                    </li>
+                    <li>
+                        <strong class="text-highlight">盈利周期：</strong>前期研发投入高（单套贮箱研发成本超千万元），需依赖融资支撑，规模化生产前盈利承压<sup class="footnote-ref"><a href="#fn1">[1]</a></sup><sup class="footnote-ref"><a href="#fn6">[6]</a></sup>。
+                    </li>
+                    <li>
+                        <strong class="text-highlight">竞争加剧：</strong>航天科工/科技集团下属企业加速民品业务渗透，价格竞争可能挤压毛利空间。
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Investment Perspective Section -->
+        <section id="investment" class="mb-16 md:mb-24">
+            <h2 class="font-heading text-primary text-4xl font-bold mb-8 text-center"><i class="fas fa-chart-pie mr-3 text-emerald-400"></i>投行视角分析</h2>
+            <div class="bg-card p-8 rounded-xl shadow-xl border-primary border">
+                <ul class="list-disc list-inside space-y-4 pl-4">
+                    <li>
+                        <strong class="text-highlight">投资逻辑：</strong>技术稀缺性+政策强驱动，估值锚定在 <strong class="text-xl">2026年商业化拐点</strong>（参考SpaceX供应链企业10-15倍PS）<sup class="footnote-ref"><a href="#fn18">[18]</a></sup>。
+                    </li>
+                    <li>
+                        <strong class="text-highlight">潜在路径：</strong>若2026年实现主流火箭型号批量配套，或成为科创板/港交所18C条款上市标的。
+                    </li>
+                    <li>
+                        <strong class="text-highlight">风险提示：</strong>需跟踪下游火箭公司发射成功率及订单兑现能力（如客户破产可能引发坏账）<sup class="footnote-ref"><a href="#fn7">[7]</a></sup>。
+                    </li>
+                </ul>
+                <p class="mt-6 text-secondary text-sm italic">
+                    <i class="fas fa-info-circle mr-2"></i>注：财务数据（营收/毛利率）未公开，分析基于行业对标及融资规模推算。
+                </p>
+            </div>
+        </section>
+
+        <!-- Data Visualization Section -->
+        <section id="visualization" class="mb-16 md:mb-24">
+            <h2 class="font-heading text-primary text-4xl font-bold mb-8 text-center"><i class="fas fa-project-diagram mr-3 text-yellow-400"></i>核心概念关系图</h2>
+            <div class="mermaid-diagram bg-card p-6 rounded-xl shadow-xl border-primary border">
+                <pre class="mermaid">
+graph TD
+    A[九天行歌] --> B(公司概况)
+    B --> B1[基本信息]
+    B --> B2[核心定位]
+
+    A --> C(主营业务分析)
+    C --> C1[液体火箭贮箱]
+    C --> C2[火箭结构件]
+    C --> C3[动力子系统装配]
+
+    A --> D(业务亮点与壁垒)
+    D --> D1[技术壁垒]
+    D1 --> D1a{低温贮箱技术}
+    D1 --> D1b{工艺创新}
+    D --> D2[商业化进展]
+    D2 --> D2a{客户覆盖}
+    D2 --> D2b{产能布局}
+    D --> D3[政策驱动]
+    D3 --> D3a{低空经济基金投资}
+    D3 --> D3b{商业火箭需求爆发}
+
+    A --> E(风险与挑战)
+    E --> E1[供应链依赖]
+    E --> E2[盈利周期]
+    E2 --> E2a{研发投入高}
+    E --> E3[竞争加剧]
+
+    A --> F(投行视角分析)
+    F --> F1[投资逻辑]
+    F1 --> F1a{技术稀缺性}
+    F1 --> F1b{政策强驱动}
+    F1 --> F1c{2026年商业化拐点}
+    F --> F2[潜在路径]
+    F --> F3[风险提示]
+    F3 --> F3a{下游订单}
+
+    style A fill:#a371f7,stroke:#8b949e,stroke-width:2px,color:#ffffff
+    style B fill:#21262d,stroke:#30363d,color:#c9d1d9
+    style C fill:#21262d,stroke:#30363d,color:#c9d1d9
+    style D fill:#21262d,stroke:#30363d,color:#c9d1d9
+    style E fill:#21262d,stroke:#30363d,color:#c9d1d9
+    style F fill:#21262d,stroke:#30363d,color:#c9d1d9
+
+    linkStyle 0 stroke:#79c0ff,stroke-width:2px
+    linkStyle 1 stroke:#79c0ff,stroke-width:2px
+    linkStyle 2 stroke:#79c0ff,stroke-width:2px
+    linkStyle 3 stroke:#79c0ff,stroke-width:2px
+    linkStyle 4 stroke:#79c0ff,stroke-width:2px
+    linkStyle 5 stroke:#79c0ff,stroke-width:2px
+                </pre>
+            </div>
+        </section>
+
+        <!-- Further Reading Section -->
+        <section id="further-reading" class="mb-16 md:mb-24">
+            <h2 class="font-heading text-primary text-4xl font-bold mb-8 text-center"><i class="fas fa-book-open mr-3 text-indigo-400"></i>延伸阅读</h2>
+            <p class="text-lg leading-relaxed mb-10 text-center text-secondary">
+                如果您对商业航天、深科技投资或中国高科技产业感兴趣，以下推荐书籍将帮助您深入理解相关领域：
+            </p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-card p-6 rounded-xl shadow-md card-hover transition-transform border-primary border">
+                    <h3 class="font-heading text-xl font-semibold mb-3 text-highlight">The Space Barons</h3>
+                    <p class="text-sm text-secondary mb-2">by Christian Davenport</p>
+                    <p class="text-base leading-relaxed">
+                        深度描绘了埃隆·马斯克、杰夫·贝佐斯等商业航天巨头如何塑造太空产业新格局，有助于理解九天行歌所处的市场环境。
+                    </p>
+                    <a href="https://www.amazon.com/Space-Barons-Musk-Bezos-Colonize/dp/1524761665" target="_blank" class="text-primary hover:underline text-sm mt-3 inline-block">了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-md card-hover transition-transform border-primary border">
+                    <h3 class="font-heading text-xl font-semibold mb-3 text-highlight">Zero to One</h3>
+                    <p class="text-sm text-secondary mb-2">by Peter Thiel</p>
+                    <p class="text-base leading-relaxed">
+                        关于如何从零到一创造独特产品和垄断市场的洞见，对理解九天行歌“低温贮箱技术唯一性”的商业价值至关重要。
+                    </p>
+                    <a href="https://www.amazon.com/Zero-One-Notes-Startups-Future/dp/0804139296" target="_blank" class="text-primary hover:underline text-sm mt-3 inline-block">了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-md card-hover transition-transform border-primary border">
+                    <h3 class="font-heading text-xl font-semibold mb-3 text-highlight">China's Vision of Victory</h3>
+                    <p class="text-sm text-secondary mb-2">by Jonathan Ward</p>
+                    <p class="text-base leading-relaxed">
+                        分析中国在关键技术领域的战略雄心和产业政策，有助于理解九天行歌如何受益于国家层面的支持，以及面临的国际供应链挑战。
+                    </p>
+                    <a href="https://www.amazon.com/Chinas-Vision-Victory-Jonathan-Ward/dp/1641770513" target="_blank" class="text-primary hover:underline text-sm mt-3 inline-block">了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-md card-hover transition-transform border-primary border">
+                    <h3 class="font-heading text-xl font-semibold mb-3 text-highlight">Fundamentals of Space Systems</h3>
+                    <p class="text-sm text-secondary mb-2">by Vincent L. Pisacane</p>
+                    <p class="text-base leading-relaxed">
+                        一本经典的航天工程教材，可提供火箭推进、结构等技术细节的背景知识，加深对九天行歌技术壁垒的理解。
+                    </p>
+                    <a href="https://www.amazon.com/Fundamentals-Space-Systems-Vincent-Pisacane/dp/0199732729" target="_blank" class="text-primary hover:underline text-sm mt-3 inline-block">了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-md card-hover transition-transform border-primary border">
+                    <h3 class="font-heading text-xl font-semibold mb-3 text-highlight">Venture Deals</h3>
+                    <p class="text-sm text-secondary mb-2">by Brad Feld & Jason Mendelson</p>
+                    <p class="text-base leading-relaxed">
+                        从创业者和投资人的双重视角解析风险投资交易，对于理解九天行歌的融资策略和投行分析逻辑有直接帮助。
+                    </p>
+                    <a href="https://www.amazon.com/Venture-Deals-Smarter-Lawyer-Capitalist/dp/1118443616" target="_blank" class="text-primary hover:underline text-sm mt-3 inline-block">了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer with footnotes -->
+    <footer class="container mx-auto px-4 py-8 text-secondary text-center border-t border-primary">
+        <ol class="footnote-list text-left mx-auto max-w-4xl" id="footnotes">
+            <li id="fn1">顺禧基金投资九天行歌B轮融资. <a href="https://www.iyiou.com/data/202501231089095" target="_blank" class="text-primary hover:underline">[链接]</a></li>
+            <li id="fn2">九天行歌BOSS直聘公司主页. <a href="https://m.zhipin.com/companys/09c0b18f79ee016f1XJ43dW6GVo~.html" target="_blank" class="text-primary hover:underline">[链接]</a></li>
+            <li id="fn5">九天行歌山东产业基地定位. <a href="https://www.laernoc.com/newsinfo/1891671222278819840" target="_blank" class="text-primary hover:underline">[链接]</a></li>
+            <li id="fn6">北京低空经济基金投资分析. <a href="https://www.donews.com/news/detail/4/4758462.html" target="_blank" class="text-primary hover:underline">[链接]</a></li>
+            <li id="fn7">九天行歌业务模式详解. <a href="https://startup.aliyun.com/info/1092430.html" target="_blank" class="text-primary hover:underline">[链接]</a></li>
+            <li id="fn11">货架式供应战略. <a href="https://startup.aliyun.com/info/1092436.html" target="_blank" class="text-primary hover:underline">[链接]</a></li>
+            <li id="fn17">低温贮箱技术唯一性. <a href="https://m.36kr.com/p/1524203157655431" target="_blank" class="text-primary hover:underline">[链接]</a></li>
+            <li id="fn18">商业航天市场预测. <a href="http://www.startup-partner.com/16814.html" target="_blank" class="text-primary hover:underline">[链接]</a></li>
+            <li id="fn20">级间段制造工艺突破. <a href="https://www.chinaerospace.com/article/59709" target="_blank" class="text-primary hover:underline">[链接]</a></li>
+        </ol>
+        <p class="mt-8">&copy; 2024 九天行歌航天科技有限公司分析. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Mermaid.js Initialization
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base', // Use base theme, then override with custom CSS for dark/light mode
+            themeVariables: {
+                darkMode: document.documentElement.classList.contains('dark'),
+                primaryColor: '#a371f7',
+                secondaryColor: '#58a6ff',
+                tertiaryColor: '#21262d', // Node fill
+                primaryTextColor: '#c9d1d9',
+                secondaryTextColor: '#8b949e',
+                tertiaryTextColor: '#c9d1d9',
+                lineColor: '#8b949e', // Edge lines
+                mainBkg: '#161b22', // Chart background
+                nodeBorder: '#30363d',
+                clusterBkg: '#161b22',
+                clusterBorder: '#30363d'
+            }
+        });
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            }
+            // Re-render Mermaid chart on theme change
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'base',
+                themeVariables: {
+                    darkMode: htmlElement.classList.contains('dark'),
+                    primaryColor: htmlElement.classList.contains('dark') ? '#a371f7' : '#6f42c1',
+                    secondaryColor: htmlElement.classList.contains('dark') ? '#58a6ff' : '#007bff',
+                    tertiaryColor: htmlElement.classList.contains('dark') ? '#21262d' : '#f8f8f8',
+                    primaryTextColor: htmlElement.classList.contains('dark') ? '#c9d1d9' : '#333333',
+                    secondaryTextColor: htmlElement.classList.contains('dark') ? '#8b949e' : '#6c757d',
+                    tertiaryTextColor: htmlElement.classList.contains('dark') ? '#c9d1d9' : '#333333',
+                    lineColor: htmlElement.classList.contains('dark') ? '#8b949e' : '#6c757d',
+                    mainBkg: htmlElement.classList.contains('dark') ? '#161b22' : '#ffffff',
+                    nodeBorder: htmlElement.classList.contains('dark') ? '#30363d' : '#e0e0e0',
+                    clusterBkg: htmlElement.classList.contains('dark') ? '#161b22' : '#ffffff',
+                    clusterBorder: htmlElement.classList.contains('dark') ? '#30363d' : '#e0e0e0'
+                }
+            });
+            // Force re-render of existing mermaid diagrams
+            document.querySelectorAll('.mermaid').forEach(element => {
+                const graphDefinition = element.textContent;
+                mermaid.render('mermaid-svg', graphDefinition).then(({ svg }) => {
+                    element.innerHTML = svg;
+                });
+            });
+        }
+
+        // Check for saved theme or system preference on load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light'); // Default to light if no preference and not dark mode system
+        }
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Animate elements on scroll
+        const animateOnScroll = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(animateOnScroll, {
+            root: null,
+            threshold: 0.1
+        });
+
+        // Observe elements with animation classes
+        document.querySelectorAll('.animate-fade-in-up, .card-hover').forEach(el => {
+            el.classList.add('opacity-0'); // Hide initially
+            observer.observe(el);
+        });
+
+        // Add CSS for animation
+        const styleSheet = document.createElement('style');
+        styleSheet.type = 'text/css';
+        styleSheet.innerText = `
+            .animate-fade-in-up {
+                transform: translateY(20px);
+                transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+            }
+            .animate-fade-in-up.animate-fade-in-up-visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .animate-fade-in-up.delay-200 { transition-delay: 0.2s; }
+            .animate-fade-in-up.delay-400 { transition-delay: 0.4s; }
+        `;
+        document.head.appendChild(styleSheet);
+
+    </script>
+</body>
+</html>
+```
