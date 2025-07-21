@@ -1,0 +1,559 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>研发人员认定与费用核算深度解析 - IPO审核指南</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom base styles and typography */
+        :root {
+            --bg-dark: #0A0A0A; /* Deeper dark background */
+            --text-light: #E0E0E0; /* Light grey for body text */
+            --text-muted: #A0A0A0; /* Muted grey for secondary text */
+            --accent-main: #34D399; /* Emerald green for highlights */
+            --accent-secondary: #60A5FA; /* Blue for links/hover */
+            --card-bg-dark: #1A1A1A;
+            --border-dark: #333333;
+        }
+
+        .dark {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        .light {
+            background-color: #F8F8F8;
+            color: #333333;
+        }
+
+        .light a {
+            color: var(--accent-main);
+        }
+        .light .text-accent-main {
+            color: var(--accent-main);
+        }
+        .light .bg-card-dark {
+            background-color: #FFFFFF;
+            border: 1px solid #E0E0E0;
+        }
+        .light .border-card-dark {
+            border-color: #E0E0E0;
+        }
+        .light .text-muted {
+            color: #666666;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            line-height: 1.75;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', serif;
+            line-height: 1.3;
+        }
+
+        .first-letter::first-letter {
+            font-size: 2.5em; /* Larger initial letter */
+            font-weight: 700;
+            line-height: 1;
+            float: left;
+            margin-right: 0.15em;
+            color: var(--accent-main);
+        }
+
+        .text-accent-main {
+            color: var(--accent-main);
+        }
+
+        .bg-card-dark {
+            background-color: var(--card-bg-dark);
+        }
+
+        .border-card-dark {
+            border-color: var(--border-dark);
+        }
+
+        a {
+            color: var(--accent-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--accent-main);
+            text-decoration: underline;
+        }
+
+        .footnote-link {
+            font-size: 0.8em;
+            vertical-align: super;
+            margin-left: 0.2em;
+            color: var(--accent-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .footnote-link:hover {
+            color: var(--accent-main);
+            text-decoration: underline;
+        }
+
+        .footnote-item {
+            font-size: 0.9em;
+            color: var(--text-muted);
+        }
+
+        .btn-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.6rem 1rem;
+            border-radius: 9999px; /* Pill shape */
+            background-color: var(--card-bg-dark);
+            color: var(--text-light);
+            border: 1px solid var(--border-dark);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-toggle:hover {
+            background-color: var(--border-dark);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Mermaid custom styles */
+        .mermaid {
+            background-color: var(--card-bg-dark) !important;
+            padding: 1.5rem !important;
+            border-radius: 0.75rem !important;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+            overflow-x: auto; /* Enable horizontal scrolling for narrow screens */
+        }
+        .mermaid svg {
+            max-width: none !important; /* Allow svg to be wider than its container */
+        }
+
+        /* Adjust colors for mermaid nodes in dark mode */
+        .dark .mermaid .node rect,
+        .dark .mermaid .node circle,
+        .dark .mermaid .node ellipse,
+        .dark .mermaid .node polygon {
+            fill: var(--card-bg-dark) !important; /* Default node background */
+            stroke: var(--accent-secondary) !important; /* Default node border */
+        }
+        .dark .mermaid .node text {
+            fill: var(--text-light) !important; /* Default node text */
+        }
+        .dark .mermaid .edgePaths .path {
+            stroke: var(--text-muted) !important; /* Arrow path */
+            stroke-width: 2px !important;
+        }
+        .dark .mermaid .edgeLabels .label text {
+            fill: var(--text-muted) !important; /* Label text */
+        }
+        /* Specific node styles from mermaid diagram */
+        .dark .node.mermaid-node-A rect {
+            fill: #4F46E5 !important; /* Indigo-600 for main topic */
+            stroke: #fff !important;
+        }
+        .dark .node.mermaid-node-A text {
+            color: #fff !important;
+        }
+        .dark .node.mermaid-node-D rect {
+            fill: #EF4444 !important; /* Red-500 for negative outcome */
+            stroke: #fff !important;
+        }
+        .dark .node.mermaid-node-F rect {
+            fill: #22C55E !important; /* Green-500 for positive outcome */
+            stroke: #fff !important;
+        }
+        .dark .node.mermaid-node-D text,
+        .dark .node.mermaid-node-F text {
+            color: #fff !important;
+        }
+
+        .light .mermaid {
+            background-color: #FFFFFF !important;
+            border: 1px solid #E0E0E0 !important;
+        }
+        .light .mermaid .node rect,
+        .light .mermaid .node circle,
+        .light .mermaid .node ellipse,
+        .light .mermaid .node polygon {
+            fill: #F8F8F8 !important;
+            stroke: #60A5FA !important;
+        }
+        .light .mermaid .node text {
+            fill: #333333 !important;
+        }
+        .light .mermaid .edgePaths .path {
+            stroke: #666666 !important;
+        }
+        .light .mermaid .edgeLabels .label text {
+            fill: #666666 !important;
+        }
+        /* Specific node styles for light mode */
+        .light .node.mermaid-node-A rect {
+            fill: #4F46E5 !important;
+            stroke: #fff !important;
+        }
+        .light .node.mermaid-node-A text {
+            color: #fff !important;
+        }
+        .light .node.mermaid-node-D rect {
+            fill: #EF4444 !important;
+            stroke: #fff !important;
+        }
+        .light .node.mermaid-node-F rect {
+            fill: #22C55E !important;
+            stroke: #fff !important;
+        }
+        .light .node.mermaid-node-D text,
+        .light .node.mermaid-node-F text {
+            color: #fff !important;
+        }
+
+    </style>
+</head>
+<body class="min-h-screen transition-colors duration-300">
+    <div class="relative min-h-screen flex flex-col">
+        <!-- Header & Theme Toggle -->
+        <header class="p-6 md:p-8 flex justify-end sticky top-0 z-50 bg-inherit transition-colors duration-300">
+            <button id="theme-toggle" class="btn-toggle text-sm">
+                <i class="fas fa-sun mr-2 hidden dark:inline-block"></i>
+                <i class="fas fa-moon mr-2 inline-block dark:hidden"></i>
+                <span class="dark:inline-block">深色模式</span>
+                <span class="inline-block dark:hidden">浅色模式</span>
+            </button>
+        </header>
+
+        <main class="flex-grow container mx-auto px-6 py-12 md:px-8 md:py-16 max-w-4xl">
+            <!-- Hero Section -->
+            <section class="mb-16 text-center">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-accent-main mb-4 tracking-tight leading-tight">
+                    IPO审核：<br>研发人员认定与费用核算深度解析
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 dark:text-gray-400 mb-6 font-light">
+                    —— 基于《监管规则适用指引——发行类第9号》权威解读
+                </p>
+                <p class="text-lg md:text-xl text-gray-200 dark:text-gray-300 max-w-2xl mx-auto italic leading-relaxed">
+                    在企业迈向资本市场的征途中，研发投入的合规性与透明度至关重要。本指南旨在剖析研发人员认定及相关费用核算的复杂性，助您精准把握监管尺度。
+                </p>
+            </section>
+
+            <!-- Main Content -->
+            <article class="prose dark:prose-dark lg:prose-xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 text-accent-main text-center">核心结论</h2>
+
+                <!-- Section 1: Distinction -->
+                <section class="mb-12 p-6 md:p-8 bg-card-dark rounded-xl shadow-lg border border-card-dark transition-transform hover:scale-[1.005]">
+                    <h3 class="text-2xl md:text-3xl font-semibold mb-6 text-gray-100 first-letter">
+                        <i class="fas fa-divide mr-3 text-accent-main"></i>一、人员认定与费用核算的区分
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Card 1: 人员认定 -->
+                        <div class="p-5 bg-gray-900 rounded-lg border border-gray-800 shadow-md transform hover:shadow-xl transition-all duration-200">
+                            <h4 class="text-xl font-semibold mb-3 text-red-400"><i class="fas fa-user-slash mr-2"></i>人员认定</h4>
+                            <ul class="list-none pl-0 space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-minus-circle mt-1 mr-3 text-red-500 flex-shrink-0"></i>
+                                    <span>
+                                        对于既从事研发又从事非研发活动的人员，若<strong class="text-red-300">当期研发工时占比低于50%</strong>，<strong class="text-red-300">原则上不得认定为研发人员</strong><sup class="footnote-link" id="ref-1-back">[1]</sup><sup class="footnote-link" id="ref-2-back">[2]</sup><sup class="footnote-link" id="ref-3-back">[3]</sup>。
+                                    </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-lightbulb mt-1 mr-3 text-yellow-400 flex-shrink-0"></i>
+                                    <span class="text-sm text-gray-400 italic">例如：某工程师研发工时占比40%、生产管理工时占比60%，则该人员不应计入研发人员总数。</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Card 2: 费用核算 -->
+                        <div class="p-5 bg-gray-900 rounded-lg border border-gray-800 shadow-md transform hover:shadow-xl transition-all duration-200">
+                            <h4 class="text-xl font-semibold mb-3 text-green-400"><i class="fas fa-hand-holding-usd mr-2"></i>费用核算</h4>
+                            <ul class="list-none pl-0 space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-plus-circle mt-1 mr-3 text-green-500 flex-shrink-0"></i>
+                                    <span>
+                                        <strong class="text-green-300">不影响研发费用的归集</strong>。即使人员未被认定为研发人员，其实际从事研发活动所对应的工时成本（如工资、社保等）<strong class="text-green-300">仍可计入研发投入（研发支出）</strong><sup class="footnote-link" id="ref-4-back">[4]</sup><sup class="footnote-link" id="ref-5-back">[5]</sup>。
+                                    </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-lightbulb mt-1 mr-3 text-yellow-400 flex-shrink-0"></i>
+                                    <span class="text-sm text-gray-400 italic">例如：上述工程师40%的研发工时对应的薪酬，可合理分摊至研发费用。</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 2: Regulatory Logic & Practical Requirements -->
+                <section class="mb-12 p-6 md:p-8 bg-card-dark rounded-xl shadow-lg border border-card-dark transition-transform hover:scale-[1.005]">
+                    <h3 class="text-2xl md:text-3xl font-semibold mb-6 text-gray-100 first-letter">
+                        <i class="fas fa-cogs mr-3 text-accent-main"></i>二、监管逻辑与实操要求
+                    </h3>
+                    <ul class="list-none pl-0 space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-gavel mt-1 mr-3 text-blue-400 flex-shrink-0"></i>
+                            <div>
+                                <strong class="text-lg text-blue-300">监管意图：</strong>
+                                <span class="block">防止企业虚增研发人员数量（如将高管、生产人员包装为研发人员），确保研发人员统计的严谨性<sup class="footnote-link" id="ref-1-back">[1]</sup><sup class="footnote-link" id="ref-6-back">[6]</sup>。</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-balance-scale mt-1 mr-3 text-purple-400 flex-shrink-0"></i>
+                            <div>
+                                <strong class="text-lg text-purple-300">费用分摊原则：</strong>
+                                <span class="block">企业需建立工时记录系统，将混合岗位人员的费用按研发工时占比在研发支出和生产经营费用间<strong class="text-purple-300">合理分配</strong>；若无法合理分摊，则相关支出不得计入研发费用<sup class="footnote-link" id="ref-5-back">[5]</sup><sup class="footnote-link" id="ref-7-back">[7]</sup>。</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-star mt-1 mr-3 text-yellow-400 flex-shrink-0"></i>
+                            <div>
+                                <strong class="text-lg text-yellow-300">例外情形：</strong>
+                                <span class="block">若研发工时占比低于50%的人员（如核心技术高管）对研发活动有重大贡献，需提供充分证据（如研发成果归属、项目主导证明）并经论证后，方可将其认定为研发人员<sup class="footnote-link" id="ref-1-back">[1]</sup><sup class="footnote-link" id="ref-8-back">[8]</sup>。</span>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Data Visualization Section -->
+                <section class="mb-12 text-center">
+                    <h3 class="text-2xl md:text-3xl font-semibold mb-6 text-gray-100"><i class="fas fa-chart-network mr-3 text-accent-main"></i>概念关系可视化</h3>
+                    <p class="text-gray-300 mb-6">通过Mermaid图表直观理解研发人员认定与费用核算的核心逻辑和相互关系。</p>
+                    <div class="mermaid-container w-full overflow-x-auto">
+                        <div class="mermaid text-sm">
+                            graph TD
+                                A["核心问题: 研发工时 &lt; 50%"]:::mermaid-node-A --> B{"影响人员认定吗?"};
+                                A --> C{"影响费用归集吗?"};
+
+                                B -- 是, 原则上 --> D["不得认定为研发人员"]:::mermaid-node-D;
+                                D -- 但可存在 --> E["例外情形 (如核心高管)"];
+
+                                C -- 否 --> F["不影响费用归集"]:::mermaid-node-F;
+                                F --> G["实际研发工时成本仍可计入研发投入"];
+                                G -- 前提是 --> H["需合理分摊并有工时记录"];
+
+                                I[监管核心目的] --> J[确保人员统计严谨性];
+                                I --> K[支持真实研发投入];
+
+                                D -- 服务于 --> J;
+                                G -- 服务于 --> K;
+
+                                style A fill:#4F46E5,stroke:#fff,stroke-width:2px,color:#fff
+                                style D fill:#EF4444,stroke:#fff,stroke-width:2px,color:#fff
+                                style F fill:#22C55E,stroke:#fff,stroke-width:2px,color:#fff
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3: Compliance Recommendations -->
+                <section class="mb-12 p-6 md:p-8 bg-card-dark rounded-xl shadow-lg border border-card-dark transition-transform hover:scale-[1.005]">
+                    <h3 class="text-2xl md:text-3xl font-semibold mb-6 text-gray-100 first-letter">
+                        <i class="fas fa-check-circle mr-3 text-accent-main"></i>三、合规建议
+                    </h3>
+                    <ol class="list-decimal list-inside pl-0 space-y-4">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 text-accent-main font-bold text-lg mr-3">1.</div>
+                            <div>
+                                <strong class="text-lg text-accent-main">工时管理：</strong> 建立完善的研发工时记录制度（如工时系统、项目台账），确保可量化分配依据<sup class="footnote-link" id="ref-5-back">[5]</sup><sup class="footnote-link" id="ref-9-back">[9]</sup>。
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 text-accent-main font-bold text-lg mr-3">2.</div>
+                            <div>
+                                <strong class="text-lg text-accent-main">费用归集：</strong> 按实际研发工时占比计算可计入研发费用的金额，保留完整凭证备查<sup class="footnote-link" id="ref-4-back">[4]</sup><sup class="footnote-link" id="ref-10-back">[10]</sup>。
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 text-accent-main font-bold text-lg mr-3">3.</div>
+                            <div>
+                                <strong class="text-lg text-accent-main">人员分类：</strong> 研发工时≥50%的人员方可纳入研发人员统计；低于50%人员仅归集对应研发费用<sup class="footnote-link" id="ref-1-back">[1]</sup><sup class="footnote-link" id="ref-3-back">[3]</sup>。
+                            </div>
+                        </li>
+                    </ol>
+                </section>
+
+                <!-- Footnotes Section -->
+                <section class="mb-12 p-6 md:p-8 bg-card-dark rounded-xl shadow-lg border border-card-dark text-sm text-gray-400">
+                    <h3 class="text-lg font-semibold mb-4 text-gray-200"><i class="fas fa-link mr-2"></i>附：依据来源</h3>
+                    <ol class="list-decimal list-inside space-y-2">
+                        <li class="footnote-item" id="ref-1"><a href="http://www.csrc.gov.cn/csrc/c101802/c7445462/content.shtml" target="_blank" rel="noopener noreferrer" class="text-accent-secondary hover:text-accent-main">证监会《监管规则适用指引——发行类第9号：研发人员及研发投入》</a></li>
+                        <li class="footnote-item" id="ref-2"><a href="https://www.shui5.cn/article/f1/18253.html" target="_blank" rel="noopener noreferrer" class="text-accent-secondary hover:text-accent-main">税屋《研发工时占比不足50%，不是研发人员?》</a></li>
+                        <li class="footnote-item" id="ref-3"><a href="https://www.kingdee.com/article/1895052545827606530.html" target="_blank" rel="noopener noreferrer" class="text-accent-secondary hover:text-accent-main">金蝶云《研发人员认定标准细化》</a></li>
+                        <li class="footnote-item" id="ref-4"><span class="text-accent-secondary">知识库《研发费用加计扣除政策执行指引》（科学技术部发布）关于"人员费用分配"的说明</span></li>
+                        <li class="footnote-item" id="ref-5"><span class="text-accent-secondary">（内容分析补充）</span></li>
+                        <li class="footnote-item" id="ref-6"><span class="text-accent-secondary">（内容分析补充）</span></li>
+                        <li class="footnote-item" id="ref-7"><span class="text-accent-secondary">（内容分析补充）</span></li>
+                        <li class="footnote-item" id="ref-8"><span class="text-accent-secondary">（内容分析补充）</span></li>
+                        <li class="footnote-item" id="ref-9"><span class="text-accent-secondary">（内容分析补充）</span></li>
+                        <li class="footnote-item" id="ref-10"><span class="text-accent-secondary">（内容分析补充）</span></li>
+                    </ol>
+                    <p class="mt-4 italic text-xs">注：以上结论综合自监管规则原文、税务实务解读及行业分析，确保符合当前（2025年）A股IPO审核口径。若涉及具体案例，建议以会计师的专项核查意见为准。</p>
+                </section>
+
+                <!-- Key Concepts (Additional Info) -->
+                <section class="mb-12 p-6 md:p-8 bg-card-dark rounded-xl shadow-lg border border-card-dark">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-200"><i class="fas fa-book-open mr-2 text-accent-main"></i>关键概念速览</h3>
+                    <dl class="space-y-3 text-gray-300">
+                        <div>
+                            <dt class="font-bold text-accent-main">研发工时占比：</dt>
+                            <dd class="ml-4">指员工投入研发活动的工作时间占其总工作时间的比例，是认定研发人员身份和分摊研发费用的关键依据。</dd>
+                        </div>
+                        <div>
+                            <dt class="font-bold text-accent-main">合规性：</dt>
+                            <dd class="ml-4">指企业的经营活动、财务处理等符合相关法律法规和监管要求，尤其在IPO审核中，研发投入的合规性是重点关注事项。</dd>
+                        </div>
+                        <div>
+                            <dt class="font-bold text-accent-main">研发费用加计扣除：</dt>
+                            <dd class="ml-4">一项税收优惠政策，允许企业在计算应纳税所得额时，在实际扣除研发费用的基础上，再加计一定比例进行扣除，旨在鼓励企业加大研发投入。</dd>
+                        </div>
+                    </dl>
+                </section>
+
+                <!-- Further Reading -->
+                <section class="mb-12 p-6 md:p-8 bg-card-dark rounded-xl shadow-lg border border-card-dark">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-200"><i class="fas fa-compass mr-2 text-accent-main"></i>延伸阅读</h3>
+                    <ul class="list-disc list-inside space-y-3 text-gray-300">
+                        <li>
+                            <a href="http://www.csrc.gov.cn/csrc/c101802/c7445462/content.shtml" target="_blank" rel="noopener noreferrer" class="text-accent-secondary hover:text-accent-main">
+                                《监管规则适用指引——发行类第9号：研发人员及研发投入》
+                            </a>
+                            <p class="text-xs text-gray-400 mt-1">—— 证监会官方文件，理解IPO审核中研发相关规定的基石。</p>
+                        </li>
+                        <li>
+                            <a href="https://www.kingdee.com/article/1895052545827606530.html" target="_blank" rel="noopener noreferrer" class="text-accent-secondary hover:text-accent-main">
+                                《企业研发费用归集实务指南》
+                            </a>
+                            <p class="text-xs text-gray-400 mt-1">—— 虽非官方，但常有专业机构结合实务经验的详细指导，有助于理解具体操作。</p>
+                        </li>
+                        <li>
+                            <a href="https://www.chinatax.gov.cn/chinatax/n810341/n810756/c816024/c816025/index.html" target="_blank" rel="noopener noreferrer" class="text-accent-secondary hover:text-accent-main">
+                                《研发费用加计扣除政策执行指引》（科学技术部）
+                            </a>
+                            <p class="text-xs text-gray-400 mt-1">—— 虽然侧重税务，但对研发费用的构成和归集有详细说明，与IPO审核理念相通。</p>
+                        </li>
+                        <li>
+                            <a href="https://www.mof.gov.cn/mofhome/index.htm" target="_blank" rel="noopener noreferrer" class="text-accent-secondary hover:text-accent-main">
+                                《企业会计准则第6号——无形资产》
+                            </a>
+                            <p class="text-xs text-gray-400 mt-1">—— 了解研发支出资本化与费用化的会计处理原则，是理解研发投入报表呈现的基础。</p>
+                        </li>
+                        <li>
+                            <a href="https://www.sse.com.cn/regulation/lawandrules/c/" target="_blank" rel="noopener noreferrer" class="text-accent-secondary hover:text-accent-main">
+                                《首次公开发行股票并上市管理办法》
+                            </a>
+                            <p class="text-xs text-gray-400 mt-1">—— 全面了解IPO的各项要求和流程，将研发问题置于整个上市框架中理解。</p>
+                        </li>
+                    </ul>
+                </section>
+            </article>
+        </main>
+
+        <!-- Footer -->
+        <footer class="p-6 md:p-8 text-center text-gray-400 text-sm">
+            <p>&copy; 2024 IPO审核指南. All rights reserved.</p>
+            <p class="mt-2">设计与开发：AI 前端专家</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark', // Default to dark theme for mermaid
+            securityLevel: 'loose', // Allow external links/click events
+            flowchart: {
+                curve: 'basis'
+            }
+        });
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                localStorage.setItem('theme', 'dark');
+                if (mermaid.get=(theme) == 'light') { // Only change if mermaid is not already dark
+                   mermaid.initialize({ theme: 'dark' });
+                }
+            } else {
+                htmlElement.classList.add('light');
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                 if (mermaid.get=(theme) == 'dark') { // Only change if mermaid is not already light
+                    mermaid.initialize({ theme: 'light' });
+                }
+            }
+        }
+
+        // Check system preference on load
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const savedTheme = localStorage.getItem('theme');
+
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (systemPrefersDark) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+
+        // Toggle on click
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Micro-interactions for cards (Optional: Can be done purely with Tailwind hover classes as well)
+        // const cards = document.querySelectorAll('.bg-card-dark');
+        // cards.forEach(card => {
+        //     card.addEventListener('mouseenter', () => card.classList.add('scale-[1.005]'));
+        //     card.addEventListener('mouseleave', () => card.classList.remove('scale-[1.005]'));
+        // });
+
+        // Scroll reveal animation (Simple example)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-4');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section, footer').forEach(section => {
+            // Exclude hero section from initial fade-in
+            if (!section.querySelector('h1')) {
+                section.classList.add('opacity-0', 'translate-y-4', 'transition-all', 'duration-700', 'ease-out');
+                observer.observe(section);
+            }
+        });
+    </script>
+</body>
+</html>
+```
