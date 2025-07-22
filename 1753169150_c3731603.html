@@ -1,0 +1,448 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>研发人员与研发投入的界定：深度解析</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS for utility classes -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC and Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom fonts for Chinese and fallback */
+        .font-serif-sc {
+            font-family: 'Noto Serif SC', 'Times New Roman', Times, serif, Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+        .font-sans-sc {
+            font-family: 'Noto Sans SC', 'Helvetica Neue', Helvetica, Arial, sans-serif, Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+
+        /* Base styles for dark/light mode transitions */
+        html {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        body {
+            /* Default to dark mode */
+            @apply bg-gray-900 text-gray-200;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        html.light body {
+            @apply bg-gray-50 text-gray-800;
+        }
+
+        /* Mermaid container styling */
+        .mermaid-container {
+            background-color: var(--mermaid-bg-color);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: background-color 0.3s ease;
+        }
+        html.dark .mermaid-container {
+            --mermaid-bg-color: #1f2937; /* Tailwind gray-800 */
+        }
+        html.light .mermaid-container {
+            --mermaid-bg-color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        /* Micro-interactions: Button hover effects */
+        .btn-hover-effect {
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-hover-effect:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        html.dark .btn-hover-effect:hover {
+            background-color: #3b82f6; /* Tailwind blue-500 */
+        }
+        html.light .btn-hover-effect:hover {
+            background-color: #2563eb; /* Tailwind blue-600 */
+        }
+
+        /* Micro-interactions: Card hover effects */
+        .card-hover-effect {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-5px);
+        }
+        html.dark .card-hover-effect:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+            background-color: #1a202c; /* Slightly darker than gray-800 for deeper contrast */
+        }
+        html.light .card-hover-effect:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            background-color: #f0f4f8; /* Slightly darker than gray-50 */
+        }
+
+        /* Footnote styling */
+        .footnote-ref {
+            vertical-align: super;
+            font-size: 0.75em;
+            line-height: 0;
+            position: relative;
+            top: -0.5em;
+            margin-left: 0.1em;
+            color: #60a5fa; /* Tailwind blue-400 */
+        }
+        html.light .footnote-ref {
+            color: #3b82f6; /* Tailwind blue-500 */
+        }
+        .footnote-item {
+            margin-top: 0.5em;
+        }
+
+        /* Custom text color for emphasis within content */
+        .text-highlight-dark {
+            color: #60a5fa; /* Tailwind blue-400 */
+        }
+        .text-highlight-light {
+            color: #3b82f6; /* Tailwind blue-500 */
+        }
+        html.light .text-highlight {
+            @apply text-highlight-light;
+        }
+        html.dark .text-highlight {
+            @apply text-highlight-dark;
+        }
+
+        /* Hero section background and overlay */
+        .hero-bg {
+            /* Placeholder random image for abstract tech/data feel */
+            background-image: url('https://source.unsplash.com/random/1600x900?abstract,tech,data,gradient');
+            background-size: cover;
+            background-position: center;
+        }
+        .hero-overlay {
+            /* Dark mode overlay */
+            background: linear-gradient(to top, rgba(17, 24, 39, 0.95), rgba(17, 24, 39, 0.75)); /* gray-900 with opacity */
+        }
+        html.light .hero-overlay {
+            /* Light mode overlay */
+            background: linear-gradient(to top, rgba(249, 250, 251, 0.95), rgba(249, 250, 251, 0.75)); /* gray-50 with opacity */
+        }
+    </style>
+</head>
+<body class="font-sans-sc antialiased leading-relaxed">
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="fixed top-6 right-6 p-3 rounded-full bg-blue-500 text-white shadow-lg btn-hover-effect z-50 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <i class="fas fa-adjust text-xl"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <header class="relative hero-bg bg-cover bg-center h-[50vh] flex items-center justify-center text-center">
+        <div class="absolute inset-0 hero-overlay"></div>
+        <div class="relative z-10 px-4 max-w-3xl mx-auto">
+            <h1 class="font-serif-sc text-4xl sm:text-5xl md:text-6xl font-bold mb-4 text-white drop-shadow-lg">
+                <i class="fas fa-microchip mr-3 text-blue-300"></i>研发人员与研发投入的界定迷思
+            </h1>
+            <p class="font-sans-sc text-xl sm:text-2xl text-blue-200 mb-6 font-light">
+                洞悉工时占比对企业研发报表的真实影响
+            </p>
+            <p class="font-sans-sc text-lg text-gray-300">
+                深入解读《监管规则适用指引——发行类第9号》核心要点，助您厘清研发人员认定与研发费用核算的复杂关系。
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        <!-- Core Conclusion Section -->
+        <section id="core-conclusion" class="bg-gray-800 light:bg-gray-100 p-8 rounded-xl shadow-xl mb-12 transform hover:scale-[1.005] transition-transform duration-300">
+            <h2 class="font-serif-sc text-3xl font-bold mb-6 text-blue-400 light:text-blue-600 text-center">
+                <i class="fas fa-lightbulb mr-3"></i>核心结论
+            </h2>
+            <p class="font-sans-sc text-xl sm:text-2xl font-semibold leading-relaxed text-center text-gray-100 light:text-gray-900">
+                “当期研发工时占比＜50%”
+                <span class="text-highlight font-extrabold mx-1">仅影响“研发人员”身份的认定</span>，
+                <span class="text-highlight font-extrabold mx-1">不影响其真实从事研发活动所对应成本计入研发投入（即费用核算）</span>。
+            </p>
+        </section>
+
+        <!-- Detailed Logic Section -->
+        <section id="detailed-logic" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            <!-- Card 1: 人员认定层面 -->
+            <div class="bg-gray-800 light:bg-white p-6 rounded-lg shadow-lg card-hover-effect">
+                <h3 class="font-serif-sc text-2xl font-bold mb-4 text-blue-400 light:text-blue-600">
+                    <i class="fas fa-user-tie mr-2"></i>1. 人员认定层面
+                </h3>
+                <p class="font-sans-sc text-gray-300 light:text-gray-700 mb-4">
+                    根据《监管规则适用指引——发行类第9号：研发人员及研发投入》第1部分规定：
+                </p>
+                <blockquote class="border-l-4 border-blue-500 pl-4 py-2 italic text-gray-200 light:text-gray-600">
+                    对于既从事研发活动又从事非研发活动的人员，当期研发工时占比低于50%的，<strong class="text-highlight">原则上不应认定为研发人员</strong><a href="#footnote1" id="ref1" class="footnote-ref">1</a>。
+                </blockquote>
+                <p class="font-sans-sc text-gray-300 light:text-gray-700 mt-4">
+                    这意味着：
+                </p>
+                <ul class="list-disc list-inside text-gray-300 light:text-gray-700 space-y-2">
+                    <li><i class="fas fa-minus-circle mr-2 text-red-400"></i>该员工 <span class="font-semibold text-red-300">不得计入</span> 招股说明书披露的“研发人员数量”及“研发人员占比”；</li>
+                    <li><i class="fas fa-exclamation-circle mr-2 text-yellow-400"></i>中介机构需将该人员 <span class="font-semibold text-yellow-300">排除在“研发人员核查表”之外</span>，并在招股书中如实披露认定口径。</li>
+                </ul>
+            </div>
+
+            <!-- Card 2: 费用核算层面 -->
+            <div class="bg-gray-800 light:bg-white p-6 rounded-lg shadow-lg card-hover-effect">
+                <h3 class="font-serif-sc text-2xl font-bold mb-4 text-blue-400 light:text-blue-600">
+                    <i class="fas fa-coins mr-2"></i>2. 费用核算层面
+                </h3>
+                <p class="font-sans-sc text-gray-300 light:text-gray-700 mb-4">
+                    同指引第2部分及起草说明明确，<span class="font-semibold">研发投入归集以“资源实际投入研发活动”为前提</span><a href="#footnote2" id="ref2" class="footnote-ref">2</a>。因此：
+                </p>
+                <ul class="list-disc list-inside text-gray-300 light:text-gray-700 space-y-2">
+                    <li><i class="fas fa-check-circle mr-2 text-green-400"></i>只要公司能提供 <span class="font-semibold text-green-300">可靠的内控证据</span>（如工时系统记录、项目日志、审批单据）证明该员工 <span class="font-semibold text-green-300">确实参与了研发活动</span>，其对应工时产生的薪酬、折旧等支出 <span class="font-semibold text-green-300">仍可计入研发费用</span>；</li>
+                    <li><i class="fas fa-balance-scale-left mr-2 text-purple-400"></i>如无法清晰拆分研发/非研发工时的，应 <span class="font-semibold text-purple-300">按合理方法分摊</span>，无法分摊的才不得计入。</li>
+                </ul>
+            </div>
+
+            <!-- Card 3: 监管核查要点 -->
+            <div class="bg-gray-800 light:bg-white p-6 rounded-lg shadow-lg card-hover-effect md:col-span-2 lg:col-span-1">
+                <h3 class="font-serif-sc text-2xl font-bold mb-4 text-blue-400 light:text-blue-600">
+                    <i class="fas fa-shield-alt mr-2"></i>3. 监管核查要点
+                </h3>
+                <p class="font-sans-sc text-gray-300 light:text-gray-700 mb-4">
+                    保荐人/申报会计师需执行以下程序：
+                </p>
+                <ul class="list-disc list-inside text-gray-300 light:text-gray-700 space-y-2">
+                    <li><i class="fas fa-file-invoice mr-2 text-indigo-400"></i>获取工时统计表、项目派工单等原始记录，验证研发工时真实性；</li>
+                    <li><i class="fas fa-clipboard-list mr-2 text-indigo-400"></i>对低于50%工时人员，<span class="font-semibold">单独列表说明其费用分摊依据</span>（见<a href="http://www.csrc.gov.cn/csrc/c101802/c7445462/content.shtml" target="_blank" class="text-blue-400 hover:underline">点击预览《监管规则适用指引——发行类第9号》全文 <i class="fas fa-external-link-alt text-sm"></i></a>）；</li>
+                    <li><i class="fas fa-eye mr-2 text-indigo-400"></i>关注是否存在 <span class="font-semibold">通过调岗突击增加研发人员</span> 或 <span class="font-semibold">未签订劳动合同人员</span> 的情形<a href="#footnote3" id="ref3" class="footnote-ref">3</a>。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Data Visualization Section -->
+        <section id="visual-summary" class="mb-12">
+            <h2 class="font-serif-sc text-3xl font-bold mb-6 text-blue-400 light:text-blue-600 text-center">
+                <i class="fas fa-chart-network mr-3"></i>核心概念关系图
+            </h2>
+            <div class="mermaid-container w-full overflow-auto">
+                <div class="mermaid">
+                    graph TD
+                        A[研发工时占比 &lt; 50%] --> B{核心影响};
+                        B -- 人员身份认定 --> C[原则上不认定为研发人员];
+                        C --> D[不计入招股书研发人员数量];
+                        C --> E[排除在核查表之外];
+                        B -- 费用核算 --> F[不影响研发投入计入];
+                        F --> G[需提供可靠内控证据];
+                        G --> H[如无法清晰拆分, 合理分摊];
+                        H --> I[无法分摊则不计入];
+
+                        style A fill:#4299e1,stroke:#3182ce,stroke-width:2px,color:#fff; /* Blue */
+                        style B fill:#f6ad55,stroke:#ed8936,stroke-width:2px,color:#fff; /* Orange */
+                        style C fill:#f56565,stroke:#e53e3e,stroke-width:2px,color:#fff; /* Red */
+                        style D fill:#a0aec0,stroke:#718096,stroke-width:1px; /* Gray */
+                        style E fill:#a0aec0,stroke:#718096,stroke-width:1px; /* Gray */
+                        style F fill:#48bb78,stroke:#38a169,stroke-width:2px,color:#fff; /* Green */
+                        style G fill:#a0aec0,stroke:#718096,stroke-width:1px; /* Gray */
+                        style H fill:#a0aec0,stroke:#718096,stroke-width:1px; /* Gray */
+                        style I fill:#a0aec0,stroke:#718096,stroke-width:1px; /* Gray */
+                </div>
+            </div>
+        </section>
+
+        <!-- Simplified Summary Section -->
+        <section id="summary-reiteration" class="bg-blue-600 light:bg-blue-500 text-white p-8 rounded-xl shadow-xl mb-12 transform hover:scale-[1.005] transition-transform duration-300">
+            <h2 class="font-serif-sc text-3xl font-bold mb-6 text-white text-center">
+                <i class="fas fa-bullhorn mr-3"></i>简言之
+            </h2>
+            <p class="font-sans-sc text-xl sm:text-2xl font-semibold leading-relaxed text-center">
+                <i class="fas fa-quote-left mr-2 text-blue-200"></i>
+                <span class="text-white text-shadow-md">
+                    “低于50%研发工时” <span class="font-extrabold mx-1 text-yellow-300">≠</span> “相关支出全部踢出研发费用”，
+                </span>
+                <br class="hidden sm:block">
+                <span class="text-white text-shadow-md">
+                    而是
+                    <span class="font-extrabold mx-1 text-green-300">“该员工不计入研发人员统计，但其真实研发支出仍可分摊计入研发费用”</span>。
+                </span>
+                <i class="fas fa-quote-right ml-2 text-blue-200"></i>
+            </p>
+        </section>
+
+        <!-- Further Reading Section -->
+        <section id="further-reading" class="mb-12">
+            <h2 class="font-serif-sc text-3xl font-bold mb-6 text-blue-400 light:text-blue-600 text-center">
+                <i class="fas fa-book-open mr-3"></i>延伸阅读
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-gray-800 light:bg-white p-6 rounded-lg shadow-lg card-hover-effect">
+                    <h3 class="font-serif-sc text-xl font-semibold mb-2 text-gray-100 light:text-gray-900">
+                        1. 《监管规则适用指引——发行类第9号：研发人员及研发投入》
+                    </h3>
+                    <p class="font-sans-sc text-gray-300 light:text-gray-700 text-sm mb-3">
+                        本文所依据的核心指引，详细规定了研发人员认定和研发投入归集的具体要求。
+                    </p>
+                    <a href="http://www.csrc.gov.cn/csrc/c101802/c7445462/content.shtml" target="_blank" class="inline-block text-blue-400 hover:underline text-sm btn-hover-effect">
+                        查看原文 <i class="fas fa-external-link-alt ml-1"></i>
+                    </a>
+                </div>
+                <div class="bg-gray-800 light:bg-white p-6 rounded-lg shadow-lg card-hover-effect">
+                    <h3 class="font-serif-sc text-xl font-semibold mb-2 text-gray-100 light:text-gray-900">
+                        2. 《企业会计准则第6号——无形资产》
+                    </h3>
+                    <p class="font-sans-sc text-gray-300 light:text-gray-700 text-sm mb-3">
+                        了解研发支出资本化和费用化的基本会计处理原则，是理解研发投入核算的基础。
+                    </p>
+                    <a href="http://www.mof.gov.cn/zhengwuxinxi/zhengwuxinxi/zhengcefabu/200610/t20061020_147043.html" target="_blank" class="inline-block text-blue-400 hover:underline text-sm btn-hover-effect">
+                        查看原文 <i class="fas fa-external-link-alt ml-1"></i>
+                    </a>
+                </div>
+                <div class="bg-gray-800 light:bg-white p-6 rounded-lg shadow-lg card-hover-effect">
+                    <h3 class="font-serif-sc text-xl font-semibold mb-2 text-gray-100 light:text-gray-900">
+                        3. 《首次公开发行股票并上市管理办法》
+                    </h3>
+                    <p class="font-sans-sc text-gray-300 light:text-gray-700 text-sm mb-3">
+                        中国A股IPO的整体框架性规定，理解研发相关规定的上位法依据。
+                    </p>
+                    <a href="http://www.csrc.gov.cn/csrc/c101802/c7445462/content.shtml" target="_blank" class="inline-block text-blue-400 hover:underline text-sm btn-hover-effect">
+                        查看原文 <i class="fas fa-external-link-alt ml-1"></i>
+                    </a>
+                </div>
+                <div class="bg-gray-800 light:bg-white p-6 rounded-lg shadow-lg card-hover-effect">
+                    <h3 class="font-serif-sc text-xl font-semibold mb-2 text-gray-100 light:text-gray-900">
+                        4. 《上市公司信息披露管理办法》
+                    </h3>
+                    <p class="font-sans-sc text-gray-300 light:text-gray-700 text-sm mb-3">
+                        上市公司应如何合规地披露包括研发在内的各类关键信息。
+                    </p>
+                    <a href="http://www.csrc.gov.cn/csrc/c101802/c7445462/content.shtml" target="_blank" class="inline-block text-blue-400 hover:underline text-sm btn-hover-effect">
+                        查看原文 <i class="fas fa-external-link-alt ml-1"></i>
+                    </a>
+                </div>
+                <div class="bg-gray-800 light:bg-white p-6 rounded-lg shadow-lg card-hover-effect">
+                    <h3 class="font-serif-sc text-xl font-semibold mb-2 text-gray-100 light:text-gray-900">
+                        5. 投行/律所/会计师事务所IPO合规报告与案例分析
+                    </h3>
+                    <p class="font-sans-sc text-gray-300 light:text-gray-700 text-sm mb-3">
+                        行业专业机构对监管指引的解读及实务案例分析，提供操作层面的指导。
+                    </p>
+                    <a href="https://www.pwccn.com/zh/index.html" target="_blank" class="inline-block text-blue-400 hover:underline text-sm btn-hover-effect">
+                        普华永道官网 (示例) <i class="fas fa-external-link-alt ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footnotes Section -->
+        <section id="footnotes" class="mt-12 pt-8 border-t border-gray-700 light:border-gray-300 text-gray-400 light:text-gray-600 text-sm">
+            <h3 class="font-serif-sc text-xl font-bold mb-4 text-blue-400 light:text-blue-600">注释</h3>
+            <ol>
+                <li id="footnote1" class="footnote-item"><a href="#ref1" class="text-blue-400 hover:underline mr-1"><i class="fas fa-link"></i></a>《监管规则适用指引——发行类第9号：研发人员及研发投入》第一部分。</li>
+                <li id="footnote2" class="footnote-item"><a href="#ref2" class="text-blue-400 hover:underline mr-1"><i class="fas fa-link"></i></a>《监管规则适用指引——发行类第9号：研发人员及研发投入》第二部分及起草说明。</li>
+                <li id="footnote3" class="footnote-item"><a href="#ref3" class="text-blue-400 hover:underline mr-1"><i class="fas fa-link"></i></a>《监管规则适用指引——发行类第9号》核查要点。</li>
+            </ol>
+        </section>
+    </main>
+
+    <footer class="text-center py-8 text-gray-500 text-sm">
+        <p>&copy; 2023 深度解析. 版权所有.</p>
+    </footer>
+
+    <!-- Mermaid.js for diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Theme Toggle Script
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const htmlElement = document.documentElement;
+
+            // Check localStorage for theme preference, otherwise use system preference
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                htmlElement.classList.add(savedTheme);
+            } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                htmlElement.classList.add('dark');
+            } else {
+                htmlElement.classList.add('light'); // Explicitly set light mode if no preference and not dark
+            }
+
+            // Function to initialize/update Mermaid theme and re-render charts
+            const updateMermaidAndTheme = () => {
+                const isDarkMode = htmlElement.classList.contains('dark');
+                const mermaidTheme = isDarkMode ? 'dark' : 'default';
+
+                // Set global Mermaid configuration, including custom theme variables for consistent styling
+                mermaid.mermaidAPI.globalConfig = {
+                    theme: mermaidTheme,
+                    themeVariables: {
+                        darkMode: isDarkMode,
+                        primaryColor: isDarkMode ? '#4299e1' : '#3b82f6', /* Blue: A[研发工时占比 < 50%] */
+                        primaryBorderColor: isDarkMode ? '#3182ce' : '#2563eb',
+                        primaryTextColor: isDarkMode ? '#ffffff' : '#ffffff',
+                        secondaryColor: isDarkMode ? '#f6ad55' : '#f59e0b', /* Orange: B{核心影响} */
+                        secondaryBorderColor: isDarkMode ? '#ed8936' : '#d97706',
+                        secondaryTextColor: isDarkMode ? '#ffffff' : '#ffffff',
+                        tertiaryColor: isDarkMode ? '#f56565' : '#ef4444', /* Red: C[原则上不认定为研发人员] */
+                        tertiaryBorderColor: isDarkMode ? '#e53e3e' : '#dc2626',
+                        tertiaryTextColor: isDarkMode ? '#ffffff' : '#ffffff',
+                        lineColor: isDarkMode ? '#a0aec0' : '#4b5563', /* Gray lines */
+                        mainBkg: isDarkMode ? '#1f2937' : '#ffffff', /* Mermaid container background */
+                        textColor: isDarkMode ? '#cbd5e0' : '#334155', /* Node text color */
+                        nodeBorder: isDarkMode ? '#718096' : '#9ca3af', /* Gray borders for D, E, G, H, I */
+                        nodeBkg: isDarkMode ? '#a0aec0' : '#e5e7eb', /* Gray backgrounds for D, E, G, H, I */
+                    }
+                };
+                
+                // Re-initialize Mermaid to apply new global config and re-scan for diagrams
+                mermaid.initialize({
+                    startOnLoad: true, // This will ensure diagrams are rendered
+                    theme: mermaidTheme // This applies the base theme
+                });
+
+                // Explicitly re-render existing mermaid diagrams to ensure theme change is applied
+                document.querySelectorAll('.mermaid').forEach((el, index) => {
+                    // Store the original chart definition if not already, to re-render
+                    if (!el.dataset.chartDefinition) {
+                        el.dataset.chartDefinition = el.textContent;
+                    }
+                    const chartDefinition = el.dataset.chartDefinition;
+                    // Assign a unique ID if not present, needed for mermaid.render
+                    const chartId = el.id || `mermaid-chart-${index}`;
+                    el.id = chartId; 
+
+                    mermaid.render(chartId, chartDefinition, (svgCode) => {
+                        el.innerHTML = svgCode;
+                    });
+                });
+            };
+
+            // Initial setup on page load
+            updateMermaidAndTheme();
+
+            // Toggle button click handler
+            themeToggleBtn.addEventListener('click', () => {
+                if (htmlElement.classList.contains('dark')) {
+                    htmlElement.classList.remove('dark');
+                    htmlElement.classList.add('light');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    htmlElement.classList.remove('light');
+                    htmlElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+                updateMermaidAndTheme(); // Update Mermaid theme after toggling
+            });
+
+            // Listen for system theme changes, but only if no manual override is set
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                if (!localStorage.getItem('theme')) { // Only react to system changes if user hasn't manually chosen a theme
+                    if (e.matches) {
+                        htmlElement.classList.remove('light');
+                        htmlElement.classList.add('dark');
+                    } else {
+                        htmlElement.classList.remove('dark');
+                        htmlElement.classList.add('light');
+                    }
+                    updateMermaidAndTheme();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+```
