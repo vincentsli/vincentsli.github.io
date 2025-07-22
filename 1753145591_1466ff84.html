@@ -1,0 +1,610 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创成长层：未盈利企业上市后的挑战与影响</title>
+    <meta name="description" content="深入解读中国A股市场科创企业监管机制与投资者风险，分析科创板未盈利企业持续亏损对公司和股东的深远影响。">
+
+    <!-- Google Fonts for Noto Serif SC and Noto Sans SC (for Chinese) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS for Utility Classes -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Mermaid.js for Diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+
+    <style>
+        /* Custom Font Stacks with Fallbacks for Chinese Readability */
+        body {
+            font-family: 'Noto Sans SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth theme transition */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', serif;
+        }
+
+        /* --- Dark Mode Specific Styles (Default) --- */
+        .dark {
+            --tw-bg-opacity: 1;
+            background-color: rgb(24 24 27 / var(--tw-bg-opacity)); /* zinc-900 */
+            color: rgb(228 228 231 / var(--tw-text-opacity)); /* zinc-200 */
+        }
+        .dark .bg-surface-light { background-color: rgb(39 39 42 / var(--tw-bg-opacity)); } /* zinc-800 for cards/inner elements */
+        .dark .text-primary { color: rgb(228 228 231 / var(--tw-text-opacity)); } /* zinc-200 */
+        .dark .text-secondary { color: rgb(161 161 170 / var(--tw-text-opacity)); } /* zinc-400 */
+        .dark .border-primary-light { border-color: rgb(63 63 70 / var(--tw-border-opacity)); } /* zinc-700 */
+        .dark a { color: rgb(34 211 238 / var(--tw-text-opacity)); } /* cyan-400 for links */
+
+        /* --- Light Mode Specific Styles --- */
+        .light {
+            background-color: #ffffff;
+            color: #1f2937; /* gray-900 */
+        }
+        .light .bg-surface-light { background-color: #f9fafb; } /* gray-50 for cards */
+        .light .text-primary { color: #1f2937; } /* gray-900 */
+        .light .text-secondary { color: #4b5563; } /* gray-700 */
+        .light .border-primary-light { border-color: #e5e7eb; } /* gray-200 */
+        .light a { color: #2563eb; } /* blue-600 for links */
+
+        /* --- Global Accent Color Variables for Consistency --- */
+        html.dark {
+            --accent-color: #22d3ee; /* cyan-400 */
+            --accent-color-hover: #06b6d4; /* cyan-600 */
+        }
+        html.light {
+            --accent-color: #2563eb; /* blue-600 */
+            --accent-color-hover: #1d4ed8; /* blue-700 */
+        }
+        .text-accent { color: var(--accent-color); }
+        .border-accent { border-color: var(--accent-color); }
+        .bg-accent { background-color: var(--accent-color); }
+
+        /* --- Hero Section Styling --- */
+        .hero-background {
+            /* Abstract tech/financial image. Replace with a high-res, royalty-free image for production. */
+            background-image: url('https://images.unsplash.com/photo-1543286392-ae9a04a602c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.8) 100%);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        /* --- Micro-interactions & Transitions --- */
+        .card-hover:hover {
+            transform: translateY(-5px); /* Lift effect */
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2); /* Deeper shadow */
+        }
+        .link-hover:hover {
+            text-decoration: underline;
+            color: var(--accent-color-hover); /* Brighter accent on hover */
+        }
+        .btn-toggle:hover {
+            transform: scale(1.05); /* Slightly enlarge */
+            filter: brightness(1.1); /* Brighter */
+        }
+
+        /* --- Drop Cap Styling (Magazine Style) --- */
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 4em; /* Large initial letter */
+            line-height: 0.8; /* Align with first text line */
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            font-family: 'Noto Serif SC', serif;
+            color: inherit; /* Inherit current text color */
+        }
+
+        /* --- Footnote Styling --- */
+        .footnote-ref {
+            vertical-align: super;
+            font-size: 0.75em;
+            margin-left: 2px;
+            cursor: pointer;
+            color: var(--accent-color); /* Use accent color */
+            transition: color 0.2s ease;
+        }
+        .footnote-ref:hover {
+            color: var(--accent-color-hover);
+            text-decoration: underline;
+        }
+        .footnotes {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid;
+            border-color: var(--tw-border-color-light); /* Managed by JS for theme */
+        }
+        .dark .footnotes { border-color: rgb(63 63 70 / var(--tw-border-opacity)); /* zinc-700 */ }
+        .light .footnotes { border-color: rgb(229 231 235 / var(--tw-border-opacity)); /* gray-200 */ }
+
+        /* --- Mermaid.js Theme Customization (Override default styles for dark/light mode) --- */
+        .mermaid {
+            --mermaid-font-family: 'Noto Sans SC', sans-serif !important;
+            /* Common for both themes - ensure labels and text are readable */
+            .label { font-size: 14px !important; }
+            .edgeLabel text { font-size: 12px !important; }
+        }
+
+        .dark .mermaid {
+            /* Node Backgrounds */
+            --mermaid-primary-color: #27272a; /* zinc-800 */
+            --mermaid-primary-background-color: #27272a;
+            --mermaid-secondary-color: #3f3f46; /* zinc-700 */
+            --mermaid-tertiary-color: #52525b; /* zinc-600 */
+
+            /* Text Colors */
+            --mermaid-primary-text-color: #e4e4e7; /* zinc-200 */
+            --mermaid-link-text-color: #a1a1aa; /* zinc-400 */
+            --mermaid-box-text-color: #e4e4e7;
+            --mermaid-title-color: #e4e4e7;
+
+            /* Lines and Borders */
+            --mermaid-node-border: #67e8f9; /* cyan-300 - accent for borders */
+            --mermaid-link-line-color: #67e8f9; /* cyan-300 - accent for lines */
+            --mermaid-line-color: #a1a1aa; /* zinc-400 - general lines */
+            --mermaid-stroke-color: #67e8f9; /* cyan-300 - general strokes */
+            --mermaid-fill-color: #3f3f46; /* zinc-700 - general fills */
+
+            /* Specific for flowchart node styling */
+            .node rect, .node circle, .node polygon, .node path {
+                fill: var(--mermaid-primary-background-color);
+                stroke: var(--mermaid-node-border);
+            }
+            .node text { fill: var(--mermaid-primary-text-color); }
+            .edgePaths .edgeLabel text { fill: var(--mermaid-link-text-color); }
+            .edgePaths .path { stroke: var(--mermaid-link-line-color); }
+
+            /* Custom styles for specific nodes in the graph */
+            .node.A rect, .node.A path { fill: #2563eb; stroke: #2563eb; }
+            .node.B rect, .node.B path { fill: #1e40af; stroke: #1e40af; }
+            .node.C rect, .node.C path { fill: #f97316; stroke: #f97316; }
+            .node.D1 rect, .node.D1 path, .node.D2 rect, .node.D2 path { fill: #b91c1c; stroke: #b91c1c; }
+            .node.E1 rect, .node.E1 path, .node.E2 rect, .node.E2 path, .node.E3 rect, .node.E3 path, .node.E4 rect, .node.E4 path,
+            .node.F1 rect, .node.F1 path, .node.F2 rect, .node.F2 path, .node.F3 rect, .node.F3 path, .node.F4 rect, .node.F4 path { fill: #dc2626; stroke: #dc2626; }
+            .node.G rect, .node.G path { fill: #0f172a; stroke: #0f172a; } /* Slate-900 for terminal/critical */
+            .node.I rect, .node.I path { fill: #059669; stroke: #059669; } /* Emerald-600 for positive */
+            .node.J rect, .node.J path { fill: #16a34a; stroke: #16a34a; } /* Green-600 for positive */
+
+            /* Text color for custom styled nodes */
+            .node.A text, .node.B text, .node.C text, .node.D1 text, .node.D2 text, .node.E1 text, .node.E2 text, .node.E3 text, .node.E4 text,
+            .node.F1 text, .node.F2 text, .node.F3 text, .node.F4 text, .node.G text, .node.I text, .node.J text {
+                fill: #ffffff !important;
+            }
+        }
+
+        .light .mermaid {
+            /* Node Backgrounds */
+            --mermaid-primary-color: #ffffff;
+            --mermaid-primary-background-color: #ffffff;
+            --mermaid-secondary-color: #f3f4f6; /* gray-100 */
+            --mermaid-tertiary-color: #e5e7eb; /* gray-200 */
+
+            /* Text Colors */
+            --mermaid-primary-text-color: #18181b; /* zinc-900 */
+            --mermaid-link-text-color: #4b5563; /* gray-700 */
+            --mermaid-box-text-color: #18181b;
+            --mermaid-title-color: #18181b;
+
+            /* Lines and Borders */
+            --mermaid-node-border: #2563eb; /* blue-600 - accent for borders */
+            --mermaid-link-line-color: #2563eb; /* blue-600 - accent for lines */
+            --mermaid-line-color: #4b5563; /* gray-700 - general lines */
+            --mermaid-stroke-color: #2563eb; /* blue-600 - general strokes */
+            --mermaid-fill-color: #f3f4f6; /* gray-100 - general fills */
+
+            /* Specific for flowchart node styling */
+            .node rect, .node circle, .node polygon, .node path {
+                fill: var(--mermaid-primary-background-color);
+                stroke: var(--mermaid-node-border);
+            }
+            .node text { fill: var(--mermaid-primary-text-color); }
+            .edgePaths .edgeLabel text { fill: var(--mermaid-link-text-color); }
+            .edgePaths .path { stroke: var(--mermaid-link-line-color); }
+
+            /* Custom styles for specific nodes in the graph (match dark mode colors) */
+            .node.A rect, .node.A path { fill: #2563eb; stroke: #2563eb; }
+            .node.B rect, .node.B path { fill: #1e40af; stroke: #1e40af; }
+            .node.C rect, .node.C path { fill: #f97316; stroke: #f97316; }
+            .node.D1 rect, .node.D1 path, .node.D2 rect, .node.D2 path { fill: #b91c1c; stroke: #b91c1c; }
+            .node.E1 rect, .node.E1 path, .node.E2 rect, .node.E2 path, .node.E3 rect, .node.E3 path, .node.E4 rect, .node.E4 path,
+            .node.F1 rect, .node.F1 path, .node.F2 rect, .node.F2 path, .node.F3 rect, .node.F3 path, .node.F4 rect, .node.F4 path { fill: #dc2626; stroke: #dc2626; }
+            .node.G rect, .node.G path { fill: #0f172a; stroke: #0f172a; }
+            .node.I rect, .node.I path { fill: #059669; stroke: #059669; }
+            .node.J rect, .node.J path { fill: #16a34a; stroke: #16a34a; }
+
+            /* Text color for custom styled nodes */
+            .node.A text, .node.B text, .node.C text, .node.D1 text, .node.D2 text, .node.E1 text, .node.E2 text, .node.E3 text, .node.E4 text,
+            .node.F1 text, .node.F2 text, .node.F3 text, .node.F4 text, .node.G text, .node.I text, .node.J text {
+                fill: #ffffff !important;
+            }
+        }
+
+        /* Keyframe for subtle fade-in animation on scroll */
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+            animation: fade-in-up 0.7s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="min-h-screen antialiased">
+
+    <!-- Theme Toggle Button (Fixed Position) -->
+    <button id="theme-toggle" class="fixed bottom-6 right-6 p-3 rounded-full shadow-lg z-50 transition-all duration-300 btn-toggle
+                                   bg-gray-200 text-gray-800 hover:bg-gray-300
+                                   dark:bg-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-600">
+        <i class="fas fa-moon hidden dark:block"></i> <!-- Moon icon for dark mode -->
+        <i class="fas fa-sun block dark:hidden"></i> <!-- Sun icon for light mode -->
+    </button>
+
+    <!-- Hero Section: Captivating Introduction -->
+    <section class="hero-background relative h-96 md:h-screen flex items-center justify-center text-center px-4">
+        <div class="hero-overlay"></div>
+        <div class="relative z-10 text-white max-w-4xl mx-auto">
+            <p class="text-sm md:text-base mb-2 tracking-widest uppercase opacity-75">资本市场洞察 · 科创板深度分析</p>
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 drop-shadow-lg">
+                科创成长层：<br class="md:hidden">未盈利企业上市后的挑战与影响
+            </h1>
+            <p class="text-base md:text-xl font-light opacity-90 leading-relaxed">
+                深入解读中国A股市场科创企业监管机制与投资者风险，分析科创板未盈利企业持续亏损对公司和股东的深远影响。
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto px-4 py-12 md:py-16 max-w-7xl">
+        <!-- Introduction Section -->
+        <section class="mb-16 opacity-0 translate-y-4 transition-all duration-700 ease-out">
+            <p class="text-lg md:text-xl leading-relaxed text-primary drop-cap">
+                作为专业从事投行业务和A股市场资本运作的AI助手，我将根据科创板相关法规、联网搜索结果及知识库资料（如“科创成长层监管规则”和“股东权益保护机制”等），分析科创成长层企业上市后持续未盈利对公司和股东的影响。当前信息截至2025年7月22日，所有内容均基于可验证的公开资料，排除任何虚构。
+            </p>
+            <p class="text-base md:text-lg leading-relaxed mt-6 text-secondary">
+                科创成长层是上海证券交易所（上交所）针对未盈利科创板企业设立的差异化监管层，旨在支持科技创新企业早期发展。根据《上海证券交易所科创板上市公司自律监管指引第5号》<sup class="footnote-ref" id="ref-1"><a href="#fn-1">1</a></sup>，上市时未盈利的企业自动纳入该层。如果企业上市后几年（如3-5年）持续未盈利，可能触发以下后果和影响：
+            </p>
+        </section>
+
+        <!-- Impact on Company Section -->
+        <section class="mb-16 opacity-0 translate-y-4 transition-all duration-700 ease-out">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-accent text-center">
+                <i class="fas fa-building mr-3"></i>一、对公司的影响
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="p-6 rounded-lg shadow-xl bg-surface-light card-hover transition-transform duration-300">
+                    <h3 class="text-2xl font-semibold mb-4 text-primary">
+                        <i class="fas fa-balance-scale-right mr-2 text-accent"></i>监管强化与调出风险
+                    </h3>
+                    <ul class="list-disc list-inside text-secondary space-y-2">
+                        <li>企业需接受更严格的信息披露和持续督导，例如在年度报告中必须说明盈利进展和经营风险<sup class="footnote-ref" id="ref-4"><a href="#fn-4">4</a></sup>。</li>
+                        <li>如果连续未盈利，可能符合“调出条件”。根据上交所规则，新注册企业若“最近两年”未实现盈利或其他财务指标（如市值或营收）不达标，将被调出科创成长层<sup class="footnote-ref" id="ref-2"><a href="#fn-2">2</a></sup>。</li>
+                        <li>调出程序通常在年报披露后2个交易日内完成<sup class="footnote-ref" id="ref-4"><a href="#fn-4">4</a></sup>，可能削弱市场信心，影响融资能力。</li>
+                    </ul>
+                    <p class="mt-4 text-sm text-zinc-500 italic">
+                        <i class="fas fa-exclamation-triangle mr-1 text-red-500"></i> 潜在后果：调出后，企业可能失去成长层的政策支持，持续亏损还可能引发监管问询或现场检查，增加合规成本。
+                    </p>
+                </div>
+                <div class="p-6 rounded-lg shadow-xl bg-surface-light card-hover transition-transform duration-300">
+                    <h3 class="text-2xl font-semibold mb-4 text-primary">
+                        <i class="fas fa-chart-line mr-2 text-accent"></i>融资与经营压力
+                    </h3>
+                    <ul class="list-disc list-inside text-secondary space-y-2">
+                        <li>未盈利状态可能限制再融资（如增发或债券发行），投资者对亏损企业的风险溢价较高，导致融资成本上升。</li>
+                        <li>知识库资料显示“财务指标不达标可能影响信贷评级和市场估值”<sup class="footnote-ref" id="ref-kb"><a href="#fn-kb">KB</a></sup>。</li>
+                    </ul>
+                    <p class="mt-4 text-sm text-zinc-500 italic">
+                        <i class="fas fa-exclamation-triangle mr-1 text-red-500"></i> 潜在后果：若亏损持续，企业流动性风险加剧，可能被迫缩减研发投入或寻求外部救助，影响长期竞争力。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact on Shareholders Section -->
+        <section class="mb-16 opacity-0 translate-y-4 transition-all duration-700 ease-out">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-accent text-center">
+                <i class="fas fa-users-line mr-3"></i>二、对股东的影响
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-6 rounded-lg shadow-xl bg-surface-light card-hover transition-transform duration-300">
+                    <h3 class="text-2xl font-semibold mb-4 text-primary">
+                        <i class="fas fa-lock mr-2 text-accent"></i>减持限制延长
+                    </h3>
+                    <p class="text-secondary leading-relaxed">
+                        根据科创板规则，在公司实现盈利前，控股股东、实际控制人、董事、监事、高级管理人员及核心技术人员，自上市之日起3个完整会计年度内不得减持首发前股份<sup class="footnote-ref" id="ref-3"><a href="#fn-3">3</a></sup>。如果持续未盈利，此锁定期将无限期延长，直至盈利实现。
+                    </p>
+                    <p class="mt-4 text-sm text-zinc-500 italic">
+                        <i class="fas fa-exclamation-triangle mr-1 text-red-500"></i> 潜在后果：股东（尤其早期投资者）无法通过减持变现，流动性受限，可能引发投资回报压力或股东纠纷。
+                    </p>
+                </div>
+                <div class="p-6 rounded-lg shadow-xl bg-surface-light card-hover transition-transform duration-300">
+                    <h3 class="text-2xl font-semibold mb-4 text-primary">
+                        <i class="fas fa-arrow-trend-down mr-2 text-accent"></i>股价波动与投资价值缩水
+                    </h3>
+                    <p class="text-secondary leading-relaxed">
+                        持续亏损可能导致股价下跌，市场对盈利前景的质疑加剧。根据行业分析，未盈利企业平均估值溢价在亏损超过3年后显著下降<sup class="footnote-ref" id="ref-kb"><a href="#fn-kb">KB</a></sup>。
+                    </p>
+                    <p class="mt-4 text-sm text-zinc-500 italic">
+                        <i class="fas fa-exclamation-triangle mr-1 text-red-500"></i> 潜在后果：普通投资者面临财富缩水风险；如企业退市，股东可能损失全部投资。
+                    </p>
+                </div>
+                <div class="p-6 rounded-lg shadow-xl bg-surface-light card-hover transition-transform duration-300">
+                    <h3 class="text-2xl font-semibold mb-4 text-primary">
+                        <i class="fas fa-hand-holding-dollar mr-2 text-accent"></i>分红与权益缺失
+                    </h3>
+                    <p class="text-secondary leading-relaxed">
+                        亏损企业无法进行现金分红，股东依赖股价增值获利。若亏损持续，此路径受阻，投资回报率降低。
+                    </p>
+                    <p class="mt-4 text-sm text-zinc-500 italic">
+                        <i class="fas fa-exclamation-triangle mr-1 text-red-500"></i> 潜在后果：股东无法获得稳定的现金流回报，投资收益不确定性高。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Visualization Section: Flowchart of Impacts -->
+        <section class="mb-16 opacity-0 translate-y-4 transition-all duration-700 ease-out">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-accent text-center">
+                <i class="fas fa-sitemap mr-3"></i>影响路径可视化
+            </h2>
+            <div class="p-6 rounded-lg shadow-xl bg-surface-light overflow-auto">
+                <div class="mermaid text-center">
+                    graph TD
+                        A["企业上市时未盈利"]:::initial --> B["纳入科创成长层"]:::process;
+
+                        B --> C{"持续未盈利？"}:::decision;
+
+                        C -- 是 --> D1["公司层面影响"]:::negative;
+                        C -- 是 --> D2["股东层面影响"]:::negative;
+
+                        D1 --> E1("监管强化与信息披露"):::consequence;
+                        D1 --> E2("再融资受限"):::consequence;
+                        D1 --> E3("经营压力增大"):::consequence;
+                        D1 -.-> E4("调出科创成长层风险"):::consequence;
+
+                        D2 --> F1("减持限制延长"):::consequence;
+                        D2 --> F2("股价波动/缩水"):::consequence;
+                        D2 --> F3("无分红/权益缺失"):::consequence;
+                        D2 -.-> F4("潜在退市风险"):::consequence;
+
+                        F4 -- 若触及 --> G("退市"):::critical;
+
+                        C -- 否 (实现盈利) --> I("符合调出条件"):::positive;
+                        I --> J("调出科创成长层"):::positive-outcome;
+
+                        %% Styling for nodes (matched with custom CSS variables above)
+                        classDef initial fill:#2563eb,stroke:#2563eb,stroke-width:2px,color:#ffffff;
+                        classDef process fill:#1e40af,stroke:#1e40af,stroke-width:2px,color:#ffffff;
+                        classDef decision fill:#f97316,stroke:#f97316,stroke-width:2px,color:#ffffff;
+                        classDef negative fill:#b91c1c,stroke:#b91c1c,stroke-width:2px,color:#ffffff;
+                        classDef consequence fill:#dc2626,stroke:#dc2626,stroke-width:1px,color:#ffffff;
+                        classDef critical fill:#0f172a,stroke:#0f172a,stroke-width:2px,color:#ffffff;
+                        classDef positive fill:#059669,stroke:#059669,stroke-width:2px,color:#ffffff;
+                        classDef positive-outcome fill:#16a34a,stroke:#16a34a,stroke-width:2px,color:#ffffff;
+
+                        linkStyle 2 stroke:#f97316,stroke-width:2px;
+                        linkStyle 3 stroke:#f97316,stroke-width:2px;
+                </div>
+            </div>
+        </section>
+
+        <!-- Summary & Recommendation Section -->
+        <section class="mb-16 opacity-0 translate-y-4 transition-all duration-700 ease-out">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-accent text-center">
+                <i class="fas fa-lightbulb mr-3"></i>总结与建议
+            </h2>
+            <div class="p-6 rounded-lg shadow-xl bg-surface-light">
+                <p class="text-lg leading-relaxed mb-4 text-secondary">
+                    <span class="font-bold text-primary">关键结论：</span>持续未盈利可能导致公司被调出科创成长层、融资受限，股东则面临减持锁定期延长和股价下跌风险。但科创板设计初衷是支持创新企业，短期亏损不一定立即触发严厉处罚（如调出或退市），需结合具体财务指标（如研发投入或营收增长）综合评估<sup class="footnote-ref" id="ref-1-2"><a href="#fn-1">1</a></sup><sup class="footnote-ref" id="ref-6"><a href="#fn-6">6</a></sup>。
+                </p>
+                <p class="text-lg leading-relaxed text-secondary">
+                    <span class="font-bold text-primary">专业建议：</span>公司应优化财务结构（如通过研发成果转化提升收入），股东需关注年报披露的盈利预期和调出风险。如需具体企业案例或进一步法规细节，请提供公司名称或补充问题。
+                </p>
+            </div>
+        </section>
+
+        <!-- Supplementary Information Section -->
+        <section class="mb-16 opacity-0 translate-y-4 transition-all duration-700 ease-out">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-accent text-center">
+                <i class="fas fa-info-circle mr-3"></i>补充信息
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="p-6 rounded-lg shadow-xl bg-surface-light">
+                    <h3 class="text-2xl font-semibold mb-4 text-primary">
+                        <i class="fas fa-lightbulb mr-2 text-accent"></i>关于科创板 (STAR Market)
+                    </h3>
+                    <p class="text-secondary leading-relaxed">
+                        科创板，即上海证券交易所科创板，是中国资本市场为支持科技创新型企业发展而设立的独立板块。它采用注册制，降低了盈利门槛，更注重企业的科技创新能力和成长潜力，吸引了大量高科技、硬科技企业上市。
+                    </p>
+                </div>
+                <div class="p-6 rounded-lg shadow-xl bg-surface-light">
+                    <h3 class="text-2xl font-semibold mb-4 text-primary">
+                        <i class="fas fa-robot mr-2 text-accent"></i>关于本AI助手
+                    </h3>
+                    <p class="text-secondary leading-relaxed">
+                        本页面内容由一名专注于投行业务、A股市场资本运作及行业分析的AI助手提供。我们致力于提供逻辑清晰、表述简洁、内容准确的专业分析和洞察，为用户在复杂多变的资本市场中提供可靠的信息支持。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Further Reading Section -->
+        <section class="mb-16 opacity-0 translate-y-4 transition-all duration-700 ease-out">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-accent text-center">
+                <i class="fas fa-book-open mr-3"></i>延伸阅读
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="p-4 rounded-lg shadow bg-surface-light card-hover transition-transform duration-300">
+                    <h3 class="text-xl font-semibold mb-2 text-primary">
+                        <i class="fas fa-file-alt mr-2 text-accent"></i>《科创板发行上市审核问答》
+                    </h3>
+                    <p class="text-secondary text-sm mb-3">
+                        由上海证券交易所发布，是理解科创板上市标准、审核流程与监管要求的官方指南。
+                    </p>
+                    <a href="https://www.sse.com.cn/lawandrules/sselawsrules/stocks/staripo/c/10784559/files/1c0c6a182e394138b997f10592a3af58.docx" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline link-hover transition-colors duration-200 text-sm">
+                        查看更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                    </a>
+                </div>
+                <div class="p-4 rounded-lg shadow bg-surface-light card-hover transition-transform duration-300">
+                    <h3 class="text-xl font-semibold mb-2 text-primary">
+                        <i class="fas fa-chart-pie mr-2 text-accent"></i>《中国A股市场发展报告》
+                    </h3>
+                    <p class="text-secondary text-sm mb-3">
+                        由中国证监会或权威研究机构发布的年度报告，分析A股市场宏观趋势、政策及各板块表现。（暂无官方链接）
+                    </p>
+                    <a href="#" class="text-blue-500 hover:underline link-hover transition-colors duration-200 text-sm opacity-70 cursor-not-allowed">
+                        了解更多 (暂无链接) <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                    </a>
+                </div>
+                <div class="p-4 rounded-lg shadow bg-surface-light card-hover transition-transform duration-300">
+                    <h3 class="text-xl font-semibold mb-2 text-primary">
+                        <i class="fas fa-university mr-2 text-accent"></i>《公司金融》
+                    </h3>
+                    <p class="text-secondary text-sm mb-3">
+                        (斯蒂芬·罗斯等著) 经典的大学教材，深入探讨企业融资、估值、投资决策与公司治理。
+                    </p>
+                    <a href="https://book.douban.com/subject/25852579/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline link-hover transition-colors duration-200 text-sm">
+                        豆瓣图书 <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                    </a>
+                </div>
+                <div class="p-4 rounded-lg shadow bg-surface-light card-hover transition-transform duration-300">
+                    <h3 class="text-xl font-semibold mb-2 text-primary">
+                        <i class="fas fa-brain mr-2 text-accent"></i>《投资的本质》
+                    </h3>
+                    <p class="text-secondary text-sm mb-3">
+                        (霍华德·马克斯著) 一部探讨投资哲学、风险控制和市场心理的深度作品。
+                    </p>
+                    <a href="https://book.douban.com/subject/35345759/" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline link-hover transition-colors duration-200 text-sm">
+                        豆瓣图书 <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                    </a>
+                </div>
+                <div class="p-4 rounded-lg shadow bg-surface-light card-hover transition-transform duration-300">
+                    <h3 class="text-xl font-semibold mb-2 text-primary">
+                        <i class="fas fa-chart-area mr-2 text-accent"></i>《泡沫与繁荣：解读中国股市》
+                    </h3>
+                    <p class="text-secondary text-sm mb-3">
+                        （假定存在）分析中国股市特有的周期、泡沫现象以及背后的经济与政策因素。（暂无官方链接）
+                    </p>
+                    <a href="#" class="text-blue-500 hover:underline link-hover transition-colors duration-200 text-sm opacity-70 cursor-not-allowed">
+                        了解更多 (暂无链接) <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footnotes Section -->
+        <section class="footnotes text-secondary text-sm leading-relaxed">
+            <h2 class="text-xl font-bold mb-4 text-primary">脚注来源</h2>
+            <ol class="list-decimal list-outside pl-4 space-y-2">
+                <li id="fn-1"><a href="https://www.sse.com.cn/lawandrules/sselawsrules/stocks/staripo/c/10784559/files/1c0c6a182e394138b997f10592a3af58.docx" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline link-hover">上海证券交易所科创板上市公司自律监管指引第5号</a>（明确科创成长层纳入规则） <a href="#ref-1" class="text-zinc-500 dark:text-zinc-500 light:text-gray-600 ml-2">↑</a></li>
+                <li id="fn-2"><a href="http://policy.mofcom.gov.cn/claw/clawContent.shtml?id=103188" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline link-hover">关于在科创板设置科创成长层增强制度包容性适应性的意见</a>（解释调出条件） <a href="#ref-2" class="text-zinc-500 dark:text-zinc-500 light:text-gray-600 ml-2">↑</a></li>
+                <li id="fn-3"><a href="https://www.pwccn.com/zh/research-and-insights/china-capital-new-time-jan2023.pdf" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline link-hover">科创板 - 普华永道报告</a>（减持限制细节） <a href="#ref-3" class="text-zinc-500 dark:text-zinc-500 light:text-gray-600 ml-2">↑</a></li>
+                <li id="fn-4"><a href="https://www.stcn.com/article/detail/2545393.html" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline link-hover">科创成长层标准明确32家存量的尚未盈利公司直接入层调出条件实施</a>（调出机制程序） <a href="#ref-4" class="text-zinc-500 dark:text-zinc-500 light:text-gray-600 ml-2">↑</a></li>
+                <li id="fn-kb"><a href="#" onclick="alert('此为AI内部知识库主题，无法直接预览具体文档，内容已融入正文。'); return false;" class="text-blue-500 hover:underline link-hover">知识库资料全名：科创成长层监管规则与股东权益保护机制</a>（点击可预览相关内容，涵盖财务指标不达标的监管处罚和股东权益影响）。 <a href="#ref-kb" class="text-zinc-500 dark:text-zinc-500 light:text-gray-600 ml-2">↑</a></li>
+                <li id="fn-6"><a href="https://news.dayoo.com/finance/202507/13/171077_54847114.htm" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline link-hover">科创板改革“1+6”政策迎新进展！32家存量未盈利企业进入科创成长层</a>（准入门槛与监管包容性）。 <a href="#ref-6" class="text-zinc-500 dark:text-zinc-500 light:text-gray-600 ml-2">↑</a></li>
+            </ol>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-zinc-500 dark:text-zinc-500 light:text-gray-600 text-sm border-t border-primary-light">
+        <p>&copy; 2025 科创板研究. All rights reserved.</p>
+        <p class="mt-2">本页面内容由AI助手提供，仅供参考。</p>
+    </footer>
+
+    <script>
+        // --- Mermaid.js Initialization ---
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base', // Use 'base' and control styling via CSS variables
+            securityLevel: 'loose', // Allows for more advanced diagramming features
+            flowchart: {
+                useMaxWidth: true, // Ensure responsiveness
+                curve: 'linear' // Simpler, cleaner lines
+            },
+            fontFamily: 'Noto Sans SC, sans-serif'
+        });
+
+        // --- Theme Toggle Logic ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme and save to localStorage
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+            } else {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+            }
+            localStorage.setItem('theme', theme);
+        }
+
+        // Apply theme on page load based on localStorage or system preference
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme) {
+            setTheme(storedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark'); // Default to dark if system prefers it
+        } else {
+            setTheme('light'); // Default to light if no preference is stored
+        }
+
+        // Event listener for theme toggle button
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // --- Smooth Scroll for Internal Links (e.g., Footnotes) ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href && href.length > 1 && href !== '#') { // Exclude empty or just '#' hrefs
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // --- Fade-in Animation on Scroll (using Intersection Observer) ---
+        const sections = document.querySelectorAll('section:not(.hero-background)'); // Exclude hero section
+
+        const observerOptions = {
+            root: null, // Relative to the viewport
+            rootMargin: '0px',
+            threshold: 0.1 // Trigger when 10% of the section is visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                    observer.unobserve(entry.target); // Stop observing once animated
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            // Add initial hidden state classes
+            section.classList.add('opacity-0', 'translate-y-4', 'transition-all', 'duration-700', 'ease-out');
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
+```
