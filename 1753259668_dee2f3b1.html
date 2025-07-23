@@ -1,0 +1,521 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板突击入股规则解读</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts for Noto Serif SC (headings) and Noto Sans SC (body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Define CSS Variables for theming */
+        :root {
+            /* Light Mode Colors */
+            --text-color-light: #333;
+            --bg-color-light: #f9f9ff; /* Soft white */
+            --card-bg-light: #ffffff;
+            --primary-accent-light: #4F46E5; /* Indigo-700 */
+            --secondary-accent-light: #8B5CF6; /* Violet-500 */
+            --border-color-light: #E5E7EB; /* Gray-200 */
+            --hover-bg-light: #f0f4f8; /* A very light gray for hover */
+            --link-color-light: #2563EB; /* Blue-600 */
+            --warn-bg-light: #FFFBEB; /* Yellow-50 */
+            --warn-text-light: #D97706; /* Yellow-700 */
+            --warn-border-light: #FCD34D; /* Yellow-300 */
+
+            /* Dark Mode Colors */
+            --text-color-dark: #E2E8F0; /* Gray-200 */
+            --bg-color-dark: #1A202C; /* Gray-900 */
+            --card-bg-dark: #2D3748; /* Gray-800 */
+            --primary-accent-dark: #81E6D9; /* Teal-300 */
+            --secondary-accent-dark: #A78BFA; /* Purple-300 */
+            --border-color-dark: #4A5568; /* Gray-600 */
+            --hover-bg-dark: #3b475c; /* Slightly lighter gray-800 for hover */
+            --link-color-dark: #93C5FD; /* Blue-300 */
+            --warn-bg-dark: #4A2B00; /* Darker yellow/orange for warning */
+            --warn-text-dark: #FBBF24; /* Yellow-400 */
+            --warn-border-dark: #F59E0B; /* Yellow-500 */
+        }
+
+        /* Default (Dark Mode) styles */
+        html {
+            color-scheme: dark; /* Helps OS know preferred theme */
+        }
+        body {
+            font-family: 'Noto Sans SC', '思源黑体', 'Tahoma', Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: var(--bg-color-dark);
+            color: var(--text-color-dark);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Apply color variables to Tailwind classes */
+        .text-primary-accent { color: var(--primary-accent-dark); }
+        .text-secondary-accent { color: var(--secondary-accent-dark); }
+        .bg-card { background-color: var(--card-bg-dark); }
+        .border-card { border-color: var(--border-color-dark); }
+        .hover\:bg-card-hover:hover { background-color: var(--hover-bg-dark); }
+        .text-link { color: var(--link-color-dark); }
+        .bg-warn { background-color: var(--warn-bg-dark); }
+        .text-warn { color: var(--warn-text-dark); }
+        .border-warn { border-color: var(--warn-border-dark); }
+
+
+        /* Light Mode Overrides */
+        html.light {
+            color-scheme: light;
+        }
+        html.light body {
+            background-color: var(--bg-color-light);
+            color: var(--text-color-light);
+        }
+        html.light .text-primary-accent { color: var(--primary-accent-light); }
+        html.light .text-secondary-accent { color: var(--secondary-accent-light); }
+        html.light .bg-card { background-color: var(--card-bg-light); }
+        html.light .border-card { border-color: var(--border-color-light); }
+        html.light .hover\:bg-card-hover:hover { background-color: var(--hover-bg-light); }
+        html.light .text-link { color: var(--link-color-light); }
+        html.light .bg-warn { background-color: var(--warn-bg-light); }
+        html.light .text-warn { color: var(--warn-text-light); }
+        html.light .border-warn { border-color: var(--warn-border-light); }
+
+        /* Specific typography for headings */
+        h1, h2, h3, h4, .font-serif {
+            font-family: 'Noto Serif SC', '思源宋体', serif;
+        }
+
+        /* Hero section background with gradient overlay */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(26,32,44,0.95) 0%, rgba(45,55,72,0.85) 100%), url('https://images.unsplash.com/photo-1590283603348-18e001c9b251?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+            background-blend-mode: multiply; /* Blends gradient with image */
+        }
+        html.light .hero-section {
+            background: linear-gradient(135deg, rgba(249,249,255,0.95) 0%, rgba(220,230,240,0.85) 100%), url('https://images.unsplash.com/photo-1590283603348-18e001c9b251?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+            background-blend-mode: multiply;
+        }
+
+        /* Custom scrollbar for subtle effect */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color-dark);
+            border-radius: 10px;
+        }
+        html.light ::-webkit-scrollbar-track {
+            background: var(--bg-color-light);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color-dark);
+            border-radius: 10px;
+        }
+        html.light ::-webkit-scrollbar-thumb {
+            background: var(--border-color-light);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-accent-dark);
+        }
+        html.light ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-accent-light);
+        }
+
+        /* Micro-interactions */
+        .card-hover-effect {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        html.light .card-hover-effect:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+        .dark-mode-toggle {
+            transition: all 0.3s ease;
+        }
+        .dark-mode-toggle:hover {
+            transform: rotate(15deg);
+        }
+        
+        /* Mermaid specific styling overrides for better theme integration */
+        .mermaid {
+            background-color: transparent !important;
+            color: var(--text-color-dark) !important;
+        }
+        html.light .mermaid {
+            color: var(--text-color-light) !important;
+        }
+        /* Further Mermaid overrides are handled via mermaid.initialize theme variables in JS */
+    </style>
+</head>
+<body class="min-h-screen antialiased">
+    <!-- Dark Mode Toggle Button -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="theme-toggle" class="dark-mode-toggle p-3 rounded-full bg-card shadow-lg flex items-center justify-center text-primary-accent border border-card">
+            <i class="fas fa-sun text-xl hidden dark:block"></i>
+            <i class="fas fa-moon text-xl dark:hidden"></i>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero-section text-white py-24 md:py-32">
+        <div class="container mx-auto px-6 max-w-4xl text-center">
+            <h1 class="text-4xl md:text-6xl font-serif font-bold leading-tight mb-4 tracking-wider">
+                科创板突击入股：规则深度解析
+            </h1>
+            <p class="text-lg md:text-xl opacity-80 mb-8 max-w-2xl mx-auto">
+                理解IPO申报中的关键门槛，助力企业合规上市
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="#definition" class="bg-primary-accent text-card px-8 py-3 rounded-full text-lg font-semibold hover:opacity-90 transition duration-300 shadow-lg">
+                    <i class="fas fa-search-dollar mr-2"></i> 了解界定
+                </a>
+                <a href="#rules" class="bg-transparent border-2 border-primary-accent text-primary-accent px-8 py-3 rounded-full text-lg font-semibold hover:bg-primary-accent hover:text-card transition duration-300 shadow-lg">
+                    <i class="fas fa-lock mr-2"></i> 锁定与减持
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-16 max-w-4xl">
+        <!-- Section 1: 突击入股的界定标准 -->
+        <section id="definition" class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-8 text-primary-accent tracking-wide">
+                <i class="fas fa-balance-scale-left mr-3"></i> 一、突击入股的界定标准
+            </h2>
+
+            <div class="bg-card p-8 rounded-lg shadow-xl border border-card mb-10 card-hover-effect">
+                <h3 class="text-2xl font-semibold mb-4 text-secondary-accent">1. 时间基准：IPO申报时点</h3>
+                <p class="mb-4 leading-relaxed">
+                    以 <strong class="text-primary-accent font-bold">IPO申报时点</strong>（非申报基准日）为判断基准。根据《科创板股票发行上市审核规则》，突击入股指在
+                    <span class="text-lg font-bold text-red-400 light:text-red-700">IPO申报前12个月内</span>通过增资或股权转让取得股份的行为。
+                </p>
+                <div class="border-l-4 border-primary-accent pl-4 py-2 bg-gray-700/30 rounded-r-md light:bg-gray-100 light:border-primary-accent">
+                    <h4 class="text-xl font-medium mb-2 text-primary-accent">
+                        <i class="fas fa-lightbulb mr-2"></i> 案例分析
+                    </h4>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><span class="font-semibold">最后一轮融资：</span> 2025年8月</li>
+                        <li><span class="font-semibold">IPO申报时点：</span> 2026年一季度（假设2026年1月）</li>
+                        <li><span class="font-semibold">间隔：</span> 约5个月（＜12个月）</li>
+                    </ul>
+                    <p class="mt-3 text-lg font-bold text-red-400 light:text-red-700">
+                        <i class="fas fa-exclamation-triangle mr-2"></i> 结论：该轮投资者属于突击入股。
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-card p-8 rounded-lg shadow-xl border border-card mb-10 card-hover-effect">
+                <h3 class="text-2xl font-semibold mb-4 text-secondary-accent">2. 豁免情形（不认定为突击入股）</h3>
+                <p class="mb-4 leading-relaxed">
+                    若投资机构同时满足以下两项，可不视为突击入股：
+                </p>
+                <ul class="list-disc list-inside space-y-2 mb-4">
+                    <li>在 <strong class="text-primary-accent font-bold">申报前24个月至申报时</strong> 持续持有股份；</li>
+                    <li>持股比例 <strong class="text-primary-accent font-bold">≥3%</strong> 或投资金额 <strong class="text-primary-accent font-bold">≥5亿元</strong>。</li>
+                </ul>
+                <p class="italic text-gray-400 light:text-gray-600">
+                    <i class="fas fa-info-circle mr-2"></i>
+                    注：您案例中的投资者持股时间不足24个月（仅5个月），无法豁免。
+                </p>
+            </div>
+
+            <!-- Mermaid Diagram for concept visualization -->
+            <div class="bg-card p-8 rounded-lg shadow-xl border border-card mb-10 overflow-x-auto">
+                <h3 class="text-2xl font-semibold mb-4 text-secondary-accent flex items-center">
+                    <i class="fas fa-project-diagram mr-3"></i> 突击入股认定流程图
+                </h3>
+                <pre class="mermaid p-4 rounded-md text-sm leading-relaxed whitespace-pre-wrap">
+graph TD
+    subgraph 定义与判断流程
+        A[IPO申报时点] --&gt; B(往前推算12个月);
+        B --&gt; C{入股时点是否在12个月内?};
+        C -- 是 --&gt; D[初步认定为突击入股];
+        C -- 否 --&gt; E[不属于突击入股];
+
+        D --&gt; F{满足豁免条件?};
+        F -- 是(申报前24个月持续持有 & (持股&#x2265;3% 或 投资&#x2265;5亿)) --&gt; G[豁免: 不认定为突击入股];
+        F -- 否 --&gt; H[最终认定为突击入股];
+    end
+
+    subgraph 锁定与减持策略
+        G --&gt; I[锁定期: 上市之日起12个月];
+        E --&gt; I;
+        H --&gt; J[锁定期: 工商变更登记之日起36个月];
+        I --&gt; K[减持规则: 锁定期满后集中竞价90日内&#x2264;1%, 大宗交易&#x2264;2%];
+        J --&gt; K;
+    end
+</pre>
+            </div>
+        </section>
+
+        <!-- Section 2: 突击入股的锁定及减持要求 -->
+        <section id="rules" class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-8 text-primary-accent tracking-wide">
+                <i class="fas fa-gavel mr-3"></i> 二、突击入股的锁定及减持要求
+            </h2>
+
+            <div class="bg-card p-8 rounded-lg shadow-xl border border-card mb-10 card-hover-effect">
+                <h3 class="text-2xl font-semibold mb-4 text-secondary-accent">1. 锁定期限</h3>
+                <p class="mb-4 leading-relaxed">
+                    对于突击入股的股东，锁定期限为 <strong class="text-primary-accent font-bold">36个月</strong>，自 <strong class="text-primary-accent font-bold">工商变更登记完成之日</strong> 起计算（而非上市日）。
+                </p>
+                <div class="border-l-4 border-secondary-accent pl-4 py-2 bg-gray-700/30 rounded-r-md light:bg-gray-100 light:border-secondary-accent">
+                    <h4 class="text-xl font-medium mb-2 text-secondary-accent">
+                        <i class="fas fa-calendar-alt mr-2"></i> 案例预估
+                    </h4>
+                    <p class="mb-2"><span class="font-semibold">您案例中：</span> 若2025年8月完成工商变更</p>
+                    <p class="text-lg font-bold text-green-400 light:text-green-700">
+                        <i class="fas fa-check-circle mr-2"></i> 锁定期至 <span class="text-primary-accent">2028年8月</span>。
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-card p-8 rounded-lg shadow-xl border border-card mb-10 card-hover-effect">
+                <h3 class="text-2xl font-semibold mb-4 text-secondary-accent">2. 减持规则（锁定期满后）</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-gray-700 light:bg-gray-100">
+                            <tr>
+                                <th class="py-3 px-4 border-b border-card text-primary-accent font-semibold">减持方式</th>
+                                <th class="py-3 px-4 border-b border-card text-primary-accent font-semibold">限制要求</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hover:bg-card-hover transition-colors duration-200">
+                                <td class="py-3 px-4 border-b border-card">集中竞价交易</td>
+                                <td class="py-3 px-4 border-b border-card">任意连续90日内，减持股份 <strong class="text-secondary-accent">≤公司总股本1%</strong></td>
+                            </tr>
+                            <tr class="hover:bg-card-hover transition-colors duration-200">
+                                <td class="py-3 px-4 border-b border-card">大宗交易</td>
+                                <td class="py-3 px-4 border-b border-card">任意连续90日内，减持股份 <strong class="text-secondary-accent">≤公司总股本2%</strong></td>
+                            </tr>
+                            <tr class="hover:bg-card-hover transition-colors duration-200">
+                                <td class="py-3 px-4 border-b border-card">协议转让</td>
+                                <td class="py-3 px-4 border-b border-card">单个受让方受让比例 <strong class="text-secondary-accent">≥5%</strong> 时，需遵守限售期要求</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="mt-4 text-sm italic text-gray-400 light:text-gray-600">
+                    <i class="fas fa-book-open mr-2"></i> 依据：《科创板上市公司持续监管办法》第十六条及减持新规。
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 3: 特别提示 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-8 text-primary-accent tracking-wide">
+                <i class="fas fa-exclamation-circle mr-3"></i> 三、特别提示
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-card p-8 rounded-lg shadow-xl border border-card card-hover-effect">
+                    <h3 class="text-2xl font-semibold mb-4 text-secondary-accent flex items-center">
+                        <i class="fas fa-chart-line mr-3"></i> 监管趋势
+                    </h3>
+                    <p class="leading-relaxed">
+                        2025年7月发布的科创板新规强调严查突击入股，要求穿透披露资金来源及定价公允性。这意味着监管机构对这类行为的审查将更加严格。
+                    </p>
+                </div>
+                <div class="bg-card p-8 rounded-lg shadow-xl border border-card card-hover-effect">
+                    <h3 class="text-2xl font-semibold mb-4 text-secondary-accent flex items-center">
+                        <i class="fas fa-hand-paper mr-3"></i> 风险提示
+                    </h3>
+                    <p class="leading-relaxed">
+                        若突击入股比例过高或定价异常，可能触发监管问询甚至影响过会。企业应审慎对待，避免合规风险。
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-10 p-6 bg-warn text-warn rounded-lg border border-warn">
+                <p class="font-bold text-lg mb-2">
+                    <i class="fas fa-lightbulb mr-2"></i> 温馨提示：
+                </p>
+                <p class="leading-relaxed">
+                    由于当前时间为2025年7月23日，用户提到的最后一轮融资（2025年8月）尚未发生，因此实际申报时点（2026年一季度）以及审核时的具体政策可能会有调整，建议在申报前咨询专业律师或券商，以最新的监管规定和审核实践为准。
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 4: 引用来源 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-8 text-primary-accent tracking-wide">
+                <i class="fas fa-link mr-3"></i> 引用来源
+            </h2>
+            <div class="bg-card p-8 rounded-lg shadow-xl border border-card">
+                <ul class="list-none space-y-4">
+                    <li class="flex items-start">
+                        <span class="text-primary-accent font-bold mr-2 mt-1">[^1]:</span>
+                        <p>
+                            <a href="https://www.jfdaily.com/news/detail?id=945737" target="_blank" rel="noopener noreferrer" class="text-link hover:underline">
+                                科创板成长层规则正式发布，个人投资者门槛不变（解放日报）
+                                <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                            </a>
+                        </p>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-primary-accent font-bold mr-2 mt-1">[^2]:</span>
+                        <p>
+                            <a href="https://www.pudong.gov.cn/019008004/20250716/810626.html" target="_blank" rel="noopener noreferrer" class="text-link hover:underline">
+                                科创板成长层规则正式发布（上海浦东）
+                                <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                            </a>
+                        </p>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-primary-accent font-bold mr-2 mt-1">[^3]:</span>
+                        <p>
+                            <a href="http://policy.mofcom.gov.cn/claw/clawContent.shtml?id=103136" target="_blank" rel="noopener noreferrer" class="text-link hover:underline">
+                                科创板上市公司持续监管办法（试行）（全球法规网）
+                                <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                            </a>
+                        </p>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-primary-accent font-bold mr-2 mt-1">[^4]:</span>
+                        <p>
+                            <a href="https://jianchiwang.com/index.php/2025/07/09/%E7%A7%81%E5%8B%9F%E5%9F%BA%E9%87%91-%E6%8A%95%E8%B5%84%E5%9F%BA%E9%87%91%E4%BB%8E%E4%B8%8A%E5%B8%82%E5%85%AC%E5%8F%B8%E5%87%8F%E6%8C%81%E9%80%80%E5%87%BA%E7%9A%84%E5%90%88%E8%A7%84%E9%97%AE-2/" target="_blank" rel="noopener noreferrer" class="text-link hover:underline">
+                                私募基金减持退出合规问题（简池网）
+                                <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                            </a>
+                        </p>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-primary-accent font-bold mr-2 mt-1">[^5]:</span>
+                        <p>
+                             <a href="https://www.lhzq.com/htlh/aws/htlh/annex/%E7%A7%91%E5%88%9B%E6%9D%BF%E8%BF%90%E8%A1%8C%E4%B8%80%E5%91%A8%E5%B9%B4%E8%93%9D%E7%9A%AE%E4%B9%A6(1595400059664).pdf" target="_blank" rel="noopener noreferrer" class="text-link hover:underline">
+                                科创板减持制度安排（华泰证券蓝皮书）
+                                <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                            </a>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 5: 进一步阅读 -->
+        <section>
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-8 text-primary-accent tracking-wide">
+                <i class="fas fa-book mr-3"></i> 进一步阅读
+            </h2>
+            <div class="bg-card p-8 rounded-lg shadow-xl border border-card">
+                <p class="mb-6 leading-relaxed">
+                    深入了解科创板IPO与股权投资的复杂性，推荐以下专业书籍或资料：
+                </p>
+                <ul class="list-disc list-inside space-y-4">
+                    <li>
+                        <strong class="text-secondary-accent">《中国证券市场法律与实务》：</strong>
+                        权威解读中国证券市场法律法规，提供全面视角。
+                    </li>
+                    <li>
+                        <strong class="text-secondary-accent">《IPO上市操作实务与案例精解》：</strong>
+                        结合具体案例，剖析企业IPO上市的全流程操作细节。
+                    </li>
+                    <li>
+                        <strong class="text-secondary-accent">《科创板制度解读与实践》：</strong>
+                        专注于科创板的各项制度创新和实践经验，是深度理解科创板的必备读物。
+                    </li>
+                    <li>
+                        <strong class="text-secondary-accent">《企业上市与并购重组》：</strong>
+                        从更宏观的企业资本运作角度，探讨上市与并购的策略与合规。
+                    </li>
+                    <li>
+                        <strong class="text-secondary-accent">《私募股权投资与上市退出》：</strong>
+                        专门针对私募股权基金从投资到上市退出的全过程，涉及合规风险与策略。
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-10 text-gray-400 light:text-gray-600 border-t border-card">
+        <p>&copy; 2023 科创板IPO合规指南. All rights reserved.</p>
+        <p class="mt-2 text-sm">本页面内容仅供参考，不构成法律意见。</p>
+    </footer>
+
+    <!-- Mermaid JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid initialization and theme variables based on dark/light mode
+        function initializeMermaid(theme) {
+            const isDark = (theme === 'dark');
+            mermaid.initialize({
+                startOnLoad: false, // We'll manually call mermaid.contentLoaded()
+                theme: isDark ? 'dark' : 'default', // 'default' for light theme
+                securityLevel: 'loose',
+                flowchart: {
+                    useMaxWidth: true,
+                    htmlLabels: true,
+                    curve: 'basis'
+                },
+                themeVariables: {
+                    darkMode: isDark,
+                    primaryColor: isDark ? '#2d3748' : '#ffffff',
+                    primaryBorderColor: isDark ? '#4a5568' : '#e2e8f0',
+                    primaryTextColor: isDark ? '#e2e8f0' : '#333',
+                    secondaryColor: isDark ? '#4a5568' : '#f0f4f8',
+                    secondaryBorderColor: isDark ? '#81e6d9' : '#4F46E5', /* Teal for dark, Indigo for light */
+                    secondaryTextColor: isDark ? '#e2e8f0' : '#333',
+                    tertiaryColor: isDark ? '#4a5568' : '#f0f4f8',
+                    tertiaryBorderColor: isDark ? '#a78bfa' : '#8B5CF6', /* Purple for dark, Violet for light */
+                    tertiaryTextColor: isDark ? '#e2e8f0' : '#333',
+                    lineColor: isDark ? '#e2e8f0' : '#333',
+                    textColor: isDark ? '#e2e8f0' : '#333',
+                    nodeBorder: isDark ? '#4a5568' : '#e2e8f0',
+                    mainBkg: isDark ? '#2d3748' : '#ffffff',
+                    clusterBkg: isDark ? '#2d3748' : '#ffffff',
+                    clusterBorder: isDark ? '#4a5568' : '#e2e8f0',
+                }
+            });
+            // mermaid.contentLoaded(); // Re-render after setting theme
+        }
+
+        // Dark/Light Mode Toggle Functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme and update Mermaid
+        function setTheme(theme) {
+            htmlElement.classList.remove('dark', 'light');
+            htmlElement.classList.add(theme);
+            localStorage.setItem('theme', theme);
+            initializeMermaid(theme);
+            mermaid.contentLoaded(); // This triggers rendering with new theme
+        }
+
+        // Check for saved theme in localStorage or system preference on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentTheme = localStorage.getItem('theme');
+            if (currentTheme) {
+                setTheme(currentTheme);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme('dark');
+            } else {
+                setTheme('light');
+            }
+        });
+
+        // Event listener for theme toggle button
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) { // Only react if user hasn't manually set a preference
+                setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+    </script>
+</body>
+</html>
+```
