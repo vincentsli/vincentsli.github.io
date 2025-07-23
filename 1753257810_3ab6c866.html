@@ -1,0 +1,894 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>军工涉密业务备案：辅导协议是否触发义务？</title>
+    <meta name="description" content="深入探讨军工涉密业务咨询服务的备案触发条件，特别是辅导协议和保荐承销协议在其中的角色，提供权威解读与实务建议。">
+
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom Fonts */
+        :root {
+            --font-serif-sc: 'Noto Serif SC', serif;
+            --font-sans-sc: 'Noto Sans SC', sans-serif;
+            --font-fallback: Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-sans-sc), var(--font-fallback);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-serif-sc), var(--font-fallback);
+        }
+
+        /* Dark Mode Specific Styles (Default) */
+        html.dark {
+            --color-bg-primary: #121212; /* Very dark background */
+            --color-bg-secondary: #1E1E1E; /* Slightly lighter for cards/sections */
+            --color-text-primary: #E0E0E0; /* Light gray for main text */
+            --color-text-secondary: #A0A0A0; /* Muted gray for secondary text */
+            --color-accent: #00BFFF; /* Bright Sky Blue for highlights */
+            --color-border: #3A3A3A; /* Darker border */
+        }
+
+        /* Light Mode Specific Styles */
+        html.light {
+            --color-bg-primary: #FDFDFD;
+            --color-bg-secondary: #FFFFFF;
+            --color-text-primary: #333333;
+            --color-text-secondary: #666666;
+            --color-accent: #007BFF; /* Royal Blue */
+            --color-border: #DCDCDC;
+        }
+
+        body {
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .text-primary { color: var(--color-text-primary); }
+        .text-secondary { color: var(--color-text-secondary); }
+        .bg-secondary { background-color: var(--color-bg-secondary); }
+        .border-base { border-color: var(--color-border); }
+        .text-accent { color: var(--color-accent); }
+
+        /* Hover effects */
+        .hover\:text-accent:hover { color: var(--color-accent); }
+        .hover\:bg-accent-light:hover { background-color: rgba(0, 191, 255, 0.1); } /* Dark mode */
+        html.light .hover\:bg-accent-light:hover { background-color: rgba(0, 123, 255, 0.1); } /* Light mode */
+        .card-hover:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: var(--color-accent);
+        }
+        html.light .card-hover:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        html.dark .card-hover:hover {
+             box-shadow: 0 10px 15px -3px rgba(0, 191, 255, 0.05), 0 4px 6px -2px rgba(0, 191, 255, 0.02);
+        }
+
+        /* Custom Drop Cap */
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 4.5em; /* Larger size */
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            font-weight: bold;
+            color: var(--color-accent);
+            font-family: var(--font-serif-sc), var(--font-fallback);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        html.light .drop-cap::first-letter {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+
+        /* Mermaid container styling for responsiveness and dark mode compatibility */
+        .mermaid-container {
+            background-color: var(--color-bg-secondary);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--color-border);
+            overflow-x: auto; /* Enable horizontal scrolling for small screens */
+        }
+        
+        /* Mermaid theme adjustments for dark mode via CSS variables */
+        html.dark .mermaid .node rect, html.dark .mermaid .node circle {
+            fill: #2A2A2A !important; /* Node background */
+            stroke: var(--color-accent) !important; /* Node border */
+        }
+        html.dark .mermaid .edgePaths .path {
+            stroke: var(--color-accent) !important; /* Edge lines */
+        }
+        html.dark .mermaid .edgeLabels text {
+            fill: var(--color-text-primary) !important; /* Edge labels text */
+        }
+        html.dark .mermaid .label text { /* Text inside nodes */
+            fill: var(--color-text-primary) !important;
+        }
+
+        /* Mermaid theme adjustments for light mode */
+        html.light .mermaid .node rect, html.light .mermaid .node circle {
+            fill: #F0F0F0 !important; /* Node background */
+            stroke: var(--color-accent) !important; /* Node border */
+        }
+        html.light .mermaid .edgePaths .path {
+            stroke: var(--color-accent) !important; /* Edge lines */
+        }
+        html.light .mermaid .edgeLabels text {
+            fill: var(--color-text-primary) !important; /* Edge labels text */
+        }
+        html.light .mermaid .label text { /* Text inside nodes */
+            fill: var(--color-text-primary) !important;
+        }
+
+        /* Responsive Table */
+        .responsive-table {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .responsive-table table {
+            width: 100%;
+            min-width: 600px; /* Ensure table doesn't get too squished */
+        }
+    </style>
+</head>
+<body class="min-h-screen antialiased flex flex-col">
+
+    <!-- Header and Mode Toggle -->
+    <header class="py-4 px-6 md:px-10 lg:px-20 flex justify-between items-center z-20 sticky top-0 bg-opacity-90 backdrop-filter backdrop-blur-sm" style="background-color: var(--color-bg-primary);">
+        <div class="text-2xl font-bold text-accent">密档<span class="text-primary">智库</span></div>
+        <button id="theme-toggle" class="p-2 rounded-full hover:bg-accent-light focus:outline-none focus:ring-2 focus:ring-accent text-primary transition-colors duration-200">
+            <i class="fas fa-sun hidden dark:inline-block"></i>
+            <i class="fas fa-moon dark:hidden"></i>
+        </button>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gray-900 text-white py-24 md:py-32 overflow-hidden" style="background-color: var(--color-bg-primary);">
+        <!-- Subtle background pattern/gradient -->
+        <div class="absolute inset-0 z-0 opacity-10" style="background-image: radial-gradient(circle at center, rgba(0, 191, 255, 0.1) 0%, transparent 70%);"></div>
+        <div class="absolute inset-0 z-0 opacity-5" style="background-image: url('data:image/svg+xml,%3Csvg width=\'6\' height=\'6\' viewBox=\'0 0 6 6\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%239C92AC\' fill-opacity=\'0.1\' fill-rule=\'evenodd\'%3E%3Cpath d=\'M5 0h1L0 6V5zm1 5v1H5zM6 0H5v1z\'/%3E%3C/g%3E%3C/svg%3E');"></div>
+        
+        <div class="container mx-auto px-6 md:px-10 lg:px-20 relative z-10 text-center">
+            <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-4 text-accent drop-shadow-lg" style="font-family: var(--font-serif-sc), var(--font-fallback);">
+                军工涉密业务备案：辅导协议是否触发义务？
+            </h1>
+            <p class="text-xl md:text-2xl font-light mb-8 text-primary" style="font-family: var(--font-sans-sc), var(--font-fallback);">
+                深度解析券商与涉军企业合作的备案要求与实践
+            </p>
+            <p class="max-w-3xl mx-auto text-lg md:text-xl text-secondary opacity-90 leading-relaxed">
+                本报告旨在明晰保荐券商在服务涉军发行人过程中，不同协议阶段（辅导协议与保荐承销协议）对军工涉密业务咨询服务备案义务的影响，结合法规条文与实务案例，提供清晰的指导。
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content Section -->
+    <main class="flex-grow container mx-auto px-6 md:px-10 lg:px-20 py-12 md:py-16">
+        <article class="bg-secondary rounded-xl shadow-lg p-8 md:p-12 border border-base">
+            <p class="text-lg leading-relaxed mb-8 drop-cap text-primary">
+                根据《军工涉密业务咨询服务安全保密监督管理办法及实施细则》第十二条及相关监管实践，结合联网搜索结果和行业案例，对您的问题分析如下：
+            </p>
+
+            <!-- Section 1: 备案义务的触发条件 -->
+            <section class="mb-10">
+                <h2 class="text-3xl font-bold mb-6 text-accent" style="font-family: var(--font-serif-sc), var(--font-fallback);">
+                    <i class="fas fa-scroll mr-3 opacity-75"></i>一、备案义务的触发条件
+                </h2>
+                <p class="text-primary leading-relaxed mb-6">
+                    根据规定，军工单位需在委托涉密业务时履行备案义务，<strong class="text-accent">核心判断标准是咨询服务是否涉及国家秘密</strong>，而非仅以协议名称（如辅导协议或保荐协议）作为区分依据：
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-primary p-6 rounded-lg border border-base transition-transform duration-200 card-hover shadow-md">
+                        <h3 class="text-xl font-semibold mb-3 text-accent" style="font-family: var(--font-serif-sc), var(--font-fallback);">
+                            <i class="fas fa-balance-scale mr-2 opacity-75"></i>业务实质优先原则
+                        </h3>
+                        <p class="text-secondary leading-relaxed mb-4">
+                            若辅导协议涉及涉密业务（如查阅军工企业涉密资料、参与涉密方案设计等），即使处于IPO早期辅导阶段，也需备案。
+                        </p>
+                        <blockquote class="border-l-4 border-accent pl-4 py-2 italic text-secondary">
+                            <i class="fas fa-quote-left text-accent mr-2"></i>
+                            <span class="text-primary">"在委托涉密业务前，甲方应当与乙方签订保密协议。在签订保密协议后，甲方应当于30个工作日内，将委托咨询服务有关情况向主管单位备案"</span><sup class="ml-1 text-accent"><a href="#footnote-1" class="hover:underline">[1]</a></sup>。
+                            <i class="fas fa-quote-right text-accent ml-2"></i>
+                        </blockquote>
+                        <p class="text-secondary text-sm mt-4">
+                            此处明确以"委托涉密业务"为触发点，未限定为改制或上市阶段。
+                        </p>
+                    </div>
+
+                    <div class="bg-primary p-6 rounded-lg border border-base transition-transform duration-200 card-hover shadow-md">
+                        <h3 class="text-xl font-semibold mb-3 text-accent" style="font-family: var(--font-serif-sc), var(--font-fallback);">
+                            <i class="fas fa-industry mr-2 opacity-75"></i>行业监管案例佐证
+                        </h3>
+                        <p class="text-secondary leading-relaxed mb-4">
+                            实务中，券商在辅导阶段若接触涉密信息（如军品技术参数、采购计划等），均需备案。
+                        </p>
+                        <ul class="list-disc list-inside text-secondary mb-4">
+                            <li>例如图南股份（300855）招股书显示，其IPO辅导机构在辅导阶段已向国防科工局备案保密资质<sup class="ml-1 text-accent"><a href="#footnote-2" class="hover:underline">[2]</a></sup>。</li>
+                            <li>汉坤律所报告指出：<strong class="text-primary">"涉军企业可与中介机构签署保密协议、委托中介机构从事涉密业务咨询服务，并于委托后30个工作日内向主管单位备案"</strong><sup class="ml-1 text-accent"><a href="#footnote-3" class="hover:underline">[3]</a></sup>，未区分辅导或上市阶段。</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Divider -->
+            <hr class="border-t border-base my-10">
+
+            <!-- Section 2: 两种协议场景的具体分析 -->
+            <section class="mb-10">
+                <h2 class="text-3xl font-bold mb-6 text-accent" style="font-family: var(--font-serif-sc), var(--font-fallback);">
+                    <i class="fas fa-clipboard-list mr-3 opacity-75"></i>二、两种协议场景的具体分析
+                </h2>
+                <div class="responsive-table">
+                    <table class="w-full text-left border-collapse rounded-lg overflow-hidden">
+                        <thead class="bg-accent bg-opacity-10 text-accent">
+                            <tr class="text-lg">
+                                <th class="p-4 border-b border-base rounded-tl-lg">协议类型</th>
+                                <th class="p-4 border-b border-base">是否触发备案义务</th>
+                                <th class="p-4 border-b border-base rounded-tr-lg">依据及说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hover:bg-accent-light transition-colors duration-200">
+                                <td class="p-4 border-b border-base text-primary"><strong>辅导协议</strong></td>
+                                <td class="p-4 border-b border-base text-accent">✅ 若涉及涉密业务</td>
+                                <td class="p-4 border-b border-base text-secondary">辅导阶段若查阅涉密资料、制定涉密整改方案等，属于"咨询服务"，需备案<sup class="ml-1 text-accent"><a href="#footnote-1" class="hover:underline">[1]</a></sup><sup class="ml-1 text-accent"><a href="#footnote-3" class="hover:underline">[3]</a></sup>。</td>
+                            </tr>
+                            <tr class="hover:bg-accent-light transition-colors duration-200">
+                                <td class="p-4 border-b border-base text-primary"><strong>保荐承销协议</strong></td>
+                                <td class="p-4 border-b border-base text-accent">✅ 必然触发</td>
+                                <td class="p-4 border-b border-base text-secondary">上市阶段需处理招股书涉密章节、答复监管涉密问询等，直接涉及国家秘密<sup class="ml-1 text-accent"><a href="#footnote-4" class="hover:underline">[4]</a></sup>。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Divider -->
+            <hr class="border-t border-base my-10">
+
+            <!-- Section 3: Conclusion -->
+            <section class="mb-10">
+                <h2 class="text-3xl font-bold mb-6 text-accent" style="font-family: var(--font-serif-sc), var(--font-fallback);">
+                    <i class="fas fa-check-circle mr-3 opacity-75"></i>结论
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-primary p-6 rounded-lg border border-base shadow-md transition-transform duration-200 card-hover">
+                        <h3 class="text-xl font-semibold mb-3 text-accent" style="font-family: var(--font-serif-sc), var(--font-fallback);">
+                            <i class="fas fa-file-contract mr-2 opacity-75"></i>签署辅导协议时
+                        </h3>
+                        <ul class="list-disc list-inside text-secondary leading-relaxed">
+                            <li><strong class="text-primary">若辅导内容涉及国家秘密</strong>（例如尽调中接触军品核心技术、涉密财务数据等），则需在签署保密协议后30日内备案。</li>
+                            <li>若仅提供非涉密通用合规辅导（如公司治理培训），则无需备案。</li>
+                        </ul>
+                    </div>
+                    <div class="bg-primary p-6 rounded-lg border border-base shadow-md transition-transform duration-200 card-hover">
+                        <h3 class="text-xl font-semibold mb-3 text-accent" style="font-family: var(--font-serif-sc), var(--font-fallback);">
+                            <i class="fas fa-handshake mr-2 opacity-75"></i>签署上市保荐协议时
+                        </h3>
+                        <p class="text-secondary leading-relaxed">
+                            因必然涉及招股书涉密信息脱密处理、军工事项审查等，<strong class="text-primary">必须备案</strong>。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-primary p-6 rounded-lg border border-base shadow-md transition-transform duration-200 card-hover">
+                    <h3 class="text-xl font-semibold mb-3 text-accent" style="font-family: var(--font-serif-sc), var(--font-fallback);">
+                        <i class="fas fa-lightbulb mr-2 opacity-75"></i>实务建议
+                    </h3>
+                    <p class="text-secondary leading-relaxed">
+                        军工企业应在签署任何中介协议前，会同保密部门评估业务涉密等级。若存在涉密内容：
+                    </p>
+                    <ul class="list-disc list-inside text-secondary leading-relaxed ml-4 mt-2">
+                        <li>要求中介机构具备《军工涉密业务咨询服务安全保密条件备案证书》；</li>
+                        <li>同步签订保密协议并履行备案<sup class="ml-1 text-accent"><a href="#footnote-1" class="hover:underline">[1]</a></sup><sup class="ml-1 text-accent"><a href="#footnote-3" class="hover:underline">[3]</a></sup>。</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Divider -->
+            <hr class="border-t border-base my-10">
+
+            <!-- Data Visualization Section (Mermaid.js) -->
+            <section class="mb-10">
+                <h2 class="text-3xl font-bold mb-6 text-accent" style="font-family: var(--font-serif-sc), var(--font-fallback);">
+                    <i class="fas fa-project-diagram mr-3 opacity-75"></i>备案义务判断流程图
+                </h2>
+                <p class="text-secondary leading-relaxed mb-6">
+                    通过以下流程图，您可以更直观地理解军工涉密业务备案义务的触发逻辑：
+                </p>
+                <div class="mermaid-container">
+                    <pre class="mermaid">
+graph TD
+    A[券商与涉军企业合作] --> B{签署辅导协议?};
+    B -- 是 --> C{辅导内容是否涉密?};
+    B -- 否 --> D{签署保荐承销协议?};
+    C -- 是 --> E[备案];
+    C -- 否 --> F[无需备案];
+    D -- 是 --> E;
+    D -- 否 --> G[无直接涉密业务];
+
+    style A fill:#2A2A2A,stroke:#00BFFF,stroke-width:2px,color:#E0E0E0
+    style B fill:#2A2A2A,stroke:#00BFFF,stroke-width:2px,color:#E0E0E0
+    style C fill:#2A2A2A,stroke:#00BFFF,stroke-width:2px,color:#E0E0E0
+    style D fill:#2A2A2A,stroke:#00BFFF,stroke-width:2px,color:#E0E0E0
+    style E fill:#00BFFF,stroke:#00BFFF,stroke-width:2px,color:#FFFFFF
+    style F fill:#4A4A4A,stroke:#4A4A4A,stroke-width:2px,color:#E0E0E0
+    style G fill:#4A4A4A,stroke:#4A4A4A,stroke-width:2px,color:#E0E0E0
+
+    linkStyle 2 stroke:#00BFFF,stroke-width:1.5px,fill:none;
+    linkStyle 3 stroke:#00BFFF,stroke-width:1.5px,fill:none;
+                    </pre>
+                </div>
+            </section>
+
+            <!-- Divider -->
+            <hr class="border-t border-base my-10">
+
+            <!-- Footnotes -->
+            <section class="mb-10 text-sm text-secondary">
+                <h3 class="text-xl font-semibold mb-4 text-accent" style="font-family: var(--font-serif-sc), var(--font-fallback);">
+                    <i class="fas fa-info-circle mr-2 opacity-75"></i>脚注来源
+                </h3>
+                <ol class="list-decimal list-outside pl-5 space-y-2">
+                    <li id="footnote-1"><a href="https://rfb.zj.gov.cn/art/2020/10/20/art_1229778041_2555119.html" target="_blank" rel="noopener noreferrer" class="hover:underline text-accent">知识库资料《军工涉密业务咨询服务安全保密监督管理工作常见问题解答》</a></li>
+                    <li id="footnote-2"><a href="http://money.finance.sina.com.cn/corp/view/vISSUE_RaiseExplanationDetail.php?stockid=300855&id=6435633" target="_blank" rel="noopener noreferrer" class="hover:underline text-accent">联网搜索标题：图南股份招股说明书</a></li>
+                    <li id="footnote-3"><a href="https://www.hankunlaw.com/upload/newsAndInsights/9a70fec1721cb8f4699eb98c5e82f561.pdf" target="_blank" rel="noopener noreferrer" class="hover:underline text-accent">联网搜索标题：涉军企业IPO重点问题详解（上篇）</a></li>
+                    <li id="footnote-4">依据《涉军企事业单位改制重组上市及上市后资本运作军工事项审查暂行办法》（科工计〔2016〕209号）第四条。</li>
+                </ol>
+            </section>
+
+            <!-- Divider -->
+            <hr class="border-t border-base my-10">
+
+            <!-- Further Reading -->
+            <section>
+                <h2 class="text-3xl font-bold mb-6 text-accent" style="font-family: var(--font-serif-sc), var(--font-fallback);">
+                    <i class="fas fa-book-open mr-3 opacity-75"></i>延伸阅读
+                </h2>
+                <p class="text-secondary leading-relaxed mb-6">
+                    若您希望深入了解军工涉密业务及资本市场相关法规，以下推荐书目或文献将为您提供宝贵参考：
+                </p>
+                <ul class="space-y-4 text-primary">
+                    <li>
+                        <a href="https://www.pkulaw.com/law/2219808399e52ce6d5571650b2841b80bdfb974a926105c0b4352f2052.html" target="_blank" rel="noopener noreferrer" class="hover:underline text-accent text-lg font-medium">
+                            <i class="fas fa-chevron-right text-accent text-sm mr-2"></i>《中华人民共和国保守国家秘密法》
+                        </a>
+                        <p class="text-secondary text-sm ml-6">国家秘密保护的根本大法，理解涉密业务前提的基础。</p>
+                    </li>
+                    <li>
+                        <a href="https://www.miit.gov.cn/cms/syt/wjbfb/bfb/art/2017/art_3cf4a54c8612457fb1f99c00bcf3b3a6.html" target="_blank" rel="noopener noreferrer" class="hover:underline text-accent text-lg font-medium">
+                            <i class="fas fa-chevron-right text-accent text-sm mr-2"></i>《军工涉密业务咨询服务安全保密监督管理办法》及实施细则
+                        </a>
+                        <p class="text-secondary text-sm ml-6">本页内容的核心法规依据，详细规定了备案、资质等要求。</p>
+                    </li>
+                    <li>
+                        <a href="http://www.kjs.gov.cn/art/2016/8/26/art_100_15494.html" target="_blank" rel="noopener noreferrer" class="hover:underline text-accent text-lg font-medium">
+                            <i class="fas fa-chevron-right text-accent text-sm mr-2"></i>《涉军企事业单位改制重组上市及上市后资本运作军工事项审查暂行办法》（科工计〔2016〕209号）
+                        </a>
+                        <p class="text-secondary text-sm ml-6">明确涉军企业资本运作中的军工事项审查流程与要求。</p>
+                    </li>
+                    <li>
+                        <a href="https://book.douban.com/subject/26732959/" target="_blank" rel="noopener noreferrer" class="hover:underline text-accent text-lg font-medium">
+                            <i class="fas fa-chevron-right text-accent text-sm mr-2"></i>《IPO实务指南》（或类似权威IPO实务书籍）
+                        </a>
+                        <p class="text-secondary text-sm ml-6">全面了解企业首次公开发行股票的整体流程与关键环节，有助于理解辅导与保荐的背景。</p>
+                    </li>
+                    <li>
+                        <a href="https://book.douban.com/subject/35367683/" target="_blank" rel="noopener noreferrer" class="hover:underline text-accent text-lg font-medium">
+                            <i class="fas fa-chevron-right text-accent text-sm mr-2"></i>《中国资本市场法律制度》（相关章节）
+                        </a>
+                        <p class="text-secondary text-sm ml-6">系统学习中国资本市场法律框架，加深对涉军业务合规性的理解。</p>
+                    </li>
+                </ul>
+            </section>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-secondary border-t border-base mt-12" style="background-color: var(--color-bg-primary);">
+        <p>&copy; 2023 密档智库. 保留所有权利。</p>
+        <div class="mt-4 flex justify-center space-x-6 text-accent">
+            <a href="#" class="hover:text-primary transition-colors duration-200" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="hover:text-primary transition-colors duration-200" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="hover:text-primary transition-colors duration-200" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+    </footer>
+
+    <!-- Mermaid.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base', // Use base theme to allow for custom CSS styling
+            flowchart: {
+                use</td>
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>军工涉密业务备案：辅导协议是否触发义务？</title>
+    <meta name="description" content="深入探讨军工涉密业务咨询服务的备案触发条件，特别是辅导协议和保荐承销协议在其中的角色，提供权威解读与实务建议。">
+
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom Fonts */
+        :root {
+            --font-serif-sc: 'Noto Serif SC', serif;
+            --font-sans-sc: 'Noto Sans SC', sans-serif;
+            --font-fallback: Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-sans-sc), var(--font-fallback);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-serif-sc), var(--font-fallback);
+        }
+
+        /* Dark Mode Specific Styles (Default) */
+        html.dark {
+            --color-bg-primary: #121212; /* Very dark background */
+            --color-bg-secondary: #1E1E1E; /* Slightly lighter for cards/sections */
+            --color-text-primary: #E0E0E0; /* Light gray for main text */
+            --color-text-secondary: #A0A0A0; /* Muted gray for secondary text */
+            --color-accent: #00BFFF; /* Bright Sky Blue for highlights */
+            --color-border: #3A3A3A; /* Darker border */
+        }
+
+        /* Light Mode Specific Styles */
+        html.light {
+            --color-bg-primary: #FDFDFD;
+            --color-bg-secondary: #FFFFFF;
+            --color-text-primary: #333333;
+            --color-text-secondary: #666666;
+            --color-accent: #007BFF; /* Royal Blue */
+            --color-border: #DCDCDC;
+        }
+
+        body {
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .text-primary { color: var(--color-text-primary); }
+        .text-secondary { color: var(--color-text-secondary); }
+        .bg-secondary { background-color: var(--color-bg-secondary); }
+        .border-base { border-color: var(--color-border); }
+        .text-accent { color: var(--color-accent); }
+
+        /* Hover effects */
+        .hover\:text-accent:hover { color: var(--color-accent); }
+        .hover\:bg-accent-light:hover { background-color: rgba(0, 191, 255, 0.1); } /* Dark mode */
+        html.light .hover\:bg-accent-light:hover { background-color: rgba(0, 123, 255, 0.1); } /* Light mode */
+        .card-hover:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: var(--color-accent);
+        }
+        html.light .card-hover:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        html.dark .card-hover:hover {
+             box-shadow: 0 10px 15px -3px rgba(0, 191, 255, 0.05), 0 4px 6px -2px rgba(0, 191, 255, 0.02);
+        }
+
+        /* Custom Drop Cap */
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 4.5em; /* Larger size */
+            line-height: 0.8;
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            font-weight: bold;
+            color: var(--color-accent);
+            font-family: var(--font-serif-sc), var(--font-fallback);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        html.light .drop-cap::first-letter {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+
+        /* Mermaid container styling for responsiveness and dark mode compatibility */
+        .mermaid-container {
+            background-color: var(--color-bg-secondary);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--color-border);
+            overflow-x: auto; /* Enable horizontal scrolling for small screens */
+        }
+        
+        /* Mermaid theme adjustments for dark mode via CSS variables */
+        html.dark .mermaid .node rect, html.dark .mermaid .node circle {
+            fill: #2A2A2A !important; /* Node background */
+            stroke: var(--color-accent) !important; /* Node border */
+        }
+        html.dark .mermaid .edgePaths .path {
+            stroke: var(--color-accent) !important; /* Edge lines */
+        }
+        html.dark .mermaid .edgeLabels text {
+            fill: var(--color-text-primary) !important; /* Edge labels text */
+        }
+        html.dark .mermaid .label text { /* Text inside nodes */
+            fill: var(--color-text-primary) !important;
+        }
+
+        /* Mermaid theme adjustments for light mode */
+        html.light .mermaid .node rect, html.light .mermaid .node circle {
+            fill: #F0F0F0 !important; /* Node background */
+            stroke: var(--color-accent) !important; /* Node border */
+        }
+        html.light .mermaid .edgePaths .path {
+            stroke: var(--color-accent) !important; /* Edge lines */
+        }
+        html.light .mermaid .edgeLabels text {
+            fill: var(--color-text-primary) !important; /* Edge labels text */
+        }
+        html.light .mermaid .label text { /* Text inside nodes */
+            fill: var(--color-text-primary) !important;
+        }
+
+        /* Responsive Table */
+        .responsive-table {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .responsive-table table {
+            width: 100%;
+            min-width: 600px; /* Ensure table doesn't get too squished */
+        }
+    </style>
+</head>
+<body class="min-h-screen antialiased flex flex-col">
+
+    <!-- Header and Mode Toggle -->
+    <header class="py-4 px-6 md:px-10 lg:px-20 flex justify-between items-center z-20 sticky top-0 bg-opacity-90 backdrop-filter backdrop-blur-sm" style="background-color: var(--color-bg-primary);">
+        <div class="text-2xl font-bold text-accent">密档<span class="text-primary">智库</span></div>
+        <button id="theme-toggle" class="p-2 rounded-full hover:bg-accent-light focus:outline-none focus:ring-2 focus:ring-accent text-primary transition-colors duration-200" aria-label="Toggle dark/light mode">
+            <i class="fas fa-sun hidden dark:inline-block"></i>
+            <i class="fas fa-moon dark:hidden"></i>
+        </button>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gray-900 text-white py-24 md:py-32 overflow-hidden" style="background-color: var(--color-bg-primary);">
+        <!-- Subtle background pattern/gradient -->
+        <div class="absolute inset-0 z-0 opacity-10" style="background-image: radial-gradient(circle at center, rgba(0, 191, 255, 0.1) 0%, transparent 70%);"></div>
+        <div class="absolute inset-0 z-0 opacity-5" style="background-image: url('data:image/svg+xml,%3Csvg width=\'6\' height=\'6\' viewBox=\'0 0 6 6\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%239C92AC\' fill-opacity=\'0.1\' fill-rule=\'evenodd\'%3E%3Cpath d=\'M5 0h1L0 6V5zm1 5v1H5zM6 0H5v1z\'/%3E%3C/g%3E%3C/svg%3E');"></div>
+        
+        <div class="container mx-auto px-6 md:px-10 lg:px-20 relative z-10 text-center">
+            <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-4 text-accent drop-shadow-lg" style="font-family: var(--font-serif-sc), var(--font-fallback);">
+                军工涉密业务备案：辅导协议是否触发义务？
+            </h1>
+            <p class="text-xl md:text-2xl font-light mb-8 text-primary" style="font-family: var(--font-sans-sc), var(--font-fallback);">
+                深度解析券商与涉军企业合作的备案要求与实践
+            </p>
+            <p class="max-w-3xl mx-auto text-lg md:text-xl text-secondary opacity-90 leading-relaxed">
+                本报告旨在明晰保荐券商在服务涉军发行人过程中，不同协议阶段（辅导协议与保荐承销协议）对军工涉密业务咨询服务备案义务的影响，结合法规条文与实务案例，提供清晰的指导。
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content Section -->
+    <main class="flex-grow container mx-auto px-6 md:px-10 lg:px-20 py-12 md:py-16">
+        <article class="bg-secondary rounded-xl shadow-lg p-8 md:p-12 border border-base">
+            <p class="text-lg leading-relaxed mb-8 drop-cap text-primary">
+                根据《军工涉密业务咨询服务安全保密监督管理办法及实施细则》第十二条及相关监管实践，结合联网搜索结果和行业案例，对您的问题分析如下：
+            </p>
+
+            <!-- Section 1: 备案义务的触发条件 -->
+            <section class="mb-10">
+                <h2 class="text-3xl font-bold mb-6 text-accent" style="font-family: var(--font-serif-sc), var(--font-fallback);">
+                    <i class="fas fa-scroll mr-3 opacity-75"></i>一、备案义务的触发条件
+                </h2>
+                <p class="text-primary leading-relaxed mb-6">
+                    根据规定，军工单位需在委托涉密业务时履行备案义务，<strong class="text-accent">核心判断标准是咨询服务是否涉及国家秘密</strong>，而非仅以协议名称（如辅导协议或保荐协议）作为区分依据：
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-primary p-6 rounded-lg border border-base transition-transform duration-200 card-hover shadow-md">
+                        <h3 class="text-xl font-semibold mb-3 text-accent" style="font-family: var(--font-serif-sc), var(--font-fallback);">
+                            <i class="fas fa-balance-scale mr-2 opacity-75"></i>业务实质优先原则
+                        </h3>
+                        <p class="text-secondary leading-relaxed mb-4">
+                            若辅导协议涉及涉密业务（如查阅军工企业涉密资料、参与涉密方案设计等），即使处于IPO早期辅导阶段，也需备案。
+                        </p>
+                        <blockquote class="border-l-4 border-accent pl-4 py-2 italic text-secondary">
+                            <i class="fas fa-quote-left text-accent mr-2"></i>
+                            <span class="text-primary">"在委托涉密业务前，甲方应当与乙方签订保密协议。在签订保密协议后，甲方应当于30个工作日内，将委托咨询服务有关情况向主管单位备案"</span><sup class="ml-1 text-accent"><a href="#footnote-1" class="hover:underline">[1]</a></sup>。
+                            <i class="fas fa-quote-right text-accent ml-2"></i>
+                        </blockquote>
+                        <p class="text-secondary text-sm mt-4">
+                            此处明确以"委托涉密业务"为触发点，未限定为改制或上市阶段。
+                        </p>
+                    </div>
+
+                    <div class="bg-primary p-6 rounded-lg border border-base transition-transform duration-200 card-hover shadow-md">
+                        <h3 class="text-xl font-semibold mb-3 text-accent" style="font-family: var(--font-serif-sc), var(--font-fallback);">
+                            <i class="fas fa-industry mr-2 opacity-75"></i>行业监管案例佐证
+                        </h3>
+                        <p class="text-secondary leading-relaxed mb-4">
+                            实务中，券商在辅导阶段若接触涉密信息（如军品技术参数、采购计划等），均需备案。
+                        </p>
+                        <ul class="list-disc list-inside text-secondary mb-4">
+                            <li>例如图南股份（300855）招股书显示，其IPO辅导机构在辅导阶段已向国防科工局备案保密资质<sup class="ml-1 text-accent"><a href="#footnote-2" class="hover:underline">[2]</a></sup>。</li>
+                            <li>汉坤律所报告指出：<strong class="text-primary">"涉军企业可与中介机构签署保密协议、委托中介机构从事涉密业务咨询服务，并于委托后30个工作日内向主管单位备案"</strong><sup class="ml-1 text-accent"><a href="#footnote-3" class="hover:underline">[3]</a></sup>，未区分辅导或上市阶段。</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Divider -->
+            <hr class="border-t border-base my-10">
+
+            <!-- Section 2: 两种协议场景的具体分析 -->
+            <section class="mb-10">
+                <h2 class="text-3xl font-bold mb-6 text-accent" style="font-family: var(--font-serif-sc), var(--font-fallback);">
+                    <i class="fas fa-clipboard-list mr-3 opacity-75"></i>二、两种协议场景的具体分析
+                </h2>
+                <div class="responsive-table">
+                    <table class="w-full text-left border-collapse rounded-lg overflow-hidden">
+                        <thead class="bg-accent bg-opacity-10 text-accent">
+                            <tr class="text-lg">
+                                <th class="p-4 border-b border-base rounded-tl-lg">协议类型</th>
+                                <th class="p-4 border-b border-base">是否触发备案义务</th>
+                                <th class="p-4 border-b border-base rounded-tr-lg">依据及说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hover:bg-accent-light transition-colors duration-200">
+                                <td class="p-4 border-b border-base text-primary"><strong>辅导协议</strong></td>
+                                <td class="p-4 border-b border-base text-accent">✅ 若涉及涉密业务</td>
+                                <td class="p-4 border-b border-base text-secondary">辅导阶段若查阅涉密资料、制定涉密整改方案等，属于"咨询服务"，需备案<sup class="ml-1 text-accent"><a href="#footnote-1" class="hover:underline">[1]</a></sup><sup class="ml-1 text-accent"><a href="#footnote-3" class="hover:underline">[3]</a></sup>。</td>
+                            </tr>
+                            <tr class="hover:bg-accent-light transition-colors duration-200">
+                                <td class="p-4 border-b border-base text-primary"><strong>保荐承销协议</strong></td>
+                                <td class="p-4 border-b border-base text-accent">✅ 必然触发</td>
+                                <td class="p-4 border-b border-base text-secondary">上市阶段需处理招股书涉密章节、答复监管涉密问询等，直接涉及国家秘密<sup class="ml-1 text-accent"><a href="#footnote-4" class="hover:underline">[4]</a></sup>。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Divider -->
+            <hr class="border-t border-base my-10">
+
+            <!-- Section 3: Conclusion -->
+            <section class="mb-10">
+                <h2 class="text-3xl font-bold mb-6 text-accent" style="font-family: var(--font-serif-sc), var(--font-fallback);">
+                    <i class="fas fa-check-circle mr-3 opacity-75"></i>结论
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-primary p-6 rounded-lg border border-base shadow-md transition-transform duration-200 card-hover">
+                        <h3 class="text-xl font-semibold mb-3 text-accent" style="font-family: var(--font-serif-sc), var(--font-fallback);">
+                            <i class="fas fa-file-contract mr-2 opacity-75"></i>签署辅导协议时
+                        </h3>
+                        <ul class="list-disc list-inside text-secondary leading-relaxed">
+                            <li><strong class="text-primary">若辅导内容涉及国家秘密</strong>（例如尽调中接触军品核心技术、涉密财务数据等），则需在签署保密协议后30日内备案。</li>
+                            <li>若仅提供非涉密通用合规辅导（如公司治理培训），则无需备案。</li>
+                        </ul>
+                    </div>
+                    <div class="bg-primary p-6 rounded-lg border border-base shadow-md transition-transform duration-200 card-hover">
+                        <h3 class="text-xl font-semibold mb-3 text-accent" style="font-family: var(--font-serif-sc), var(--font-fallback);">
+                            <i class="fas fa-handshake mr-2 opacity-75"></i>签署上市保荐协议时
+                        </h3>
+                        <p class="text-secondary leading-relaxed">
+                            因必然涉及招股书涉密信息脱密处理、军工事项审查等，<strong class="text-primary">必须备案</strong>。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-primary p-6 rounded-lg border border-base shadow-md transition-transform duration-200 card-hover">
+                    <h3 class="text-xl font-semibold mb-3 text-accent" style="font-family: var(--font-serif-sc), var(--font-fallback);">
+                        <i class="fas fa-lightbulb mr-2 opacity-75"></i>实务建议
+                    </h3>
+                    <p class="text-secondary leading-relaxed">
+                        军工企业应在签署任何中介协议前，会同保密部门评估业务涉密等级。若存在涉密内容：
+                    </p>
+                    <ul class="list-disc list-inside text-secondary leading-relaxed ml-4 mt-2">
+                        <li>要求中介机构具备《军工涉密业务咨询服务安全保密条件备案证书》；</li>
+                        <li>同步签订保密协议并履行备案<sup class="ml-1 text-accent"><a href="#footnote-1" class="hover:underline">[1]</a></sup><sup class="ml-1 text-accent"><a href="#footnote-3" class="hover:underline">[3]</a></sup>。</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Divider -->
+            <hr class="border-t border-base my-10">
+
+            <!-- Data Visualization Section (Mermaid.js) -->
+            <section class="mb-10">
+                <h2 class="text-3xl font-bold mb-6 text-accent" style="font-family: var(--font-serif-sc), var(--font-fallback);">
+                    <i class="fas fa-project-diagram mr-3 opacity-75"></i>备案义务判断流程图
+                </h2>
+                <p class="text-secondary leading-relaxed mb-6">
+                    通过以下流程图，您可以更直观地理解军工涉密业务备案义务的触发逻辑：
+                </p>
+                <div class="mermaid-container">
+                    <pre class="mermaid">
+graph TD
+    A[券商与涉军企业合作] --> B{签署辅导协议?};
+    B -- 是 --> C{辅导内容是否涉密?};
+    B -- 否 --> D{签署保荐承销协议?};
+    C -- 是 --> E[备案];
+    C -- 否 --> F[无需备案];
+    D -- 是 --> E;
+    D -- 否 --> G[无直接涉密业务];
+
+    style A fill:#2A2A2A,stroke:#00BFFF,stroke-width:2px,color:#E0E0E0
+    style B fill:#2A2A2A,stroke:#00BFFF,stroke-width:2px,color:#E0E0E0
+    style C fill:#2A2A2A,stroke:#00BFFF,stroke-width:2px,color:#E0E0E0
+    style D fill:#2A2A2A,stroke:#00BFFF,stroke-width:2px,color:#E0E0E0
+    style E fill:#00BFFF,stroke:#00BFFF,stroke-width:2px,color:#FFFFFF
+    style F fill:#4A4A4A,stroke:#4A4A4A,stroke-width:2px,color:#E0E0E0
+    style G fill:#4A4A4A,stroke:#4A4A4A,stroke-width:2px,color:#E0E0E0
+
+    linkStyle 2 stroke:#00BFFF,stroke-width:1.5px,fill:none;
+    linkStyle 3 stroke:#00BFFF,stroke-width:1.5px,fill:none;
+                    </pre>
+                </div>
+            </section>
+
+            <!-- Divider -->
+            <hr class="border-t border-base my-10">
+
+            <!-- Footnotes -->
+            <section class="mb-10 text-sm text-secondary">
+                <h3 class="text-xl font-semibold mb-4 text-accent" style="font-family: var(--font-serif-sc), var(--font-fallback);">
+                    <i class="fas fa-info-circle mr-2 opacity-75"></i>脚注来源
+                </h3>
+                <ol class="list-decimal list-outside pl-5 space-y-2">
+                    <li id="footnote-1"><a href="https://rfb.zj.gov.cn/art/2020/10/20/art_1229778041_2555119.html" target="_blank" rel="noopener noreferrer" class="hover:underline text-accent">知识库资料《军工涉密业务咨询服务安全保密监督管理工作常见问题解答》</a></li>
+                    <li id="footnote-2"><a href="http://money.finance.sina.com.cn/corp/view/vISSUE_RaiseExplanationDetail.php?stockid=300855&id=6435633" target="_blank" rel="noopener noreferrer" class="hover:underline text-accent">联网搜索标题：图南股份招股说明书</a></li>
+                    <li id="footnote-3"><a href="https://www.hankunlaw.com/upload/newsAndInsights/9a70fec1721cb8f4699eb98c5e82f561.pdf" target="_blank" rel="noopener noreferrer" class="hover:underline text-accent">联网搜索标题：涉军企业IPO重点问题详解（上篇）</a></li>
+                    <li id="footnote-4">依据《涉军企事业单位改制重组上市及上市后资本运作军工事项审查暂行办法》（科工计〔2016〕209号）第四条。</li>
+                </ol>
+            </section>
+
+            <!-- Divider -->
+            <hr class="border-t border-base my-10">
+
+            <!-- Further Reading -->
+            <section>
+                <h2 class="text-3xl font-bold mb-6 text-accent" style="font-family: var(--font-serif-sc), var(--font-fallback);">
+                    <i class="fas fa-book-open mr-3 opacity-75"></i>延伸阅读
+                </h2>
+                <p class="text-secondary leading-relaxed mb-6">
+                    若您希望深入了解军工涉密业务及资本市场相关法规，以下推荐书目或文献将为您提供宝贵参考：
+                </p>
+                <ul class="space-y-4 text-primary">
+                    <li>
+                        <a href="https://www.pkulaw.com/law/2219808399e52ce6d5571650b2841b80bdfb974a926105c0b4352f2052.html" target="_blank" rel="noopener noreferrer" class="hover:underline text-accent text-lg font-medium">
+                            <i class="fas fa-chevron-right text-accent text-sm mr-2"></i>《中华人民共和国保守国家秘密法》
+                        </a>
+                        <p class="text-secondary text-sm ml-6">国家秘密保护的根本大法，理解涉密业务前提的基础。</p>
+                    </li>
+                    <li>
+                        <a href="https://www.miit.gov.cn/cms/syt/wjbfb/bfb/art/2017/art_3cf4a54c8612457fb1f99c00bcf3b3a6.html" target="_blank" rel="noopener noreferrer" class="hover:underline text-accent text-lg font-medium">
+                            <i class="fas fa-chevron-right text-accent text-sm mr-2"></i>《军工涉密业务咨询服务安全保密监督管理办法》及实施细则
+                        </a>
+                        <p class="text-secondary text-sm ml-6">本页内容的核心法规依据，详细规定了备案、资质等要求。</p>
+                    </li>
+                    <li>
+                        <a href="http://www.kjs.gov.cn/art/2016/8/26/art_100_15494.html" target="_blank" rel="noopener noreferrer" class="hover:underline text-accent text-lg font-medium">
+                            <i class="fas fa-chevron-right text-accent text-sm mr-2"></i>《涉军企事业单位改制重组上市及上市后资本运作军工事项审查暂行办法》（科工计〔2016〕209号）
+                        </a>
+                        <p class="text-secondary text-sm ml-6">明确涉军企业资本运作中的军工事项审查流程与要求。</p>
+                    </li>
+                    <li>
+                        <a href="https://book.douban.com/subject/26732959/" target="_blank" rel="noopener noreferrer" class="hover:underline text-accent text-lg font-medium">
+                            <i class="fas fa-chevron-right text-accent text-sm mr-2"></i>《IPO实务指南》（或类似权威IPO实务书籍）
+                        </a>
+                        <p class="text-secondary text-sm ml-6">全面了解企业首次公开发行股票的整体流程与关键环节，有助于理解辅导与保荐的背景。</p>
+                    </li>
+                    <li>
+                        <a href="https://book.douban.com/subject/35367683/" target="_blank" rel="noopener noreferrer" class="hover:underline text-accent text-lg font-medium">
+                            <i class="fas fa-chevron-right text-accent text-sm mr-2"></i>《中国资本市场法律制度》（相关章节）
+                        </a>
+                        <p class="text-secondary text-sm ml-6">系统学习中国资本市场法律框架，加深对涉军业务合规性的理解。</p>
+                    </li>
+                </ul>
+            </section>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-secondary border-t border-base mt-12" style="background-color: var(--color-bg-primary);">
+        <p>&copy; 2023 密档智库. 保留所有权利。</p>
+        <div class="mt-4 flex justify-center space-x-6 text-accent">
+            <a href="#" class="hover:text-primary transition-colors duration-200" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="hover:text-primary transition-colors duration-200" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="hover:text-primary transition-colors duration-200" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+    </footer>
+
+    <!-- Mermaid.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base', // Use base theme to allow for custom CSS styling
+            flowchart: {
+                htmlLabels: true
+            }
+        });
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            htmlElement.classList.remove('light', 'dark');
+            htmlElement.classList.add(theme);
+            localStorage.setItem('theme', theme);
+            // No need to re-initialize Mermaid if its theme is controlled by CSS classes on html element
+        }
+
+        // Check for saved theme or system preference on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme('dark');
+            } else {
+                setTheme('light');
+            }
+        });
+
+        // Toggle theme on button click
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Listen for system theme changes (optional, but good practice)
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            // Only react if user hasn't manually set a theme (i.e., no localStorage entry)
+            if (!localStorage.getItem('theme')) { 
+                setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+    </script>
+</body>
+</html>
+```
