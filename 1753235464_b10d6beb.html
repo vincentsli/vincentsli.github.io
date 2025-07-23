@@ -1,0 +1,567 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拟上市公司债转股评估指南</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-bg: #1A1A2E;
+            --dark-card: #282844;
+            --dark-text-primary: #E0E0E0;
+            --dark-text-secondary: #B0B0B0;
+            --dark-accent: #6C63FF; /* Purple-ish accent */
+            --dark-border: #404066;
+
+            --light-bg: #F5F5F5;
+            --light-card: #FFFFFF;
+            --light-text-primary: #333333;
+            --light-text-secondary: #666666;
+            --light-accent: #4B0082; /* Indigo accent */
+            --light-border: #E0E0E0;
+        }
+
+        /* Dark Mode Styles */
+        html.dark {
+            background-color: var(--dark-bg);
+            color: var(--dark-text-primary);
+        }
+        html.dark .bg-card {
+            background-color: var(--dark-card);
+        }
+        html.dark .text-secondary {
+            color: var(--dark-text-secondary);
+        }
+        html.dark .border-primary {
+            border-color: var(--dark-border);
+        }
+        html.dark .text-accent {
+            color: var(--dark-accent);
+        }
+        html.dark .btn-accent {
+            background-color: var(--dark-accent);
+            color: var(--dark-text-primary);
+        }
+        html.dark a {
+            color: var(--dark-accent);
+        }
+
+        /* Light Mode Styles */
+        html.light {
+            background-color: var(--light-bg);
+            color: var(--light-text-primary);
+        }
+        html.light .bg-card {
+            background-color: var(--light-card);
+        }
+        html.light .text-secondary {
+            color: var(--light-text-secondary);
+        }
+        html.light .border-primary {
+            border-color: var(--light-border);
+        }
+        html.light .text-accent {
+            color: var(--light-accent);
+        }
+        html.light .btn-accent {
+            background-color: var(--light-accent);
+            color: var(--light-card);
+        }
+        html.light a {
+            color: var(--light-accent);
+        }
+
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            line-height: 1.8;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', serif;
+            line-height: 1.4;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .hero-background {
+            background: linear-gradient(rgba(26, 26, 46, 0.8), rgba(26, 26, 46, 0.8)), url('https://source.unsplash.com/random/1920x1080/?finance,growth,investment') no-repeat center center/cover;
+        }
+        html.light .hero-background {
+            background: linear-gradient(rgba(245, 245, 245, 0.8), rgba(245, 245, 245, 0.8)), url('https://source.unsplash.com/random/1920x1080/?finance,growth,investment') no-repeat center center/cover;
+        }
+
+        /* Custom Scrollbar for subtle visual effect */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--dark-card);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--dark-accent);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5A52D0; /* Slightly darker accent on hover */
+        }
+        html.light ::-webkit-scrollbar-track {
+            background: var(--light-card);
+        }
+        html.light ::-webkit-scrollbar-thumb {
+            background: var(--light-accent);
+        }
+        html.light ::-webkit-scrollbar-thumb:hover {
+            background: #3c0066; /* Slightly darker accent on hover */
+        }
+
+        /* First letter drop cap */
+        .drop-cap:first-letter {
+            float: left;
+            font-size: 4.5em; /* Larger size */
+            line-height: 0.8; /* Adjust line height to prevent too much vertical space */
+            margin-right: 0.1em; /* Small right margin */
+            font-family: 'Noto Serif SC', serif;
+            color: var(--dark-accent);
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+        }
+        html.light .drop-cap:first-letter {
+            color: var(--light-accent);
+        }
+
+        /* Smooth scroll for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Mermaid container styling */
+        .mermaid-container {
+            background-color: var(--dark-bg); /* Match main background or a slightly lighter one */
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease;
+        }
+        html.light .mermaid-container {
+            background-color: var(--light-bg);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        /* Specific Mermaid theme adjustments for dark mode */
+        .mermaid {
+            color: var(--dark-text-primary) !important;
+            fill: var(--dark-text-primary) !important;
+        }
+        html.dark .mermaid .node rect, html.dark .mermaid .node circle, html.dark .mermaid .node ellipse, html.dark .mermaid .node polygon {
+            fill: var(--dark-card) !important;
+            stroke: var(--dark-accent) !important;
+        }
+        html.dark .mermaid .node text {
+            fill: var(--dark-text-primary) !important;
+        }
+        html.dark .mermaid .edgePath .path {
+            stroke: var(--dark-border) !important;
+            fill: none !important;
+        }
+        html.dark .mermaid .edgePath .arrowheadPath {
+            fill: var(--dark-border) !important;
+            stroke: var(--dark-border) !important;
+        }
+        html.dark .mermaid .labelText {
+            fill: var(--dark-text-secondary) !important;
+        }
+
+        /* Specific Mermaid theme adjustments for light mode */
+        html.light .mermaid .node rect, html.light .mermaid .node circle, html.light .mermaid .node ellipse, html.light .mermaid .node polygon {
+            fill: var(--light-card) !important;
+            stroke: var(--light-accent) !important;
+        }
+        html.light .mermaid .node text {
+            fill: var(--light-text-primary) !important;
+        }
+        html.light .mermaid .edgePath .path {
+            stroke: var(--light-border) !important;
+            fill: none !important;
+        }
+        html.light .mermaid .edgePath .arrowheadPath {
+            fill: var(--light-border) !important;
+            stroke: var(--light-border) !important;
+        }
+        html.light .mermaid .labelText {
+            fill: var(--light-text-secondary) !important;
+        }
+
+        /* Ensure Mermaid diagram is responsive */
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+    </style>
+</head>
+<body class="transition-colors duration-300">
+    <!-- Header with Theme Toggle -->
+    <header class="py-4 px-6 flex justify-between items-center fixed w-full z-50 bg-card shadow-lg border-b border-primary">
+        <div class="flex items-center space-x-2">
+            <i class="fas fa-landmark text-accent text-2xl"></i>
+            <span class="text-xl font-semibold text-primary">资本洞察</span>
+        </div>
+        <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-accent transition-colors duration-300">
+            <i id="theme-icon" class="fas fa-moon text-xl text-primary"></i>
+        </button>
+    </header>
+
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section class="hero-background text-white py-24 px-6 md:px-12 text-center relative overflow-hidden">
+            <div class="relative z-10 max-w-4xl mx-auto">
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 animate-fade-in-up">
+                    <span class="text-accent">拟上市公司债转股：</span> 深度评估与合规指南
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-secondary tracking-wide animate-fade-in-up delay-200">
+                    探究A股IPO背景下，股东债转股投资的评估必要性、机构选择与资质要求
+                </p>
+                <a href="#content" class="inline-block bg-accent text-white px-8 py-4 rounded-full text-lg font-bold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 animate-fade-in-up delay-400">
+                    <i class="fas fa-arrow-down mr-2"></i> 立即阅读
+                </a>
+            </div>
+            <!-- Subtle particles/shapes for visual interest -->
+            <div class="absolute inset-0 z-0 opacity-20">
+                <div class="absolute top-1/4 left-1/4 w-32 h-32 bg-purple-500 rounded-full mix-blend-screen animate-blob animation-delay-0"></div>
+                <div class="absolute top-1/2 right-1/4 w-48 h-48 bg-blue-500 rounded-full mix-blend-screen animate-blob animation-delay-2000"></div>
+                <div class="absolute bottom-1/4 left-1/2 w-40 h-40 bg-pink-500 rounded-full mix-blend-screen animate-blob animation-delay-4000"></div>
+            </div>
+        </section>
+
+        <!-- Main Content Section -->
+        <section id="content" class="container mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
+            <!-- Article Content -->
+            <article class="md:col-span-2 bg-card p-8 rounded-lg shadow-xl border border-primary">
+                <p class="text-secondary mb-8 text-lg drop-cap">
+                    您好，作为专业的投行业务与A股市场资本运作专家，我将基于当前掌握的联网搜索结果、知识库检索结果（知识库关键词为“拟上市公司,债转股,评估机构,证券服务资质,股东”）以及最新的A股IPO相关法规（截至2025年7月23日），为您提供关于拟上市公司股东通过债转股投资的专业分析与解答。
+                </p>
+
+                <h2 class="text-3xl font-bold mb-6 text-accent flex items-center">
+                    <i class="fas fa-question-circle mr-3"></i> 1. 债转股是否需要做评估？
+                </h2>
+                <div class="border-l-4 border-accent pl-4 mb-8">
+                    <p class="text-2xl font-semibold mb-2 text-primary">是的，强制要求评估。</p>
+                    <p class="text-lg text-secondary">
+                        根据《公司法》第27条规定，非货币资产出资必须进行资产评估，而债转股（即将债权转换为公司股权）正属于此类非货币出资行为。评估的目的是为了确保债权价值的公允性，防止可能稀释现有股东权益的情况发生，同时也是IPO审核的关键合规性要求。
+                    </p>
+                    <ul class="list-disc list-inside text-secondary mt-4 space-y-2">
+                        <li><i class="fas fa-balance-scale-left mr-2 text-accent"></i> 确保债权价值公允，维护公司和股东利益。</li>
+                        <li><i class="fas fa-gavel mr-2 text-accent"></i> 符合《公司法》及证券监管部门对非货币出资的法定要求。</li>
+                        <li><i class="fas fa-check-circle mr-2 text-accent"></i> 在A股IPO过程中，评估报告是必不可少的申报材料，缺失或不规范可能导致审核受阻甚至申请被否。</li>
+                    </ul>
+                </div>
+                <blockquote class="bg-gray-100 dark:bg-gray-800 border-l-4 border-blue-500 pl-4 py-3 italic text-secondary rounded-lg my-6 shadow-sm">
+                    <p>"投资方以非货币资产出资的，应当根据《公司法》的规定...委托具有相应资质的评估机构进行评估。"</p>
+                    <footer class="text-sm mt-2 text-right">- 联网搜索 [企业合规| 市场化债转股基金的“募投管退”][^2]</footer>
+                </blockquote>
+
+                <h2 class="text-3xl font-bold mb-6 text-accent flex items-center">
+                    <i class="fas fa-users-cog mr-3"></i> 2. 评估机构由谁委托？
+                </h2>
+                <div class="border-l-4 border-accent pl-4 mb-8">
+                    <p class="text-2xl font-semibold mb-2 text-primary">由公司（拟上市公司）委托。</p>
+                    <p class="text-lg text-secondary">
+                        评估机构的委托主体必须是拟上市公司本身，而非股东个人。这是为了保障评估过程的独立性和公正性。债权人（即未来的股东）作为交易的利益相关方，如果自行委托评估，可能存在利益冲突的风险，不符合监管要求。公司应通过董事会或股东会决议，正式委托具备相应资质的评估机构。
+                    </p>
+                    <ul class="list-disc list-inside text-secondary mt-4 space-y-2">
+                        <li><i class="fas fa-handshake mr-2 text-accent"></i> 确保评估独立性与公允性，避免利益冲突。</li>
+                        <li><i class="fas fa-building mr-2 text-accent"></i> 符合《上市公司证券发行注册管理办法》对公司内部控制和合规的要求。</li>
+                        <li><i class="fas fa-vote-yea mr-2 text-accent"></i> 委托流程需经公司董事会或股东会审议通过。</li>
+                    </ul>
+                </div>
+
+                <h2 class="text-3xl font-bold mb-6 text-accent flex items-center">
+                    <i class="fas fa-award mr-3"></i> 3. 是否需要证券服务资质的评估机构？
+                </h2>
+                <div class="border-l-4 border-accent pl-4 mb-8">
+                    <p class="text-2xl font-semibold mb-2 text-primary">是的，必须具备证券期货相关业务资格。</p>
+                    <p class="text-lg text-secondary">
+                        在A股IPO的严谨框架下，所有参与提供专业服务的中介机构，包括资产评估机构，都必须获得中国证监会颁发的《证券期货业务许可证》。这一资质是评估报告被证券监管部门认可的先决条件。不具备该资质的评估机构出具的报告，将无法用于IPO申报，甚至可能导致退回或不予受理。
+                    </p>
+                    <ul class="list-disc list-inside text-secondary mt-4 space-y-2">
+                        <li><i class="fas fa-certificate mr-2 text-accent"></i> 证券监管硬性要求，确保评估报告的权威性与合规性。</li>
+                        <li><i class="fas fa-clipboard-list mr-2 text-accent"></i> 评估机构需在证监会备案，且评估师需具备证券从业资格。</li>
+                        <li><i class="fas fa-lightbulb mr-2 text-accent"></i> 常见的具备资质的机构包括中联评估、天健兴业等业内知名机构。</li>
+                    </ul>
+                </div>
+
+                <!-- Summary & Recommendations -->
+                <h2 class="text-3xl font-bold mb-6 text-accent flex items-center">
+                    <i class="fas fa-lightbulb mr-3"></i> 总结与建议
+                </h2>
+                <div class="bg-blue-50 dark:bg-blue-900 bg-opacity-30 dark:bg-opacity-30 p-6 rounded-lg shadow-inner border border-blue-200 dark:border-blue-700 mb-8">
+                    <ul class="list-none space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-cogs text-blue-500 dark:text-blue-400 mt-1 mr-3 text-xl"></i>
+                            <div>
+                                <strong class="text-xl text-primary block mb-1">操作流程概览：</strong>
+                                <span class="text-secondary text-lg">拟上市公司通过董事会决议，正式委托具备证券期货相关业务资格的评估机构，出具符合监管要求的评估报告，并将其作为IPO申报材料的关键组成部分。</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-exclamation-triangle text-red-500 dark:text-red-400 mt-1 mr-3 text-xl"></i>
+                            <div>
+                                <strong class="text-xl text-primary block mb-1">风险提示：</strong>
+                                <span class="text-secondary text-lg">若债转股未按规定评估，或委托了不具备相应资质的机构，可能导致IPO审核受阻，面临被监管问询或要求重新评估的风险，严重者可能直接影响上市进程。强烈建议在债转股实施前，与您的保荐机构（如券商）进行充分沟通与咨询。</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-clock text-green-500 dark:text-green-400 mt-1 mr-3 text-xl"></i>
+                            <div>
+                                <strong class="text-xl text-primary block mb-1">时效性说明：</strong>
+                                <span class="text-secondary text-lg">上述信息基于2023-2024年（如新《公司法》修订）及之前的现有法规和行业实践，截至2025年7月23日仍具有指导意义。请注意，资本市场政策可能实时更新，建议您始终以中国证监会及相关部门的最新监管问答和指引为准。</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Citations -->
+                <div class="mt-12 pt-8 border-t border-primary text-sm text-secondary">
+                    <h3 class="text-xl font-bold mb-4 text-primary">参考文献及来源：</h3>
+                    <ol class="list-decimal list-outside space-y-2 pl-5">
+                        <li id="fn1">实践中的中国证券法律制度 (链接至: <a href="https://www.kwm.com/content/dam/kwm/insights/download-publication/china/2022/%E5%AE%9E%E8%B7%B5%E4%B8%AD%E7%9A%84%E4%B8%AD%E5%9B%BD%E8%AF%81%E5%88%B8%E6%B3%95%E5%BE%8B%E5%88%B6%E5%BA%A6.pdf" target="_blank" class="text-accent hover:underline">kwm.com</a>)</li>
+                        <li id="fn2">企业合规| 市场化债转股基金的“募投管退” (链接至: <a href="https://www.zhonglun.com/research/articles/7372.html" target="_blank" class="text-accent hover:underline">zhonglun.com</a>)</li>
+                        <li id="fn3">中国证券监督管理委员会令（第206号） 上市公司证券发行注册管理办法 (链接至: <a href="#" onclick="alert('该链接为模拟链接，实际请查阅中国证监会官网'); return false;" class="text-accent hover:underline">证监会官网</a>)</li>
+                        <li id="fn4">长春泰盟机械制造股份有限公司拟债转股 (链接至: <a href="https://pdf.dfcfw.com/pdf/H2_AN201909161360021389_1.pdf" target="_blank" class="text-accent hover:underline">dfcfw.com</a>)</li>
+                        <li id="fn5">基于知识库关键词“证券服务资质”检索，关联《证券法》规定（知识库资料全名：证券期货相关业务资格管理规则）</li>
+                    </ol>
+                </div>
+            </article>
+
+            <!-- Sidebar / Visualization -->
+            <aside class="md:col-span-1 space-y-12">
+                <!-- Key Concepts Card -->
+                <div class="bg-card p-8 rounded-lg shadow-xl border border-primary">
+                    <h3 class="text-2xl font-bold mb-6 text-accent flex items-center">
+                        <i class="fas fa-puzzle-piece mr-3"></i> 核心概念速览
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center">
+                            <span class="bg-accent rounded-full w-6 h-6 flex items-center justify-center text-white text-sm font-bold mr-3">1</span>
+                            <span class="text-lg text-primary"><strong>债转股：</strong> 债权转为股权。</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="bg-accent rounded-full w-6 h-6 flex items-center justify-center text-white text-sm font-bold mr-3">2</span>
+                            <span class="text-lg text-primary"><strong>非货币出资：</strong> 以现金以外的资产出资。</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="bg-accent rounded-full w-6 h-6 flex items-center justify-center text-white text-sm font-bold mr-3">3</span>
+                            <span class="text-lg text-primary"><strong>资产评估：</strong> 确定资产公允价值。</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="bg-accent rounded-full w-6 h-6 flex items-center justify-center text-white text-sm font-bold mr-3">4</span>
+                            <span class="text-lg text-primary"><strong>证券服务资质：</strong> 开展证券业务的必要许可。</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="bg-accent rounded-full w-6 h-6 flex items-center justify-center text-white text-sm font-bold mr-3">5</span>
+                            <span class="text-lg text-primary"><strong>拟上市公司：</strong> 准备上市的公司。</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Data Visualization Section -->
+                <div class="bg-card p-8 rounded-lg shadow-xl border border-primary mermaid-container">
+                    <h3 class="text-2xl font-bold mb-6 text-accent flex items-center">
+                        <i class="fas fa-sitemap mr-3"></i> 债转股合规流程图
+                    </h3>
+                    <div class="mermaid-diagram text-center text-primary">
+                        <pre class="mermaid">
+graph TD
+    A[拟上市公司] --> B(董事会/股东会决议);
+    B --> C{是否涉及债转股?};
+    C -- 是 --> D[债转股被视为非货币出资];
+    D --> E(强制进行资产评估);
+    E --> F[公司委托评估机构];
+    F --> G{评估机构是否具备证券服务资质?};
+    G -- 否 --> H[评估报告无效，IPO受阻];
+    G -- 是 --> I[出具合法有效评估报告];
+    I --> J(评估报告纳入IPO申报材料);
+    J --> K[等待证监会审核];
+    K -- 审核通过 --> L[成功IPO];
+    K -- 审核未通过/问询 --> M[补充材料/整改];
+    C -- 否 --> N[直接准备IPO申报];
+</pre>
+                    </div>
+                    <p class="text-sm text-secondary mt-4">
+                        此图展示了拟上市公司债转股过程中评估与资质要求的关键步骤及相互关系。
+                    </p>
+                </div>
+
+                <!-- Further Reading Section -->
+                <div class="bg-card p-8 rounded-lg shadow-xl border border-primary">
+                    <h3 class="text-2xl font-bold mb-6 text-accent flex items-center">
+                        <i class="fas fa-book-reader mr-3"></i> 延伸阅读
+                    </h3>
+                    <ul class="space-y-4">
+                        <li>
+                            <a href="#" onclick="alert('该链接为模拟链接，实际请查阅相关出版物或学术资料'); return false;" class="text-primary hover:underline block text-lg">
+                                <strong class="text-accent">《公司法》最新修订解读</strong>
+                            </a>
+                            <p class="text-secondary text-sm">深入理解非货币出资及股权结构相关法律条款。</p>
+                        </li>
+                        <li>
+                            <a href="#" onclick="alert('该链接为模拟链接，实际请查阅相关出版物或学术资料'); return false;" class="text-primary hover:underline block text-lg">
+                                <strong class="text-accent">《证券法》与证券市场规范</strong>
+                            </a>
+                            <p class="text-secondary text-sm">了解证券服务机构资质及资本市场监管全貌。</p>
+                        </li>
+                        <li>
+                            <a href="#" onclick="alert('该链接为模拟链接，实际请查阅相关出版物或学术资料'); return false;" class="text-primary hover:underline block text-lg">
+                                <strong class="text-accent">《上市公司证券发行注册管理办法》释义</strong>
+                            </a>
+                            <p class="text-secondary text-sm">细读IPO申报要求及审核重点。</p>
+                        </li>
+                        <li>
+                            <a href="#" onclick="alert('该链接为模拟链接，实际请查阅相关出版物或学术资料'); return false;" class="text-primary hover:underline block text-lg">
+                                <strong class="text-accent">资产评估原理与实务</strong>
+                            </a>
+                            <p class="text-secondary text-sm">掌握资产评估的基本方法和债权评估的特殊性。</p>
+                        </li>
+                        <li>
+                            <a href="#" onclick="alert('该链接为模拟链接，实际请查阅相关出版物或学术资料'); return false;" class="text-primary hover:underline block text-lg">
+                                <strong class="text-accent">股权融资与公司治理</strong>
+                            </a>
+                            <p class="text-secondary text-sm">探讨股权融资对公司治理结构的影响与风险控制。</p>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-card py-8 mt-16 text-center text-secondary text-sm border-t border-primary">
+        <p>&copy; 2025 资本洞察. 版权所有.</p>
+        <p class="mt-2">本页面信息仅供参考，不构成任何投资建议。请以官方发布为准。</p>
+    </footer>
+
+    <!-- Tailwind CSS animation utilities (defined for demonstration) -->
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes blob {
+            0%, 100% {
+                transform: scale(1) translate(0, 0);
+            }
+            33% {
+                transform: scale(1.1) translate(30px, -20px);
+            }
+            66% {
+                transform: scale(0.9) translate(-20px, 30px);
+            }
+        }
+        .animate-fade-in { animation: fadeIn 1s ease-out forwards; }
+        .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+        .animate-blob { animation: blob 8s infinite ease-in-out; }
+        .animation-delay-0 { animation-delay: 0s; }
+        .animation-delay-200 { animation-delay: 0.2s; }
+        .animation-delay-400 { animation-delay: 0.4s; }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
+    </style>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+
+        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        } else {
+            document.documentElement.classList.remove('dark');
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        });
+    </script>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Configure Mermaid.js for dark mode
+        function configureMermaidTheme() {
+            const isDarkMode = document.documentElement.classList.contains('dark');
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: isDarkMode ? 'dark' : 'default',
+                themeVariables: {
+                    primaryColor: isDarkMode ? '#282844' : '#FFFFFF',
+                    primaryBorderColor: isDarkMode ? '#6C63FF' : '#4B0082',
+                    lineColor: isDarkMode ? '#404066' : '#E0E0E0',
+                    mainBkg: isDarkMode ? '#1A1A2E' : '#F5F5F5',
+                    nodeBorder: isDarkMode ? '#6C63FF' : '#4B0082',
+                    nodeBkg: isDarkMode ? '#282844' : '#FFFFFF',
+                    textColor: isDarkMode ? '#E0E0E0' : '#333333',
+                    clusterBkg: isDarkMode ? '#20203A' : '#E0E0E0',
+                    clusterBorder: isDarkMode ? '#404066' : '#B0B0B0',
+                    edgeLabelBackground: isDarkMode ? '#1A1A2E' : '#F5F5F5',
+                },
+                flowchart: {
+                    curve: 'basis' // Make lines smoother
+                }
+            });
+        }
+
+        // Initial configuration
+        configureMermaidTheme();
+
+        // Re-render Mermaid diagrams when theme changes
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === 'class' && mutation.target === document.documentElement) {
+                    configureMermaidTheme(); // Reconfigure theme
+                    // Force re-render if diagrams don't update automatically
+                    // This might involve re-processing the `mermaid` pre tags
+                    const mermaidElements = document.querySelectorAll('.mermaid');
+                    mermaidElements.forEach(el => {
+                        el.removeAttribute('data-processed'); // Mark as unprocessed
+                        el.innerHTML = el.dataset.graph; // Restore original graph definition
+                    });
+                    mermaid.init(); // Re-initialize all diagrams
+                }
+            });
+        });
+        observer.observe(document.documentElement, { attributes: true });
+
+        // Store original graph content to enable re-rendering
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.mermaid pre').forEach(pre => {
+                pre.dataset.graph = pre.textContent; // Store original content
+            });
+            mermaid.init(); // Initial render
+        });
+    </script>
+</body>
+</html>
+```
