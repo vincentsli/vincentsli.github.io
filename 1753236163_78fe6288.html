@@ -1,0 +1,491 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A股IPO：债转股评估报告，申报文件中的硬性要求</title>
+    <meta name="description" content="深入解析A股IPO中债转股评估报告的必要性、监管要求、实操要点与风险提示。">
+
+    <!-- Google Fonts for Noto Serif SC (headings) and Noto Sans SC (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+
+    <style>
+        /* Custom base fonts */
+        :root {
+            --font-serif-sc: 'Noto Serif SC', serif;
+            --font-sans-sc: 'Noto Sans SC', sans-serif;
+            --font-fallback: Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-sans-sc), var(--font-fallback);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-serif-sc), var(--font-fallback);
+        }
+
+        /* Dark Mode Styles - Default */
+        html.dark {
+            --color-bg: #1a202c; /* slate-900 equivalent for base body */
+            --color-text-primary: #e2e8f0; /* slate-200 */
+            --color-text-secondary: #a0aec0; /* slate-400 */
+            --color-accent: #38bdf8; /* sky-400 */
+            --color-border: #4a5568; /* slate-600 */
+            --color-card-bg: #2d3748; /* slate-800 */
+            --color-code-bg: #252c3c; /* A slightly darker slate */
+        }
+
+        /* Light Mode Styles */
+        html.light {
+            --color-bg: #f8fafc; /* slate-50 */
+            --color-text-primary: #1a202c; /* slate-900 */
+            --color-text-secondary: #4a5568; /* slate-600 */
+            --color-accent: #0284c7; /* sky-700 */
+            --color-border: #e2e8f0; /* slate-200 */
+            --color-card-bg: #ffffff; /* white */
+            --color-code-bg: #f1f5f9; /* slate-100 */
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Apply custom colors using Tailwind utility classes where possible, otherwise direct CSS */
+        .text-primary { color: var(--color-text-primary); }
+        .text-secondary { color: var(--color-text-secondary); }
+        .text-accent { color: var(--color-accent); }
+        .bg-card { background-color: var(--color-card-bg); }
+        .border-base { border-color: var(--color-border); }
+        .bg-code { background-color: var(--color-code-bg); }
+
+        /* Mermaid container styling */
+        .mermaid {
+            background-color: var(--color-card-bg);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--color-border);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Custom scrollbar for subtle touch */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--color-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-border);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-accent);
+        }
+
+        /* Micro-interactions */
+        .interactive-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: var(--color-accent);
+        }
+    </style>
+</head>
+<body class="min-h-screen antialiased flex flex-col items-center">
+
+    <!-- Header / Navigation -->
+    <header class="w-full bg-card shadow-lg py-4 px-6 md:px-8 border-b border-base sticky top-0 z-50 transition-colors duration-300">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <a href="#" class="text-xl md:text-2xl font-bold text-accent hover:text-sky-500 transition-colors duration-300">
+                <i class="fas fa-landmark mr-2"></i>IPO合规解读
+            </a>
+            <button id="theme-toggle" class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-accent transition-colors duration-300 hover:bg-gray-700 dark:hover:bg-gray-200 text-primary">
+                <i class="fas fa-sun hidden dark:inline-block"></i>
+                <i class="fas fa-moon inline-block dark:hidden"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="w-full py-20 px-6 md:px-8 bg-gradient-to-br from-gray-800 to-gray-900 text-center relative overflow-hidden transition-colors duration-300">
+        <div class="absolute inset-0 opacity-10 bg-top-left-pattern"></div>
+        <div class="max-w-4xl mx-auto relative z-10">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight text-white drop-shadow-lg">
+                <span class="block text-accent text-3xl md:text-5xl mb-2">A股IPO深度解析</span>
+                债转股评估报告：申报文件中的硬性要求
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8 font-light leading-relaxed">
+                全面解读当前A股IPO监管规则下，债转股评估报告作为申报文件的必要性、监管依据、实操要点及潜在风险。助您合规闯关，高效上市。
+            </p>
+            <div class="flex justify-center space-x-4">
+                <a href="#content" class="px-8 py-3 bg-accent text-white rounded-full text-lg font-semibold hover:bg-sky-500 transition-transform duration-300 hover:scale-105 shadow-lg">
+                    <i class="fas fa-angle-down mr-2"></i>阅读详情
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main id="content" class="container mx-auto px-6 md:px-8 py-16 grid grid-cols-1 lg:grid-cols-3 gap-12 text-primary transition-colors duration-300">
+
+        <!-- Left Column - Main Article Content -->
+        <article class="lg:col-span-2 space-y-10">
+
+            <!-- Introduction -->
+            <section class="bg-card p-8 rounded-xl shadow-lg border border-base interactive-card">
+                <h2 class="text-3xl font-bold mb-6 text-accent flex items-center">
+                    <i class="fas fa-exclamation-circle text-sky-500 mr-3"></i>核心要点概述
+                </h2>
+                <p class="text-lg leading-relaxed text-secondary mb-4">
+                    根据当前A股IPO监管规则（截至2025年7月23日），<strong class="text-accent">债转股对应的评估报告必须作为IPO申报文件提交</strong>。这是确保非货币资产出资公允性、避免潜在利益输送、维护中小投资者权益的关键合规要求。
+                </p>
+                <p class="text-lg leading-relaxed text-secondary border-l-4 border-accent pl-4 py-2 italic">
+                    "合规是企业上市的生命线，任何细节的疏忽都可能导致前功尽弃。"
+                </p>
+            </section>
+
+            <!-- Section 1: 法律依据与监管要求 -->
+            <section class="bg-card p-8 rounded-xl shadow-lg border border-base interactive-card">
+                <h2 class="text-3xl font-bold mb-6 text-accent flex items-center">
+                    <i class="fas fa-gavel text-sky-500 mr-3"></i>一、法律依据与监管要求
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-3 text-primary flex items-center">
+                            <i class="fas fa-balance-scale mr-2 text-sky-500"></i>《首次公开发行股票注册管理办法》第四十二条
+                        </h3>
+                        <p class="text-lg leading-relaxed text-secondary mb-4">
+                            要求发行人提交“与财务会计资料相关的其他文件”，<strong class="text-accent">非货币资产出资（含债转股）的评估报告属于必备文件</strong>。
+                        </p>
+                        <blockquote class="bg-code p-4 rounded-md border-l-4 border-sky-600 italic text-sm text-gray-400">
+                            依据联网搜索结果中《上海证券交易所发行上市审核规则适用指引第7号》¹：<br>
+                            &gt; 发行人申报IPO时需披露“审计报告和法律意见书<strong class="text-sky-300">等文件</strong>”，该“等”字包含与资产权属、出资合规性相关的评估文件。
+                        </blockquote>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-3 text-primary flex items-center">
+                            <i class="fas fa-book-open mr-2 text-sky-500"></i>证监会《监管规则适用指引——发行类第1号》1-3条
+                        </h3>
+                        <p class="text-lg leading-relaxed text-secondary mb-4">
+                            明确要求：
+                        </p>
+                        <blockquote class="bg-code p-4 rounded-md border-l-4 border-sky-600 italic text-sm text-gray-400">
+                            &gt; “<strong class="text-sky-300">历史沿革中存在非货币出资的</strong>，应提交资产评估报告……保荐机构需核查评估方法的适当性及定价公允性。”
+                        </blockquote>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: 实操要求 -->
+            <section class="bg-card p-8 rounded-xl shadow-lg border border-base interactive-card">
+                <h2 class="text-3xl font-bold mb-6 text-accent flex items-center">
+                    <i class="fas fa-clipboard-check text-sky-500 mr-3"></i>二、实操要求
+                </h2>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-code rounded-lg text-primary text-left">
+                        <thead class="bg-gray-700 dark:bg-gray-800 text-gray-200 uppercase text-sm leading-normal">
+                            <tr>
+                                <th class="py-3 px-6 text-center">环节 <i class="fas fa-cogs ml-1"></i></th>
+                                <th class="py-3 px-6">具体要求 <i class="fas fa-tasks ml-1"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-secondary text-base font-light">
+                            <tr class="border-b border-gray-600 dark:border-gray-700 hover:bg-gray-700 dark:hover:bg-gray-800 transition-colors duration-200">
+                                <td class="py-4 px-6 text-center whitespace-nowrap">申报阶段</td>
+                                <td class="py-4 px-6">
+                                    评估报告作为《招股说明书》的附件，纳入“发行人历史沿革”或“验资报告”的支撑文件¹。
+                                    <span class="block mt-1 text-sm text-sky-400"><i class="fas fa-file-invoice mr-1"></i>重要附件</span>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-600 dark:border-gray-700 hover:bg-gray-700 dark:hover:bg-gray-800 transition-colors duration-200">
+                                <td class="py-4 px-6 text-center whitespace-nowrap">审核问询</td>
+                                <td class="py-4 px-6">
+                                    交易所通常就债转股评估的<strong class="text-accent">方法选择、参数合理性、债权真实性</strong>发出问询（如2025年科创板某终止案例）。
+                                    <span class="block mt-1 text-sm text-sky-400"><i class="fas fa-question-circle mr-1"></i>核心关注点</span>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-700 dark:hover:bg-gray-800 transition-colors duration-200">
+                                <td class="py-4 px-6 text-center whitespace-nowrap">未提交后果</td>
+                                <td class="py-4 px-6">
+                                    可能导致IPO申请不予受理或要求补正，甚至成为上市委审议的否决点（如2024年创业板某公司因未补充评估被终止审核⁶）。
+                                    <span class="block mt-1 text-sm text-red-400"><i class="fas fa-times-circle mr-1"></i>严重后果</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Section 3: 申报文件中的定位 -->
+            <section class="bg-card p-8 rounded-xl shadow-lg border border-base interactive-card">
+                <h2 class="text-3xl font-bold mb-6 text-accent flex items-center">
+                    <i class="fas fa-folder-open text-sky-500 mr-3"></i>三、申报文件中的定位
+                </h2>
+                <h3 class="text-2xl font-semibold mb-3 text-primary flex items-center">
+                    <i class="fas fa-file-alt mr-2 text-sky-500"></i>文件类型：
+                </h3>
+                <p class="text-lg leading-relaxed text-secondary mb-6">
+                    补充法律文件（非核心文件但不可或缺）
+                </p>
+                <h3 class="text-2xl font-semibold mb-3 text-primary flex items-center">
+                    <i class="fas fa-sitemap mr-2 text-sky-500"></i>编排位置：
+                </h3>
+                <pre class="bg-code p-6 rounded-md overflow-x-auto text-sm text-gray-300 shadow-inner"><code><span class="text-sky-400">招股说明书</span>
+├── <span class="text-purple-400">第五节 发行人基本情况</span>
+│    └── <span class="text-green-400">三、历史沿革</span>（引用评估报告编号）
+└── <span class="text-sky-400">附件</span>
+     ├── <span class="text-yellow-400">法律意见书</span>（引述评估结论）
+     └── <span class="text-red-400">**债转股专项评估报告**</span>（原件）</code></pre>
+            </section>
+
+            <!-- Section 4: 风险提示 -->
+            <section class="bg-card p-8 rounded-xl shadow-lg border border-base interactive-card">
+                <h2 class="text-3xl font-bold mb-6 text-accent flex items-center">
+                    <i class="fas fa-exclamation-triangle text-sky-500 mr-3"></i>四、风险提示
+                </h2>
+                <ul class="list-none space-y-4">
+                    <li class="flex items-start text-lg text-secondary">
+                        <i class="fas fa-clock text-sky-500 mr-3 mt-1 flex-shrink-0"></i>
+                        <div>
+                            <strong class="text-primary">时效性要求</strong>：
+                            评估报告有效期通常为1年，若IPO审核跨年度（如2025年申报、2026年上市），需确保评估报告在<strong class="text-accent">上会审议时仍在有效期内</strong>，否则需更新。
+                        </div>
+                    </li>
+                    <li class="flex items-start text-lg text-secondary">
+                        <i class="fas fa-users-cog text-sky-500 mr-3 mt-1 flex-shrink-0"></i>
+                        <div>
+                            <strong class="text-primary">关联方债转股</strong>：
+                            若债转股涉及关联方（如控股股东），还需额外披露<strong class="text-accent">评估机构独立性声明</strong>（避免利益输送嫌疑）。
+                        </div>
+                    </li>
+                </ul>
+                <div class="mt-8 p-4 bg-yellow-900 bg-opacity-30 border border-yellow-700 rounded-lg text-yellow-200 text-base">
+                    <i class="fas fa-lightbulb mr-2"></i>建议：提前规划，确保评估报告在整个IPO流程中始终保持合规性与时效性。
+                </div>
+            </section>
+
+            <!-- Conclusion -->
+            <section class="bg-card p-8 rounded-xl shadow-lg border border-base interactive-card">
+                <h2 class="text-3xl font-bold mb-6 text-accent flex items-center">
+                    <i class="fas fa-check-double text-sky-500 mr-3"></i>结论
+                </h2>
+                <p class="text-xl leading-relaxed text-secondary mb-6">
+                    <strong class="text-accent">债转股评估报告必须作为IPO申报文件提交</strong>，且需满足以下关键条件：
+                </p>
+                <ul class="list-none space-y-4">
+                    <li class="flex items-center text-lg text-primary">
+                        <i class="fas fa-check-circle text-sky-500 mr-3 text-2xl"></i>
+                        由具备证券资质的评估机构出具（如中联、天健兴业等备案机构）。
+                    </li>
+                    <li class="flex items-center text-lg text-primary">
+                        <i class="fas fa-check-circle text-sky-500 mr-3 text-2xl"></i>
+                        由<strong class="text-accent">拟上市公司</strong>委托并支付费用（见前一问题解答）。
+                    </li>
+                    <li class="flex items-center text-lg text-primary">
+                        <i class="fas fa-check-circle text-sky-500 mr-3 text-2xl"></i>
+                        纳入招股说明书附件，供监管机构核查债转股定价公允性。
+                    </li>
+                </ul>
+                <div class="mt-8 text-sm text-gray-400 space-y-2">
+                    <p>⁶ 典型案例：2024年<strong class="text-sky-300">江苏某科技公司创业板IPO终止案</strong>，因未提交控股股东债转股的评估报告，被上市委质疑出资不实。</p>
+                    <p>¹ 依据《上海证券交易所发行上市审核规则适用指引第7号——预先审阅》（上证发〔2025〕87号）申报文件清单。</p>
+                    <p>² 详见证监会官网：<a href="http://www.csrc.gov.cn/csrc/c101935/zfxxgk_zdgk.shtml" target="_blank" class="text-sky-400 hover:underline">发行类监管规则适用指引</a>。</p>
+                </div>
+            </section>
+        </article>
+
+        <!-- Right Column - Sidebar / Data Visualization / Further Reading -->
+        <aside class="lg:col-span-1 space-y-10">
+
+            <!-- Data Visualization - Mermaid Chart -->
+            <section class="bg-card p-8 rounded-xl shadow-lg border border-base">
+                <h2 class="text-2xl font-bold mb-6 text-accent flex items-center">
+                    <i class="fas fa-chart-network mr-3 text-sky-500"></i>IPO申报流程与评估报告关系
+                </h2>
+                <div class="mermaid text-primary">
+                    graph TD
+                        A[IPO 申报启动] --> B{公司历史沿革中是否存在非货币出资?};
+                        B -- 是 --> C[债转股/非货币出资];
+                        C --> D{是否出具资产评估报告?};
+                        D -- 是且合规 --> E[评估报告作为申报附件];
+                        D -- 否/不合规 --> F[监管问询/不予受理/终止审核];
+                        E --> G[IPO 审核/问询];
+                        G -- 满足合规要求 --> H[上市成功];
+                        G -- 存在问题/未补正 --> F;
+                        B -- 否 --> G;
+
+                        subgraph 评估报告合规要素
+                            E_sub1[法律依据明确] --> E;
+                            E_sub2[实操要求遵循] --> E;
+                            E_sub3[风险提示规避] --> E;
+                        end
+
+                        classDef default fill:#374151,stroke:#6B7280,stroke-width:2px,color:#E5E7EB;
+                        classDef highlight fill:#0284c7,stroke:#0ea5e9,stroke-width:2px,color:#fff;
+                        classDef warning fill:#dc2626,stroke:#ef4444,stroke-width:2px,color:#fff;
+
+                        class A,G,H highlight;
+                        class F warning;
+                        class C,D,E default;
+                </div>
+            </section>
+
+            <!-- Complementary Information - What is Debt-to-Equity Swap? -->
+            <section class="bg-card p-8 rounded-xl shadow-lg border border-base interactive-card">
+                <h2 class="text-2xl font-bold mb-6 text-accent flex items-center">
+                    <i class="fas fa-info-circle mr-3 text-sky-500"></i>补充信息：什么是债转股？
+                </h2>
+                <p class="text-lg leading-relaxed text-secondary mb-4">
+                    <strong class="text-primary">债转股（Debt-to-Equity Swap）</strong>，是指公司将所欠债权人的债务，通过协议或法律程序，转换为债权人对公司的股权。
+                </p>
+                <p class="text-lg leading-relaxed text-secondary">
+                    这通常发生在公司重组、引入战略投资者或改善财务结构时。在IPO语境下，如果拟上市公司在历史沿革中曾进行债转股，其债权估值并转换为股权的过程需经过严格的评估，以确保估值的公允性、合法性，防止通过虚增债权价值来稀释其他股东权益或规避监管。
+                </p>
+                <a href="https://baike.baidu.com/item/%E5%80%BA%E8%BD%AC%E8%82%A1/100063" target="_blank" class="text-sky-400 hover:underline mt-4 inline-block">
+                    <i class="fas fa-external-link-alt mr-1"></i>了解更多
+                </a>
+            </section>
+
+            <!-- Further Reading -->
+            <section class="bg-card p-8 rounded-xl shadow-lg border border-base interactive-card">
+                <h2 class="text-2xl font-bold mb-6 text-accent flex items-center">
+                    <i class="fas fa-book-reader mr-3 text-sky-500"></i>延伸阅读
+                </h2>
+                <ul class="list-none space-y-4">
+                    <li class="flex items-start">
+                        <i class="fas fa-caret-right text-sky-500 mt-1 mr-3 flex-shrink-0"></i>
+                        <div>
+                            <strong class="text-primary">《公司金融》</strong> (Corporate Finance) - Stephen A. Ross 等著。了解公司估值、资本结构等基础理论。
+                            <a href="#" class="text-sky-400 text-sm block mt-1 hover:underline"></a>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-caret-right text-sky-500 mt-1 mr-3 flex-shrink-0"></i>
+                        <div>
+                            <strong class="text-primary">《中国证券法》</strong> - 了解中国资本市场法律框架及IPO相关法规。
+                            <a href="#" class="text-sky-400 text-sm block mt-1 hover:underline"></a>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-caret-right text-sky-500 mt-1 mr-3 flex-shrink-0"></i>
+                        <div>
+                            <strong class="text-primary">《资产评估：理论、方法与实务》</strong> - 了解资产评估的具体原理和操作方法，对理解评估报告有帮助。
+                            <a href="#" class="text-sky-400 text-sm block mt-1 hover:underline"></a>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-caret-right text-sky-500 mt-1 mr-3 flex-shrink-0"></i>
+                        <div>
+                            <strong class="text-primary">证监会及沪深交易所官网</strong> - 最权威、实时的监管规则发布平台，直接获取最新法规和指引。
+                            <a href="http://www.csrc.gov.cn" target="_blank" class="text-sky-400 text-sm block mt-1 hover:underline">csrc.gov.cn</a>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-caret-right text-sky-500 mt-1 mr-3 flex-shrink-0"></i>
+                        <div>
+                            <strong class="text-primary">《IPO审核案例精选与实务分析》</strong> (各类券商投行部门内部资料或公开出版物) - 学习实际案例中的问题与解决方案。
+                            <a href="#" class="text-sky-400 text-sm block mt-1 hover:underline"></a>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full bg-card py-8 px-6 md:px-8 border-t border-base text-center text-secondary text-sm transition-colors duration-300">
+        <div class="max-w-6xl mx-auto">
+            <p>&copy; 2025 IPO合规解读. All rights reserved.</p>
+            <p class="mt-2">免责声明：本文内容仅供参考，不构成任何专业法律或财务建议。</p>
+        </div>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark', // Default theme for Mermaid, will be updated by JS
+            securityLevel: 'loose' // Needed for custom styling in graph
+        });
+
+        // Dark/Light Mode Toggle Functionality
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                localStorage.setItem('theme', 'dark');
+                mermaid.initialize({ theme: 'dark', securityLevel: 'loose' });
+            } else {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+                mermaid.initialize({ theme: 'default', securityLevel: 'loose' }); // 'default' for light theme in Mermaid
+            }
+            // Re-render Mermaid charts to apply new theme
+            setTimeout(() => {
+                mermaid.init();
+            }, 100);
+        }
+
+        // Check system preference on load
+        const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+        // Set initial theme based on localStorage or system preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (prefersDarkScheme.matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+
+        // Listen for system theme changes
+        prefersDarkScheme.addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) { // Only update if user hasn't manually set a theme
+                setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+
+        // Toggle button click handler
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Smooth scroll for "阅读详情" button
+        document.querySelector('a[href="#content"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
+```
