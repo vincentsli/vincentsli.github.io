@@ -1,0 +1,533 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第二类限制性股票激励方案税务解析</title>
+    <meta name="description" content="深入解析拟上市公司第二类限制性股票激励方案中的个人所得税义务与计算。">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Fonts with Fallbacks */
+        .font-sans-sc {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+        .font-serif-sc {
+            font-family: 'Noto Serif SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, serif;
+        }
+
+        /* Dark Mode Colors */
+        .dark {
+            --color-bg-primary: #1a1a2e;
+            --color-text-primary: #e0e0e0;
+            --color-text-secondary: #a0a0a0;
+            --color-accent-gold: #fcd34d;
+            --color-accent-blue: #60a5fa;
+            --color-border-subtle: #33334d;
+            --color-card-bg: #22223b;
+            --color-code-bg: #2b2b45;
+            --color-link-hover: #fcd34d;
+        }
+
+        /* Light Mode Colors */
+        html:not(.dark) {
+            --color-bg-primary: #f5f5f5;
+            --color-text-primary: #333333;
+            --color-text-secondary: #666666;
+            --color-accent-gold: #f59e0b;
+            --color-accent-blue: #2563eb;
+            --color-border-subtle: #e0e0e0;
+            --color-card-bg: #ffffff;
+            --color-code-bg: #ececec;
+            --color-link-hover: #f59e0b;
+        }
+
+        /* Apply custom properties to Tailwind classes */
+        body {
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+        }
+        .text-primary { color: var(--color-text-primary); }
+        .text-secondary { color: var(--color-text-secondary); }
+        .text-accent-gold { color: var(--color-accent-gold); }
+        .text-accent-blue { color: var(--color-accent-blue); }
+        .bg-card { background-color: var(--color-card-bg); }
+        .border-subtle { border-color: var(--color-border-subtle); }
+        .bg-code { background-color: var(--color-code-bg); }
+        .hover\:text-link-hover:hover { color: var(--color-link-hover); }
+
+        /* Mermaid specific styles for dark/light mode */
+        .mermaid {
+            background-color: var(--color-card-bg); /* Use card background for mermaid container */
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--color-border-subtle);
+        }
+
+        /* Custom styling for specific elements */
+        .hero-gradient {
+            background-image: linear-gradient(to bottom, rgba(26, 26, 46, 0.8), rgba(26, 26, 46, 0.8)), url('https://images.unsplash.com/photo-1590283603358-d9967650dd7f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            /* Image by Unsplash: Shubham Dhage */
+            background-size: cover;
+            background-position: center;
+        }
+
+        html:not(.dark) .hero-gradient {
+            background-image: linear-gradient(to bottom, rgba(245, 245, 245, 0.8), rgba(245, 245, 245, 0.8)), url('https://images.unsplash.com/photo-1590283603358-d9967650dd7f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--color-accent-blue);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+            z-index: 1000;
+        }
+        .scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Custom scrollbar for subtle aesthetics */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-bg-primary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-border-subtle);
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-text-secondary);
+        }
+
+        /* Dropcap effect for first paragraph */
+        .dropcap::first-letter {
+            float: left;
+            font-size: 4em;
+            line-height: 0.8;
+            font-weight: 700;
+            margin-right: 0.1em;
+            color: var(--color-accent-gold);
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        /* Hover effects for cards/buttons */
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .btn-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="font-sans-sc min-h-screen transition-colors duration-300 antialiased">
+
+    <!-- Dark Mode Toggle -->
+    <button id="theme-toggle" class="fixed top-6 right-6 p-3 rounded-full bg-card text-accent-gold z-50 shadow-lg btn-hover transition-all duration-300">
+        <i class="fas fa-sun hidden dark:block text-2xl"></i>
+        <i class="fas fa-moon block dark:hidden text-2xl"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <header class="hero-gradient py-20 px-4 md:px-8 text-white relative overflow-hidden">
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h1 class="text-4xl md:text-6xl font-serif-sc font-bold mb-4 leading-tight">
+                第二类限制性股票激励方案税务解析
+            </h1>
+            <p class="text-xl md:text-2xl text-secondary mb-8 font-light italic">
+                —— 拟上市公司股权激励中的个税义务与计算详解
+            </p>
+            <p class="text-lg md:text-xl leading-relaxed text-primary dropcap">
+                深入理解企业股权激励政策，尤其对拟上市公司而言，其复杂性不容小觑。本篇文章旨在为您详细剖析第二类限制性股票激励方案中，激励对象在不同时点所承担的个人所得税义务及其税额计算逻辑，助您清晰掌握核心要点，规避潜在税务风险。
+            </p>
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-transparent to-transparent opacity-50"></div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto py-12 px-4 md:px-8">
+        <section class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-serif-sc font-semibold mb-6 text-accent-gold leading-relaxed">
+                <i class="fas fa-calendar-alt mr-3 text-2xl opacity-75"></i>一、纳税义务发生时点
+            </h2>
+            <div class="bg-card p-6 rounded-xl shadow-md border border-subtle mb-6 card-hover transition-all duration-300">
+                <h3 class="text-2xl font-sans-sc font-medium mb-4 text-primary">
+                    1. 每次解锁归属时（2020-2023年）
+                </h3>
+                <p class="text-lg leading-relaxed text-secondary mb-4">
+                    协议约定“服务期内每年届满后解锁25%”，<strong class="text-primary">每次解锁日即产生个人所得税纳税义务</strong>。
+                </p>
+                <div class="bg-code p-4 rounded-lg flex items-start space-x-3 text-base md:text-lg">
+                    <i class="fas fa-info-circle text-accent-blue mt-1"></i>
+                    <p class="text-primary flex-1">
+                        <strong class="text-accent-gold">原因：</strong>
+                        第二类限制性股票在归属日（解锁日）所有权转移至员工，税法视同取得“工资薪金所得”。
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-card p-6 rounded-xl shadow-md border border-subtle card-hover transition-all duration-300">
+                <h3 class="text-2xl font-sans-sc font-medium mb-4 text-primary">
+                    2. 实际退出时（2026年及以后）
+                </h3>
+                <p class="text-lg leading-relaxed text-secondary">
+                    退出时（出售股票）按<strong class="text-primary">“财产转让所得”</strong> 单独计税。若出售价高于归属日公允价值，差额部分按20%税率缴税；低于则不征税。
+                </p>
+            </div>
+        </section>
+
+        <hr class="border-subtle my-12">
+
+        <section class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-serif-sc font-semibold mb-6 text-accent-gold leading-relaxed">
+                <i class="fas fa-calculator mr-3 text-2xl opacity-75"></i>二、各环节税额计算方式
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <!-- 解锁归属环节 -->
+                <div class="bg-card p-6 rounded-xl shadow-md border border-subtle card-hover transition-all duration-300">
+                    <h3 class="text-2xl font-sans-sc font-medium mb-4 text-primary">
+                        (1) 解锁归属环节
+                    </h3>
+                    <ul class="list-none space-y-3 mb-6">
+                        <li class="flex items-start text-lg text-secondary">
+                            <i class="fas fa-hand-holding-usd text-accent-blue mr-3 mt-1"></i>
+                            <span class="flex-1">
+                                <strong class="text-primary">应纳税所得额</strong> = （<strong class="text-accent-gold">解锁日股票公允价值 × 解锁股数</strong>） - <strong class="text-accent-gold">员工实际支付对价（授予价格）</strong>
+                                <br><em class="text-sm text-secondary block mt-1">（注：拟上市公司公允价值需专业评估，通常参考每股净资产或融资估值）</em>
+                            </span>
+                        </li>
+                        <li class="flex items-start text-lg text-secondary">
+                            <i class="fas fa-percent text-accent-blue mr-3 mt-1"></i>
+                            <span class="flex-1">
+                                <strong class="text-primary">税率</strong>：合并计入解锁当年综合所得，按 <strong class="text-accent-gold">3%-45%超额累进税率</strong> 计税。
+                            </span>
+                        </li>
+                    </ul>
+                    <div class="bg-code p-4 rounded-lg overflow-x-auto mb-6">
+                        <pre class="text-primary text-sm md:text-base whitespace-pre-wrap"><code>应纳税额 = 应纳税所得额 × 综合所得税率 - 速算扣除数</code></pre>
+                    </div>
+                    <div class="bg-code p-4 rounded-lg flex items-start space-x-3 text-base md:text-lg">
+                        <i class="fas fa-lightbulb text-accent-gold mt-1"></i>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-primary mb-2">示例：</h4>
+                            <p class="text-secondary">
+                                若2020年解锁25%时：<br>
+                                - 解锁日公允价值=10元/股<br>
+                                - 授予价格=2元/股<br>
+                                - 解锁股数=1万股<br>
+                                <strong class="text-primary">应纳税所得额</strong> = (10-2) × 10,000 = <strong class="text-accent-gold">80,000元</strong><br>
+                                若当年综合所得适用<strong class="text-primary">10%</strong>税率，则税额=80,000×10% - 2,520（速算扣除数）= <strong class="text-accent-gold">5,480元</strong>。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 退出出售环节 -->
+                <div class="bg-card p-6 rounded-xl shadow-md border border-subtle card-hover transition-all duration-300">
+                    <h3 class="text-2xl font-sans-sc font-medium mb-4 text-primary">
+                        (2) 退出出售环节
+                    </h3>
+                    <ul class="list-none space-y-3 mb-6">
+                        <li class="flex items-start text-lg text-secondary">
+                            <i class="fas fa-chart-line text-accent-blue mr-3 mt-1"></i>
+                            <span class="flex-1">
+                                <strong class="text-primary">应纳税所得额</strong> = <strong class="text-accent-gold">股票出售价格 - 归属日公允价值</strong>
+                                <br><em class="text-sm text-secondary block mt-1">（归属日公允价值已在解锁环节计税，此处仅对增值部分征税）</em>
+                            </span>
+                        </li>
+                        <li class="flex items-start text-lg text-secondary">
+                            <i class="fas fa-percent text-accent-blue mr-3 mt-1"></i>
+                            <span class="flex-1">
+                                <strong class="text-primary">税率</strong>：按 <strong class="text-accent-gold">20%</strong> 固定税率征收。
+                            </span>
+                        </li>
+                    </ul>
+                    <div class="bg-code p-4 rounded-lg overflow-x-auto mb-6">
+                        <pre class="text-primary text-sm md:text-base whitespace-pre-wrap"><code>应纳税额 = (出售价 - 归属日公允价值) × 股数 × 20%</code></pre>
+                    </div>
+                    <div class="bg-code p-4 rounded-lg flex items-start space-x-3 text-base md:text-lg">
+                        <i class="fas fa-lightbulb text-accent-gold mt-1"></i>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-primary mb-2">示例：</h4>
+                            <p class="text-secondary">
+                                若2026年以15元/股出售，归属日公允价值为10元/股：<br>
+                                <strong class="text-primary">应纳税额</strong> = (15-10) × 10,000 × 20% = <strong class="text-accent-gold">10,000元</strong>。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-subtle my-12">
+
+        <!-- Data Visualization Section -->
+        <section class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-serif-sc font-semibold mb-6 text-accent-gold leading-relaxed">
+                <i class="fas fa-project-diagram mr-3 text-2xl opacity-75"></i>股权激励税务流程可视化
+            </h2>
+            <div class="mermaid-diagram text-center bg-card p-6 rounded-xl shadow-md border border-subtle">
+                <div class="mermaid">
+                    graph TD
+                        A[股票授予 (2019)] --> B{服务期满 / 每年解锁 25%};
+
+                        B -- 2020年解锁 --> C1[解锁归属1: 综合所得计税];
+                        B -- 2021年解锁 --> C2[解锁归属2: 综合所得计税];
+                        B -- 2022年解锁 --> C3[解锁归属3: 综合所得计税];
+                        B -- 2023年解锁 --> C4[解锁归属4: 综合所得计税];
+
+                        C1 --> D(税负前置风险);
+                        C2 --> D;
+                        C3 --> D;
+                        C4 --> D;
+
+                        C4 -- 条件满足 (上市且服务期满) --> E[公司上市 (预计2026)];
+
+                        E -- 若解锁发生在上市后 --> F1[上市后解锁归属: 20%优惠税率];
+                        E -- 股票流通 --> G[实际退出/出售股票];
+
+                        G --> H[财产转让所得: 20%税率];
+
+                        style A fill:#60A5FA,stroke:#3B82F6,stroke-width:2px,color:#fff
+                        style B fill:#FCD34D,stroke:#F59E0B,stroke-width:2px
+                        style C1 fill:#FECACA,stroke:#EF4444,stroke-width:2px
+                        style C2 fill:#FECACA,stroke:#EF4444,stroke-width:2px
+                        style C3 fill:#FECACA,stroke:#EF4444,stroke-width:2px
+                        style C4 fill:#FECACA,stroke:#EF4444,stroke-width:2px
+                        style D fill:#FCA5A5,stroke:#DC2626,stroke-width:2px,color:#fff
+                        style E fill:#6EE7B7,stroke:#10B981,stroke-width:2px
+                        style F1 fill:#A7F3D0,stroke:#34D399,stroke-width:2px
+                        style G fill:#93C5FD,stroke:#3B82F6,stroke-width:2px
+                        style H fill:#BFDBFE,stroke:#60A5FA,stroke-width:2px
+                </div>
+            </div>
+            <p class="text-center text-sm text-secondary mt-4">此图示概述了第二类限制性股票从授予到退出的主要税务节点和潜在风险。</p>
+        </section>
+
+        <hr class="border-subtle my-12">
+
+        <section class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-serif-sc font-semibold mb-6 text-accent-gold leading-relaxed">
+                <i class="fas fa-cogs mr-3 text-2xl opacity-75"></i>三、特殊政策与实操要点
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-card p-6 rounded-xl shadow-md border border-subtle card-hover transition-all duration-300">
+                    <h3 class="text-2xl font-sans-sc font-medium mb-4 text-primary">
+                        1. 递延纳税（仅限上市公司）
+                    </h3>
+                    <p class="text-lg leading-relaxed text-secondary mb-4">
+                        若公司<strong class="text-primary">上市前归属</strong>，无法适用递延纳税政策；若部分归属发生在<strong class="text-primary">上市后（2026年及以后）</strong>，则该批次可享受：
+                    </p>
+                    <div class="bg-code p-4 rounded-lg overflow-x-auto mb-4">
+                        <pre class="text-primary text-sm md:text-base whitespace-pre-wrap"><code>应纳税额 = 应纳税所得额 × 20%</code></pre>
+                    </div>
+                    <p class="text-sm text-secondary italic">
+                        （详见《关于延续实施上市公司股权激励有关个人所得税政策的公告》（财政部 税务总局公告2023年第25号））
+                    </p>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-md border border-subtle card-hover transition-all duration-300">
+                    <h3 class="text-2xl font-sans-sc font-medium mb-4 text-primary">
+                        2. 公允价值确定难点
+                    </h3>
+                    <ul class="list-none space-y-3">
+                        <li class="flex items-start text-lg text-secondary">
+                            <i class="fas fa-balance-scale text-accent-blue mr-3 mt-1"></i>
+                            <span class="flex-1">
+                                <strong class="text-primary">非上市期间</strong>：需由评估机构出具估值报告（通常采用净资产法或市场法）。
+                            </span>
+                        </li>
+                        <li class="flex items-start text-lg text-secondary">
+                            <i class="fas fa-chart-bar text-accent-blue mr-3 mt-1"></i>
+                            <span class="flex-1">
+                                <strong class="text-primary">上市后</strong>：直接取归属日股票收盘价。
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-subtle my-12">
+
+        <section class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-serif-sc font-semibold mb-6 text-accent-gold leading-relaxed">
+                <i class="fas fa-exclamation-triangle mr-3 text-2xl opacity-75"></i>四、风险提示
+            </h2>
+            <div class="bg-card p-6 rounded-xl shadow-md border border-subtle card-hover transition-all duration-300 mb-6">
+                <h3 class="text-2xl font-sans-sc font-medium mb-4 text-primary">
+                    1. 税负前置风险
+                </h3>
+                <p class="text-lg leading-relaxed text-secondary">
+                    员工可能在未实际获得股票收益（未上市）时即需缴纳高额个税（如归属日估值较高）。
+                </p>
+            </div>
+            <div class="bg-card p-6 rounded-xl shadow-md border border-subtle card-hover transition-all duration-300">
+                <h3 class="text-2xl font-sans-sc font-medium mb-4 text-primary">
+                    2. 政策适配性
+                </h3>
+                <p class="text-lg leading-relaxed text-secondary">
+                    若公司最终未上市，无法享受20%优惠税率，所有归属所得均按综合所得计税，税负可能显著增加。
+                </p>
+            </div>
+            <p class="text-lg leading-relaxed text-secondary mt-8 bg-code p-6 rounded-xl border border-subtle">
+                <i class="fas fa-lightbulb text-accent-gold mr-3"></i>
+                <strong class="text-primary">建议：</strong>与评估机构及税务部门提前沟通公允价值认定方式，并优化解锁节奏以降低税负。如需进一步测算，需提供具体授予价格、解锁批次时间及估值依据。
+            </p>
+        </section>
+
+        <hr class="border-subtle my-12">
+
+        <!-- Further Reading -->
+        <section class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-serif-sc font-semibold mb-6 text-accent-gold leading-relaxed">
+                <i class="fas fa-book-reader mr-3 text-2xl opacity-75"></i>进一步阅读
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-card p-6 rounded-xl shadow-md border border-subtle card-hover transition-all duration-300">
+                    <h3 class="text-xl font-sans-sc font-medium mb-2 text-primary">《税法学》</h3>
+                    <p class="text-secondary text-base">
+                        深入理解中国税收法律体系与政策的理论基础，掌握各项税收制度的原理和应用。
+                    </p>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-md border border-subtle card-hover transition-all duration-300">
+                    <h3 class="text-xl font-sans-sc font-medium mb-2 text-primary">《公司股权激励实务与案例精解》</h3>
+                    <p class="text-secondary text-base">
+                        涵盖股权激励方案的设计、实施、管理及税务处理，提供丰富的实务案例。
+                    </p>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-md border border-subtle card-hover transition-all duration-300">
+                    <h3 class="text-xl font-sans-sc font-medium mb-2 text-primary">《财务管理》</h3>
+                    <p class="text-secondary text-base">
+                        学习企业价值评估、资本结构、投资决策等核心财务知识，理解公司估值原理。
+                    </p>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-md border border-subtle card-hover transition-all duration-300">
+                    <h3 class="text-xl font-sans-sc font-medium mb-2 text-primary">《个人所得税实务》</h3>
+                    <p class="text-secondary text-base">
+                        详细解读个人所得税的各项规定，包括工资薪金、股权激励等收入的计税方法。
+                    </p>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-md border border-subtle card-hover transition-all duration-300">
+                    <h3 class="text-xl font-sans-sc font-medium mb-2 text-primary">《创业维艰：从风险到回报》</h3>
+                    <p class="text-secondary text-base">
+                        本·霍洛维茨的经典之作，从创业者的视角探讨公司运营、股权分配、团队管理等。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-subtle my-12">
+
+        <!-- Data Sources -->
+        <section class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-serif-sc font-semibold mb-6 text-accent-gold leading-relaxed">
+                <i class="fas fa-database mr-3 text-2xl opacity-75"></i>资料来源
+            </h2>
+            <ul class="list-decimal list-inside space-y-3 text-lg text-secondary">
+                <li><a href="https://pdf.dfcfw.com/pdf/H301_AP202308291596285681_1.pdf" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:text-link-hover transition-colors duration-200">《股权激励政策持续完善，第二类限制性股票迅速发展》</a>（政策时效性确认）</li>
+                <li><a href="https://www.tashansz.com/TashanResearch/info.aspx?itemid=607" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:text-link-hover transition-colors duration-200">《上市公司股权激励个人所得税如何缴纳？》</a>（第二类纳税时点）</li>
+                <li><a href="https://blog.sina.com.cn/s/blog_88a4e7250102z9co.html" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:text-link-hover transition-colors duration-200">《科创板第二类限制性股票个税缴纳》</a>（实操案例）</li>
+                <li><a href="https://fgk.chinatax.gov.cn/zcfgk/c102416/c5211082/content.html" target="_blank" rel="noopener noreferrer" class="text-accent-blue hover:text-link-hover transition-colors duration-200">《上市公司股权激励有关个税政策延续实施公告》（2023年第25号）</a>（税率适用）</li>
+                <li>《财政部 税务总局关于个人所得税法修改后有关优惠政策衔接问题的通知》（财税〔2018〕164号）</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top" class="scroll-to-top">
+        <i class="fas fa-arrow-up text-2xl"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="bg-card py-8 px-4 md:px-8 text-center text-secondary border-t border-subtle mt-12">
+        <p class="text-sm">© 2024 股权激励税务解析. All rights reserved.</p>
+        <p class="text-xs mt-2">本页内容仅供参考，不构成专业税务建议。具体情况请咨询专业税务顾问。</p>
+    </footer>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid with dark mode theme based on HTML class
+        const initializeMermaid = () => {
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: document.documentElement.classList.contains('dark') ? 'dark' : 'default',
+                flowchart: {
+                    curve: 'basis' // Make lines smoother
+                },
+                securityLevel: 'loose' // Allows linking
+            });
+            // Re-render charts explicitly if needed after theme change or content load
+            mermaid.contentLoaded();
+        };
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Check for saved theme preference or system preference on load
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            htmlElement.classList.toggle('dark', currentTheme === 'dark');
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            htmlElement.classList.add('dark');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            // Re-initialize mermaid to apply new theme
+            initializeMermaid();
+        });
+
+        // Scroll to Top Button Logic
+        const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) { // Show button after scrolling down 300px
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Initial Mermaid render
+        document.addEventListener('DOMContentLoaded', initializeMermaid);
+
+    </script>
+</body>
+</html>
+```
