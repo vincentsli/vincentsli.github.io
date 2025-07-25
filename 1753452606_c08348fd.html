@@ -1,0 +1,597 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拟上市公司备用金管理：IPO核查的重点与规范要求</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <style>
+        /* Define CSS Variables for theming */
+        :root {
+            /* Dark Mode Defaults */
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #272c41;
+            --text-primary: #e0e0e0;
+            --text-secondary: #c0c7e2;
+            --text-tertiary: #a0a7c4; /* For smaller text / less emphasis */
+            --accent-main: #818cf8; /* Light blue-purple for highlights */
+            --accent-alt: #fcd34d; /* Amber for special emphasis */
+            --border-color: #374151;
+            --link-color: #93c5fd;
+            --link-hover-color: #60a5fa;
+            --card-shadow: rgba(0, 0, 0, 0.4);
+        }
+
+        html.light {
+            /* Light Mode Overrides */
+            --bg-primary: #f8f8f8;
+            --bg-secondary: #ffffff;
+            --text-primary: #333333;
+            --text-secondary: #1f2937;
+            --text-tertiary: #555555;
+            --accent-main: #3b82f6; /* Standard blue */
+            --accent-alt: #fbbf24; /* Standard gold */
+            --border-color: #e5e7eb;
+            --link-color: #2563eb;
+            --link-hover-color: #1d4ed8;
+            --card-shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Apply CSS variables using Tailwind's arbitrary values or direct application */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        a:hover {
+            color: var(--link-hover-color);
+            text-decoration: underline;
+        }
+
+        .card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px var(--card-shadow), 0 2px 4px -1px var(--card-shadow);
+            transition: all 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px var(--card-shadow), 0 4px 6px -2px var(--card-shadow);
+        }
+
+        /* Specific text colors for content within cards */
+        .card p, .card li {
+            color: var(--text-primary);
+        }
+        .card p.text-sm, .card li .font-medium {
+            color: var(--text-tertiary);
+        }
+
+        /* Mermaid container theming */
+        .mermaid-container {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px var(--card-shadow);
+        }
+
+        /* Custom styling for blockquotes */
+        blockquote {
+            border-left: 4px solid var(--accent-main);
+            color: var(--text-tertiary);
+            transition: border-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Subtle first letter drop cap effect */
+        .first-letter-drop::first-letter {
+            float: left;
+            font-size: 3.5em; /* Larger size */
+            line-height: 0.8;
+            font-family: 'Noto Serif SC', serif;
+            margin-right: 0.1em;
+            color: var(--accent-main);
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3); /* Only for dark mode, subtle */
+            transition: color 0.3s ease;
+        }
+        html.light .first-letter-drop::first-letter {
+            text-shadow: none;
+        }
+
+        /* Style for references */
+        .reference-list {
+            color: var(--text-tertiary);
+        }
+
+        /* Hero Section Gradient and Pattern */
+        .hero-section {
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #3e1f73 100%); /* Adjusted for a deeper, more sophisticated gradient */
+            transition: background 0.3s ease;
+        }
+        html.light .hero-section {
+            background: linear-gradient(135deg, #f8f8f8 0%, #c4dafd 100%);
+        }
+
+        .hero-title {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(to right, #a78bfa, #f472b6); /* Brighter gradient for title */
+        }
+        html.light .hero-title {
+            background-image: linear-gradient(to right, #6366f1, #ec4899);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-color);
+            background-color: var(--bg-primary);
+            color: var(--text-tertiary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Specific icon colors */
+        .icon-red { color: #ef4444; }
+        .icon-green { color: #22c55e; }
+        .icon-yellow { color: #eab308; }
+        .icon-purple { color: #a855f7; }
+        .icon-cyan { color: #06b6d4; }
+        .icon-blue { color: #3b82f6; }
+        .icon-orange { color: #f97316; }
+        .icon-pink { color: #ec4899; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+
+    <!-- Header & Dark Mode Toggle -->
+    <header class="p-4 border-b border-color sticky top-0 z-50 bg-bg-primary transition-colors duration-300 ease-in-out">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-xl font-bold text-accent-main">
+                <i class="fas fa-gavel mr-2"></i>IPO合规
+            </div>
+            <button id="theme-toggle" class="p-2 rounded-full text-text-primary hover:bg-bg-secondary transition-colors duration-300 ease-in-out">
+                <i class="fas fa-sun hidden dark:block"></i>
+                <i class="fas fa-moon dark:hidden"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section relative py-20 px-4 transition-colors duration-300 ease-in-out overflow-hidden">
+        <div class="absolute inset-0 opacity-5" style="background-image: url('data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M0 10V0h10v10H0zm10 10V0h10v10H10zm10 10V0h10v10H20zM0 30V10h10v10H0zM10 40V20h10v10H10zm10 40V30h10v10H20zM0 50V30h10v10H0zM10 60V40h10v10H10zm10 60V50h10v10H20zM0 70V50h10v10H0zM10 80V60h10v10H10zm10 80V70h10v10H20zM0 90V70h10v10H0zM10 100V80h10v10H10zm10 100V90h10v10H20z\' fill=\'%23ffffff\'/%3E%3C/svg%3E');"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 leading-tight tracking-tight hero-title">
+                拟上市公司员工备用金管理
+            </h1>
+            <p class="text-2xl md:text-3xl font-light text-blue-200 mb-6">
+                IPO核查的重点与规范要求
+            </p>
+            <p class="text-lg md:text-xl leading-relaxed text-gray-300 max-w-2xl mx-auto first-letter-drop">
+                作为专业从事投行业务和A股市场资本运作的AI助手，我将基于联网搜索和知识库检索结果，为您分析拟上市公司员工借还备用金的重点关注事项及相关规则规定。联网搜索覆盖了IPO内控案例、监管要求和实务指南，确保内容真实、准确。
+            </p>
+            <div class="mt-8">
+                <a href="#main-content" class="inline-block bg-accent-main hover:bg-link-hover-color text-white font-semibold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out">
+                    深入了解 <i class="fas fa-arrow-down ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <main id="main-content" class="flex-grow container mx-auto px-4 py-16 md:py-20 transition-colors duration-300 ease-in-out">
+
+        <!-- Section: 重点关注事项 -->
+        <section class="mb-16">
+            <h2 class="text-4xl font-bold mb-10 text-center text-text-secondary">
+                <i class="fas fa-exclamation-triangle mr-3 icon-red"></i>重点关注事项
+            </h2>
+            <p class="text-lg leading-relaxed text-center mb-12 text-text-primary max-w-3xl mx-auto">
+                在IPO准备阶段，员工借还备用金是财务内控的关键风险点。需重点关注以下事项（基于监管案例和实务经验）：
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-question-circle text-3xl mr-4 icon-blue"></i>
+                        <h3 class="text-2xl font-semibold text-text-secondary">合理性评估</h3>
+                    </div>
+                    <p class="mb-3">
+                        在银行转账便捷的背景下，大额备用金借还不具备商业合理性。需核查备用金用途是否真实、必要（如小额差旅、零星采购），避免用于非业务目的（如工资发放、费用报销）。
+                    </p>
+                    <p class="text-sm">
+                        <i class="fas fa-lightbulb mr-1"></i> 若金额过高（例如超过日常经营需求），可能被视为内控缺陷。案例显示，备用金金额持续增长（如某公司备用金达3600万元）易引发监管质疑<sup class="text-link-color text-xs ml-1"><a href="#ref-1">[1]</a><a href="#ref-2">[2]</a></sup>。
+                    </p>
+                </div>
+
+                <div class="card p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-shield-alt text-3xl mr-4 icon-green"></i>
+                        <h3 class="text-2xl font-semibold text-text-secondary">内部控制有效性</h3>
+                    </div>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><span class="font-medium text-text-tertiary">审批流程：</span>核查是否有严格的审批制度（如分级授权、额度控制），确保借款前有书面申请、主管审批记录。</li>
+                        <li><span class="font-medium text-text-tertiary">归还机制：</span>关注是否及时归还（一般应在业务完成后30日内），避免长期挂账。逾期未还可能表明内控失效。</li>
+                        <li><span class="font-medium text-text-tertiary">核算与对账：</span>备用金是否纳入财务系统核算，定期对账（如每月核对借款人明细），防止成本/费用归集不及时或截止性错误<sup class="text-link-color text-xs ml-1"><a href="#ref-2">[2]</a><a href="#ref-3">[3]</a></sup>。</li>
+                    </ul>
+                </div>
+
+                <div class="card p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-dollar-sign text-3xl mr-4 icon-yellow"></i>
+                        <h3 class="text-2xl font-semibold text-text-secondary">资金合规风险</h3>
+                    </div>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><span class="font-medium text-text-tertiary">资金占用与体外循环：</span>备用金可能被用于垫付资金、关联方资金拆借或体外收支（如通过个人卡流转），导致财务报告失真。需核查资金流向是否与业务一致，避免涉及关联方利益输送。</li>
+                        <li><span class="font-medium text-text-tertiary">税务与合规：</span>借款是否涉税（如视为员工收入），归还时是否有凭证支持。历史问题（如未缴个税）需在申报前整改<sup class="text-link-color text-xs ml-1"><a href="#ref-3">[3]</a><a href="#ref-4">[4]</a></sup>。</li>
+                    </ul>
+                </div>
+
+                <div class="card p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-check-double text-3xl mr-4 icon-purple"></i>
+                        <h3 class="text-2xl font-semibold text-text-secondary">整改与核查深度</h3>
+                    </div>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><span class="font-medium text-text-tertiary">报告期内规范：</span>若存在历史不规范情形（如在报告期前期），必须在申报前彻底整改（如收回资金、注销相关账户）。中介机构需验证整改措施（如制度修订、培训记录）。</li>
+                        <li><span class="font-medium text-text-tertiary">全面核查：</span>保荐人和律师需详细核查：借款人名单、借款/归还时间、金额明细、用途凭证（如发票、合同），并覆盖所有交易（核查比例建议70%以上）<sup class="text-link-color text-xs ml-1"><a href="#ref-1">[1]</a><a href="#ref-3">[3]</a></sup>。</li>
+                    </ul>
+                </div>
+
+                <div class="card p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-chart-pie text-3xl mr-4 icon-red"></i>
+                        <h3 class="text-2xl font-semibold text-text-secondary">影响持续盈利能力</h3>
+                    </div>
+                    <p class="mb-3">
+                        备用金管理混乱可能反映内控薄弱，间接影响财务数据真实性（如虚增费用或隐藏负债）。
+                    </p>
+                    <p class="text-sm">
+                        <i class="fas fa-exclamation-circle mr-1"></i> 监管案例中，此类问题曾导致IPO被否（如柳州欧维姆机械因备用金内控缺陷被否决）<sup class="text-link-color text-xs ml-1"><a href="#ref-2">[2]</a></sup>。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Visualization Section -->
+        <section class="mb-16">
+            <h2 class="text-4xl font-bold mb-10 text-center text-text-secondary">
+                <i class="fas fa-project-diagram mr-3 icon-cyan"></i>IPO备用金内控：核心概念关系图
+            </h2>
+            <p class="text-lg leading-relaxed text-center mb-8 text-text-primary max-w-3xl mx-auto">
+                以下图表可视化展示了拟上市公司IPO过程中，员工备用金管理相关的核心概念、风险与监管逻辑。
+            </p>
+            <div class="mermaid-container rounded-lg p-4 shadow-xl">
+                <pre class="mermaid">
+graph TD
+    A[IPO上市流程] --> B{财务内控核查};
+    B --> C[员工备用金管理];
+
+    C --> C1(合理性评估);
+    C1 -- 过高/非业务用途 --> R1(内控缺陷);
+
+    C --> C2(内部控制有效性);
+    C2 -- 审批/归还/核算缺陷 --> R2(资金风险/财务失真);
+
+    C --> C3(资金合规风险);
+    C3 -- 资金占用/体外循环/税务问题 --> R2;
+
+    B -- 发现问题 --> D[内控问题整改];
+    D -- 彻底规范 --> E(通过核查);
+    D -- 未整改/新发问题 --> R3(IPO被否决);
+
+    S1["《首次公开发行股票并上市管理办法》"] -- 要求 --> B;
+    S2["《首发业务若干问题解答》"] -- 指引整改 --> D;
+    S3["交易所规范运作指引"] -- 强调 --> C3;
+    S4["IPO实务指南"] -- 指导核查 --> B;
+
+    R1 -- 影响 --> E;
+    R2 -- 影响 --> E;
+    R3 -- 结果 --> A;
+
+    subgraph 核心风险
+        R1;
+        R2;
+        R3;
+    end
+
+    subgraph 监管依据
+        S1;
+        S2;
+        S3;
+        S4;
+    end
+                </pre>
+            </div>
+        </section>
+
+        <!-- Section: 相关规则和规定 -->
+        <section class="mb-16">
+            <h2 class="text-4xl font-bold mb-10 text-center text-text-secondary">
+                <i class="fas fa-balance-scale-right mr-3 icon-amber"></i>相关规则和规定
+            </h2>
+            <p class="text-lg leading-relaxed text-center mb-12 text-text-primary max-w-3xl mx-auto">
+                涉及备用金管理的核心规则来自证监会、交易所的IPO和内控要求，具体包括：
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-file-alt text-3xl mr-4 icon-blue"></i>
+                        <h3 class="text-2xl font-semibold text-text-secondary">《首次公开发行股票并上市管理办法》（证监会令第32号）</h3>
+                    </div>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><span class="font-medium text-text-tertiary">第十七条：</span>要求发行人内部控制健全有效，合理保证财务报告的可靠性。备用金作为内控环节，必须规范核算和披露<sup class="text-link-color text-xs ml-1"><a href="#ref-1">[1]</a><a href="#ref-3">[3]</a></sup>。</li>
+                        <li><span class="font-medium text-text-tertiary">第十二条：</span>强调董事、高管不得频繁变动，相关内控制度需稳定执行，备用金管理涉及财务负责人职责<sup class="text-link-color text-xs ml-1"><a href="#ref-3">[3]</a></sup>。</li>
+                    </ul>
+                </div>
+
+                <div class="card p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-book-open text-3xl mr-4 icon-orange"></i>
+                        <h3 class="text-2xl font-semibold text-text-secondary">《首发业务若干问题解答》（证监会发布）</h3>
+                    </div>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><span class="font-medium text-text-tertiary">问题25（财务内控规范）：</span>明确拟上市公司在报告期内存在财务内控不规范情形（如备用金滥用），应通过中介机构在申报前完成整改（如收回资金、完善制度），并确保申报期最后一年无新发问题。整改需经保荐人验证<sup class="text-link-color text-xs ml-1"><a href="#ref-2">[2]</a><a href="#ref-4">[4]</a></sup>。</li>
+                    </ul>
+                </div>
+
+                <div class="card p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-landmark text-3xl mr-4 icon-green"></i>
+                        <h3 class="text-2xl font-semibold text-text-secondary">交易所规范运作指引（如《深圳证券交易所上市公司规范运作指引》）</h3>
+                    </div>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><span class="font-medium text-text-tertiary">第4.2.3条：</span>禁止控股股东、关联方通过共用账户或资金存入控制公司财务，备用金若涉及关联方（如员工为关联人），需披露并证明公允性<sup class="text-link-color text-xs ml-1"><a href="#ref-5">[5]</a><a href="#ref-6">[6]</a></sup>。</li>
+                        <li><span class="font-medium text-text-tertiary">内控要求：</span>强调资金管理的独立性，备用金借还不影响公司财务独立<sup class="text-link-color text-xs ml-1"><a href="#ref-6">[6]</a></sup>。</li>
+                    </ul>
+                </div>
+
+                <div class="card p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-clipboard-list text-3xl mr-4 icon-red"></i>
+                        <h3 class="text-2xl font-semibold text-text-secondary">IPO实务指南（中介机构核查要求）</h3>
+                    </div>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>保荐人和会计师需执行：借款人访谈、银行流水核对、凭证抽样测试，并出具专项说明（如备用金核算是否影响财务报表真实性）。案例显示，核查不足可能导致反馈意见或否决<sup class="text-link-color text-xs ml-1"><a href="#ref-1">[1]</a><a href="#ref-2">[2]</a><a href="#ref-3">[3]</a></sup>。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 总结建议 -->
+        <section class="mb-16">
+            <h2 class="text-4xl font-bold mb-10 text-center text-text-secondary">
+                <i class="fas fa-lightbulb mr-3 icon-yellow"></i>总结建议
+            </h2>
+            <div class="bg-gradient-to-r from-blue-800 to-indigo-700 rounded-xl p-8 shadow-xl text-white">
+                <ul class="list-disc list-inside text-lg space-y-4">
+                    <li><span class="font-semibold text-accent-alt">整改优先：</span>在IPO申报前，彻底清理备用金历史问题（如收回逾期借款、规范制度），确保报告期最后一年无违规。</li>
+                    <li><span class="font-semibold text-accent-alt">中介角色：</span>聘请保荐人和律师深度核查（如全覆盖借款人明细），并在招股书中披露内控整改措施。</li>
+                    <li><span class="font-semibold text-accent-alt">规则依据：</span>核心遵守《首发管理办法》和交易所指引，避免触及相关条款。</li>
+                </ul>
+                <blockquote class="mt-6 text-base text-blue-100 border-l-4 border-blue-300 pl-4 py-2">
+                    <i class="fas fa-quote-left mr-2"></i>以上内容基于联网搜索结果整理，排除不相关信息。若贵公司有具体案例（如备用金金额或用途），可提供细节以便更精准分析。
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- Section: 延伸阅读 -->
+        <section class="mb-16">
+            <h2 class="text-4xl font-bold mb-10 text-center text-text-secondary">
+                <i class="fas fa-book-reader mr-3 icon-pink"></i>延伸阅读
+            </h2>
+            <p class="text-lg leading-relaxed text-center mb-8 text-text-primary max-w-3xl mx-auto">
+                为更深入理解企业上市与内控管理，我们推荐以下高质量书籍或报告：
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card p-5 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-2 text-text-secondary">《上市公司内部控制指引》</h3>
+                    <p class="text-sm mb-3">详细阐述中国上市公司内部控制的框架与要求，是构建健全内控体系的基础。</p>
+                    <a href="https://www.sse.com.cn/lawandrules/sserules/listing/equity/general/c/c_20111116_1485.shtml" target="_blank" rel="noopener noreferrer" class="text-link-color hover:underline text-sm">
+                        <i class="fas fa-external-link-alt mr-1"></i> 查看详情
+                    </a>
+                </div>
+                <div class="card p-5 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-2 text-text-secondary">《企业会计准则》</h3>
+                    <p class="text-sm mb-3">理解财务核算和披露的根本依据，对于规范备用金会计处理至关重要。</p>
+                    <a href="http://www.mof.gov.cn/mofhome/index/zcgzzs/200610/t20061021_1669865.htm" target="_blank" rel="noopener noreferrer" class="text-link-color hover:underline text-sm">
+                        <i class="fas fa-external-link-alt mr-1"></i> 查看详情
+                    </a>
+                </div>
+                <div class="card p-5 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-2 text-text-secondary">《IPO实务操作与案例精解》</h3>
+                    <p class="text-sm mb-3">结合实务案例，深入分析IPO过程中的各类风险与应对策略，包括财务核查要点。</p>
+                    <a href="https://book.douban.com/subject/26601248/" target="_blank" rel="noopener noreferrer" class="text-link-color hover:underline text-sm">
+                        <i class="fas fa-external-link-alt mr-1"></i> 查看详情 (豆瓣)
+                    </a>
+                </div>
+                <div class="card p-5 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-2 text-text-secondary">《公司治理：理论与实践》</h3>
+                    <p class="text-sm mb-3">从宏观角度探讨公司治理结构，理解内控在公司治理中的作用和重要性。</p>
+                    <a href="https://book.douban.com/subject/1077983/" target="_blank" rel="noopener noreferrer" class="text-link-color hover:underline text-sm">
+                        <i class="fas fa-external-link-alt mr-1"></i> 查看详情 (豆瓣)
+                    </a>
+                </div>
+                <div class="card p-5 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-2 text-text-secondary">《中国证监会IPO审核关注要点》</h3>
+                    <p class="text-sm mb-3">各类监管问答和案例的汇总，直接反映了监管机构在IPO审核中的关注重心。</p>
+                    <a href="https://www.csrc.gov.cn/csrc/c100107/c1447185/1447185/files/%E9%A6%96%E5%8F%91%E4%B8%9A%E5%8A%A1%E8%8B%A5%E5%B9%B2%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94.doc" target="_blank" rel="noopener noreferrer" class="text-link-color hover:underline text-sm">
+                        <i class="fas fa-external-link-alt mr-1"></i> 查看详情 (官方文件)
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- References Section -->
+        <section class="mt-16 border-t border-color pt-8">
+            <h2 class="text-2xl font-bold mb-6 text-text-secondary">
+                <i class="fas fa-bookmark mr-2"></i>引用来源
+            </h2>
+            <ol class="reference-list text-text-tertiary text-sm">
+                <li id="ref-1" class="mb-1"><span class="font-semibold">[1]</span> <a href="https://zhuanlan.zhihu.com/p/44921736" target="_blank" rel="noopener noreferrer">拟上市公司IPO内控关注要点 - 知乎专栏</a></li>
+                <li id="ref-2" class="mb-1"><span class="font-semibold">[2]</span> <a href="http://scholarsupdate.hi2net.com/news_read.asp?NewsID=22957" target="_blank" rel="noopener noreferrer">中国证监会（CSRC）：企业上市十大不能犯的错误</a></li>
+                <li id="ref-3" class="mb-1"><span class="font-semibold">[3]</span> <a href="http://www.360doc.com/content/21/0319/21/1331017_967870812.shtml" target="_blank" rel="noopener noreferrer">IPO财务核查之内部控制 - 360Doc</a></li>
+                <li id="ref-4" class="mb-1"><span class="font-semibold">[4]</span> <a href="http://www.csrc.gov.cn/csrc/c100107/c1447185/1447185/files/%E9%A6%96%E5%8F%91%E4%B8%9A%E5%8A%A1%E8%8B%A5%E5%B9%B2%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94.doc" target="_blank" rel="noopener noreferrer">首发业务若干问题解答 - 中国证监会</a></li>
+                <li id="ref-5" class="mb-1"><span class="font-semibold">[5]</span> <a href="https://sentury-oss.oss-accelerate.aliyuncs.com/whr/cms/b1b71dbc23aea3cb04ea441dfb9f196c.pdf" target="_blank" rel="noopener noreferrer">深圳证券交易所上市公司规范运作指引</a></li>
+                <li id="ref-6" class="mb-1"><span class="font-semibold">[6]</span> <a href="https://www.investor.org.cn/information_release/news_release_from_authorities/hsjysfb/202308/P020230807511795625536.pdf" target="_blank" rel="noopener noreferrer">创业板上市公司规范运作（2023年修订） - 中国投资者网</a></li>
+            </ol>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="p-8 text-center text-sm">
+        <p>&copy; 2023 IPO合规助手. All rights reserved.</p>
+        <p class="mt-2">提供专业、准确的A股市场资本运作咨询.</p>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid.js configuration
+        const mermaidConfig = {
+            startOnLoad: true,
+            securityLevel: 'loose', // Allow external links etc.
+            themeVariables: {
+                // Default dark mode theme variables for Mermaid
+                'darkMode': true,
+                'background': '#272c41',
+                'primaryColor': '#818cf8',
+                'primaryBorderColor': '#818cf8',
+                'lineColor': '#e0e0e0',
+                'textColor': '#e0e0e0',
+                'secondaryColor': '#fcd34d',
+                'tertiaryColor': '#93c5fd',
+                'clusterBkg': '#1a1a2e',
+                'clusterBorder': '#4b5563',
+                'nodeBorder': '#818cf8',
+                'nodeTextColor': '#e0e0e0',
+                'edgeLabelBackground': '#272c41',
+                'fontFamily': 'Noto Sans SC, Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif'
+            }
+        };
+
+        const mermaidLightConfig = {
+            // Light mode theme variables for Mermaid
+            'darkMode': false,
+            'background': '#ffffff',
+            'primaryColor': '#3b82f6',
+            'primaryBorderColor': '#3b82f6',
+            'lineColor': '#333333',
+            'textColor': '#333333',
+            'secondaryColor': '#fbbf24',
+            'tertiaryColor': '#2563eb',
+            'clusterBkg': '#f8f8f8',
+            'clusterBorder': '#e5e7eb',
+            'nodeBorder': '#3b82f6',
+            'nodeTextColor': '#333333',
+            'edgeLabelBackground': '#ffffff',
+            'fontFamily': 'Noto Sans SC, Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif'
+        };
+
+        // Initialize Mermaid with a default theme (will be updated by toggle)
+        mermaid.initialize(mermaidConfig);
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                localStorage.setItem('theme', 'dark');
+                // Update Mermaid theme for dark mode
+                mermaid.initialize({...mermaidConfig, themeVariables: mermaidConfig.themeVariables});
+            } else {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+                // Update Mermaid theme for light mode
+                mermaid.initialize({...mermaidConfig, themeVariables: mermaidLightConfig});
+            }
+            // Re-render Mermaid graph after theme change
+            if (document.querySelector('.mermaid')) {
+                mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+            }
+        }
+
+        // Check for saved theme preference or system preference on load
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (prefersDark) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+
+        // Toggle button event listener
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Smooth scroll for hero button
+        document.querySelector('a[href^="#"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+
+        // Intersection Observer for fade-in effect on sections (micro-interaction)
+        const sections = document.querySelectorAll('section');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            // Apply initial hidden state and observe, excluding the hero section
+            if (!section.classList.contains('hero-section')) {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                observer.observe(section);
+            }
+        });
+    </script>
+</body>
+</html>
+```
