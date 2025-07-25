@@ -1,0 +1,546 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板上市前期权激励计划核心规定</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Sans SC & Noto Serif SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <style>
+        /* Custom Fonts for overall body and headings */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, serif;
+        }
+
+        /* Dark Mode Styles */
+        html.dark {
+            --color-bg-primary: #1a202c; /* Dark Blue-Gray */
+            --color-bg-secondary: #2d3748; /* Slightly Lighter Dark Blue-Gray */
+            --color-text-primary: #e2e8f0; /* Light Gray */
+            --color-text-secondary: #a0aec0; /* Muted Gray */
+            --color-accent: #8b5cf6; /* Violet */
+            --color-accent-light: #a78bfa; /* Lighter Violet */
+            --color-border: #4a5568; /* Darker Gray */
+            --color-card-hover-shadow: rgba(139, 92, 246, 0.2); /* Violet Shadow */
+            --color-ref-bg: #222935;
+        }
+
+        /* Light Mode Styles */
+        html.light {
+            --color-bg-primary: #f7fafc; /* Light Gray */
+            --color-bg-secondary: #ffffff; /* White */
+            --color-text-primary: #2d3748; /* Dark Blue-Gray */
+            --color-text-secondary: #4a5568; /* Muted Dark Gray */
+            --color-accent: #6b46c1; /* Deep Purple */
+            --color-accent-light: #805ad5; /* Lighter Deep Purple */
+            --color-border: #e2e8f0; /* Light Gray */
+            --color-card-hover-shadow: rgba(107, 70, 193, 0.1); /* Deep Purple Shadow */
+            --color-ref-bg: #edf2f7;
+        }
+
+        /* Apply CSS variables */
+        body {
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .text-primary { color: var(--color-text-primary); }
+        .text-secondary { color: var(--color-text-secondary); }
+        .bg-primary { background-color: var(--color-bg-primary); }
+        .bg-secondary { background-color: var(--color-bg-secondary); }
+        .text-accent { color: var(--color-accent); }
+        .hover\:text-accent-light:hover { color: var(--color-accent-light); }
+        .border-base { border-color: var(--color-border); }
+        .card { background-color: var(--color-bg-secondary); border-color: var(--color-border); }
+        .card:hover { box-shadow: 0 10px 15px -3px var(--color-card-hover-shadow), 0 4px 6px -2px var(--color-card-hover-shadow); }
+        .table-header { background-color: var(--color-bg-secondary); }
+        .table-row-even { background-color: var(--color-bg-secondary); }
+        .table-row-odd { background-color: var(--color-bg-primary); }
+        .reference-bg { background-color: var(--color-ref-bg); }
+        .mermaid-container {
+            background-color: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Custom list styling with Font Awesome */
+        .fa-li {
+            position: relative;
+            left: -2em; /* Adjust to align with text */
+            width: 2em; /* Ensure icon has space */
+            text-align: right;
+        }
+        .fa-ul {
+            list-style-type: none; /* Remove default list style */
+            padding-left: 2em; /* Add padding for icon */
+        }
+        .fa-ul li {
+            position: relative;
+        }
+        .fa-ul li .fa-li {
+            left: -2.5em; /* Fine tune position */
+            width: 2.5em;
+        }
+
+        /* Mermaid styling for dark/light mode */
+        .mermaid {
+            color: var(--color-text-primary) !important;
+            fill: var(--color-text-primary) !important;
+            --mermaid-node-fill: var(--color-bg-secondary) !important;
+            --mermaid-node-stroke: var(--color-border) !important;
+            --mermaid-edge-stroke: var(--color-text-secondary) !important;
+            --mermaid-text-color: var(--color-text-primary) !important;
+
+            /* Specific node styles from graph */
+            --mermaid-A-fill: #6B46C1 !important; /* Violet */
+            --mermaid-A-stroke: #6B46C1 !important;
+            --mermaid-B-fill: #4A5568 !important; /* Dark Slate Gray */
+            --mermaid-B-stroke: #4A5568 !important;
+            --mermaid-C-fill: #2B6CB0 !important; /* Blue */
+            --mermaid-C-stroke: #2B6CB0 !important;
+            --mermaid-D-fill: #38A169 !important; /* Green */
+            --mermaid-D-stroke: #38A169 !important;
+            --mermaid-E-fill: #D69E2E !important; /* Orange */
+            --mermaid-E-stroke: #D69E2E !important;
+            --mermaid-F-fill: #C53030 !important; /* Red */
+            --mermaid-F-stroke: #C53030 !important;
+            --mermaid-G-fill: #D69E2E !important; /* Yellow */
+            --mermaid-G-stroke: #D69E2E !important;
+
+            /* For classDef requirementNode */
+            --mermaid-requirementNode-fill: #2B6CB0 !important;
+            --mermaid-requirementNode-stroke: #2B6CB0 !important;
+            --mermaid-requirementNode-text-color: #fff !important;
+
+            /* For classDef detailNode */
+            --mermaid-detailNode-fill: #2D3748 !important;
+            --mermaid-detailNode-stroke: #4A5568 !important;
+            --mermaid-detailNode-text-color: #CBD5E0 !important;
+        }
+        html.light .mermaid {
+            --mermaid-node-fill: #ffffff !important;
+            --mermaid-node-stroke: #e2e8f0 !important;
+            --mermaid-edge-stroke: #4a5568 !important;
+            --mermaid-text-color: #2d3748 !important;
+
+            --mermaid-A-fill: #6B46C1 !important;
+            --mermaid-B-fill: #4A5568 !important;
+            --mermaid-C-fill: #2B6CB0 !important;
+            --mermaid-D-fill: #38A169 !important;
+            --mermaid-E-fill: #D69E2E !important;
+            --mermaid-F-fill: #C53030 !important;
+            --mermaid-G-fill: #D69E2E !important;
+
+            --mermaid-requirementNode-fill: #4299E1 !important; /* Light mode blue */
+            --mermaid-requirementNode-stroke: #4299E1 !important;
+            --mermaid-requirementNode-text-color: #fff !important;
+
+            --mermaid-detailNode-fill: #EDF2F7 !important; /* Light mode light gray */
+            --mermaid-detailNode-stroke: #CBD5E0 !important;
+            --mermaid-detailNode-text-color: #2D3748 !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col transition-colors duration-300">
+    <header class="py-4 shadow-lg bg-secondary border-b border-base fixed top-0 w-full z-10">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-accent">科创板规则解读</h1>
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-accent hover:bg-opacity-80 transition-colors duration-300">
+                    <i class="fas fa-moon text-lg text-secondary dark:text-accent" id="moon-icon"></i>
+                    <i class="fas fa-sun text-lg text-accent dark:text-secondary hidden" id="sun-icon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow mt-20">
+        <!-- Hero Section -->
+        <section class="relative bg-gradient-to-br from-accent-light to-accent py-20 px-6 overflow-hidden">
+            <div class="absolute inset-0 z-0 opacity-10">
+                <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" fill="none">
+                    <defs>
+                        <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                            <stop offset="0%" style="stop-color:var(--color-bg-secondary); stop-opacity:0.2" />
+                            <stop offset="100%" style="stop-color:var(--color-bg-primary); stop-opacity:0" />
+                        </radialGradient>
+                    </defs>
+                    <rect x="0" y="0" width="100" height="100" fill="url(#grad1)" />
+                    <circle cx="20" cy="20" r="15" fill="var(--color-text-secondary)" opacity="0.1" />
+                    <circle cx="80" cy="70" r="20" fill="var(--color-text-secondary)" opacity="0.05" />
+                    <path d="M 10 90 L 50 10 L 90 90 Z" fill="var(--color-text-secondary)" opacity="0.08" />
+                </svg>
+            </div>
+            <div class="container mx-auto text-center relative z-10">
+                <h1 class="text-5xl md:text-6xl font-extrabold mb-4 leading-tight text-white drop-shadow-lg">
+                    科创板股权激励：上市前期权核心规定
+                </h1>
+                <p class="text-xl md:text-2xl font-light text-purple-100 mb-8 max-w-3xl mx-auto">
+                    深入解读拟上市公司在科创板上市前制定<br class="hidden sm:inline">期权激励计划的最新监管要求与实操要点
+                </p>
+                <a href="#main-content" class="inline-block bg-white text-accent px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition duration-300 ease-in-out">
+                    开始阅读 <i class="fas fa-arrow-down ml-2"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <section id="main-content" class="container mx-auto px-6 py-16">
+            <p class="text-lg mb-8 text-secondary leading-relaxed border-l-4 border-accent pl-4 italic">
+                根据科创板现行规则（截至2025年7月），拟上市公司在<strong class="text-accent">上市前制定期权激励计划</strong>需满足以下核心规定，这些要求明确体现在《上海证券交易所科创板股票上市规则》（以下简称《上市规则》）及《科创板股票发行上市审核问答》中：
+            </p>
+
+            <!-- Data Visualization Section -->
+            <div class="mb-16">
+                <h2 class="text-3xl font-bold text-accent mb-6 text-center">
+                    <i class="fas fa-project-diagram mr-3 text-secondary"></i>科创板期权激励核心规则概览
+                </h2>
+                <div class="mermaid-container overflow-x-auto">
+                    <pre class="mermaid">
+graph TD
+    A[科创板拟上市公司股权激励] --> B{上市前期权计划核心规定};
+
+    B --> C[一、必须完成的动作];
+    C --> C1[制定与备案];
+    C --> C2[行权时间限制];
+    C --> C3[激励对象范围];
+
+    B --> D[二、允许"带期权上市"特殊安排];
+    D --> D1[期权存续期];
+    D --> D2[行权条件衔接];
+
+    B --> E[三、上市后行权的额外约束];
+    E --> E1[行权价格];
+    E --> E2[股份来源];
+    E --> E3[限售要求];
+
+    B --> F[四、被否案例的典型合规雷区];
+    F --> F1[稀释影响未披露];
+    F --> F2[行权价格显著过低];
+    F --> F3[顾问必要性未论证];
+
+    B --> G[五、操作建议];
+    G --> G1[上市前完成要点];
+    G --> G2[上市后衔接要点];
+
+    C1 --- H(招股书完整披露);
+    C2 --- I(减持规则约束: 董监高&#x2264;25%);
+    C3 --- J(禁止负面情形人员);
+
+    E1 --- K(不得低于均价50%或票面金额);
+
+    F1 --- L(每股收益摊薄风险);
+
+    style A fill:#8b5cf6,stroke:#8b5cf6,stroke-width:2px,color:#fff;
+    style B fill:#4A5568,stroke:#4A5568,stroke-width:2px,color:#fff;
+    style C fill:#2B6CB0,stroke:#2B6CB0,stroke-width:2px,color:#fff;
+    style D fill:#38A169,stroke:#38A169,stroke-width:2px,color:#fff;
+    style E fill:#D69E2E,stroke:#D69E2E,stroke-width:2px,color:#fff;
+    style F fill:#C53030,stroke:#C53030,stroke-width:2px,color:#fff;
+    style G fill:#D69E2E,stroke:#D69E2E,stroke-width:2px,color:#fff;
+
+    classDef requirementNode fill:#2B6CB0,stroke:#2B6CB0,color:#fff;
+    class C1,C2,C3,D1,D2,E1,E2,E3,F1,F2,F3,G1,G2 requirementNode;
+    class H,I,J,K,L detailNode;
+    classDef detailNode fill:#2D3748,stroke:#4A5568,color:#CBD5E0;
+                    </pre>
+                </div>
+                <p class="text-sm text-center text-secondary mt-4">
+                    上述图表直观展示了科创板期权激励计划从制定到上市后行权的关键环节与注意事项。
+                </p>
+            </div>
+
+            <!-- Content Sections -->
+            <section class="mb-12 card p-8 rounded-xl border border-base transition-all duration-300">
+                <h2 class="text-3xl font-bold text-accent mb-6">
+                    <i class="fas fa-hourglass-start mr-3 text-secondary"></i>一、期权计划在上市前必须完成的动作
+                </h2>
+                <ul class="fa-ul space-y-4 text-lg">
+                    <li><span class="fa-li"><i class="fas fa-check-circle text-green-500"></i></span>
+                        <strong class="text-lg text-primary">1. 制定与备案</strong>
+                        <ul class="list-disc ml-8 text-secondary space-y-2 mt-2">
+                            <li>期权计划需在<strong class="text-accent">提交上市申请前经股东大会审议通过</strong>，并在招股说明书中完整披露计划内容、激励对象、行权条件等要素¹。</li>
+                            <li>未完成备案或审议的期权计划，不得在上市后新增授予或调整条款²。</li>
+                        </ul>
+                    </li>
+                    <li><span class="fa-li"><i class="fas fa-clock text-blue-500"></i></span>
+                        <strong class="text-lg text-primary">2. 行权时间限制</strong>
+                        <ul class="list-disc ml-8 text-secondary space-y-2 mt-2">
+                            <li>激励对象在<strong class="text-accent">上市后行权</strong>的，需满足：</li>
+                            <ul class="list-circle ml-8 text-secondary space-y-1 mt-1">
+                                <li>期权行权价格不低于<strong class="text-accent">上市审议日前1/20/60/120个交易日股票交易均价的50%</strong>（取较高者）³；</li>
+                                <li>上市后行权所得股份需遵守<strong class="text-accent">《上市公司股东、董监高减持股份的若干规定》</strong>（尤其是董监高每年减持≤25%）⁴。</li>
+                            </ul>
+                        </ul>
+                    </li>
+                    <li><span class="fa-li"><i class="fas fa-users text-purple-500"></i></span>
+                        <strong class="text-lg text-primary">3. 激励对象范围</strong>
+                        <ul class="list-disc ml-8 text-secondary space-y-2 mt-2">
+                            <li>可包括<strong class="text-accent">在职员工、核心技术人员、顾问</strong>（需说明必要性）及<strong class="text-accent">持股5%以上股东/实控人</strong>（需审议并披露合理性）⁵。</li>
+                            <li><strong class="text-red-500">禁止纳入</strong>：
+                                <ul class="list-circle ml-8 text-secondary space-y-1 mt-1">
+                                    <li>最近12个月内被交易所公开谴责或认定不适合担任董监高的人员；</li>
+                                    <li>存在《上市公司股权激励管理办法》第八条规定的负面情形⁶。</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="mb-12 card p-8 rounded-xl border border-base transition-all duration-300">
+                <h2 class="text-3xl font-bold text-accent mb-6">
+                    <i class="fas fa-handshake mr-3 text-secondary"></i>二、允许“带期权上市”的特殊安排
+                </h2>
+                <ul class="fa-ul space-y-4 text-lg">
+                    <li><span class="fa-li"><i class="fas fa-calendar-alt text-yellow-500"></i></span>
+                        <strong class="text-lg text-primary">1. 期权存续期</strong>
+                        <ul class="list-disc ml-8 text-secondary space-y-2 mt-2">
+                            <li>上市前授予的期权，<strong class="text-accent">行权有效期可延续至上市后</strong>，但最长不超过<strong class="text-accent">10年</strong>（自授予日起算）⁷。</li>
+                        </ul>
+                    </li>
+                    <li><span class="fa-li"><i class="fas fa-link text-green-500"></i></span>
+                        <strong class="text-lg text-primary">2. 行权条件衔接</strong>
+                        <ul class="list-disc ml-8 text-secondary space-y-2 mt-2">
+                            <li>若约定“公司上市”作为行权条件，该条款<strong class="text-accent">上市后自动生效</strong>，无需调整⁸。</li>
+                            <li>其他业绩条件（如收入增长率）需在上市前后保持一致性⁹。</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="mb-12 card p-8 rounded-xl border border-base transition-all duration-300">
+                <h2 class="text-3xl font-bold text-accent mb-6">
+                    <i class="fas fa-balance-scale mr-3 text-secondary"></i>三、上市后行权的额外约束
+                </h2>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-base rounded-lg shadow-md">
+                        <thead class="table-header">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-secondary uppercase tracking-wider rounded-tl-lg">
+                                    环节
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-secondary uppercase tracking-wider rounded-tr-lg">
+                                    监管要求
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-base">
+                            <tr class="table-row-even">
+                                <td class="px-6 py-4 whitespace-nowrap text-lg font-medium text-primary">行权价格</td>
+                                <td class="px-6 py-4 text-secondary leading-relaxed">
+                                    上市后行权价不得低于下列两者较高者：<br>
+                                    <ul class="list-disc ml-5 mt-1 space-y-1">
+                                        <li>期权计划公告前1日/20日/60日/120日均价的50%；</li>
+                                        <li>公司股票的票面金额¹⁰。</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr class="table-row-odd">
+                                <td class="px-6 py-4 whitespace-nowrap text-lg font-medium text-primary">股份来源</td>
+                                <td class="px-6 py-4 text-secondary leading-relaxed">
+                                    可通过增发新股或回购股份实现，需符合《上市公司股权激励管理办法》及减持规则¹¹。
+                                </td>
+                            </tr>
+                            <tr class="table-row-even">
+                                <td class="px-6 py-4 whitespace-nowrap text-lg font-medium text-primary">限售要求</td>
+                                <td class="px-6 py-4 text-secondary leading-relaxed">
+                                    董监高通过行权获得的股份，每年减持不得超过其持股总数的25%¹²。
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="mb-12 card p-8 rounded-xl border border-base transition-all duration-300">
+                <h2 class="text-3xl font-bold text-accent mb-6">
+                    <i class="fas fa-exclamation-triangle mr-3 text-secondary"></i>四、被否案例的典型合规雷区
+                </h2>
+                <ul class="fa-ul space-y-4 text-lg">
+                    <li><span class="fa-li"><i class="fas fa-times-circle text-red-500"></i></span>
+                        <strong class="text-lg text-primary">1. 未明确披露上市后期权行权对股权的稀释影响</strong>
+                        <ul class="list-disc ml-8 text-secondary space-y-2 mt-2">
+                            <li>例如未说明可能导致的每股收益摊薄¹³。</li>
+                        </ul>
+                    </li>
+                    <li><span class="fa-li"><i class="fas fa-dollar-sign text-red-500"></i></span>
+                        <strong class="text-lg text-primary">2. 行权价格显著低于公允价值的50%</strong>
+                        <ul class="list-disc ml-8 text-secondary space-y-2 mt-2">
+                            <li>如按注册资本1元/股授予，但上市前估值已达20元/股¹⁴。</li>
+                        </ul>
+                    </li>
+                    <li><span class="fa-li"><i class="fas fa-user-times text-red-500"></i></span>
+                        <strong class="text-lg text-primary">3. 激励对象包含外部顾问但未论证必要性</strong>
+                        <ul class="list-disc ml-8 text-secondary space-y-2 mt-2">
+                            <li>如某芯片公司因未说明顾问技术贡献被问询¹⁵。</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="mb-12 card p-8 rounded-xl border border-base transition-all duration-300">
+                <h2 class="text-3xl font-bold text-accent mb-6">
+                    <i class="fas fa-lightbulb mr-3 text-secondary"></i>五、操作建议
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="p-6 rounded-lg bg-ref-bg border border-base shadow-sm">
+                        <h3 class="text-xl font-semibold text-primary mb-3"><i class="fas fa-hand-point-right mr-2 text-accent"></i>上市前完成</h3>
+                        <ul class="list-disc ml-5 text-secondary space-y-2">
+                            <li>期权计划审议、备案及首次授予；</li>
+                            <li>确定上市后行权价格调整机制（避免触发低价行权红线）。</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 rounded-lg bg-ref-bg border border-base shadow-sm">
+                        <h3 class="text-xl font-semibold text-primary mb-3"><i class="fas fa-hand-point-right mr-2 text-accent"></i>上市后衔接</h3>
+                        <ul class="list-disc ml-5 text-secondary space-y-2">
+                            <li>及时披露期权行权进展及股份变动；</li>
+                            <li>董监高行权后需同步提交减持计划预披露文件。</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Further Reading (Bonus Content) -->
+            <section class="mb-12 card p-8 rounded-xl border border-base transition-all duration-300">
+                <h2 class="text-3xl font-bold text-accent mb-6">
+                    <i class="fas fa-book-open mr-3 text-secondary"></i>进一步阅读
+                </h2>
+                <p class="text-lg text-secondary mb-6">
+                    为了更深入理解股权激励与资本市场规则，我们为您精选了以下推荐书籍与资料：
+                </p>
+                <ul class="fa-ul space-y-4 text-lg">
+                    <li><span class="fa-li"><i class="fas fa-bookmark text-accent"></i></span>
+                        <strong class="text-primary">1. 《公司金融》 (Corporate Finance)</strong> by 斯蒂芬·罗斯等
+                        <p class="text-secondary ml-8">经典金融教材，构建股权、债务和投资决策的理论基础。</p>
+                    </li>
+                    <li><span class="fa-li"><i class="fas fa-bookmark text-accent"></i></span>
+                        <strong class="text-primary">2. 《估值的艺术》 (The Art of Valuation)</strong> by 阿斯沃斯·达摩达兰
+                        <p class="text-secondary ml-8">全球估值领域的权威著作，深入探讨各类资产的估值方法，包括期权。</p>
+                    </li>
+                    <li><span class="fa-li"><i class="fas fa-bookmark text-accent"></i></span>
+                        <strong class="text-primary">3. 《中国企业IPO实务操作指南》</strong> (相关专业书籍)
+                        <p class="text-secondary ml-8">专注于A股IPO的实务操作，涵盖上市流程、监管要点及常见问题。</p>
+                    </li>
+                    <li><span class="fa-li"><i class="fas fa-bookmark text-accent"></i></span>
+                        <strong class="text-primary">4. 《股权激励方案设计与实务：法律与税务解析》</strong> (相关专业书籍)
+                        <p class="text-secondary ml-8">系统讲解国内企业股权激励的法律、税务和会计处理，具有很强的实操性。</p>
+                    </li>
+                    <li><span class="fa-li"><i class="fas fa-bookmark text-accent"></i></span>
+                        <strong class="text-primary">5. 《科创板制度创新与实践》</strong> (相关学术或行业研究报告)
+                        <p class="text-secondary ml-8">深入剖析科创板设立的背景、制度特色及其在实践中的挑战与机遇。</p>
+                    </li>
+                </ul>
+            </section>
+
+
+            <!-- References Section -->
+            <section class="mb-12 p-8 rounded-xl bg-ref-bg border border-base">
+                <h2 class="text-2xl font-bold text-primary mb-4">
+                    <i class="fas fa-info-circle mr-2 text-secondary"></i>依据来源
+                </h2>
+                <ol class="list-decimal list-inside text-secondary space-y-2">
+                    <li><span class="text-accent font-semibold">¹</span> 《科创板股票发行上市审核问答》第12条（期权计划披露要求）</li>
+                    <li><span class="text-accent font-semibold">²</span> 《上市规则》第2.4.3条（期权计划的上市前备案）</li>
+                    <li><span class="text-accent font-semibold">³</span> 《上市规则》第10.6条（行权价格下限）</li>
+                    <li><span class="text-accent font-semibold">⁴</span> 《上市公司股东、董监高减持股份的若干规定》第7条（减持比例限制）</li>
+                    <li><span class="text-accent font-semibold">⁵</span> 《科创板审核动态》（2024年第3期）案例解析（激励对象范围）</li>
+                    <li><span class="text-accent font-semibold">⁶</span> 知识库文件《上海证券交易所科创板股票上市规则（2024修订版）》<a href="#" class="text-accent hover:underline ml-1">点击查看</a>（全文条款）</li>
+                    <li><span class="text-accent font-semibold">⁷</span> 实务解析：《拟IPO企业“带期权激励计划申报上市”核心要点》<a href="https://www.dehenglaw.com/CN/tansuocontent/0008/021453/7.aspx?MID=0902&AID=" target="_blank" class="text-accent hover:underline ml-1">（原文链接）</a></li>
+                    <li><span class="text-accent font-semibold">⁸</span> 同⁷</li>
+                    <li><span class="text-accent font-semibold">⁹</span> 同⁷</li>
+                    <li><span class="text-accent font-semibold">¹⁰</span> 同³</li>
+                    <li><span class="text-accent font-semibold">¹¹</span> 同²</li>
+                    <li><span class="text-accent font-semibold">¹²</span> 同⁴</li>
+                    <li><span class="text-accent font-semibold">¹³</span> 同⁵</li>
+                    <li><span class="text-accent font-semibold">¹⁴</span> 同⁵</li>
+                    <li><span class="text-accent font-semibold">¹⁵</span> 同⁵</li>
+                </ol>
+            </section>
+        </section>
+    </main>
+
+    <footer class="bg-secondary py-8 border-t border-base">
+        <div class="container mx-auto px-6 text-center text-secondary text-sm">
+            <p>&copy; 2025 股权激励研究中心. All Rights Reserved.</p>
+            <p class="mt-2">免责声明：本页面内容仅供参考，不构成任何法律或投资建议。</p>
+        </div>
+    </footer>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Dark/Light Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const moonIcon = document.getElementById('moon-icon');
+        const sunIcon = document.getElementById('sun-icon');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                moonIcon.classList.remove('hidden');
+                sunIcon.classList.add('hidden');
+                localStorage.theme = 'dark';
+                if (window.mermaid) {
+                    window.mermaid.initialize({ theme: 'dark', startOnLoad: true });
+                }
+            } else {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                moonIcon.classList.add('hidden');
+                sunIcon.classList.remove('hidden');
+                localStorage.theme = 'light';
+                if (window.mermaid) {
+                    window.mermaid.initialize({ theme: 'default', startOnLoad: true }); // 'default' for light theme in mermaid
+                }
+            }
+        }
+
+        // Initial theme check
+        const storedTheme = localStorage.theme;
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (storedTheme === 'dark' || (storedTheme === undefined && prefersDark)) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+
+        // Event listener for toggle button
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        });
+
+        // Initialize Mermaid after setting theme
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'default'; // 'default' is Mermaid's light theme
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: currentTheme,
+                flowchart: {
+                    use -> link: true,
+                    curve: 'basis'
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+```
