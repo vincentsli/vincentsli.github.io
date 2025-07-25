@@ -1,0 +1,524 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="system">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拟上市公司员工备用金借还：合规审核要点与监管解析</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts for Noto Serif SC and Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom CSS Variables for Theming */
+        :root {
+            --bg-light: #F7F7F7;
+            --text-dark: #333333;
+            --heading-light: #2C3E50; /* Dark Blue Gray */
+            --accent-light: #4A90E2; /* Bright Blue */
+            --accent-secondary-light: #E67E22; /* Carrot Orange */
+            --border-light: #E0E0E0;
+            --card-light: #FFFFFF;
+            --code-bg-light: #EEEEEE;
+        }
+
+        .dark {
+            --bg-dark: #1A1A1A; /* Deep Dark */
+            --text-light: #E0E0E0; /* Off-white */
+            --heading-dark: #66CCFF; /* Lighter Blue/Teal */
+            --accent-dark: #A5D6A7; /* Light Green */
+            --accent-secondary-dark: #FFD700; /* Gold */
+            --border-dark: #333333;
+            --card-dark: #252525;
+            --code-bg-dark: #2E2E2E;
+        }
+
+        /* Base styles - follow system theme by default */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            line-height: 1.8; /* Increased line-height for better readability */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Dark mode specific styles */
+        .dark body {
+            color: var(--text-light);
+            background-color: var(--bg-dark);
+        }
+
+        /* Headings */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', serif; /* Prioritize Serif for headings */
+            font-weight: 700;
+            margin-top: 1.5em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+        }
+        .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+            color: var(--heading-dark);
+        }
+
+        /* Specific Heading Colors */
+        .text-primary-accent {
+            color: var(--accent-light);
+        }
+        .dark .text-primary-accent {
+            color: var(--accent-dark);
+        }
+
+        .text-secondary-accent {
+            color: var(--accent-secondary-light);
+        }
+        .dark .text-secondary-accent {
+            color: var(--accent-secondary-dark);
+        }
+
+        /* Links */
+        a {
+            color: var(--accent-light);
+            text-decoration: none;
+            transition: color 0.2s ease, text-decoration 0.2s ease;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: var(--accent-secondary-light);
+        }
+        .dark a {
+            color: var(--accent-dark);
+        }
+        .dark a:hover {
+            color: var(--accent-secondary-dark);
+        }
+
+        /* Blockquote for callouts */
+        blockquote {
+            border-left: 4px solid var(--accent-light);
+            padding-left: 1.5rem;
+            margin-left: 0;
+            margin-right: 0;
+            color: var(--text-dark);
+            background-color: var(--card-light);
+            border-radius: 0.375rem; /* rounded-md */
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            font-style: italic;
+        }
+        .dark blockquote {
+            border-left-color: var(--accent-dark);
+            color: var(--text-light);
+            background-color: var(--card-dark);
+        }
+        
+        /* Custom list style */
+        ul.fa-ul li {
+            position: relative;
+            list-style: none; /* Remove default list style */
+            padding-left: 2rem; /* Space for the icon */
+            margin-bottom: 0.5rem;
+        }
+        ul.fa-ul li .fa-li {
+            left: 0;
+            top: 0.3em; /* Adjust vertical alignment of icon */
+            color: var(--accent-light);
+        }
+        .dark ul.fa-ul li .fa-li {
+            color: var(--accent-dark);
+        }
+        
+        /* Card styles */
+        .card {
+            background-color: var(--card-light);
+            border: 1px solid var(--border-light);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .dark .card {
+            background-color: var(--card-dark);
+            border-color: var(--border-dark);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* subtle shadow lift */
+        }
+        .dark .card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Mermaid container styling */
+        .mermaid {
+            background-color: var(--card-light);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow-x: auto; /* Enable horizontal scrolling for large diagrams */
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .dark .mermaid {
+            background-color: var(--card-dark);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        /* Mermaid theme customization via JavaScript for dark mode */
+
+        /* Scroll-to-top button */
+        #scrollToTopBtn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--accent-light);
+            color: white;
+            border: none;
+            border-radius: 9999px; /* circle */
+            padding: 1rem;
+            cursor: pointer;
+            display: none; /* Hidden by default */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        #scrollToTopBtn:hover {
+            background-color: var(--accent-secondary-light);
+            transform: translateY(-3px);
+        }
+        .dark #scrollToTopBtn {
+            background-color: var(--accent-dark);
+        }
+        .dark #scrollToTopBtn:hover {
+            background-color: var(--accent-secondary-dark);
+        }
+
+        /* Responsive adjustments */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 960px;
+            }
+        }
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 1200px;
+            }
+        }
+        @media (min-width: 1280px) {
+            .container {
+                max-width: 1400px;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header and Theme Toggle -->
+    <header class="py-4 border-b border-border-light dark:border-border-dark shadow-sm">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-primary-accent">IPO合规洞察</h1>
+            <button id="themeToggle" class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-accent">
+                <i class="fas fa-sun text-xl dark:hidden"></i>
+                <i class="fas fa-moon text-xl hidden dark:inline"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Module -->
+    <section class="relative bg-gradient-to-r from-primary-accent to-secondary-accent dark:from-heading-dark dark:to-accent-secondary-dark py-24 text-white overflow-hidden shadow-lg">
+        <div class="absolute inset-0 z-0 opacity-20" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23000000\' fill-opacity=\'0.4\' fill-rule=\'evenodd\'%3E%3Cpath d=\'M60 9.998V10H0V9.998zM60 49.998V50H0V49.998zM59.998 0H60v60h-.002zM9.998 0H10v60H9.998zM49.998 0H50v60h-.002z\'/%3E%3C/g%3E%3C/svg%3E'); background-size: 30px 30px;"></div>
+        <div class="container mx-auto px-4 relative z-10 text-center">
+            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight drop-shadow-lg">
+                拟上市公司员工备用金借还：<br class="hidden sm:inline">合规审核要点与监管解析
+            </h2>
+            <p class="text-lg sm:text-xl lg:text-2xl opacity-90 max-w-3xl mx-auto mb-8 font-light italic">
+                <i class="fas fa-chart-line mr-2"></i>深耕IPO财务合规，洞察核心风险与实践
+            </p>
+            <p class="text-base sm:text-lg max-w-2xl mx-auto">
+                在A股IPO进程中，员工备用金的管理规范性是监管机构关注的重点。本报告将为您深入解析拟上市公司员工备用金借还的核查要点、相关法规及实操建议，助力企业稳健迈向资本市场。
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Sidebar for Navigation -->
+            <aside class="lg:col-span-1 hidden lg:block">
+                <div class="sticky top-8 p-6 rounded-lg shadow-md card">
+                    <h3 class="text-2xl font-semibold mb-4 text-primary-accent">内容导航</h3>
+                    <ul class="space-y-2 text-lg">
+                        <li><a href="#focus-areas" class="hover:text-secondary-accent"><i class="fas fa-bullseye mr-2"></i>关注和核查事项</a></li>
+                        <li><a href="#rules-regulations" class="hover:text-secondary-accent"><i class="fas fa-balance-scale mr-2"></i>相关规则及规定</a></li>
+                        <li><a href="#rectification-suggestions" class="hover:text-secondary-accent"><i class="fas fa-wrench mr-2"></i>整改建议</a></li>
+                        <li><a href="#visualization" class="hover:text-secondary-accent"><i class="fas fa-project-diagram mr-2"></i>概念关系图</a></li>
+                        <li><a href="#further-reading" class="hover:text-secondary-accent"><i class="fas fa-book-open mr-2"></i>延伸阅读</a></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Main Article Content -->
+            <article class="lg:col-span-2">
+                <section id="focus-areas" class="mb-10">
+                    <h2 class="text-3xl font-bold mb-6 text-primary-accent">
+                        <i class="fas fa-search-dollar mr-3 text-secondary-accent"></i>一、需重点关注和核查的事项
+                    </h2>
+                    <p class="text-lg mb-4">根据A股IPO审核要求，员工备用金借还情形需重点关注以下事项：</p>
+
+                    <div class="space-y-8">
+                        <div class="card p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
+                            <h3 class="text-2xl font-semibold mb-3 text-secondary-accent"><i class="fas fa-clipboard-check mr-2"></i>1. 内控制度的健全性与有效性</h3>
+                            <ul class="fa-ul">
+                                <li><span class="fa-li"><i class="fas fa-dot-circle"></i></span><strong class="text-primary-accent">制度设计</strong>：核查公司是否建立完善的备用金管理制度，涵盖借支审批、用途限制、报销流程、归还时限及超期追责机制<sup class="ml-1">[1]</sup><sup class="ml-1">[2]</sup>。</li>
+                                <li><span class="fa-li"><i class="fas fa-dot-circle"></i></span><strong class="text-primary-accent">执行有效性</strong>：需验证制度是否实际执行，例如：</li>
+                                <ul class="list-disc pl-8 my-2">
+                                    <li>借支是否履行多级审批（如部门负责人→财务→高管）<sup class="ml-1">[4]</sup>；</li>
+                                    <li>报销是否附有真实业务凭证（如发票、差旅单据）<sup class="ml-1">[6]</sup>；</li>
+                                    <li>是否存在长期未归还或挪用情形<sup class="ml-1">[8]</sup>。</li>
+                                </ul>
+                            </ul>
+                            <blockquote class="text-sm mt-4">
+                                <i class="fas fa-lightbulb mr-2"></i><strong>知识库资料</strong>：<a href="#" class="font-medium">《公司财务管理制度》</a>（点击预览）明确要求“员工离职时需清算借款，因离职导致资金损失的需追责”<sup class="ml-1">[11]</sup>。
+                            </blockquote>
+                        </div>
+
+                        <div class="card p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
+                            <h3 class="text-2xl font-semibold mb-3 text-secondary-accent"><i class="fas fa-file-invoice-dollar mr-2"></i>2. 备用金用途的合理性</h3>
+                            <ul class="fa-ul">
+                                <li><span class="fa-li"><i class="fas fa-dot-circle"></i></span><strong class="text-primary-accent">范围限定</strong>：仅允许用于公务支出（如差旅费、零星采购、业务招待），禁止用于个人消费或关联方资金往来<sup class="ml-1">[7]</sup><sup class="ml-1">[9]</sup>。</li>
+                                <li><span class="fa-li"><i class="fas fa-dot-circle"></i></span><strong class="text-primary-accent">金额匹配性</strong>：单笔借支金额需与业务规模匹配（如大额采购需提供采购合同）<sup class="ml-1">[2]</sup><sup class="ml-1">[4]</sup>。</li>
+                            </ul>
+                        </div>
+
+                        <div class="card p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
+                            <h3 class="text-2xl font-semibold mb-3 text-secondary-accent"><i class="fas fa-calculator mr-2"></i>3. 财务核算的规范性</h3>
+                            <ul class="fa-ul">
+                                <li><span class="fa-li"><i class="fas fa-dot-circle"></i></span><strong class="text-primary-accent">会计处理</strong>：备用金需在“其他应收款”科目核算，定期清理挂账（一般不超过3个月）<sup class="ml-1">[5]</sup><sup class="ml-1">[11]</sup>。</li>
+                                <li><span class="fa-li"><i class="fas fa-dot-circle"></i></span><strong class="text-primary-accent">税务合规</strong>：报销凭证需符合税法要求，避免虚开发票或拆分费用避税<sup class="ml-1">[6]</sup><sup class="ml-1">[20]</sup>。</li>
+                            </ul>
+                        </div>
+
+                        <div class="card p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
+                            <h3 class="text-2xl font-semibold mb-3 text-secondary-accent"><i class="fas fa-handshake-alt-slash mr-2"></i>4. 关联方资金往来的排查</h3>
+                            <ul class="fa-ul">
+                                <li><span class="fa-li"><i class="fas fa-dot-circle"></i></span>核查借支员工是否涉及实控人、董监高或其关联方，防止变相资金占用<sup class="ml-1">[9]</sup><sup class="ml-1">[12]</sup>。</li>
+                                <li><span class="fa-li"><i class="fas fa-dot-circle"></i></span>若存在员工与经销商/供应商的资金往来，需说明背景并排除利益输送<sup class="ml-1">[1]</sup>。</li>
+                            </ul>
+                        </div>
+
+                        <div class="card p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
+                            <h3 class="text-2xl font-semibold mb-3 text-secondary-accent"><i class="fas fa-exclamation-triangle mr-2"></i>5. 风险敞口及整改措施</h3>
+                            <ul class="fa-ul">
+                                <li><span class="fa-li"><i class="fas fa-dot-circle"></i></span><strong class="text-primary-accent">历史问题</strong>：若报告期内存在违规（如个人卡代发工资），需披露整改结果（如注销账户、制度修订）<sup class="ml-1">[17]</sup><sup class="ml-1">[20]</sup>。</li>
+                                <li><span class="fa-li"><i class="fas fa-dot-circle"></i></span><strong class="text-primary-accent">持续监控</strong>：建立备用金台账，定期审计使用情况<sup class="ml-1">[5]</sup><sup class="ml-1">[18]</sup>。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <hr class="my-10 border-border-light dark:border-border-dark">
+
+                <section id="rules-regulations" class="mb-10">
+                    <h2 class="text-3xl font-bold mb-6 text-primary-accent">
+                        <i class="fas fa-gavel mr-3 text-secondary-accent"></i>二、相关规则及规定
+                    </h2>
+                    <div class="space-y-8">
+                        <div class="card p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
+                            <h3 class="text-2xl font-semibold mb-3 text-secondary-accent"><i class="fas fa-scroll mr-2"></i>1. 核心监管文件</h3>
+                            <ul class="fa-ul">
+                                <li><span class="fa-li"><i class="fas fa-file-alt"></i></span><strong>《首次公开发行股票并上市管理办法》第十七条</strong>：要求发行人内部控制健全且有效执行<sup class="ml-1">[12]</sup>。</li>
+                                <li><span class="fa-li"><i class="fas fa-file-alt"></i></span><strong>《企业内部控制基本规范》</strong>（财政部等五部委）：
+                                    <ul class="list-disc pl-8 my-2">
+                                        <li>第5号指引（资金活动）：明确备用金需纳入资金管控体系<sup class="ml-1">[13]</sup><sup class="ml-1">[18]</sup>。</li>
+                                    </ul>
+                                </li>
+                                <li><span class="fa-li"><i class="fas fa-file-alt"></i></span><strong>《深圳证券交易所上市公司自律监管指引第1号》5.2条</strong>：
+                                    <blockquote class="text-sm my-2">
+                                        <i class="fas fa-quote-left mr-1"></i>内部控制需覆盖“与财务报告相关的所有业务环节，包括费用报销及资金管理”<sup class="ml-1">[18]</sup>。<i class="fas fa-quote-right ml-1"></i>
+                                    </blockquote>
+                                </li>
+                                <li><span class="fa-li"><i class="fas fa-file-alt"></i></span><strong>《会计基础工作规范》</strong>：对备用金的核算、报销等会计处理有基本要求。</li>
+                            </ul>
+                        </div>
+
+                        <div class="card p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
+                            <h3 class="text-2xl font-semibold mb-3 text-secondary-accent"><i class="fas fa-check-double mr-2"></i>2. IPO审核实操要求</h3>
+                            <ul class="fa-ul">
+                                <li><span class="fa-li"><i class="fas fa-dot-circle"></i></span><strong class="text-primary-accent">反馈问询重点</strong>：监管层要求披露备用金借支对象、金额、用途合理性，并说明内控有效性<sup class="ml-1">[1]</sup><sup class="ml-1">[2]</sup><sup class="ml-1">[6]</sup>。</li>
+                                <li><span class="fa-li"><i class="fas fa-dot-circle"></i></span><strong class="text-primary-accent">核查程序</strong>：保荐机构需执行以下程序：
+                                    <ul class="list-disc pl-8 my-2">
+                                        <li>穿行测试：抽查借支/报销单据，验证审批链完整性<sup class="ml-1">[4]</sup><sup class="ml-1">[6]</sup>；</li>
+                                        <li>资金流水核查：比对备用金流向与业务真实性<sup class="ml-1">[1]</sup><sup class="ml-1">[17]</sup>；</li>
+                                        <li>访谈员工：确认用途合规性<sup class="ml-1">[7]</sup><sup class="ml-1">[17]</sup>。</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <hr class="my-10 border-border-light dark:border-border-dark">
+
+                <section id="rectification-suggestions" class="mb-10">
+                    <h2 class="text-3xl font-bold mb-6 text-primary-accent">
+                        <i class="fas fa-lightbulb mr-3 text-secondary-accent"></i>三、整改建议（基于案例经验）
+                    </h2>
+                    <div class="space-y-8">
+                        <div class="card p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
+                            <h3 class="text-2xl font-semibold mb-3 text-secondary-accent"><i class="fas fa-cogs mr-2"></i>1. 制度层面</h3>
+                            <ul class="fa-ul">
+                                <li><span class="fa-li"><i class="fas fa-dot-circle"></i></span>制定《备用金管理细则》，明确单笔限额（如≤5万元）、最长借支期（如30天）<sup class="ml-1">[5]</sup><sup class="ml-1">[11]</sup>。</li>
+                            </ul>
+                        </div>
+
+                        <div class="card p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
+                            <h3 class="text-2xl font-semibold mb-3 text-secondary-accent"><i class="fas fa-laptop-code mr-2"></i>2. 执行层面</h3>
+                            <ul class="fa-ul">
+                                <li><span class="fa-li"><i class="fas fa-dot-circle"></i></span>上线电子审批系统，强制关联报销凭证与借支记录<sup class="ml-1">[10]</sup><sup class="ml-1">[18]</sup>。</li>
+                            </ul>
+                        </div>
+
+                        <div class="card p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
+                            <h3 class="text-2xl font-semibold mb-3 text-secondary-accent"><i class="fas fa-file-signature mr-2"></i>3. 披露层面</h3>
+                            <ul class="fa-ul">
+                                <li><span class="fa-li"><i class="fas fa-dot-circle"></i></span>在招股书“公司治理”章节专项说明备用金内控措施及整改成效<sup class="ml-1">[12]</sup><sup class="ml-1">[16]</sup>。</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <blockquote class="text-lg mt-8">
+                        <i class="fas fa-info-circle mr-2"></i><strong>提示</strong>：若报告期内备用金规模显著增长（如占营收比例超1%），需提供合理性分析及支撑证据<sup class="ml-1">[2]</sup><sup class="ml-1">[4]</sup>。
+                    </blockquote>
+                </section>
+
+                <hr class="my-10 border-border-light dark:border-border-dark">
+
+                <!-- Data Visualization Section -->
+                <section id="visualization" class="mb-10">
+                    <h2 class="text-3xl font-bold mb-6 text-primary-accent">
+                        <i class="fas fa-project-diagram mr-3 text-secondary-accent"></i>概念关系图：备用金合规体系
+                    </h2>
+                    <p class="text-lg mb-4">通过以下思维导图，您可以更直观地理解拟上市公司备用金借还合规体系的核心构成与相互关系。</p>
+                    <div class="mermaid">
+                        mindmap
+                          root((拟上市公司备用金借还合规))
+                            核心要点
+                              内控制度
+                                健全性与有效性
+                                借支审批
+                                报销归还
+                              用途合理性
+                                公务支出
+                                金额匹配
+                              财务核算
+                                及时报销
+                                长期挂账
+                                会计准则
+                              资金合规性
+                                挪用排查
+                                体外循环
+                              关联方往来
+                                实控人/董监高
+                                利益输送
+                              风险与整改
+                                历史违规
+                                持续监控
+                            监管框架
+                              核心监管文件
+                                《首次公开发行股票并上市管理办法》
+                                《企业内部控制基本规范》
+                                《深交所自律监管指引第1号》
+                                《会计基础工作规范》
+                              IPO审核实践
+                                反馈问询重点
+                                保荐机构核查程序
+                            合规建议
+                              制度完善
+                                《备用金管理细则》
+                                单笔限额
+                                借支期限
+                              执行强化
+                                电子审批系统
+                                凭证关联
+                              信息披露
+                                招股书说明
+                                整改成效
+                    </div>
+                </section>
+
+                <hr class="my-10 border-border-light dark:border-border-dark">
+
+                <!-- Further Reading Section -->
+                <section id="further-reading" class="mb-10">
+                    <h2 class="text-3xl font-bold mb-6 text-primary-accent">
+                        <i class="fas fa-book-reader mr-3 text-secondary-accent"></i>延伸阅读
+                    </h2>
+                    <p class="text-lg mb-4">为了更深入地理解公司财务合规与IPO相关知识，我们推荐以下书籍或资料：</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="card p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                            <h4 class="text-xl font-semibold mb-2 text-primary-accent"><i class="fas fa-book mr-2"></i>《公司法》</h4>
+                            <p class="text-base">中国公司治理和运营的基础法律，理解企业法律架构和股东权利义务的基石。</p>
+                            <a href="https://baike.baidu.com/item/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%85%AC%E5%8F%B8%E6%B3%95/1041933" target="_blank" class="text-sm mt-2 block">了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                        </div>
+                        <div class="card p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                            <h4 class="text-xl font-semibold mb-2 text-primary-accent"><i class="fas fa-book mr-2"></i>《证券法》</h4>
+                            <p class="text-base">规范证券发行、交易和监管的法律，是理解IPO流程和信息披露要求的核心法规。</p>
+                            <a href="https://baike.baidu.com/item/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E8%AF%81%E5%88%B8%E6%B3%95/1066063" target="_blank" class="text-sm mt-2 block">了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                        </div>
+                        <div class="card p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                            <h4 class="text-xl font-semibold mb-2 text-primary-accent"><i class="fas fa-book mr-2"></i>《企业会计准则》</h4>
+                            <p class="text-base">企业编制财务报告应遵循的规范，对于理解备用金的会计处理至关重要。</p>
+                            <a href="https://baike.baidu.com/item/%E4%BC%81%E4%B8%9A%E4%BC%9A%E8%AE%A1%E5%87%86%E5%88%99/1060965" target="_blank" class="text-sm mt-2 block">了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                        </div>
+                        <div class="card p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                            <h4 class="text-xl font-semibold mb-2 text-primary-accent"><i class="fas fa-book mr-2"></i>《企业内部控制评价指引》</h4>
+                            <p class="text-base">指导企业建立健全内部控制体系并进行有效性评价的具体规范，是内部审计的实用工具。</p>
+                            <a href="https://baike.baidu.com/item/%E4%BC%81%E4%B8%9A%E5%86%85%E9%83%A8%E6%8E%A7%E5%88%B6%E8%AF%84%E4%BB%B7%E6%8C%87%E5%BC%95/1060980" target="_blank" class="text-sm mt-2 block">了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                        </div>
+                        <div class="card p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                            <h4 class="text-xl font-semibold mb-2 text-primary-accent"><i class="fas fa-book mr-2"></i>《IPO审核经典案例解析》</h4>
+                            <p class="text-base">通过实际案例分析，揭示IPO审核中的常见问题、监管关注点及解决方案，是IPO从业者的必备参考。</p>
+                            <a href="https://baike.baidu.com/item/%E9%A6%96%E6%AC%A1%E5%85%AC%E5%BC%80%E5%8F%91%E8%A1%8C%E8%82%A1%E7%A5%A8%E5%B9%B6%E4%B8%8A%E5%B8%82%E7%AE%A1%E7%90%86%E5%8A%9E%E6%B3%95/1271374" target="_blank" class="text-sm mt-2 block">了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                        </div>
+                    </div>
+                </section>
+            </article>
+        </div>
+    </main>
+
+    <!-- Footnotes -->
+    <footer class="container mx-auto px-4 py-8 border-t border-border-light dark:border-border-dark text-sm opacity-80">
+        <h4 class="text-xl font-semibold mb-4 text-primary-accent">参考文献</h4>
+        <ol class="list-decimal list-inside space-y-2">
+            <li><a id="fn1" href="https://zhuanlan.zhihu.com/p/44921736" target="_blank">拟上市公司IPO内控关注要点</a>（备用金内控流程设计）</li>
+            <li><a id="fn2" href="http://qxb-pdf-osscache.qixin.com/AnBaseinfo/b4d58a1bc58119cec465c8f69dc8060a.pdf" target="_blank">江苏合海集团挂牌反馈意见</a>（内控有效性核查）</li>
+            <li><a id="fn4" href="http://www.360doc.com/content/23/0724/08/78825344_1089806752.shtml" target="_blank">IPO企业财务内控审核问询重点</a>（备用金用途及审批）</li>
+            <li><a id="fn5" href="https://zhuanlan.zhihu.com/p/637277247" target="_blank">观想科技员工备用金案例</a>（内控合理性分析）</li>
+            <li><a id="fn6" href="https://www.sohu.com/a/212118036_481838" target="_blank">企业内控常见问题解析</a>（报销凭证真实性）</li>
+            <li><a id="fn7" href="https://q.stock.sohu.com/cn,gg,300096,9546746580.shtml" target="_blank">易联众员工备用金借款说明</a>（用途限定）</li>
+            <li><a id="fn8" href="http://static.cninfo.com.cn/finalpage/2018-04-26/1204794689.PDF" target="_blank">雅百特内控缺陷公告</a>（备用金管理缺失案例）</li>
+            <li><a id="fn9" href="http://static.sse.com.cn/stock/disclosure/announcement/c/202009/000400_20200925_D1EH.pdf" target="_blank">关联方资金往来规定</a>（禁止变相资金占用）</li>
+            <li><a id="fn10" href="https://www.sohu.com/a/504144369_120669146" target="_blank">企业财务报销管理如何规范</a>（电子审批系统，此链接为通用参考，原内容未提供具体链接，此处为补充）</li>
+            <li><a id="fn11" href="http://static.cninfo.com.cn/finalpage/2025-04-28/1223324092.PDF" target="_blank">安徽华骐环保财务管理制度</a>（离职借款清算条款）</li>
+            <li><a id="fn12" href="http://www.csrc.gov.cn/csrc/c100107/c1447185/1447185/files/%E9%A6%96%E5%8F%91%E4%B8%9A%E5%8A%A1%E8%8B%A5%E5%B9%B2%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94.doc" target="_blank">首发业务若干问题解答</a>（财务内控要求）</li>
+            <li><a id="fn13" href="https://www.pwccn.com/zh/blog/a-share/20231020.html" target="_blank">A股企业内部控制规范</a>（全面实施要求）</li>
+            <li><a id="fn16" href="http://www.360doc.com/content/24/0718/09/2209670_1129058092.shtml" target="_blank">因内控问题终止上市案例</a>（内控趋严趋势）</li>
+            <li><a id="fn17" href="https://ipo.shangpu-china.com/m/news/1838.html" target="_blank">个人卡支付风险解析</a>（整改措施）</li>
+            <li><a id="fn18" href="https://docs.static.szse.cn/www/lawrules/rule/stock/supervision/mb/W020231215812625401694.docx" target="_blank">深交所自律监管指引</a>（资金活动内控要求）</li>
+            <li><a id="fn20" href="https://www.shui5.cn/article/84/2516.html" target="_blank">个人卡支付合规建议</a>（税务与整改）</li>
+        </ol>
+        <p class="text-center mt-8">&copy; 2024 IPO合规洞察. All rights reserved.</p>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" title="回到顶部">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Mermaid.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid.js
+        document.addEventListener('DOMContentLoaded', function() {
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'default', // Default theme, will be overridden by custom CSS for dark mode
+                flowchart: {
+                    use</script>
+```
