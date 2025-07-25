@@ -1,0 +1,541 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资本公积转增股本：自然人个税缓缴深度解析</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Light Mode Colors */
+            --background-light: #f7f7f7;
+            --text-light: #333;
+            --primary-light: #2c5282; /* Darker blue for accents */
+            --secondary-light: #4299e1; /* Lighter blue for highlights */
+            --card-bg-light: #ffffff;
+            --border-light: #e2e8f0;
+            --link-light: #2b6cb0;
+            --link-hover-light: #2c5282;
+            --mermaid-bg-light: #ffffff;
+            --mermaid-border-light: #e2e8f0;
+            --mermaid-text-light: #333;
+        }
+
+        .dark {
+            /* Dark Mode Colors */
+            --background-dark: #1a202c; /* Dark charcoal */
+            --text-dark: #e2e8f0; /* Off-white */
+            --primary-dark: #63b3ed; /* Sky blue */
+            --secondary-dark: #3182ce; /* Dodger blue */
+            --card-bg-dark: #2d3748; /* Darker slate */
+            --border-dark: #4a5568;
+            --link-dark: #63b3ed;
+            --link-hover-dark: #3182ce;
+            --mermaid-bg-dark: #2d3748;
+            --mermaid-border-dark: #4a5568;
+            --mermaid-text-dark: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .serif {
+            font-family: 'Noto Serif SC', Georgia, "FangSong", serif;
+        }
+
+        /* Base styles for light mode */
+        body {
+            background-color: var(--background-light);
+            color: var(--text-light);
+        }
+        .text-primary { color: var(--primary-light); }
+        .bg-card { background-color: var(--card-bg-light); }
+        .border-primary { border-color: var(--border-light); }
+        a { color: var(--link-light); }
+        a:hover { color: var(--link-hover-light); }
+        .header-bg { background-image: url('https://source.unsplash.com/random/1920x600/?finance,investment,future'); background-position: center; background-size: cover; } /* Placeholder image */
+
+        /* Dark mode overrides */
+        .dark body {
+            background-color: var(--background-dark);
+            color: var(--text-dark);
+        }
+        .dark .text-primary { color: var(--primary-dark); }
+        .dark .bg-card { background-color: var(--card-bg-dark); }
+        .dark .border-primary { border-color: var(--border-dark); }
+        .dark a { color: var(--link-dark); }
+        .dark a:hover { color: var(--link-hover-dark); }
+
+        /* Custom styles for Mermaidx */
+        .mermaid-container {
+            background-color: var(--mermaid-bg-light);
+            border: 1px solid var(--mermaid-border-light);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .dark .mermaid-container {
+            background-color: var(--mermaid-bg-dark);
+            border: 1px solid var(--mermaid-border-dark);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .mermaid {
+            color: var(--mermaid-text-light); /* This is generally overridden by mermaid's own theme */
+        }
+        .dark .mermaid {
+            color: var(--mermaid-text-dark); /* This is generally overridden by mermaid's own theme */
+        }
+
+        /* Custom scrollbar for subtle effect */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1); /* Light track */
+            border-radius: 4px;
+        }
+        .dark::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1); /* Dark track */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,0.2); /* Light thumb */
+            border-radius: 4px;
+        }
+        .dark::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.2); /* Dark thumb */
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0,0,0,0.3); /* Light thumb hover */
+        }
+        .dark::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,255,255,0.3); /* Dark thumb hover */
+        }
+
+        /* Micro-interactions */
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        .dark .card-hover:hover {
+             box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .transition-all {
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Hero Image overlay for text readability */
+        .hero-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.2) 100%);
+        }
+        .dark .hero-overlay::before {
+             background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.3) 100%);
+        }
+
+        /* Specific styles for footnotes */
+        .footnotes-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .footnotes-list li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: baseline;
+        }
+        .footnotes-list li a {
+            margin-left: 0.5rem;
+        }
+        .footnotes-list li .footnote-anchor {
+            font-size: 0.8em; /* Smaller font for the number */
+            vertical-align: super; /* Raise it slightly */
+            margin-right: 0.2em;
+        }
+
+        /* Responsive typography adjustments */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            h3 { font-size: 1.5rem; }
+            p, li { font-size: 1rem; }
+            .hero-content { padding: 4rem 1rem; }
+        }
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.75rem; }
+            h3 { font-size: 1.25rem; }
+            p, li { font-size: 0.95rem; }
+            .hero-content { padding: 3rem 0.5rem; }
+        }
+    </style>
+</head>
+<body class="transition-all">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header / Hero Section -->
+        <header class="relative header-bg text-white py-20 px-4 md:px-8 lg:px-16 flex items-center justify-center text-center hero-overlay">
+            <div class="relative z-10 max-w-4xl mx-auto hero-content">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold serif mb-4 leading-tight drop-shadow-lg">
+                    <i class="fas fa-chart-line mr-3 text-primary"></i>资本运作核心：自然人股本转增个税缓缴深度解析
+                </h1>
+                <p class="text-xl md:text-2xl font-light mb-8 opacity-90 drop-shadow">
+                    洞悉政策要义，优化税务规划，助力企业与股东共赢
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <button id="theme-toggle" class="bg-primary hover:bg-secondary-dark text-white font-semibold py-3 px-6 rounded-full shadow-lg transition-all transform hover:scale-105 flex items-center">
+                        <i class="fas fa-adjust mr-2"></i> <span id="theme-text">切换模式</span>
+                    </button>
+                    <a href="#main-content" class="bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold py-3 px-6 rounded-full shadow-lg transition-all transform hover:scale-105 flex items-center">
+                        <i class="fas fa-scroll mr-2"></i> 开始阅读
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main id="main-content" class="flex-grow container mx-auto px-4 md:px-8 lg:px-16 py-12 md:py-16">
+            <section class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                <!-- Section 1: Introduction & Overview -->
+                <div class="lg:col-span-2 bg-card rounded-xl shadow-lg p-8 card-hover transition-all border-primary border">
+                    <h2 class="text-3xl md:text-4xl serif font-bold mb-6 text-primary flex items-center">
+                        <i class="fas fa-lightbulb mr-3"></i> 政策洞察：资本公积转增股本与自然人个税缓缴
+                    </h2>
+                    <p class="mb-4 text-lg leading-relaxed">
+                        在A股市场资本运作中，<strong class="text-primary font-semibold">资本公积转增股本</strong>是企业调整股本结构、优化财务报表的重要手段。然而，对于自然人股东而言，由此产生的个人所得税问题一直备受关注。本页将深入解析当前政策，特别是关于个人所得税<strong class="text-primary font-semibold">缓缴的可能性、规则有效性及具体适用条件</strong>，助您精准理解并合规操作。
+                    </p>
+                    <div class="border-t border-b border-gray-300 dark:border-gray-600 py-4 my-6">
+                        <p class="text-lg font-medium text-gray-700 dark:text-gray-300 flex items-center">
+                            <i class="fas fa-question-circle mr-2 text-primary"></i>
+                            您是否正在为资本公积转增股本的税务问题而困扰？
+                        </p>
+                        <p class="text-base text-gray-600 dark:text-gray-400 mt-2">
+                            本指南旨在提供清晰、专业的解读，助您化解疑虑，作出明智决策。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Section 2: Quick Answers / Key Takeaways -->
+                <div class="lg:col-span-1 bg-card rounded-xl shadow-lg p-8 card-hover transition-all border-primary border">
+                    <h3 class="text-2xl serif font-bold mb-6 text-primary flex items-center">
+                        <i class="fas fa-check-circle mr-3"></i> 核心速览
+                    </h3>
+                    <ul class="space-y-4 text-lg">
+                        <li class="flex items-start">
+                            <i class="fas fa-clipboard-check text-green-500 mt-1 mr-3"></i>
+                            <div>
+                                <strong class="text-gray-800 dark:text-gray-200">可否缓缴？</strong> <span class="text-primary">是的，在特定条件下允许。</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-calendar-check text-green-500 mt-1 mr-3"></i>
+                            <div>
+                                <strong class="text-gray-800 dark:text-gray-200">规则有效性？</strong> <span class="text-primary">现行有效，源自财税〔2015〕116号。</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-bullhorn text-yellow-500 mt-1 mr-3"></i>
+                            <div>
+                                <strong class="text-gray-800 dark:text-gray-200">适用对象？</strong> <span class="text-primary">非上市/未挂牌中小高新技术企业。</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-clock text-blue-500 mt-1 mr-3"></i>
+                            <div>
+                                <strong class="text-gray-800 dark:text-gray-200">缓缴期限？</strong> <span class="text-primary">不超过5个公历年度。</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Detailed Analysis Section -->
+            <section class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                <div class="lg:col-span-2 bg-card rounded-xl shadow-lg p-8 card-hover transition-all border-primary border">
+                    <h3 class="text-2xl serif font-bold mb-6 text-primary flex items-center">
+                        <i class="fas fa-money-bill-wave mr-3"></i> 深入解析：缓缴政策的适用性与条件
+                    </h3>
+
+                    <article class="prose dark:prose-invert max-w-none">
+                        <h4 class="text-xl serif font-semibold mb-3 text-primary">1. 资本公积转增股本自然人缴税是否可以缓缴？</h4>
+                        <p class="text-lg leading-relaxed mb-4">
+                            <strong class="font-semibold">是的，在特定条件下可以缓缴个人所得税。</strong>
+                            资本公积转增股本时，自然人股东取得的转增股本数额，通常被视为“利息、股息、红利所得”，需按20%税率缴纳个人所得税<sup class="footnote-anchor">1,2</sup>。
+                            但根据现行税收政策，符合条件的企业（如中小高新技术企业）允许自然人股东分期缴纳个人所得税，实现缓缴<sup class="footnote-anchor">6,7</sup>。
+                        </p>
+
+                        <h4 class="text-xl serif font-semibold mb-3 text-primary">2. 规则是否还现行有效？</h4>
+                        <p class="text-lg leading-relaxed mb-4">
+                            <strong class="font-semibold">是的，规则现行有效。</strong>
+                            缓缴政策源自《财政部 国家税务总局关于将国家自主创新示范区有关税收试点政策推广到全国范围的通知》（财税〔2015〕116号）及后续国家税务总局公告（2015年第80号）<sup class="footnote-anchor">6,7</sup>。
+                            这些政策自2016年1月1日起实施，且截至2025年7月25日，未有废止或重大修订的官方信息。联网搜索结果显示，2024年专业文章仍引用该政策，证实其有效性<sup class="footnote-anchor">1,6</sup>。
+                        </p>
+
+                        <h4 class="text-xl serif font-semibold mb-3 text-primary">3. 如果有效，具体规定符合缓缴有哪些条件？</h4>
+                        <p class="text-lg leading-relaxed mb-4">
+                            缓缴政策仅适用于特定企业类型和场景，具体条件如下（基于财税〔2015〕116号文件及国家税务总局公告）：
+                        </p>
+                        <ul class="list-none pl-0 space-y-3 mb-6">
+                            <li class="flex items-start text-lg">
+                                <i class="fas fa-building text-secondary-dark mt-1 mr-3 flex-shrink-0"></i>
+                                <div>
+                                    <strong class="text-gray-800 dark:text-gray-200">企业条件：</strong>
+                                    必须为 <span class="font-semibold text-primary">中小高新技术企业</span>（需符合《高新技术企业认定管理办法》的标准，如注册时间、研发投入比例等）。
+                                    企业必须 <span class="font-semibold text-primary">非上市</span> 且 <span class="font-semibold text-primary">未在全国中小企业股份转让系统（新三板）挂牌</span><sup class="footnote-anchor">6,7</sup>。
+                                </div>
+                            </li>
+                            <li class="flex items-start text-lg">
+                                <i class="fas fa-coins text-secondary-dark mt-1 mr-3 flex-shrink-0"></i>
+                                <div>
+                                    <strong class="text-gray-800 dark:text-gray-200">转增来源条件：</strong>
+                                    转增股本的资金来源包括 <span class="font-semibold text-primary">资本公积、未分配利润或盈余公积</span>。但需注意：
+                                    如果资本公积来源于 <span class="font-semibold text-primary">股票发行溢价</span>（如IPO或增资溢价），转增股本时可能免征个人所得税（不适用缓缴，因无需缴税）<sup class="footnote-anchor">1,3</sup>。
+                                    如果资本公积来源于 <span class="font-semibold text-primary">其他途径</span>（如资产评估增值），则转增需缴税，并可申请缓缴<sup class="footnote-anchor">1,8</sup>。
+                                </div>
+                            </li>
+                            <li class="flex items-start text-lg">
+                                <i class="fas fa-user-tie text-secondary-dark mt-1 mr-3 flex-shrink-0"></i>
+                                <div>
+                                    <strong class="text-gray-800 dark:text-gray-200">纳税人条件：</strong>
+                                    纳税人（自然人股东）需 <span class="font-semibold text-primary">根据实际情况自行制定分期缴税计划</span>。
+                                    分期缴纳期限 <span class="font-semibold text-primary">不超过5个公历年度</span>（例如，可分5年缴纳，每年缴纳部分税款）<sup class="footnote-anchor">6,7</sup>。
+                                </div>
+                            </li>
+                            <li class="flex items-start text-lg">
+                                <i class="fas fa-file-alt text-secondary-dark mt-1 mr-3 flex-shrink-0"></i>
+                                <div>
+                                    <strong class="text-gray-800 dark:text-gray-200">其他要求：</strong>
+                                    企业需向主管税务机关备案分期缴税计划。纳税人需留存相关资料备查，如企业高新技术企业证书、转增决议文件等。知识库资料进一步确认，缓缴规定适用于“中小高新技术企业以未分配利润、盈余公积、资本公积向个人股东转增股本”的场景，强调税务合规性<sup class="footnote-anchor">知识库</sup>。
+                                </div>
+                            </li>
+                        </ul>
+                    </article>
+                </div>
+
+                <!-- Summary & Recommendations / Related Topics -->
+                <div class="lg:col-span-1 space-y-8">
+                    <div class="bg-card rounded-xl shadow-lg p-8 card-hover transition-all border-primary border">
+                        <h3 class="text-2xl serif font-bold mb-6 text-primary flex items-center">
+                            <i class="fas fa-chart-pie mr-3"></i> 总结与建议
+                        </h3>
+                        <p class="mb-4 text-lg">
+                            <strong class="text-primary font-semibold">关键点：</strong>缓缴政策仅针对非上市中小高新技术企业，自然人股东可分期缴税不超过5年。但需区分资本公积来源—股票发行溢价转增可能免税，其他情况需缴税并可缓缴。
+                        </p>
+                        <p class="mb-4 text-lg">
+                            <strong class="text-primary font-semibold">行业分析视角：</strong>在A股市场资本运作中，此政策常用于拟IPO企业股改阶段（如有限责任公司整体变更为股份有限公司），帮助自然人股东缓解税负压力，但企业需确保符合高新技术资质<sup class="footnote-anchor">1,6,知识库</sup>。
+                        </p>
+                        <p class="mb-4 text-lg">
+                            <strong class="text-primary font-semibold">注意事项：</strong>如果您的企业不属于中小高新技术企业，或转增来源为股票溢价，可能不适用缓缴。建议咨询主管税务机关或专业税务顾问，结合具体案例核实。
+                        </p>
+                        <div class="text-sm italic text-gray-500 dark:text-gray-400 mt-6">
+                            <i class="fas fa-info-circle mr-1"></i> 免责声明：以上信息基于当前可获资料，若政策有更新，请以官方最新文件为准。
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Data Visualization Section -->
+            <section class="mb-12">
+                <h3 class="text-3xl serif font-bold mb-8 text-primary text-center flex items-center justify-center">
+                    <i class="fas fa-project-diagram mr-3"></i> 资本公积转增股本个税缓缴决策流程图
+                </h3>
+                <div class="mermaid-container">
+                    <pre class="mermaid">
+graph TD
+    A[资本公积转增股本] --> B{自然人股东是否取得收益?};
+    B -- 否 --> C[如：股票发行溢价转增];
+    C --> D[免征个人所得税];
+    B -- 是 --> E{是否为中小高新技术企业?};
+    E -- 否 --> F[按"股息红利"20%税率全额缴纳个税];
+    E -- 是 --> G{企业是否非上市/非新三板挂牌?};
+    G -- 否 --> F;
+    G -- 是 --> H{转增来源是否为未分配利润/盈余公积/其他资本公积?};
+    H -- 否 --> I[非适用缓缴条件，参照一般处理];
+    H -- 是 --> J[符合缓缴条件];
+    J --> K[纳税人自行制定分期缴税计划];
+    K --> L[分期缴纳期限不超过5个公历年度];
+    L --> M[向主管税务机关备案];
+    M --> N[成功缓缴个税];
+
+    style A fill:#63B3ED,stroke:#2C5282,stroke-width:2px,color:#fff;
+    style B fill:#F6AD55,stroke:#DD6B20,stroke-width:2px,color:#fff;
+    style C fill:#CBD5E0,stroke:#A0AEC0,stroke-width:1px;
+    style D fill:#48BB78,stroke:#2F855A,stroke-width:2px,color:#fff;
+    style E fill:#F6AD55,stroke:#DD6B20,stroke-width:2px,color:#fff;
+    style F fill:#F56565,stroke:#C53030,stroke-width:2px,color:#fff;
+    style G fill:#F6AD55,stroke:#DD6B20,stroke-width:2px,color:#fff;
+    style H fill:#F6AD55,stroke:#DD6B20,stroke-width:2px,color:#fff;
+    style I fill:#F56565,stroke:#C53030,stroke-width:2px,color:#fff;
+    style J fill:#4299E1,stroke:#3182CE,stroke-width:2px,color:#fff;
+    style K fill:#63B3ED,stroke:#2C5282,stroke-width:1px,color:#fff;
+    style L fill:#63B3ED,stroke:#2C5282,stroke-width:1px,color:#fff;
+    style M fill:#63B3ED,stroke:#2C5282,stroke-width:1px,color:#fff;
+    style N fill:#48BB78,stroke:#2F855A,stroke-width:2px,color:#fff;
+
+                    </pre>
+                </div>
+                <p class="text-center text-gray-600 dark:text-gray-400 mt-4 text-sm">
+                    <i class="fas fa-info-circle mr-1"></i> 点击图表元素可查看其交互行为（此示例图表为静态，实际效果需Mermaid配置）。
+                </p>
+            </section>
+
+            <!-- Further Reading Section -->
+            <section class="bg-card rounded-xl shadow-lg p-8 card-hover transition-all border-primary border mb-12">
+                <h3 class="text-2xl serif font-bold mb-6 text-primary flex items-center">
+                    <i class="fas fa-book-reader mr-3"></i> 延伸阅读：深入理解资本运作与税务合规
+                </h3>
+                <p class="mb-6 text-lg">
+                    以下推荐五本相关书籍或论文，助您更全面地理解资本市场、公司治理及税务规划的复杂性。
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-5 shadow-inner transition-all hover:shadow-md">
+                        <h4 class="text-xl font-semibold mb-2 text-primary">1. 《公司金融》</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-3 text-base">经典公司金融教材，系统介绍资本结构、股利政策等。</p>
+                        <a href="#" class="text-secondary-dark hover:underline text-sm font-medium"><i class="fas fa-external-link-alt mr-1"></i> 了解更多</a>
+                    </div>
+                    <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-5 shadow-inner transition-all hover:shadow-md">
+                        <h4 class="text-xl font-semibold mb-2 text-primary">2. 《税法原理与实务》</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-3 text-base">国内税法权威著作，涵盖个人所得税等各项税种细则。</p>
+                        <a href="#" class="text-secondary-dark hover:underline text-sm font-medium"><i class="fas fa-external-link-alt mr-1"></i> 了解更多</a>
+                    </div>
+                    <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-5 shadow-inner transition-all hover:shadow-md">
+                        <h4 class="text-xl font-semibold mb-2 text-primary">3. 《中国企业上市实务全书》</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-3 text-base">深入探讨企业上市全流程，包括股改与税务处理。</p>
+                        <a href="#" class="text-secondary-dark hover:underline text-sm font-medium"><i class="fas fa-external-link-alt mr-1"></i> 了解更多</a>
+                    </div>
+                    <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-5 shadow-inner transition-all hover:shadow-md">
+                        <h4 class="text-xl font-semibold mb-2 text-primary">4. 《高新技术企业认定管理办法》</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-3 text-base">官方文件，了解中小高新技术企业认定标准。</p>
+                        <a href="http://www.most.gov.cn/ztzl/gqrd/gqrdglbf/" target="_blank" class="text-secondary-dark hover:underline text-sm font-medium"><i class="fas fa-external-link-alt mr-1"></i> 官方链接</a>
+                    </div>
+                    <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-5 shadow-inner transition-all hover:shadow-md">
+                        <h4 class="text-xl font-semibold mb-2 text-primary">5. 《中国税收政策年度分析报告》</h4>
+                        <p class="text-gray-700 dark:text-gray-300 mb-3 text-base">每年更新，把握最新税收政策动态与趋势。</p>
+                        <a href="#" class="text-secondary-dark hover:underline text-sm font-medium"><i class="fas fa-external-link-alt mr-1"></i> 了解更多</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footnotes Section -->
+            <section class="bg-card rounded-xl shadow-lg p-8 card-hover transition-all border-primary border">
+                <h3 class="text-2xl serif font-bold mb-6 text-primary flex items-center">
+                    <i class="fas fa-info-circle mr-3"></i> 参考文献与脚注
+                </h3>
+                <ol class="footnotes-list text-base text-gray-700 dark:text-gray-300">
+                    <li><span class="footnote-anchor">1.</span> 联网搜索：简析资本公积转增股本自然人股东纳税争议，竞天公诚律师事务所（2024年），<a href="https://www.jingtian.com/Content/2024/04-03/1930012803.html" target="_blank" class="text-secondary-dark hover:underline">点击标题查看</a>。内容涉及资本公积转增税务基础及缓缴政策引用。</li>
+                    <li><span class="footnote-anchor">2.</span> 联网搜索：资本公积转增股本个人所得税相关知识，税屋，<a href="https://www.shui5.cn/article/a7/53974.html" target="_blank" class="text-secondary-dark hover:underline">点击标题查看</a>。说明一般企业转增税务处理。</li>
+                    <li><span class="footnote-anchor">3.</span> 联网搜索：结合IPO案例再议资本公积转增的个人所得税问题，国浩律师事务所，<a href="https://www.grandall.com.cn/ghsd/info.aspx?itemid=25266" target="_blank" class="text-secondary-dark hover:underline">点击标题查看</a>。提及股票溢价转增免税案例。</li>
+                    <li><span class="footnote-anchor">6.</span> 联网搜索：上市税收研讨：资本公积转增股本个税问题，湖北省地方金融监督管理局（2021年），<a href="https://jrb.hubei.gov.cn/bmdt/zbscjs/sszd/202109/t20210916_3765829.shtml" target="_blank" class="text-secondary-dark hover:underline">点击标题查看</a>。明确中小高新技术企业分期缴税规则（5年缓缴）。</li>
+                    <li><span class="footnote-anchor">7.</span> 联网搜索：国家税务总局关于股权奖励和转增股本个人所得税征管问题的公告，国家税务总局（2015年），<a href="https://guangdong.chinatax.gov.cn/gdsw/zjfg/2015-11/27/content_58b6d3a87d9645cc9970d9e7deac04db.shtml" target="_blank" class="text-secondary-dark hover:underline">点击标题查看</a>。官方政策文件，规定缓缴条件。</li>
+                    <li><span class="footnote-anchor">8.</span> 联网搜索：资本公积转增股本自然人股东个税问题小议，中伦律师事务所，<a href="https://www.zhonglun.com/research/articles/8067.html" target="_blank" class="text-secondary-dark hover:underline">点击标题查看</a>。分析税务处理细节。</li>
+                    <li><span class="footnote-anchor">知识库.</span> 知识库：资本公积转增股本税务知识库（全名：点击<a href="#" target="_blank" class="text-secondary-dark hover:underline">资本公积转增股本自然人缴税缓缴规定知识库</a>可以预览相关内容）。检索关键词“资本公积转增股本,自然人缴税,缓缴规定,现行有效,税务条件”，确认中小高新技术企业缓缴规则及条件。</li>
+                </ol>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-gray-400 py-8 text-center">
+            <div class="container mx-auto px-4">
+                <p>&copy; 2025 资本运作税务解析. All rights reserved.</p>
+                <p class="mt-2 text-sm">此页面仅供信息参考，不构成专业税务建议。具体情况请咨询专业人士。</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeText = document.getElementById('theme-text');
+        const htmlElement = document.documentElement;
+
+        // Set initial theme based on system preference or saved setting
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            htmlElement.classList.remove('light', 'dark');
+            htmlElement.classList.add(currentTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            htmlElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            htmlElement.classList.add('light');
+            localStorage.setItem('theme', 'light');
+        }
+
+        function updateThemeButtonText() {
+            if (htmlElement.classList.contains('dark')) {
+                themeText.textContent = '浅色模式';
+            } else {
+                themeText.textContent = '深色模式';
+            }
+        }
+
+        updateThemeButtonText(); // Initial text update
+
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            updateThemeButtonText();
+            // Re-render mermaid charts on theme change
+            mermaid.init(undefined, ".mermaid");
+        });
+
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: htmlElement.classList.contains('dark') ? 'dark' : 'default',
+            fontFamily: "'Noto Sans SC', Tahoma, Arial, sans-serif",
+            flowchart: {
+                curve: 'linear',
+            },
+            sequence: {
+                diagramMarginX: 50,
+                diagramMarginY: 10,
+                actorMargin: 50,
+                width: 150,
+                height: 65,
+                boxMargin: 10,
+                boxTextMargin: 5,
+                lineMargin: 10,
+                titleTopMargin: 35,
+                noteMargin: 10,
+                messageMargin: 35,
+                mirrorActors: true,
+                bottomMarginAdj: 1,
+                use          : "<font awesome code>",
+                rightArrow   : "\u2192",
+                leftArrow    : "\u2190",
+                rightArrowandBack: "\u21a6",
+                leftArrowandBack: "\u21a4",
+                dividerTag   : "\u2014",
+                rangeStack   : "#EEE0F7"
+            }
+        });
+
+        // Smooth scroll for "开始阅读" button
+        document.querySelector('a[href^="#"]').addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
+```
