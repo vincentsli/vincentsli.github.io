@@ -1,0 +1,693 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>军工涉密业务备案：辅导协议与上市协议深度解析</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles to define color variables for dark/light mode and specific font stacks */
+
+        /* Light Mode Colors (default values) */
+        :root {
+            --color-bg: #f8f8f8;
+            --color-text: #333333;
+            --color-text-secondary: #666666;
+            --color-card-bg: #ffffff;
+            --color-accent: #3b82f6; /* Blue */
+            --color-border: #e0e0e0;
+            --color-hero-bg-from: #e0e0e0;
+            --color-hero-bg-to: #f0f0f0;
+            --color-hero-text: #333333;
+            --color-red-text: #ef4444;
+            --color-red-bg: #fef2f2;
+            --color-red-border: #fca5a5;
+            --color-quote-bg: #f3f4f6;
+            --color-quote-border: #bfdbfe;
+        }
+
+        /* Dark Mode Colors */
+        html.dark {
+            --color-bg: #1a1a1a;
+            --color-text: #e0e0e0;
+            --color-text-secondary: #a0a0a0;
+            --color-card-bg: #2a2a2a;
+            --color-accent: #0ea5e9; /* Sky blue */
+            --color-border: #3a3a3a;
+            --color-hero-bg-from: #1f2937; /* Dark Gray-900 */
+            --color-hero-bg-to: #111827; /* Even darker Gray-950 */
+            --color-hero-text: #ffffff;
+            --color-red-text: #fecaca; /* Red-200 */
+            --color-red-bg: #450a0a; /* Red-950 with opacity */
+            --color-red-border: #b91c1c; /* Red-700 */
+            --color-quote-bg: #1f2937; /* Gray-800 */
+            --color-quote-border: #1d4ed8; /* Blue-700 */
+        }
+
+        body {
+            font-family: 'Noto Sans SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            line-height: 1.75; /* Default line height for body */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Times New Roman', serif;
+            font-weight: 700; /* Noto Serif SC Black */
+            color: var(--color-text); /* Ensure headings adapt */
+            line-height: 1.25;
+        }
+
+        /* Specific Tailwind utility overrides with CSS variables for dynamic theming */
+        .text-gray-300 { color: var(--color-text-secondary); }
+        .text-gray-400 { color: var(--color-text-secondary); }
+        .text-gray-500 { color: var(--color-text-secondary); }
+        .text-gray-700 { color: var(--color-text-secondary); }
+        .text-gray-800 { color: var(--color-text); }
+        .text-white { color: var(--color-hero-text); } /* For Hero section specifically */
+
+        .bg-gray-100 { background-color: var(--color-bg); }
+        .bg-gray-800 { background-color: var(--color-card-bg); }
+        .bg-gray-900 { background-color: var(--color-bg); } /* Used for overall body bg if main content has lighter card bg */
+
+        .border-gray-700 { border-color: var(--color-border); }
+        .border-gray-200 { border-color: var(--color-border); }
+
+        a { color: var(--color-accent); }
+        a:hover { color: var(--color-text); text-decoration: underline; }
+
+        /* Hero Section Specifics */
+        .hero-bg-gradient {
+            background-image: linear-gradient(to bottom right, var(--color-hero-bg-from), var(--color-hero-bg-to));
+        }
+
+        /* Risk Section Specifics */
+        .bg-red-900.bg-opacity-30 {
+            background-color: var(--color-red-bg);
+        }
+        .border-red-700 {
+            border-color: var(--color-red-border);
+        }
+        .text-red-200 {
+            color: var(--color-red-text);
+        }
+        .text-red-300 {
+            color: var(--color-red-text);
+        }
+        .text-red-400 {
+            color: var(--color-red-text);
+        }
+        .border-red-800 {
+            border-color: var(--color-red-border);
+        }
+
+        /* Blockquote Specifics */
+        blockquote {
+            background-color: var(--color-quote-bg);
+            border-color: var(--color-quote-border);
+        }
+
+        /* Accent Colors (often blue-related) */
+        .text-blue-400 { color: var(--color-accent); }
+        .text-blue-500 { color: var(--color-accent); }
+        .text-blue-600 { color: var(--color-accent); }
+        .text-blue-300 { color: var(--color-accent); }
+        .border-blue-500 { border-color: var(--color-accent); }
+        .bg-blue-600 { background-color: var(--color-accent); }
+        .hover\:bg-blue-700:hover { background-color: color-mix(in srgb, var(--color-accent) 80%, black); } /* Darken accent on hover */
+        .border-blue-600 { border-color: var(--color-accent); }
+
+        /* Mermaid Specific Styling (for dark mode) */
+        .mermaid {
+            background-color: var(--color-card-bg) !important;
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl equivalent */
+            border: 1px solid var(--color-border);
+        }
+
+        .mermaid .node rect, .mermaid .node circle, .mermaid .node ellipse, .mermaid .node polygon {
+            fill: #3a3a3a !important; /* Darker node background */
+            stroke: var(--color-accent) !important; /* Accent border */
+            stroke-width: 2px !important;
+        }
+
+        .mermaid .node text {
+            fill: var(--color-text) !important; /* Text color for nodes */
+            font-family: 'Noto Sans SC', sans-serif !important;
+            font-size: 14px !important;
+        }
+
+        .mermaid .edgePaths .path {
+            stroke: var(--color-text-secondary) !important; /* Dark grey lines */
+            stroke-width: 2px !important;
+        }
+
+        .mermaid .edgeLabels .edgeLabel text {
+            fill: var(--color-text-secondary) !important; /* Dark grey text for labels */
+            background-color: var(--color-card-bg) !important; /* Match background for label background */
+            font-family: 'Noto Sans SC', sans-serif !important;
+        }
+        .mermaid .label text {
+            fill: var(--color-text) !important;
+        }
+
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-border);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-text-secondary);
+        }
+
+        /* Fade-in animation for content sections */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s cubic-bezier(0.3, 0.7, 0.4, 1), transform 0.6s cubic-bezier(0.3, 0.7, 0.4, 1);
+        }
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* First letter drop cap effect */
+        .dropcap::first-letter {
+            font-family: 'Noto Serif SC', serif;
+            float: left;
+            font-size: 3.5em; /* Adjust size as needed */
+            line-height: 0.8;
+            padding-right: 8px;
+            font-weight: 700;
+            color: var(--color-accent); /* Accent color for the drop cap */
+            margin-top: 4px; /* Adjust vertical alignment */
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        /* Specific styles for footnotes */
+        .footnote-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 2rem;
+            border-top: 1px solid var(--color-border);
+            padding-top: 1rem;
+            font-size: 0.875rem; /* text-sm */
+            color: var(--color-text-secondary);
+        }
+        .footnote-list li {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+        .footnote-link {
+            vertical-align: super;
+            font-size: 0.7em;
+            text-decoration: none;
+            color: var(--color-accent);
+            padding-left: 2px;
+            padding-right: 2px;
+            border-radius: 2px;
+            transition: background-color 0.2s ease;
+        }
+        .footnote-link:hover {
+            background-color: rgba(14, 165, 233, 0.1); /* light blue semi-transparent */
+        }
+        .footnote-back-link {
+            text-decoration: none;
+            margin-left: 0.25rem;
+            color: var(--color-text-secondary);
+        }
+        .footnote-back-link:hover {
+            color: var(--color-accent);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header & Theme Toggle -->
+    <header class="py-4 px-6 md:px-12 flex justify-between items-center fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-sm bg-black bg-opacity-30">
+        <h1 class="text-2xl md:text-3xl font-bold text-gray-100">
+            <span class="text-blue-400">军工</span>涉密业务解析
+        </h1>
+        <button id="theme-toggle" class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400 hover:bg-gray-700 transition-colors duration-300">
+            <i class="fas fa-moon text-gray-300 text-lg"></i>
+        </button>
+    </header>
+
+    <main class="container mx-auto px-6 py-24 md:py-32 max-w-4xl lg:max-w-5xl">
+
+        <!-- Hero Section -->
+        <section class="text-center mb-16 relative overflow-hidden rounded-xl p-8 md:p-12 lg:p-16 hero-bg-gradient shadow-xl transform hover:scale-[1.005] transition-transform duration-300">
+            <div class="absolute inset-0 bg-cover bg-center opacity-10" style="background-image: url('https://images.unsplash.com/photo-1510519159388-37d4520a0273?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="relative z-10">
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight text-white drop-shadow-lg">
+                    <span class="text-blue-400">军工涉密</span>业务备案：投行实务深度指南
+                </h2>
+                <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+                    洞悉军工涉密业务咨询服务的备案要求，确保合规操作，规避潜在风险。
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#core-conclusion" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105 flex items-center justify-center">
+                        <i class="fas fa-search-dollar mr-2"></i> 了解核心结论
+                    </a>
+                    <a href="#mermaid-chart" class="bg-gray-700 hover:bg-gray-600 text-gray-200 font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105 flex items-center justify-center">
+                        <i class="fas fa-project-diagram mr-2"></i> 查看流程图
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Conclusion -->
+        <section id="core-conclusion" class="mb-16 fade-in">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-8 text-white text-center">
+                <i class="fas fa-bullseye text-blue-400 mr-3"></i>核心结论
+            </h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gray-800 p-8 rounded-lg shadow-md hover:shadow-xl transform hover:translate-y-[-5px] transition-all duration-300 border-l-4 border-blue-500">
+                    <h3 class="text-2xl font-bold mb-4 text-white flex items-center">
+                        <i class="fas fa-file-signature text-blue-400 mr-3"></i>辅导协议
+                    </h3>
+                    <p class="text-gray-300 leading-relaxed text-lg">
+                        <span class="font-semibold text-blue-300">签署辅导协议需备案</span>：若辅导阶段涉及接触或处理涉密信息（如军品技术参数、采购目录等），则属于需报送情形<a href="#footnote-1" class="footnote-link" id="fnref-1"><sup>[1]</sup></a><a href="#footnote-2" class="footnote-link" id="fnref-2"><sup>[2]</sup></a>。
+                    </p>
+                </div>
+                <div class="bg-gray-800 p-8 rounded-lg shadow-md hover:shadow-xl transform hover:translate-y-[-5px] transition-all duration-300 border-l-4 border-blue-500">
+                    <h3 class="text-2xl font-bold mb-4 text-white flex items-center">
+                        <i class="fas fa-handshake text-blue-400 mr-3"></i>上市保荐承销协议
+                    </h3>
+                    <p class="text-gray-300 leading-relaxed text-lg">
+                        <span class="font-semibold text-blue-300">签署上市保荐承销协议必然备案</span>：因直接涉及招股书涉密章节、国防专利等核心涉密内容<a href="#footnote-3" class="footnote-link" id="fnref-3"><sup>[3]</sup></a>。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <div class="border-t border-gray-700 my-12 w-1/3 mx-auto"></div>
+
+        <!-- Analysis Basis -->
+        <section class="mb-16 fade-in">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-8 text-white text-center">
+                <i class="fas fa-lightbulb text-blue-400 mr-3"></i>具体分析依据
+            </h2>
+
+            <div class="space-y-10">
+                <!-- Section 1: 辅导协议的备案要求 -->
+                <div class="bg-gray-800 p-8 rounded-lg shadow-md transform hover:scale-[1.005] transition-transform duration-300 border border-gray-700">
+                    <h3 class="text-2xl font-bold mb-6 text-white flex items-center">
+                        <i class="fas fa-clipboard-list text-blue-400 mr-3"></i>一、辅导协议的备案要求
+                    </h3>
+                    <p class="text-gray-300 leading-relaxed mb-4 text-lg dropcap">
+                        根据《军工涉密业务咨询服务安全保密监督管理办法及实施细则》（以下简称《办法》）及知识库《中信建投证券股份有限公司涉及军工涉密业务保密管理办法》<a href="#footnote-4" class="footnote-link" id="fnref-4"><sup>[4]</sup></a>第十二条：
+                    </p>
+                    <blockquote class="bg-gray-900 border-l-4 border-blue-600 text-gray-200 italic p-6 rounded-r-lg mb-6">
+                        <p class="mb-2"><i class="fas fa-quote-left text-blue-400 mr-2"></i>**辅导和尽职调查阶段**需使用内部计算机处理文件，且项目立项后应向保密办公室备案。</p>
+                        <cite class="block text-right text-sm text-gray-400">— 《中信建投证券股份有限公司涉及军工涉密业务保密管理办法》</cite>
+                    </blockquote>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        <span class="font-semibold text-blue-300">关键点</span>：
+                    </p>
+                    <ul class="list-none space-y-3 pl-0 text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-400 mt-1 mr-3 flex-shrink-0"></i>
+                            <p>辅导阶段通常包括 <span class="font-medium text-blue-300">尽职调查、内控整改、材料申报</span> 等环节，可能接触涉密信息（如军方供应商名录、军品技术文件）。</p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-400 mt-1 mr-3 flex-shrink-0"></i>
+                            <p>联网案例显示（德恒律师事务所分析），若中介机构在辅导中处理涉密信息（如“军代表审核的供应商目录”），即触发备案义务<a href="#footnote-5" class="footnote-link" id="fnref-5"><sup>[5]</sup></a>。</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Section 2: 上市保荐承销协议的备案要求 -->
+                <div class="bg-gray-800 p-8 rounded-lg shadow-md transform hover:scale-[1.005] transition-transform duration-300 border border-gray-700">
+                    <h3 class="text-2xl font-bold mb-6 text-white flex items-center">
+                        <i class="fas fa-gavel text-blue-400 mr-3"></i>二、上市保荐承销协议的备案要求
+                    </h3>
+                    <p class="text-gray-300 leading-relaxed dropcap">
+                        根据知识库《中信建投证券涉军涉密业务操作指引》<a href="#footnote-6" class="footnote-link" id="fnref-6"><sup>[6]</sup></a>第二条：
+                    </p>
+                    <blockquote class="bg-gray-900 border-l-4 border-blue-600 text-gray-200 italic p-6 rounded-r-lg">
+                        <p class="mb-2"><i class="fas fa-quote-left text-blue-400 mr-2"></i>上市阶段（含改制、重组）直接涉及 **招股书涉密章节编制、答复监管涉密问询、信息披露豁免** 等，属于核心涉密业务，必须备案。</p>
+                        <cite class="block text-right text-sm text-gray-400">— 《中信建投证券涉军涉密业务操作指引》</cite>
+                    </blockquote>
+                </div>
+
+                <!-- Section 3: 例外情形 -->
+                <div class="bg-gray-800 p-8 rounded-lg shadow-md transform hover:scale-[1.005] transition-transform duration-300 border border-gray-700">
+                    <h3 class="text-2xl font-bold mb-6 text-white flex items-center">
+                        <i class="fas fa-exclamation-circle text-blue-400 mr-3"></i>三、例外情形
+                    </h3>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        若同时满足以下条件，辅导协议 <span class="font-semibold text-blue-300">可不备案</span>：
+                    </p>
+                    <ul class="list-none space-y-3 pl-0 text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-minus-circle text-red-400 mt-1 mr-3 flex-shrink-0"></i>
+                            <p>发行人 <span class="font-medium text-red-300">不涉及军工业务</span>（如纯民品企业）；</p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-minus-circle text-red-400 mt-1 mr-3 flex-shrink-0"></i>
+                            <p>辅导内容 <span class="font-medium text-red-300">完全不接触涉密信息</span>（如仅涉及公司治理、财务规范等通用内容）。</p>
+                        </li>
+                    </ul>
+                    <p class="text-gray-400 italic mt-6 border-t border-gray-700 pt-4">
+                        <i class="fas fa-info-circle mr-2"></i>但实践中涉军企业辅导极少符合此情形。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Divider -->
+        <div class="border-t border-gray-700 my-12 w-1/3 mx-auto"></div>
+
+        <!-- Filing Process and Time Limit -->
+        <section class="mb-16 fade-in">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-8 text-white text-center">
+                <i class="fas fa-clock text-blue-400 mr-3"></i>备案流程及时限
+            </h2>
+            <div class="bg-gray-800 p-8 rounded-lg shadow-md border border-gray-700 transform hover:scale-[1.005] transition-transform duration-300">
+                <ul class="list-none space-y-6 pl-0 text-gray-300">
+                    <li class="flex items-start">
+                        <i class="fas fa-user-tie text-blue-400 mt-1 mr-4 flex-shrink-0 text-2xl"></i>
+                        <div>
+                            <p class="text-xl font-bold text-white mb-2">责任主体</p>
+                            <p class="leading-relaxed">涉军发行人（非中介机构）需在委托项目后 <span class="font-semibold text-blue-300">30个工作日内</span> 向主管单位（如国防科工局）备案<a href="#footnote-7" class="footnote-link" id="fnref-7"><sup>[7]</sup></a>。</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-file-alt text-blue-400 mt-1 mr-4 flex-shrink-0 text-2xl"></i>
+                        <div>
+                            <p class="text-xl font-bold text-white mb-2">备案内容</p>
+                            <p class="leading-relaxed">咨询机构资质、保密协议执行情况等（详见《办法》第十二条）。</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Risk Warning -->
+        <section class="mb-16 fade-in">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-8 text-white text-center">
+                <i class="fas fa-exclamation-triangle text-red-400 mr-3"></i>风险提示
+            </h2>
+            <div class="bg-red-900 bg-opacity-30 border border-red-700 p-8 rounded-lg shadow-md transform hover:scale-[1.005] transition-transform duration-300">
+                <p class="text-red-200 leading-relaxed mb-4 text-lg font-medium">
+                    <i class="fas fa-shield-alt text-red-400 mr-3"></i>未按规定备案可能导致严重后果：
+                </p>
+                <ul class="list-disc list-inside space-y-3 pl-4 text-red-200">
+                    <li class="flex items-start">
+                        <span class="mr-2 text-red-400">•</span>
+                        <p><span class="font-semibold text-red-100">中介机构被暂停军工涉密业务资格</span>；</p>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="mr-2 text-red-400">•</span>
+                        <p><span class="font-semibold text-red-100">发行人面临国防科工局监管处罚</span>（如科工计〔2016〕209号文）<a href="#footnote-8" class="footnote-link" id="fnref-8"><sup>[8]</sup></a>。</p>
+                    </li>
+                </ul>
+                <p class="text-red-300 italic mt-6 border-t border-red-800 pt-4">
+                    <i class="fas fa-lightbulb mr-2"></i>建议在项目启动时由发行人会同保荐机构，根据实际涉密风险向主管单位确认备案必要性。
+                </p>
+            </div>
+        </section>
+
+        <!-- Mermaid Data Visualization -->
+        <section id="mermaid-chart" class="mb-16 fade-in">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-8 text-white text-center">
+                <i class="fas fa-sitemap text-blue-400 mr-3"></i>军工涉密业务备案决策流程
+            </h2>
+            <div class="mermaid">
+                graph TD
+                    A[开始] --> B{签署何种协议?};
+                    B -- 辅导协议 --> C{辅导阶段是否接触涉密信息?};
+                    B -- 上市保荐承销协议 --> E[必然备案];
+                    C -- 是 --> D[需备案];
+                    C -- 否 --> F{发行人是否涉军工业务?};
+                    F -- 是 --> D;
+                    F -- 否 --> G[不需备案 (极少见)];
+                    D --> H(30工作日内向主管单位备案);
+                    E --> H;
+                    H --> I[合规完成];
+                    D -- 未备案 --> J(风险提示: 暂停业务资格/处罚);
+                    E -- 未备案 --> J;
+                    J --> K[重新评估/整改];
+
+                    style A fill:#0ea5e9,stroke:#0ea5e9,stroke-width:2px,color:#fff;
+                    style B fill:#3a3a3a,stroke:#0ea5e9,stroke-width:2px,color:#fff;
+                    style C fill:#3a3a3a,stroke:#0ea5e9,stroke-width:2px,color:#fff;
+                    style D fill:#22c55e,stroke:#22c55e,stroke-width:2px,color:#fff;
+                    style E fill:#22c55e,stroke:#22c55e,stroke-width:2px,color:#fff;
+                    style F fill:#3a3a3a,stroke:#0ea5e9,stroke-width:2px,color:#fff;
+                    style G fill:#ef4444,stroke:#ef4444,stroke-width:2px,color:#fff;
+                    style H fill:#facc15,stroke:#facc15,stroke-width:2px,color:#333;
+                    style I fill:#10b981,stroke:#10b981,stroke-width:2px,color:#fff;
+                    style J fill:#dc2626,stroke:#dc2626,stroke-width:2px,color:#fff;
+                    style K fill:#fbbf24,stroke:#fbbf24,stroke-width:2px,color:#333;
+            </div>
+        </section>
+
+        <!-- Key Concepts Explanation (加分项) -->
+        <section class="mb-16 fade-in">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-8 text-white text-center">
+                <i class="fas fa-book-open text-blue-400 mr-3"></i>核心概念解析
+            </h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gray-800 p-6 rounded-lg shadow-md border border-gray-700">
+                    <h3 class="text-xl font-bold mb-3 text-white flex items-center">
+                        <i class="fas fa-lock text-blue-400 mr-3"></i>军工涉密业务
+                    </h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        指军工单位或与军工有关的企事业单位，在改制、重组、上市、股权融资等资本运作过程中，涉及国家秘密信息（如军品技术参数、生产工艺、采购名录、军事设施信息、国防专利等）的咨询服务活动。这些活动需遵守严格的保密规定。
+                    </p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg shadow-md border border-gray-700">
+                    <h3 class="text-xl font-bold mb-3 text-white flex items-center">
+                        <i class="fas fa-clipboard-check text-blue-400 mr-3"></i>备案
+                    </h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        指涉军企事业单位或相关中介机构，在开展军工涉密业务咨询服务前或特定阶段后，依据相关法规向国家国防科技工业局等主管单位进行登记报告，以获得批准并接受安全保密监督管理的行为。这是确保业务合规性和国家秘密安全的重要环节。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Further Reading (加分项) -->
+        <section class="mb-16 fade-in">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-8 text-white text-center">
+                <i class="fas fa-book text-blue-400 mr-3"></i>延伸阅读
+            </h2>
+            <div class="bg-gray-800 p-8 rounded-lg shadow-md border border-gray-700">
+                <ul class="list-none space-y-6 pl-0">
+                    <li class="flex items-start">
+                        <i class="fas fa-file-pdf text-blue-400 mt-1 mr-4 flex-shrink-0 text-xl"></i>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-1">
+                                <a href="http://www.saastind.gov.cn/cms/news_view.action?channelId=100100&contentId=646011728114521088" target="_blank" rel="noopener noreferrer" class="hover:underline text-blue-400">
+                                    《军工涉密业务咨询服务安全保密监督管理办法》
+                                </a>
+                            </h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                军工涉密业务咨询服务的核心指导文件，确立了备案和监督管理的基本框架。
+                            </p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-file-pdf text-blue-400 mt-1 mr-4 flex-shrink-0 text-xl"></i>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-1">
+                                <a href="http://www.miit.gov.cn/zwgk/zcjd/art/2021/art_09b85c2c51b54a29a0f443588258e762.html" target="_blank" rel="noopener noreferrer" class="hover:underline text-blue-400">
+                                    《军工涉密业务咨询服务安全保密监督管理办法实施细则》
+                                </a>
+                            </h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                对《管理办法》的具体执行和操作细节进行补充和细化，是实务操作的重要参考。
+                            </p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-file-pdf text-blue-400 mt-1 mr-4 flex-shrink-0 text-xl"></i>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-1">
+                                <a href="https://www.ndcnc.com/html/nd_news_view_2530.html" target="_blank" rel="noopener noreferrer" class="hover:underline text-blue-400">
+                                    《涉军企事业单位改制重组上市及上市后资本运作军工事项审查工作管理暂行办法》（科工计〔2016〕209号）
+                                </a>
+                            </h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                专门针对涉军企业改制、重组、上市及后续资本运作中的军工事项审查要求。
+                            </p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-balance-scale text-blue-400 mt-1 mr-4 flex-shrink-0 text-xl"></i>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-1">
+                                <a href="http://www.npc.gov.cn/npc/c30834/201912/11c2069b124847e383bbce243e8d259c.shtml" target="_blank" rel="noopener noreferrer" class="hover:underline text-blue-400">
+                                    《中华人民共和国证券法》
+                                </a>
+                            </h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                证券市场的基础法律，其中对信息披露和合规性的要求与涉密业务的备案紧密相关。
+                            </p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-shield-alt text-blue-400 mt-1 mr-4 flex-shrink-0 text-xl"></i>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-1">
+                                <a href="http://www.gov.cn/ziliao/flfg/2010-04/29/content_1594911.htm" target="_blank" rel="noopener noreferrer" class="hover:underline text-blue-400">
+                                    《中华人民共和国保守国家秘密法》
+                                </a>
+                            </h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                国家保密工作的根本大法，是所有涉密业务合规的法律基石。
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Footnotes -->
+        <section id="footnotes" class="mt-20 fade-in">
+            <h2 class="text-2xl font-semibold mb-6 text-white border-b border-gray-700 pb-4">
+                <i class="fas fa-info-circle text-blue-400 mr-3"></i>参考文献
+            </h2>
+            <ol class="footnote-list">
+                <li id="footnote-1">
+                    <a href="#fnref-1" class="footnote-back-link"><sup>[1]</sup></a> 《军工涉密业务咨询服务安全保密监督管理办法及实施细则》第十二条。
+                </li>
+                <li id="footnote-2">
+                    <a href="#fnref-2" class="footnote-back-link"><sup>[2]</sup></a> 军工企业的事先审查和保密审查问题分析，德恒律师事务所，<a href="https://www.dehenglaw.com/CN/tansuocontent/0008/026577/7.aspx?MID=0902" target="_blank" rel="noopener noreferrer">链接</a>。
+                </li>
+                <li id="footnote-3">
+                    <a href="#fnref-3" class="footnote-back-link"><sup>[3]</sup></a> 知识库《中信建投证券涉军涉密业务操作指引》第二章第六条。
+                </li>
+                <li id="footnote-4">
+                    <a href="#fnref-4" class="footnote-back-link"><sup>[4]</sup></a> 知识库《中信建投证券股份有限公司涉及军工涉密业务保密管理办法》第十二条（二）、（三）。
+                </li>
+                <li id="footnote-5">
+                    <a href="#fnref-5" class="footnote-back-link"><sup>[5]</sup></a> 军工企业的事先审查和保密审查问题分析，德恒律师事务所，<a href="https://www.dehenglaw.com/CN/tansuocontent/0008/026577/7.aspx?MID=0902" target="_blank" rel="noopener noreferrer">链接</a>。
+                </li>
+                <li id="footnote-6">
+                    <a href="#fnref-6" class="footnote-back-link"><sup>[6]</sup></a> 知识库《中信建投证券涉军涉密业务操作指引》第二条。
+                </li>
+                <li id="footnote-7">
+                    <a href="#fnref-7" class="footnote-back-link"><sup>[7]</sup></a> 《军工涉密业务咨询服务安全保密监督管理办法及实施细则》第十二条。
+                </li>
+                <li id="footnote-8">
+                    <a href="#fnref-8" class="footnote-back-link"><sup>[8]</sup></a> 《涉军企事业单位改制重组上市及上市后资本运作军工事项审查工作管理暂行办法》（科工计〔2016〕209号）。
+                </li>
+            </ol>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 text-center py-8 text-sm border-t border-gray-700">
+        <p>&copy; 2023 军工涉密业务解析. 保留所有权利. <span class="mx-2">|</span> 设计与开发：专业前端专家</p>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid Configuration for Dark Mode
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark', // Ensures Mermaid uses its internal dark theme
+            flowchart: {
+                useMaxWidth: true, // Use max-width for responsiveness
+                curve: 'basis'
+            },
+            sequence: {
+                showNumbers: true
+            },
+            gantt: {
+                axisFormat: '%Y/%m/%d'
+            }
+        });
+
+        // Theme Toggle JavaScript
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun text-yellow-400 text-lg"></i>'; // Sun icon for dark mode
+            } else {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeToggle.innerHTML = '<i class="fas fa-moon text-gray-700 text-lg"></i>'; // Moon icon for light mode
+            }
+        }
+
+        // Initialize theme based on local storage or system preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark'); // Default to dark if system preference is dark
+        } else {
+            setTheme('light'); // Default to light if no preference is set and system is not dark
+        }
+
+        // Toggle functionality
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Intersection Observer for fade-in effect
+        const fadeIns = document.querySelectorAll('.fade-in');
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Stop observing once animated
+                }
+            });
+        }, {
+            threshold: 0.1, // Trigger when 10% of the element is visible
+            rootMargin: '0px 0px -50px 0px' // Offset to trigger slightly before it enters full view
+        });
+
+        fadeIns.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Adjust header background on scroll
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('bg-opacity-70', 'shadow-lg');
+            } else {
+                header.classList.remove('bg-opacity-70', 'shadow-lg');
+            }
+        });
+
+    </script>
+</body>
+</html>
+```
