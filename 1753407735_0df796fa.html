@@ -1,0 +1,591 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO备用金核查：重点与规则解读</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <style>
+        /* Base styles for dark mode */
+        body {
+            font-family: "Noto Sans SC", Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            @apply bg-zinc-900 text-zinc-200 transition-colors duration-300;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: "Noto Serif SC", "Noto Sans SC", serif; /* Prioritize Serif for headings */
+            @apply text-zinc-50;
+        }
+
+        /* Light mode styles */
+        html.light body {
+            @apply bg-zinc-50 text-zinc-800;
+        }
+
+        html.light h1, html.light h2, html.light h3, html.light h4 {
+            @apply text-zinc-900;
+        }
+
+        /* Custom styles for Mermaid */
+        .mermaid {
+            background-color: transparent !important;
+        }
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        /* Mermaid dark mode overrides */
+        html.dark .mermaid .node rect, html.dark .mermaid .node circle, html.dark .mermaid .node polygon {
+            fill: #2d3748 !important; /* Tailwind gray-800 */
+            stroke: #a0aec0 !important; /* Tailwind gray-400 */
+        }
+        html.dark .mermaid .node text {
+            fill: #e2e8f0 !important; /* Tailwind gray-200 */
+        }
+        html.dark .mermaid .edge path {
+            stroke: #a0aec0 !important; /* Tailwind gray-400 */
+        }
+        html.dark .mermaid .edge text {
+            fill: #e2e8f0 !important; /* Tailwind gray-200 */
+        }
+
+        /* Mermaid light mode overrides */
+        html.light .mermaid .node rect, html.light .mermaid .node circle, html.light .mermaid .node polygon {
+            fill: #cbd5e0 !important; /* Tailwind gray-300 */
+            stroke: #4a5568 !important; /* Tailwind gray-700 */
+        }
+        html.light .mermaid .node text {
+            fill: #2d3748 !important; /* Tailwind gray-800 */
+        }
+        html.light .mermaid .edge path {
+            stroke: #4a5568 !important; /* Tailwind gray-700 */
+        }
+        html.light .mermaid .edge text {
+            fill: #2d3748 !important; /* Tailwind gray-800 */
+        }
+
+        /* Custom scrollbar for better aesthetics */
+        body::-webkit-scrollbar {
+            width: 8px;
+        }
+        body::-webkit-scrollbar-track {
+            background: theme('colors.zinc.800'); /* Dark background */
+        }
+        body::-webkit-scrollbar-thumb {
+            background-color: theme('colors.blue.600'); /* Accent color */
+            border-radius: 4px;
+        }
+        html.light body::-webkit-scrollbar-track {
+            background: theme('colors.zinc.200'); /* Light background */
+        }
+        html.light body::-webkit-scrollbar-thumb {
+            background-color: theme('colors.blue.500'); /* Accent color */
+        }
+
+        /* Micro-interactions */
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* subtle shadow */
+        }
+
+        .icon-pulse:hover {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Footnote styling */
+        .footnote-link {
+            font-size: 0.75em; /* Smaller text */
+            vertical-align: super; /* Superscript */
+            @apply text-blue-400 hover:text-blue-300;
+        }
+        html.light .footnote-link {
+            @apply text-blue-600 hover:text-blue-700;
+        }
+        .footnotes {
+            @apply text-sm text-zinc-400 mt-12 border-t border-zinc-700 pt-6;
+        }
+        html.light .footnotes {
+            @apply text-zinc-600 border-zinc-200;
+        }
+        .footnotes ol {
+            @apply list-decimal pl-6;
+        }
+        .footnotes li {
+            @apply mb-2;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header / Hero Section -->
+    <header class="relative overflow-hidden py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-zinc-800 to-zinc-900 dark:from-zinc-900 dark:to-zinc-950">
+        <!-- Abstract background pattern -->
+        <div class="absolute inset-0 opacity-10 dark:opacity-5" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMuorgvMjAwMC9zdmciPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PHBhdGggZmlsbD0iIzQwNGU2MiIgZD0iTTAgMGg2MHY2MEgweiIvPjxwYXRoIGQ9Ik0zIDZMMi4yNjcgNS41IDEuNiA2LjMyMyAzIDcuMzY2IDQuNCw2LjMyMyAzLjcyNSAxLjU5MiAzIDIuNjkgMyAzLjk3MiAyLjc2IDEuNzM5eiIgZmlsbD0iIzUzNzk5MyIvPjxwYXRoIGQ9Ik01MyAzNWwxLTEuNzMgMi42LTEuNSAyLjYgMS41IDAgMy40Ni0yLjYgMS41LTIuNi0xLjUweiIgZmlsbD0iIzk5YjJkYiIvPjxwYXRoIGQ9Ik0zMCAxMmwtMiAxLjczLTQuMi0yLjQyLTQuMiAyLjQyIDAgNC44NCA0LjIgMi40MiA0LjIgLTIuNDJ6IiBmaWxsPSIjMmExYTMwIi8+PHBhdGggZD0iTTkuNjg3IDUyLjQzOGwzLjUzNi02LjExNCAwLTcuMDY3LTcuMDcyIDQuMDgyIDAgMi4wNDQgLTMuNTM2IDYuMTE0eiIgZmlsbD0iIzM1NTk2NiIvPjxwYXRoIGQ9Ik0yMCAzOWwtMy40Ni0yIDAgLTMuNDYgLTMuNDYgMi0zLjQ2LTIgMC0zLjQ2IDYuOTItNCA2LjkyIDR6IiBmaWxsPSIjYzk2ODU3Ii8+PHBhdGggZD0iTTUwIDIwbC0xLjczMi0xIDAgLTEuNzMyLTIgMS4xNTUgMi41OTgtMy40NjQtLjU3Ny0xIDAgLTIuMTA3IDIuNTk4IDEuNTA5IDIuNTk4LTEuNTA5IDAgMi4xMDcgLS41NzcgMSAyLjU5OCAzLjQ2NHoiIGZpbGw9IiM2NjgwODIiLz48cGF0aCBkPSJNNDIgNDJsLTQgMi4zMDkgMC00LjYxOSA0LTIuMzA5IDAgNC42MTl6IiBmaWxsPSIjNzVhYTA4Ii8+PHBhdGggZD0iTTExIDUwbC0xLjczMiAxIDAgLTEuNzMyLTIgMS4xNTUgMi41OTgtMy40NjQtLjU3Ny0xIDAgLTIuMTA3IDIuNTk4IDEuNTA5IDIuNTk4LTEuNTA5IDAgMi4xMDcgLS41NzcgMSAyLjU5OCAzLjQ2NHoiIGZpbGwtb3BhY2l0eT0iLjMiIGZpbGw9IiM5YWMxNjUiLz48L2c+PC9zdmc+'); background-size: 30px; transform: rotate(45deg) scale(2); }
+        <div class="relative z-10 max-w-7xl mx-auto text-center">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight mb-4">
+                拟上市公司员工备用金：<br class="hidden sm:inline-block"> IPO审核核查重点与规则解读
+            </h1>
+            <p class="text-xl sm:text-2xl lg:text-3xl text-zinc-300 dark:text-zinc-400 mb-8 max-w-3xl mx-auto">
+                深度解析企业上市过程中，备用金管理不规范的合规风险与应对策略
+            </p>
+            <div class="flex items-center justify-center space-x-4">
+                <button id="theme-toggle" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition-all duration-300 flex items-center space-x-2">
+                    <i class="fas fa-adjust"></i>
+                    <span>模式切换</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <!-- Introduction -->
+        <section class="mb-16">
+            <p class="text-lg leading-relaxed text-zinc-300 dark:text-zinc-400">
+                根据投行业务实践及A股IPO审核要求，拟上市公司员工借还备用金需重点关注以下事项及核查要点，相关规则依据如下：
+            </p>
+        </section>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <!-- Section 1: 核查重点关注事项 -->
+            <section class="lg:col-span-2 p-6 rounded-lg bg-zinc-800 dark:bg-zinc-800 shadow-xl card-hover">
+                <h2 class="text-3xl font-bold mb-8 flex items-center">
+                    <i class="fas fa-clipboard-check text-blue-500 mr-4 icon-pulse"></i>
+                    一、核查重点关注事项
+                </h2>
+
+                <!-- 1. 内控制度有效性 -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-blue-400 flex items-center">
+                        <i class="fas fa-shield-alt text-blue-500 mr-3"></i>
+                        1. 内控制度有效性
+                    </h3>
+                    <ul class="space-y-3 pl-5 list-none">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                            <span class="text-zinc-300 dark:text-zinc-400">
+                                <strong class="text-zinc-50">必要性审查：</strong>备用金借款必须用于公务支出（如差旅、采购），需提供借款事由证明文件<a href="#footnote-1" class="footnote-link">[^1]</a><a href="#footnote-2" class="footnote-link">[^2]</a>。
+                            </span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                            <span class="text-zinc-300 dark:text-zinc-400">
+                                <strong class="text-zinc-50">审批流程：</strong>检查借款是否履行分级审批（如部门负责人→财务总监→总经理），报销是否及时（一般要求业务结束15日内）<a href="#footnote-1" class="footnote-link">[^1]</a><a href="#footnote-5" class="footnote-link">[^5]</a>。
+                            </span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                            <span class="text-zinc-300 dark:text-400">
+                                <strong class="text-zinc-50">额度管理：</strong>单笔及累计借款额度是否受限（如不超过月工资3倍），超限额需特殊审批<a href="#footnote-2" class="footnote-link">[^2]</a>。
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 2. 财务规范性与资金占用风险 -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-blue-400 flex items-center">
+                        <i class="fas fa-dollar-sign text-blue-500 mr-3"></i>
+                        2. 财务规范性与资金占用风险
+                    </h3>
+                    <ul class="space-y-3 pl-5 list-none">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                            <span class="text-zinc-300 dark:text-zinc-400">
+                                <strong class="text-zinc-50">用途真实性：</strong>核查备用金是否实际用于公务，禁止用于个人消费、投资等非公用途<a href="#footnote-4" class="footnote-link">[^4]</a><a href="#footnote-12" class="footnote-link">[^12]</a>。
+                            </span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                            <span class="text-zinc-300 dark:text-zinc-400">
+                                <strong class="text-zinc-50">归还及时性：</strong>关注长期未核销的借款（如超30天），需排查是否存在变相资金占用<a href="#footnote-1" class="footnote-link">[^1]</a><a href="#footnote-16" class="footnote-link">[^16]</a>。
+                            </span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                            <span class="text-zinc-300 dark:text-zinc-400">
+                                <strong class="text-zinc-50">闭环管理：</strong>借款→报销→冲抵/归还须形成完整凭证链，避免现金交易（优先通过银行转账）<a href="#footnote-2" class="footnote-link">[^2]</a><a href="#footnote-12" class="footnote-link">[^12]</a>。
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 3. 关联交易与利益输送风险 -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-blue-400 flex items-center">
+                        <i class="fas fa-link text-blue-500 mr-3"></i>
+                        3. 关联交易与利益输送风险
+                    </h3>
+                    <ul class="space-y-3 pl-5 list-none">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                            <span class="text-zinc-300 dark:text-zinc-400">
+                                <strong class="text-zinc-50">关联方识别：</strong>若借款人为实控人、董监高或其关联人，需按关联交易披露并履行程序<a href="#footnote-3" class="footnote-link">[^3]</a><a href="#footnote-7" class="footnote-link">[^7]</a>。
+                            </span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                            <span class="text-zinc-300 dark:text-zinc-400">
+                                <strong class="text-zinc-50">定价公允性：</strong>核查是否支付利息（如无息借款需说明合理性），对比市场利率水平<a href="#footnote-7" class="footnote-link">[^7]</a><a href="#footnote-14" class="footnote-link">[^14]</a>。
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 4. 税务合规性 -->
+                <div class="mb-0">
+                    <h3 class="text-2xl font-semibold mb-4 text-blue-400 flex items-center">
+                        <i class="fas fa-file-invoice-dollar text-blue-500 mr-3"></i>
+                        4. 税务合规性
+                    </h3>
+                    <ul class="space-y-3 pl-5 list-none">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mr-3 mt-1"></i>
+                            <span class="text-zinc-300 dark:text-zinc-400">
+                                <strong class="text-zinc-50">个人所得税：</strong>超期未归还的借款可能被视为薪酬所得，需代扣个税<a href="#footnote-12" class="footnote-link">[^12]</a>。
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Sidebar / Right Column -->
+            <aside class="lg:col-span-1 space-y-8">
+                <!-- Data Visualization - Mermaid Chart -->
+                <section class="p-6 rounded-lg bg-zinc-800 dark:bg-zinc-800 shadow-xl card-hover">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-sitemap text-yellow-500 mr-3 icon-pulse"></i>
+                        核心概念关系图
+                    </h2>
+                    <div class="mermaid-container overflow-x-auto">
+                        <div class="mermaid text-center">
+                            graph TD
+                                A[IPO 备用金核查] --> B(内控制度有效性)
+                                A --> C(财务规范性与资金占用风险)
+                                A --> D(关联交易与利益输送风险)
+                                A --> E(税务合规性)
+
+                                B --> B1[必要性审查]
+                                B --> B2[审批流程]
+                                B --> B3[额度管理]
+
+                                C --> C1[用途真实性]
+                                C --> C2[归还及时性]
+                                C3[闭环管理] --- C
+
+                                D --> D1[关联方识别]
+                                D --> D2[定价公允性]
+
+                                E --> E1[个人所得税]
+
+                                A --要求中介机构--> F[中介机构核查]
+                                F --> F1(穿行测试)
+                                F --> F2(资金流水核查)
+                                F --> F3(关联方筛查)
+                                F --> F4(大额/异常交易核实)
+
+                                G[案例警示] --强调重要性--> A
+                                G1(诺康达医药: 信披不完整) --> G
+                                G2(广大特材: 关联交易披露不实) --> G
+
+                                H[合规建议] --指导--> A
+                                H1(报告期全面清理) --> H
+                                H2(完善备用金制度) --> H
+
+                                A --遵循--> R[核心规则与监管依据]
+                                R --> R1(首发业务问题解答)
+                                R --> R2(企业内控基本规范)
+                                R --> R3(上市公司治理准则)
+                                R --> R4(交易所审核指引)
+
+                                style A fill:#4F46E5,stroke:#fff,stroke-width:2px,color:#fff;
+                                style B fill:#3B82F6,stroke:#fff,stroke-width:1px,color:#fff;
+                                style C fill:#3B82F6,stroke:#fff,stroke-width:1px,color:#fff;
+                                style D fill:#3B82F6,stroke:#fff,stroke-width:1px,color:#fff;
+                                style E fill:#3B82F6,stroke:#fff,stroke-width:1px,color:#fff;
+                                style F fill:#EC4899,stroke:#fff,stroke-width:1px,color:#fff;
+                                style G fill:#EF4444,stroke:#fff,stroke-width:1px,color:#fff;
+                                style H fill:#10B981,stroke:#fff,stroke-width:1px,color:#fff;
+                                style R fill:#6366F1,stroke:#fff,stroke-width:1px,color:#fff;
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Case Study Warnings -->
+                <section class="p-6 rounded-lg bg-red-800 bg-opacity-70 dark:bg-red-900 dark:bg-opacity-70 shadow-xl card-hover text-red-100">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center text-red-50">
+                        <i class="fas fa-exclamation-triangle text-red-300 mr-3 icon-pulse"></i>
+                        案例警示
+                    </h2>
+                    <div class="mb-4">
+                        <p class="font-semibold mb-2 text-red-50">诺康达医药（科创板终止）</p>
+                        <p class="text-sm">因未披露离职监事关联方交易（含资金往来），被认定信披不完整<a href="#footnote-knowledgebase-1" class="footnote-link text-red-200">[^知识库1]</a>。</p>
+                    </div>
+                    <div>
+                        <p class="font-semibold mb-2 text-red-50">广大特材（问询重点）</p>
+                        <p class="text-sm">供应商穿透核查不足导致关联交易披露不实，被监管问询<a href="#footnote-knowledgebase-2" class="footnote-link text-red-200">[^知识库2]</a>。</p>
+                    </div>
+                </section>
+
+                <!-- Further Reading -->
+                <section class="p-6 rounded-lg bg-zinc-800 dark:bg-zinc-800 shadow-xl card-hover">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-book-open text-purple-500 mr-3 icon-pulse"></i>
+                        延伸阅读
+                    </h2>
+                    <ul class="space-y-4 text-zinc-300 dark:text-zinc-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-bookmark text-purple-400 mr-3 mt-1"></i>
+                            <div>
+                                <strong class="text-zinc-50">《上市公司收购管理办法》</strong>
+                                <p class="text-sm">中国证监会发布，规范关联交易和资金占用，为关联交易核查提供重要依据。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-bookmark text-purple-400 mr-3 mt-1"></i>
+                            <div>
+                                <strong class="text-zinc-50">《企业内部控制应用指引第8号——资金活动》</strong>
+                                <p class="text-sm">财政部发布，针对资金活动的具体内控指引，与备用金管理强相关。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-bookmark text-purple-400 mr-3 mt-1"></i>
+                            <div>
+                                <strong class="text-zinc-50">《IPO财务报表审阅与核查》</strong>
+                                <p class="text-sm">涵盖IPO财务核查方方面面，备用金作为内控和资金占用一部分会涉及。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-bookmark text-purple-400 mr-3 mt-1"></i>
+                            <div>
+                                <strong class="text-zinc-50">《财务尽职调查实务指南》</strong>
+                                <p class="text-sm">从尽调角度阐述了资金往来、关联交易等核查方法。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-bookmark text-purple-400 mr-3 mt-1"></i>
+                            <div>
+                                <strong class="text-zinc-50">《公司法》</strong>
+                                <p class="text-sm">中华人民共和国法律，法律层面的资金占用、关联交易等基本法律依据。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </aside>
+        </div>
+
+        <!-- Section 2: 核心规则及监管依据 -->
+        <section class="mt-12 p-6 rounded-lg bg-zinc-800 dark:bg-zinc-800 shadow-xl card-hover">
+            <h2 class="text-3xl font-bold mb-8 flex items-center">
+                <i class="fas fa-gavel text-teal-500 mr-4 icon-pulse"></i>
+                二、核心规则及监管依据
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Rule 1 -->
+                <div class="bg-zinc-700 dark:bg-zinc-700 p-6 rounded-lg shadow-inner">
+                    <h3 class="text-xl font-semibold mb-3 text-teal-400 flex items-center">
+                        <i class="fas fa-balance-scale text-teal-300 mr-2"></i>
+                        1. 《首发业务若干问题解答》
+                    </h3>
+                    <p class="text-zinc-300 dark:text-zinc-400">
+                        <strong class="text-zinc-50">问题14：</strong>要求发行人建立严格的资金管理制度，禁止关联方非经营性资金占用，备用金需规范审批、限定额度并及时清理<a href="#footnote-10" class="footnote-link">[^10]</a>。
+                    </p>
+                </div>
+                <!-- Rule 2 -->
+                <div class="bg-zinc-700 dark:bg-zinc-700 p-6 rounded-lg shadow-inner">
+                    <h3 class="text-xl font-semibold mb-3 text-teal-400 flex items-center">
+                        <i class="fas fa-file-contract text-teal-300 mr-2"></i>
+                        2. 《企业内部控制基本规范》
+                    </h3>
+                    <p class="text-zinc-300 dark:text-zinc-400">
+                        财政部等发布，明确资金活动控制要求，包括借款审批、报销审核等关键控制点<a href="#footnote-1" class="footnote-link">[^1]</a><a href="#footnote-5" class="footnote-link">[^5]</a>。
+                    </p>
+                </div>
+                <!-- Rule 3 -->
+                <div class="bg-zinc-700 dark:bg-zinc-700 p-6 rounded-lg shadow-inner">
+                    <h3 class="text-xl font-semibold mb-3 text-teal-400 flex items-center">
+                        <i class="fas fa-building text-teal-300 mr-2"></i>
+                        3. 《上市公司治理准则》
+                    </h3>
+                    <p class="text-zinc-300 dark:text-zinc-400">
+                        <strong class="text-zinc-50">第74条：</strong>关联交易需履行披露及决策程序，关联方借款需回避表决<a href="#footnote-7" class="footnote-link">[^7]</a><a href="#footnote-20" class="footnote-link">[^20]</a>。
+                    </p>
+                </div>
+                <!-- Rule 4 -->
+                <div class="bg-zinc-700 dark:bg-zinc-700 p-6 rounded-lg shadow-inner">
+                    <h3 class="text-xl font-semibold mb-3 text-teal-400 flex items-center">
+                        <i class="fas fa-chart-line text-teal-300 mr-2"></i>
+                        4. 交易所审核指引
+                    </h3>
+                    <p class="text-zinc-300 dark:text-zinc-400">
+                        如《北交所上市指引第1号》1-13条：关联交易须披露完整，杜绝通过备用金调节利润或输送利益<a href="#footnote-34" class="footnote-link">[^34]</a>。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 中介机构核查要求 -->
+        <section class="mt-12 p-6 rounded-lg bg-zinc-800 dark:bg-zinc-800 shadow-xl card-hover">
+            <h2 class="text-3xl font-bold mb-8 flex items-center">
+                <i class="fas fa-users-cog text-indigo-500 mr-4 icon-pulse"></i>
+                三、中介机构核查要求
+            </h2>
+            <div class="text-zinc-300 dark:text-zinc-400 mb-6">
+                <p class="mb-4">
+                    <strong class="text-zinc-50">保荐机构/会计师需执行程序：</strong>
+                </p>
+                <ul class="space-y-4 pl-5 list-none">
+                    <li class="flex items-start">
+                        <i class="fas fa-search-dollar text-indigo-400 mr-3 mt-1"></i>
+                        <span>
+                            <strong class="text-zinc-50">穿行测试：</strong>抽取样本验证借款审批→使用→报销的全流程内控有效性<a href="#footnote-1" class="footnote-link">[^1]</a><a href="#footnote-5" class="footnote-link">[^5]</a>。
+                        </span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-receipt text-indigo-400 mr-3 mt-1"></i>
+                        <span>
+                            <strong class="text-zinc-50">资金流水核查：</strong>比对借款人银行流水，确认无流向关联方或用于异常用途<a href="#footnote-4" class="footnote-link">[^4]</a><a href="#footnote-9" class="footnote-link">[^9]</a>。
+                        </span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-user-friends text-indigo-400 mr-3 mt-1"></i>
+                        <span>
+                            <strong class="text-zinc-50">关联方筛查：</strong>核查借款人是否关联方（含离职人员、亲属等），避免遗漏披露<a href="#footnote-3" class="footnote-link">[^3]</a><a href="#footnote-7" class="footnote-link">[^7]</a>。
+                        </span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-exclamation-circle text-indigo-400 mr-3 mt-1"></i>
+                        <span>
+                            <strong class="text-zinc-50">大额或异常交易：</strong>单笔超5万元或频繁借还的，重点核实背景及凭证<a href="#footnote-12" class="footnote-link">[^12]</a><a href="#footnote-15" class="footnote-link">[^15]</a>。
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="p-4 rounded-lg bg-blue-900 bg-opacity-30 dark:bg-blue-900 dark:bg-opacity-30 border border-blue-700 dark:border-blue-800 text-blue-100">
+                <i class="fas fa-lightbulb text-blue-300 mr-2"></i>
+                <strong class="text-blue-50">重要建议：</strong>
+                建议拟上市公司在报告期（IPO申报前三年）全面清理备用金借款，确保无遗留问题，并完善《备用金管理制度》以符合上市合规要求。
+            </div>
+        </section>
+
+        <!-- Footnotes -->
+        <section class="footnotes">
+            <h2 class="text-xl font-bold mb-4 text-zinc-50 dark:text-zinc-200">参考文献</h2>
+            <ol>
+                <li id="footnote-1"><a href="http://www.360doc.com/content/21/0319/21/1331017_967870812.shtml" target="_blank" class="text-blue-400 hover:underline">IPO财务核查之内部控制</a></li>
+                <li id="footnote-2"><a href="http://szzhenxingcpa.com/trainingdetail/311.html" target="_blank" class="text-blue-400 hover:underline">关于IPO财务尽调的25个问题</a></li>
+                <li id="footnote-3"><a href="https://www.deheheng.com/content/31382.html" target="_blank" class="text-blue-400 hover:underline">全面注册制IPO关联方和关联交易的核查要求</a></li>
+                <li id="footnote-4"><a href="http://m.capwhale.com/newsfile/mdetails/20221012/m9ae422e5b6df420386a83b59088dd651.shtml" target="_blank" class="text-blue-400 hover:underline">IPO银行流水核查要点</a></li>
+                <li id="footnote-5"><a href="http://www.360doc.com/content/18/0923/09/41148459_789014564.shtml" target="_blank" class="text-blue-400 hover:underline">拟上市公司IPO内控关注要点</a></li>
+                <li id="footnote-7"><a href="https://zhuanlan.zhihu.com/p/647997411" target="_blank" class="text-blue-400 hover:underline">关联交易在IPO过程中的监管尺度</a></li>
+                <li id="footnote-9"><a href="https://ipo.shangpu-china.com/news/3432.html" target="_blank" class="text-blue-400 hover:underline">IPO流水核查总结</a></li>
+                <li id="footnote-10"><a href="http://docs.static.szse.cn/www/ipo/problems/auditprocess/W020210824389763395359.pdf" target="_blank" class="text-blue-400 hover:underline">首发业务若干问题解答（证监会）</a></li>
+                <li id="footnote-12"><a href="https://ipo.shangpu-china.com/m/news/1838.html" target="_blank" class="text-blue-400 hover:underline">拟上市企业“个人卡”问题详解</a></li>
+                <li id="footnote-14"><a href="https://www.grandwaylaw.com/zhuanyewenzhang/2054.html" target="_blank" class="text-blue-400 hover:underline">IPO律师尽调中的关联交易核查</a></li>
+                <li id="footnote-15"><a href="https://www.financetown.com.cn/arc/17-19048.html" target="_blank" class="text-blue-400 hover:underline">财务内控问题案例解析</a></li>
+                <li id="footnote-16"><a href="https://www.sohu.com/a/212118036_481838" target="_blank" class="text-blue-400 hover:underline">企业上市内控问题分析</a></li>
+                <li id="footnote-20"><a href="http://www.csrc.gov.cn/csrc/c101802/c7118238/content.shtml" target="_blank" class="text-blue-400 hover:underline">监管规则适用指引——发行类第4号</a></li>
+                <li id="footnote-34"><a href="http://www.360doc.com/content/21/0319/21/1331017_967870812.shtml#" target="_blank" class="text-blue-400 hover:underline">北交所上市指引第1号</a></li>
+                <li id="footnote-knowledgebase-1" class="text-zinc-500">诺康达医药案例 (知识库资料，此处为示意)</li>
+                <li id="footnote-knowledgebase-2" class="text-zinc-500">广大特材案例 (知识库资料，此处为示意)</li>
+            </ol>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 px-4 sm:px-6 lg:px-8 bg-zinc-900 dark:bg-zinc-950 text-center text-zinc-400 dark:text-zinc-500 text-sm">
+        <p>&copy; 2023 IPO合规指南. All rights reserved.</p>
+    </footer>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({ startOnLoad: true });
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                htmlElement.classList.add('light');
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Check for saved theme preference or system preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (prefersDark) {
+            setTheme('dark');
+        } else {
+            setTheme('light'); // Default to light if no preference and not dark system
+        }
+
+        // Toggle button event listener
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+            // Re-render Mermaid to apply theme-specific styles
+            mermaid.init();
+        });
+
+        // Optional: Intersection Observer for scroll animations (simple fade-in)
+        const sections = document.querySelectorAll('section');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1 // When 10% of the section is visible
+        };
+
+        const sectionObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up'); // Add an animation class
+                    observer.unobserve(entry.target); // Stop observing once animated
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            section.classList.add('opacity-0', 'translate-y-4', 'transition-all', 'duration-700', 'ease-out');
+            sectionObserver.observe(section);
+        });
+
+        // Add CSS for fade-in-up
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .fade-in-up {
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+```
