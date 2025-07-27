@@ -1,0 +1,584 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO股东合规深度解析：三类股东与有限合伙基金</title>
+    <meta name="description" content="深入解读IPO中三类股东（契约型基金、信托计划、资产管理计划）的最新监管限制，以及未备案有限合伙基金的合规性问题。">
+
+    <!-- Preconnect to Google Fonts and CDN for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC (headings) and Noto Sans SC (body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Base styles, default to dark mode */
+        :root {
+            --color-bg-primary: #1A1A1A;
+            --color-text-primary: #E0E0E0;
+            --color-text-secondary: #A0A0A0;
+            --color-accent: #00BFFF; /* Deep sky blue */
+            --color-card-bg: #2B2B2B;
+            --color-border: #444444;
+            --color-table-header: #3A3A3A;
+            --color-mermaid-bg: #2B2B2B;
+            --color-mermaid-text: #E0E0E0;
+            --color-mermaid-primary-node: #00BFFF;
+            --color-mermaid-secondary-node: #6A5ACD; /* SlateBlue */
+            --color-mermaid-error-node: #DC143C; /* Crimson */
+            --color-mermaid-success-node: #3CB371; /* MediumSeaGreen */
+            --color-mermaid-final-node: #FFD700; /* Gold */
+        }
+
+        /* Light mode overrides */
+        html.light {
+            --color-bg-primary: #F0F2F5;
+            --color-text-primary: #333333;
+            --color-text-secondary: #555555;
+            --color-accent: #1E90FF; /* Dodger blue */
+            --color-card-bg: #FFFFFF;
+            --color-border: #D1D5DB;
+            --color-table-header: #E5E7EB;
+            --color-mermaid-bg: #FFFFFF;
+            --color-mermaid-text: #333333;
+            --color-mermaid-primary-node: #1E90FF;
+            --color-mermaid-secondary-node: #8A2BE2; /* BlueViolet */
+            --color-mermaid-error-node: #FF4500; /* OrangeRed */
+            --color-mermaid-success-node: #228B22; /* ForestGreen */
+            --color-mermaid-final-node: #DAA520; /* Goldenrod */
+        }
+
+        body {
+            font-family: "Noto Sans SC", Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-self;
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            line-height: 1.8;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "Noto Serif SC", serif;
+            color: var(--color-text-primary);
+        }
+
+        a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: var(--color-text-secondary); /* A slightly different hover color for links */
+        }
+
+        /* Custom styles for Hero section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--color-card-bg) 0%, var(--color-bg-primary) 100%);
+            border-bottom: 1px solid var(--color-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
+            opacity: 0.1;
+            filter: blur(80px);
+            animation: pulse 5s infinite alternate;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
+            opacity: 0.1;
+            filter: blur(80px);
+            animation: pulse 6s infinite alternate-reverse;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.8) translate(0, 0); opacity: 0.1; }
+            50% { transform: scale(1.2) translate(10px, 10px); opacity: 0.2; }
+            100% { transform: scale(0.8) translate(0, 0); opacity: 0.1; }
+        }
+
+        /* Card styles */
+        .card {
+            background-color: var(--color-card-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 0.75rem; /* Equivalent to Tailwind's rounded-xl */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Table styles */
+        .styled-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 0.75rem;
+            overflow: hidden; /* Ensures rounded corners apply to content */
+        }
+
+        .styled-table thead th {
+            background-color: var(--color-table-header);
+            color: var(--color-text-primary);
+            padding: 1rem 1.5rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .styled-table tbody tr {
+            background-color: var(--color-card-bg);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .styled-table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        .styled-table tbody td {
+            padding: 1rem 1.5rem;
+            color: var(--color-text-primary);
+        }
+
+        /* First letter styling for paragraphs */
+        p.drop-cap:first-letter {
+            float: left;
+            font-size: 4em; /* Adjust as needed */
+            line-height: 0.8;
+            font-family: "Noto Serif SC", serif;
+            color: var(--color-accent);
+            margin-right: 0.1em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        /* Mermaid container styling */
+        .mermaid {
+            background-color: var(--color-mermaid-bg);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--color-border);
+            overflow-x: auto; /* Enable horizontal scrolling for large diagrams */
+            color: var(--color-mermaid-text); /* Ensure text within mermaid is readable */
+        }
+
+        /* Custom Mermaid styling to match theme */
+        .mermaid svg {
+            font-family: "Noto Sans SC", sans-serif !important;
+        }
+
+        /* Define specific colors for Mermaid nodes/lines based on theme variables */
+        .mermaid .node rect, .mermaid .node circle, .mermaid .node polygon {
+            fill: var(--color-mermaid-secondary-node) !important;
+            stroke: var(--color-mermaid-secondary-node) !important;
+            stroke-width: 2px !important;
+        }
+
+        .mermaid .node.current rect, .mermaid .node.current circle, .mermaid .node.current polygon {
+            fill: var(--color-mermaid-primary-node) !important;
+            stroke: var(--color-mermaid-primary-node) !important;
+        }
+
+        /* Specific node styles from Mermaid graph TD for custom styling */
+        .mermaid .node rect[style*="fill:#f9f"],
+        .mermaid .node rect[style*="fill:%23f9f"] { fill: var(--color-mermaid-secondary-node) !important; stroke: var(--color-mermaid-secondary-node) !important; } /* For C[三类股东] */
+
+        .mermaid .node rect[style*="fill:#bbf"],
+        .mermaid .node rect[style*="fill:%23bbf"] { fill: var(--color-mermaid-primary-node) !important; stroke: var(--color-mermaid-primary-node) !important; } /* For D[其他类型股东] */
+
+        .mermaid .node rect[style*="fill:#fdd"],
+        .mermaid .node rect[style*="fill:%23fdd"] { fill: var(--color-mermaid-error-node) !important; stroke: var(--color-mermaid-error-node) !important; color: var(--color-text-primary) !important;} /* For X (error) nodes */
+
+        .mermaid .node rect[style*="fill:#afa"],
+        .mermaid .node rect[style*="fill:%23afa"] { fill: var(--color-mermaid-success-node) !important; stroke: var(--color-mermaid-success-node) !important; color: var(--color-text-primary) !important;} /* For ✅ (success) nodes */
+
+        .mermaid .node rect[style*="fill:#ffc"],
+        .mermaid .node rect[style*="fill:%23ffc"] { fill: var(--color-mermaid-final-node) !important; stroke: var(--color-mermaid-final-node) !important; color: var(--color-text-primary) !important;} /* For 🚀 (IPO) node */
+
+        .mermaid .node text {
+            fill: var(--color-mermaid-text) !important; /* Text color inside nodes */
+        }
+
+        .mermaid .edgePaths .path {
+            stroke: var(--color-text-secondary) !important; /* Line color */
+        }
+
+        .mermaid .edgeLabels text {
+            fill: var(--color-text-secondary) !important; /* Edge label text color */
+        }
+    </style>
+</head>
+<body class="antialiased flex flex-col min-h-screen">
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" aria-label="Toggle theme" class="fixed top-6 right-6 z-50 p-3 rounded-full shadow-lg transition-all duration-300 ease-in-out hover:scale-105 active:scale-95" style="background-color: var(--color-card-bg); color: var(--color-text-primary); border: 1px solid var(--color-border);">
+        <i class="fas fa-moon text-lg"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <header class="hero-section text-center py-20 px-4">
+        <div class="max-w-4xl mx-auto relative z-10">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 leading-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-blue-600 dark:from-cyan-300 dark:to-teal-500 transition-all duration-300 ease-in-out">
+                <i class="fas fa-chart-line mr-4 opacity-75"></i>IPO股东合规深度解析
+            </h1>
+            <p class="text-xl md:text-2xl font-light text-gray-400 dark:text-gray-300 leading-relaxed mb-8">
+                聚焦三类股东与有限合伙基金：全面注册制下的上市关键考量
+            </p>
+            <p class="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto drop-cap">
+                在全面注册制改革背景下，企业上市对股东结构和合规性的要求日益严格。特别是“三类股东”（契约型基金、信托计划、资产管理计划）和有限合伙基金的适格性，成为IPO审核中的关键环节。本篇深度解析将为您揭示最新监管规则，助您规避潜在上市风险，确保资本之路稳健前行。
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <!-- Left Column - Main Content -->
+        <section class="lg:col-span-2 space-y-12">
+            <!-- IPO对三类股东的限制 -->
+            <article class="card p-8">
+                <h2 class="text-3xl font-semibold mb-6 text-cyan-400 dark:text-cyan-300"><i class="fas fa-ban mr-3 opacity-75"></i>IPO对三类股东的限制</h2>
+                <p class="mb-6 text-gray-400 dark:text-gray-300">
+                    三类股东（契约型基金、信托计划、资产管理计划）在IPO审核中并非绝对禁止，但需满足以下关键限制，否则将构成上市障碍（基于当前监管规则，截至2025年）：
+                </p>
+
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <i class="fas fa-hand-point-right text-accent text-xl mt-1 mr-3 flex-shrink-0"></i>
+                        <div>
+                            <h3 class="text-xl font-medium mb-2 text-text-primary">不得为控股股东/实际控制人/第一大股东</h3>
+                            <p class="text-gray-400 dark:text-gray-300">
+                                发行人控股股东、实际控制人或第一大股东不得为三类股东，否则需清理或调整股权结构（例如华脉泰科曾因三类股东持股比例较高而终止IPO）<a href="http://www.360doc.com/content/17/1210/15/943329_711821714.shtml" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">[3]</a>。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-hand-point-right text-accent text-xl mt-1 mr-3 flex-shrink-0"></i>
+                        <div>
+                            <h3 class="text-xl font-medium mb-2 text-text-primary">必须依法备案并纳入金融监管</h3>
+                            <p class="text-gray-400 dark:text-gray-300">
+                                三类股东需在 **中国证券投资基金业协会（中基协）** 完成备案，其管理人需依法注册登记，并纳入国家金融监管部门（如证监会、银保监会）有效监管<a href="http://www.deheheng.com/content/31026.html" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">[1]</a><a href="https://www.zhonglun.com/research/articles/7468.html" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">[2]</a>。未备案或备案失效的三类股东需整改（如延长存续期或调整结构）。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-hand-point-right text-accent text-xl mt-1 mr-3 flex-shrink-0"></i>
+                        <div>
+                            <h3 class="text-xl font-medium mb-2 text-text-primary">需满足穿透核查要求</h3>
+                            <p class="text-gray-400 dark:text-gray-300">
+                                中介机构必须核查三类股东的最终出资人，确保：不导致股东人数超过200人（穿透后计算）<a href="https://m.caijing.com.cn/api/show?contentid=4306603" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">[5]</a>；不存在规避监管、利益输送或代持问题；发行人的关联方（控股股东、董监高、中介机构）未在三类股东中持有权益<a href="http://www.deheheng.com/content/31026.html" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">[1]</a><a href="https://gdlianyue.com/news_view.php?id=181" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">[4]</a>。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-hand-point-right text-accent text-xl mt-1 mr-3 flex-shrink-0"></i>
+                        <div>
+                            <h3 class="text-xl font-medium mb-2 text-text-primary">锁定期与减持规则合规</h3>
+                            <p class="text-gray-400 dark:text-gray-300">
+                                三类股东需承诺锁定36个月（自上市之日起），且减持行为需符合《减持规则》要求（如不得利用嵌套结构规避）<a href="http://www.deheheng.com/content/31026.html" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">[1]</a><a href="https://zhuanlan.zhihu.com/p/439039587" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">[6]</a>。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-hand-point-right text-accent text-xl mt-1 mr-3 flex-shrink-0"></i>
+                        <div>
+                            <h3 class="text-xl font-medium mb-2 text-text-primary">禁止多层嵌套</h3>
+                            <p class="text-gray-400 dark:text-gray-300">
+                                三类股东的结构需透明，不得存在规避监管的多层嵌套（例如资产管理计划嵌套契约型基金）<a href="https://www.zhonglun.com/research/articles/7468.html" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">[2]</a><a href="https://gdlianyue.com/news_view.php?id=181" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">[4]</a>。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 未备案的有限合伙基金是否属于三类股东？ -->
+            <article class="card p-8">
+                <h2 class="text-3xl font-semibold mb-6 text-cyan-400 dark:text-cyan-300"><i class="fas fa-question-circle mr-3 opacity-75"></i>未备案的有限合伙基金是否属于三类股东？</h2>
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <i class="fas fa-check-circle text-accent text-xl mt-1 mr-3 flex-shrink-0"></i>
+                        <div>
+                            <h3 class="text-xl font-medium mb-2 text-text-primary">有限合伙基金不属于三类股东</h3>
+                            <p class="text-gray-400 dark:text-gray-300">
+                                三类股东特指 **契约型基金、信托计划、资产管理计划** 三种非实体金融载体<a href="http://www.deheheng.com/content/31026.html" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">[1]</a><a href="http://www.360doc.com/content/21/1221/07/70295278_1009634665.shtml" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">[7]</a>。有限合伙基金是依法注册的商事主体（合伙企业），性质不同，不在三类股东范畴内<a href="http://www.360doc.com/content/17/1210/15/943329_711821714.shtml" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">[3]</a><a href="https://zhuanlan.zhihu.com/p/439039587" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">[6]</a>。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-exclamation-triangle text-red-500 text-xl mt-1 mr-3 flex-shrink-0"></i>
+                        <div>
+                            <h3 class="text-xl font-medium mb-2 text-text-primary">但未备案将导致IPO审核风险</h3>
+                            <p class="text-gray-400 dark:text-gray-300">
+                                若有限合伙基金属于私募基金（如从事股权投资），则必须完成中基协备案<a href="http://www.360doc.com/content/17/1210/15/943329_711821714.shtml" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">[3]</a><a href="https://www.lexology.com/library/detail.aspx?g=1ec048ef-f572-4044-881a-b5c4606f969d" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">[8]</a>。未备案的有限合伙基金：被视为“不合规私募基金”，需清理或整改（例如穿透核查出资人或要求退出）<a href="https://www.lexology.com/library/detail.aspx?g=1ec048ef-f572-4044-881a-b5c4606f969d" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">[8]</a>；可能导致股东适格性问题，如无法证明资金来源合法或存在代持风险<a href="https://gdlianyue.com/news_view.php?id=181" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">[4]</a><a href="https://zhuanlan.zhihu.com/p/439039587" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">[6]</a>；知识库案例（华海诚科）中，有限合伙基金（如嘉兴崇山投资合伙企业）均已完成备案（编号SND523），未备案案例会被要求补充核查<a href="https://example.com/knowledge-base" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">[9]</a>。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 总结表格 -->
+            <article class="card p-8">
+                <h2 class="text-3xl font-semibold mb-6 text-cyan-400 dark:text-cyan-300"><i class="fas fa-clipboard-list mr-3 opacity-75"></i>总结概览</h2>
+                <div class="overflow-x-auto">
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th class="w-1/4">问题</th>
+                                <th>关键结论</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-medium text-text-primary">IPO对三类股东限制</td>
+                                <td class="text-gray-400 dark:text-gray-300">需满足：非控股股东 + 合法备案 + 穿透核查 + 锁定期覆盖 + 无嵌套规避监管。</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium text-text-primary">未备案有限合伙性质</td>
+                                <td class="text-gray-400 dark:text-gray-300">不属于三类股东，但若为私募基金则必须备案，否则构成IPO障碍（需清理或穿透处理）。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+
+            <!-- 数据可视化：IPO股东合规路径图 -->
+            <article class="card p-8">
+                <h2 class="text-3xl font-semibold mb-6 text-cyan-400 dark:text-cyan-300"><i class="fas fa-project-diagram mr-3 opacity-75"></i>IPO股东合规路径图</h2>
+                <p class="mb-6 text-gray-400 dark:text-gray-300">通过以下流程图，直观理解不同类型股东在IPO审核中的合规路径及关键审查点。</p>
+                <div class="mermaid-diagram mermaid">
+                    graph TD
+                        A[潜在股东] --> B{是否为契约型/信托/资管计划?};
+                        B -- 是 --> C[三类股东];
+                        B -- 否 --> D[其他类型股东];
+
+                        C --> C1{是控股/实控/第一大股东?};
+                        C1 -- 是 --> C1A[❌ 禁止];
+                        C1 -- 否 --> C2{是否在中基协备案并有效监管?};
+                        C2 -- 否 --> C2A[❌ 需整改/清理];
+                        C2 -- 是 --> C3{是否进行穿透核查 (不超200人, 无关联方)?};
+                        C3 -- 否 --> C3A[❌ 需补正];
+                        C3 -- 是 --> C4{锁定期与减持合规?};
+                        C4 -- 否 --> C4A[❌ 需调整];
+                        C4 -- 是 --> C5{是否存在多层嵌套规避监管?};
+                        C5 -- 是 --> C5A[❌ 需简化/清理];
+                        C5 -- 否 --> C_OK[✅ 三类股东合规];
+
+                        D --> D1{是否为有限合伙基金?};
+                        D1 -- 是 --> D2{有限合伙是否为私募基金?};
+                        D2 -- 否 --> D_Other_OK[✅ 其他有限合伙合规];
+                        D2 -- 是 --> D3{有限合伙是否在中基协备案?};
+                        D3 -- 否 --> D3A[❌ 需备案/清理];
+                        D3 -- 是 --> D_PE_OK[✅ 已备案私募基金合伙合规];
+                        D1 -- 否 --> Other_OK[✅ 其他股东类型合规];
+
+                        C_OK --> IPO[🚀 准备IPO];
+                        D_Other_OK --> IPO;
+                        D_PE_OK --> IPO;
+                        Other_OK --> IPO;
+
+                        style C fill:#00BFFF,stroke:#00BFFF,stroke-width:2px; /* Primary Accent Blue */
+                        style D fill:#6A5ACD,stroke:#6A5ACD,stroke-width:2px; /* Secondary Accent Purple */
+                        style C1A fill:#DC143C,stroke:#DC143C,stroke-width:2px,color:#fff; /* Crimson for Error */
+                        style C2A fill:#DC143C,stroke:#DC143C,stroke-width:2px,color:#fff;
+                        style C3A fill:#DC143C,stroke:#DC143C,stroke-width:2px,color:#fff;
+                        style C4A fill:#DC143C,stroke:#DC143C,stroke-width:2px,color:#fff;
+                        style C5A fill:#DC143C,stroke:#DC143C,stroke-width:2px,color:#fff;
+                        style D3A fill:#DC143C,stroke:#DC143C,stroke-width:2px,color:#fff;
+                        style C_OK fill:#3CB371,stroke:#3CB371,stroke-width:2px,color:#fff; /* MediumSeaGreen for Success */
+                        style D_Other_OK fill:#3CB371,stroke:#3CB371,stroke-width:2px,color:#fff;
+                        style D_PE_OK fill:#3CB371,stroke:#3CB371,stroke-width:2px,color:#fff;
+                        style Other_OK fill:#3CB371,stroke:#3CB371,stroke-width:2px,color:#fff;
+                        style IPO fill:#FFD700,stroke:#FFD700,stroke-width:2px,color:#333; /* Gold for Final */
+                </div>
+            </article>
+
+            <!-- 脚注 -->
+            <section class="card p-8">
+                <h2 class="text-2xl font-semibold mb-4 text-cyan-400 dark:text-cyan-300"><i class="fas fa-info-circle mr-3 opacity-75"></i>脚注</h2>
+                <ol class="list-decimal pl-5 space-y-2 text-gray-400 dark:text-gray-300 text-sm">
+                    <li><a href="http://www.deheheng.com/content/31026.html" target="_blank" rel="noopener noreferrer">联网搜索标题：房立棠、张淼晶：全面注册制下IPO企业“三类股东”问题分析</a>（三类股东定义及核心限制）。</li>
+                    <li><a href="https://www.zhonglun.com/research/articles/7468.html" target="_blank" rel="noopener noreferrer">联网搜索标题：拟科创板IPO企业之员工持股平台形式探析</a>（备案要求及嵌套问题）。</li>
+                    <li><a href="http://www.360doc.com/content/17/1210/15/943329_711821714.shtml" target="_blank" rel="noopener noreferrer">联网搜索标题：证监会对拟IPO公司私募基金股东的审核特点分析</a>（有限合伙非三类股东但需备案）。</li>
+                    <li><a href="https://gdlianyue.com/news_view.php?id=181" target="_blank" rel="noopener noreferrer">联网搜索标题：科创板IPO“三类股东”问题研究</a>（穿透核查及锁定期要求）。</li>
+                    <li><a href="https://m.caijing.com.cn/api/show?contentid=4306603" target="_blank" rel="noopener noreferrer">联网搜索标题：“三类股东”凸显新三板定位之困</a>（股东人数200人限制）。</li>
+                    <li><a href="https://zhuanlan.zhihu.com/p/439039587" target="_blank" rel="noopener noreferrer">联网搜索标题：一文读懂｜国有资本参与私募股权基金的风控要点</a>（备案视为专业投资者）。</li>
+                    <li><a href="http://www.360doc.com/content/21/1221/07/70295278_1009634665.shtml" target="_blank" rel="noopener noreferrer">联网搜索标题：从IPO案例看非挂牌期间形成的“三类股东”的审核松绑</a>（三类股东范围界定）。</li>
+                    <li><a href="https://www.lexology.com/library/detail.aspx?g=1ec048ef-f572-4044-881a-b5c4606f969d" target="_blank" rel="noopener noreferrer">联网搜索标题：2017年首发申请涉及私募基金投资证监会反馈意见分析</a>（未备案风险及清理要求）。</li>
+                    <li><a href="https://example.com/knowledge-base" target="_blank" rel="noopener noreferrer">知识库资料：华海诚科:招股说明书(注册稿)</a>（点击预览：有限合伙基金备案案例及三类股东合规处理）。</li>
+                </ol>
+            </section>
+        </section>
+
+        <!-- Right Column - Sidebar / Supplementary Info -->
+        <aside class="lg:col-span-1 space-y-12">
+            <!-- 核心概念速览 -->
+            <section class="card p-6">
+                <h2 class="text-2xl font-semibold mb-4 text-cyan-400 dark:text-cyan-300"><i class="fas fa-lightbulb mr-3 opacity-75"></i>核心概念速览</h2>
+                <ul class="space-y-3 text-gray-400 dark:text-gray-300 text-base">
+                    <li><strong class="text-text-primary">三类股东:</strong> 指契约型私募基金、资产管理计划和信托计划。</li>
+                    <li><strong class="text-text-primary">有限合伙基金:</strong> 一种企业组织形式，通常用于私募基金投资，具有独立法人地位。</li>
+                    <li><strong class="text-text-primary">中基协备案:</strong> 中国证券投资基金业协会对私募基金及其管理人的登记备案，是合法合规运营的重要标志。</li>
+                    <li><strong class="text-text-primary">穿透核查:</strong> 向上追溯至最终出资人，核查股东人数和资金来源，防止规避监管。</li>
+                    <li><strong class="text-text-primary">多层嵌套:</strong> 通过多级金融产品设立投资，增加复杂性，可能被用于规避监管。</li>
+                </ul>
+            </section>
+
+            <!-- 监管机构 -->
+            <section class="card p-6">
+                <h2 class="text-2xl font-semibold mb-4 text-cyan-400 dark:text-cyan-300"><i class="fas fa-building mr-3 opacity-75"></i>主要监管机构</h2>
+                <ul class="space-y-3 text-gray-400 dark:text-gray-300 text-base">
+                    <li><strong class="text-text-primary">中国证券监督管理委员会 (CSRC):</strong> 负责全国证券期货市场统一监管，制定IPO审核规则。</li>
+                    <li><strong class="text-text-primary">中国证券投资基金业协会 (AMAC):</strong> 行业自律组织，负责私募基金登记备案、行业自律管理。</li>
+                </ul>
+            </section>
+
+            <!-- 延伸阅读 -->
+            <section class="card p-6">
+                <h2 class="text-2xl font-semibold mb-4 text-cyan-400 dark:text-cyan-300"><i class="fas fa-book-reader mr-3 opacity-75"></i>延伸阅读</h2>
+                <ul class="space-y-3 text-gray-400 dark:text-gray-300 text-base">
+                    <li>
+                        <strong class="text-text-primary">《中国证券法》</strong><br>
+                        <span class="text-gray-500 dark:text-gray-400">了解中国证券市场的基本法律框架和原则。</span>
+                    </li>
+                    <li>
+                        <strong class="text-text-primary">《首次公开发行股票并上市管理办法》</strong><br>
+                        <span class="text-gray-500 dark:text-gray-400">详细规定了企业申请IPO的条件、程序和信息披露要求。</span>
+                    </li>
+                    <li>
+                        <strong class="text-text-primary">《私募投资基金监督管理暂行办法》</strong><br>
+                        <span class="text-gray-500 dark:text-gray-400">掌握私募基金的设立、运作、备案等方面的具体规定。</span>
+                    </li>
+                    <li>
+                        <strong class="text-text-primary">《首次公开发行股票并在科创板上市申请文件格式指引》</strong><br>
+                        <span class="text-gray-500 dark:text-gray-400">针对科创板IPO申请文件的具体要求和范本。</span>
+                    </li>
+                    <li>
+                        <strong class="text-text-primary">《证券法实务精要》</strong><br>
+                        <span class="text-gray-500 dark:text-gray-400">一本结合案例分析的证券法实务指南，提供深入的法律解析和操作建议。</span>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-card-bg text-center py-8 px-4 mt-16 border-t border-border">
+        <p class="text-sm text-gray-500 dark:text-gray-400">&copy; 2025 IPO合规研究。所有权利保留。本页面内容仅供参考，不构成法律建议。</p>
+        <div class="mt-4 flex justify-center space-x-6 text-gray-500 dark:text-gray-400">
+            <a href="#" class="hover:text-accent transition-colors duration-200"><i class="fab fa-weibo"></i></a>
+            <a href="#" class="hover:text-accent transition-colors duration-200"><i class="fab fa-weixin"></i></a>
+            <a href="#" class="hover:text-accent transition-colors duration-200"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid configuration
+        mermaid.initialize({
+            startOnLoad: true,
+            themeVariables: {
+                // These variables will be updated dynamically by the JS for dark/light mode
+                background: getComputedStyle(document.documentElement).getPropertyValue('--color-mermaid-bg').trim(),
+                textColor: getComputedStyle(document.documentElement).getPropertyValue('--color-mermaid-text').trim(),
+                primaryColor: getComputedStyle(document.documentElement).getPropertyValue('--color-mermaid-primary-node').trim(),
+                secondaryColor: getComputedStyle(document.documentElement).getPropertyValue('--color-mermaid-secondary-node').trim(),
+                lineColor: getComputedStyle(document.documentElement).getPropertyValue('--color-text-secondary').trim(),
+                // Add more variables as needed to control Mermaid's appearance
+                // based on our CSS variables for errors, success, final nodes, etc.
+                // Note: Mermaid's theme variables are limited, so custom CSS overrides are still necessary.
+            },
+            flowchart: {
+                curve: 'basis' // Smooth curves for flowcharts
+            }
+        });
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                themeToggle.innerHTML = '<i class="fas fa-sun text-lg"></i>'; // Change to sun icon
+            } else {
+                htmlElement.classList.add('light');
+                htmlElement.classList.remove('dark');
+                themeToggle.innerHTML = '<i class="fas fa-moon text-lg"></i>'; // Change to moon icon
+            }
+            localStorage.setItem('theme', theme);
+
+            // Re-render Mermaid to apply new theme variables
+            updateMermaidTheme();
+        }
+
+        // Function to get initial theme
+        function getInitialTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                return savedTheme;
+            }
+            // Check system preference
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        // Apply initial theme on load
+        document.addEventListener('DOMContentLoaded', () => {
+            setTheme(getInitialTheme());
+        });
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = localStorage.getItem('theme');
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        });
+
+        // Function to update Mermaid theme variables dynamically
+        function updateMermaidTheme() {
+            const rootStyles = getComputedStyle(document.documentElement);
+            const mermaidConfig = {
+                themeVariables: {
+                    background: rootStyles.getPropertyValue('--color-mermaid-bg').trim(),
+                    textColor: rootStyles.getPropertyValue('--color-mermaid-text').trim(),
+                    primaryColor: rootStyles.getPropertyValue('--color-mermaid-primary-node').trim(),
+                    secondaryColor: rootStyles.getPropertyValue('--color-mermaid-secondary-node').trim(),
+                    lineColor: rootStyles.getPropertyValue('--color-text-secondary').trim(),
+                },
+                flowchart: { curve: 'basis' }
+            };
+            mermaid.initialize(mermaidConfig); // Re-initialize with new theme variables
+            // Force re-render of existing diagrams
+            const mermaidElements = document.querySelectorAll('.mermaid-diagram');
+            mermaidElements.forEach(el => {
+                const originalContent = el.textContent;
+                el.innerHTML = ''; // Clear content
+                el.textContent = originalContent; // Set content back to trigger re-render
+            });
+        }
+    </script>
+</body>
+</html>
+```
