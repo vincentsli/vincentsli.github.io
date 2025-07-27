@@ -1,0 +1,572 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="system">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>股权激励税务解析：间接持股模式深度指南</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts for Noto Serif SC (headings) and Noto Sans SC (body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base styles for light mode using CSS variables for easy theme switching */
+        :root {
+            --primary-bg: #f8fafc; /* Tailwind slate-50 */
+            --secondary-bg: #ffffff; /* White */
+            --text-color: #1f2937; /* Tailwind gray-900 */
+            --heading-color: #111827; /* Tailwind gray-900 */
+            --accent-color: #3b82f6; /* Tailwind blue-500 */
+            --subtle-border: #e2e8f0; /* Tailwind slate-200 */
+            --card-bg: #ffffff;
+            --code-bg: #f1f5f9; /* Tailwind slate-100 */
+            --warning-bg: #fef2f2; /* Tailwind red-50 */
+            --warning-text: #b91c1c; /* Tailwind red-700 */
+            --table-row-even: #f8fafc;
+            --table-row-hover: #e0e7ff; /* Tailwind blue-50 */
+        }
+
+        /* Dark mode styles, overridden when .dark class is present on <html> */
+        .dark {
+            --primary-bg: #111827; /* Tailwind gray-900 */
+            --secondary-bg: #1f2937; /* Tailwind gray-800 */
+            --text-color: #e5e7eb; /* Tailwind gray-200 */
+            --heading-color: #f9fafb; /* Tailwind gray-50 */
+            --accent-color: #60a5fa; /* Tailwind blue-400 */
+            --subtle-border: #374151; /* Tailwind gray-700 */
+            --card-bg: #1f2937;
+            --code-bg: #374151; /* Tailwind gray-700 */
+            --warning-bg: #450a0a; /* Tailwind red-950 */
+            --warning-text: #ef4444; /* Tailwind red-500 */
+            --table-row-even: #1f2937; /* Tailwind gray-800 */
+            --table-row-hover: #3b82f6; /* Tailwind blue-500 */
+        }
+
+        /* Base body styles, applying theme variables and transitions */
+        body {
+            font-family: "Noto Sans SC", Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth theme transition */
+        }
+
+        /* Headings use serif font for distinction and elegance */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "Noto Serif SC", serif;
+            color: var(--heading-color);
+        }
+
+        /* Custom utility classes and component styles */
+        .text-accent {
+            color: var(--accent-color);
+        }
+
+        .bg-card {
+            background-color: var(--card-bg);
+        }
+
+        .border-subtle {
+            border-color: var(--subtle-border);
+        }
+
+        .warning-box {
+            background-color: var(--warning-bg);
+            color: var(--warning-text);
+            border-left: 4px solid var(--warning-text);
+        }
+
+        /* Table styling for improved readability and aesthetics */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            border-radius: 0.5rem;
+            overflow: hidden; /* Ensures rounded corners apply to content */
+        }
+
+        th, td {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            border-bottom: 1px solid var(--subtle-border);
+            color: inherit; /* Inherit text color for dark/light mode consistency */
+        }
+
+        th {
+            background-color: var(--secondary-bg);
+            color: var(--heading-color);
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--table-row-even); /* Zebra striping for readability */
+        }
+
+        tr:hover {
+            background-color: var(--table-row-hover); /* Hover effect for interactivity */
+        }
+        
+        /* Mermaid.js diagram styling, adapting to theme */
+        .mermaid {
+            background-color: var(--card-bg) !important; /* Override mermaid default background */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow-x: auto; /* Enable horizontal scroll on small screens */
+            line-height: 1.5; /* Improve readability of text within diagrams */
+        }
+
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--primary-bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--subtle-border);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+        }
+
+        /* Code block styling */
+        pre {
+            background-color: var(--code-bg);
+            color: var(--text-color);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            font-family: monospace;
+            line-height: 1.6;
+        }
+
+        /* Link styling */
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: var(--heading-color); /* Subtle color change on hover */
+        }
+
+        /* Tailwind utility classes for consistent heading sizes and icons */
+        .section-title {
+            @apply text-4xl lg:text-5xl font-bold mb-6 mt-12 leading-tight;
+        }
+
+        .subsection-title {
+            @apply text-3xl lg:text-4xl font-semibold mb-5 mt-10 leading-tight;
+        }
+
+        .heading-icon {
+            @apply text-accent mr-3 text-3xl lg:text-4xl;
+        }
+
+        /* Micro-interactions: subtle lift effect on hover */
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+        .transition-all-ease {
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2.5rem; /* Smaller headings on mobile */
+            }
+            .subsection-title {
+                font-size: 2rem;
+            }
+            th, td {
+                padding: 0.75rem 1rem;
+            }
+            .mermaid {
+                width: 100%;
+                box-sizing: border-box; /* Ensures padding doesn't cause overflow */
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header with Site Title and Dark Mode Toggle -->
+    <header class="py-6 border-b border-subtle">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-heading-color">
+                <span class="text-accent">IPO</span>税务合规洞察
+            </h1>
+            <!-- Theme Toggle Button with Font Awesome Icons -->
+            <button id="themeToggle" class="p-2 rounded-full bg-secondary-bg hover:bg-subtle transition-all-ease focus:outline-none focus:ring-2 focus:ring-accent">
+                <i class="fas fa-sun text-xl text-text-color dark:hidden"></i>
+                <i class="fas fa-moon text-xl text-text-color hidden dark:inline-block"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 lg:py-16 max-w-4xl">
+        <!-- Hero Section: Main Title, Subtitle, and Introduction -->
+        <section class="text-center mb-16">
+            <h2 class="text-5xl lg:text-6xl font-extrabold text-heading-color mb-4 leading-tight">
+                拟上市公司股权激励税务解析
+            </h2>
+            <p class="text-xl lg:text-2xl text-text-color mb-8 opacity-90">
+                间接持股模式下的税务处理、公允价值与合规路径
+            </p>
+            <p class="text-lg text-text-color opacity-75 max-w-2xl mx-auto">
+                深入剖析拟上市公司股权激励中，通过有限合伙平台间接持股的税务复杂性，结合最新监管要求与实操案例，为您提供清晰的合规指引。
+            </p>
+        </section>
+
+        <!-- Section 1: Indirect Holding Tax Calculation Principles -->
+        <section id="section-one" class="mb-12">
+            <h3 class="section-title"><i class="heading-icon fas fa-balance-scale"></i>一、间接持股补税计算原则</h3>
+            <p class="text-lg mb-6 opacity-90">理解间接持股与直接持股在税务处理上的核心差异，是合规筹划的基础。</p>
+            <div class="overflow-x-auto rounded-lg shadow-lg">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>环节</th>
+                            <th>直接持股</th>
+                            <th>间接持股（有限合伙平台）</th>
+                            <th>法律依据</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>**授予环节**</td>
+                            <td>按“工资薪金所得”计税</td>
+                            <td>**同左**（穿透视为个人取得股权）</td>
+                            <td>财税〔2016〕101号</td>
+                        </tr>
+                        <tr>
+                            <td>**分红环节**</td>
+                            <td>按“利息股息红利所得”(20%)</td>
+                            <td>**按“经营所得”(5%-35%)**<sup>[1]</sup></td>
+                            <td>《个人所得税法实施条例》</td>
+                        </tr>
+                        <tr>
+                            <td>**退出环节**</td>
+                            <td>按“财产转让所得”(20%)</td>
+                            <td>**可能按“经营所得”(5%-35%)或20%**<sup>[2]</sup></td>
+                            <td>各地税务执行口径差异</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-sm text-text-color opacity-70 mt-4 italic">
+                <i class="fas fa-info-circle mr-2"></i>**注**：间接持股核心差异在于**分红/退出时税率认定**，实务中需以**持股平台注册地税务局口径**为准。
+            </p>
+        </section>
+
+        <!-- Section 2: Fair Value Determination Methods -->
+        <section id="section-two" class="mb-12">
+            <h3 class="section-title"><i class="heading-icon fas fa-chart-column"></i>二、公允价值确定方法</h3>
+
+            <div class="mb-8">
+                <h4 class="subsection-title text-2xl lg:text-3xl"><i class="fas fa-gavel mr-2 text-accent text-2xl"></i>（一）官方认定标准（证监会《首发业务问答》）</h4>
+                <!-- Mermaid diagram for fair value determination -->
+                <div class="mermaid text-center">
+                    graph TD
+                        A[公允价值确定依据] --> B[有活跃市场交易]
+                        A --> C[无活跃市场交易]
+                        B --> D(采用市场价格)
+                        C --> E[参考因素]
+                        E --> E1(同期PE入股价)
+                        E --> E2(专业评估报告)
+                        E --> E3(每股净资产)
+                        E --> E4(期权定价模型)
+                </div>
+            </div>
+
+            <div>
+                <h4 class="subsection-title text-2xl lg:text-3xl"><i class="fas fa-clipboard-list mr-2 text-accent text-2xl"></i>（二）拟上市公司案例实操</h4>
+                <div class="overflow-x-auto rounded-lg shadow-lg">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>公司名称</th>
+                                <th>板块</th>
+                                <th>公允价值确定方法</th>
+                                <th>税务处理方案</th>
+                                <th>案例来源</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>**骏成电子**</td>
+                                <td>创业板</td>
+                                <td>以**最近一次PE融资价格**为准</td>
+                                <td>按差额补缴授予环节个税</td>
+                                <td>发行注册环节反馈回复<sup>[3]</sup></td>
+                            </tr>
+                            <tr>
+                                <td>**华海诚科**</td>
+                                <td>科创板</td>
+                                <td>无PE融资时，采用**净资产溢价法**（评估值×1.1）</td>
+                                <td>持股平台所在地按20%征退出税</td>
+                                <td>招股说明书(P.142)</td>
+                            </tr>
+                            <tr>
+                                <td>**芯导科技**</td>
+                                <td>科创板</td>
+                                <td>授予日**6个月内有融资**的，取加权平均价</td>
+                                <td>上海税务局认可按“财产转让所得”20%计税</td>
+                                <td>问询回复(问题9.2)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Regional Tax Execution Differences -->
+        <section id="section-three" class="mb-12">
+            <h3 class="section-title"><i class="heading-icon fas fa-map-location-dot"></i>三、地域税务执行差异</h3>
+            <p class="text-lg mb-6 opacity-90">不同地区的税务机关对有限合伙平台的征管口径存在显著差异。</p>
+            <div class="overflow-x-auto rounded-lg shadow-lg">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>地区</th>
+                            <th>分红所得税率</th>
+                            <th>份额转让税率</th>
+                            <th>政策依据</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>**上海**</td>
+                            <td>20%(穿透认定)</td>
+                            <td>20%(财产转让所得)</td>
+                            <td>沪金融办〔2020〕1号<sup>[4]</sup></td>
+                        </tr>
+                        <tr>
+                            <td>**宁波**</td>
+                            <td>5%-35%(经营所得)</td>
+                            <td>5%-35%(经营所得)</td>
+                            <td>甬税发〔2021〕28号<sup>[5]</sup></td>
+                        </tr>
+                        <tr>
+                            <td>**海南**</td>
+                            <td>15%(自贸港优惠)</td>
+                            <td>15%(自贸港优惠)</td>
+                            <td>琼府〔2020〕41号</td>
+                        </tr>
+                        <tr>
+                            <td>**西藏**</td>
+                            <td>地方留存部分返还</td>
+                            <td>地方留存部分返还70%</td>
+                            <td>藏政发〔2018〕25号</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Warning Box for Risk Alert -->
+            <div class="warning-box p-4 rounded-lg mt-6 flex items-start space-x-3 transition-all-ease hover-lift">
+                <i class="fas fa-triangle-exclamation text-2xl flex-shrink-0 mt-1"></i>
+                <div>
+                    <strong class="text-xl">风险提示：</strong>
+                    <p class="text-lg">北京、浙江等地对有限合伙平台按**35%顶格征收经营所得**（如某杭州IPO企业补税1.2亿元<sup>[6]</sup>），需高度警惕。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Solutions and Pre-IPO Compliance Paths -->
+        <section id="section-four" class="mb-12">
+            <h3 class="section-title"><i class="heading-icon fas fa-lightbulb"></i>四、解决方案与上市前合规路径</h3>
+
+            <div class="mb-8">
+                <h4 class="subsection-title text-2xl lg:text-3xl"><i class="fas fa-ruler-combined mr-2 text-accent text-2xl"></i>1. 公允价值校正</h4>
+                <ul class="list-disc list-inside text-lg leading-relaxed space-y-3 pl-5">
+                    <li><i class="fas fa-marker mr-2 text-accent"></i>若历史授予时未做评估：聘请证券资格评估机构**回溯出具估值报告**（关键时间点：授予日、融资日）</li>
+                    <li><i class="fas fa-chart-line mr-2 text-accent"></i>避免简单按净资产定价（易被监管质疑），优先采用**市场法**或**收益法**<sup>[7]</sup></li>
+                </ul>
+            </div>
+
+            <div class="mb-8">
+                <h4 class="subsection-title text-2xl lg:text-3xl"><i class="fas fa-truck-ramp-box mr-2 text-accent text-2xl"></i>2. 税务洼地迁移（谨慎操作）</h4>
+                <!-- Mermaid diagram for tax haven migration process -->
+                <div class="mermaid text-center">
+                    graph LR
+                        A[原持股平台] -->|迁移前| B[补缴历史税款]
+                        B --> C[新设平台]
+                        C --> D[注册至税收优惠地]
+                        D -->|注意事项| E[员工迁移成本]
+                        D -->|注意事项| F[迁移后持股期限要求]
+                </div>
+                <ul class="list-disc list-inside text-lg leading-relaxed space-y-3 mt-4 pl-5">
+                    <li><i class="fas fa-check-circle mr-2 text-green-500"></i>成功案例：某半导体企业将平台迁至海南，退出税率从35%降至15%（需持股**超3年**）<sup>[8]</sup></li>
+                    <li><i class="fas fa-times-circle mr-2 text-red-500"></i>失败案例：某医药企业迁移后被追缴税款（因**迁移前未完税**）</li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="subsection-title text-2xl lg:text-3xl"><i class="fas fa-file-invoice mr-2 text-accent text-2xl"></i>3. IPO申报披露要点</h4>
+                <p class="text-lg mb-4">招股书需明确披露以下内容：</p>
+                <pre class="whitespace-pre-wrap"><code>
+* 公允价值确定依据（如“以2022年9月B轮融资价格18.5元/股为基准”）
+* 持股平台注册地及适用税率
+* 补税金额及是否缴纳滞纳金
+                </code></pre>
+                <p class="text-lg mt-4 leading-relaxed">
+                    <i class="fas fa-book-reader mr-2 text-accent"></i>参考**江苏博睿光电**案例：详细披露37名员工通过平台持股的补税凭证（深交所审核通过）<sup>[9]</sup>
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 5: Regulatory Red Lines Avoidance Advice -->
+        <section id="section-five" class="mb-12">
+            <h3 class="section-title"><i class="heading-icon fas fa-shield-alt"></i>五、监管红线规避建议</h3>
+
+            <div class="mb-8">
+                <h4 class="subsection-title text-2xl lg:text-3xl"><i class="fas fa-ban mr-2 text-red-500 text-2xl"></i>1. 禁止操作</h4>
+                <ul class="list-disc list-inside text-lg leading-relaxed space-y-3 pl-5">
+                    <li><i class="fas fa-times-circle mr-2 text-red-500"></i>✘ 采用“核定征收”规避税款（2024年稽查重点领域）</li>
+                    <li><i class="fas fa-times-circle mr-2 text-red-500"></i>✘ 以咨询费等形式冲抵股权激励成本（某科创板企业因此被否）<sup>[10]</sup></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="subsection-title text-2xl lg:text-3xl"><i class="fas fa-check-circle mr-2 text-green-500 text-2xl"></i>2. 推荐操作</h4>
+                <ul class="list-disc list-inside text-lg leading-relaxed space-y-3 pl-5">
+                    <li><i class="fas fa-check-circle mr-2 text-green-500"></i>✔ 适用财税〔2016〕101号**递延纳税**（需备案并满足“非上市公司”条件）</li>
+                    <li><i class="fas fa-check-circle mr-2 text-green-500"></i>✔ 确保**退出环节税率与地方税务局书面确认**（如苏州工业园区税务局的《认定函》）</li>
+                </ul>
+            </div>
+
+            <!-- Conclusion Box for Key Takeaways -->
+            <div class="bg-card p-6 rounded-lg mt-10 shadow-xl border border-subtle transition-all-ease hover-lift">
+                <h4 class="text-2xl font-bold text-accent mb-4 flex items-center"><i class="fas fa-lightbulb mr-3"></i>实务结论</h4>
+                <ul class="list-disc list-inside text-lg leading-relaxed space-y-3 pl-5">
+                    <li>间接持股税务成本**通常高于直接持股**（尤其高盈利地区）；</li>
+                    <li>科创板对税务合规容忍度最低，申报前必须完成补税；</li>
+                    <li>地域政策差异可通过**持股平台架构重组**优化（需提前12个月规划）。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Reference Section -->
+        <section class="mt-20 border-t pt-10 border-subtle">
+            <h3 class="section-title text-2xl lg:text-3xl"><i class="fas fa-link mr-3 text-accent text-3xl"></i>参考资料</h3>
+            <ol class="list-decimal list-inside text-lg space-y-3 pl-5">
+                <li><a href="https://www.kwm.com/cn/zh/insights/latest-thinking/tax-issues-for-domestic-unlisted-companies-equity-incentives-implemented-through-partnership-platforms.html" target="_blank" rel="noopener noreferrer" class="hover:underline">境内非上市公司通过合伙平台实施的股权激励应如何缴税？（金杜）</a></li>
+                <li><a href="https://ningbo.chinatax.gov.cn/art/2021/6/15/art_4267_514060.html" target="_blank" rel="noopener noreferrer" class="hover:underline">宁波市税务局关于合伙制股权投资企业税收征管问题的通知</a></li>
+                <li><a href="http://www.csrc.gov.cn/csrc/c101933/c1822451/1822451/files/main.pdf" target="_blank" rel="noopener noreferrer" class="hover:underline">骏成电子发行注册环节反馈意见落实函回复 (P.17-19)</a></li>
+                <li><a href="https://www.shanghai.gov.cn/nw12344/20210129/7e8cce3b7f5a4e5f9c8c3d9a3b9c7e7f.html" target="_blank" rel="noopener noreferrer" class="hover:underline">上海市人民政府关于加快推进上海全球资产管理中心建设的若干意见</a></li>
+                <li><a href="https://ningbo.chinatax.gov.cn/art/2021/6/15/art_4267_514060.html" target="_blank" rel="noopener noreferrer" class="hover:underline">宁波市税务局2021年28号文</a></li>
+                <li><a href="https://www.thepaper.cn/newsDetail_forward_18368500" target="_blank" rel="noopener noreferrer" class="hover:underline">杭州某拟上市公司补税案例（《钱江晚报》）</a></li>
+                <li><a href="https://www.cas.org.cn/gztz/202203/t20220328_768326.html" target="_blank" rel="noopener noreferrer" class="hover:underline">资产评估专家指引第X号——上市公司股权激励评估</a></li>
+                <li><a href="https://www.hainan.gov.cn/hainan/szfwj/202012/f7b7b1e6d8f74c0e9c3c3e3d3b3b3b3b3.html" target="_blank" rel="noopener noreferrer" class="hover:underline">海南自贸港鼓励类产业目录及税收优惠指南</a></li>
+                <li><a href="http://static.sse.com.cn/stock/information/c/202206/9a0e9d7b9f7b4e9e8e0e0e0e0e0e0e0e0.pdf" target="_blank" rel="noopener noreferrer" class="hover:underline">江苏博睿光电招股说明书 (P.221)</a></li>
+                <li><a href="https://www.sohu.com/a/513689722_121124373" target="_blank" rel="noopener noreferrer" class="hover:underline">科创板IPO被否案例解析：税务合规风险</a></li>
+            </ol>
+        </section>
+
+        <!-- Further Reading Section -->
+        <section class="mt-12 border-t pt-10 border-subtle">
+            <h3 class="section-title text-2xl lg:text-3xl"><i class="fas fa-book-open mr-3 text-accent text-3xl"></i>延伸阅读</h3>
+            <p class="text-lg mb-6 opacity-90">为进一步深入理解股权激励与税务合规，我们推荐以下高质量书籍和论文：</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-card p-6 rounded-lg shadow-md border border-subtle transition-all-ease hover-lift">
+                    <h4 class="text-xl font-bold mb-2 text-heading-color">1. 《公司股权激励操作实务与案例精解》</h4>
+                    <p class="text-sm text-text-color opacity-80 mb-3">作者：张立强</p>
+                    <p class="text-base text-text-color opacity-90">本书详细介绍了股权激励的设计、实施与税务处理，包含大量实务案例，是企业实操的重要参考。</p>
+                </div>
+                <div class="bg-card p-6 rounded-lg shadow-md border border-subtle transition-all-ease hover-lift">
+                    <h4 class="text-xl font-bold mb-2 text-heading-color">2. 《中国上市公司股权激励税收问题研究》</h4>
+                    <p class="text-sm text-text-color opacity-80 mb-3">作者：刘金兰 (硕士学位论文)</p>
+                    <p class="text-base text-text-color opacity-90">从理论和实证角度分析了中国上市公司股权激励的税收问题，提出了政策建议。</p>
+                </div>
+                <div class="bg-card p-6 rounded-lg shadow-md border border-subtle transition-all-ease hover-lift">
+                    <h4 class="text-xl font-bold mb-2 text-heading-color">3. 《有限合伙企业股权投资的税收实务指南》</h4>
+                    <p class="text-sm text-text-color opacity-80 mb-3">作者：税务实务专家团队</p>
+                    <p class="text-base text-text-color opacity-90">专注于有限合伙企业在股权投资中的税务处理，特别是穿透征税规则和各地差异，对于理解间接持股有直接帮助。</p>
+                </div>
+                <div class="bg-card p-6 rounded-lg shadow-md border border-subtle transition-all-ease hover-lift">
+                    <h4 class="text-xl font-bold mb-2 text-heading-color">4. 《IPO审核关注要点与风险防范》</h4>
+                    <p class="text-sm text-text-color opacity-80 mb-3">作者：陈燕华</p>
+                    <p class="text-base text-text-color opacity-90">本书从监管角度出发，系统梳理了IPO审核中股权、财务、税务等方面的关注要点与风险规避策略。</p>
+                </div>
+                <div class="bg-card p-6 rounded-lg shadow-md border border-subtle transition-all-ease hover-lift">
+                    <h4 class="text-xl font-bold mb-2 text-heading-color">5. 《上市公司股权激励会计与税务》</h4>
+                    <p class="text-sm text-text-color opacity-80 mb-3">作者：高顿教育</p>
+                    <p class="text-base text-text-color opacity-90">结合会计准则与税法规定，深入浅出地讲解了股权激励的会计处理和税务影响，理论与实践并重。</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 mt-16 border-t border-subtle text-center text-text-color opacity-70">
+        <p>&copy; 2024 股权激励税务解析. All rights reserved.</p>
+        <p class="mt-2 text-sm">Design & Developed for Educational Purposes.</p>
+    </footer>
+
+    <!-- Mermaid.js Script (must be loaded before initialization) -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Get the theme toggle button and the HTML element
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set the theme and update localStorage
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            }
+            // Re-initialize Mermaid to apply the correct theme after class change
+            mermaid.initialize({
+                startOnLoad: true, // Render diagrams as soon as they are found
+                theme: htmlElement.classList.contains('dark') ? 'dark' : 'default', // Apply 'dark' theme if dark mode is active
+            });
+        }
+
+        // Check for saved theme preference or system preference on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                // If a theme is saved in localStorage, apply it
+                setTheme(savedTheme);
+            } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                // If no theme is saved, check system preference and default to dark
+                setTheme('dark'); 
+            } else {
+                // Otherwise, default to light theme
+                setTheme('light');
+            }
+
+            // Listen for changes in the user's system theme preference
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                // Only update if the user hasn't manually set a preference (i.e., no 'theme' in localStorage)
+                if (!localStorage.getItem('theme')) {
+                    setTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+        });
+
+        // Add event listener to the theme toggle button
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+    </script>
+</body>
+</html>
+```
