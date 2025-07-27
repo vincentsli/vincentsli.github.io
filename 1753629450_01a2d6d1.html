@@ -1,0 +1,615 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>税务洞察：股权激励与个税补缴</title>
+    <meta name="description" content="深度解析股权激励与常规个税补缴的计算方法与注意事项，助您精准税务规划，规避风险。">
+    <meta name="theme-color" content="#18181b"> <!-- Dark mode primary background -->
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC (headings) and Noto Sans SC (body) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+
+    <style>
+        /* Custom Fonts and Fallbacks */
+        body {
+            font-family: "Noto Sans SC", Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-self;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "Noto Serif SC", serif;
+        }
+        /* Dark Mode Specific Styles */
+        html.dark {
+            background-color: #18181b; /* zinc-900 */
+            color: #e4e4e7; /* zinc-200 */
+        }
+        html.dark .text-primary-light { color: #e4e4e7; }
+        html.dark .text-secondary-light { color: #a1a1aa; } /* zinc-400 */
+        html.dark .bg-card-light { background-color: #27272a; } /* zinc-800 */
+        html.dark .border-card-light { border-color: #3f3f46; } /* zinc-700 */
+        html.dark .text-accent-light { color: #34d399; } /* emerald-400 */
+        html.dark .text-accent-alt-light { color: #38bdf8; } /* sky-400 */
+        html.dark .table-header-light { background-color: #3f3f46; } /* zinc-700 */
+
+        /* Light Mode Specific Styles (default Tailwind classes will apply, or override explicitly) */
+        html:not(.dark) {
+            background-color: #ffffff;
+            color: #374151; /* gray-700 */
+        }
+        html:not(.dark) .text-primary-light { color: #1f2937; } /* gray-900 */
+        html:not(.dark) .text-secondary-light { color: #4b5563; } /* gray-600 */
+        html:not(.dark) .bg-card-light { background-color: #f9fafb; } /* gray-50 */
+        html:not(.dark) .border-card-light { border-color: #e5e7eb; } /* gray-200 */
+        html:not(.dark) .text-accent-light { color: #059669; } /* emerald-600 */
+        html:not(.dark) .text-accent-alt-light { color: #0284c7; } /* sky-700 */
+        html:not(.dark) .table-header-light { background-color: #f3f4f6; } /* gray-100 */
+
+        /* General styles for both modes, using Tailwind's `dark:` variant */
+        .mermaid {
+            background-color: var(--tw-bg-card); /* Will be handled by JS dynamic class */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* subtle shadow */
+        }
+        /* Custom variables for theme switching */
+        :root {
+            --tw-bg-primary: #ffffff;
+            --tw-text-primary: #1f2937;
+            --tw-bg-card: #f9fafb;
+            --tw-border-card: #e5e7eb;
+            --tw-text-accent: #059669;
+            --tw-text-accent-alt: #0284c7;
+        }
+        html.dark {
+            --tw-bg-primary: #18181b;
+            --tw-text-primary: #e4e4e7;
+            --tw-bg-card: #27272a;
+            --tw-border-card: #3f3f46;
+            --tw-text-accent: #34d399;
+            --tw-text-accent-alt: #38bdf8;
+        }
+        .bg-primary { background-color: var(--tw-bg-primary); }
+        .text-primary { color: var(--tw-text-primary); }
+        .bg-card { background-color: var(--tw-bg-card); }
+        .border-card { border-color: var(--tw-border-card); }
+        .text-accent { color: var(--tw-text-accent); }
+        .text-accent-alt { color: var(--tw-text-accent-alt); }
+
+        /* Custom styles for code blocks/formulas */
+        .formula-block {
+            background-color: var(--tw-bg-card);
+            padding: 1.25rem;
+            border-radius: 0.5rem;
+            font-family: 'Fira Code', 'JetBrains Mono', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-break: break-all;
+            color: var(--tw-text-accent-alt);
+            border-left: 4px solid var(--tw-text-accent);
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        html.dark .formula-block {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Table specific styling */
+        .data-table th, .data-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--tw-border-card);
+        }
+        .data-table th {
+            background-color: var(--tw-bg-card); /* Use card background for headers */
+            font-weight: 600;
+            color: var(--tw-text-accent);
+        }
+        .data-table tbody tr:nth-child(even) {
+            background-color: rgba(var(--tw-border-card-rgb), 0.2); /* Subtle zebra striping */
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid var(--tw-border-card);
+            border-radius: 0.5rem;
+            overflow: hidden; /* Ensures rounded corners apply to content */
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Callout / Quote Block */
+        .callout {
+            border-left: 4px solid var(--tw-text-accent);
+            padding-left: 1.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--tw-text-primary);
+            background-color: var(--tw-bg-card);
+            padding: 1.25rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        html.dark .callout {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .callout strong {
+            color: var(--tw-text-accent);
+        }
+
+        /* Links with icons */
+        .icon-link {
+            @apply inline-flex items-center space-x-2 text-accent hover:text-accent-alt transition-colors duration-200;
+        }
+        .icon-link svg {
+            @apply w-4 h-4;
+        }
+
+        /* Responsive adjustments for headings */
+        h1 { @apply text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight; }
+        h2 { @apply text-3xl sm:text-4xl font-bold leading-snug pt-8 pb-4; }
+        h3 { @apply text-xl sm:text-2xl font-semibold leading-relaxed pt-6 pb-2; }
+        p { @apply text-base lg:text-lg leading-relaxed mb-4; }
+        li { @apply text-base lg:text-lg leading-relaxed mb-2; }
+
+        /* Mermaid styling override */
+        html.dark .mermaid svg {
+            background-color: #27272a !important; /* zinc-800 */
+            fill: #e4e4e7 !important; /* zinc-200 */
+        }
+        html.dark .mermaid .node rect,
+        html.dark .mermaid .node circle,
+        html.dark .mermaid .node ellipse,
+        html.dark .mermaid .node polygon {
+            stroke: #34d399 !important; /* emerald-400 */
+            fill: #1f2937 !important; /* gray-900 */
+        }
+        html.dark .mermaid .edgePaths .path {
+            stroke: #e4e4e7 !important; /* zinc-200 */
+        }
+        html.dark .mermaid .edgeLabels text {
+            fill: #e4e4e7 !important; /* zinc-200 */
+        }
+        html.dark .mermaid .node text {
+            fill: #e4e4e7 !important; /* zinc-200 */
+        }
+        html.dark .mermaid .cluster rect {
+            fill: #3f3f46 !important; /* zinc-700 */
+            stroke: #a1a1aa !important; /* zinc-400 */
+        }
+        html.dark .mermaid .cluster text {
+            fill: #e4e4e7 !important; /* zinc-200 */
+        }
+
+        /* Light mode Mermaid */
+        html:not(.dark) .mermaid svg {
+            background-color: #f9fafb !important; /* gray-50 */
+            fill: #1f2937 !important; /* gray-900 */
+        }
+        html:not(.dark) .mermaid .node rect,
+        html:not(.dark) .mermaid .node circle,
+        html:not(.dark) .mermaid .node ellipse,
+        html:not(.dark) .mermaid .node polygon {
+            stroke: #059669 !important; /* emerald-600 */
+            fill: #ffffff !important; /* white */
+        }
+        html:not(.dark) .mermaid .edgePaths .path {
+            stroke: #1f2937 !important; /* gray-900 */
+        }
+        html:not(.dark) .mermaid .edgeLabels text {
+            fill: #1f2937 !important; /* gray-900 */
+        }
+        html:not(.dark) .mermaid .node text {
+            fill: #1f2937 !important; /* gray-900 */
+        }
+        html:not(.dark) .mermaid .cluster rect {
+            fill: #e5e7eb !important; /* gray-200 */
+            stroke: #6b7280 !important; /* gray-500 */
+        }
+        html:not(.dark) .mermaid .cluster text {
+            fill: #1f2937 !important; /* gray-900 */
+        }
+    </style>
+</head>
+<body class="bg-primary text-primary transition-colors duration-300">
+
+    <!-- Header & Navigation -->
+    <header class="py-6 border-b border-card-light sticky top-0 z-50 bg-primary shadow-md">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-accent">税务洞察</a>
+            <button id="theme-toggle" aria-label="Toggle theme" class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-accent transition-colors duration-200 hover:bg-card-light">
+                <i class="fas fa-sun text-xl text-primary-light dark:hidden"></i>
+                <i class="fas fa-moon text-xl text-primary-light hidden dark:inline-block"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-zinc-900 to-gray-800 dark:from-zinc-900 dark:to-gray-800 text-white py-20 overflow-hidden md:py-32">
+        <div class="absolute inset-0 opacity-10">
+            <!-- Subtle background pattern or illustration -->
+            <svg class="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+                        <path d="M0 16h32M16 0v32" stroke="currentColor" stroke-width="0.5" fill="none" stroke-opacity="0.2"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid)" />
+            </svg>
+        </div>
+        <div class="max-w-5xl mx-auto px-6 relative z-10 text-center">
+            <h1 class="text-accent-light mb-4 drop-shadow-lg">
+                洞察税务，规避风险
+            </h1>
+            <p class="text-xl sm:text-2xl font-light text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed">
+                深度解析股权激励与个税补缴的计算方法与关键考量
+            </p>
+            <a href="#content-start" class="inline-block bg-accent text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:bg-accent-alt transition-all duration-300 transform hover:scale-105">
+                开始阅读 <i class="fas fa-arrow-down ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="content-start" class="max-w-5xl mx-auto px-6 py-12 lg:py-16">
+
+        <p class="text-primary-light mb-8 italic border-b pb-4 border-card-light">
+            在复杂的税务体系中，精确计算补税金额是企业合规与个人财富管理的关键。本文将根据您的提问背景，特别是针对**拟上市公司员工股权激励持股平台未缴税**这一具体场景，详细阐述补税金额的计算逻辑、公式及操作注意事项，并涵盖常规个人所得税汇算清缴的情况。
+        </p>
+
+        <!-- Section 1: 股权激励场景补税计算 -->
+        <section class="mb-12">
+            <h2 class="text-accent">
+                <i class="fas fa-briefcase text-accent-light mr-3"></i> 一、股权激励场景补税计算 <span class="text-base font-normal text-secondary-light">（核心风险）</span>
+            </h2>
+            <p class="text-secondary-light mb-6">适用于员工通过有限合伙持股平台获得股权但未缴税的情形，需区分**授予环节**和**退出环节**：</p>
+
+            <!-- Sub-section: 授予环节补税 -->
+            <h3 class="text-primary-light">
+                <i class="fas fa-handshake text-accent-alt-light mr-2"></i> （一）授予环节补税（获得合伙份额时）
+            </h3>
+            <p>当员工以低于公允价值的价格获得合伙份额时，差额部分需按**“工资、薪金所得”**补税：</p>
+            <div class="formula-block">
+                <p><code class="text-accent-alt">应纳税所得额</code> = <code class="text-accent">(授予时股权公允价值 - 员工支付价格)</code> × <code class="text-accent">授予股数</code></p>
+                <p><code class="text-accent-alt">补税金额</code> = <code class="text-accent">应纳税所得额</code> × <code class="text-accent">适用税率</code> - <code class="text-accent">速算扣除数</code></p>
+            </div>
+
+            <p class="mt-6 font-semibold">税率表（7级超额累进）：</p>
+            <div class="overflow-x-auto">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>应纳税所得额</th>
+                            <th>税率</th>
+                            <th>速算扣除数</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>≤36,000元</td>
+                            <td>3%</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>36,000元~144,000元</td>
+                            <td>10%</td>
+                            <td>2,520元</td>
+                        </tr>
+                        <tr>
+                            <td>144,000元~300,000元</td>
+                            <td>20%</td>
+                            <td>16,920元</td>
+                        </tr>
+                        <tr>
+                            <td>>300,000元</td>
+                            <td>25%-45%</td>
+                            <td><a href="https://www.chinatax.gov.cn/n810341/n810755/c5142060/content.html" target="_blank" class="text-accent hover:underline">详见个税税率表 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout">
+                <p class="mb-2"><strong><i class="fas fa-calculator mr-2"></i> 示例</strong></p>
+                <p>员工以5元/股获授10万股，授予日公允价值为8元/股，则：</p>
+                <p class="font-mono text-sm leading-snug">
+                    应纳税所得额 = (8-5)×100,000 = 300,000元<br>
+                    补税金额 = 300,000×20% - 16,920 = <strong class="text-lg text-accent">43,080元</strong>
+                </p>
+                <p class="text-sm text-secondary-light mt-2">
+                    <i class="fas fa-info-circle mr-1"></i>（若符合财税〔2016〕101号文条件可递延纳税）
+                </p>
+            </div>
+
+            <!-- Sub-section: 退出环节补税 -->
+            <h3 class="text-primary-light mt-10">
+                <i class="fas fa-chart-line text-accent-alt-light mr-2"></i> （二）退出环节补税（转让合伙份额时）
+            </h3>
+            <p>收益需按**“财产转让所得”**或**“经营所得”**补税：</p>
+            <div class="formula-block">
+                <p><code class="text-accent-alt">补税金额</code> = <code class="text-accent">(转让收入 - 取得成本 - 合理费用)</code> × <code class="text-accent">税率</code></p>
+            </div>
+            <ul class="list-disc list-inside ml-4 mt-4 text-primary-light">
+                <li class="mb-2"><strong class="text-accent-light">若按财产转让所得</strong>：统一适用 <strong class="text-lg">20%</strong> 税率。
+                    <a href="https://www.kwm.com/cn/zh/insights/latest-thinking/tax-issues-for-domestic-unlisted-companies-equity-incentives-implemented-through-partnership-platforms.html" target="_blank" class="icon-link ml-2">
+                        <i class="fas fa-link"></i> 了解更多
+                    </a>
+                </li>
+                <li><strong class="text-accent-light">若按经营所得</strong>：适用5%-35%超额累进税率（通常税务机关优先认定20%）。</li>
+            </ul>
+        </section>
+
+        <!-- Section 2: 常规个税汇算补税 -->
+        <section class="mb-12">
+            <h2 class="text-accent">
+                <i class="fas fa-file-invoice-dollar text-accent-light mr-3"></i> 二、常规个税汇算补税 <span class="text-base font-normal text-secondary-light">（非股权激励）</span>
+            </h2>
+            <p class="text-secondary-light mb-6">适用于年度综合所得汇算清缴（如工资、劳务报酬等）：</p>
+            <div class="formula-block">
+                <code class="text-accent-alt">补税金额</code> = <code class="text-accent">[</code>
+                <code class="text-accent">综合所得收入额</code> - 60,000元 - <code class="text-accent">专项扣除</code> <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <code class="text-accent">专项附加扣除</code> - <code class="text-accent">其他扣除</code>
+                <code class="text-accent">]</code> × <code class="text-accent">税率</code> - <code class="text-accent">速算扣除数</code> - <code class="text-accent">已预缴税额</code>
+            </div>
+
+            <p class="mt-6 font-semibold">关键参数：</p>
+            <ul class="list-disc list-inside ml-4 mt-4 text-primary-light">
+                <li class="mb-2"><strong>综合所得收入额</strong> = 工资薪金 + 劳务报酬×80% + 稿酬×56% + 特许权使用费×80%</li>
+                <li class="mb-2"><strong>专项扣除</strong>：“三险一金”等</li>
+                <li class="mb-2"><strong>专项附加扣除</strong>：子女教育、房贷利息等（最高扣除额详见
+                    <a href="https://www.chinatax.gov.cn/n810341/n810755/c5142060/content.html" target="_blank" class="icon-link">
+                        <i class="fas fa-link"></i> 国税总局说明
+                    </a>
+                    ）
+                </li>
+                <li><strong>税率表</strong>：同股权激励授予环节（3%-45%累进）。
+                    <a href="https://www.gz.gov.cn/zwgk/zdly/jsjf/grsdsyhzczt/content/post_8217850.html" target="_blank" class="icon-link ml-2">
+                        <i class="fas fa-link"></i> 计算公式参考
+                    </a>
+                </li>
+            </ul>
+
+            <div class="callout bg-card-light mt-8">
+                <p class="mb-2"><strong><i class="fas fa-hand-holding-usd mr-2"></i> 免补税情形</strong>（无需操作）：</p>
+                <ul class="list-disc list-inside ml-4 text-primary-light">
+                    <li>年度综合所得 ≤ 12万元</li>
+                    <li>补税金额 ≤ 400元
+                        <a href="https://shanghai.chinatax.gov.cn/zcfw/rdwd/202205/t462819.html" target="_blank" class="icon-link ml-2">
+                            <i class="fas fa-link"></i> 更多信息
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 3: 操作注意事项 -->
+        <section class="mb-12">
+            <h2 class="text-accent">
+                <i class="fas fa-exclamation-triangle text-accent-light mr-3"></i> 三、操作注意事项
+            </h2>
+            <ul class="list-disc list-inside ml-4 mt-4 text-primary-light">
+                <li class="mb-2">
+                    <strong>滞纳金计算</strong>：逾期补税需按日加收 <strong class="text-accent">0.05%滞纳金</strong>（=未缴税款×0.05%×逾期天数）。
+                    <a href="https://www.irs.gov/zh-hans/payments/underpayment-of-estimated-tax-by-individuals-penalty" target="_blank" class="icon-link ml-2">
+                        <i class="fas fa-link"></i> 参考IRS说明
+                    </a>
+                </li>
+                <li class="mb-2">
+                    <strong>证据保存</strong>：
+                    <ul class="list-circle list-inside ml-4 mt-1 text-secondary-light">
+                        <li>股权激励需提供<strong class="text-accent-alt-light">估值报告</strong>（证明公允价值）</li>
+                        <li>常规汇算需留存<strong class="text-accent-alt-light">收入凭证/扣除证明</strong></li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>争议处理</strong>：若对税务认定有异议（如经营所得vs财产转让所得），可申请<strong class="text-accent">行政复议</strong>。
+                    <a href="https://example.com/knowledge-doc7" target="_blank" class="icon-link ml-2">
+                        <i class="fas fa-link"></i> 预览行政复议流程
+                    </a>
+                </li>
+            </ul>
+
+            <div class="callout mt-8">
+                <p class="mb-2">
+                    <strong class="text-accent"><i class="fas fa-lightbulb mr-2"></i> 建议</strong>
+                </p>
+                <p>立即启动税务自查，聘请专业机构核定历史数据。对拟上市公司，建议在IPO申报前6个月完成补税。</p>
+                <a href="https://example.com/knowledge-doc6" target="_blank" class="icon-link mt-2 block">
+                    <i class="fas fa-file-alt"></i> 参考规范整改时限要求
+                </a>
+            </div>
+        </section>
+
+        <!-- Data Visualization Section -->
+        <section class="mb-12">
+            <h2 class="text-accent">
+                <i class="fas fa-project-diagram text-accent-light mr-3"></i> 税务补缴计算流程图
+            </h2>
+            <p class="text-secondary-light mb-6">以下概念关系图展示了不同补税场景及其计算逻辑的概要，帮助您快速理解核心流程。</p>
+            <div class="mermaid-container bg-card rounded-lg p-6 shadow-xl transition-shadow duration-300 hover:shadow-2xl">
+                <pre class="mermaid">
+                    graph TD
+                        A[计算补税金额] --> B{是否涉及股权激励?};
+
+                        B -- 是 --> C[股权激励场景];
+                        C --> C1{获取合伙份额?};
+                        C1 -- 是 --> C2[授予环节补税];
+                        C2 -- 依据 "工资、薪金所得" 计税 --> C3[应纳税所得额 = (公允价值 - 支付价格) x 股数];
+                        C3 --> C4[适用7级超额累进税率];
+
+                        C1 -- 否 --> C5[转让合伙份额?];
+                        C5 -- 是 --> C6[退出环节补税];
+                        C6 --> C7[应纳税所得额 = 转让收入 - 成本 - 费用];
+                        C7 --> C8{税率: "财产转让所得" (20%) 或 "经营所得" (5%-35%)};
+
+                        B -- 否 --> D[常规个税汇算场景];
+                        D --> D1[综合所得收入额];
+                        D1 --> D2[减除各项扣除: 6万/专项/专项附加/其他];
+                        D2 --> D3[计算应纳税所得额];
+                        D3 --> D4[适用7级超额累进税率];
+
+                        C4 & C8 & D4 --> E[减去已预缴税额];
+                        E --> F[得出最终补税金额];
+
+                        F --> G[注意事项];
+                        G --> G1[免补税情形];
+                        G --> G2[滞纳金];
+                        G --> G3[证据保存];
+                        G --> G4[争议处理];
+
+                        style A fill:#34d399,stroke:#059669,stroke-width:2px,color:#fff;
+                        style B fill:#38bdf8,stroke:#0284c7,stroke-width:2px,color:#fff;
+                        style C fill:#a1a1aa,stroke:#71717a,stroke-width:1px;
+                        style D fill:#a1a1aa,stroke:#71717a,stroke-width:1px;
+                        style E fill:#27272a,stroke:#3f3f46,color:#e4e4e7;
+                        style F fill:#34d399,stroke:#059669,stroke-width:2px,color:#fff;
+                        style G fill:#facc15,stroke:#eab308,stroke-width:2px;
+                        classDef highlight fill:#34d399,stroke:#059669,stroke-width:2px,color:#fff;
+                        classDef process fill:#27272a,stroke:#3f3f46,color:#e4e4e7;
+                        classDef decision fill:#38bdf8,stroke:#0284c7,stroke-width:2px,color:#fff;
+                        classDef subcategory fill:#a1a1aa,stroke:#71717a,stroke-width:1px;
+                        classDef important fill:#facc15,stroke:#eab308,stroke-width:2px;
+                        classDef final fill:#34d399,stroke:#059669,stroke-width:2px,color:#fff;
+
+                        class A highlight;
+                        class B decision;
+                        class C subcategory;
+                        class D subcategory;
+                        class C2, C3, C4, C6, C7, C8, D1, D2, D3, D4, E process;
+                        class G important;
+                        class F final;
+                    </pre>
+            </div>
+        </section>
+
+        <!-- Further Reading Section -->
+        <section class="mb-12">
+            <h2 class="text-accent">
+                <i class="fas fa-book-open text-accent-light mr-3"></i> 进一步阅读
+            </h2>
+            <p class="text-secondary-light mb-6">为了更深入地理解税务与股权激励相关知识，我们推荐以下资源：</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Book 1 -->
+                <a href="https://search.cnki.net/Search/Result?base=CPFD&code=CPFD&kw=%E3%80%8A%E4%B8%AD%E5%9B%BD%E7%A8%8E%E6%B3%95%E3%80%8B" target="_blank" class="bg-card-light rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02] border border-card-light">
+                    <h3 class="text-lg font-semibold text-primary-light mb-2"><i class="fas fa-landmark text-accent-alt-light mr-2"></i>《中国税法》</h3>
+                    <p class="text-sm text-secondary-light">系统学习中国税收法律体系的基础读物，全面了解各项税种的法律规定与原理。</p>
+                </a>
+                <!-- Book 2 -->
+                <a href="https://www.chinatax.gov.cn/n810341/n810755/c5142060/content.html" target="_blank" class="bg-card-light rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02] border border-card-light">
+                    <h3 class="text-lg font-semibold text-primary-light mb-2"><i class="fas fa-balance-scale text-accent-alt-light mr-2"></i>《个人所得税法释义》</h3>
+                    <p class="text-sm text-secondary-light">权威解读个人所得税法条文，帮助理解个税征收的具体细则和精神。</p>
+                </a>
+                <!-- Book 3 -->
+                <a href="https://www.amazon.cn/dp/B07L5P2L9L" target="_blank" class="bg-card-light rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02] border border-card-light">
+                    <h3 class="text-lg font-semibold text-primary-light mb-2"><i class="fas fa-hands-helping text-accent-alt-light mr-2"></i>《股权激励实务与案例精解》</h3>
+                    <p class="text-sm text-secondary-light">结合实际案例，深入探讨股权激励方案的设计、实施及税务处理等实务问题。</p>
+                </a>
+                <!-- Resource 4 -->
+                <a href="http://www.chinatax.gov.cn/" target="_blank" class="bg-card-light rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02] border border-card-light">
+                    <h3 class="text-lg font-semibold text-primary-light mb-2"><i class="fas fa-globe-asia text-accent-alt-light mr-2"></i> 国家税务总局官网</h3>
+                    <p class="text-sm text-secondary-light">获取最新税收政策、法规、公告及解读的官方渠道，确保信息准确性。</p>
+                </a>
+                <!-- Resource 5 -->
+                <a href="https://www.kwm.com/cn/zh/insights/latest-thinking/tax-issues-for-domestic-unlisted-companies-equity-incentives-implemented-through-partnership-platforms.html" target="_blank" class="bg-card-light rounded-lg p-6 shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-[1.02] border border-card-light">
+                    <h3 class="text-lg font-semibold text-primary-light mb-2"><i class="fas fa-gavel text-accent-alt-light mr-2"></i> 金杜律师事务所税务洞察</h3>
+                    <p class="text-sm text-secondary-light">知名律所提供的专业税务分析与法律建议，尤其关注股权激励等复杂税务问题。</p>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-card-light text-secondary-light py-8 mt-12 border-t border-card-light">
+        <div class="max-w-5xl mx-auto px-6 text-center text-sm">
+            <p>&copy; 2023 税务洞察. All rights reserved.</p>
+            <p class="mt-2">本页面信息仅供参考，不构成专业税务建议。</p>
+            <div class="flex justify-center space-x-4 mt-4">
+                <a href="#" class="hover:text-primary-light transition-colors duration-200"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="hover:text-primary-light transition-colors duration-200"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="hover:text-primary-light transition-colors duration-200"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base', // Use 'base' to allow custom CSS to take full control
+            themeVariables: {
+                darkMode: document.documentElement.classList.contains('dark')
+            }
+        });
+
+        // Theme Toggle Functionality
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18181b');
+                if (window.mermaid) {
+                    mermaid.initialize({ themeVariables: { darkMode: true } });
+                    mermaid.init(); // Re-render mermaid charts
+                }
+            } else {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff');
+                if (window.mermaid) {
+                    mermaid.initialize({ themeVariables: { darkMode: false } });
+                    mermaid.init(); // Re-render mermaid charts
+                }
+            }
+        }
+
+        // Check for saved theme or system preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light'); // Default to light if no preference and not dark mode system
+        }
+
+        // Toggle button event listener
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Optional: Smooth scroll for hero anchor
+        document.querySelector('a[href="#content-start"]').addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+
+        // Initial render for mermaid after theme is set (important for dynamic themes)
+        window.addEventListener('load', () => {
+            if (window.mermaid) {
+                mermaid.init();
+            }
+        });
+
+    </script>
+</body>
+</html>
+```
