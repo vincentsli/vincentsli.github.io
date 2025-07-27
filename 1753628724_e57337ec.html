@@ -1,0 +1,505 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>股权激励持股平台合规风险与解决方案</title>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC (headings) and Noto Sans SC (body) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <style>
+        /* Custom Fonts & Base Styles */
+        body {
+            font-family: "Noto Sans SC", Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "Noto Serif SC", serif;
+        }
+
+        /* Dark Mode Specific Styles */
+        .dark .bg-gray-900 { background-color: #1a1a2e; } /* Deep dark blue-purple */
+        .dark .bg-gray-950 { background-color: #121223; } /* Even darker for header/footer */
+        .dark .bg-gray-800 { background-color: #24243b; } /* Slightly lighter for cards/sections */
+        .dark .text-gray-200 { color: #e0e0e0; }
+        .dark .text-gray-300 { color: #c0c0c0; }
+        .dark .text-gray-400 { color: #a0a0a0; }
+        .dark .border-gray-700 { border-color: #3b3b5c; }
+
+        /* Accent Colors (Dark Mode) */
+        .dark .text-purple-400 { color: #bb86fc; } /* Main accent for headings */
+        .dark .text-purple-500 { color: #9c27b0; }
+        .dark .text-purple-200 { color: #e7d1ff; }
+        .dark .border-purple-500 { border-color: #9c27b0; }
+
+        .dark .text-red-400 { color: #ef5350; }
+        .dark .text-red-500 { color: #d32f2f; }
+        .dark .border-red-600 { border-color: #d32f2f; }
+
+        .dark .text-green-400 { color: #66bb6a; }
+        .dark .text-green-500 { color: #388e3c; }
+        .dark .border-green-500 { border-color: #388e3c; }
+
+        .dark .text-blue-400 { color: #42a5f5; }
+        .dark .text-blue-500 { color: #1976d2; }
+        .dark .border-blue-500 { border-color: #1976d2; }
+
+        .dark .text-yellow-400 { color: #ffee58; }
+        .dark .text-yellow-500 { color: #fbc02d; }
+        .dark .border-yellow-500 { border-color: #fbc02d; }
+
+        .dark .text-pink-400 { color: #ec407a; }
+        .dark .text-pink-500 { color: #c2185b; }
+        .dark .border-pink-500 { border-color: #c2185b; }
+
+        .dark .text-teal-400 { color: #26a69a; }
+        .dark .text-teal-500 { color: #00897b; }
+        .dark .border-teal-500 { border-color: #00897b; }
+
+        .dark .text-orange-400 { color: #ffa726; }
+        .dark .text-orange-500 { color: #f57c00; }
+        .dark .border-orange-500 { border-color: #f57c00; }
+
+        /* Light Mode Styles (override dark mode defaults) */
+        html.light {
+            --tw-bg-opacity: 1;
+            background-color: rgb(248 250 252 / var(--tw-bg-opacity)); /* bg-blue-50 */
+            color: rgb(15 23 42 / var(--tw-text-opacity)); /* text-slate-900 */
+        }
+        html.light body {
+            background-color: rgb(248 250 252 / var(--tw-bg-opacity));
+            color: rgb(15 23 42 / var(--tw-text-opacity));
+        }
+        html.light .bg-gray-900 { background-color: #ffffff; }
+        html.light .bg-gray-950 { background-color: #f0f0f5; }
+        html.light .bg-gray-800 { background-color: #f9f9ff; }
+        html.light .text-gray-200,
+        html.light .text-gray-300,
+        html.light .text-gray-400,
+        html.light .text-gray-500 { color: #333333; }
+        html.light .border-gray-700 { border-color: #e0e0e0; }
+        html.light .shadow-xl { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+        html.light .shadow-inner { box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); }
+
+        /* Accent Colors (Light Mode) */
+        html.light .text-purple-400 { color: #6d28d9; }
+        html.light .text-purple-500 { color: #4c1d95; }
+        html.light .text-purple-200 { color: #9c66e4; }
+        html.light .border-purple-500 { border-color: #4c1d95; }
+
+        html.light .text-red-400 { color: #dc2626; }
+        html.light .text-red-500 { color: #b91c1c; }
+        html.light .border-red-600 { border-color: #b91c1c; }
+
+        html.light .text-green-400 { color: #22c55e; }
+        html.light .text-green-500 { color: #16a34a; }
+        html.light .border-green-500 { border-color: #16a34a; }
+
+        html.light .text-blue-400 { color: #3b82f6; }
+        html.light .text-blue-500 { color: #2563eb; }
+        html.light .border-blue-500 { border-color: #2563eb; }
+
+        html.light .text-yellow-400 { color: #facc15; }
+        html.light .text-yellow-500 { color: #eab308; }
+        html.light .border-yellow-500 { border-color: #eab308; }
+
+        html.light .text-pink-400 { color: #ec4899; }
+        html.light .text-pink-500 { color: #db2777; }
+        html.light .border-pink-500 { border-color: #db2777; }
+
+        html.light .text-teal-400 { color: #14b8a6; }
+        html.light .text-teal-500 { color: #0d9488; }
+        html.light .border-teal-500 { border-color: #0d9488; }
+
+        html.light .text-orange-400 { color: #f97316; }
+        html.light .text-orange-500 { color: #ea580c; }
+        html.light .border-orange-500 { border-color: #ea580c; }
+
+        /* Mermaid Chart Custom Colors for Dark Mode */
+        .dark .mermaid .node rect,
+        .dark .mermaid .node polygon,
+        .dark .mermaid .node circle,
+        .dark .mermaid .edgePath {
+            fill: var(--mermaid-node-fill, #24243b) !important;
+            stroke: var(--mermaid-node-stroke, #3b3b5c) !important;
+        }
+        .dark .mermaid .node text {
+            fill: #e0e0e0 !important;
+            color: #e0e0e0 !important;
+        }
+        /* Specific Mermaid node styles */
+        .dark .mermaid .node.current-problem rect,
+        .dark .mermaid .node.current-problem polygon { fill: #6A0DAD !important; stroke: #5A0B9D !important; }
+        .dark .mermaid .node.current-problem text { fill: #FFFFFF !important; }
+
+        .dark .mermaid .node.risk rect,
+        .dark .mermaid .node.risk polygon { fill: #DC143C !important; stroke: #B22222 !important; }
+        .dark .mermaid .node.risk text { fill: #FFFFFF !important; }
+
+        .dark .mermaid .node.solution-category rect,
+        .dark .mermaid .node.solution-category polygon { fill: #20B2AA !important; stroke: #008B8B !important; }
+        .dark .mermaid .node.solution-category text { fill: #FFFFFF !important; }
+
+        .dark .mermaid .node.solution-step rect,
+        .dark .mermaid .node.solution-step polygon { fill: #E0E0E0 !important; stroke: #B0B0B0 !important; }
+        .dark .mermaid .node.solution-step text { fill: #333333 !important; }
+        
+        .dark .mermaid .edgePath path { stroke: #888 !important; }
+        .dark .mermaid .edgeLabel { background-color: transparent !important; }
+        .dark .mermaid .edgeLabel text { fill: #a0a0a0 !important; }
+
+        /* Mermaid Chart Custom Colors for Light Mode */
+        html.light .mermaid .node rect,
+        html.light .mermaid .node polygon,
+        html.light .mermaid .node circle,
+        html.light .mermaid .edgePath {
+            fill: #f0f0f5 !important;
+            stroke: #e0e0e0 !important;
+        }
+        html.light .mermaid .node text {
+            fill: #333333 !important;
+            color: #333333 !important;
+        }
+        /* Specific Mermaid node styles for light mode */
+        html.light .mermaid .node.current-problem rect,
+        html.light .mermaid .node.current-problem polygon { fill: #9c66e4 !important; stroke: #8a2be2 !important; }
+        html.light .mermaid .node.current-problem text { fill: #FFFFFF !important; }
+
+        html.light .mermaid .node.risk rect,
+        html.light .mermaid .node.risk polygon { fill: #dc2626 !important; stroke: #b91c1c !important; }
+        html.light .mermaid .node.risk text { fill: #FFFFFF !important; }
+
+        html.light .mermaid .node.solution-category rect,
+        html.light .mermaid .node.solution-category polygon { fill: #14b8a6 !important; stroke: #0d9488 !important; }
+        html.light .mermaid .node.solution-category text { fill: #FFFFFF !important; }
+
+        html.light .mermaid .node.solution-step rect,
+        html.light .mermaid .node.solution-step polygon { fill: #e0e0e0 !important; stroke: #b0b0b0 !important; }
+        html.light .mermaid .node.solution-step text { fill: #333333 !important; }
+
+        html.light .mermaid .edgePath path { stroke: #888 !important; }
+        html.light .mermaid .edgeLabel { background-color: transparent !important; }
+        html.light .mermaid .edgeLabel text { fill: #a0a0a0 !important; }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 antialiased transition-colors duration-300">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="py-4 px-6 md:px-12 flex justify-between items-center bg-gray-950 shadow-lg z-20">
+            <a href="#" class="text-2xl md:text-3xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 hover:opacity-80 transition-opacity duration-200">
+                合规洞察
+            </a>
+            <button id="theme-toggle" aria-label="切换主题" class="p-2 rounded-full hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors duration-300">
+                <i class="fas fa-sun text-yellow-500 text-xl dark:hidden" aria-hidden="true"></i>
+                <i class="fas fa-moon text-blue-300 text-xl hidden dark:inline" aria-hidden="true"></i>
+            </button>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="flex-grow container mx-auto px-4 py-8 md:py-12">
+
+            <!-- Hero Section -->
+            <section class="mb-12 text-center relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 shadow-xl p-8 md:p-16">
+                <div class="absolute inset-0 bg-no-repeat bg-cover bg-center opacity-10" style="background-image: url('https://images.unsplash.com/photo-1549247775-6f17e296a84d?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+                <div class="relative z-10">
+                    <h2 class="text-4xl md:text-6xl font-serif font-extrabold mb-4 leading-tight text-white drop-shadow-lg">
+                        拟上市公司股权激励持股平台<br class="hidden md:block">合规风险与解决方案
+                    </h2>
+                    <p class="text-xl md:text-2xl text-purple-200 mb-6 font-light">应对上市审核挑战的关键策略</p>
+                    <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                        拟上市公司通过有限合伙企业设立员工股权激励持股平台，但激励对象<strong class="text-yellow-400">未完成工商登记</strong>且<strong class="text-yellow-400">未缴纳税款</strong>，存在显著合规风险。本报告将结合最新法规与实务案例，深入剖析风险并提供切实可行的解决方案。
+                    </p>
+                </div>
+            </section>
+
+            <!-- Table of Contents -->
+            <nav class="mb-12 p-6 bg-gray-800 rounded-lg shadow-inner border border-gray-700">
+                <h3 class="text-xl font-serif font-bold mb-4 text-purple-400"><i class="fas fa-list-check mr-2" aria-hidden="true"></i>目录</h3>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-300">
+                    <li><a href="#risks" class="hover:text-purple-300 transition-colors duration-200"><i class="fas fa-exclamation-triangle mr-2 text-red-400" aria-hidden="true"></i>一、主要上市审核风险</a></li>
+                    <li><a href="#solutions" class="hover:text-purple-300 transition-colors duration-200"><i class="fas fa-wrench mr-2 text-green-400" aria-hidden="true"></i>二、解决方案与操作步骤</a></li>
+                    <li><a href="#legal-solution" class="ml-4 hover:text-purple-300 transition-colors duration-200"><i class="fas fa-gavel mr-2 text-blue-400" aria-hidden="true"></i>（一）法律层面：确权与显名化</a></li>
+                    <li><a href="#tax-solution" class="ml-4 hover:text-purple-300 transition-colors duration-200"><i class="fas fa-receipt mr-2 text-yellow-400" aria-hidden="true"></i>（二）税务层面：合规补税</a></li>
+                    <li><a href="#finance-solution" class="ml-4 hover:text-purple-300 transition-colors duration-200"><i class="fas fa-chart-pie mr-2 text-pink-400" aria-hidden="true"></i>（三）财务层面：规范会计处理</a></li>
+                    <li><a href="#procedure-solution" class="ml-4 hover:text-purple-300 transition-colors duration-200"><i class="fas fa-file-invoice mr-2 text-teal-400" aria-hidden="true"></i>（四）程序层面：完善决策与披露</a></li>
+                    <li><a href="#notes" class="hover:text-purple-300 transition-colors duration-200"><i class="fas fa-info-circle mr-2 text-orange-400" aria-hidden="true"></i>三、特别提示</a></li>
+                    <li><a href="#further-reading" class="hover:text-purple-300 transition-colors duration-200"><i class="fas fa-book-open mr-2 text-purple-400" aria-hidden="true"></i>四、延伸阅读</a></li>
+                </ul>
+            </nav>
+
+            <!-- Risks Section -->
+            <section id="risks" class="mb-12">
+                <h3 class="text-3xl md:text-4xl font-serif font-bold mb-8 text-red-400 border-b-2 border-red-500 pb-2"><i class="fas fa-exclamation-triangle mr-3 text-red-500" aria-hidden="true"></i>一、主要上市审核风险</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Risk Card 1 -->
+                    <div class="p-6 bg-gray-800 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-gray-700 hover:border-red-600">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-gavel text-red-400 text-3xl mr-4" aria-hidden="true"></i>
+                            <h4 class="text-xl font-serif font-semibold text-white">1. 股权权属不清晰<span class="text-gray-400 text-base ml-2">(核心法律风险)</span></h4>
+                        </div>
+                        <p class="text-gray-300 leading-relaxed mb-3">激励对象未在有限合伙企业中登记为合伙人，构成 <strong class="text-red-300">“股权代持”或“隐性持股”</strong>。证监会明确要求拟上市公司股权清晰，代持问题可能导致IPO被否<a href="https://example.com/knowledge-doc1" target="_blank" class="text-purple-300 hover:underline ml-1 text-sm font-semibold hover:text-purple-200"><sup>[1]</sup></a><a href="http://www.gongsifa.com/guquan/aritcle268.html" target="_blank" class="text-purple-300 hover:underline ml-1 text-sm font-semibold hover:text-purple-200"><sup>[2]</sup></a>。</p>
+                        <p class="text-gray-400 text-sm italic">风险案例：如未显名登记，离职员工可能主张权益，引发股权纠纷<a href="https://example.com/knowledge-doc2" target="_blank" class="text-purple-300 hover:underline ml-1 text-sm font-semibold hover:text-purple-200"><sup>[3]</sup></a>。</p>
+                    </div>
+                    <!-- Risk Card 2 -->
+                    <div class="p-6 bg-gray-800 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-gray-700 hover:border-red-600">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-receipt text-red-400 text-3xl mr-4" aria-hidden="true"></i>
+                            <h4 class="text-xl font-serif font-semibold text-white">2. 税务合规风险<span class="text-gray-400 text-base ml-2">(重点问询事项)</span></h4>
+                        </div>
+                        <p class="text-gray-300 leading-relaxed mb-3">未缴纳税款违反《个人所得税法》：</p>
+                        <ul class="list-disc list-inside text-gray-300 leading-relaxed mb-3 ml-4">
+                            <li><strong class="text-red-300">授予环节</strong>：激励对象获得合伙份额时，若授予价格低于公允价值，差额需按“工资薪金所得”缴纳个税（税率3%-45%）<a href="https://www.lingdongweilai.com/content/2022081001.html" target="_blank" class="text-purple-300 hover:underline ml-1 text-sm font-semibold hover:text-purple-200"><sup>[4]</sup></a>。</li>
+                            <li><strong class="text-red-300">退出环节</strong>：未来转让合伙份额时，收益可能被认定为“经营所得”（税率5%-35%）或“财产转让所得”（税率20%），未申报将面临补缴、滞纳金及处罚<a href="https://www.junhe.com/download?filePath=/upload/law-reviews/72c29a4b6fb714748c68b4535f56186e.pdf" target="_blank" class="text-purple-300 hover:underline ml-1 text-sm font-semibold hover:text-purple-200"><sup>[5]</sup></a><a href="https://www.kwm.com/cn/zh/insights/latest-thinking/tax-issues-for-domestic-unlisted-companies-equity-incentives-implemented-through-partnership-platforms.html" target="_blank" class="text-purple-300 hover:underline ml-1 text-sm font-semibold hover:text-purple-200"><sup>[6]</sup></a>。</li>
+                        </ul>
+                        <p class="text-gray-400 text-sm italic">实务中：税务部门可能追缴历史税款，并质疑公司内控有效性<a href="https://www.shui5.cn/article/c2/49847.html" target="_blank" class="text-purple-300 hover:underline ml-1 text-sm font-semibold hover:text-purple-200"><sup>[7]</sup></a>。</p>
+                    </div>
+                    <!-- Risk Card 3 -->
+                    <div class="p-6 bg-gray-800 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-gray-700 hover:border-red-600">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-chart-pie text-red-400 text-3xl mr-4" aria-hidden="true"></i>
+                            <h4 class="text-xl font-serif font-semibold text-white">3. 股份支付处理瑕疵<span class="text-gray-400 text-base ml-2">(财务风险)</span></h4>
+                        </div>
+                        <p class="text-gray-300 leading-relaxed mb-3">若未按会计准则确认股份支付费用，可能虚增报告期利润，导致财报重大调整<a href="https://example.com/knowledge-doc3" target="_blank" class="text-purple-300 hover:underline ml-1 text-sm font-semibold hover:text-purple-200"><sup>[8]</sup></a>。</p>
+                        <p class="text-gray-400 text-sm italic">监管要求：科创板/创业板问询中，90%以上企业因此被问询<a href="https://www.shui5.cn/article/c5/113375.html" target="_blank" class="text-purple-300 hover:underline ml-1 text-sm font-semibold hover:text-purple-200"><sup>[9]</sup></a>。</p>
+                    </div>
+                    <!-- Risk Card 4 -->
+                    <div class="p-6 bg-gray-800 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-gray-700 hover:border-red-600">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-user-secret text-red-400 text-3xl mr-4" aria-hidden="true"></i>
+                            <h4 class="text-xl font-serif font-semibold text-white">4. 利益输送嫌疑<span class="text-gray-400 text-base ml-2">(诚信风险)</span></h4>
+                        </div>
+                        <p class="text-gray-300 leading-relaxed mb-3">若部分激励对象为实控人亲友或外部人员，可能被质疑损害公司利益<a href="https://www.dehenglaw.com/CN/tansuocontent/0008/025877/7.aspx?MID=0902&AID=" target="_blank" class="text-purple-300 hover:underline ml-1 text-sm font-semibold hover:text-purple-200"><sup>[10]</sup></a>。</p>
+                        <p class="text-gray-400 text-sm italic">案例：某IPO因非员工持股未充分披露被否。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Data Visualization Section -->
+            <section class="mb-12 p-6 bg-gray-800 rounded-lg shadow-xl border border-gray-700">
+                <h3 class="text-3xl md:text-4xl font-serif font-bold mb-8 text-purple-400 border-b-2 border-purple-500 pb-2"><i class="fas fa-sitemap mr-3 text-purple-500" aria-hidden="true"></i>风险与解决方案全景图</h3>
+                <div class="mermaid text-center text-gray-200 p-4 rounded-lg bg-gray-900 border border-gray-700">
+                    graph TD
+                        A[当前问题: 未登记/未缴税]:::current-problem --> B{上市审核风险};
+                        B --> B1[股权权属不清晰]:::risk;
+                        B --> B2[税务合规风险]:::risk;
+                        B --> B3[股份支付瑕疵]:::risk;
+                        B --> B4[利益输送嫌疑]:::risk;
+
+                        B1 --> C1[法律层面: 确权与显名化]:::solution-category;
+                        B2 --> C2[税务层面: 合规补税]:::solution-category;
+                        B3 --> C3[财务层面: 规范会计处理]:::solution-category;
+                        B4 --> C4[程序层面: 完善决策与披露]:::solution-category;
+
+                        C1 --> D1[补办工商登记]:::solution-step;
+                        C1 --> D2[清理代持关系]:::solution-step;
+
+                        C2 --> D3[自查补缴历史税款]:::solution-step;
+                        C2 --> D4[未来税务规划]:::solution-step;
+
+                        C3 --> D5[追溯确认股份支付]:::solution-step;
+
+                        C4 --> D6[内部程序补正]:::solution-step;
+                        C4 --> D7[IPO披露要点]:::solution-step;
+
+                        classDef current-problem fill:#6A0DAD,stroke:#5A0B9D,stroke-width:2px,color:#FFF;
+                        classDef risk fill:#DC143C,stroke:#B22222,stroke-width:2px,color:#FFF;
+                        classDef solution-category fill:#20B2AA,stroke:#008B8B,stroke-width:2px,color:#FFF;
+                        classDef solution-step fill:#E0E0E0,stroke:#B0B0B0,color:#333;
+                </div>
+            </section>
+
+            <!-- Solutions Section -->
+            <section id="solutions" class="mb-12">
+                <h3 class="text-3xl md:text-4xl font-serif font-bold mb-8 text-green-400 border-b-2 border-green-500 pb-2"><i class="fas fa-wrench mr-3 text-green-500" aria-hidden="true"></i>二、解决方案与操作步骤</h3>
+
+                <div class="space-y-10">
+                    <!-- Legal Section -->
+                    <div id="legal-solution" class="bg-gray-800 p-8 rounded-xl shadow-xl border border-gray-700 hover:shadow-2xl transition-shadow duration-300">
+                        <h4 class="text-2xl md:text-3xl font-serif font-bold mb-6 text-blue-400"><i class="fas fa-gavel mr-3 text-blue-500" aria-hidden="true"></i>（一）法律层面：确权与显名化</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="p-5 bg-gray-900 rounded-lg border border-gray-700 hover:border-blue-500 transition-colors duration-200">
+                                <h5 class="text-xl font-semibold text-white mb-3"><i class="fas fa-user-tie mr-2 text-blue-400" aria-hidden="true"></i>1. 补办工商登记</h5>
+                                <p class="text-gray-300 leading-relaxed">立即将激励对象登记为有限合伙企业合伙人，完善合伙协议和出资证明，确保权属清晰<a href="https://www.jingtian.com/Content/2025/04-14/1721375620.html" target="_blank" class="text-purple-300 hover:underline ml-1 text-sm font-semibold hover:text-purple-200"><sup>[11]</sup></a>。</p>
+                                <p class="text-gray-400 text-sm italic mt-2">若涉及离职员工，需按约定回购份额并办理变更登记<a href="https://example.com/knowledge-doc2" target="_blank" class="text-purple-300 hover:underline ml-1 text-sm font-semibold hover:text-purple-200"><sup>[3]</sup></a>。</p>
+                            </div>
+                            <div class="p-5 bg-gray-900 rounded-lg border border-gray-700 hover:border-blue-500 transition-colors duration-200">
+                                <h5 class="text-xl font-semibold text-white mb-3"><i class="fas fa-unlink mr-2 text-blue-400" aria-hidden="true"></i>2. 清理代持关系</h5>
+                                <p class="text-gray-300 leading-relaxed">出具《代持情况说明》，由所有激励对象确认权属，并公证留存，彻底消除代持隐患<a href="https://www.hanshenglaw.cn/CN/08/293a3b0550f386c5.aspx" target="_blank" class="text-purple-300 hover:underline ml-1 text-sm font-semibold hover:text-purple-200"><sup>[13]</sup></a>。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tax Section -->
+                    <div id="tax-solution" class="bg-gray-800 p-8 rounded-xl shadow-xl border border-gray-700 hover:shadow-2xl transition-shadow duration-300">
+                        <h4 class="text-2xl md:text-3xl font-serif font-bold mb-6 text-yellow-400"><i class="fas fa-receipt mr-3 text-yellow-500" aria-hidden="true"></i>（二）税务层面：合规补税</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="p-5 bg-gray-900 rounded-lg border border-gray-700 hover:border-yellow-500 transition-colors duration-200">
+                                <h5 class="text-xl font-semibold text-white mb-3"><i class="fas fa-dollar-sign mr-2 text-yellow-400" aria-hidden="true"></i>1. 自查补缴历史税款</h5>
+                                <p class="text-gray-300 leading-relaxed">聘请税务机构核定<strong class="text-yellow-300">授予时公允价值</strong>，按“工资薪金所得”补缴个税（差额部分），并争取适用分期缴纳政策<a href="https://www.sundiallawfirm.com/en/zhuanlan/497.html" target="_blank" class="text-purple-300 hover:underline ml-1 text-sm font-semibold hover:text-purple-200"><sup>[14]</sup></a>。</p>
+                                <p class="text-gray-400 text-sm italic mt-2">依据：财税〔2016〕101号文允许非上市公司股权激励递延纳税，但需备案<a href="https://www.allbrightlaw.com/CN/10475/ad1c1f460f5d309b.aspx" target="_blank" class="text-purple-300 hover:underline ml-1 text-sm font-semibold hover:text-purple-200"><sup>[15]</sup></a><a href="https://www.hankunlaw.com/portal/article/index/cid/8/id/14118.html" target="_blank" class="text-purple-300 hover:underline ml-1 text-sm font-semibold hover:text-purple-200"><sup>[16]</sup></a>。</p>
+                            </div>
+                            <div class="p-5 bg-gray-900 rounded-lg border border-gray-700 hover:border-yellow-500 transition-colors duration-200">
+                                <h5 class="text-xl font-semibold text-white mb-3"><i class="fas fa-chart-line mr-2 text-yellow-400" aria-hidden="true"></i>2. 未来税务规划</h5>
+                                <p class="text-gray-300 leading-relaxed">持股平台退出时，优先适用“财产转让所得”（20%税率），需提前设计交易结构。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Financial Section -->
+                    <div id="finance-solution" class="bg-gray-800 p-8 rounded-xl shadow-xl border border-gray-700 hover:shadow-2xl transition-shadow duration-300">
+                        <h4 class="text-2xl md:text-3xl font-serif font-bold mb-6 text-pink-400"><i class="fas fa-chart-pie mr-3 text-pink-500" aria-hidden="true"></i>（三）财务层面：规范会计处理</h4>
+                        <div class="grid grid-cols-1 gap-6">
+                            <div class="p-5 bg-gray-900 rounded-lg border border-gray-700 hover:border-pink-500 transition-colors duration-200">
+                                <h5 class="text-xl font-semibold text-white mb-3"><i class="fas fa-calculator mr-2 text-pink-400" aria-hidden="true"></i>1. 追溯确认股份支付</h5>
+                                <p class="text-gray-300 leading-relaxed">对历史激励重新测算股份支付费用，按服务期分摊计入管理费用<a href="https://example.com/knowledge-doc3" target="_blank" class="text-purple-300 hover:underline ml-1 text-sm font-semibold hover:text-purple-200"><sup>[8]</sup></a>。</p>
+                                <p class="text-gray-400 text-sm italic mt-2">案例参考：首次授予日至IPO申报日超过3年的，费用可分3年摊销<a href="https://www.shui5.cn/article/c5/113375.html" target="_blank" class="text-purple-300 hover:underline ml-1 text-sm font-semibold hover:text-purple-200"><sup>[17]</sup></a>。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Procedural Section -->
+                    <div id="procedure-solution" class="bg-gray-800 p-8 rounded-xl shadow-xl border border-gray-700 hover:shadow-2xl transition-shadow duration-300">
+                        <h4 class="text-2xl md:text-3xl font-serif font-bold mb-6 text-teal-400"><i class="fas fa-file-invoice mr-3 text-teal-500" aria-hidden="true"></i>（四）程序层面：完善决策与披露</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="p-5 bg-gray-900 rounded-lg border border-gray-700 hover:border-teal-500 transition-colors duration-200">
+                                <h5 class="text-xl font-semibold text-white mb-3"><i class="fas fa-clipboard-list mr-2 text-teal-400" aria-hidden="true"></i>1. 内部程序补正</h5>
+                                <p class="text-gray-300 leading-relaxed">召开股东大会追认股权激励计划的合法性，并制定《股权激励管理制度》<a href="https://example.com/knowledge-doc5" target="_blank" class="text-purple-300 hover:underline ml-1 text-sm font-semibold hover:text-purple-200"><sup>[18]</sup></a>。</p>
+                            </div>
+                            <div class="p-5 bg-gray-900 rounded-lg border border-gray-700 hover:border-teal-500 transition-colors duration-200">
+                                <h5 class="text-xl font-semibold text-white mb-3"><i class="fas fa-magnifying-glass-chart mr-2 text-teal-400" aria-hidden="true"></i>2. IPO披露要点</h5>
+                                <p class="text-gray-300 leading-relaxed">招股书需详细披露持股平台背景、激励对象、税务补缴、股份支付等情况，确保信息透明<a href="https://www.huiyelaw.com/news-3004.html" target="_blank" class="text-purple-300 hover:underline ml-1 text-sm font-semibold hover:text-purple-200"><sup>[19]</sup></a>。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Special Notes Section -->
+            <section id="notes" class="mb-12 p-8 bg-gray-800 rounded-xl shadow-xl border border-gray-700">
+                <h3 class="text-3xl md:text-4xl font-serif font-bold mb-8 text-orange-400 border-b-2 border-orange-500 pb-2"><i class="fas fa-info-circle mr-3 text-orange-500" aria-hidden="true"></i>三、特别提示</h3>
+                <ul class="list-disc list-inside space-y-4 text-gray-300 text-lg">
+                    <li class="relative pl-6">
+                        <span class="absolute left-0 top-0 text-orange-400"><i class="fas fa-clock" aria-hidden="true"></i></span>
+                        <strong class="text-white">时间窗口：</strong>需在IPO申报基准日前6个月完成整改<a href="https://example.com/knowledge-doc6" target="_blank" class="text-purple-300 hover:underline ml-1 text-sm font-semibold hover:text-purple-200"><sup>[20]</sup></a>。
+                    </li>
+                    <li class="relative pl-6">
+                        <span class="absolute left-0 top-0 text-orange-400"><i class="fas fa-handshake" aria-hidden="true"></i></span>
+                        <strong class="text-white">中介协调：</strong>保荐机构需对股权清晰性、税务合规性发表明确意见<a href="https://www.junhe.com/legal-updates/1889?locale=zh" target="_blank" class="text-purple-300 hover:underline ml-1 text-sm font-semibold hover:text-purple-200"><sup>[21]</sup></a>。
+                    </li>
+                </ul>
+                <p class="mt-8 text-gray-300 text-lg leading-relaxed border-t border-gray-700 pt-6">
+                    <i class="fas fa-lightbulb mr-2 text-yellow-400" aria-hidden="true"></i>建议立即启动整改，避免因历史问题延误上市进程。具体操作需结合公司所在地税务政策（如海南/横琴的税收优惠）及最新监管口径调整。
+                </p>
+            </section>
+
+            <!-- Further Reading Section -->
+            <section id="further-reading" class="mb-12 p-8 bg-gray-800 rounded-xl shadow-xl border border-gray-700">
+                <h3 class="text-3xl md:text-4xl font-serif font-bold mb-8 text-purple-400 border-b-2 border-purple-500 pb-2"><i class="fas fa-book-open mr-3 text-purple-500" aria-hidden="true"></i>四、延伸阅读</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-5 bg-gray-900 rounded-lg border border-gray-700 hover:border-purple-500 transition-colors duration-200">
+                        <h5 class="text-xl font-semibold text-white mb-2"><i class="fas fa-book mr-2 text-purple-400" aria-hidden="true"></i>《上市公司股权激励实务》</h5>
+                        <p class="text-gray-300 text-sm">深入剖析股权激励的法规、模式、实施与管理，为企业提供全面指导。</p>
+                    </div>
+                    <div class="p-5 bg-gray-900 rounded-lg border border-gray-700 hover:border-purple-500 transition-colors duration-200">
+                        <h5 class="text-xl font-semibold text-white mb-2"><i class="fas fa-file-contract mr-2 text-purple-400" aria-hidden="true"></i>《IPO实务操作指南》</h5>
+                        <p class="text-gray-300 text-sm">涵盖IPO全流程的法律、财务、审核要点，是拟上市公司的必备参考。</p>
+                    </div>
+                    <div class="p-5 bg-gray-900 rounded-lg border border-gray-700 hover:border-purple-500 transition-colors duration-200">
+                        <h5 class="text-xl font-semibold text-white mb-2"><i class="fas fa-chart-bar mr-2 text-purple-400" aria-hidden="true"></i>《企业财务报表分析与风险识别》</h5>
+                        <p class="text-gray-300 text-sm">帮助理解股份支付等会计处理对财务报表的影响及风险识别。</p>
+                    </div>
+                    <div class="p-5 bg-gray-900 rounded-lg border border-gray-700 hover:border-purple-500 transition-colors duration-200">
+                        <h5 class="text-xl font-semibold text-white mb-2"><i class="fas fa-stamp mr-2 text-purple-400" aria-hidden="true"></i>《税务稽查应对与风险管理》</h5>
+                        <p class="text-gray-300 text-sm">提供税务合规策略，尤其针对股权激励等高风险业务的稽查应对。</p>
+                    </div>
+                    <div class="p-5 bg-gray-900 rounded-lg border border-gray-700 hover:border-purple-500 transition-colors duration-200">
+                        <h5 class="text-xl font-semibold text-white mb-2"><i class="fas fa-network-wired mr-2 text-purple-400" aria-hidden="true"></i>《公司法实务精要》</h5>
+                        <p class="text-gray-300 text-sm">理解股权架构、合伙企业法律性质及相关公司治理基础。</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-950 py-8 px-4 md:px-12 text-center text-gray-500 text-sm border-t border-gray-800">
+            <p>&copy; 2025 合规洞察. 版权所有.</p>
+            <p class="mt-2">免责声明：本页面内容仅供参考，不构成专业法律或税务建议。</p>
+        </footer>
+    </div>
+
+    <!-- Mermaid.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const htmlElement = document.documentElement;
+
+            // Function to set theme
+            const setTheme = (theme) => {
+                if (theme === 'dark') {
+                    htmlElement.classList.add('dark');
+                    htmlElement.classList.remove('light');
+                } else {
+                    htmlElement.classList.add('light');
+                    htmlElement.classList.remove('dark');
+                }
+                localStorage.setItem('theme', theme);
+
+                // Update Mermaid theme configuration
+                mermaid.initialize({
+                    startOnLoad: true,
+                    theme: htmlElement.classList.contains('dark') ? 'dark' : 'default',
+                    securityLevel: 'loose', // Necessary for external links in diagrams if any
+                });
+
+                // Re-render all existing Mermaid diagrams
+                document.querySelectorAll('.mermaid').forEach(div => {
+                    const svgCode = div.innerHTML; // Store original SVG for restoration if needed
+                    const graphDefinition = div.textContent; // Get the original graph definition
+
+                    // Clear existing SVG
+                    div.innerHTML = ''; 
+
+                    // Render with new theme
+                    mermaid.render('mermaid-svg-' + Math.random().toString(36).substring(7), graphDefinition, (svg) => {
+                        div.innerHTML = svg;
+                    });
+                });
+            };
+
+            // Check stored theme or system preference on load
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme('dark');
+            } else {
+                setTheme('light');
+            }
+
+            // Toggle theme on button click
+            themeToggleBtn.addEventListener('click', () => {
+                const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+                setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+            });
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+```
