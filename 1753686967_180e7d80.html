@@ -1,0 +1,413 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>证券研究所与投行协作可行性分析：合规与实践</title>
+    <meta name="description" content="深入解读证券行业信息隔离墙制度，分析证券研究所为投行客户提供行业报告的合规路径与风险。">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+
+    <style>
+        /* Custom Fonts & Fallbacks */
+        .font-serif-sc {
+            font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Hiragino Serif GB', 'Songti SC', serif;
+        }
+        .font-sans-sc {
+            font-family: 'Noto Sans SC', 'Source Han Sans SC', 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', 'Droid Sans Fallback', sans-serif;
+        }
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            @apply bg-gray-900 text-gray-200; /* Default Dark Mode */
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        body.light {
+            @apply bg-white text-gray-800;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+            @apply text-white; /* Headings white in dark mode */
+        }
+        body.light h1, body.light h2, body.light h3, body.light h4, body.light h5, body.light h6 {
+            @apply text-gray-900; /* Headings dark in light mode */
+        }
+
+        /* Custom styles for better readability and aesthetics */
+        .container {
+            max-width: 960px; /* Max width for content */
+        }
+        .section-separator {
+            @apply w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full my-12;
+        }
+        .card {
+            @apply bg-gray-800 bg-opacity-70 rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1;
+        }
+        .light .card {
+            @apply bg-gray-100 bg-opacity-70 shadow-md;
+        }
+        .mermaid {
+            @apply bg-gray-800 p-4 rounded-lg shadow-inner;
+            overflow-x: auto; /* Ensure horizontal scroll for small screens */
+        }
+        .light .mermaid {
+            @apply bg-gray-50;
+        }
+
+        /* Mermaid theming (important for dark mode) */
+        .mermaid-diagram text {
+            fill: #e2e8f0 !important; /* light grey text */
+        }
+        .mermaid-diagram .node rect, .mermaid-diagram .node circle, .mermaid-diagram .node polygon {
+            fill: #374151 !important; /* dark grey background for nodes */
+            stroke: #60a5fa !important; /* blue border */
+        }
+        .mermaid-diagram .node text {
+            fill: #e2e8f0 !important;
+        }
+        .mermaid-diagram .edgePaths .path {
+            stroke: #a78bfa !important; /* purple line */
+        }
+        .mermaid-diagram .edgeLabels text {
+            fill: #e2e8f0 !important;
+        }
+        .mermaid-diagram .node.hover {
+            stroke: #a78bfa !important;
+            stroke-width: 2px !important;
+        }
+        /* Light mode mermaid adjustments */
+        body.light .mermaid-diagram text {
+            fill: #374151 !important; /* dark grey text */
+        }
+        body.light .mermaid-diagram .node rect, body.light .mermaid-diagram .node circle, body.light .mermaid-diagram .node polygon {
+            fill: #e2eeef !important; /* light background for nodes */
+            stroke: #3b82f6 !important; /* blue border */
+        }
+        body.light .mermaid-diagram .node text {
+            fill: #374151 !important;
+        }
+        body.light .mermaid-diagram .edgePaths .path {
+            stroke: #8b5cf6 !important; /* purple line */
+        }
+        body.light .mermaid-diagram .edgeLabels text {
+            fill: #374151 !important;
+        }
+        body.light .mermaid-diagram .node.hover {
+            stroke: #8b5cf6 !important;
+            stroke-width: 2px !important;
+        }
+
+        /* Custom list styling */
+        .custom-list li {
+            position: relative;
+            padding-left: 1.75rem; /* Space for the icon */
+            margin-bottom: 0.75rem;
+        }
+        .custom-list li::before {
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 0.1rem; /* Adjust vertical alignment */
+            color: #60a5fa; /* Blue icon */
+        }
+        body.light .custom-list li::before {
+            color: #3b82f6; /* Lighter blue icon */
+        }
+        .custom-list.check li::before { content: "\f00c"; } /* Check mark */
+        .custom-list.ban li::before { content: "\f05e"; color: #ef4444; } /* Ban circle */
+        body.light .custom-list.ban li::before { color: #dc2626; } /* Lighter red */
+        .custom-list.lightbulb li::before { content: "\f0eb"; } /* Lightbulb */
+
+        /* Footnotes styling */
+        .footnote-link {
+            @apply text-blue-400 hover:text-blue-300 transition-colors duration-200;
+        }
+        .light .footnote-link {
+            @apply text-blue-600 hover:text-blue-700;
+        }
+        .footnote-list {
+            @apply text-sm text-gray-400;
+        }
+        .light .footnote-list {
+            @apply text-gray-600;
+        }
+        .footnote-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2.25rem; /* text-4xl on small screens */
+            }
+            .hero-subtitle {
+                font-size: 1.25rem; /* text-xl on small screens */
+            }
+        }
+    </style>
+</head>
+<body class="dark" x-data="{ darkMode: localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) }"
+      x-init="$watch('darkMode', val => {
+          if (val) {
+              document.body.classList.add('dark');
+              document.body.classList.remove('light');
+              localStorage.setItem('theme', 'dark');
+          } else {
+              document.body.classList.add('light');
+              document.body.classList.remove('dark');
+              localStorage.setItem('theme', 'light');
+          }
+      });
+      if (darkMode) {
+          document.body.classList.add('dark');
+          document.body.classList.remove('light');
+      } else {
+          document.body.classList.add('light');
+          document.body.classList.remove('dark');
+      }
+      Mermaid.initialize({ startOnLoad: true, theme: darkMode ? 'dark' : 'default', flowchart: { curve: 'basis' } });"
+>
+
+    <!-- Theme Toggle Button -->
+    <div class="fixed top-4 right-4 z-50">
+        <button @click="darkMode = !darkMode"
+                class="p-3 rounded-full bg-gray-700 text-gray-200 shadow-lg hover:scale-105 transition-transform duration-200
+                       dark:bg-gray-800 dark:text-gray-200
+                       light:bg-gray-100 light:text-gray-800">
+            <template x-if="darkMode">
+                <i class="fas fa-sun"></i> <!-- Sun icon for light mode -->
+            </template>
+            <template x-if="!darkMode">
+                <i class="fas fa-moon"></i> <!-- Moon icon for dark mode -->
+            </template>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative bg-gradient-to-br from-gray-900 via-gray-900 to-black text-white py-24 px-4 overflow-hidden shadow-2xl">
+        <!-- Subtle pattern overlay -->
+        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/black-linen.png')]"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-900 to-purple-900 opacity-20 z-0"></div>
+
+        <div class="container mx-auto relative z-10 text-center">
+            <h1 class="font-serif-sc text-5xl md:text-6xl font-bold leading-tight mb-4 tracking-wide hero-title animate-fade-in-up">
+                证券研究所能否为投行客户撰写报告？
+            </h1>
+            <p class="font-sans-sc text-xl md:text-2xl text-blue-300 mb-8 hero-subtitle animate-fade-in-up delay-200">
+                合规与实践：信息隔离墙下的可行性分析
+            </p>
+            <p class="font-sans-sc text-lg max-w-3xl mx-auto opacity-90 animate-fade-in-up delay-400">
+                深入解读当前证券行业监管规则，分析同一证券公司内研究部门与投行部门协作的边界与路径，为您揭示防火墙制度下的合规智慧。
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-16">
+        <section class="mb-16">
+            <h2 class="font-serif-sc text-3xl md:text-4xl font-bold mb-8 text-center text-blue-400 light:text-blue-700 animate-fade-in">
+                核心问题概述
+            </h2>
+            <p class="font-sans-sc text-lg leading-relaxed mb-6 text-center max-w-4xl mx-auto">
+                根据当前证券行业监管规则及实务操作，同一家证券公司的研究所<strong class="text-green-400 light:text-green-600">可以</strong>为投行部门的客户（拟上市公司）提供深度行业研究报告或定制报告，但需严格遵守<strong class="text-purple-400 light:text-purple-600">信息隔离墙制度</strong>和<strong class="text-purple-400 light:text-purple-600">利益冲突管理要求</strong>。以下将进行具体分析：
+            </p>
+            <div class="section-separator mx-auto"></div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="font-serif-sc text-3xl md:text-4xl font-bold mb-8 text-center text-blue-400 light:text-blue-700 animate-fade-in">
+                <i class="fas fa-shield-alt text-blue-500 mr-3"></i>监管框架与操作可行性
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="card animate-fade-in-left">
+                    <h3 class="font-serif-sc text-2xl font-semibold mb-4 text-blue-300 light:text-blue-600">
+                        1. 防火墙制度要求 <i class="fas fa-lock ml-2 text-blue-500"></i>
+                    </h3>
+                    <ul class="custom-list check text-base leading-relaxed">
+                        <li>根据《证券公司和证券投资基金管理公司合规管理办法》第23条及《证券公司信息隔离墙制度指引》规定：
+                            <ul class="ml-6 mt-2 list-disc list-inside">
+                                <li>证券公司需在投行（卖方）与研究（买方）部门之间设立信息隔离墙，防止内幕交易和利益输送<sup class="ml-1"><a href="#footnote-1" class="footnote-link">[1]</a></sup>。</li>
+                                <li><strong class="text-green-400 light:text-green-600">允许跨部门协作</strong>，但须履行<strong class="text-purple-400 light:text-purple-600">跨墙审批程序</strong>，确保敏感信息不泄露<sup class="ml-1"><a href="#footnote-2" class="footnote-link">[2]</a></sup>。</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card animate-fade-in-right">
+                    <h3 class="font-serif-sc text-2xl font-semibold mb-4 text-blue-300 light:text-blue-600">
+                        2. 实务操作中的合规路径 <i class="fas fa-code-branch ml-2 text-blue-500"></i>
+                    </h3>
+                    <ul class="custom-list check text-base leading-relaxed">
+                        <li><strong class="text-yellow-300 light:text-yellow-600">深度行业报告</strong>：研究所可基于<strong class="text-green-400 light:text-green-600">公开信息</strong>撰写行业分析（如市场趋势、技术发展），不涉及拟上市公司未公开数据，<strong class="text-green-400 light:text-green-600">无需跨墙</strong><sup class="ml-1"><a href="#footnote-3" class="footnote-link">[3]</a></sup>。</li>
+                        <li><strong class="text-yellow-300 light:text-yellow-600">定制报告</strong>：若内容需结合客户特定需求（如行业定位分析），必须：
+                            <ul class="ml-6 mt-2 list-decimal list-inside">
+                                <li>由投行部门发起<strong class="text-purple-400 light:text-purple-600">跨墙申请</strong>，经合规部门审批；</li>
+                                <li>限制报告仅包含<strong class="text-green-400 light:text-green-600">已公开信息</strong>，避免引用投行项目敏感数据；</li>
+                                <li>报告发布前需经<strong class="text-purple-400 light:text-purple-600">合规审核</strong>并标注“本报告不构成投资建议”<sup class="ml-1"><a href="#footnote-4" class="footnote-link">[4]</a></sup>。</li>
+                            </ul>
+                        </li>
+                        <li><strong class="text-yellow-300 light:text-yellow-600">典型案例</strong>：东吴证券研究所为地方政府提供定制化行业报告，长江证券通过内部路演机制将研究转化为投行支持（2024年内部路演超300次）<sup class="ml-1"><a href="#footnote-5" class="footnote-link">[5]</a><a href="#footnote-6" class="footnote-link">[6]</a></sup>。</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="section-separator mx-auto"></div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="font-serif-sc text-3xl md:text-4xl font-bold mb-8 text-center text-red-400 light:text-red-700 animate-fade-in">
+                <i class="fas fa-exclamation-triangle text-red-500 mr-3"></i>限制与风险提示
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="card animate-fade-in-left">
+                    <h3 class="font-serif-sc text-2xl font-semibold mb-4 text-red-300 light:text-red-600">
+                        1. 禁止行为 <i class="fas fa-ban ml-2 text-red-500"></i>
+                    </h3>
+                    <ul class="custom-list ban text-base leading-relaxed">
+                        <li>研究报告<strong class="text-red-400 light:text-red-600">不得包含拟上市公司的未公开财务数据、业务进展或发行方案</strong>，否则涉嫌内幕交易<sup class="ml-1"><a href="#footnote-7" class="footnote-link">[7]</a></sup>。</li>
+                        <li>不得通过报告为投行项目<strong class="text-red-400 light:text-red-600">变相抬高估值或引导市场预期</strong>（如新股投价报告需独立撰写）<sup class="ml-1"><a href="#footnote-8" class="footnote-link">[8]</a></sup>。</li>
+                    </ul>
+                </div>
+
+                <div class="card animate-fade-in-right">
+                    <h3 class="font-serif-sc text-2xl font-semibold mb-4 text-red-300 light:text-red-600">
+                        2. 违规后果 <i class="fas fa-gavel ml-2 text-red-500"></i>
+                    </h3>
+                    <p class="text-base leading-relaxed">
+                        若未履行跨墙程序或泄露敏感信息，证券公司可能被证监会采取监管措施（如出具警示函、暂停业务资格）<sup class="ml-1"><a href="#footnote-9" class="footnote-link">[9]</a></sup>。
+                    </p>
+                </div>
+            </div>
+            <div class="section-separator mx-auto"></div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="font-serif-sc text-3xl md:text-4xl font-bold mb-8 text-center text-blue-400 light:text-blue-700 animate-fade-in">
+                <i class="fas fa-lightbulb text-yellow-400 mr-3"></i>实务建议
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="card animate-fade-in-left">
+                    <h3 class="font-serif-sc text-2xl font-semibold mb-4 text-blue-300 light:text-blue-600">
+                        1. 操作流程可视化 <i class="fas fa-sitemap ml-2 text-blue-500"></i>
+                    </h3>
+                    <div class="mermaid-diagram text-sm">
+                        <pre class="mermaid text-center">
+                            graph LR
+                            A[投行提出定制需求] --&gt; B{合规部门跨墙审批}
+                            B --&gt; C{内容审查}
+                            C --&gt;|公开信息| D[研究所撰写报告]
+                            C --&gt;|涉密信息| E[终止或脱敏处理]
+                            D --&gt; F{合规复核}
+                            F --&gt; G[交付客户]
+                        </pre>
+                    </div>
+                    <p class="font-sans-sc text-sm text-gray-400 mt-4 italic">
+                        <i class="fas fa-info-circle mr-1"></i>此流程图清晰展示了合规框架下的报告撰写路径，核心在于"合规部门跨墙审批"和"内容审查"。
+                    </p>
+                </div>
+
+                <div class="card animate-fade-in-right">
+                    <h3 class="font-serif-sc text-2xl font-semibold mb-4 text-blue-300 light:text-blue-600">
+                        2. 替代方案 <i class="fas fa-exchange-alt ml-2 text-blue-500"></i>
+                    </h3>
+                    <p class="text-base leading-relaxed mb-4">
+                        若合规成本过高或存在其他顾虑，可建议客户考虑以下替代方案：
+                    </p>
+                    <ul class="custom-list lightbulb text-base leading-relaxed">
+                        <li>购买第三方独立机构（如专业咨询公司）的行业研究报告。</li>
+                        <li>由研究所发布<strong class="text-green-400 light:text-green-600">非定制化行业报告</strong>，客户自行参考公开内容<sup class="ml-1"><a href="#footnote-10" class="footnote-link">[10]</a></sup>。</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="section-separator mx-auto"></div>
+        </section>
+
+        <section class="mb-16 text-center animate-fade-in">
+            <h2 class="font-serif-sc text-4xl md:text-5xl font-bold mb-6 text-green-400 light:text-green-700">
+                <i class="fas fa-check-circle mr-3"></i>结论
+            </h2>
+            <p class="font-sans-sc text-2xl md:text-3xl font-semibold leading-relaxed max-w-4xl mx-auto text-yellow-300 light:text-yellow-600">
+                <strong class="text-green-400 light:text-green-600">允许且常见</strong>，但必须通过跨墙机制严格控制信息流，确保报告内容限于公开信息且经合规审核。实践中，约60%的头部券商通过此模式服务投行客户<sup class="ml-1"><a href="#footnote-6" class="footnote-link">[6]</a></sup>。
+            </p>
+        </section>
+
+        <!-- Footnotes -->
+        <section class="mb-16 pt-8 border-t border-gray-700 light:border-gray-300 animate-fade-in">
+            <h3 class="font-serif-sc text-2xl font-semibold mb-6 text-blue-400 light:text-blue-700">
+                <i class="fas fa-asterisk text-blue-500 mr-2"></i>参考资料
+            </h3>
+            <ol class="footnote-list">
+                <li id="footnote-1"><sup>[1]</sup> 《证券公司信息隔离墙制度指引》第12条，中国证券业协会，2010年</li>
+                <li id="footnote-2"><sup>[2]</sup> 知识库资料《投资银行业务管理委员会公文处理工作指引》第94页明确规定："证券研究人员为公司投资银行项目撰写投资价值研究报告需履行跨墙审批程序"</li>
+                <li id="footnote-3"><sup>[3]</sup> 联网搜索：长江证券建立研究业务与自营、资管部门的实时沟通机制，<a href="https://m.cls.cn/detail/2022651" target="_blank" rel="noopener noreferrer" class="footnote-link">财联社｜券商卖方研究转型布局方向</a></li>
+                <li id="footnote-4"><sup>[4]</sup> 知识库资料《投资银行业务管理委员会公文处理工作指引》附录模板："向研究发展部申请行业研究服务需明确用途及信息范围"</li>
+                <li id="footnote-5"><sup>[5]</sup> 联网搜索：东吴证券研究所服务案例，<a href="http://stcn.com/article/detail/898184.html" target="_blank" rel="noopener noreferrer" class="footnote-link">证券时报网｜东吴证券研究所服务模式</a></li>
+                <li id="footnote-6"><sup>[6]</sup> 联网搜索：长江证券内部协作数据，<a href="https://news.qq.com/rain/a/20250505A0609800" target="_blank" rel="noopener noreferrer" class="footnote-link">腾讯新闻｜券商研究转型实践</a></li>
+                <li id="footnote-7"><sup>[7]</sup> 《证券法》第54条，禁止利用未公开信息交易</li>
+                <li id="footnote-8"><sup>[8]</sup> 《发布证券研究报告暂行规定》第6条，防范利益冲突</li>
+                <li id="footnote-9"><sup>[9]</sup> 证监会2024年典型案例通报（行政处罚决定书〔2024〕35号）</li>
+                <li id="footnote-10"><sup>[10]</sup> 知识库资料《IPO月度动态（2023年5月）》："拟上市公司可参考独立行业研究"</li>
+            </ol>
+        </section>
+
+        <!-- Further Reading -->
+        <section class="pt-8 border-t border-gray-700 light:border-gray-300 animate-fade-in">
+            <h3 class="font-serif-sc text-2xl font-semibold mb-6 text-blue-400 light:text-blue-700">
+                <i class="fas fa-book-open text-purple-500 mr-2"></i>延伸阅读
+            </h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card p-5">
+                    <h4 class="font-serif-sc text-xl font-semibold text-blue-300 light:text-blue-600 mb-2">《证券法》解读与案例分析</h4>
+                    <p class="text-sm text-gray-400 light:text-gray-600 mb-3">深入理解中国证券市场的法律基石，掌握证券发行、交易及监管的最新法规和典型案例。</p>
+                    <a href="#" class="text-blue-400 hover:text-blue-300 light:text-blue-600 light:hover:text-blue-700 transition-colors duration-200 text-sm italic"><i class="fas fa-external-link-alt mr-1"></i>了解更多</a>
+                </div>
+                <div class="card p-5">
+                    <h4 class="font-serif-sc text-xl font-semibold text-blue-300 light:text-blue-600 mb-2">中国证券市场发展报告（年度）</h4>
+                    <p class="text-sm text-gray-400 light:text-gray-600 mb-3">权威机构发布的年度报告，全面反映中国证券市场的宏观趋势、政策变化与行业发展动态。</p>
+                    <a href="#" class="text-blue-400 hover:text-blue-300 light:text-blue-600 light:hover:text-blue-700 transition-colors duration-200 text-sm italic"><i class="fas fa-external-link-alt mr-1"></i>了解更多</a>
+                </div>
+                <div class="card p-5">
+                    <h4 class="font-serif-sc text-xl font-semibold text-blue-300 light:text-blue-600 mb-2">金融机构合规管理</h4>
+                    <p class="text-sm text-gray-400 light:text-gray-600 mb-3">探讨金融机构内部合规体系的构建与运营，涵盖风险识别、内控机制及监管应对策略。</p>
+                    <a href="#" class="text-blue-400 hover:text-blue-300 light:text-blue-600 light:hover:text-blue-700 transition-colors duration-200 text-sm italic"><i class="fas fa-external-link-alt mr-1"></i>了解更多</a>
+                </div>
+                <div class="card p-5">
+                    <h4 class="font-serif-sc text-xl font-semibold text-blue-300 light:text-blue-600 mb-2">投资银行学：理论与实践</h4>
+                    <p class="text-sm text-gray-400 light:text-gray-600 mb-3">全面介绍投资银行业务的核心理论与操作实践，包括IPO、并购重组、估值等关键环节。</p>
+                    <a href="#" class="text-blue-400 hover:text-blue-300 light:text-blue-600 light:hover:text-blue-700 transition-colors duration-200 text-sm italic"><i class="fas fa-external-link-alt mr-1"></i>了解更多</a>
+                </div>
+                <div class="card p-5">
+                    <h4 class="font-serif-sc text-xl font-semibold text-blue-300 light:text-blue-600 mb-2">信息隔离墙：金融合规的基石</h4>
+                    <p class="text-sm text-gray-400 light:text-gray-600 mb-3">深度解析金融领域信息隔离墙的设立原则、操作细节及其在防范内幕交易中的关键作用。</p>
+                    <a href="#" class="text-blue-400 hover:text-blue-300 light:text-blue-600 light:hover:text-blue-700 transition-colors duration-200 text-sm italic"><i class="fas fa-external-link-alt mr-1"></i>了解更多</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 text-gray-500 text-center py-8 px-4 mt-16 shadow-inner light:bg-gray-100">
+        <p class="text-sm">&copy; 2024 证券行业合规洞察. All rights reserved.</p>
+        <p class="text-xs mt-2">免责声明：本页面内容仅供参考，不构成任何投资或法律建议。</p>
+    </footer>
+
+    <!-- Alpine.js for theme toggle -->
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initial Mermaid config for dynamic theme switching
+        // This part is handled by Alpine.js x-init to ensure theme is applied on load
+        // and also when darkMode state changes.
+    </script>
+</body>
+</html>
+```
