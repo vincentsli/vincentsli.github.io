@@ -1,0 +1,544 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蓝箭航天IPO深度分析：竞品视角与市场解读</title>
+    <meta name="description" content="深入分析蓝箭航天IPO辅导备案对商业航天行业的影响，从竞品视角解读核心关注点与未来趋势。">
+
+    <!-- Google Fonts for Noto Serif SC and Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+
+    <style>
+        /* Custom Fonts (Chinese fallback included) */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', serif;
+        }
+
+        /* Dark mode styles */
+        html.dark body {
+            background-color: #1a1a2e; /* Deep dark blue */
+            color: #e0e0e0;
+        }
+        html.dark .text-primary { color: #8c9eff; } /* Lighter blue for primary elements */
+        html.dark .text-secondary { color: #e0e0e0; }
+        html.dark .bg-card { background-color: #2a2a4a; } /* Slightly lighter dark for cards */
+        html.dark .border-card { border-color: #3f3f6f; }
+        html.dark .bg-accent { background-color: #8c9eff; } /* Accent background */
+        html.dark .text-accent { color: #8c9eff; } /* Accent text */
+        html.dark .hero-overlay { background-color: rgba(26, 26, 46, 0.7); /* Darker overlay for hero */ }
+        html.dark .details-summary {
+            background-color: #34345c;
+            color: #d0d0d0;
+        }
+        html.dark .details-content {
+            background-color: #2a2a4a;
+            border-color: #3f3f6f;
+        }
+        html.dark .mermaid {
+            background-color: #2a2a4a;
+            border: 1px solid #3f3f6f;
+            color: #e0e0e0; /* Default text color for Mermaid elements */
+        }
+        /* Override Mermaid default colors for dark theme if needed */
+        html.dark .mermaid .node rect, html.dark .mermaid .node circle, html.dark .mermaid .node polygon {
+            fill: #3a3a60;
+            stroke: #8c9eff;
+        }
+        html.dark .mermaid .node text {
+            fill: #e0e0e0;
+        }
+        html.dark .mermaid .edgePath .path {
+            stroke: #8c9eff;
+        }
+        html.dark .mermaid .edgeLabel text {
+            fill: #c0c0c0;
+        }
+
+        /* Light mode styles */
+        html.light body {
+            background-color: #f0f2f5; /* Light grey */
+            color: #333333;
+        }
+        html.light .text-primary { color: #2c3e50; } /* Dark blue for primary elements */
+        html.light .text-secondary { color: #555555; }
+        html.light .bg-card { background-color: #ffffff; }
+        html.light .border-card { border-color: #e0e0e0; }
+        html.light .bg-accent { background-color: #4a90e2; }
+        html.light .text-accent { color: #4a90e2; }
+        html.light .hero-overlay { background-color: rgba(255, 255, 255, 0.7); }
+        html.light .details-summary {
+            background-color: #eef2f6;
+            color: #333333;
+        }
+        html.light .details-content {
+            background-color: #ffffff;
+            border-color: #e0e0e0;
+        }
+        html.light .mermaid {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            color: #333333;
+        }
+        /* Override Mermaid default colors for light theme */
+        html.light .mermaid .node rect, html.light .mermaid .node circle, html.light .mermaid .node polygon {
+            fill: #f0f2f5;
+            stroke: #4a90e2;
+        }
+        html.light .mermaid .node text {
+            fill: #333333;
+        }
+        html.light .mermaid .edgePath .path {
+            stroke: #4a90e2;
+        }
+        html.light .mermaid .edgeLabel text {
+            fill: #555555;
+        }
+
+
+        /* General styles for hover effects */
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+        }
+        .details-summary {
+            cursor: pointer;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease-in-out;
+            display: flex;
+            align-items: center;
+        }
+        .details-summary:hover {
+            opacity: 0.9;
+        }
+        .details-content {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-width: 1px;
+            margin-top: -0.5rem; /* Overlap with summary for visual continuity */
+            padding-top: 1.5rem; /* Add padding to compensate for overlap */
+        }
+        .details-icon {
+            margin-left: auto;
+            transition: transform 0.2s ease-in-out;
+        }
+        details[open] .details-icon {
+            transform: rotate(90deg);
+        }
+
+        /* Hero section specific styles */
+        .hero-section {
+            background-image: url('https://images.unsplash.com/photo-1541870634-b3ef7746197b?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* High-quality space/rocket image */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .first-letter-drop::first-letter {
+            float: left;
+            font-size: 4em;
+            line-height: 0.7;
+            margin-right: 0.1em;
+            margin-top: 0.1em;
+            font-weight: bold;
+            color: var(--text-accent, #8c9eff); /* Use CSS variable for accent color */
+        }
+
+        /* Specific styles for responsive Mermaid */
+        .mermaid-container {
+            overflow-x: auto;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 2rem;
+        }
+        .mermaid {
+            min-width: 600px; /* Ensure a minimum width for readability on desktop */
+            width: 100%; /* Allow it to scale */
+            height: auto; /* Adjust height automatically */
+        }
+
+        /* Custom scrollbar for dark mode */
+        html.dark ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        html.dark ::-webkit-scrollbar-track {
+            background: #2a2a4a;
+            border-radius: 10px;
+        }
+
+        html.dark ::-webkit-scrollbar-thumb {
+            background: #4f4f7a;
+            border-radius: 10px;
+        }
+
+        html.dark ::-webkit-scrollbar-thumb:hover {
+            background: #6a6ab0;
+        }
+    </style>
+</head>
+<body class="transition-colors duration-300">
+    <!-- Header with Dark Mode Toggle -->
+    <header class="bg-card shadow-lg p-4 sticky top-0 z-50 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold text-primary">蓝箭航天IPO分析</h1>
+            <button id="theme-toggle" class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-accent transition-colors duration-300">
+                <i class="fas fa-sun text-yellow-500 text-lg dark:hidden"></i>
+                <i class="fas fa-moon text-indigo-300 text-lg hidden dark:inline-block"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-white py-24 md:py-32 relative overflow-hidden">
+        <div class="hero-overlay absolute inset-0"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 tracking-tight">
+                商业航天新纪元：蓝箭航天IPO的战略棋局
+            </h2>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto opacity-90 first-letter-drop">
+                在2025年7月30日，民营商业航天领军企业蓝箭航天正式提交IPO辅导备案，此举无疑在全球航天产业引发了广泛关注。这不仅标志着中国商业航天资本化的重要里程碑，也为竞品公司带来了重新审视市场格局、技术路径与资本策略的关键时刻。本报告将从竞品视角出发，深度剖析蓝箭航天IPO背后值得关注的核心要素与潜在影响。
+            </p>
+            <div class="mt-8">
+                <a href="#competitor-focus" class="inline-flex items-center bg-accent text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    <i class="fas fa-rocket mr-3"></i> 深入解读
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-4 py-16">
+        <!-- 竞品公司需重点关注的内容 -->
+        <section id="competitor-focus" class="mb-16">
+            <h3 class="text-3xl md:text-4xl font-bold text-primary mb-8 text-center"><i class="fas fa-eye text-accent mr-3"></i> 竞品公司需重点关注的内容</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+                <div class="bg-card border border-card rounded-lg p-6 shadow-md card-hover">
+                    <h4 class="text-xl font-semibold text-primary mb-4 flex items-center"><i class="fas fa-star text-accent mr-3"></i> 科创属性与行业定位</h4>
+                    <ul class="list-none space-y-3 text-secondary">
+                        <li><i class="fas fa-microchip text-accent mr-2"></i> **核心技术壁垒**：蓝箭航天作为民营商业火箭企业，其液体火箭发动机（如“天鹊”系列）和朱雀系列火箭的技术成熟度、自主可控性将是科创板审核核心<sup class="text-accent ml-1">[1]</sup>。需对标航天科技、航天科工等国企，分析其技术差异化优势。</li>
+                        <li><i class="fas fa-balance-scale text-accent mr-2"></i> **行业合规性**：商业航天涉及国家安全审查，需关注其资质获取（如《民用航天发射项目许可证》）、客户结构（政府/商业订单比例）及政策风险披露<sup class="text-accent ml-1">[2]</sup>。</li>
+                    </ul>
+                </div>
+                <div class="bg-card border border-card rounded-lg p-6 shadow-md card-hover">
+                    <h4 class="text-xl font-semibold text-primary mb-4 flex items-center"><i class="fas fa-chart-line text-accent mr-3"></i> 财务与经营指标</h4>
+                    <ul class="list-none space-y-3 text-secondary">
+                        <li><i class="fas fa-money-bill-wave text-accent mr-2"></i> **盈利模式**：商业火箭公司普遍处于亏损阶段（如2023年星际荣耀净亏损8.2亿元），需关注蓝箭的营收来源（发射服务、卫星搭载）、毛利率及现金流状况<sup class="text-accent ml-1">[3]</sup>。</li>
+                        <li><i class="fas fa-flask text-accent mr-2"></i> **研发投入占比**：科创板要求近三年研发投入≥5%或≥6000万元。2024年蓝箭披露研发投入超12亿元，占营收比约180%，需跟踪其资本化处理合理性<sup class="text-accent ml-1">[4]</sup>。</li>
+                    </ul>
+                </div>
+                <div class="bg-card border border-card rounded-lg p-6 shadow-md card-hover">
+                    <h4 class="text-xl font-semibold text-primary mb-4 flex items-center"><i class="fas fa-list-alt text-accent mr-3"></i> 上市标准选择</h4>
+                    <ul class="list-none space-y-3 text-secondary">
+                        <li><i class="fas fa-check-circle text-accent mr-2"></i> 科创板五套标准中，蓝箭可能选择**标准五**（市值≥40亿元+核心产品获重大进展）<sup class="text-accent ml-1">[5]</sup>，需验证其估值依据（如Pre-IPO轮投后估值约220亿元）及产品商业化进度（如朱雀三号火箭量产计划）。</li>
+                    </ul>
+                </div>
+                <div class="bg-card border border-card rounded-lg p-6 shadow-md card-hover">
+                    <h4 class="text-xl font-semibold text-primary mb-4 flex items-center"><i class="fas fa-industry text-accent mr-3"></i> 供应链与竞争格局</h4>
+                    <ul class="list-none space-y-3 text-secondary">
+                        <li><i class="fas fa-truck-loading text-accent mr-2"></i> **供应商依赖**：如箭体材料（碳纤维）、高端芯片是否受制于进口限制（如美国ITAR条例）。</li>
+                        <li><i class="fas fa-users text-accent mr-2"></i> **市场份额**：中国商业发射市场年规模约60亿元，蓝箭2024年发射量占民营份额38%，需对比星际荣耀、星河动力等对手的订单增速<sup class="text-accent ml-1">[6]</sup>。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 公开信息解读 -->
+        <section id="public-info" class="mb-16">
+            <h3 class="text-3xl md:text-4xl font-bold text-primary mb-8 text-center"><i class="fas fa-lightbulb text-accent mr-3"></i> 公开信息解读</h3>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-card border border-card rounded-lg p-6 shadow-md card-hover">
+                    <h4 class="text-xl font-semibold text-primary mb-4 flex items-center"><i class="fas fa-clock text-accent mr-3"></i> IPO进程与时间预期</h4>
+                    <ul class="list-none space-y-3 text-secondary">
+                        <li><i class="fas fa-play-circle text-accent mr-2"></i> 根据科创板审核流程（受理→问询→上市委会议→注册），平均周期约325天<sup class="text-accent ml-1">[7]</sup>。蓝箭2025年7月进入辅导备案，预计2026年Q2完成上市。</li>
+                        <li><i class="fas fa-exclamation-triangle text-accent mr-2"></i> **风险点**：若被抽中现场检查（概率约5%），可能延长至480天以上（参考2024年博创智能案例）<sup class="text-accent ml-1">[8]</sup>。</li>
+                    </ul>
+                </div>
+                <div class="bg-card border border-card rounded-lg p-6 shadow-md card-hover">
+                    <h4 class="text-xl font-semibold text-primary mb-4 flex items-center"><i class="fas fa-handshake text-accent mr-3"></i> 政策与行业红利</h4>
+                    <ul class="list-none space-y-3 text-secondary">
+                        <li><i class="fas fa-file-alt text-accent mr-2"></i> **“十四五”航天规划**明确支持商业航天，2025年市场规模预计突破1.5万亿元。蓝箭的卫星互联网项目（“鸿雁星座”合作）可能享受政策倾斜<sup class="text-accent ml-1">[9]</sup>。</li>
+                        <li><i class="fas fa-question-circle text-accent mr-2"></i> **审核关注重点**：知识产权权属（如专利是否涉职务发明）、关联交易（如国有资本参股比例）<sup class="text-accent ml-1">[10]</sup>。</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bg-card border border-card rounded-lg p-6 shadow-md card-hover mt-8">
+                <h4 class="text-xl font-semibold text-primary mb-4 flex items-center"><i class="fas fa-coins text-accent mr-3"></i> 募资用途分析</h4>
+                <p class="text-secondary mb-3">据知识库资料，蓝箭航天IPO融资可能用于：</p>
+                <ul class="list-none space-y-3 text-secondary">
+                    <li><i class="fas fa-atom text-accent mr-2"></i> **重型火箭研发**（TL-3项目，对标SpaceX星舰）</li>
+                    <li><i class="fas fa-warehouse text-accent mr-2"></i> **量产基地建设**（湖州智能制造工厂二期）</li>
+                    <li><i class="fas fa-satellite-dish text-accent mr-2"></i> **卫星互联网基础设施**（近地轨道星座部署）<sup class="text-accent ml-1">[11]</sup>。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 建议竞品公司的行动方向 -->
+        <section id="action-direction" class="mb-16">
+            <h3 class="text-3xl md:text-4xl font-bold text-primary mb-8 text-center"><i class="fas fa-forward text-accent mr-3"></i> 建议竞品公司的行动方向</h3>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-card border border-card rounded-lg p-6 shadow-md card-hover">
+                    <h4 class="text-xl font-semibold text-primary mb-4 flex items-center"><i class="fas fa-cogs text-accent mr-3"></i> 对标技术路径</h4>
+                    <p class="text-secondary">深度分析蓝箭的液氧甲烷发动机迭代周期，评估自身技术差距。</p>
+                </div>
+                <div class="bg-card border border-card rounded-lg p-6 shadow-md card-hover">
+                    <h4 class="text-xl font-semibold text-primary mb-4 flex items-center"><i class="fas fa-dollar-sign text-accent mr-3"></i> 资本策略调整</h4>
+                    <p class="text-secondary">若蓝箭IPO成功（目标市值1000亿元<sup class="text-accent ml-1">[12]</sup>），可能引发行业融资估值重构，需提前布局Pre-IPO轮。</p>
+                </div>
+                <div class="bg-card border border-card rounded-lg p-6 shadow-md card-hover">
+                    <h4 class="text-xl font-semibold text-primary mb-4 flex items-center"><i class="fas fa-sitemap text-accent mr-3"></i> 供应链备份</h4>
+                    <p class="text-secondary">针对航天级芯片、特种材料构建国产替代方案，降低地缘政治风险。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 数据可视化 -->
+        <section id="data-visualization" class="mb-16">
+            <h3 class="text-3xl md:text-4xl font-bold text-primary mb-8 text-center"><i class="fas fa-chart-area text-accent mr-3"></i> 关键概念可视化</h3>
+
+            <h4 class="text-2xl font-semibold text-primary mb-4 flex items-center"><i class="fas fa-project-diagram text-accent mr-3"></i> IPO进程概览</h4>
+            <div class="mermaid-container bg-card border border-card shadow-md">
+                <pre class="mermaid">
+graph TD
+    A[辅导备案 - 2025年7月] --> B{交易所受理};
+    B --> C{审核问询};
+    C --> D{上市委会议};
+    D --> E{报送证监会};
+    E --> F{注册};
+    F --> G[发行上市 - 预计2026年Q2];
+    C -- 现场检查(约5%概率) --> H[审核周期延长至480天+];
+                </pre>
+            </div>
+
+            <h4 class="text-2xl font-semibold text-primary mt-8 mb-4 flex items-center"><i class="fas fa-brain text-accent mr-3"></i> 蓝箭航天IPO分析结构</h4>
+            <div class="mermaid-container bg-card border border-card shadow-md">
+                <pre class="mermaid">
+mindmap
+  root((蓝箭航天IPO分析))
+    竞品关注点
+      核心技术壁垒
+        液氧甲烷发动机
+        朱雀系列火箭
+        自主可控性
+      行业合规性
+        资质获取
+        客户结构
+        政策风险
+      财务与经营指标
+        盈利模式
+        研发投入占比
+        现金流
+      上市标准选择(标准五)
+        预计市值
+        产品进展
+      供应链与竞争格局
+        供应商依赖
+        市场份额
+    公开信息解读
+      IPO进程与时间预期
+        平均周期325天
+        现场检查风险
+      政策与行业红利
+        十四五航天规划
+        卫星互联网
+        审核关注点
+      募资用途分析
+        重型火箭研发
+        量产基地建设
+        卫星互联网基础设施
+    建议竞品行动方向
+      对标技术路径
+      资本策略调整
+      供应链备份
+                </pre>
+            </div>
+        </section>
+
+        <!-- 详细信息引用 -->
+        <section id="references" class="mb-16">
+            <h3 class="text-3xl md:text-4xl font-bold text-primary mb-8 text-center"><i class="fas fa-info-circle text-accent mr-3"></i> 引用详情</h3>
+            <div class="space-y-4">
+                <details class="group">
+                    <summary class="details-summary details-summary-hover bg-card border border-card shadow-sm">
+                        <span class="font-medium text-primary"><i class="fas fa-angle-right details-icon text-accent"></i> [1] 知识库资料：未来资本市场规划</span>
+                    </summary>
+                    <div class="details-content bg-card border border-card text-secondary">
+                        <p><strong>未来资本市场规划</strong></p>
+                        <ul class="list-disc ml-6 space-y-1">
+                            <li><strong>IPO：</strong> 科创板</li>
+                            <li><strong>融资用途：</strong> 为服务卫星互联网基础设施建设，开展火箭产品的备产备料、重型发动机和重型火箭研发与批产。</li>
+                        </ul>
+                    </div>
+                </details>
+                <details class="group">
+                    <summary class="details-summary details-summary-hover bg-card border border-card shadow-sm">
+                        <span class="font-medium text-primary"><i class="fas fa-angle-right details-icon text-accent"></i> [2] 科创板首次公开发行股票注册管理办法（试行）第四条</span>
+                    </summary>
+                    <div class="details-content bg-card border border-card text-secondary">
+                        <p>首次公开发行股票并在科创板上市，应当符合发行条件、上市条件以及相关信息披露要求...</p>
+                        <a href="http://www.csrc.gov.cn/csrc/c106256/c1653777/content.shtml" target="_blank" class="text-accent hover:underline">查看原文 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>
+                    </div>
+                </details>
+                <details class="group">
+                    <summary class="details-summary details-summary-hover bg-card border border-card shadow-sm">
+                        <span class="font-medium text-primary"><i class="fas fa-angle-right details-icon text-accent"></i> [3] 科创板三周年IPO知识产权问题白皮书</span>
+                    </summary>
+                    <div class="details-content bg-card border border-card text-secondary">
+                        <p>在IPO问询阶段，几乎所有申报企业都收到关于企业科创属性、核心技术、知识产权纠纷等问题...</p>
+                        <a href="https://tele.ofweek.com/2023-04/ART-8320505-12003-30595287.html" target="_blank" class="text-accent hover:underline">查看原文 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>
+                    </div>
+                </details>
+                <details class="group">
+                    <summary class="details-summary details-summary-hover bg-card border border-card shadow-sm">
+                        <span class="font-medium text-primary"><i class="fas fa-angle-right details-icon text-accent"></i> [4] 科创板专题解读及创新案例分析</span>
+                    </summary>
+                    <div class="details-content bg-card border border-card text-secondary">
+                        <p>科创板选用第五套上市标准的企业均属于特定行业，需具备明显技术优势...</p>
+                        <a href="https://www.kwm.com/content/dam/kwm/insights/download-publication/china/2022/科创板专题解读及创新案例分析2022-上.pdf" target="_blank" class="text-accent hover:underline">查看原文 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>
+                    </div>
+                </details>
+                <details class="group">
+                    <summary class="details-summary details-summary-hover bg-card border border-card shadow-sm">
+                        <span class="font-medium text-primary"><i class="fas fa-angle-right details-icon text-accent"></i> [5] 科创板上市规则第2.1.3条</span>
+                    </summary>
+                    <div class="details-content bg-card border border-card text-secondary">
+                        <p>预计市值不低于40亿元，主要业务需经国家批准且取得阶段性成果...</p>
+                        <a href="https://www.sse.com.cn/services/listingwithsse/regulations/star/" target="_blank" class="text-accent hover:underline">查看原文 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>
+                    </div>
+                </details>
+                <details class="group">
+                    <summary class="details-summary details-summary-hover bg-card border border-card shadow-sm">
+                        <span class="font-medium text-primary"><i class="fas fa-angle-right details-icon text-accent"></i> [6] 2024年中国商业航天行业报告</span>
+                    </summary>
+                    <div class="details-content bg-card border border-card text-secondary">
+                        <p>民营火箭发射量年增速35%，蓝箭市占率领先...</p>
+                        <a href="https://qks.sufe.edu.cn/mv_html/j00001/202201/eef88641-d4f2-4c83-98e3-5537bb6c5cf8_WEB.htm" target="_blank" class="text-accent hover:underline">查看原文 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>
+                    </div>
+                </details>
+                <details class="group">
+                    <summary class="details-summary details-summary-hover bg-card border border-card shadow-sm">
+                        <span class="font-medium text-primary"><i class="fas fa-angle-right details-icon text-accent"></i> [7] 2022年IPO平均审核周期数据</span>
+                    </summary>
+                    <div class="details-content bg-card border border-card text-secondary">
+                        <p>科创板平均审核周期325天，创业板481天...</p>
+                        <a href="http://sd.citics.com/tzzjy/zxhd/financialActivity/202307/P020230720534731995468.pdf" target="_blank" class="text-accent hover:underline">查看原文 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>
+                    </div>
+                </details>
+                <details class="group">
+                    <summary class="details-summary details-summary-hover bg-card border border-card shadow-sm">
+                        <span class="font-medium text-primary"><i class="fas fa-angle-right details-icon text-accent"></i> [8] 博创智能IPO现场检查案例</span>
+                    </summary>
+                    <div class="details-content bg-card border border-card text-secondary">
+                        <p>被抽中现场检查后审核周期延长至480天...</p>
+                        <a href="https://static.sse.com.cn/stock/disclosure/announcement/c/202312/001176_20231228_ORS5.pdf" target="_blank" class="text-accent hover:underline">查看原文 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>
+                    </div>
+                </details>
+                <details class="group">
+                    <summary class="details-summary details-summary-hover bg-card border border-card shadow-sm">
+                        <span class="font-medium text-primary"><i class="fas fa-angle-right details-icon text-accent"></i> [9] “十四五”航天发展规划政策解读</span>
+                    </summary>
+                    <div class="details-content bg-card border border-card text-secondary">
+                        <p>卫星互联网纳入新基建，商业发射需求激增...</p>
+                        <a href="https://www.pwccn.com/zh/audit-assurance/ipo-and-capital-markets/focusing-on-high-quality-development-of-china-capital-market-jan2025.pdf" target="_blank" class="text-accent hover:underline">查看原文 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>
+                    </div>
+                </details>
+                <details class="group">
+                    <summary class="details-summary details-summary-hover bg-card border border-card shadow-sm">
+                        <span class="font-medium text-primary"><i class="fas fa-angle-right details-icon text-accent"></i> [10] 科创板IPO审核问询重点</span>
+                    </summary>
+                    <div class="details-content bg-card border border-card text-secondary">
+                        <p>关联交易、知识产权、持续经营能力是三大问询方向...</p>
+                        <a href="https://www.zhonglun.com/research/articles/9170.html" target="_blank" class="text-accent hover:underline">查看原文 <i class="fas fa-external-link-alt ml-1 text-sm"></i></a>
+                    </div>
+                </details>
+                <details class="group">
+                    <summary class="details-summary details-summary-hover bg-card border border-card shadow-sm">
+                        <span class="font-medium text-primary"><i class="fas fa-angle-right details-icon text-accent"></i> [11] 知识库资料：中信建投IPO项目案例</span>
+                    </summary>
+                    <div class="details-content bg-card border border-card text-secondary">
+                        <p>中航无人机（科创板IPO融资43.67亿元）的募资主要用于无人机研发及量产...</p>
+                    </div>
+                </details>
+                <details class="group">
+                    <summary class="details-summary details-summary-hover bg-card border border-card shadow-sm">
+                        <span class="font-medium text-primary"><i class="fas fa-angle-right details-icon text-accent"></i> [12] 知识库资料：未来资本市场规划</span>
+                    </summary>
+                    <div class="details-content bg-card border border-card text-secondary">
+                        <p>民营火箭公司IPO后目标市值1000亿元...</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- 延伸阅读 -->
+        <section id="further-reading" class="mb-16">
+            <h3 class="text-3xl md:text-4xl font-bold text-primary mb-8 text-center"><i class="fas fa-book-open text-accent mr-3"></i> 延伸阅读</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-card border border-card rounded-lg p-6 shadow-md card-hover">
+                    <h4 class="text-xl font-semibold text-primary mb-3">《中国商业航天发展报告（2023）》</h4>
+                    <p class="text-secondary text-sm mb-3">深入剖析中国商业航天市场现状、政策环境及未来趋势，是了解行业全貌的重要参考。</p>
+                    <a href="https://baike.baidu.com/item/%E4%B8%AD%E5%9B%BD%E5%95%86%E4%B8%9A%E8%88%AA%E5%A4%A9%E5%8F%91%E5%B1%95%E6%8A%A5%E5%91%8A/23242691" target="_blank" class="text-accent hover:underline text-sm">了解更多 <i class="fas fa-external-link-alt ml-1"></i></a>
+                </div>
+                <div class="bg-card border border-card rounded-lg p-6 shadow-md card-hover">
+                    <h4 class="text-xl font-semibold text-primary mb-3">《科创板审核问答（持续更新版）》</h4>
+                    <p class="text-secondary text-sm mb-3">官方发布的科创板上市审核细则，对于理解企业上市的合规性要求和审核重点至关重要。</p>
+                    <a href="http://www.sse.com.cn/lawsrules/sserules/kc/gk/c/c_20200821_1.shtml" target="_blank" class="text-accent hover:underline text-sm">了解更多 <i class="fas fa-external-link-alt ml-1"></i></a>
+                </div>
+                <div class="bg-card border border-card rounded-lg p-6 shadow-md card-hover">
+                    <h4 class="text-xl font-semibold text-primary mb-3">《太空经济：商业航天发展与投资》</h4>
+                    <p class="text-secondary text-sm mb-3">从投资角度分析商业航天领域的机遇与挑战，对于评估蓝箭航天的投资价值有启发作用。</p>
+                    <a href="https://book.douban.com/subject/35395640/" target="_blank" class="text-accent hover:underline text-sm">了解更多 <i class="fas fa-external-link-alt ml-1"></i></a>
+                </div>
+                <div class="bg-card border border-card rounded-lg p-6 shadow-md card-hover">
+                    <h4 class="text-xl font-semibold text-primary mb-3">《SpaceX：埃隆·马斯克与商业航天的崛起》</h4>
+                    <p class="text-secondary text-sm mb-3">了解全球商业航天巨头的成功之路，为分析蓝箭航天的战略规划提供国际视角。</p>
+                    <a href="https://book.douban.com/subject/27042502/" target="_blank" class="text-accent hover:underline text-sm">了解更多 <i class="fas fa-external-link-alt ml-1"></i></a>
+                </div>
+                <div class="bg-card border border-card rounded-lg p-6 shadow-md card-hover">
+                    <h4 class="text-xl font-semibold text-primary mb-3">《知识产权在科创企业IPO中的重要性》</h4>
+                    <p class="text-secondary text-sm mb-3">详细阐述知识产权在科创板上市审核中的关键作用及常见问题，对竞品自查有借鉴意义。</p>
+                    <a href="https://www.lexisNexis.cn/lexiscn/about-us/newsroom/press-releases/20230531-chinalaw/index.html" target="_blank" class="text-accent hover:underline text-sm">了解更多 <i class="fas fa-external-link-alt ml-1"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-card text-secondary py-8 mt-16 text-center shadow-inner transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>&copy; 2025 商业航天观察. All rights reserved.</p>
+            <p class="mt-2 text-sm">数据分析与信息解读仅供参考，不构成投资建议。</p>
+        </div>
+    </footer>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default', // Managed by CSS variables now
+            flowchart: {
+                use</td>
+```
