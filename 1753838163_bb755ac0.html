@@ -1,0 +1,526 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>限制性股权激励：税务行权时点深度解析</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2310B981' d='M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z'/%3E%3C/svg%3E" type="image/svg+xml">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Chinese characters (Noto Serif SC, Noto Sans SC) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+
+    <style>
+        /* Custom base styles for dark/light mode */
+        :root {
+            --bg-color-dark: #0A0A0A; /* Deeper black for dark mode background */
+            --text-color-dark: #E0E0E0; /* Light gray for main text */
+            --text-color-secondary-dark: #A0A0A0; /* Mid gray for secondary text */
+            --card-bg-dark: #1A1A1A; /* Slightly lighter black for cards */
+            --border-color-dark: #333333; /* Dark gray for borders */
+            --accent-color: #10B981; /* Emerald green */
+            --accent-color-light: #059669; /* Darker emerald for light mode */
+            --highlight-color: #34D399; /* Lighter emerald for highlights */
+
+            --bg-color-light: #F9F9F9; /* Off-white for light mode background */
+            --text-color-light: #2A2A2A; /* Dark gray for main text */
+            --text-color-secondary-light: #6B7280; /* Mid gray for secondary text */
+            --card-bg-light: #FFFFFF; /* White for cards */
+            --border-color-light: #E5E7EB; /* Light gray for borders */
+
+            /* Font definitions */
+            --font-serif-sc: 'Noto Serif SC', serif;
+            --font-sans-sc: 'Noto Sans SC', sans-serif;
+            --font-fallback: Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+
+        /* Dark mode default */
+        body {
+            background-color: var(--bg-color-dark);
+            color: var(--text-color-dark);
+            font-family: var(--font-sans-sc), var(--font-fallback);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Light mode override */
+        html.light body {
+            background-color: var(--bg-color-light);
+            color: var(--text-color-light);
+        }
+
+        /* Apply custom fonts */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-serif-sc), var(--font-fallback);
+            font-weight: 600; /* Semi-bold for headings */
+        }
+
+        /* Text colors for dark/light mode */
+        .text-primary { color: var(--text-color-dark); }
+        .text-secondary { color: var(--text-color-secondary-dark); }
+        .text-accent { color: var(--accent-color); }
+        .bg-card { background-color: var(--card-bg-dark); }
+        .border-base { border-color: var(--border-color-dark); }
+
+        html.light .text-primary { color: var(--text-color-light); }
+        html.light .text-secondary { color: var(--text-color-secondary-light); }
+        html.light .text-accent { color: var(--accent-color-light); }
+        html.light .bg-card { background-color: var(--card-bg-light); }
+        html.light .border-base { border-color: var(--border-color-light); }
+
+        /* Specific Tailwind overrides for deeper dark mode */
+        .dark .bg-gray-950 { background-color: var(--bg-color-dark); }
+        .dark .text-gray-100 { color: var(--text-color-dark); }
+        .dark .text-gray-300 { color: var(--text-color-secondary-dark); }
+        .dark .bg-gray-850 { background-color: var(--card-bg-dark); }
+        .dark .border-gray-700 { border-color: var(--border-color-dark); }
+
+        .light .bg-gray-50 { background-color: var(--bg-color-light); }
+        .light .text-gray-900 { color: var(--text-color-light); }
+        .light .text-gray-600 { color: var(--text-color-secondary-light); }
+        .light .bg-white { background-color: var(--card-bg-light); }
+        .light .border-gray-200 { border-color: var(--border-color-light); }
+
+        /* Custom styles for Merimaid diagrams */
+        .mermaid {
+            background-color: var(--card-bg-dark);
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 1.5rem; /* p-6 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-lg */
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        html.light .mermaid {
+            background-color: var(--card-bg-light);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-lg */
+        }
+
+        /* Specific Mermaid theme adjustments (example, might need more fine-tuning) */
+        .dark .mermaid .node rect, .dark .mermaid .node circle, .dark .mermaid .node polygon {
+            fill: #2C2C2C; /* Darker background for nodes */
+            stroke: #4A4A4A; /* Node border */
+        }
+        .dark .mermaid .node text {
+            fill: #E0E0E0; /* Light text for nodes */
+        }
+        .dark .mermaid .edgePaths .edgePath .path {
+            stroke: #A0A0A0; /* Edge path color */
+            fill: none;
+        }
+        .dark .mermaid .edgeLabels .edgeLabel {
+            background-color: #2C2C2C; /* Label background */
+            color: #E0E0E0; /* Label text */
+        }
+
+        html.light .mermaid .node rect, html.light .mermaid .node circle, html.light .mermaid .node polygon {
+            fill: #F0F0F0;
+            stroke: #B0B0B0;
+        }
+        html.light .mermaid .node text {
+            fill: #2A2A2A;
+        }
+        html.light .mermaid .edgePaths .edgePath .path {
+            stroke: #6B7280;
+        }
+        html.light .mermaid .edgeLabels .edgeLabel {
+            background-color: #F0F0F0;
+            color: #2A2A2A;
+        }
+
+        /* Footnote styling */
+        .footnote {
+            font-size: 0.85em;
+            color: var(--text-color-secondary-dark);
+            margin-top: 1.5rem;
+            line-height: 1.6;
+        }
+        html.light .footnote {
+            color: var(--text-color-secondary-light);
+        }
+        .footnote sup {
+            vertical-align: super;
+            font-size: 0.7em;
+            margin-right: 0.2em;
+        }
+
+        /* 微交互：链接悬停效果 */
+        a:hover {
+            color: var(--highlight-color);
+            text-decoration: underline;
+            transition: color 0.2s ease;
+        }
+
+        /* 微交互：按钮悬停效果 */
+        .btn-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .btn-toggle {
+            transition: all 0.2s ease;
+        }
+
+        /* Card hover effect */
+        .card-item {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .card-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        html.light .card-item:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+
+    <!-- Header & Theme Toggle -->
+    <header class="py-4 px-6 md:px-12 flex justify-between items-center z-10 sticky top-0 bg-opacity-95 bg-gray-950 light:bg-gray-50 backdrop-blur-sm transition-colors duration-300 border-b border-base">
+        <div class="flex items-center space-x-2">
+            <i class="fas fa-balance-scale text-accent text-2xl"></i>
+            <span class="text-xl font-bold text-primary font-serif">股权激励税务指南</span>
+        </div>
+        <button id="theme-toggle" class="btn-toggle p-2 rounded-full bg-card border border-base text-primary hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-75">
+            <i class="fas fa-sun text-lg theme-icon" data-mode="light"></i>
+            <i class="fas fa-moon text-lg theme-icon hidden" data-mode="dark"></i>
+        </button>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gray-900 light:bg-gray-100 py-20 px-6 md:px-12 text-center overflow-hidden border-b border-base">
+        <div class="absolute inset-0 opacity-10 dark:opacity-20 bg-center bg-cover" style="background-image: url('https://images.unsplash.com/photo-1590283626265-f860473e0c03?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-blend-mode: multiply; filter: grayscale(100%);"></div>
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 text-primary drop-shadow-lg">
+                <span class="text-accent">限制性股权激励：</span><br class="hidden md:block"> 税务行权时点深度解析
+            </h1>
+            <p class="text-lg md:text-xl mb-8 text-secondary font-sans">
+                准确理解个税义务发生时点，避免潜在税务风险，助力企业与员工合规共赢。
+            </p>
+            <div class="space-x-4">
+                <a href="#core-principles" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-emerald-600 hover:bg-emerald-700 transition-colors duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-gray-950">
+                    <i class="fas fa-file-invoice-dollar mr-2"></i> 立即了解核心原则
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Grid -->
+    <main class="flex-grow container mx-auto px-6 md:px-12 py-16 grid grid-cols-1 lg:grid-cols-3 gap-12">
+
+        <!-- Left Column - Main Article Content -->
+        <div class="lg:col-span-2 space-y-12">
+
+            <!-- Section 1: 税法上的行权时点认定原则 -->
+            <section id="core-principles" class="bg-card p-8 rounded-2xl shadow-xl border border-base card-item">
+                <h2 class="text-3xl font-bold mb-6 flex items-center text-primary">
+                    <i class="fas fa-landmark text-accent mr-3"></i> 税法上的行权时点认定原则
+                </h2>
+                <div class="prose dark:prose-invert max-w-none text-primary leading-relaxed text-lg">
+                    <p class="mb-6 first-letter:text-5xl first-letter:font-bold first-letter:text-accent first-letter:mr-3 first-letter:float-left">
+                        根据税法规定及实务操作，拟上市公司限制性股权激励的 <strong class="text-accent">个税纳税义务发生时点</strong> 应结合 <strong class="text-accent">所有权归属</strong> 和 <strong class="text-accent">解除限售条件</strong> 综合判断。核心结论如下：
+                    </p>
+
+                    <h3 class="text-2xl font-semibold mb-4 text-primary flex items-center">
+                        <i class="fas fa-check-circle text-emerald-400 mr-2"></i> 以“解除限售日”为纳税义务发生时点
+                    </h3>
+                    <p class="mb-4">
+                        根据《财政部 国家税务总局关于完善股权激励和技术入股有关所得税政策的通知》（财税〔2016〕101号）<sup class="text-accent"><a href="#footnote-1" class="hover:underline">[1]</a></sup>：
+                    </p>
+                    <blockquote class="border-l-4 border-emerald-500 pl-4 py-2 italic text-gray-300 dark:text-gray-400 mb-6">
+                        限制性股票应纳税所得额按 <strong class="text-accent">股票登记日</strong> 与 <strong class="text-accent">解除限售日</strong> 的差额计算，在 <strong class="text-accent">解除限售日</strong> 确认纳税义务。
+                    </blockquote>
+                    <p class="mb-6">
+                        <strong class="text-accent">依据</strong>：解除限售日标志着激励对象实际获得股票完整所有权（即使存在禁售期）。
+                    </p>
+
+                    <h3 class="text-2xl font-semibold mb-4 text-primary flex items-center">
+                        <i class="fas fa-times-circle text-red-400 mr-2"></i> “上市后出售”属于禁售安排，不影响纳税时点
+                    </h3>
+                    <p class="mb-4">
+                        在您描述的案例中：
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 mb-6 ml-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-unlock-alt text-emerald-400 mt-1 mr-2"></i>
+                            <div><strong class="text-accent">解锁期满</strong> → 解除限售条件达成（服务期/业绩条件满足），税法上视为行权完成；</div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-ban text-red-400 mt-1 mr-2"></i>
+                            <div><strong class="text-accent">上市要求</strong> → 属于后续 <strong class="text-accent">禁售条款</strong>（流动性限制），不属于税法认定的“限售条件”<sup class="text-accent"><a href="#footnote-2" class="hover:underline">[2]</a></sup>。</div>
+                        </li>
+                    </ul>
+                    <p class="mb-6">
+                        <strong class="text-accent">结论</strong>：个税纳税义务在解锁期满时触发，与是否上市无关。
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 2: 特殊情形：递延纳税的适用 -->
+            <section id="deferred-tax" class="bg-card p-8 rounded-2xl shadow-xl border border-base card-item">
+                <h2 class="text-3xl font-bold mb-6 flex items-center text-primary">
+                    <i class="fas fa-hourglass-half text-blue-400 mr-3"></i> 特殊情形：递延纳税的适用
+                </h2>
+                <div class="prose dark:prose-invert max-w-none text-primary leading-relaxed text-lg">
+                    <p class="mb-4">
+                        若同时满足以下条件，可适用 <strong class="text-blue-400">递延纳税政策</strong>（转让时按20%税率）<sup class="text-blue-400"><a href="#footnote-3" class="hover:underline">[3]</a></sup>：
+                    </p>
+                    <ol class="list-decimal list-inside space-y-2 mb-6 ml-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-building text-blue-400 mt-1 mr-2"></i>
+                            <div>属于境内居民企业的股权激励计划；</div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-scroll text-blue-400 mt-1 mr-2"></i>
+                            <div>激励计划经公司董事会/股东会批准；</div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-users text-blue-400 mt-1 mr-2"></i>
+                            <div>激励对象为公司技术骨干或高管（≤全体员工30%）；</div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-hand-holding-usd text-blue-400 mt-1 mr-2"></i>
+                            <div><strong class="text-blue-400">股票来源为发行人自身股份</strong>。</div>
+                        </li>
+                    </ol>
+                    <p class="mb-4">
+                        <strong class="text-blue-400">效果</strong>：纳税义务递延至实际转让股权时（如上市后出售），但需在解锁期满时向税务机关备案。
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 3: 您的案例分析与建议 -->
+            <section id="case-analysis" class="bg-card p-8 rounded-2xl shadow-xl border border-base card-item">
+                <h2 class="text-3xl font-bold mb-6 flex items-center text-primary">
+                    <i class="fas fa-lightbulb text-purple-400 mr-3"></i> 您的案例分析与建议
+                </h2>
+                <div class="prose dark:prose-invert max-w-none text-primary leading-relaxed text-lg">
+                    <h3 class="text-2xl font-semibold mb-4 text-primary flex items-center">
+                        <i class="fas fa-file-contract text-red-400 mr-2"></i> 当前协议条款分析
+                    </h3>
+                    <p class="mb-4">
+                        <code class="bg-gray-800 dark:bg-gray-700 text-highlight-color px-2 py-1 rounded-md text-sm">解锁期满可回购</code> + <code class="bg-gray-800 dark:bg-gray-700 text-highlight-color px-2 py-1 rounded-md text-sm">上市后允许公允价值出售</code>
+                    </p>
+                    <p class="mb-6">
+                        → 解锁期满即产生纳税义务（因限售条件已解除），实控人回购视为“转让行为”，需按 <strong class="text-red-400">“财产转让所得”</strong> 缴税<sup class="text-red-400"><a href="#footnote-4" class="hover:underline">[4]</a></sup>。
+                    </p>
+
+                    <h3 class="text-2xl font-semibold mb-4 text-primary flex items-center">
+                        <i class="fas fa-exclamation-triangle text-yellow-400 mr-2"></i> 税务风险提示
+                    </h3>
+                    <p class="mb-6">
+                        若在解锁期满时不申报个税，可能被认定为偷漏税（实际案例中，税务机关通常以解除限售日为计税时点）<sup class="text-yellow-400"><a href="#footnote-5" class="hover:underline">[5]</a></sup>。
+                    </p>
+
+                    <blockquote class="border-l-4 border-purple-500 pl-4 py-2 text-primary bg-gray-800 dark:bg-gray-850 rounded-md">
+                        <p class="text-xl font-bold mb-2 flex items-center text-purple-400">
+                            <i class="fas fa-bullhorn mr-2"></i> 实务建议
+                        </p>
+                        <p class="mb-2">重新审查协议条款，若希望实现“上市后缴税”，需同时满足：</p>
+                        <ul class="list-disc list-inside space-y-1 ml-4 text-primary">
+                            <li class="flex items-start">
+                                <i class="fas fa-gavel text-purple-400 mt-1 mr-2"></i>
+                                <div>（1）将 <strong class="text-purple-400">“成功上市”</strong> 明确写入 <strong class="text-purple-400">解除限售条件</strong>（而非仅禁售条款）；</div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-clipboard-list text-purple-400 mt-1 mr-2"></i>
+                                <div>（2）适用递延纳税备案（需符合前述4项条件）。</div>
+                            </li>
+                        </ul>
+                    </blockquote>
+                </div>
+            </section>
+        </div>
+
+        <!-- Right Column - Sidebar (Visualization, Further Reading) -->
+        <aside class="lg:col-span-1 space-y-12">
+
+            <!-- Data Visualization -->
+            <section class="bg-card p-8 rounded-2xl shadow-xl border border-base card-item">
+                <h2 class="text-3xl font-bold mb-6 flex items-center text-primary">
+                    <i class="fas fa-chart-network text-accent mr-3"></i> 纳税义务判定流程图
+                </h2>
+                <div class="mermaid text-center overflow-x-auto">
+                    graph TD
+                        A[限制性股票授予] --> B{解锁期满条件是否满足?};
+                        B -- 是 --> C[解除限售日];
+                        B -- 否 --> A;
+
+                        C --> D{协议是否将 "上市" 明确列为解除限售条件?};
+                        D -- 否 <br/>(仅为禁售或出售方式) --> E[个税纳税义务在解除限售日触发];
+                        D -- 是 <br/>(明确为解除限售条件) --> F{是否已上市并实际转让/回购?};
+
+                        F -- 否 --> G[暂不纳税];
+                        F -- 是 --> H[上市后实际转让时纳税];
+
+                        E --> I{是否符合递延纳税政策?};
+                        H --> I;
+                        I -- 是 --> J[向税务机关备案，<br/>转让时按20%税率纳税];
+                        I -- 否 --> K[按工资薪金所得或<br/>财产转让所得计算个税];
+
+                        style A fill:#10B981,stroke:#059669,stroke-width:2px,color:#fff;
+                        style B fill:#F6AD55,stroke:#ED8936,stroke-width:2px,color:#fff;
+                        style C fill:#34D399,stroke:#10B981,stroke-width:2px,color:#fff;
+                        style D fill:#F6AD55,stroke:#ED8936,stroke-width:2px,color:#fff;
+                        style E fill:#EF4444,stroke:#DC2626,stroke-width:2px,color:#fff;
+                        style F fill:#F6AD55,stroke:#ED8936,stroke-width:2px,color:#fff;
+                        style G fill:#93C5FD,stroke:#60A5FA,stroke-width:2px,color:#fff;
+                        style H fill:#34D399,stroke:#10B981,stroke-width:2px,color:#fff;
+                        style I fill:#F6AD55,stroke:#ED8936,stroke-width:2px,color:#fff;
+                        style J fill:#60A5FA,stroke:#3B82F6,stroke-width:2px,color:#fff;
+                        style K fill:#EF4444,stroke:#DC2626,stroke-width:2px,color:#fff;
+                </div>
+                <p class="text-secondary text-sm mt-4 text-center">
+                    点击流程图中的节点或箭头，可查看详细说明（此为概念图，Mermaid本身不支持点击展开，但可表达逻辑流）。
+                </p>
+            </section>
+
+            <!-- Further Reading -->
+            <section class="bg-card p-8 rounded-2xl shadow-xl border border-base card-item">
+                <h2 class="text-3xl font-bold mb-6 flex items-center text-primary">
+                    <i class="fas fa-book-open text-orange-400 mr-3"></i> 延伸阅读
+                </h2>
+                <ul class="list-none space-y-6">
+                    <li class="flex items-start">
+                        <i class="fas fa-caret-right text-orange-400 mt-1 mr-3"></i>
+                        <div>
+                            <p class="font-semibold text-primary">《股权激励：机制设计与案例分析》</p>
+                            <p class="text-secondary text-sm">深入探讨股权激励方案的设计、实施与风险控制，提供大量实务案例。</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-caret-right text-orange-400 mt-1 mr-3"></i>
+                        <div>
+                            <p class="font-semibold text-primary">《公司金融》</p>
+                            <p class="text-secondary text-sm">金融学经典教材，有助于理解股权估值、资本结构等基础概念。</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-caret-right text-orange-400 mt-1 mr-3"></i>
+                        <div>
+                            <p class="font-semibold text-primary">《税收筹划》</p>
+                            <p class="text-secondary text-sm">从更广阔的视角审视企业与个人税收优化策略，提升税务管理能力。</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-caret-right text-orange-400 mt-1 mr-3"></i>
+                        <div>
+                            <p class="font-semibold text-primary">《财务分析与估值》</p>
+                            <p class="text-secondary text-sm">系统学习公司财务报表分析及企业估值方法，辅助理解“公允价值”。</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-caret-right text-orange-400 mt-1 mr-3"></i>
+                        <div>
+                            <p class="font-semibold text-primary">《公司法》及相关法律法规解析</p>
+                            <p class="text-secondary text-sm">理解股权结构、股东权利义务等法律基础，是构建激励计划的基石。</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+
+    </main>
+
+    <!-- Footnotes -->
+    <section id="footnotes" class="container mx-auto px-6 md:px-12 py-12 border-t border-base mt-12 text-secondary footnote">
+        <h2 class="text-xl font-bold mb-4 text-primary">参考资料</h2>
+        <ol class="list-decimal list-inside space-y-2">
+            <li id="footnote-1" class="mb-1">
+                <sup>[1]</sup> 财政部 国家税务总局关于完善股权激励和技术入股有关所得税政策的通知（财税〔2016〕101号）第一条第一款。
+            </li>
+            <li id="footnote-2" class="mb-1">
+                <sup>[2]</sup> 联网搜索《职工取得限制性股票激励如何计缴个人所得税浅析》（税屋）。
+            </li>
+            <li id="footnote-3" class="mb-1">
+                <sup>[3]</sup> 财税〔2016〕101号文第二条，非上市公司股权激励递延纳税政策。
+            </li>
+            <li id="footnote-4" class="mb-1">
+                <sup>[4]</sup> 知识库《IPO企业通过员工持股平台实施股权激励的重点问题及实务案例》（FinanceTown）。
+            </li>
+            <li id="footnote-5" class="mb-1">
+                <sup>[5]</sup> 联网搜索《股权激励的所得税处理-股票期权》（新浪博客）。
+            </li>
+        </ol>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 light:bg-gray-100 py-8 px-6 md:px-12 text-center text-gray-400 dark:text-gray-500 text-sm border-t border-base">
+        <p>&copy; 2023 股权税务指南. All rights reserved.</p>
+        <p class="mt-2">本页面信息仅供参考，具体税务处理请咨询专业机构。</p>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark', // Default theme for Mermaid, will be updated by JS
+            securityLevel: 'loose' // Allows full functionality, adjust if needed
+        });
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const sunIcon = themeToggleBtn.querySelector('[data-mode="light"]');
+        const moonIcon = themeToggleBtn.querySelector('[data-mode="dark"]');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+                // Update Mermaid theme
+                mermaid.initialize({ theme: 'dark', startOnLoad: false });
+            } else {
+                htmlElement.classList.add('light');
+                htmlElement.classList.remove('dark');
+                moonIcon.classList.add('hidden');
+                sunIcon.classList.remove('hidden');
+                // Update Mermaid theme
+                mermaid.initialize({ theme: 'default', startOnLoad: false }); // 'default' for light mode
+            }
+            localStorage.setItem('theme', theme);
+            // Re-render Mermaid diagrams
+            mermaid.contentLoaded();
+        }
+
+        // Check system preference on load
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const savedTheme = localStorage.getItem('theme');
+
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (systemPrefersDark) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+
+        // Toggle theme on button click
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) { // Only react to system changes if user hasn't set a preference
+                setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+
+    </script>
+</body>
+</html>
+```
