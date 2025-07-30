@@ -1,0 +1,556 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板上市财务数据梳理：2022-2024年关键要点</title>
+    <meta name="description" content="天兵科技科创板上市2022-2024年财务数据梳理与关键监管要求详解，助力企业高效完成IPO准备。">
+
+    <!-- Google Fonts for Chinese (Noto Serif SC for headings, Noto Sans SC for body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+
+    <style>
+        /* Custom Fonts with Fallback for Chinese */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, serif;
+        }
+
+        /* Dark Mode Transitions */
+        html.dark {
+            --tw-bg-opacity: 1;
+            background-color: rgb(17 24 39 / var(--tw-bg-opacity)); /* bg-gray-900 */
+            color: rgb(229 231 235 / var(--tw-text-opacity)); /* text-gray-200 */
+        }
+        html:not(.dark) {
+            --tw-bg-opacity: 1;
+            background-color: rgb(243 244 246 / var(--tw-bg-opacity)); /* bg-gray-100 */
+            color: rgb(55 65 81 / var(--tw-text-opacity)); /* text-gray-700 */
+        }
+        body, .bg-gray-800, .bg-gray-700, .border-gray-700, .text-gray-400, .text-gray-300,
+        .dark\:bg-gray-900, .dark\:bg-gray-800, .dark\:bg-gray-700, .dark\:border-gray-700, .dark\:text-gray-200, .dark\:text-gray-400 {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Custom Mermaid Styling for Dark Mode */
+        .mermaid {
+            background-color: #1f2937 !important; /* Tailwind gray-800 */
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            margin-top: 1.5rem;
+        }
+        .dark .mermaid-dark-theme g.nodes > g.node rect,
+        .dark .mermaid-dark-theme g.nodes > g.node circle,
+        .dark .mermaid-dark-theme g.nodes > g.node ellipse,
+        .dark .mermaid-dark-theme g.nodes > g.node polygon {
+            fill: #374151 !important; /* Tailwind gray-700 */
+            stroke: #4b5563 !important; /* Tailwind gray-600 */
+        }
+        .dark .mermaid-dark-theme g.nodes > g.node text {
+            fill: #d1d5db !important; /* Tailwind gray-300 */
+        }
+        .dark .mermaid-dark-theme .edgePath .path {
+            stroke: #6b7280 !important; /* Tailwind gray-500 */
+        }
+        .dark .mermaid-dark-theme .edgePath .end-arrow {
+            fill: #6b7280 !important; /* Tailwind gray-500 */
+        }
+        .dark .mermaid-dark-theme .cluster rect {
+            fill: #374151 !important;
+            stroke: #4b5563 !important;
+        }
+        .dark .mermaid-dark-theme .cluster text {
+            fill: #d1d5db !important;
+        }
+
+        /* Light Mode Mermaid Styling (default mermaid uses light mode colors) */
+        html:not(.dark) .mermaid {
+            background-color: #e5e7eb !important; /* Tailwind gray-200 */
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            margin-top: 1.5rem;
+        }
+        html:not(.dark) .mermaid g.nodes > g.node rect,
+        html:not(.dark) .mermaid g.nodes > g.node circle,
+        html:not(.dark) .mermaid g.nodes > g.node ellipse,
+        html:not(.dark) .mermaid g.nodes > g.node polygon {
+            fill: #f9fafb !important; /* Tailwind gray-50 */
+            stroke: #d1d5db !important; /* Tailwind gray-300 */
+        }
+        html:not(.dark) .mermaid g.nodes > g.node text {
+            fill: #374151 !important; /* Tailwind gray-700 */
+        }
+        html:not(.dark) .mermaid .edgePath .path {
+            stroke: #9ca3af !important; /* Tailwind gray-400 */
+        }
+        html:not(.dark) .mermaid .edgePath .end-arrow {
+            fill: #9ca3af !important; /* Tailwind gray-400 */
+        }
+        html:not(.dark) .mermaid .cluster rect {
+            fill: #f3f4f6 !important;
+            stroke: #e5e7eb !important;
+        }
+        html:not(.dark) .mermaid .cluster text {
+            fill: #6b7280 !important;
+        }
+
+        /* Custom scrollbar for subtle look */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #4a5568; /* dark mode */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background-color: #2d3748; /* dark mode */
+        }
+        html:not(.dark) ::-webkit-scrollbar-thumb {
+            background-color: #a0aec0; /* light mode */
+        }
+        html:not(.dark) ::-webkit-scrollbar-track {
+            background-color: #edf2f7; /* light mode */
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-200 antialiased leading-relaxed">
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-50 bg-white bg-opacity-90 dark:bg-gray-900 dark:bg-opacity-90 shadow-md backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <h1 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-50">
+                <i class="fas fa-chart-line text-blue-600 dark:text-blue-400 mr-2"></i>
+                <span class="hidden sm:inline">科创板上市财务数据梳理</span>
+                <span class="inline sm:hidden">财务梳理</span>
+            </h1>
+            <button id="theme-toggle" class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-colors duration-300 hover:bg-gray-200 dark:hover:bg-gray-700">
+                <i class="fas fa-sun text-gray-600 dark:hidden"></i>
+                <i class="fas fa-moon text-gray-400 hidden dark:inline"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+
+        <!-- Hero Module -->
+        <section class="relative bg-gradient-to-br from-gray-950 to-gray-800 dark:from-gray-950 dark:to-gray-800 rounded-lg p-8 sm:p-12 mb-12 shadow-xl overflow-hidden transition-colors duration-300">
+            <!-- Background pattern/lines -->
+            <div class="absolute inset-0 opacity-10 dark:opacity-15" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%239CA3AF\' fill-opacity=\'0.2\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0 20v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM6 46v-4H4v4H0v2h4v4h2v-4h4v-2H6zm0-20v-4H4v4H0v2h4v4h2v-4h4v-2H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+            <div class="relative z-10 text-center">
+                <h1 class="text-3xl sm:text-5xl font-extrabold text-blue-400 mb-4 tracking-tight">
+                    <span class="block">科创板上市财务数据梳理</span>
+                    <span class="block text-xl sm:text-3xl mt-2 text-gray-100 font-semibold">2022-2024年关键要点</span>
+                </h1>
+                <p class="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto mb-6">
+                    助力天兵科技，精准把握科创属性与监管要求，确保IPO财务合规性与数据透明化。
+                </p>
+                <div class="mt-8">
+                    <a href="#overview" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-transform transform hover:scale-105">
+                        <i class="fas fa-scroll mr-2"></i> 深入了解
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content Area -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+            <!-- Left Column: Key Information & Progress -->
+            <div class="lg:col-span-2 space-y-8">
+                <section id="overview" class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">
+                        <i class="fas fa-clipboard-list text-blue-500 mr-2"></i> 重点关注事项
+                    </h2>
+                    <div class="prose dark:prose-invert max-w-none text-gray-800 dark:text-gray-200">
+                        <p class="text-lg mb-4">
+                            <strong>22-24年财务数据梳理</strong>
+                        </p>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3 flex items-center">
+                            <i class="fas fa-info-circle text-purple-500 mr-2"></i> 具体情况及当前进展
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-300 italic mb-4">（需企业根据实际状态填写，示例参考）</p>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-red-50 dark:bg-red-900 bg-opacity-70 dark:bg-opacity-30 p-5 rounded-md border border-red-200 dark:border-red-700 shadow-sm">
+                                <h4 class="text-lg font-medium text-red-700 dark:text-red-300 mb-3 flex items-center">
+                                    <i class="fas fa-exclamation-triangle mr-2 text-red-600 dark:text-red-400"></i> 当前痛点
+                                </h4>
+                                <ul class="list-none space-y-2">
+                                    <li class="flex items-start text-red-600 dark:text-red-200"><i class="fas fa-times-circle mt-1 mr-2 flex-shrink-0"></i> 收入确认政策是否符合军工行业特性（如军品验收节点、暂定价调整）；</li>
+                                    <li class="flex items-start text-red-600 dark:text-red-200"><i class="fas fa-times-circle mt-1 mr-2 flex-shrink-0"></i> 研发费用归集口径是否满足科创板“研发占比≥5%或15%”要求；</li>
+                                    <li class="flex items-start text-red-600 dark:text-red-200"><i class="fas fa-times-circle mt-1 mr-2 flex-shrink-0"></i> 政府补助/军品退税会计处理合规性存疑。</li>
+                                </ul>
+                            </div>
+                            <div class="bg-blue-50 dark:bg-blue-900 bg-opacity-70 dark:bg-opacity-30 p-5 rounded-md border border-blue-200 dark:border-blue-700 shadow-sm">
+                                <h4 class="text-lg font-medium text-blue-700 dark:text-blue-300 mb-3 flex items-center">
+                                    <i class="fas fa-sync-alt mr-2 text-blue-600 dark:text-blue-400"></i> 当前进度
+                                </h4>
+                                <ul class="list-none space-y-2">
+                                    <li class="flex items-start text-blue-600 dark:text-blue-200"><i class="fas fa-chevron-right mt-1 mr-2 flex-shrink-0"></i> 天健已完成2022年审计初稿；</li>
+                                    <li class="flex items-start text-blue-600 dark:text-blue-200"><i class="fas fa-chevron-right mt-1 mr-2 flex-shrink-0"></i> 2023年成本分摊模型待完善；</li>
+                                    <li class="flex items-start text-blue-600 dark:text-blue-200"><i class="fas fa-chevron-right mt-1 mr-2 flex-shrink-0"></i> 军品业务分板块收入拆分未完成。</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mt-8 mb-3 flex items-center">
+                            <i class="fas fa-hands-helping text-green-500 mr-2"></i> 需天兵科技协助事项
+                        </h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-md border border-gray-200 dark:border-gray-600 shadow-sm">
+                                <h4 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3 flex items-center">
+                                    <i class="fas fa-file-alt mr-2 text-gray-600 dark:text-gray-400"></i> 1. 资料提供
+                                </h4>
+                                <ul class="list-none space-y-2 text-gray-700 dark:text-gray-300">
+                                    <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-2 text-green-500"></i> 全套销售/采购合同、验收单据（涉密部分需做脱敏处理）；</li>
+                                    <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-2 text-green-500"></i> 研发项目台账（含人员工时、材料消耗明细）；</li>
+                                    <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-2 text-green-500"></i> 军品定价批复文件及价格调整记录。</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-700 p-5 rounded-md border border-gray-200 dark:border-gray-600 shadow-sm">
+                                <h4 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-3 flex items-center">
+                                    <i class="fas fa-network-wired mr-2 text-gray-600 dark:text-gray-400"></i> 2. 流程配合
+                                </h4>
+                                <ul class="list-none space-y-2 text-gray-700 dark:text-gray-300">
+                                    <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-2 text-green-500"></i> 开放ERP系统财务模块查询权限（限审计团队）；</li>
+                                    <li class="flex items-start"><i class="fas fa-check-circle mt-1 mr-2 text-green-500"></i> 协调生产/研发部门提供成本动因说明。</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mt-8 mb-3 flex items-center">
+                            <i class="fas fa-users-cog text-indigo-500 mr-2"></i> 参与各方
+                        </h3>
+                        <ul class="list-none space-y-2 text-gray-700 dark:text-gray-300">
+                            <li class="flex items-center"><i class="fas fa-user-tie text-indigo-400 mr-2"></i> <strong class="text-gray-800 dark:text-gray-100">主导</strong>：天兵科技财务部</li>
+                            <li class="flex items-center"><i class="fas fa-handshake text-indigo-400 mr-2"></i> <strong class="text-gray-800 dark:text-gray-100">核心协作方</strong>：天健（审计）、中信建投（保荐人）</li>
+                            <li class="flex items-center"><i class="fas fa-shield-alt text-indigo-400 mr-2"></i> <strong class="text-gray-800 dark:text-gray-100">支持方</strong>：军工主管部门（涉密数据核验）</li>
+                        </ul>
+
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mt-8 mb-3 flex items-center">
+                            <i class="fas fa-calendar-alt text-teal-500 mr-2"></i> 建议完成时间节点
+                        </h3>
+                        <div class="overflow-x-auto rounded-md border border-gray-200 dark:border-gray-700 shadow-sm">
+                            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                                <thead class="bg-gray-50 dark:bg-gray-700">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                                            阶段性任务
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                                            截止时间
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+                                        <td class="px-6 py-4 whitespace-nowrap text-gray-800 dark:text-gray-200 flex items-center">
+                                            <i class="fas fa-clipboard-check text-teal-500 mr-2"></i> 三年一期内控穿行测试
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300 font-mono">
+                                            2024-06-30
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+                                        <td class="px-6 py-4 whitespace-nowrap text-gray-800 dark:text-gray-200 flex items-center">
+                                            <i class="fas fa-search-dollar text-teal-500 mr-2"></i> 收入/研发费用专项核查
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300 font-mono">
+                                            2024-07-31
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+                                        <td class="px-6 py-4 whitespace-nowrap text-gray-800 dark:text-gray-200 flex items-center">
+                                            <i class="fas fa-file-signature text-teal-500 mr-2"></i> 审计报告定稿
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300 font-mono">
+                                            2024-08-15
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+                                        <td class="px-6 py-4 whitespace-nowrap text-gray-800 dark:text-gray-200 flex items-center">
+                                            <i class="fas fa-book-reader text-teal-500 mr-2"></i> 招股书财务章节终稿
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300 font-mono">
+                                            2024-08-31
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mt-8 mb-3 flex items-center">
+                            <i class="fas fa-building text-orange-500 mr-2"></i> 天兵科技部门人员
+                        </h3>
+                        <ul class="list-none space-y-2 text-gray-700 dark:text-gray-300">
+                            <li class="flex items-center"><i class="fas fa-briefcase text-orange-400 mr-2"></i> <strong class="text-gray-800 dark:text-gray-100">财务总监</strong>：总协调（资金流水核查签字）</li>
+                            <li class="flex items-center"><i class="fas fa-calculator text-orange-400 mr-2"></i> <strong class="text-gray-800 dark:text-gray-100">成本会计</strong>：研发费用归集支持</li>
+                            <li class="flex items-center"><i class="fas fa-chart-pie text-orange-400 mr-2"></i> <strong class="text-gray-800 dark:text-gray-100">信披专员</strong>：配合招股书数据披露</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column: Key Regulatory Requirements & Visualizations -->
+            <div class="lg:col-span-1 space-y-8">
+                <section class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">
+                        <i class="fas fa-gavel text-red-500 mr-2"></i> 关键监管要求摘要
+                    </h2>
+                    <div class="prose dark:prose-invert max-w-none text-gray-800 dark:text-gray-200">
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3 flex items-center">
+                            <i class="fas fa-flask text-red-400 mr-2"></i> 1. 科创属性量化指标
+                        </h3>
+                        <ul class="list-none space-y-2 text-gray-700 dark:text-gray-300">
+                            <li class="flex items-start"><i class="fas fa-arrow-alt-circle-right mt-1 mr-2 text-red-500"></i> 最近三年研发投入复合增长率≥20%，或累计≥6000万元；</li>
+                            <li class="flex items-start"><i class="fas fa-arrow-alt-circle-right mt-1 mr-2 text-red-500"></i> 发明专利≥5项（军工企业可放宽至4项）；</li>
+                            <li class="flex items-start"><i class="fas fa-arrow-alt-circle-right mt-1 mr-2 text-red-500"></i> 营业收入复合增长率≥20%或最近一年≥3亿元。</li>
+                        </ul>
+
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mt-6 mb-3 flex items-center">
+                            <i class="fas fa-balance-scale-right text-red-400 mr-2"></i> 2. 审计重点
+                        </h3>
+                        <ul class="list-none space-y-2 text-gray-700 dark:text-gray-300">
+                            <li class="flex items-start"><i class="fas fa-arrow-alt-circle-right mt-1 mr-2 text-red-500"></i> 收入：需穿透核查最终军品使用方（如军方单位）；</li>
+                            <li class="flex items-start"><i class="fas fa-arrow-alt-circle-right mt-1 mr-2 text-red-500"></i> 存货：在制品需按军品型号单独计提跌价准备；</li>
+                            <li class="flex items-start"><i class="fas fa-arrow-alt-circle-right mt-1 mr-2 text-red-500"></i> 关联交易：军工集团内交易定价需取得可比第三方佐证。</li>
+                        </ul>
+
+                        <div class="mt-6 p-4 bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-30 border border-yellow-200 dark:border-yellow-700 rounded-md shadow-sm">
+                            <p class="text-sm text-yellow-800 dark:text-yellow-300">
+                                <i class="fas fa-exclamation-circle mr-2 text-yellow-600 dark:text-yellow-400"></i>
+                                <strong>注</strong>：军工企业需特别注意
+                                <strong class="text-yellow-900 dark:text-yellow-100">《涉军企事业单位改制重组上市及上市后资本运作军工事项审查工作管理暂行办法》</strong>
+                                对财务数据脱密披露的特殊要求。建议同步启动军工事项审查（JSC）预沟通。
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Data Visualization: Mermaid Diagram -->
+                <section class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">
+                        <i class="fas fa-project-diagram text-purple-500 mr-2"></i> 财务数据梳理流程与关键要素关联图
+                    </h2>
+                    <div class="text-gray-700 dark:text-gray-300 text-sm mb-4">
+                        通过此图表直观了解科创板IPO财务梳理的核心流程、参与方及关键监管要求之间的逻辑关系。
+                    </div>
+                    <div class="mermaid-container bg-gray-800 dark:bg-gray-800 rounded-lg p-4 transition-colors duration-300">
+                        <pre class="mermaid theme-dark-theme">
+graph TD
+    subgraph IPO财务数据梳理
+        A[开始: 财务数据梳理] --> B(22-24年财务数据)
+        B --> C{痛点与现状评估}
+        C -- 发现问题 --> D(需天兵科技协助事项)
+        D -- 资料提供 --> E(财务部主导)
+        D -- 流程配合 --> E
+        E --> F(核心协作: 天健 & 中信建投)
+        F -- 审计核查 --> G(关键监管要求)
+        G --> H(审计报告定稿)
+        H --> I(招股书财务章节终稿)
+        I --> J[完成: IPO财务申报]
+    end
+
+    subgraph 关键监管要求
+        G_R1[科创属性量化指标]
+        G_R2[审计重点]
+        G_R3[军工事项审查(JSC)]
+        G -- 关注 --> G_R1
+        G -- 关注 --> G_R2
+        G -- 关注 --> G_R3
+    end
+
+    subgraph 参与方
+        P1[天兵科技财务部]
+        P2[天健(审计)]
+        P3[中信建投(保荐人)]
+        P4[军工主管部门]
+        E --- P1
+        F --- P2
+        F --- P3
+        G_R3 --- P4
+    end
+
+    classDef default fill:#374151,stroke:#4b5563,stroke-width:2px,color:#d1d5db;
+    classDef highlight fill:#4f46e5,stroke:#6366f1,stroke-width:2px,color:#d1d5db; /* blue-700 / blue-600 */
+    classDef red fill:#dc2626,stroke:#ef4444,stroke-width:2px,color:#fef2f2; /* red-600 / red-500 */
+    classDef green fill:#10b981,stroke:#34d399,stroke-width:2px,color:#ecfdf5; /* green-500 / green-400 */
+
+    class A,J highlight
+    class C red
+    class G_R1,G_R2,G_R3 green
+    </pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Additional Sections -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <section class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">
+                    <i class="fas fa-lightbulb text-yellow-500 mr-2"></i> 关键概念解析
+                </h2>
+                <div class="prose dark:prose-invert max-w-none text-gray-800 dark:text-gray-200 space-y-4">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2 flex items-center">
+                            <i class="fas fa-cogs mr-2 text-yellow-400"></i> 内控穿行测试
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            审计师通过追踪交易流程，从起点到终点，验证企业内部控制设计和运行有效性的方法。它是评价内控制度健全性和执行力度的重要手段。
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2 flex items-center">
+                            <i class="fas fa-shield-alt mr-2 text-yellow-400"></i> 军工事项审查 (JSC)
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            针对涉军企业上市过程中涉及的国家军事秘密、武器装备等敏感事项进行的专门审查。旨在确保国家安全和军事信息的保密性，是军工企业上市的特有环节。
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2 flex items-center">
+                            <i class="fas fa-chart-bar mr-2 text-yellow-400"></i> 研发费用资本化边界
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            区分研发投入应计入当期损益（费用化）还是形成无形资产（资本化）的界限。合理划分对企业的利润表和资产负债表有重大影响，尤其在科创板申报中备受关注。
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">
+                    <i class="fas fa-book-open text-blue-500 mr-2"></i> 进一步阅读
+                </h2>
+                <div class="prose dark:prose-invert max-w-none text-gray-800 dark:text-gray-200">
+                    <ul class="list-none space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-book mr-3 mt-1 text-blue-400 flex-shrink-0"></i>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">《公司法》</h3>
+                                <p class="text-gray-700 dark:text-gray-300 text-sm">
+                                    中华人民共和国公司设立、组织、行为和解散的根本大法，为企业上市提供了基本的法律框架。
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-book mr-3 mt-1 text-blue-400 flex-shrink-0"></i>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">《证券法》</h3>
+                                <p class="text-gray-700 dark:text-gray-300 text-sm">
+                                    规范证券发行和交易行为、维护证券市场秩序、保护投资者合法权益的法律，是IPO的核心法律依据。
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-book mr-3 mt-1 text-blue-400 flex-shrink-0"></i>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">《上海证券交易所科创板股票上市规则》</h3>
+                                <p class="text-gray-700 dark:text-gray-300 text-sm">
+                                    针对科创板上市的专门规则，详细规定了上市条件、程序、信息披露等具体要求，是科创板IPO的直接指导文件。
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-book mr-3 mt-1 text-blue-400 flex-shrink-0"></i>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">《公开发行证券的公司信息披露内容与格式准则第41号——科创板公司招股说明书》</h3>
+                                <p class="text-gray-700 dark:text-gray-300 text-sm">
+                                    明确了科创板公司招股说明书的各项信息披露内容、顺序和格式要求，是财务数据梳理的直接产出标准。
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-book mr-3 mt-1 text-blue-400 flex-shrink-0"></i>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">《企业会计准则》</h3>
+                                <p class="text-gray-700 dark:text-gray-300 text-sm">
+                                    中国企业进行会计核算和报告的统一规范，是财务数据合法合规的基础，所有财务处理必须符合其规定。
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-200 dark:bg-gray-900 py-6 text-center text-gray-600 dark:text-gray-400 text-sm transition-colors duration-300">
+        <p>&copy; 2024 天兵科技 科创板上市财务数据梳理. All rights reserved.</p>
+        <p class="mt-2">本页内容仅供参考，请以最新监管要求及专业意见为准。</p>
+    </footer>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid Configuration
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base', // Use 'base' to allow custom CSS styling for dark/light mode
+            themeVariables: {
+                darkMode: true, // Default to dark mode for Mermaid's base styling
+                primaryColor: '#374151', // gray-700
+                secondaryColor: '#4b5563', // gray-600
+                tertiaryColor: '#1f2937', // gray-800
+                primaryTextColor: '#d1d5db', // gray-300
+                lineColor: '#6b7280', // gray-500
+            }
+        });
+
+        // Theme Switcher Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                mermaid.initialize({ theme: 'dark', themeVariables: { /* dark mode variables */ }});
+            } else {
+                htmlElement.classList.remove('dark');
+                mermaid.initialize({ theme: 'default', themeVariables: { /* light mode variables */ }});
+            }
+            localStorage.setItem('theme', theme);
+        }
+
+        // Check for saved theme preference or system preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light'); // Default to light if no preference and system is not dark
+        }
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Optional: Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (!localStorage.getItem('theme')) { // Only update if user hasn't manually set a preference
+                setTheme(event.matches ? 'dark' : 'light');
+            }
+        });
+    </script>
+</body>
+</html>
+```
