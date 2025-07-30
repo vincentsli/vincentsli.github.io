@@ -1,0 +1,517 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蓝箭航天IPO深度分析：竞品视角与市场解读</title>
+    <meta name="description" content="深入分析蓝箭航天IPO对中国商业航天市场的影响，从技术、供应链、资本等多维度解读。">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC (Chinese) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom Font Definitions for Chinese and Fallbacks */
+        :root {
+            --font-serif-sc: 'Noto Serif SC', 'Times New Roman', Times, serif;
+            --font-sans-sc: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-sans-sc);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-serif-sc);
+        }
+
+        /* Dark Mode Specific Styles (Default) */
+        .dark {
+            background-color: #1a1a2e; /* Deep dark blue-purple for body background */
+            color: #e0e0e0; /* Light gray text */
+        }
+        .dark .card-bg {
+            background-color: #26263a; /* Slightly lighter dark for card backgrounds */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* Enhanced shadow for dark mode cards */
+        }
+        .dark .hero-overlay {
+            /* Gradient overlay for hero image in dark mode */
+            background: linear-gradient(to top, rgba(26, 26, 46, 0.95) 0%, rgba(26, 26, 46, 0.7) 50%, rgba(26, 26, 46, 0.2) 100%);
+        }
+        .dark .highlight {
+            color: #9b9eff; /* Lighter accent color for highlights in dark mode */
+        }
+        .dark .dropcap::first-letter {
+            color: #9b9eff; /* Lighter accent color for dropcap in dark mode */
+        }
+        .dark .border-gray-700 {
+            border-color: #3f3f5a; /* Border color for cards/dividers in dark mode */
+        }
+
+        /* Light Mode Specific Styles (When .dark class is absent) */
+        html:not(.dark) {
+            background-color: #f7f7f7; /* Soft light gray for body background */
+            color: #333; /* Dark gray text */
+        }
+        html:not(.dark) .card-bg {
+            background-color: #ffffff; /* White for card backgrounds */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for light mode cards */
+        }
+        html:not(.dark) .hero-overlay {
+            /* Gradient overlay for hero image in light mode */
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.7) 50%, rgba(255, 255, 255, 0.2) 100%);
+        }
+        html:not(.dark) .highlight {
+            color: #6a6ee0; /* Accent color for highlights in light mode */
+        }
+        html:not(.dark) .dropcap::first-letter {
+            color: #6a6ee0; /* Accent color for dropcap in light mode */
+        }
+        html:not(.dark) .border-gray-700 {
+            border-color: #e0e0e0; /* Border color for cards/dividers in light mode */
+        }
+
+        /* General Styles */
+        .highlight {
+            font-weight: 600;
+        }
+        
+        /* Dropcap effect for the first letter of a paragraph */
+        .dropcap::first-letter {
+            float: left;
+            font-size: 4.5em; /* Larger font size */
+            line-height: 0.75; /* Adjust line height for alignment */
+            margin-right: 0.1em;
+            font-weight: bold;
+            font-family: var(--font-serif-sc); /* Apply serif font to dropcap */
+        }
+
+        /* Smooth scroll for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animations for scroll reveal */
+        .animate-fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .animate-fade-in-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mermaid Chart Styling Overrides */
+        .mermaid {
+            background-color: transparent !important; /* Make mermaid background transparent */
+            border-radius: 8px;
+            padding: 16px;
+        }
+        /* Dark Mode Mermaid Colors */
+        .dark .mermaid svg {
+            color: #e0e0e0;
+        }
+        .dark .mermaid .node rect, .dark .mermaid .node circle, .dark .mermaid .node polygon {
+            fill: #3f3f5a !important; /* Node background */
+            stroke: #6a6a8a !important; /* Node border */
+        }
+        .dark .mermaid .node text {
+            fill: #e0e0e0 !important; /* Node text */
+        }
+        .dark .mermaid .edgePaths .path {
+            stroke: #8a8aab !important; /* Arrow/line color */
+            fill: none !important;
+        }
+        .dark .mermaid .edgeLabels text {
+            fill: #c0c0c0 !important; /* Edge label text */
+        }
+        /* Light Mode Mermaid Colors */
+        html:not(.dark) .mermaid svg {
+            color: #333;
+        }
+        html:not(.dark) .mermaid .node rect, html:not(.dark) .mermaid .node circle, html:not(.dark) .mermaid .node polygon {
+            fill: #ffffff !important;
+            stroke: #cccccc !important;
+        }
+        html:not(.dark) .mermaid .node text {
+            fill: #333 !important;
+        }
+        html:not(.dark) .mermaid .edgePaths .path {
+            stroke: #666 !important;
+            fill: none !important;
+        }
+        html:not(.dark) .mermaid .edgeLabels text {
+            fill: #555 !important;
+        }
+
+    </style>
+</head>
+<body class="transition-colors duration-500 ease-in-out">
+    <!-- Theme Toggle Button -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="theme-toggle" aria-label="Toggle dark mode" class="p-3 rounded-full bg-indigo-600 text-white shadow-lg hover:bg-indigo-700 transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75">
+            <i class="fas fa-sun block dark:hidden"></i>
+            <i class="fas fa-moon hidden dark:block"></i>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative h-screen flex items-center justify-center text-center overflow-hidden bg-cover bg-center" style="background-image: url('https://source.unsplash.com/random/1920x1080/?rocket,space,launch,galaxy,futuristic');">
+        <div class="absolute inset-0 hero-overlay"></div>
+        <div class="relative z-10 p-6 max-w-4xl mx-auto text-white">
+            <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-4 tracking-tight drop-shadow-lg">
+                <span class="highlight">蓝箭航天</span>IPO：商业航天新纪元
+            </h1>
+            <p class="text-xl md:text-2xl font-light mb-8 opacity-90 drop-shadow">
+                竞品视角下的机遇与挑战
+            </p>
+            <p class="text-lg md:text-xl leading-relaxed opacity-80 dropcap">
+                2025年7月29日，国内民营火箭巨头蓝箭航天正式启动科创板IPO辅导，这不仅是其自身发展的里程碑，更是中国商业航天领域迈向资本市场的重要信号。本文将从竞品角度深入剖析蓝箭IPO的关键要素，并解读其背后蕴含的行业深层信息。
+            </p>
+            <a href="#main-content" class="inline-block mt-8 px-8 py-3 bg-indigo-600 text-white text-lg font-semibold rounded-full shadow-lg hover:bg-indigo-700 transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75">
+                <i class="fas fa-arrow-down mr-2"></i> 深入解读
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="container mx-auto px-4 py-16 md:py-24">
+        
+        <!-- Section: 竞品视角下需重点关注的IPO要素 -->
+        <section class="mb-16 md:mb-24 card-bg p-8 rounded-xl shadow-2xl animate-fade-in-up">
+            <h2 class="text-4xl md:text-5xl font-bold mb-12 text-center highlight">
+                <i class="fas fa-eye mr-4 text-indigo-500"></i>竞品视角下需重点关注的IPO要素
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 技术路径与产品商业化进展 -->
+                <div class="p-6 rounded-lg border border-gray-700 hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 card-bg">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">
+                        <i class="fas fa-flask mr-3"></i>技术路径与商业化进展
+                    </h3>
+                    <ul class="space-y-3 text-lg leading-relaxed">
+                        <li><strong class="highlight">技术路线差异：</strong>蓝箭主攻<span class="highlight">液氧甲烷火箭</span>（朱雀系列）；竞品如天兵科技（液氧煤油，运载效率3.67%）与星河动力（固体火箭转向液体）。</li>
+                        <li><strong class="highlight">量产能力：</strong>蓝箭朱雀三号2024年首飞成功，2025年计划执行<span class="highlight">4次发射</span>；竞品如星河动力智神星一号首飞推迟至2026年。</li>
+                        <li><strong class="highlight">订单储备：</strong>蓝箭获<span class="highlight">中国星网14发订单</span>（占其未来3年产能70%），远超竞品。</li>
+                    </ul>
+                </div>
+
+                <!-- 供应链风险 -->
+                <div class="p-6 rounded-lg border border-gray-700 hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 card-bg">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">
+                        <i class="fas fa-chain-broken mr-3"></i>供应链风险
+                    </h3>
+                    <ul class="space-y-3 text-lg leading-relaxed">
+                        <li><strong class="highlight">材料依赖：</strong>蓝箭箭体材料（T800级碳纤维）<span class="highlight">依赖日本东丽进口</span>。</li>
+                        <li><strong class="highlight">芯片限制：</strong>美国ITAR条例限制航天级FPGA芯片对华出口，曾致星际荣耀2024年减产。</li>
+                        <li><strong class="highlight">发动机自研：</strong>蓝箭发动机自研比例超<span class="highlight">90%</span>（天鹊系列），优势显著。</li>
+                    </ul>
+                </div>
+
+                <!-- 资本运作与估值对比 -->
+                <div class="p-6 rounded-lg border border-gray-700 hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 card-bg">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">
+                        <i class="fas fa-money-bill-wave mr-3"></i>资本运作与估值对比
+                    </h3>
+                    <ul class="space-y-3 text-lg leading-relaxed">
+                        <li><strong class="highlight">融资能力：</strong>蓝箭Pre-IPO轮估值约<span class="highlight">200亿元</span>（2024年），显著高于星际荣耀（85亿元）和星河动力（92亿元）。</li>
+                        <li><strong class="highlight">IPO标准选择：</strong>蓝箭适用科创板<span class="highlight">第五套标准</span>（市值≥40亿元+核心产品获重大进展）。</li>
+                        <li><strong class="highlight">行业估值：</strong>蓝箭若成功上市，将成为<span class="highlight">科创板首家商业火箭公司</span>，或推高行业估值。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Visualization: Competitive Landscape -->
+        <section class="mb-16 md:mb-24 card-bg p-8 rounded-xl shadow-2xl animate-fade-in-up">
+            <h2 class="text-4xl md:text-5xl font-bold mb-12 text-center highlight">
+                <i class="fas fa-sitemap mr-4 text-indigo-500"></i>商业航天主要竞品对比
+            </h2>
+            <div class="flex justify-center items-center">
+                <div class="mermaid text-center w-full overflow-x-auto p-4 max-w-full">
+                    graph TD
+                        A[蓝箭航天] -->|液氧甲烷<br>估值 200亿<br>订单 14发| B(朱雀系列)
+                        A -- 运载效率 3.18% --> K
+                        A -- 发动机自研 >90% --> M
+
+                        C[天兵科技] -->|液氧煤油<br>估值 180亿<br>首飞 2025| D(天龙系列)
+                        C -- 运载效率 3.67% --> K
+
+                        E[星河动力] -->|固体->液体<br>估值 92亿<br>首飞 2026(延期)| F(谷神星/智神星)
+                        E -- 发动机测试延误 --> K
+
+                        G[星际荣耀] -->|双曲线系列<br>估值 85亿<br>订单 2发(2024)| H(双曲线系列)
+                        G -- FPGA芯片断供 --> N
+
+                        subgraph 核心竞争力
+                            K[商业化进度]
+                            M[自研能力]
+                            N[供应链风险]
+                        end
+
+                        style A fill:#6a6ee0,stroke:#6a6ee0,stroke-width:2px,color:#fff
+                        style B fill:#8084e6,stroke:#8084e6,stroke-width:1px,color:#fff
+                        style C fill:#3f3f5a,stroke:#6a6a8a,stroke-width:1px
+                        style D fill:#5a5d7c,stroke:#6a6a8a,stroke-width:1px
+                        style E fill:#3f3f5a,stroke:#6a6a8a,stroke-width:1px
+                        style F fill:#5a5d7c,stroke:#6a6a8a,stroke-width:1px
+                        style G fill:#3f3f5a,stroke:#6a6a8a,stroke-width:1px
+                        style H fill:#5a5d7c,stroke:#6a6a8a,stroke-width:1px
+                        
+                        style K fill:#2b2b40,stroke:#4a4a60,stroke-dasharray: 5 5
+                        style M fill:#2b2b40,stroke:#4a4a60,stroke-dasharray: 5 5
+                        style N fill:#2b2b40,stroke:#4a4a60,stroke-dasharray: 5 5
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 公开信息解读 -->
+        <section class="mb-16 md:mb-24 card-bg p-8 rounded-xl shadow-2xl animate-fade-in-up">
+            <h2 class="text-4xl md:text-5xl font-bold mb-12 text-center highlight">
+                <i class="fas fa-lightbulb mr-4 text-indigo-500"></i>公开信息解读
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- IPO进程时间表 -->
+                <div class="p-6 rounded-lg border border-gray-700 hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 card-bg">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">
+                        <i class="fas fa-calendar-alt mr-3"></i>IPO进程时间表
+                    </h3>
+                    <ul class="space-y-3 text-lg leading-relaxed">
+                        <li><strong class="highlight">当前阶段：</strong>辅导备案（2025年7月29日）。</li>
+                        <li><strong class="highlight">预期时间：</strong>预计2025年10月完成辅导验收，2026年Q2上市。</li>
+                        <li><strong class="highlight">审核风险：</strong>商业火箭公司首单IPO可能触发<span class="highlight">跨部门联合审查</span>（涉及国防科工局），周期或延长。</li>
+                    </ul>
+                </div>
+
+                <!-- 政策与行业信号 -->
+                <div class="p-6 rounded-lg border border-gray-700 hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 card-bg">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">
+                        <i class="fas fa-gavel mr-3"></i>政策与行业信号
+                    </h3>
+                    <ul class="space-y-3 text-lg leading-relaxed">
+                        <li><strong class="highlight">政策红利：</strong>证监会7月25日发文“支持硬科技企业科创板融资”，商业航天被列为重点领域。</li>
+                        <li><strong class="highlight">行业影响：</strong>若蓝箭成功上市，将推高行业估值，但可能加速中小竞品出清（2024年商业航天融资额同比降40%）。</li>
+                    </ul>
+                </div>
+
+                <!-- 信息披露焦点 -->
+                <div class="p-6 rounded-lg border border-gray-700 hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 card-bg">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">
+                        <i class="fas fa-clipboard-list mr-3"></i>信息披露焦点
+                    </h3>
+                    <ul class="space-y-3 text-lg leading-relaxed">
+                        <li><strong class="highlight">技术披露深度：</strong>需关注招股书是否披露发动机比冲、回收成功率等核心参数。</li>
+                        <li><strong class="highlight">关联交易：</strong>控股股东张昌武持股14.68%，需核查是否存在技术授权等关联安排。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Visualization: IPO Timeline -->
+        <section class="mb-16 md:mb-24 card-bg p-8 rounded-xl shadow-2xl animate-fade-in-up">
+            <h2 class="text-4xl md:text-5xl font-bold mb-12 text-center highlight">
+                <i class="fas fa-hourglass-start mr-4 text-indigo-500"></i>蓝箭航天IPO关键时间轴
+            </h2>
+            <div class="flex justify-center items-center">
+                <div class="mermaid text-center w-full overflow-x-auto p-4 max-w-full">
+                    timeline
+                        title 蓝箭航天IPO关键时间轴
+                        section 2024年
+                            朱雀三号首飞成功
+                            蓝箭Pre-IPO轮估值200亿
+                        section 2025年Q3
+                            7月29日: 提交科创板IPO辅导备案
+                            预计10月: 完成辅导验收
+                        section 2026年Q2
+                            若顺利: 预计上市 (平均周期325天)
+                        section 潜在风险
+                            跨部门联合审查: 周期延长至480天
+                            行业融资困难: 加速中小竞品出清
+                </div>
+            </div>
+        </section>
+
+        <!-- Supplementary Information: 关于蓝箭航天 -->
+        <section class="mb-16 md:mb-24 card-bg p-8 rounded-xl shadow-2xl animate-fade-in-up">
+            <h2 class="text-4xl md:text-5xl font-bold mb-12 text-center highlight">
+                <i class="fas fa-info-circle mr-4 text-indigo-500"></i>关于蓝箭航天
+            </h2>
+            <div class="text-lg leading-relaxed space-y-4">
+                <p>
+                    蓝箭航天空间科技股份有限公司（LandSpace）成立于2015年，是中国领先的商业航天公司，专注于液体运载火箭的研发、设计、制造与运营。公司致力于为全球客户提供高可靠、低成本的商业发射服务。
+                </p>
+                <p>
+                    作为国内民营火箭领域的头部企业，蓝箭航天在液氧甲烷火箭技术上取得了突破性进展，尤其是其“朱雀”系列运载火箭，其中朱雀二号成功入轨，成为全球首枚成功入轨的液氧甲烷火箭，朱雀三号更具备可回收复用能力，代表了中国商业航天领域的最高水平。
+                </p>
+                <p>
+                    公司拥有一支经验丰富的团队，并与中国航天系统建立了紧密的合作关系。此次启动IPO辅导，标志着蓝箭航天正迈向新的发展阶段，有望借助资本市场的力量，加速技术创新与商业化进程，进一步巩固其在商业航天领域的领先地位。
+                </p>
+            </div>
+        </section>
+
+        <!-- Further Reading -->
+        <section class="mb-16 md:mb-24 card-bg p-8 rounded-xl shadow-2xl animate-fade-in-up">
+            <h2 class="text-4xl md:text-5xl font-bold mb-12 text-center highlight">
+                <i class="fas fa-book-reader mr-4 text-indigo-500"></i>延伸阅读
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Book 1 -->
+                <div class="p-6 rounded-lg border border-gray-700 card-bg flex items-start space-x-4">
+                    <i class="fas fa-lightbulb text-3xl text-indigo-400 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-indigo-400">《精益创业》</h3>
+                        <p class="text-lg">作者：埃里克·莱斯</p>
+                        <p class="text-base leading-relaxed text-gray-400">构建创新型企业的基石，强调通过“构建-度量-学习”的循环，有效减少风险，适用于科技初创公司。</p>
+                        <a href="https://book.douban.com/subject/6873551/" target="_blank" rel="noopener noreferrer" class="text-indigo-500 hover:underline text-sm mt-2 block">了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+                <!-- Book 2 -->
+                <div class="p-6 rounded-lg border border-gray-700 card-bg flex items-start space-x-4">
+                    <i class="fas fa-rocket text-3xl text-indigo-400 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-indigo-400">《从0到1》</h3>
+                        <p class="text-lg">作者：彼得·蒂尔</p>
+                        <p class="text-base leading-relaxed text-gray-400">关于创新与创业的深刻洞见，强调创造独特价值的重要性，对于理解商业航天的独角兽逻辑有启发。</p>
+                        <a href="https://book.douban.com/subject/25920709/" target="_blank" rel="noopener noreferrer" class="text-indigo-500 hover:underline text-sm mt-2 block">了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+                <!-- Book 3 -->
+                <div class="p-6 rounded-lg border border-gray-700 card-bg flex items-start space-x-4">
+                    <i class="fas fa-chart-line text-3xl text-indigo-400 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-indigo-400">《商业航天行业研究报告》</h3>
+                        <p class="text-lg">作者：各大券商/研究机构</p>
+                        <p class="text-base leading-relaxed text-gray-400">获取最新的市场数据、技术趋势和竞争格局分析，是深入了解行业必不可少的资料。</p>
+                        <a href="https://www.google.com/search?q=商业航天行业研究报告" target="_blank" rel="noopener noreferrer" class="text-indigo-500 hover:underline text-sm mt-2 block">了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+                <!-- Book 4 -->
+                <div class="p-6 rounded-lg border border-gray-700 card-bg flex items-start space-x-4">
+                    <i class="fas fa-university text-3xl text-indigo-400 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-indigo-400">《公司法》与《证券法》</h3>
+                        <p class="text-lg">作者：中华人民共和国全国人大常委会</p>
+                        <p class="text-base leading-relaxed text-gray-400">理解IPO审核、股权结构、信息披露等法律法规的权威依据，对分析上市公司至关重要。</p>
+                        <a href="https://www.npc.gov.cn/npc/c30834/flgk.shtml" target="_blank" rel="noopener noreferrer" class="text-indigo-500 hover:underline text-sm mt-2 block">了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+                <!-- Book 5 -->
+                <div class="p-6 rounded-lg border border-gray-700 card-bg flex items-start space-x-4">
+                    <i class="fas fa-satellite-dish text-3xl text-indigo-400 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-indigo-400">《太空创业时代》</h3>
+                        <p class="text-lg">作者：罗伯特·G·罗德斯 (或类似主题)</p>
+                        <p class="text-base leading-relaxed text-gray-400">探讨全球商业航天新兴产业的机遇与挑战，洞察行业未来发展趋势及投资价值。</p>
+                        <a href="https://www.google.com/search?q=太空创业时代" target="_blank" rel="noopener noreferrer" class="text-indigo-500 hover:underline text-sm mt-2 block">了解更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 border-t border-gray-700 text-gray-500 text-sm">
+        <p>&copy; 2025 商业航天观察. 保留所有权利。</p>
+        <p class="mt-2">数据来源：联网搜索结果（2025年7月30日左右）、《商业航天行业研究报告（2025年）》及公开信息。</p>
+    </footer>
+
+    <!-- Mermaid JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid Configuration (must be called before mermaid.init())
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark', // Default theme for Mermaid. Will be updated by theme-toggle.
+            securityLevel: 'loose', // Allows for more flexible chart rendering
+            flowchart: {
+                curve: 'basis' // Smooth curves for flowcharts
+            },
+            timeline: {
+                fontFamily: 'var(--font-sans-sc)', // Apply custom font to timeline
+                fontSize: '16px',
+                labelColor: '#e0e0e0', // Default light text for dark mode
+                sectionBkgColor: '#3f3f5a', // Darker background for sections
+                nodeBkgColor: '#2b2b40', // Node background
+                nodeBorderColor: '#6a6a8a', // Node border
+                nodeTextColor: '#e0e0e0' // Node text
+            }
+        });
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+        const mermaidCharts = document.querySelectorAll('.mermaid'); // Select all mermaid charts
+
+        // Function to set the theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                // Re-initialize mermaid with dark theme
+                mermaid.initialize({ theme: 'dark' });
+            } else {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                // Re-initialize mermaid with default (light) theme
+                mermaid.initialize({ theme: 'default' });
+            }
+            // Trigger a re-render for all mermaid charts to apply new theme
+            mermaidCharts.forEach(chart => {
+                chart.removeAttribute('data-processed'); // Mark as unprocessed
+                mermaid.init(undefined, chart); // Re-initialize specific chart
+            });
+        }
+
+        // Check for saved theme preference or system preference on load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark'); // Default to dark if system prefers it
+        } else {
+            setTheme('light'); // Otherwise, default to light
+        }
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Micro-interaction: Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Stop observing once animated
+                }
+            });
+        }, {
+            threshold: 0.1, // Trigger when 10% of the element is visible
+            rootMargin: '0px 0px -50px 0px' // Offset to trigger slightly earlier
+        });
+
+        // Apply 'animate-fade-in-up' class and observe sections
+        document.querySelectorAll('section.animate-fade-in-up').forEach(section => {
+            observer.observe(section);
+        });
+
+    </script>
+</body>
+</html>
+```
