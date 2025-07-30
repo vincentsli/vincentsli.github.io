@@ -1,0 +1,495 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A股IPO财务披露核心“大表”解析</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts for Noto Serif SC and Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <style>
+        /* Base styles for dark mode */
+        :root {
+            --bg-color: #0f172a; /* slate-950 */
+            --text-color: #e2e8f0; /* slate-200 */
+            --heading-color: #f1f5f9; /* slate-100 */
+            --accent-color: #2dd4bf; /* teal-400 */
+            --card-bg: #1e293b; /* slate-800 */
+            --border-color: #334155; /* slate-700 */
+            --link-color: #38bdf8; /* sky-400 */
+            --blockquote-bg: #155e75; /* teal-900 with some opacity */
+            --blockquote-border: #0d9488; /* teal-700 */
+            --mermaid-theme: dark;
+        }
+
+        /* Light mode overrides */
+        html.light {
+            --bg-color: #ffffff;
+            --text-color: #334155; /* slate-700 */
+            --heading-color: #1e293b; /* slate-800 */
+            --accent-color: #06b6d4; /* cyan-500 */
+            --card-bg: #f8fafc; /* slate-50 */
+            --border-color: #e2e8f0; /* slate-200 */
+            --link-color: #2563eb; /* blue-600 */
+            --blockquote-bg: #e0f2f7; /* cyan-50 */
+            --blockquote-border: #22d3ee; /* cyan-400 */
+            --mermaid-theme: default;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', 'Tahoma', Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.8;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', 'Tahoma', Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            color: var(--heading-color);
+            line-height: 1.4;
+        }
+
+        /* Custom styling for first letter */
+        .article-section p:first-of-type::first-letter {
+            font-family: 'Noto Serif SC', serif;
+            float: left;
+            font-size: 4.5rem; /* Large initial letter */
+            line-height: 0.8;
+            padding-right: 0.5rem;
+            margin-top: 0.25rem;
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        blockquote {
+            border-left: 4px solid var(--blockquote-border);
+            background-color: var(--blockquote-bg);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0.5rem;
+            color: var(--text-color);
+        }
+
+        blockquote p {
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Tailwind's shadow-md */
+            transform: translateY(-2px);
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: color 0.2s ease-in-out;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .highlight-text {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        /* Responsive adjustments for specific elements */
+        @media (max-width: 768px) {
+            .article-section p:first-of-type::first-letter {
+                font-size: 3rem; /* Smaller for mobile */
+                line-height: 1;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Theme Toggle Button -->
+    <button id="themeToggle" class="fixed top-4 right-4 z-50 p-3 rounded-full shadow-lg bg-slate-800 text-slate-200 hover:scale-110 transition-transform duration-200 ease-out dark:bg-slate-100 dark:text-slate-800">
+        <i class="fas fa-moon text-lg dark:hidden"></i>
+        <i class="fas fa-sun text-lg hidden dark:inline"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <header class="relative overflow-hidden py-24 md:py-32 bg-gradient-to-br from-slate-900 to-slate-950 dark:from-slate-700 dark:to-slate-800 text-center shadow-lg">
+        <div class="absolute inset-0 z-0 opacity-10">
+            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" fill="currentColor">
+                <defs>
+                    <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                        <path d="M 10 0 L 0 0 L 0 10" fill="none" stroke="currentColor" stroke-width="0.1"></path>
+                    </pattern>
+                </defs>
+                <rect width="100" height="100" fill="url(#grid)"></rect>
+            </svg>
+        </div>
+        <div class="relative z-10 max-w-5xl mx-auto px-4">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 text-slate-100 dark:text-gray-800 drop-shadow-md">
+                A股IPO财务披露核心“大表”解析
+            </h1>
+            <p class="text-xl md:text-2xl font-light text-slate-300 dark:text-gray-600 mb-8">
+                法定财务报表与辅助材料的深度解读
+            </p>
+            <div class="flex justify-center items-center space-x-4 text-slate-400 dark:text-gray-500 text-lg">
+                <span><i class="fas fa-chart-line mr-2"></i>财务洞察</span>
+                <span><i class="fas fa-building mr-2"></i>企业上市</span>
+                <span><i class="fas fa-file-invoice-dollar mr-2"></i>合规要求</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 py-12 md:py-16">
+        <div class="article-section text-lg mb-12">
+            <p class="mb-6">
+                在A股IPO申报中，财务需披露的核心“大表”是指法定财务报表，即<span class="highlight-text">利润表、资产负债表和现金流量表</span>（合称“三大财务报表”）。这是证监会《公开发行证券的公司信息披露内容与格式准则》的强制性要求。
+            </p>
+        </div>
+
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 flex items-center">
+                <i class="fas fa-balance-scale text-teal-400 mr-4"></i>
+                一、法定核心报表<span class="text-sm ml-3 text-slate-400">(必须披露)</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 资产负债表 Card -->
+                <div class="card p-6 rounded-lg shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-[1.01] border border-slate-700 dark:border-slate-200">
+                    <h3 class="text-2xl font-semibold mb-3 flex items-center text-slate-100 dark:text-slate-800">
+                        <i class="fas fa-file-alt text-teal-400 mr-3"></i>资产负债表
+                    </h3>
+                    <ul class="list-none space-y-2 text-slate-300 dark:text-slate-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-circle-info text-teal-400 text-sm mt-1 mr-2"></i>
+                            反映申报企业<strong class="highlight-text">报告期末的资产、负债及所有者权益状况</strong>。
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-calendar-alt text-teal-400 text-sm mt-1 mr-2"></i>
+                            <strong class="highlight-text">要求</strong>：披露最近3年及一期（如2022-2024年及2025年1-6月）的合并及母公司报表。
+                        </li>
+                    </ul>
+                </div>
+                <!-- 利润表 Card -->
+                <div class="card p-6 rounded-lg shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-[1.01] border border-slate-700 dark:border-slate-200">
+                    <h3 class="text-2xl font-semibold mb-3 flex items-center text-slate-100 dark:text-slate-800">
+                        <i class="fas fa-chart-bar text-teal-400 mr-3"></i>利润表
+                    </h3>
+                    <ul class="list-none space-y-2 text-slate-300 dark:text-slate-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-circle-info text-teal-400 text-sm mt-1 mr-2"></i>
+                            展示企业<strong class="highlight-text">报告期内的收入、成本、费用及利润</strong>构成。
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-magnifying-glass-chart text-teal-400 text-sm mt-1 mr-2"></i>
+                            <strong class="highlight-text">要求</strong>：需包含同比变动分析（如收入增长原因、毛利率波动）。
+                        </li>
+                    </ul>
+                </div>
+                <!-- 现金流量表 Card -->
+                <div class="card p-6 rounded-lg shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-[1.01] border border-slate-700 dark:border-slate-200">
+                    <h3 class="text-2xl font-semibold mb-3 flex items-center text-slate-100 dark:text-slate-800">
+                        <i class="fas fa-arrow-right-arrow-left text-teal-400 mr-3"></i>现金流量表
+                    </h3>
+                    <ul class="list-none space-y-2 text-slate-300 dark:text-slate-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-circle-info text-teal-400 text-sm mt-1 mr-2"></i>
+                            揭示<strong class="highlight-text">经营、投资、筹资活动的现金流入流出</strong>情况。
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-star text-teal-400 text-sm mt-1 mr-2"></i>
+                            <strong class="highlight-text">重点关注</strong>：经营活动现金流与净利润的匹配性。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <blockquote class="mt-8 text-slate-300 dark:text-slate-700">
+                <p class="font-medium text-slate-200 dark:text-slate-800 mb-2 flex items-center">
+                    <i class="fas fa-book-open text-teal-400 mr-2"></i>依据：
+                </p>
+                <p>证监会《读懂上市公司报告——招股说明书之五财务报表分析》明确将三大报表列为投资者分析企业财务健康度的核心工具。实务中需按《财务报告的一般规定》编制。</p>
+            </blockquote>
+            <!-- Supplementary info: 所有者权益变动表 -->
+            <div class="mt-8 p-6 bg-slate-800 rounded-lg shadow-md border border-slate-700 dark:bg-slate-50 dark:border-slate-200">
+                <h3 class="text-xl font-semibold mb-3 flex items-center text-slate-100 dark:text-slate-800">
+                    <i class="fas fa-handshake text-teal-400 mr-3"></i>所有者权益变动表
+                </h3>
+                <p class="text-slate-300 dark:text-slate-600">
+                    虽然核心内容未详述，但<strong class="highlight-text">所有者权益变动表</strong>通常也需与三大报表一同披露。它揭示了报告期内所有者权益各组成部分（如实收资本、资本公积、盈余公积和未分配利润）的增减变动情况，是了解公司股权结构和利润分配政策的重要窗口。
+                </p>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 flex items-center">
+                <i class="fas fa-chart-pie text-teal-400 mr-4"></i>
+                二、辅助性报表<span class="text-sm ml-3 text-slate-400">(非核心大表)</span>
+            </h2>
+            <div class="space-y-6 text-lg text-slate-300 dark:text-slate-700">
+                <p class="flex items-start">
+                    <i class="fas fa-grip-lines-vertical text-teal-400 mr-3 mt-1"></i>
+                    用户提到的“收入成本大表”“费用大表”等<strong class="highlight-text">不属于法定主表</strong>，而是用于附注披露或财务核查的支撑材料：
+                </p>
+                <ul class="list-none space-y-4 ml-6">
+                    <li class="flex items-start">
+                        <i class="fas fa-dollar-sign text-teal-400 mt-1 mr-3"></i>
+                        <strong class="highlight-text">收入/成本明细表</strong>：在财务报表附注中分解营业成本构成（如按业务或产品线）。
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-receipt text-teal-400 mt-1 mr-3"></i>
+                        <strong class="highlight-text">费用分析表</strong>：用于说明管理费用、研发费用的具体项目（如职工薪酬占比）。
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-balance-scale-right text-teal-400 mt-1 mr-3"></i>
+                        <strong class="highlight-text">备考报表</strong>：涉及重大资产重组时，需补充披露备考利润表及资产负债表（模拟合并后数据）。
+                    </li>
+                </ul>
+            </div>
+            <blockquote class="mt-8 text-slate-300 dark:text-slate-700">
+                <p class="font-medium text-slate-200 dark:text-slate-800 mb-2 flex items-center">
+                    <i class="fas fa-lightbulb text-teal-400 mr-2"></i>实务提示：
+                </p>
+                <p>此类明细表是审计底稿或问询回复的组成部分，用于验证三大报表合理性，但IPO申报文件不以其为主体。</p>
+            </blockquote>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 flex items-center">
+                <i class="fas fa-gavel text-teal-400 mr-4"></i>
+                三、监管重点及案例参考
+            </h2>
+            <div class="space-y-6 text-lg text-slate-300 dark:text-slate-700">
+                <div class="flex items-start">
+                    <i class="fas fa-check-circle text-teal-400 mt-1 mr-3"></i>
+                    <div>
+                        <strong class="highlight-text">完整性要求</strong>：未完整披露三大报表或主要项目变动分析（如存货、应收款异常）可能被监管问询。
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <i class="fas fa-link text-teal-400 mt-1 mr-3"></i>
+                    <div>
+                        <strong class="highlight-text">勾稽关系</strong>：三张表需逻辑一致（如净利润与经营活动现金流的匹配度）。
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <i class="fas fa-landmark text-teal-400 mt-1 mr-3"></i>
+                    <div>
+                        <strong class="highlight-text">案例</strong>：胜通钢帘线IPO案例中，因未披露完整的利润表和现金流量表，被要求补充说明亏损对合并报表的影响。
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 flex items-center">
+                <i class="fas fa-check-double text-teal-400 mr-4"></i>
+                结论
+            </h2>
+            <div class="space-y-6 text-lg text-slate-300 dark:text-slate-700">
+                <div class="flex items-start">
+                    <i class="fas fa-dot-circle text-teal-400 mt-1 mr-3"></i>
+                    <div>
+                        <strong class="highlight-text">IPO必备大表</strong>：利润表、资产负债表、现金流量表（含所有者权益变动表）。
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <i class="fas fa-dot-circle text-teal-400 mt-1 mr-3"></i>
+                    <div>
+                        <strong class="highlight-text">非核心报表</strong>：“收入成本大表”“费用大表”仅为辅助性材料，用于附注披露或核查支撑。
+                    </div>
+                </div>
+                <p class="mt-6 flex items-start">
+                    <i class="fas fa-comment-dots text-teal-400 mt-1 mr-3"></i>
+                    <strong class="highlight-text">建议</strong>：企业应优先确保三大报表的合规性，并提前梳理附注明细（如成本费用分解）以应对监管问询。
+                </p>
+            </div>
+        </section>
+
+        <!-- Data Visualization Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 flex items-center">
+                <i class="fas fa-project-diagram text-teal-400 mr-4"></i>
+                IPO财务报表关系概览
+            </h2>
+            <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-xl border border-slate-700 dark:border-slate-200 overflow-x-auto">
+                <pre class="mermaid p-4 rounded-md">
+graph TD
+    subgraph IPO财务报表体系
+        A[核心法定报表] --> B(资产负债表);
+        A --> C(利润表);
+        A --> D(现金流量表);
+        A --> E(所有者权益变动表);
+
+        B -- "反映: 企业财务状况" --> B1(资产、负债、权益);
+        C -- "反映: 经营成果" --> C1(收入、成本、费用、利润);
+        D -- "反映: 现金流转" --> D1(经营、投资、筹资现金流);
+        E -- "反映: 权益构成变动" --> E1(股本、公积、留存收益);
+
+        F[辅助性报表] --> G(收入/成本明细表);
+        F --> H(费用分析表);
+        F --> I(备考报表);
+
+        G -- "支撑验证 & 附注披露" --> A;
+        H -- "支撑验证 & 附注披露" --> A;
+        I -- "模拟合并后数据" --> A;
+
+        A -- "需满足" --> J(完整性要求);
+        A -- "需确保" --> K(勾稽关系一致);
+
+        J -- "避免" --> L(监管问询);
+        K -- "避免" --> L;
+    end
+    L -- "参考案例" --> M(胜通钢帘线IPO案例);
+    classDef mainNode fill:#2dd4bf,stroke:#2dd4bf,stroke-width:2px,color:#fff,font-weight:bold;
+    class A,B,C,D,E,F,G,H,I,J,K,L,M mainNode;
+    classDef subNode fill:#1e293b,stroke:#334155,color:#e2e8f0;
+    class B1,C1,D1,E1 subNode;
+                </pre>
+            </div>
+        </section>
+
+        <!-- Further Reading Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 flex items-center">
+                <i class="fas fa-book-open text-teal-400 mr-4"></i>
+                延伸阅读
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-lg">
+                <!-- Book 1 -->
+                <div class="card p-6 rounded-lg shadow-md flex items-start space-x-4 border border-slate-700 dark:border-slate-200">
+                    <i class="fas fa-book-reader text-teal-400 text-3xl mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-slate-100 dark:text-slate-800">《财务自由之路》</h3>
+                        <p class="text-slate-300 dark:text-slate-600">
+                            深入浅出地讲解了个人和企业财务管理的核心概念，对于理解财务报表背后的逻辑有启发作用。
+                        </p>
+                    </div>
+                </div>
+                <!-- Book 2 -->
+                <div class="card p-6 rounded-lg shadow-md flex items-start space-x-4 border border-slate-700 dark:border-slate-200">
+                    <i class="fas fa-chart-line text-teal-400 text-3xl mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-slate-100 dark:text-slate-800">《公司财务原理》</h3>
+                        <p class="text-slate-300 dark:text-slate-600">
+                            金融领域经典教材，系统阐述了公司财务的理论与实践，是理解IPO估值与财务分析的基石。
+                        </p>
+                    </div>
+                </div>
+                <!-- Book 3 -->
+                <div class="card p-6 rounded-lg shadow-md flex items-start space-x-4 border border-slate-700 dark:border-slate-200">
+                    <i class="fas fa-piggy-bank text-teal-400 text-3xl mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-slate-100 dark:text-slate-800">《手把手教你读财报》</h3>
+                        <p class="text-slate-300 dark:text-slate-600">
+                            针对非专业人士，以生动案例解析三大财务报表，帮助快速掌握财务分析技能。
+                        </p>
+                    </div>
+                </div>
+                <!-- Book 4 -->
+                <div class="card p-6 rounded-lg shadow-md flex items-start space-x-4 border border-slate-700 dark:border-slate-200">
+                    <i class="fas fa-clipboard-check text-teal-400 text-3xl mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-slate-100 dark:text-slate-800">《审计理论与实务》</h3>
+                        <p class="text-slate-300 dark:text-slate-600">
+                            了解IPO审计过程及财务报表如何被核查，对于理解披露要求和风险管理至关重要。
+                        </p>
+                    </div>
+                </div>
+                <!-- Book 5 -->
+                <div class="card p-6 rounded-lg shadow-md flex items-start space-x-4 border border-slate-700 dark:border-slate-200">
+                    <i class="fas fa-scale-balanced text-teal-400 text-3xl mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-slate-100 dark:text-slate-800">《证券法》</h3>
+                        <p class="text-slate-300 dark:text-slate-600">
+                            理解IPO及信息披露的法律基础，掌握监管框架和违规风险。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer with Footnotes -->
+    <footer class="max-w-4xl mx-auto px-4 py-8 border-t border-slate-700 dark:border-slate-300 text-slate-400 text-sm">
+        <h3 class="text-xl font-semibold mb-4 text-slate-100 dark:text-slate-800">脚注</h3>
+        <ul class="space-y-2">
+            <li>
+                <span class="highlight-text">[^1]:</span> 证监会《读懂上市公司报告---招股说明书之五财务报表分析》，<a href="http://www.csrc.gov.cn/jiangxi/c105770/c4812964/content.shtml" target="_blank" class="text-sky-400 hover:underline">点击查看原文</a>
+            </li>
+            <li>
+                <span class="highlight-text">[^2]:</span> 证监会《公开发行证券的公司信息披露内容与格式准则》（此处为补充说明，原文未提供链接，基于普遍认知）
+            </li>
+            <li>
+                <span class="highlight-text">[^4]:</span> 《再融资季度动态（2022年7-9月）》，（内部知识库文件，无法提供外部链接）
+            </li>
+            <li>
+                <span class="highlight-text">[^5]:</span> 立信《江苏天兵财务尽职调查报告》，（内部知识库文件，无法提供外部链接）
+            </li>
+        </ul>
+        <p class="mt-8 text-center">&copy; 2023 财务报告分析. All rights reserved.</p>
+    </footer>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid.js
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: document.documentElement.classList.contains('dark') ? 'dark' : 'default',
+            flowchart: {
+                curve: 'basis'
+            }
+        });
+
+        // Theme Switcher Logic
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                localStorage.setItem('theme', 'dark');
+                mermaid.initialize({ theme: 'dark' }); // Update Mermaid theme
+            } else {
+                htmlElement.classList.add('light');
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                mermaid.initialize({ theme: 'default' }); // Update Mermaid theme
+            }
+        }
+
+        // Check system preference on load
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const savedTheme = localStorage.getItem('theme');
+
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (systemPrefersDark) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+    </script>
+</body>
+</html>
+```
