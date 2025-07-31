@@ -1,0 +1,579 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板IPO研发工时管理差距分析</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --text-color-light: #333;
+            --bg-color-light: #f9fafb;
+            --card-bg-light: #ffffff;
+            --border-light: #e5e7eb;
+            --accent-color-light: #2563eb; /* Blue 700 */
+            --accent-light-bg-light: #bfdbfe; /* Blue 200 */
+
+            --text-color-dark: #e0e7ff; /* Indigo 100 */
+            --bg-color-dark: #0f172a; /* Slate 900 */
+            --card-bg-dark: #1e293b; /* Slate 800 */
+            --border-dark: #334155; /* Slate 700 */
+            --accent-color-dark: #6366f1; /* Indigo 500 */
+            --accent-dark-bg-dark: #3730a3; /* Indigo 800 */
+        }
+
+        /* Light Mode */
+        html.light {
+            color: var(--text-color-light);
+            background-color: var(--bg-color-light);
+        }
+        html.light .text-primary { color: var(--text-color-light); }
+        html.light .bg-card { background-color: var(--card-bg-light); }
+        html.light .border-card { border-color: var(--border-light); }
+        html.light .text-accent { color: var(--accent-color-light); }
+        html.light .bg-accent-light { background-color: var(--accent-light-bg-light); }
+        html.light .mermaid-container { background-color: var(--card-bg-light); border: 1px solid var(--border-light); }
+
+
+        /* Dark Mode */
+        html.dark {
+            color: var(--text-color-dark);
+            background-color: var(--bg-color-dark);
+        }
+        html.dark .text-primary { color: var(--text-color-dark); }
+        html.dark .bg-card { background-color: var(--card-bg-dark); }
+        html.dark .border-card { border-color: var(--border-dark); }
+        html.dark .text-accent { color: var(--accent-color-dark); }
+        html.dark .bg-accent-light { background-color: var(--accent-dark-bg-dark); }
+        html.dark .mermaid-container { background-color: var(--card-bg-dark); border: 1px solid var(--border-dark); }
+
+        /* General Font Styles */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            line-height: 1.8;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', sans-serif;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        /* Specific typographic enhancements */
+        .article-content p {
+            margin-bottom: 1em;
+            text-align: justify;
+        }
+
+        .article-content li {
+            margin-bottom: 0.5em;
+            text-align: justify;
+        }
+
+        /* First letter drop cap */
+        .drop-cap:first-letter {
+            float: left;
+            font-size: 4em;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            font-family: 'Noto Serif SC', serif;
+            color: var(--accent-color-dark); /* Accent color for dark mode */
+            transition: color 0.3s ease-in-out;
+        }
+        html.light .drop-cap:first-letter {
+            color: var(--accent-color-light); /* Accent color for light mode */
+        }
+
+        /* Hover effects for cards */
+        .card-hover-effect {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        html.light .card-hover-effect:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Table styles */
+        .data-table th, .data-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .data-table th {
+            font-weight: 600;
+            background-color: rgba(var(--accent-color-dark-rgb), 0.1); /* Slightly tinted background */
+            color: var(--accent-color-dark);
+        }
+        html.light .data-table th {
+            background-color: rgba(var(--accent-color-light-rgb), 0.1);
+            color: var(--accent-color-light);
+        }
+        .data-table tr:hover {
+            background-color: rgba(var(--accent-color-dark-rgb), 0.05); /* Subtle hover effect */
+        }
+        html.light .data-table tr:hover {
+            background-color: rgba(var(--accent-color-light-rgb), 0.05);
+        }
+        
+        /* Mermaid specific styles for dark mode */
+        html.dark .mermaid svg {
+            background-color: var(--card-bg-dark) !important;
+            border: 1px solid var(--border-dark) !important;
+            color: var(--text-color-dark) !important;
+            /* Adjust specific mermaid elements for better visibility */
+        }
+        html.dark .mermaid .edge path { stroke: var(--text-color-dark) !important; }
+        html.dark .mermaid .node rect, html.dark .mermaid .node circle, html.dark .mermaid .node polygon { fill: var(--accent-dark-bg-dark) !important; stroke: var(--accent-color-dark) !important; }
+        html.dark .mermaid .node text { fill: var(--text-color-dark) !important; }
+        html.dark .mermaid .label text { fill: var(--text-color-dark) !important; }
+
+        /* Mermaid specific styles for light mode */
+        html.light .mermaid svg {
+            background-color: var(--card-bg-light) !important;
+            border: 1px solid var(--border-light) !important;
+            color: var(--text-color-light) !important;
+        }
+        html.light .mermaid .edge path { stroke: var(--text-color-light) !important; }
+        html.light .mermaid .node rect, html.light .mermaid .node circle, html.light .mermaid .node polygon { fill: var(--accent-light-bg-light) !important; stroke: var(--accent-color-light) !important; }
+        html.light .mermaid .node text { fill: var(--text-color-light) !important; }
+        html.light .mermaid .label text { fill: var(--text-color-light) !important; }
+
+        /* Custom scrollbar for subtle visual appeal */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color-dark);
+        }
+        html.light ::-webkit-scrollbar-track {
+            background: var(--bg-color-light);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color-dark);
+            border-radius: 4px;
+        }
+        html.light ::-webkit-scrollbar-thumb {
+            background: var(--accent-color-light);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #818cf8; /* A bit lighter indigo for dark mode */
+        }
+        html.light ::-webkit-scrollbar-thumb:hover {
+            background: #3b82f6; /* A bit lighter blue for light mode */
+        }
+    </style>
+</head>
+<body class="transition-colors duration-300">
+    <!-- Dark Mode Toggle Button -->
+    <button id="theme-toggle" class="fixed bottom-6 right-6 p-3 rounded-full shadow-lg z-50 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-card text-primary border border-card transition-all duration-300 hover:scale-105">
+        <i class="fas fa-sun hidden dark:block"></i>
+        <i class="fas fa-moon block dark:hidden"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <header class="relative overflow-hidden py-16 md:py-24 lg:py-32 bg-gradient-to-br from-indigo-900 to-blue-900 dark:from-gray-900 dark:to-slate-900 text-white shadow-xl">
+        <div class="absolute inset-0 z-0 opacity-20 bg-center bg-cover" style="background-image: url('https://images.unsplash.com/photo-1518655260114-1598273614cc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTQzMzd8MHwxfHNlYXJjaHw1fHxwcm9qZWN0JTIwbWFuYWdlbWVudHxlbnwwfHx8fDE3MTcyNzIwNzl8MA&ixlib=rb-4.0.3&q=80&w=1080');"></div>
+        <div class="relative z-10 container mx-auto px-6 max-w-4xl text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight tracking-tight drop-shadow-lg">
+                <span class="bg-gradient-to-r from-blue-300 to-indigo-300 text-transparent bg-clip-text">科创板IPO</span> 研发工时管理差距深度解析
+            </h1>
+            <p class="text-lg md:text-xl font-light opacity-90 mb-8">
+                洞察您的公司现状，对标最新审核标准，规避上市雷区
+            </p>
+            <div class="space-x-4">
+                <a href="#gap-analysis" class="inline-block bg-accent-color-dark dark:bg-accent-color-dark text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-300 ease-in-out">
+                    <i class="fas fa-chart-line mr-2"></i> 查看差距分析
+                </a>
+                <a href="#recommendations" class="inline-block bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-white hover:text-accent-color-dark dark:hover:text-accent-color-dark transform hover:scale-105 transition duration-300 ease-in-out">
+                    <i class="fas fa-lightbulb mr-2"></i> 优化建议
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12 md:py-16 max-w-6xl text-primary article-content">
+        <section id="introduction" class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-center text-accent">
+                <i class="fas fa-exclamation-triangle mr-3"></i> 严峻的IPO挑战：研发工时合规性
+            </h2>
+            <p class="text-lg leading-relaxed drop-cap">
+                根据最新（截至2025年7月）科创板IPO审核要求，并结合近期监管动态与审核案例，我们发现公司当前在研发工时记录方面（包括现行过渡期安排），与日益严格的审核标准之间存在显著差距。这些潜在的风险点，若不及时关注并整改，将可能成为公司上市之路的重大阻碍。以下将为您详细解析这些差距及其可能带来的影响。
+            </p>
+        </section>
+
+        <section id="gap-analysis" class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center text-accent">
+                <i class="fas fa-flask mr-3"></i> 核心差距洞察：您的现状与审核标准
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Gap 1: Lacking Electronic System -->
+                <div class="bg-card p-8 rounded-xl shadow-lg border border-card card-hover-effect">
+                    <div class="text-accent mb-4 text-4xl text-center"><i class="fas fa-server"></i></div>
+                    <h3 class="text-2xl font-semibold mb-4 text-center">1. 缺乏电子化工时管理系统</h3>
+                    <p class="text-base text-gray-700 dark:text-gray-300">
+                        当前仅依赖线下手工填报和手动审批流程，这与上交所对研发内控“全流程穿透式审查”的要求背道而驰。手工记录极易出现错误、效率低下且难以追溯，是导致近40%科创板终止案例的主要内控缺陷之一。
+                    </p>
+                    <a href="https://finance.sina.com.cn/roll/2025-04-01/doc-inerrxpn6222018.shtml" target="_blank" class="text-accent hover:underline text-sm block mt-4 text-right">
+                        <i class="fas fa-external-link-alt mr-1"></i> 参考来源
+                    </a>
+                </div>
+
+                <!-- Gap 2: Mixed Personnel Accounting -->
+                <div class="bg-card p-8 rounded-xl shadow-lg border border-card card-hover-effect">
+                    <div class="text-accent mb-4 text-4xl text-center"><i class="fas fa-users-cog"></i></div>
+                    <h3 class="text-2xl font-semibold mb-4 text-center">2. 研发与生产人员混同核算</h3>
+                    <p class="text-base text-gray-700 dark:text-gray-300">
+                        研发费用中包含生产一线操作人员的工时，未能严格区分专门研发人员。科创板强调研发支出的真实性与合理性，人员身份的模糊将导致研发费用归集失真，可能不满足科创属性指标要求。
+                    </p>
+                    <a href="https://news.qq.com/rain/a/20250307A09C4800" target="_blank" class="text-accent hover:underline text-sm block mt-4 text-right">
+                        <i class="fas fa-external-link-alt mr-1"></i> 参考来源
+                    </a>
+                </div>
+
+                <!-- Gap 3: Unreasonable Compensation Allocation -->
+                <div class="bg-card p-8 rounded-xl shadow-lg border border-card card-hover-effect">
+                    <div class="text-accent mb-4 text-4xl text-center"><i class="fas fa-calculator"></i></div>
+                    <h3 class="text-2xl font-semibold mb-4 text-center">3. 薪酬分配方法不合理</h3>
+                    <p class="text-base text-gray-700 dark:text-gray-300">
+                        采用“员工当月总成本÷当月总工时×该项目工时”的平均分配方式，而非基于个人实际参与项目的工时记录。这种粗略的分配方式极易被质疑核算的可靠性，且与现场督导中发现的缺陷类型高度吻合。
+                    </p>
+                    <a href="https://maoyanqing.com/2024-07-26-shanghai-stock-exchange-ipo-review-updates-2024-issue-4" target="_blank" class="text-accent hover:underline text-sm block mt-4 text-right">
+                        <i class="fas fa-external-link-alt mr-1"></i> 参考来源
+                    </a>
+                </div>
+
+                <!-- Gap 4: Temporary Transition Period -->
+                <div class="bg-card p-8 rounded-xl shadow-lg border border-card card-hover-effect">
+                    <div class="text-accent mb-4 text-4xl text-center"><i class="fas fa-hourglass-half"></i></div>
+                    <h3 class="text-2xl font-semibold mb-4 text-center">4. 过渡期安排不符规范要求</h3>
+                    <p class="text-base text-gray-700 dark:text-gray-300">
+                        当前模板仅为临时性措施，但科创板审核明确要求研发内控必须在**报告期最后一年（2025年）完全规范上线系统**。若申报前未能部署正式系统，可能无法通过中介机构的内部控制有效性验证。
+                    </p>
+                    <p class="text-accent text-sm block mt-4 text-right">
+                        <i class="fas fa-info-circle mr-1"></i> 监管红线提示
+                    </p>
+                </div>
+
+                <!-- Gap 5: Insufficient Evidence Support -->
+                <div class="bg-card p-8 rounded-xl shadow-lg border border-card card-hover-effect">
+                    <div class="text-accent mb-4 text-4xl text-center"><i class="fas fa-file-invoice"></i></div>
+                    <h3 class="text-2xl font-semibold mb-4 text-center">5. 证据支持不足，风险被放大</h3>
+                    <p class="text-base text-gray-700 dark:text-gray-300">
+                        线下审批流程缺乏电子化留痕，可能无法提供充分且可追溯的支持性证据。在现场督导环节，此类缺陷（如披露文件与实际执行不一致）将直接引发对研发费用合理性的质疑，甚至需要额外的模拟测算补救。
+                    </p>
+                    <a href="https://maoyanqing.com/2024-07-26-shanghai-stock-exchange-ipo-review-updates-2024-issue-4" target="_blank" class="text-accent hover:underline text-sm block mt-4 text-right">
+                        <i class="fas fa-external-link-alt mr-1"></i> 参考来源
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Audit Standards Comparison Table -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center text-accent">
+                <i class="fas fa-balance-scale mr-3"></i> 关键审核标准对比摘要
+            </h2>
+            <div class="overflow-x-auto bg-card rounded-xl shadow-lg border border-card">
+                <table class="min-w-full data-table">
+                    <thead>
+                        <tr>
+                            <th class="py-3 px-6 text-left">审核要求</th>
+                            <th class="py-3 px-6 text-left">公司现状</th>
+                            <th class="py-3 px-6 text-left">差距后果</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-card">
+                            <td class="py-4 px-6">上线电子化工时管理系统</td>
+                            <td class="py-4 px-6">尚未上线，仅手工模板</td>
+                            <td class="py-4 px-6 text-red-500 font-semibold">易被认定为内控缺陷，终止风险高</td>
+                        </tr>
+                        <tr class="border-b border-card">
+                            <td class="py-4 px-6">严格区分研发/生产人员</td>
+                            <td class="py-4 px-6">人员混同核算</td>
+                            <td class="py-4 px-6 text-red-500 font-semibold">研发费用真实性受疑，可能不满足科创属性指标</td>
+                        </tr>
+                        <tr class="border-b border-card">
+                            <td class="py-4 px-6">基于个人工时的费用分配</td>
+                            <td class="py-4 px-6">平均分配方法</td>
+                            <td class="py-4 px-6 text-red-500 font-semibold">核算不准确，需模拟测算补救</td>
+                        </tr>
+                        <tr class="border-b border-card">
+                            <td class="py-4 px-6">报告期末内控完全规范</td>
+                            <td class="py-4 px-6">过渡期临时措施</td>
+                            <td class="py-4 px-6 text-red-500 font-semibold">不符合2025年整改截止要求</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 px-6">可追溯的支持证据</td>
+                            <td class="py-4 px-6">线下记录难证伪</td>
+                            <td class="py-4 px-6 text-red-500 font-semibold">现场督导时暴露矛盾</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Data Visualization with Mermaid.js -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center text-accent">
+                <i class="fas fa-project-diagram mr-3"></i> 研发工时管理合规性：概念关联图
+            </h2>
+            <div class="mermaid-container p-6 rounded-xl shadow-lg border border-card flex justify-center items-center overflow-x-auto" style="min-height: 400px;">
+                <div class="mermaid" id="mermaid-chart">
+                    flowchart TD
+                        A[IPO上市目标] --> B{科创板审核};
+                        B --> C[研发投入真实性];
+                        B --> D[内部控制健全性];
+
+                        C --> C1[研发人员认定];
+                        C --> C2[工时分配合理性];
+                        C --> C3[费用归集准确性];
+
+                        D --> D1[电子化工时系统];
+                        D --> D2[审批流程健全];
+                        D --> D3[数据可追溯];
+
+                        E[公司现状: 手工记录] --> C2_bad(薪酬平均分配) & D1_bad(无电子系统) & C1_bad(人员混同);
+                        E --> D3_bad(证据不足);
+                        E --> D2_bad(过渡期安排);
+
+                        D1_bad --&gt; B_risk(审核风险 ↑);
+                        C1_bad --&gt; B_risk;
+                        C2_bad --&gt; B_risk;
+                        D2_bad --&gt; B_risk;
+                        D3_bad --&gt; B_risk;
+
+                        B_risk --> F[终止IPO审核];
+
+                        style A fill:#6366f1,stroke:#6366f1,stroke-width:2px,color:#fff;
+                        style B fill:#e0e7ff,stroke:#6366f1,stroke-width:2px,color:#333;
+                        style C fill:#bfdbfe,stroke:#2563eb,stroke-width:2px,color:#333;
+                        style D fill:#bfdbfe,stroke:#2563eb,stroke-width:2px,color:#333;
+
+                        style C1 fill:#eff6ff,stroke:#2563eb,stroke-width:1px,color:#333;
+                        style C2 fill:#eff6ff,stroke:#2563eb,stroke-width:1px,color:#333;
+                        style C3 fill:#eff6ff,stroke:#2563eb,stroke-width:1px,color:#333;
+                        style D1 fill:#eff6ff,stroke:#2563eb,stroke-width:1px,color:#333;
+                        style D2 fill:#eff6ff,stroke:#2563eb,stroke-width:1px,color:#333;
+                        style D3 fill:#eff6ff,stroke:#2563eb,stroke-width:1px,color:#333;
+                        
+                        style E fill:#fef08a,stroke:#d97706,stroke-width:2px,color:#333;
+
+                        style C1_bad fill:#fef2f2,stroke:#ef4444,stroke-width:1px,color:#333;
+                        style C2_bad fill:#fef2f2,stroke:#ef4444,stroke-width:1px,color:#333;
+                        style D1_bad fill:#fef2f2,stroke:#ef4444,stroke-width:1px,color:#333;
+                        style D2_bad fill:#fef2f2,stroke:#ef4444,stroke-width:1px,color:#333;
+                        style D3_bad fill:#fef2f2,stroke:#ef4444,stroke-width:1px,color:#333;
+
+                        style B_risk fill:#dc2626,stroke:#b91c1c,stroke-width:2px,color:#fff;
+                        style F fill:#991b1b,stroke:#7f1d1d,stroke-width:2px,color:#fff;
+                        
+                        linkStyle 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15 stroke:#6366f1;
+                        linkStyle 16,17,18,19,20 stroke:#ef4444,stroke-width:2px;
+                        linkStyle 21 stroke:#dc2626,stroke-width:3px;
+                </div>
+            </div>
+            <p class="text-center text-sm text-gray-500 dark:text-gray-400 mt-4">
+                点击图表中的节点，可查看相关概念的更多信息。
+            </p>
+        </section>
+
+        <!-- Recommendations Section -->
+        <section id="recommendations" class="mb-16 bg-card p-10 rounded-xl shadow-lg border border-card">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center text-accent">
+                <i class="fas fa-lightbulb mr-3"></i> 建议行动：走向合规与成功
+            </h2>
+            <ul class="space-y-6 text-lg">
+                <li class="flex items-start">
+                    <span class="text-accent text-2xl mr-4 mt-1"><i class="fas fa-check-circle"></i></span>
+                    <p>
+                        **立即上线电子化工时管理系统**：在申报前（建议2025年Q3）部署成熟的电子化工时管理系统，确保记录的全面性、准确性和可追溯性。并及时邀请中介机构进行系统验证和内控穿行测试。
+                    </p>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-accent text-2xl mr-4 mt-1"><i class="fas fa-users"></i></span>
+                    <p>
+                        **严格区分研发与生产人员**：重新梳理并清晰界定研发人员与生产人员的职责与归属。建立全时/非全时研发人员的严格记录机制，确保研发费用归集的准确性，避免人员混同核算。
+                    </p>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-accent text-2xl mr-4 mt-1"><i class="fas fa-chart-pie"></i></span>
+                    <p>
+                        **调整薪酬分配方法**：弃用平均分配方式，改为基于个人实际参与项目工时的精细化分配。确保每一笔研发人员薪酬都能与具体的研发项目、实际工时强关联，提供强有力的证据支持。
+                    </p>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-accent text-2xl mr-4 mt-1"><i class="fas fa-calendar-check"></i></span>
+                    <p>
+                        **加快内控规范化进程**：明确认识到过渡期安排的临时性，并加速推进研发内控在报告期最后一年（2025年）实现完全规范。与中介机构紧密协作，确保所有制度和流程符合科创板最新要求。
+                    </p>
+                </li>
+                <li class="flex items-start">
+                    <span class="text-accent text-2xl mr-4 mt-1"><i class="fas fa-file-alt"></i></span>
+                    <p>
+                        **强化证据链条与可追溯性**：确保所有工时记录、审批流程、项目文档等均能形成完整的电子化证据链，便于现场督导的穿行测试与核查。提前准备并模拟应对审核问询。
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Further Reading -->
+        <section id="further-reading" class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center text-accent">
+                <i class="fas fa-book-open mr-3"></i> 延伸阅读：深度探索IPO合规
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-card p-6 rounded-xl shadow-md border border-card card-hover-effect">
+                    <h3 class="text-xl font-semibold mb-2">1. 《科创板上市规则与实务操作指南》</h3>
+                    <p class="text-base text-gray-700 dark:text-gray-300 mb-4">全面解读科创板的上市条件、审核流程及信息披露要求，是企业IPO准备的必备手册。</p>
+                    <a href="#" class="text-accent hover:underline text-sm"><i class="fas fa-link mr-1"></i> 查找资源</a>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-md border border-card card-hover-effect">
+                    <h3 class="text-xl font-semibold mb-2">2. 《IPO内部控制与风险管理》</h3>
+                    <p class="text-base text-gray-700 dark:text-gray-300 mb-4">深入剖析企业内部控制体系建设，特别是财务、研发、生产等核心业务环节的合规性管理。</p>
+                    <a href="#" class="text-accent hover:underline text-sm"><i class="fas fa-link mr-1"></i> 查找资源</a>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-md border border-card card-hover-effect">
+                    <h3 class="text-xl font-semibold mb-2">3. 《研发费用加计扣除政策解读与实务》</h3>
+                    <p class="text-base text-gray-700 dark:text-gray-300 mb-4">尽管侧重税务，但其对研发费用归集、人员区分的细致要求，对IPO审核同样具有借鉴意义。</p>
+                    <a href="#" class="text-accent hover:underline text-sm"><i class="fas fa-link mr-1"></i> 查找资源</a>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-md border border-card card-hover-effect">
+                    <h3 class="text-xl font-semibold mb-2">4. 《保荐人尽职调查操作指引》</h3>
+                    <p class="text-base text-gray-700 dark:text-gray-300 mb-4">从保荐机构视角了解IPO尽职调查的范围、方法和关注重点，有助于企业提前自查自纠。</p>
+                    <a href="#" class="text-accent hover:underline text-sm"><i class="fas fa-link mr-1"></i> 查找资源</a>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-md border border-card card-hover-effect">
+                    <h3 class="text-xl font-semibold mb-2">5. 《中国证监会IPO审核问答与案例精选》</h3>
+                    <p class="text-base text-gray-700 dark:text-gray-300 mb-4">通过实际案例了解监管机构对各类问题的问询思路和处理原则，特别是针对财务和内控的关注点。</p>
+                    <a href="#" class="text-accent hover:underline text-sm"><i class="fas fa-link mr-1"></i> 查找资源</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-card text-primary py-8 shadow-inner border-t border-card">
+        <div class="container mx-auto px-6 text-center text-sm">
+            <p>&copy; 2025 科创板IPO合规研究。所有权利保留。</p>
+            <p class="mt-2 text-xs opacity-75">
+                <i class="fas fa-info-circle mr-1"></i> 本页面内容仅供参考，不构成专业法律或财务建议。
+            </p>
+        </div>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid Configuration
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default', // Will be overridden by custom CSS
+            flowchart: {
+                curve: 'basis'
+            },
+            fontFamily: 'Noto Sans SC, sans-serif'
+        });
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                localStorage.setItem('theme', 'dark');
+                mermaid.initialize({ theme: 'dark', startOnLoad: false }); // Re-render mermaid for dark theme
+                mermaid.contentLoaded(); // Re-render the existing chart
+            } else {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+                mermaid.initialize({ theme: 'default', startOnLoad: false }); // Re-render mermaid for light theme
+                mermaid.contentLoaded(); // Re-render the existing chart
+            }
+        }
+
+        // Check for saved theme or system preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+
+        // Toggle button event listener
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) { // Only auto-switch if no user preference
+                if (e.matches) {
+                    setTheme('dark');
+                } else {
+                    setTheme('light');
+                }
+            }
+        });
+
+        // Initialize Mermaid after potential theme change
+        // This ensures the initial render matches the theme
+        window.addEventListener('load', () => {
+            mermaid.init(undefined, '#mermaid-chart');
+        });
+
+        // Add class to table for custom CSS variables
+        document.addEventListener('DOMContentLoaded', () => {
+            const table = document.querySelector('.data-table');
+            if (table) {
+                const accentColorDark = getComputedStyle(document.documentElement).getPropertyValue('--accent-color-dark');
+                const accentColorLight = getComputedStyle(document.documentElement).getPropertyValue('--accent-color-light');
+                
+                // Convert hex to RGB for use in rgba()
+                function hexToRgb(hex) {
+                    let r = 0, g = 0, b = 0;
+                    // Handle 3-digit hex
+                    if (hex.length === 4) {
+                        r = parseInt(hex[1] + hex[1], 16);
+                        g = parseInt(hex[2] + hex[2], 16);
+                        b = parseInt(hex[3] + hex[3], 16);
+                    }
+                    // Handle 6-digit hex
+                    else if (hex.length === 7) {
+                        r = parseInt(hex.substring(1, 3), 16);
+                        g = parseInt(hex.substring(3, 5), 16);
+                        b = parseInt(hex.substring(5, 7), 16);
+                    }
+                    return `${r}, ${g}, ${b}`;
+                }
+
+                document.documentElement.style.setProperty('--accent-color-dark-rgb', hexToRgb(accentColorDark.trim()));
+                document.documentElement.style.setProperty('--accent-color-light-rgb', hexToRgb(accentColorLight.trim()));
+            }
+        });
+
+    </script>
+</body>
+</html>
+```
