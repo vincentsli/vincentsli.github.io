@@ -1,0 +1,525 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板上市：研发型企业内部控制体系构建指南</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC (headings) and Noto Sans SC (body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Custom Styles -->
+    <style>
+        /* Base fonts for Chinese and fallback */
+        :root {
+            --font-serif-sc: 'Noto Serif SC', 'Times New Roman', Times, serif;
+            --font-sans-sc: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-sans-sc);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-serif-sc);
+        }
+
+        /* Dark Mode Colors */
+        .dark {
+            --bg-primary: #1A1A2E; /* Deep Blue-Purple */
+            --bg-secondary: #0F0F1A; /* Even darker */
+            --text-primary: #E0E0E0; /* Light Gray */
+            --text-secondary: #B0B0B0; /* Muted Gray */
+            --accent-blue: #60A5FA; /* Blue-400 */
+            --accent-green: #34D399; /* Emerald-400 */
+            --border-color: #33334F; /* Darker border */
+            --card-bg: #2B2B4A; /* Slightly lighter than primary */
+            --shadow-color: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Light Mode Colors */
+        html:not(.dark) {
+            --bg-primary: #F8F8F8; /* Light White */
+            --bg-secondary: #FFFFFF; /* Pure White */
+            --text-primary: #333333; /* Dark Gray */
+            --text-secondary: #666666; /* Muted Gray */
+            --accent-blue: #2563EB; /* Blue-600 */
+            --accent-green: #059669; /* Emerald-600 */
+            --border-color: #E0E0E0; /* Light border */
+            --card-bg: #FFFFFF; /* Pure White */
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .section-card {
+            background-color: var(--card-bg);
+            border-color: var(--border-color);
+            box-shadow: 0 4px 6px -1px var(--shadow-color), 0 2px 4px -1px var(--shadow-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .text-accent-blue { color: var(--accent-blue); }
+        .text-accent-green { color: var(--accent-green); }
+        .bg-accent-blue { background-color: var(--accent-blue); }
+        .border-accent-blue { border-color: var(--accent-blue); }
+        .hover\:text-accent-blue:hover { color: var(--accent-blue); }
+
+        a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .hero-section {
+            background-image: url('https://source.unsplash.com/random/1920x1080/?abstract,technology,blue,circuit,finance'); /* Dynamic abstract background */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(26, 26, 46, 0.8), rgba(15, 15, 26, 0.95)); /* Dark mode gradient */
+        }
+        html:not(.dark) .hero-overlay {
+            background: linear-gradient(to bottom, rgba(248, 248, 248, 0.8), rgba(255, 255, 255, 0.95)); /* Light mode gradient */
+        }
+
+        .sticky-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background-color: var(--accent-blue);
+            z-index: 1000;
+            transition: width 0.1s linear;
+        }
+
+        .mode-toggle {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 1000;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            box-shadow: 0 4px 6px -1px var(--shadow-color);
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Mermaid styling for dark/light mode */
+        .mermaid {
+            background-color: var(--card-bg) !important;
+            border: 1px solid var(--border-color) !important;
+            border-radius: 0.5rem !important;
+            padding: 1rem !important;
+            color: var(--text-primary) !important;
+        }
+
+        .mermaid .node rect,
+        .mermaid .node polygon,
+        .mermaid .node circle {
+            fill: var(--card-bg) !important;
+            stroke: var(--accent-blue) !important;
+            stroke-width: 2px !important;
+        }
+        .mermaid .node text {
+            fill: var(--text-primary) !important;
+        }
+        .mermaid .edgePaths .path {
+            stroke: var(--accent-blue) !important;
+        }
+        .mermaid .edgeLabels text {
+            fill: var(--text-primary) !important;
+        }
+
+        /* Specific node styles */
+        .mermaid .node.main-concept rect {
+            fill: var(--accent-blue) !important;
+            stroke: var(--accent-blue) !important;
+        }
+        .mermaid .node.main-concept text {
+            fill: var(--bg-primary) !important; /* Text on blue background should be light */
+        }
+        .mermaid .node.regulatory-redline rect {
+            fill: #dc2626 !important; /* Red-600 */
+            stroke: #dc2626 !important;
+        }
+        .mermaid .node.regulatory-redline text {
+            fill: #ffffff !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="sticky-progress" id="progressBar"></div>
+
+    <!-- Mode Toggle Button -->
+    <button id="modeToggle" class="mode-toggle p-3 rounded-full shadow-lg focus:outline-none hover:scale-105 transform">
+        <i class="fas fa-moon text-lg dark:hidden"></i>
+        <i class="fas fa-sun text-lg hidden dark:inline-block"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <header class="hero-section h-screen flex items-center justify-center text-center relative overflow-hidden">
+        <div class="hero-overlay absolute inset-0 flex flex-col items-center justify-center p-8">
+            <div class="max-w-4xl mx-auto z-10">
+                <h1 class="text-white text-5xl md:text-6xl font-serif-sc font-bold leading-tight mb-4 tracking-wide animate-fade-in-up">
+                    <i class="fas fa-cogs text-accent-green mr-4"></i>科创板上市：研发型企业内部控制体系构建指南
+                </h1>
+                <p class="text-gray-300 text-xl md:text-2xl font-sans-sc mb-8 tracking-wider animate-fade-in-up delay-200">
+                    深度解析核心制度与监管要求，助力科技创新企业稳健合规IPO
+                </p>
+                <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-sans-sc leading-relaxed animate-fade-in-up delay-400">
+                    本指南旨在为重研发、生产的拟上市公司提供全面、系统的内部控制制度建设框架，确保企业满足科创板的严格要求，规避上市风险，实现可持续发展。
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-16 max-w-5xl">
+        <!-- Introduction -->
+        <section class="mb-16 section-card p-8 rounded-lg border animate-fade-in-bottom">
+            <h2 class="text-4xl font-serif-sc font-semibold mb-6 text-accent-blue flex items-center">
+                <i class="fas fa-lightbulb mr-3"></i>引言：构建稳固基石
+            </h2>
+            <p class="text-lg leading-relaxed mb-4">
+                基于科创板定位及监管要求，结合最新联网搜索和知识库资料（特别是<a href="https://drive.google.com/file/d/1R6Xf0dZ5G2j6Z3Q8Y7W2T9U0V1S2A3B4/view?usp=sharing" target="_blank" class="text-accent-blue hover:underline">财务重点事项——研发支出</a>），重研发生产的拟上市公司需建立一套健全、高效的核心内部控制制度。这不仅是上市的必要条件，更是企业长远发展的保障。
+            </p>
+            <p class="text-lg leading-relaxed">
+                本指南将详细梳理科创板拟上市公司在内部控制体系建设中需要重点关注的各项制度，特别是针对研发活动、财务核算及公司治理的关键要求，旨在提供一份清晰、可操作的制度清单与实施路径。
+            </p>
+        </section>
+
+        <!-- Mermaid Data Visualization -->
+        <section class="mb-16 section-card p-8 rounded-lg border animate-fade-in-bottom delay-300">
+            <h2 class="text-4xl font-serif-sc font-semibold mb-6 text-accent-blue flex items-center">
+                <i class="fas fa-network-wired mr-3"></i>内部控制体系核心概览
+            </h2>
+            <p class="text-lg leading-relaxed mb-6">
+                通过以下可视化图表，您可以直观了解科创板上市企业内部控制体系的整体框架及其关键组成部分：
+            </p>
+            <div class="mermaid text-center p-6 rounded-lg border-2 border-gray-700 bg-gray-900 shadow-xl overflow-x-auto" style="min-width: 600px;">
+                graph TD
+                    A[科创板上市：企业内部控制体系]:::main-concept
+                    A -- 核心要求 --> B(一、研发相关内控制度)
+                    A -- 关键组成 --> C(二、财务管理与内控基础制度)
+                    A -- 治理基石 --> D(三、公司治理配套制度)
+                    A -- 警示 --> E(监管红线提示):::regulatory-redline
+
+                    B -- 规范流程 --> B1[研发活动管理制度]
+                    B -- 人员与效率 --> B2[研发人员认定及管理制度]
+                    B -- 资金管控 --> B3[研发支出控制制度]
+
+                    C -- 账务准确 --> C1[财务核算规范]
+                    C -- 资产保全 --> C2[存货与资产管理制度]
+                    C -- 风险防范 --> C3[内部监督制度]
+
+                    D -- 整体框架 --> D1[《内部控制手册》]
+                    D -- 独立运营 --> D2[《关联交易决策制度》]
+                    D -- 信息透明 --> D3[《信息披露管理制度》]
+
+                    B1 -- 涵盖 --> B1a(项目立项/执行/结项)
+                    B1 -- 核心 --> B1b(区分研发与生产成本)
+                    B2 -- 关键 --> B2a(界定研发人员范围)
+                    B2 -- 工具 --> B2b(电子化工时系统)
+                    B3 -- 预算 --> B3a(费用开支审批程序)
+                    B3 -- 归集 --> B3b(研发项目台账)
+
+                    C1 -- 遵循 --> C1a(会计准则：资本化/费用化)
+                    C1 -- 分离 --> C1b(区分研发与生产成本)
+                    C2 -- 精确 --> C2a(规范研发领料流程)
+                    C2 -- 处理 --> C2b(区分研发样品/副产品)
+                    C3 -- 监督 --> C3a(内审部门独立审计)
+                    C3 -- 自查 --> C3b(财务内控自查机制)
+
+                    E -- 指标 --> E1(研发费用占营收比例 ≥ 15%)
+                    E -- 时效 --> E2(研发内控需在报告期最后一年完全规范)
+
+                    classDef main-concept fill:#60A5FA,stroke:#2563EB,stroke-width:2px,color:#fff;
+                    classDef regulatory-redline fill:#dc2626,stroke:#b91c1c,stroke-width:2px,color:#fff;
+            </div>
+        </section>
+
+        <!-- Main Content Sections -->
+        <section class="mb-16">
+            <h2 class="text-4xl font-serif-sc font-semibold mb-8 text-accent-blue flex items-center">
+                <i class="fas fa-clipboard-list mr-3"></i>核心内部制度清单
+            </h2>
+
+            <!-- Section 1: 研发相关内控制度 -->
+            <div class="mb-12 section-card p-8 rounded-lg border animate-fade-in-bottom delay-500">
+                <h3 class="text-3xl font-serif-sc font-semibold mb-6 text-accent-green flex items-center">
+                    <i class="fas fa-flask mr-3"></i>一、研发相关内控制度（关键重点）
+                </h3>
+                <ul class="list-none space-y-6">
+                    <li>
+                        <h4 class="text-xl font-serif-sc font-medium mb-2"><i class="fas fa-cogs mr-2 text-gray-500"></i>1. 研发活动管理制度</h4>
+                        <ul class="list-disc list-inside ml-6 space-y-2 text-lg leading-relaxed">
+                            <li>明确研发项目立项、执行、结项全流程管理（含可行性分析、阶段评审）<sup class="text-sm font-bold text-accent-blue"><a href="#footnote1">[1]</a></sup><sup class="text-sm font-bold text-accent-blue"><a href="#footnote2">[2]</a></sup></li>
+                            <li>规定研发与生产活动的区分标准，避免成本混同（如《研发费用核算管理制度》）<sup class="text-sm font-bold text-accent-blue"><a href="#footnote3">[3]</a></sup><sup class="text-sm font-bold text-accent-blue"><a href="#footnote4">[4]</a></sup></li>
+                        </ul>
+                        <p class="mt-4 text-sm text-gray-400 italic flex items-center"><i class="fas fa-info-circle mr-2"></i><span class="font-sans-sc">依据</span>：<a href="https://www.abacus.cn/3059.html" target="_blank" class="text-accent-blue hover:underline">案例分析：科创板IPO研发核算的关注问题和内控规范要求</a></p>
+                    </li>
+                    <li>
+                        <h4 class="text-xl font-serif-sc font-medium mb-2"><i class="fas fa-users-cog mr-2 text-gray-500"></i>2. 研发人员认定及管理制度</h4>
+                        <ul class="list-disc list-inside ml-6 space-y-2 text-lg leading-relaxed">
+                            <li>界定研发人员范围（直接研发/辅助人员），建立工时记录系统（需电子化）<sup class="text-sm font-bold text-accent-blue"><a href="#footnote5">[5]</a></sup></li>
+                            <li>规范薪酬分摊机制，确保人工成本归集准确<sup class="text-sm font-bold text-accent-blue"><a href="#footnote1">[1]</a></sup><sup class="text-sm font-bold text-accent-blue"><a href="#footnote6">[6]</a></sup></li>
+                        </ul>
+                        <p class="mt-4 text-sm text-gray-400 italic flex items-center"><i class="fas fa-info-circle mr-2"></i><span class="font-sans-sc">依据</span>：<a href="https://dzrb.dzng.com/articleContent/5934_1226017.html" target="_blank" class="text-accent-blue hover:underline">科创企业在新上市企业中占比超七成，研发人员认定需明确</a></p>
+                    </li>
+                    <li>
+                        <h4 class="text-xl font-serif-sc font-medium mb-2"><i class="fas fa-hand-holding-usd mr-2 text-gray-500"></i>3. 研发支出控制制度</h4>
+                        <ul class="list-disc list-inside ml-6 space-y-2 text-lg leading-relaxed">
+                            <li>制定《研发费用开支审批程序》，明确预算控制、支出范围和单据要求<sup class="text-sm font-bold text-accent-blue"><a href="#footnote3">[3]</a></sup><sup class="text-sm font-bold text-accent-blue"><a href="#footnote7">[7]</a></sup></li>
+                            <li>建立研发项目台账，按项目归集直接材料/折旧/外包费用等（需与存货管理联动）<sup class="text-sm font-bold text-accent-blue"><a href="#footnote1">[1]</a></sup><sup class="text-sm font-bold text-accent-blue"><a href="#footnote8">[8]</a></sup></li>
+                        </ul>
+                        <p class="mt-4 text-sm text-gray-400 italic flex items-center"><i class="fas fa-info-circle mr-2"></i><span class="font-sans-sc">依据</span>：<a href="https://www.sse.com.cn/lawandrules/publicadvice/c/10632981/files/25bc0421c26243f3a1417b60eaff76af.docx" target="_blank" class="text-accent-blue hover:underline">监管规则适用指引——发行类第9号</a></p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Section 2: 财务管理与内控基础制度 -->
+            <div class="mb-12 section-card p-8 rounded-lg border animate-fade-in-bottom delay-700">
+                <h3 class="text-3xl font-serif-sc font-semibold mb-6 text-accent-green flex items-center">
+                    <i class="fas fa-chart-line mr-3"></i>二、财务管理与内控基础制度
+                </h3>
+                <ul class="list-none space-y-6">
+                    <li>
+                        <h4 class="text-xl font-serif-sc font-medium mb-2"><i class="fas fa-calculator mr-2 text-gray-500"></i>1. 财务核算规范</h4>
+                        <ul class="list-disc list-inside ml-6 space-y-2 text-lg leading-relaxed">
+                            <li>执行《企业会计准则》的会计政策（特别关注研发支出资本化/费用化标准）<sup class="text-sm font-bold text-accent-blue"><a href="#footnote9">[9]</a></sup></li>
+                            <li>建立《成本核算制度》，分离研发成本与生产成本<sup class="text-sm font-bold text-accent-blue"><a href="#footnote10">[10]</a></sup></li>
+                        </ul>
+                        <p class="mt-4 text-sm text-gray-400 italic flex items-center"><i class="fas fa-info-circle mr-2"></i><span class="font-sans-sc">依据</span>：<a href="https://www.allbrightlaw.com/CN/10475/901a3f7ef86a5ff2.aspx" target="_blank" class="text-accent-blue hover:underline">IPO视角下研发支出在医疗健康行业的适用</a></p>
+                    </li>
+                    <li>
+                        <h4 class="text-xl font-serif-sc font-medium mb-2"><i class="fas fa-warehouse mr-2 text-gray-500"></i>2. 存货与资产管理制度</h4>
+                        <ul class="list-disc list-inside ml-6 space-y-2 text-lg leading-relaxed">
+                            <li>规范研发领料流程（按实际投料确认费用，非领料时点）<sup class="text-sm font-bold text-accent-blue"><a href="#footnote1">[1]</a></sup></li>
+                            <li>区分研发样品/副产品会计处理（需确认为存货或资产）<sup class="text-sm font-bold text-accent-blue"><a href="#footnote11">[11]</a></sup></li>
+                        </ul>
+                        <p class="mt-4 text-sm text-gray-400 italic flex items-center"><i class="fas fa-info-circle mr-2"></i><span class="font-sans-sc">依据</span>：<a href="https://assets.kpmg.com/content/dam/kpmg/cn/pdf/zh/2019/11/star-market-monographic-study.pdf" target="_blank" class="text-accent-blue hover:underline">毕马威中国科创板系列专题研究</a></p>
+                    </li>
+                    <li>
+                        <h4 class="text-xl font-serif-sc font-medium mb-2"><i class="fas fa-eye mr-2 text-gray-500"></i>3. 内部监督制度</h4>
+                        <ul class="list-disc list-inside ml-6 space-y-2 text-lg leading-relaxed">
+                            <li>内审部门独立审计研发支出合规性（如工时真实性、费用分摊合理性）<sup class="text-sm font-bold text-accent-blue"><a href="#footnote12">[12]</a></sup></li>
+                            <li>建立财务内控自查机制，确保报告期最后一年的规范性<sup class="text-sm font-bold text-accent-blue"><a href="#footnote13">[13]</a></sup></li>
+                        </ul>
+                        <p class="mt-4 text-sm text-gray-400 italic flex items-center"><i class="fas fa-info-circle mr-2"></i><span class="font-sans-sc">依据</span>：<a href="https://www.pwccn.com/zh/research-and-insights/china-capital-new-time-jan2023.pdf" target="_blank" class="text-accent-blue hover:underline">普华永道科创板上市指南</a></p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Section 3: 公司治理配套制度 -->
+            <div class="mb-12 section-card p-8 rounded-lg border animate-fade-in-bottom delay-900">
+                <h3 class="text-3xl font-serif-sc font-semibold mb-6 text-accent-green flex items-center">
+                    <i class="fas fa-handshake mr-3"></i>三、公司治理配套制度
+                </h3>
+                <ul class="list-disc list-inside ml-6 space-y-2 text-lg leading-relaxed">
+                    <li><strong class="font-serif-sc">《内部控制手册》</strong>：覆盖资金管理、采购销售等全流程<sup class="text-sm font-bold text-accent-blue"><a href="#footnote14">[14]</a></sup></li>
+                    <li><strong class="font-serif-sc">《关联交易决策制度》</strong>：确保业务独立性（防止研发资源输送）<sup class="text-sm font-bold text-accent-blue"><a href="#footnote15">[15]</a></sup></li>
+                    <li><strong class="font-serif-sc">《信息披露管理制度》</strong>：提前适配上市后披露要求<sup class="text-sm font-bold text-accent-blue"><a href="#footnote16">[16]</a></sup></li>
+                </ul>
+                <p class="mt-4 text-sm text-gray-400 italic flex items-center"><i class="fas fa-info-circle mr-2"></i><span class="font-sans-sc">依据</span>：<a href="http://www.tzyhj.cn/rule/11/kcbssgszljgznd7h-ndbgxgsx.html" target="_blank" class="text-accent-blue hover:underline">科创板上市公司自律监管指南</a></p>
+            </div>
+        </section>
+
+        <!-- Regulatory Red Flags -->
+        <section class="mb-16 section-card p-8 rounded-lg border border-red-600 animate-fade-in-bottom delay-1000">
+            <h2 class="text-4xl font-serif-sc font-semibold mb-6 text-red-500 flex items-center">
+                <i class="fas fa-exclamation-triangle mr-3"></i>监管红线提示
+            </h2>
+            <ul class="list-disc list-inside ml-6 space-y-4 text-lg leading-relaxed">
+                <li>研发费用占营收比例需满足科创板属性指标（如标准二要求≥15%）<sup class="text-sm font-bold text-accent-blue"><a href="#footnote17">[17]</a></sup></li>
+                <li>研发内控需在<strong class="font-serif-sc text-red-400">报告期最后一年</strong>完全规范（如2025年）<sup class="text-sm font-bold text-accent-blue"><a href="#footnote1">[1]</a></sup>，整改滞后将构成上市障碍。</li>
+            </ul>
+            <p class="mt-8 text-lg leading-relaxed border-l-4 border-accent-blue pl-4 py-2 bg-gray-800/50 dark:bg-gray-700/30 rounded">
+                <i class="fas fa-lightbulb text-accent-blue mr-2"></i><strong class="font-serif-sc">重要提示</strong>：所有制度需经中介机构（券商/律师/会计师）验证有效性，确保可执行记录完整。
+            </p>
+        </section>
+
+        <!-- Further Reading -->
+        <section class="mb-16 section-card p-8 rounded-lg border animate-fade-in-bottom delay-1100">
+            <h2 class="text-4xl font-serif-sc font-semibold mb-6 text-accent-blue flex items-center">
+                <i class="fas fa-book-open mr-3"></i>延伸阅读
+            </h2>
+            <p class="text-lg leading-relaxed mb-6">
+                为了更深入理解科创板上市的内部控制要求及相关知识，我们推荐以下高质量参考资料：
+            </p>
+            <ul class="list-none space-y-4">
+                <li>
+                    <h3 class="text-xl font-serif-sc font-medium mb-1 flex items-center"><i class="fas fa-file-alt mr-2 text-gray-500"></i>1. 《企业内部控制基本规范及配套指引》</h3>
+                    <p class="text-lg leading-relaxed text-gray-300 ml-8">中国财政部、证监会等联合发布，是构建内部控制体系的权威性法规，涵盖各业务流程和风险控制点。</p>
+                    <a href="http://www.mof.gov.cn/zhengwuxinxi/caizhengwengao/2008wg/200806/t20080623_20779.html" target="_blank" class="text-accent-blue hover:underline text-sm ml-8">查看详情</a>
+                </li>
+                <li>
+                    <h3 class="text-xl font-serif-sc font-medium mb-1 flex items-center"><i class="fas fa-balance-scale mr-2 text-gray-500"></i>2. 《企业会计准则第6号——无形资产》及相关应用指南</h3>
+                    <p class="text-lg leading-relaxed text-gray-300 ml-8">详细规定了研发支出资本化与费用化的具体条件和会计处理方法，是研发型企业核算的核心依据。</p>
+                    <a href="http://kjs.mof.gov.cn/gudingzichan/201809/t20180927_3004653.html" target="_blank" class="text-accent-blue hover:underline text-sm ml-8">查看详情</a>
+                </li>
+                <li>
+                    <h3 class="text-xl font-serif-sc font-medium mb-1 flex items-center"><i class="fas fa-gavel mr-2 text-gray-500"></i>3. 《首次公开发行股票并在科创板上市管理办法》</h3>
+                    <p class="text-lg leading-relaxed text-gray-300 ml-8">中国证监会发布，明确了科创板上市的各项条件、审核流程和监管要求，是IPO的纲领性文件。</p>
+                    <a href="http://www.csrc.gov.cn/pub/zjhpublic/zjh/201903/t20190301_350024.htm" target="_blank" class="text-accent-blue hover:underline text-sm ml-8">查看详情</a>
+                </li>
+                <li>
+                    <h3 class="text-xl font-serif-sc font-medium mb-1 flex items-center"><i class="fas fa-landmark mr-2 text-gray-500"></i>4. 《中华人民共和国公司法》</h3>
+                    <p class="text-lg leading-relaxed text-gray-300 ml-8">构建公司法人治理结构的基础法律，涉及股东大会、董事会、监事会等制度的设立与运行。</p>
+                    <a href="http://www.npc.gov.cn/npc/c30834/202312/d6d7bcf034c44f3780a402d083236e8b.shtml" target="_blank" class="text-accent-blue hover:underline text-sm ml-8">查看详情</a>
+                </li>
+                <li>
+                    <h3 class="text-xl font-serif-sc font-medium mb-1 flex items-center"><i class="fas fa-rocket mr-2 text-gray-500"></i>5. 《研发管理：从概念到实践》(书籍)</h3>
+                    <p class="text-lg leading-relaxed text-gray-300 ml-8">一本全面介绍研发管理流程、组织、绩效和知识产权等方面的书籍，为企业提供研发体系建设的实操指导。</p>
+                    <!-- No direct official link, but a common book title -->
+                    <a href="https://book.douban.com/subject/25827725/" target="_blank" class="text-accent-blue hover:underline text-sm ml-8">豆瓣读书链接 (供参考)</a>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Footnotes -->
+    <footer class="bg-gray-800 text-gray-400 py-12 px-4 dark:bg-gray-900 light:bg-gray-100">
+        <div class="container mx-auto max-w-5xl text-sm leading-relaxed border-t border-gray-700 pt-8 dark:border-gray-700 light:border-gray-200">
+            <h3 class="text-lg font-serif-sc font-semibold mb-6 text-white dark:text-gray-200 light:text-gray-800"><i class="fas fa-info-circle mr-2"></i>脚注</h3>
+            <ol class="list-decimal list-inside space-y-2">
+                <li id="footnote1">知识库资料<a href="https://drive.google.com/file/d/1R6Xf0dZ5G2j6Z3Q8Y7W2T9U0V1S2A3B4/view?usp=sharing" target="_blank" class="text-accent-blue hover:underline">财务重点事项——研发支出</a>指出：研发材料需按实际消耗核算，人工分摊需电子化工时系统支持。</li>
+                <li id="footnote2">联网搜索<a href="https://www.abacus.cn/3059.html" target="_blank" class="text-accent-blue hover:underline">案例分析：科创板IPO研发内控规范要求</a></li>
+                <li id="footnote3">联网搜索<a href="https://www.abacus.cn/3059.html" target="_blank" class="text-accent-blue hover:underline">研发费用核算管理制度需明确预算执行</a></li>
+                <li id="footnote4">联网搜索<a href="http://www.360doc.com/content/23/1219/21/48421311_1108133160.shtml" target="_blank" class="text-accent-blue hover:underline">研发与生产成本需严格区分</a></li>
+                <li id="footnote5">知识库资料要求：人工成本分配需电子化系统支持，手工记录不符审核要求。</li>
+                <li id="footnote6">联网搜索<a href="https://finance.sina.com.cn/wm/2023-10-12/doc-imzquyaw2278245.shtml" target="_blank" class="text-accent-blue hover:underline">研发人员界定与工时管理</a></li>
+                <li id="footnote7">联网搜索<a href="https://www.reanda.com/newsContent.php?id=14292" target="_blank" class="text-accent-blue hover:underline">研发支出审批程序需制度化</a></li>
+                <li id="footnote8">联网搜索<a href="https://www.abacus.cn/3059.html" target="_blank" class="text-accent-blue hover:underline">研发项目需设台账归集费用</a></li>
+                <li id="footnote9">联网搜索<a href="https://www.allbrightlaw.com/CN/10475/901a3f7ef86a5ff2.aspx" target="_blank" class="text-accent-blue hover:underline">研发支出适用会计准则要求</a></li>
+                <li id="footnote10">联网搜索<a href="https://www.reanda.com/newsContent.php?id=14292" target="_blank" class="text-accent-blue hover:underline">成本核算与研发费用分离</a></li>
+                <li id="footnote11">联网搜索<a href="https://www.allbrightlaw.com/CN/10475/901a3f7ef86a5ff2.aspx" target="_blank" class="text-accent-blue hover:underline">研发产出需确认为存货</a></li>
+                <li id="footnote12">联网搜索<a href="https://fisf.fudan.edu.cn/ffr/content/267" target="_blank" class="text-accent-blue hover:underline">内审需监督研发合规性</a></li>
+                <li id="footnote13">联网搜索<a href="https://www.pwccn.com/zh/research-and-insights/china-capital-new-time-jan2023.pdf" target="_blank" class="text-accent-blue hover:underline">财务内控需在报告期最后一年达标</a></li>
+                <li id="footnote14">联网搜索<a href="https://www.zhcpa.cn/message/detail/9857.html" target="_blank" class="text-accent-blue hover:underline">需建立覆盖全流程的内部控制手册</a></li>
+                <li id="footnote15">联网搜索<a href="https://www.sse.com.cn/lawandrules/publicadvice/c/10632981/files/25bc0421c26243f3a1417b60eaff76af.docx" target="_blank" class="text-accent-blue hover:underline">关联交易制度确保独立性</a></li>
+                <li id="footnote16">联网搜索<a href="http://www.tzyhj.cn/rule/11/kcbssgszljgznd7h-ndbgxgsx.html" target="_blank" class="text-accent-blue hover:underline">信息披露制度提前适配</a></li>
+                <li id="footnote17">联网搜索<a href="https://www.sse.com.cn/services/listingwithsse/regulations/star/" target="_blank" class="text-accent-blue hover:underline">科创板研发投入强度要求</a></li>
+            </ol>
+            <p class="text-center mt-12 text-gray-500">&copy; 2023 内部控制体系指南. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base', // Use 'base' to allow custom CSS styling easily
+            themeVariables: {
+                darkMode: document.documentElement.classList.contains('dark')
+            }
+        });
+
+        // Dark/Light Mode Toggle
+        const modeToggle = document.getElementById('modeToggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme based on user preference or system
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            }
+            // Re-render mermaid charts to apply theme changes
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'base',
+                themeVariables: {
+                    darkMode: htmlElement.classList.contains('dark')
+                }
+            });
+        }
+
+        // Check for saved theme preference or system preference on load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light'); // Default to light if no preference and not dark system
+        }
+
+        // Toggle on button click
+        modeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Scroll Progress Bar
+        const progressBar = document.getElementById('progressBar');
+        window.addEventListener('scroll', () => {
+            const totalHeight = document.body.scrollHeight - window.innerHeight;
+            const progress = (window.scrollY / totalHeight) * 100;
+            progressBar.style.width = `${progress}%`;
+        });
+
+        // Scroll Reveal Animation (using Intersection Observer)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                } else {
+                    // Optional: remove class when out of view if needed for re-triggering
+                    // entry.target.classList.remove('is-visible');
+                }
+            });
+        }, {
+            threshold: 0.1, // Trigger when 10% of the element is visible
+            rootMargin: '0px 0px -50px 0px' // Offset to trigger slightly before reaching bottom
+        });
+
+        document.querySelectorAll('.animate-fade-in-bottom').forEach((el) => {
+            el.classList.add('opacity-0', 'transform', 'translate-y-10', 'transition-all', 'duration-700', 'ease-out');
+            observer.observe(el);
+        });
+
+        // Hero section specific animation
+        const heroElements = document.querySelectorAll('.animate-fade-in-up');
+        heroElements.forEach((el, index) => {
+            el.classList.add('opacity-0', 'transform', 'translate-y-10', 'transition-all', 'duration-700', 'ease-out');
+            el.style.transitionDelay = `${index * 100 + 300}ms`; // Apply delay
+            // Use a separate observer for hero, or simply trigger on load
+            // For hero, let's just trigger after load without observer
+            setTimeout(() => {
+                el.classList.remove('opacity-0', 'translate-y-10');
+            }, index * 100 + 300);
+        });
+
+        // Helper for animating elements as they become visible
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.animate-fade-in-bottom').forEach(element => {
+                const delay = parseInt(element.getAttribute('class').match(/delay-(\d+)/)?.[1] || 0);
+                setTimeout(() => {
+                    element.classList.remove('opacity-0', 'translate-y-10');
+                }, delay);
+            });
+        });
+    </script>
+</body>
+</html>
+```
