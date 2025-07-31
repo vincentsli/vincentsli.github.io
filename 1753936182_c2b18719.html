@@ -1,0 +1,578 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>股权转让个税滞纳金：解析计算与历史追征</title>
+    <meta name="description" content="专业解读税务局核定征收股权转让个人所得税滞纳金的计算规则、历史追征时点与法律依据。">
+
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom Fonts for Chinese */
+        html {
+            /* Fallback fonts for Chinese characters, ensuring good display */
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6, .font-serif-sc {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+
+        /* Dark Mode Specific Styles */
+        html.dark {
+            --tw-bg-opacity: 1;
+            background-color: rgb(8 8 10 / var(--tw-bg-opacity)); /* bg-gray-950 equivalent */
+            color: #E5E7EB; /* text-gray-200 equivalent */
+        }
+        html.dark .text-base-100 { color: #E5E7EB; }
+        html.dark .text-base-200 { color: #D1D5DB; }
+        html.dark .text-base-300 { color: #9CA3AF; }
+        html.dark .bg-card { background-color: rgb(24 24 27 / var(--tw-bg-opacity)); } /* bg-gray-900 equivalent */
+        html.dark .bg-highlight { background-color: rgb(39 39 42 / var(--tw-bg-opacity)); } /* bg-gray-800 equivalent */
+        html.dark .border-card { border-color: rgb(63 63 70 / var(--tw-border-opacity)); } /* border-gray-700 equivalent */
+        html.dark .shadow-custom { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); } /* subtle dark shadow */
+        html.dark a { color: #60A5FA; } /* blue-400 */
+        html.dark a:hover { color: #93C5FD; } /* blue-300 */
+        html.dark .hero-overlay {
+            background: linear-gradient(to top, rgba(8, 8, 10, 0.95), rgba(8, 8, 10, 0.75), rgba(8, 8, 10, 0.5));
+        }
+
+        /* Light Mode Specific Styles */
+        html.light {
+            --tw-bg-opacity: 1;
+            background-color: rgb(255 255 255 / var(--tw-bg-opacity)); /* bg-white equivalent */
+            color: #1F2937; /* text-gray-800 equivalent */
+        }
+        html.light .text-base-100 { color: #1F2937; }
+        html.light .text-base-200 { color: #374151; }
+        html.light .text-base-300 { color: #6B7280; }
+        html.light .bg-card { background-color: rgb(249 250 251 / var(--tw-bg-opacity)); } /* bg-gray-50 equivalent */
+        html.light .bg-highlight { background-color: rgb(229 231 235 / var(--tw-bg-opacity)); } /* bg-gray-200 equivalent */
+        html.light .border-card { border-color: rgb(209 213 219 / var(--tw-border-opacity)); } /* border-gray-300 equivalent */
+        html.light .shadow-custom { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); } /* default shadow */
+        html.light a { color: #2563EB; } /* blue-600 */
+        html.light a:hover { color: #1D4ED8; } /* blue-700 */
+        html.light .hero-overlay {
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.5));
+        }
+
+        /* Mermaid Theme for Dark Mode */
+        .mermaid-dark {
+            filter: invert(0.9) hue-rotate(180deg); /* Simple filter to invert colors for dark mode */
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4B5563; /* Tailwind gray-600 */
+            border-radius: 4px;
+        }
+
+        html.light ::-webkit-scrollbar-thumb {
+            background: #9CA3AF; /* Tailwind gray-400 */
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6B7280; /* Tailwind gray-500 */
+        }
+        html.light ::-webkit-scrollbar-thumb:hover {
+            background: #6B7280; /* Tailwind gray-500 */
+        }
+    </style>
+</head>
+<body class="transition-colors duration-300 ease-in-out">
+    <!-- Theme Toggle Button -->
+    <button id="themeToggle" class="fixed top-4 right-4 z-50 p-3 rounded-full bg-card shadow-lg text-base-100 transition-all duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-opacity-50">
+        <i class="fas fa-moon text-lg light:hidden"></i>
+        <i class="fas fa-sun text-lg dark:hidden"></i>
+    </button>
+
+    <!-- Hero Module -->
+    <header class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1518655187019-389f4640101e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-position: 25% 75%;">
+            <div class="hero-overlay absolute inset-0"></div>
+        </div>
+        <div class="relative z-10 text-center px-4 max-w-4xl">
+            <h1 class="text-5xl md:text-7xl font-bold text-base-100 leading-tight mb-4 font-serif-sc animate-fade-in-up">
+                股权转让个税滞纳金<br><span class="text-teal-400">深度解析与应对策略</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-base-200 mb-8 max-w-2xl mx-auto animate-fade-in-up delay-150">
+                专业视角解读税务局核定征收与法律时效：理解计算规则，洞悉历史追征要点。
+            </p>
+            <a href="#content" class="inline-block px-8 py-4 bg-sky-600 text-white rounded-lg text-lg font-medium shadow-lg hover:bg-sky-700 transition duration-300 ease-in-out transform hover:scale-105 animate-fade-in-up delay-300">
+                了解详情 <i class="fas fa-arrow-down ml-2"></i>
+            </a>
+        </div>
+        <div class="absolute bottom-10 animate-bounce">
+            <i class="fas fa-chevron-down text-base-100 text-3xl"></i>
+        </div>
+    </header>
+
+    <main id="content" class="container mx-auto px-4 py-16 md:py-24 text-base-100">
+
+        <!-- Introduction Section -->
+        <section class="mb-16 md:mb-24 animate-fade-in-up">
+            <h2 class="text-4xl font-bold mb-6 text-teal-400 font-serif-sc leading-snug">引言：透视股权转让中的税务合规挑战</h2>
+            <p class="text-lg md:text-xl leading-relaxed text-base-200 first-letter:float-left first-letter:text-5xl first-letter:font-bold first-letter:mr-3 first-letter:text-sky-500">
+                在A股市场资本运作日益频繁的今天，股权转让已成为企业重组与个人财富管理的重要环节。然而，随之而来的税务合规问题，特别是个人所得税的核定征收与滞纳金计算，往往令纳税人感到困惑。本篇深度分析将结合最新税法规定、权威案例以及专业知识，为您清晰解读股权转让个税滞纳金的计算规则、历史事件的追征时点，并提供实用的风险应对策略。
+            </p>
+            <div class="mt-8 p-6 bg-card rounded-lg shadow-md border border-card transition-all duration-300 hover:shadow-xl">
+                <p class="text-base-200 italic">
+                    <i class="fas fa-info-circle text-sky-500 mr-2"></i>
+                    本分析基于：知识库资料“自然人股东减资撤资中的涉税事项”¹、联网搜索结果²³⁴以及《中华人民共和国税收征收管理法》等核心税法依据。当前时间（2025年7月31日）不影响规则时效性。
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 1: 滞纳金的计算规则 -->
+        <section class="mb-16 md:mb-24 animate-fade-in-up delay-100">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-sky-400 font-serif-sc border-b border-gray-700 pb-4">
+                <i class="fas fa-calculator mr-3"></i>1. 滞纳金的计算规则
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-card p-8 rounded-lg shadow-md border border-card transition-all duration-300 hover:shadow-xl">
+                    <h3 class="text-2xl font-semibold mb-4 text-teal-300">计算公式与依据</h3>
+                    <p class="text-lg leading-relaxed text-base-200 mb-6">
+                        滞纳金是对未按期缴纳税款的惩罚性费用，其计算有明确的法律依据。
+                    </p>
+                    <div class="bg-highlight p-6 rounded-md border border-card mb-6">
+                        <p class="text-xl font-mono text-base-100 text-center">
+                            <span class="text-2xl font-bold text-sky-400">滞纳金</span> = 滞纳税款 × 滞纳天数 × <span class="text-yellow-400">0.0005</span>
+                        </p>
+                    </div>
+                    <ul class="list-none space-y-3 text-base-200">
+                        <li><i class="fas fa-dot-circle text-sky-500 mr-2"></i> **滞纳税款**：指税务局核定的应补缴个税金额。</li>
+                        <li><i class="fas fa-dot-circle text-sky-500 mr-2"></i> **滞纳天数**：从税款缴纳期限届满次日起，至实际缴纳税款之日止。</li>
+                        <li><i class="fas fa-dot-circle text-sky-500 mr-2"></i> **日利率**：万分之五（即0.0005），依据《税收征管法》第三十二条⁴。</li>
+                    </ul>
+                </div>
+                <div class="bg-card p-8 rounded-lg shadow-md border border-card transition-all duration-300 hover:shadow-xl">
+                    <h3 class="text-2xl font-semibold mb-4 text-teal-300">关键点与计算示例</h3>
+                    <p class="text-lg leading-relaxed text-base-200 mb-6">
+                        理解以下关键点，有助于准确估算滞纳金：
+                    </p>
+                    <ul class="list-none space-y-3 text-base-200 mb-6">
+                        <li><i class="fas fa-asterisk text-yellow-500 mr-2"></i> 滞纳金按日累计，**无上限**。
+                        <span class="text-xs text-base-300 block ml-6">（注：根据《税收征管法》及实践，滞纳金可能超过本金，没有明确上限）</span>
+                        </li>
+                        <li><i class="fas fa-asterisk text-yellow-500 mr-2"></i> 若因申报收入偏低而核定征收，滞纳税款以核定金额为准。</li>
+                    </ul>
+                    <div class="bg-highlight p-6 rounded-md border border-card">
+                        <h4 class="text-xl font-semibold mb-3 text-base-100"><i class="fas fa-lightbulb text-sky-500 mr-2"></i>计算示例</h4>
+                        <p class="text-base-200">
+                            假设2020年1月1日发生股权转让，应补税款**10万元**，缴纳期限届满日为2020年2月15日。若实际缴纳日为2025年7月31日：
+                        </p>
+                        <p class="text-lg font-mono text-base-100 mt-4">
+                            滞纳天数 ≈ 1990天<br>
+                            滞纳金 = 100,000 × 1990 × 0.0005 ≈ <span class="text-xl font-bold text-teal-400">99,500元</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: 历史事件滞纳金起算时点的确定 -->
+        <section class="mb-16 md:mb-24 animate-fade-in-up delay-200">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-sky-400 font-serif-sc border-b border-gray-700 pb-4">
+                <i class="fas fa-clock mr-3"></i>2. 历史事件滞纳金起算时点的确定
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="md:col-span-2 bg-card p-8 rounded-lg shadow-md border border-card transition-all duration-300 hover:shadow-xl">
+                    <h3 class="text-2xl font-semibold mb-4 text-teal-300">一般规则：起算时点</h3>
+                    <p class="text-lg leading-relaxed text-base-200 mb-6">
+                        滞纳金的起算时点是计算的关键，它直接决定了滞纳天数。
+                    </p>
+                    <ul class="list-none space-y-4 text-base-200">
+                        <li>
+                            <i class="fas fa-calendar-alt text-sky-500 mr-2"></i> **纳税义务发生时间**：
+                            <span class="block ml-6">股权转让协议生效、支付价款或完成变更登记时（67号公告第二十条），具体情形包括：</span>
+                            <ul class="list-disc list-inside ml-8 mt-2 space-y-1 text-base-300">
+                                <li>受让方已支付或部分支付股权转让价款；</li>
+                                <li>股权转让协议已签订生效；</li>
+                                <li>受让方已实际履行股东职责或享受股东权益；</li>
+                                <li>国家有关部门判决、登记或公告生效；</li>
+                                <li>税务机关认定的其他有证据表明股权已发生转移的情形。</li>
+                            </ul>
+                        </li>
+                        <li><i class="fas fa-hourglass-half text-sky-500 mr-2"></i> **税款缴纳期限**：纳税义务发生后的次月15日内。</li>
+                        <li><i class="fas fa-play-circle text-sky-500 mr-2"></i> **滞纳金起算日**：缴纳期限届满之日起第16日。
+                            <span class="block ml-6 text-base-300">（例如，2月15日届满，则2月16日起算。依据：Result 2分析显示²）</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="md:col-span-1 bg-card p-8 rounded-lg shadow-md border border-card transition-all duration-300 hover:shadow-xl">
+                    <h3 class="text-2xl font-semibold mb-4 text-teal-300">核心概念速览</h3>
+                    <ul class="list-none space-y-4 text-base-200">
+                        <li class="p-3 bg-highlight rounded-md border border-card hover:bg-gray-700 transition"><i class="fas fa-balance-scale text-yellow-500 mr-2"></i> **核定征收**: 当纳税人申报的收入明显偏低且无正当理由时，税务机关有权核定其应纳税所得额。</li>
+                        <li class="p-3 bg-highlight rounded-md border border-card hover:bg-gray-700 transition"><i class="fas fa-calendar-check text-yellow-500 mr-2"></i> **纳税义务发生时间**: 法律规定纳税人产生纳税义务的时点。</li>
+                        <li class="p-3 bg-highlight rounded-md border border-card hover:bg-gray-700 transition"><i class="fas fa-history text-yellow-500 mr-2"></i> **追征期**: 税务机关追征税款的法定时限。</li>
+                        <li class="p-3 bg-highlight rounded-md border border-card hover:bg-gray-700 transition"><i class="fas fa-coins text-yellow-500 mr-2"></i> **滞纳金**: 因未按期缴纳税款而产生的按日加收的罚款。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-12 bg-card p-8 rounded-lg shadow-md border border-card animate-fade-in-up delay-300 transition-all duration-300 hover:shadow-xl">
+                <h3 class="text-2xl font-semibold mb-4 text-teal-300"><i class="fas fa-gavel mr-3"></i>历史事件特殊性：追征期影响</h3>
+                <p class="text-lg leading-relaxed text-base-200 mb-6">
+                    对于多年前的股权转让事件，滞纳金的起算时点是否有效，需重点关注《税收征管法》第五十二条规定的追征期。
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-highlight p-6 rounded-md border border-card">
+                        <h4 class="text-xl font-semibold mb-3 text-base-100"><i class="fas fa-layer-group text-sky-500 mr-2"></i>未超追征期</h4>
+                        <ul class="list-none space-y-3 text-base-200">
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i> **纳税人失误（计算错误等）**：追征期3年，特殊情况可延长至5年。滞纳金从应缴日起算。</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i> **偷税、抗税、骗税**：追征期无限长。滞纳金从应缴日起算。</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i> **税务机关责任**：追征期3年，**不加收滞纳金**。</li>
+                        </ul>
+                    </div>
+                    <div class="bg-highlight p-6 rounded-md border border-card">
+                        <h4 class="text-xl font-semibold mb-3 text-base-100"><i class="fas fa-times-circle text-red-500 mr-2"></i>超出追征期</h4>
+                        <ul class="list-none space-y-3 text-base-200">
+                            <li><i class="fas fa-exclamation-triangle text-orange-500 mr-2"></i> 通常情况下，若已超出法定追征期，税务机关无权再追征税款及滞纳金，起算时点自然失效。</li>
+                            <li><i class="fas fa-exclamation-triangle text-orange-500 mr-2"></i> **核定征收下的起算时点**：即使税务局多年后才核定补税，滞纳金通常仍从原纳税义务发生时的应缴日起算，除非已超出追征期。</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="mt-6 text-base-200">
+                    <i class="fas fa-quote-left text-sky-500 mr-2"></i>
+                    <em class="italic">“陈年旧账”案件中，起算时点需结合追征期确认；例如，10年前的转让若因失误未申报，且已超5年追征期，则滞纳金不成立。</em> — Result 1²
+                </p>
+            </div>
+        </section>
+
+        <!-- Data Visualization Section -->
+        <section class="mb-16 md:mb-24 animate-fade-in-up delay-400">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-sky-400 font-serif-sc border-b border-gray-700 pb-4">
+                <i class="fas fa-chart-network mr-3"></i>3. 滞纳金计算与追征逻辑流程图
+            </h2>
+            <p class="text-lg md:text-xl leading-relaxed text-base-200 mb-8">
+                通过以下流程图，更直观地理解股权转让个税滞纳金的计算与追征逻辑。
+            </p>
+            <div class="bg-card p-6 rounded-lg shadow-md border border-card overflow-x-auto">
+                <div class="mermaid text-base-100 dark:mermaid-dark">
+                    flowchart TD
+                        A[股权转让发生] --> B{纳税义务发生时点确定?};
+                        B -- 是 --> C[次月15日内申报纳税];
+                        C --> D{是否按期申报缴纳?};
+                        D -- 是 --> E[纳税义务完成];
+                        D -- 否 --> F[未按期缴纳税款];
+                        F --> G[缴纳期限届满次日 (实际起算点: 第16日)];
+                        G --> H[按日加收万分之五滞纳金];
+                        H --> I{税务机关是否追征?};
+                        I -- 否 --> J[继续累积滞纳金];
+                        I -- 是 --> K{是否超出追征期?};
+                        K -- 否 --> L[追征税款及滞纳金];
+                        K -- 是 (非偷骗抗) --> M[无法追征税款及滞纳金];
+                        K -- 是 (偷骗抗) --> N[追征期无限长, 追征税款及滞纳金];
+
+                        style A fill:#60A5FA,stroke:#3B82F6,stroke-width:2px,color:#fff
+                        style B fill:#9CA3AF,stroke:#6B7280,stroke-width:2px,color:#fff
+                        style C fill:#34D399,stroke:#10B981,stroke-width:2px,color:#fff
+                        style D fill:#9CA3AF,stroke:#6B7280,stroke-width:2px,color:#fff
+                        style E fill:#D1D5DB,stroke:#9CA3AF,stroke-width:2px,color:#374151
+                        style F fill:#EF4444,stroke:#DC2626,stroke-width:2px,color:#fff
+                        style G fill:#F59E0B,stroke:#D97706,stroke-width:2px,color:#fff
+                        style H fill:#F59E0B,stroke:#D97706,stroke-width:2px,color:#fff
+                        style I fill:#9CA3AF,stroke:#6B7280,stroke-width:2px,color:#fff
+                        style J fill:#EF4444,stroke:#DC2626,stroke-width:2px,color:#fff
+                        style K fill:#9CA3AF,stroke:#6B7280,stroke-width:2px,color:#fff
+                        style L fill:#34D399,stroke:#10B981,stroke-width:2px,color:#fff
+                        style M fill:#D1D5DB,stroke:#9CA3AF,stroke-width:2px,color:#374151
+                        style N fill:#EF4444,stroke:#DC2626,stroke-width:2px,color:#fff
+
+                        linkStyle 0 stroke:#60A5FA,stroke-width:2px,fill:none;
+                        linkStyle 1 stroke:#34D399,stroke-width:2px,fill:none;
+                        linkStyle 2 stroke:#60A5FA,stroke-width:2px,fill:none;
+                        linkStyle 3 stroke:#34D399,stroke-width:2px,fill:none;
+                        linkStyle 4 stroke:#EF4444,stroke-width:2px,fill:none;
+                        linkStyle 5 stroke:#F59E0B,stroke-width:2px,fill:none;
+                        linkStyle 6 stroke:#F59E0B,stroke-width:2px,fill:none;
+                        linkStyle 7 stroke:#60A5FA,stroke-width:2px,fill:none;
+                        linkStyle 8 stroke:#EF4444,stroke-width:2px,fill:none;
+                        linkStyle 9 stroke:#60A5FA,stroke-width:2px,fill:none;
+                        linkStyle 10 stroke:#34D399,stroke-width:2px,fill:none;
+                        linkStyle 11 stroke:#D1D5DB,stroke-width:2px,fill:none;
+                        linkStyle 12 stroke:#EF4444,stroke-width:2px,fill:none;
+                </div>
+            </div>
+        </section>
+
+        <!-- Summary and Recommendations Section -->
+        <section class="mb-16 md:mb-24 animate-fade-in-up delay-500">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-sky-400 font-serif-sc border-b border-gray-700 pb-4">
+                <i class="fas fa-check-double mr-3"></i>4. 总结与建议
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-card p-8 rounded-lg shadow-md border border-card transition-all duration-300 hover:shadow-xl">
+                    <h3 class="text-2xl font-semibold mb-4 text-teal-300">核心要点概括</h3>
+                    <ul class="list-none space-y-3 text-base-200">
+                        <li><i class="fas fa-tags text-sky-500 mr-2"></i> **滞纳金计算**：日万分之五，从缴纳期限届满次日起算。</li>
+                        <li><i class="fas fa-calendar-days text-sky-500 mr-2"></i> **起算时点**：缴纳期限届满后第16日。</li>
+                        <li><i class="fas fa-shield-alt text-sky-500 mr-2"></i> **历史事件**：需先核实是否在追征期内（失误3-5年，偷税无限期）。</li>
+                    </ul>
+                </div>
+                <div class="bg-card p-8 rounded-lg shadow-md border border-card transition-all duration-300 hover:shadow-xl">
+                    <h3 class="text-2xl font-semibold mb-4 text-teal-300">风险提示与行动建议</h3>
+                    <p class="text-lg leading-relaxed text-base-200 mb-4">
+                        在A股资本运作中，历史股权转让的税务合规常受监管关注。
+                    </p>
+                    <ul class="list-none space-y-3 text-base-200">
+                        <li><i class="fas fa-search-dollar text-yellow-500 mr-2"></i> **自查与补缴**：定期自查历史转让记录，如遗漏申报，尽早补缴以减少滞纳金累积。</li>
+                        <li><i class="fas fa-users-cog text-yellow-500 mr-2"></i> **专业咨询**：咨询专业税务顾问，利用法律规定进行合理抗辩（如证明非主观故意）。</li>
+                        <li><i class="fas fa-lightbulb text-yellow-500 mr-2"></i> **合规先行**：未来股权转让务必严格按照规定履行纳税义务。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footnotes Section -->
+        <section class="mb-16 md:mb-24 animate-fade-in-up delay-600">
+            <h2 class="text-2xl font-bold mb-6 text-sky-400 font-serif-sc border-b border-gray-700 pb-3"><i class="fas fa-info-circle mr-2"></i>脚注与引用来源</h2>
+            <ol class="list-decimal list-outside ml-6 space-y-3 text-base-200 text-sm">
+                <li><strong class="text-teal-300">知识库资料</strong>：“自然人股东减资撤资中的涉税事项”。该文件概述了财产转让所得个税的计算方法，但未覆盖滞纳金规则。</li>
+                <li><strong class="text-teal-300">联网搜索结果</strong>：<a href="https://www.kwm.com/cn/zh/insights/latest-thinking/case-study-on-the-dispute-over-the-tax-collection-period-of-a-natural-person-share-transfer-case.html" target="_blank" class="text-blue-400 hover:underline transition-colors duration-200">《与税局的“陈年旧账”何时了？——评某自然人股转案的追征期争议》</a>：分析滞纳金起算时点为缴纳期限届满第16日，并强调追征期对历史事件的影响。</li>
+                <li><strong class="text-teal-300">联网搜索结果</strong>：<a href="http://www.shui5.cn/article/d7/136792.html" target="_blank" class="text-blue-400 hover:underline transition-colors duration-200">《税务争议案件滞纳金常见争议点全在这里》</a>：引用《个人所得税自行纳税申报办法(试行)》第十九条，说明纳税义务发生时点和滞纳金起算逻辑。</li>
+                <li><strong class="text-teal-300">联网搜索结果</strong>：<a href="https://www.shui5.cn/article/00/127445.html" target="_blank" class="text-blue-400 hover:underline transition-colors duration-200">《三个判例显示：最高法对是否加收滞纳金的判决思路有变化》</a>：引用《税收征收管理法实施细则》第七十五条，确认滞纳金计算和追征期应用。</li>
+            </ol>
+        </section>
+
+        <!-- Further Reading Section -->
+        <section class="animate-fade-in-up delay-700">
+            <h2 class="text-3xl font-bold mb-6 text-sky-400 font-serif-sc border-b border-gray-700 pb-4"><i class="fas fa-book-open mr-2"></i>进一步阅读</h2>
+            <p class="text-lg md:text-xl leading-relaxed text-base-200 mb-8">
+                若您希望深入了解股权转让、税务合规及相关法律问题，以下推荐书籍与资源将提供更全面的视角。
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-card p-6 rounded-lg shadow-md border border-card transition-all duration-300 hover:scale-[1.02] hover:shadow-xl flex items-start">
+                    <i class="fas fa-book text-sky-500 text-3xl mr-4 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-teal-300">《中华人民共和国税收征收管理法》释义</h3>
+                        <p class="text-base-200 text-sm mb-3">官方权威解读，理解税收征管法律框架的基础。</p>
+                        <a href="https://www.chinalaw.gov.cn/wap/flk/flkDetails?flkId=8001002621&content=undefined" target="_blank" class="text-blue-400 hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i> 在线查看</a>
+                    </div>
+                </div>
+                <div class="bg-card p-6 rounded-lg shadow-md border border-card transition-all duration-300 hover:scale-[1.02] hover:shadow-xl flex items-start">
+                    <i class="fas fa-file-invoice-dollar text-sky-500 text-3xl mr-4 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-teal-300">《股权转让所得个人所得税管理办法（试行）》</h3>
+                        <p class="text-base-200 text-sm mb-3">国家税务总局公告2014年第67号，股权转让个税的核心法规。</p>
+                        <a href="http://www.chinatax.gov.cn/n810341/n810756/c1103504/content.html" target="_blank" class="text-blue-400 hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i> 在线查看</a>
+                    </div>
+                </div>
+                <div class="bg-card p-6 rounded-lg shadow-md border border-card transition-all duration-300 hover:scale-[1.02] hover:shadow-xl flex items-start">
+                    <i class="fas fa-university text-sky-500 text-3xl mr-4 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-teal-300">《中国税法》</h3>
+                        <p class="text-base-200 text-sm mb-3">（知名税务学者的教材或专著）系统学习中国税法体系的入门。例如：刘剑文主编《中国税法》。</p>
+                        <a href="#" class="text-blue-400 hover:underline text-sm opacity-50 cursor-not-allowed"><i class="fas fa-search mr-1"></i> 查找资源</a>
+                    </div>
+                </div>
+                <div class="bg-card p-6 rounded-lg shadow-md border border-card transition-all duration-300 hover:scale-[1.02] hover:shadow-xl flex items-start">
+                    <i class="fas fa-handshake text-sky-500 text-3xl mr-4 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-teal-300">《公司股权设计与股权激励实务》</h3>
+                        <p class="text-base-200 text-sm mb-3">（实务类书籍）从法律和税务角度解析股权交易的实践操作。</p>
+                        <a href="#" class="text-blue-400 hover:underline text-sm opacity-50 cursor-not-allowed"><i class="fas fa-search mr-1"></i> 查找资源</a>
+                    </div>
+                </div>
+                <div class="bg-card p-6 rounded-lg shadow-md border border-card transition-all duration-300 hover:scale-[1.02] hover:shadow-xl flex items-start">
+                    <i class="fas fa-balance-scale-right text-sky-500 text-3xl mr-4 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-teal-300">《税务争议解决》</h3>
+                        <p class="text-base-200 text-sm mb-3">（法律实务类书籍）深入了解税务行政复议与诉讼的实践。</p>
+                        <a href="#" class="text-blue-400 hover:underline text-sm opacity-50 cursor-not-allowed"><i class="fas fa-search mr-1"></i> 查找资源</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-12 text-base-300 border-t border-gray-800 dark:border-gray-700 light:border-gray-200 mt-16 animate-fade-in-up delay-800">
+        <p>&copy; 2025 股权转让税务深度解析. All rights reserved.</p>
+        <p class="mt-2 text-sm">本网页内容仅供参考，不构成专业税务建议，具体问题请咨询专业机构。</p>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme based on preference
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                themeToggle.innerHTML = '<i class="fas fa-sun text-lg"></i>'; // Change icon to sun
+            } else {
+                htmlElement.classList.add('light');
+                htmlElement.classList.remove('dark');
+                themeToggle.innerHTML = '<i class="fas fa-moon text-lg"></i>'; // Change icon to moon
+            }
+            localStorage.setItem('theme', theme);
+            // Update Mermaid theme
+            updateMermaidTheme(theme);
+        }
+
+        // Initialize theme on page load
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (prefersDark) {
+            setTheme('dark'); // Default to dark if system prefers it
+        } else {
+            setTheme('light'); // Default to light otherwise
+        }
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        });
+
+        // Mermaid Configuration
+        function updateMermaidTheme(currentTheme) {
+            if (currentTheme === 'dark') {
+                mermaid.initialize({
+                    startOnLoad: true,
+                    theme: 'dark', // Use 'dark' theme for Mermaid in dark mode
+                    securityLevel: 'loose',
+                    flowchart: {
+                        htmlLabels: true,
+                        curve: 'basis'
+                    },
+                    sequence: {
+                        actorMargin: 50
+                    },
+                    gantt: {
+                        axisFormatter: [
+                            ['%Y-%m-%d', function (d) {
+                                return d.getDay() === 1;
+                            }]
+                        ]
+                    }
+                });
+                document.querySelectorAll('.mermaid').forEach(el => {
+                    el.classList.add('mermaid-dark');
+                });
+            } else {
+                mermaid.initialize({
+                    startOnLoad: true,
+                    theme: 'default', // Use 'default' theme for Mermaid in light mode
+                    securityLevel: 'loose',
+                    flowchart: {
+                        htmlLabels: true,
+                        curve: 'basis'
+                    },
+                    sequence: {
+                        actorMargin: 50
+                    },
+                    gantt: {
+                        axisFormatter: [
+                            ['%Y-%m-%d', function (d) {
+                                return d.getDay() === 1;
+                            }]
+                        ]
+                    }
+                });
+                document.querySelectorAll('.mermaid').forEach(el => {
+                    el.classList.remove('mermaid-dark');
+                });
+            }
+            // mermaid.contentLoaded(); // This might trigger a re-render for existing diagrams
+            // A common workaround for dynamic theme changes with Mermaid involves clearing existing diagrams
+            // and re-rendering them, but for this specific setup, mermaid.initialize() on theme change
+            // might be sufficient if diagrams are static. For more robust dynamic re-rendering,
+            // one would need to use `mermaid.render()` with specific element IDs.
+            // For this project, a simple re-init should suffice as the diagram is fixed.
+            setTimeout(() => mermaid.init(), 100); // Small delay to ensure CSS updates
+        }
+
+        // Initialize Mermaid on page load with the correct theme
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+            updateMermaidTheme(currentTheme);
+            // Initial call to mermaid.init() for diagrams present on load
+            mermaid.init();
+        });
+
+        // Simple scroll animation for sections
+        const animateElements = document.querySelectorAll('.animate-fade-in-up');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1 // When 10% of the element is visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        animateElements.forEach(el => {
+            observer.observe(el);
+        });
+
+        // Custom CSS for animations
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .animate-fade-in-up {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            }
+            .animate-fade-in-up.fade-in-up {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .animate-fade-in-up.delay-100 { transition-delay: 0.1s; }
+            .animate-fade-in-up.delay-150 { transition-delay: 0.15s; }
+            .animate-fade-in-up.delay-200 { transition-delay: 0.2s; }
+            .animate-fade-in-up.delay-300 { transition-delay: 0.3s; }
+            .animate-fade-in-up.delay-400 { transition-delay: 0.4s; }
+            .animate-fade-in-up.delay-500 { transition-delay: 0.5s; }
+            .animate-fade-in-up.delay-600 { transition-delay: 0.6s; }
+            .animate-fade-in-up.delay-700 { transition-delay: 0.7s; }
+            .animate-fade-in-up.delay-800 { transition-delay: 0.8s; }
+
+            /* First letter drop cap */
+            .first-letter\\:float-left.first-letter\\:text-5xl.first-letter\\:font-bold.first-letter\\:mr-3.first-letter\\:text-sky-500::first-letter {
+                float: left;
+                font-size: 3.5em; /* Tailwind text-5xl is 3rem, adjust as needed */
+                line-height: 1;
+                font-weight: 700;
+                margin-right: 0.25em; /* Tailwind mr-3 is 0.75rem, adjust for aesthetic */
+                color: var(--sky-500, #3B82F6); /* Default for light mode */
+            }
+
+            html.dark .first-letter\\:float-left.first-letter\\:text-5xl.first-letter\\:font-bold.first-letter\\:mr-3.first-letter\\:text-sky-500::first-letter {
+                 color: #7DD3FC; /* sky-300 for dark mode */
+            }
+        `;
+        document.head.appendChild(style);
+
+    </script>
+</body>
+</html>
+```
