@@ -1,0 +1,581 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO前置：拟上市公司强制性内部制度清单</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <style>
+        /* Custom Fonts & Base Styles */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            /* Default Dark Mode Background */
+            @apply bg-gray-950 text-gray-200;
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .dark body {
+            @apply bg-gray-950 text-gray-200;
+        }
+        .light body {
+            @apply bg-white text-gray-800;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+            @apply text-indigo-400 dark:text-purple-400; /* Accent color for headings */
+        }
+        h1 { @apply text-4xl md:text-5xl font-extrabold mb-6 leading-tight; }
+        h2 { @apply text-3xl md:text-4xl font-bold mt-12 mb-6 border-b-2 border-purple-600 dark:border-indigo-700 pb-3; }
+        h3 { @apply text-2xl md:text-3xl font-bold mt-8 mb-4; }
+        p { @apply mb-4 leading-relaxed; }
+        ul { @apply list-none pl-0 mb-4; }
+        li { @apply mb-2; }
+
+        /* Custom list item styling */
+        .custom-list-item {
+            @apply flex items-start mb-3;
+        }
+        .custom-list-icon {
+            @apply text-purple-500 dark:text-indigo-400 mr-3 mt-1 text-lg flex-shrink-0;
+        }
+        .custom-note {
+            @apply text-sm italic text-gray-400 dark:text-gray-500 mt-4;
+        }
+        .highlight {
+            @apply font-semibold text-purple-300 dark:text-indigo-300;
+        }
+        .table-custom {
+            @apply w-full text-left border-collapse;
+        }
+        .table-custom th, .table-custom td {
+            @apply py-3 px-4 border-b border-gray-700 dark:border-gray-700;
+        }
+        .table-custom th {
+            @apply bg-gray-800 dark:bg-gray-800 text-gray-300 dark:text-gray-300 font-semibold;
+        }
+        .table-custom tr:hover {
+            @apply bg-gray-800 dark:bg-gray-800;
+        }
+
+        /* Dark/Light Mode Transition */
+        .dark .bg-white, .light .bg-gray-950 { transition: background-color 0.3s ease; }
+        .dark .text-gray-800, .light .text-gray-200 { transition: color 0.3s ease; }
+        .dark .border-purple-600, .light .border-indigo-700 { transition: border-color 0.3s ease; }
+
+        /* Micro-interactions */
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .dark .card-hover:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Mermaid styling for dark mode */
+        .dark .mermaid {
+            filter: invert(0.9) hue-rotate(180deg); /* Attempt to invert colors for dark mode */
+        }
+        .mermaid-container {
+            background-color: #f7f7f7; /* Light background for the diagram itself */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+        .dark .mermaid-container {
+            background-color: #2b2b2b; /* Darker background for the diagram container in dark mode */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+    </style>
+</head>
+<body class="bg-gray-950 text-gray-200">
+
+    <!-- Dark Mode Toggle Button -->
+    <button id="themeToggle" class="fixed bottom-6 right-6 p-3 rounded-full bg-purple-600 dark:bg-indigo-700 text-white shadow-lg z-50 hover:scale-110 transition-transform duration-300">
+        <i class="fas fa-sun text-xl" id="themeIcon"></i>
+    </button>
+
+    <!-- Header & Hero Module -->
+    <header class="relative overflow-hidden bg-gradient-to-br from-gray-900 to-black py-20 px-4 md:px-8 shadow-xl">
+        <div class="absolute inset-0 bg-cover bg-center opacity-10" style="background-image: url('https://images.unsplash.com/photo-1549925255-a04403164966?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+        <div class="relative max-w-4xl mx-auto text-center z-10">
+            <h1 class="text-white dark:text-gray-100 drop-shadow-lg text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight">
+                <i class="fas fa-gavel mr-4 text-purple-400 dark:text-indigo-300"></i>IPO前置：拟上市公司强制性内部制度清单
+            </h1>
+            <p class="mt-6 text-xl md:text-2xl text-gray-300 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                基于最新监管要求，确保企业合规基石，规避上市风险的核心要件解析。
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto px-4 py-12 md:py-16 max-w-4xl">
+
+        <p class="text-lg mb-8 text-gray-300 dark:text-gray-400 border-b border-gray-700 dark:border-gray-700 pb-6">
+            根据《上市公司章程指引》《上市规则》及首发审核要求，拟上市公司在申报IPO前必须建立以下<strong class="highlight">强制性内部制度</strong>，这些制度是上市审核的核心要件，并有明确的监管依据：
+        </p>
+
+        <!-- Section 1: 公司治理类 -->
+        <section id="governance-systems" class="mb-12">
+            <h2><i class="fas fa-building-columns custom-list-icon"></i>一、公司治理类 <span class="text-xl text-gray-500">(监管直接规定)</span></h2>
+            <div class="grid md:grid-cols-2 gap-8 mt-6">
+                <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover">
+                    <h3 class="text-purple-400 dark:text-indigo-400 mb-3"><i class="fas fa-file-alt mr-2"></i>《公司章程》</h3>
+                    <div class="custom-list-item">
+                        <i class="fas fa-check-circle custom-list-icon"></i>
+                        <p class="text-gray-300 dark:text-gray-300"><strong class="highlight">依据</strong>：《上市公司章程指引》第一条（证监会公告〔2024〕1号），要求载明公司治理结构、股东权利等基本规范。</p>
+                    </div>
+                    <div class="custom-list-item">
+                        <i class="fas fa-check-circle custom-list-icon"></i>
+                        <p class="text-gray-300 dark:text-gray-300"><strong class="highlight">关键内容</strong>：必须明确审计委员会替代监事会职能（新《公司法》修订后强制要求）。</p>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover">
+                    <h3 class="text-purple-400 dark:text-indigo-400 mb-3"><i class="fas fa-users-gear mr-2"></i>《股东大会议事规则》《董事会议事规则》</h3>
+                    <div class="custom-list-item">
+                        <i class="fas fa-check-circle custom-list-icon"></i>
+                        <p class="text-gray-300 dark:text-gray-300"><strong class="highlight">依据</strong>：《上市公司章程指引》第十一条及《上市规则》4.1.2，需作为章程附件，规定会议召集、表决程序等。</p>
+                    </div>
+                    <div class="custom-list-item">
+                        <i class="fas fa-check-circle custom-list-icon"></i>
+                        <p class="text-gray-300 dark:text-gray-300"><strong class="highlight">新增要求</strong>：科创板/创业板公司须在董事会下设<strong class="highlight">审计委员会</strong>（行使原监事会职权），且成员需包含独立董事。</p>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover md:col-span-2">
+                    <h3 class="text-purple-400 dark:text-indigo-400 mb-3"><i class="fas fa-user-tie mr-2"></i>《独立董事工作制度》</h3>
+                    <div class="custom-list-item">
+                        <i class="fas fa-check-circle custom-list-icon"></i>
+                        <p class="text-gray-300 dark:text-gray-300"><strong class="highlight">依据</strong>：《上市公司独立董事管理办法》第十条，明确独立董事的职责、履职保障及问责机制。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: 财务与内控类 -->
+        <section id="finance-internal-control" class="mb-12">
+            <h2><i class="fas fa-calculator custom-list-icon"></i>二、财务与内控类 <span class="text-xl text-gray-500">(实质性必备)</span></h2>
+            <div class="grid md:grid-cols-2 gap-8 mt-6">
+                <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover">
+                    <h3 class="text-purple-400 dark:text-indigo-400 mb-3"><i class="fas fa-magnifying-glass-chart mr-2"></i>《内部审计制度》</h3>
+                    <div class="custom-list-item">
+                        <i class="fas fa-check-circle custom-list-icon"></i>
+                        <p class="text-gray-300 dark:text-gray-300"><strong class="highlight">强制依据</strong>：《上市公司章程指引》第一百五十七条：“公司实行内部审计制度，配备专职审计人员”。</p>
+                    </div>
+                    <div class="custom-list-item">
+                        <i class="fas fa-check-circle custom-list-icon"></i>
+                        <p class="text-gray-300 dark:text-gray-300"><strong class="highlight">实操要点</strong>：审计部门需直接向审计委员会报告，覆盖财务收支、内控有效性审查。</p>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover">
+                    <h3 class="text-purple-400 dark:text-indigo-400 mb-3"><i class="fas fa-handshake mr-2"></i>《关联交易决策制度》</h3>
+                    <div class="custom-list-item">
+                        <i class="fas fa-check-circle custom-list-icon"></i>
+                        <p class="text-gray-300 dark:text-gray-300"><strong class="highlight">依据</strong>：《上市规则》6.3.8：“上市公司应建立关联方识别及交易审议程序”。</p>
+                    </div>
+                    <div class="custom-list-item">
+                        <i class="fas fa-check-circle custom-list-icon"></i>
+                        <p class="text-gray-300 dark:text-gray-300"><strong class="highlight">关键要求</strong>：明确一般关联交易（董事会审批）与重大关联交易（股东大会审批）的划分标准。</p>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover md:col-span-2">
+                    <h3 class="text-purple-400 dark:text-indigo-400 mb-3"><i class="fas fa-shield-alt mr-2"></i>《对外担保管理制度》</h3>
+                    <div class="custom-list-item">
+                        <i class="fas fa-check-circle custom-list-icon"></i>
+                        <p class="text-gray-300 dark:text-gray-300"><strong class="highlight">依据</strong>：《上市公司章程指引》第四十二条，要求规定担保权限、风险评估及披露流程。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 信息披露与合规类 -->
+        <section id="disclosure-compliance" class="mb-12">
+            <h2><i class="fas fa-bullhorn custom-list-icon"></i>三、信息披露与合规类 <span class="text-xl text-gray-500">(申报前必须建立)</span></h2>
+            <div class="grid md:grid-cols-2 gap-8 mt-6">
+                <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover">
+                    <h3 class="text-purple-400 dark:text-indigo-400 mb-3"><i class="fas fa-newspaper mr-2"></i>《信息披露事务管理制度》</h3>
+                    <div class="custom-list-item">
+                        <i class="fas fa-check-circle custom-list-icon"></i>
+                        <p class="text-gray-300 dark:text-gray-300"><strong class="highlight">依据</strong>：《上市公司信息披露管理办法》第十五条，要求上市前搭建信息披露框架，明确责任主体。</p>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover">
+                    <h3 class="text-purple-400 dark:text-indigo-400 mb-3"><i class="fas fa-user-secret mr-2"></i>《内幕信息知情人登记制度》</h3>
+                    <div class="custom-list-item">
+                        <i class="fas fa-check-circle custom-list-icon"></i>
+                        <p class="text-gray-300 dark:text-gray-300"><strong class="highlight">强制依据</strong>：《上市公司监管指引第5号》第三条，股改完成后即需执行，防止IPO进程泄密。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: 科创板特殊要求 -->
+        <section id="STAR-market-requirements" class="mb-12">
+            <h2><i class="fas fa-flask custom-list-icon"></i>四、科创板特殊要求 <span class="text-xl text-gray-500">(若申报科创板)</span></h2>
+            <div class="grid md:grid-cols-2 gap-8 mt-6">
+                <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover">
+                    <h3 class="text-purple-400 dark:text-indigo-400 mb-3"><i class="fas fa-lightbulb mr-2"></i>《研发活动管理制度》</h3>
+                    <div class="custom-list-item">
+                        <i class="fas fa-check-circle custom-list-icon"></i>
+                        <p class="text-gray-300 dark:text-gray-300"><strong class="highlight">依据</strong>：《科创属性评价指引》及《监管规则适用指引——发行类第9号》，要求：</p>
+                    </div>
+                    <ul class="ml-8 text-gray-300 dark:text-gray-300 list-disc list-inside">
+                        <li>研发项目全流程管控（立项至结项）；</li>
+                        <li>研发费用独立核算（与生产成本分离）；</li>
+                        <li>研发人员工时记录电子化。</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover">
+                    <h3 class="text-purple-400 dark:text-indigo-400 mb-3"><i class="fas fa-hand-holding-dollar mr-2"></i>《募集资金管理制度》</h3>
+                    <div class="custom-list-item">
+                        <i class="fas fa-check-circle custom-list-icon"></i>
+                        <p class="text-gray-300 dark:text-gray-300"><strong class="highlight">前置要求</strong>：招股书披露前需制定，明确募集资金专户存储及投向合规性。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: 监管红线 -->
+        <section id="regulatory-red-lines" class="mb-12">
+            <h2><i class="fas fa-triangle-exclamation custom-list-icon"></i>监管红线：未建立直接导致审核终止</h2>
+            <div class="bg-red-900 dark:bg-red-900 bg-opacity-30 p-6 rounded-lg shadow-md border-l-4 border-red-500 mt-6">
+                <div class="custom-list-item">
+                    <i class="fas fa-times-circle custom-list-icon text-red-400"></i>
+                    <p class="text-red-200 dark:text-red-200"><strong class="highlight">制度生效时间</strong>：所有制度需在<strong class="highlight">股改完成前</strong>正式生效（有限公司变更为股份公司时）。</p>
+                </div>
+                <div class="custom-list-item">
+                    <i class="fas fa-times-circle custom-list-icon text-red-400"></i>
+                    <p class="text-red-200 dark:text-red-200"><strong class="highlight">执行痕迹要求</strong>：如《内部审计制度》需提供近一年的审计报告底稿；《关联交易制度》需留存决策记录。</p>
+                </div>
+                <div class="custom-list-item">
+                    <i class="fas fa-times-circle custom-list-icon text-red-400"></i>
+                    <p class="text-red-200 dark:text-red-200"><strong class="highlight">科创板专项</strong>：研发相关制度缺失或执行不到位，将不满足科创属性指标（如研发投入占比≥15%）。</p>
+                </div>
+                <p class="custom-note text-red-300 dark:text-red-400">
+                    <i class="fas fa-info-circle mr-2"></i>注：各制度需经中介机构（券商/律师/会计师）验证有效性，并在招股书“公司治理”章节披露。
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 6: 附件：制度与监管依据对照表 -->
+        <section id="reference-table" class="mb-12">
+            <h2><i class="fas fa-table custom-list-icon"></i>附件：制度与监管依据对照表</h2>
+            <div class="overflow-x-auto mt-6">
+                <table class="table-custom rounded-lg shadow-md overflow-hidden">
+                    <thead>
+                        <tr>
+                            <th class="rounded-tl-lg">制度名称</th>
+                            <th class="rounded-tr-lg">核心监管依据</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>公司章程</td>
+                            <td>《上市公司章程指引》第一条</td>
+                        </tr>
+                        <tr>
+                            <td>内部审计制度</td>
+                            <td>《上市公司章程指引》第一百五十七条</td>
+                        </tr>
+                        <tr>
+                            <td>关联交易决策制度</td>
+                            <td>《上市规则》第6.3.8条</td>
+                        </tr>
+                        <tr>
+                            <td>内幕信息知情人登记</td>
+                            <td>《关于上市公司建立内幕信息知情人登记管理制度的规定》第五条</td>
+                        </tr>
+                        <tr>
+                            <td>研发管理制度</td>
+                            <td>《监管规则适用指引——发行类第9号》</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Data Visualization (Mermaid.js) -->
+        <section id="visualization" class="mb-12">
+            <h2><i class="fas fa-chart-network custom-list-icon"></i>IPO合规制度体系概览</h2>
+            <p class="text-gray-300 dark:text-gray-400 mb-6">以下图示展现了拟上市公司强制性内部制度在IPO申报流程中的核心地位及类别关系：</p>
+            <div class="mermaid-container">
+                <pre class="mermaid">
+graph TD
+    A[IPO申报] --> B(股改完成前 <br/>制度生效);
+    B --> C{强制性内部制度建立};
+
+    C --> D[公司治理类];
+    C --> E[财务与内控类];
+    C --> F[信息披露与合规类];
+    C --> G[科创板特殊要求];
+
+    D --> D1(公司章程);
+    D --> D2(股东大会/董事会议事规则);
+    D --> D3(独立董事工作制度);
+
+    E --> E1(内部审计制度);
+    E --> E2(关联交易决策制度);
+    E --> E3(对外担保管理制度);
+
+    F --> F1(信息披露事务管理制度);
+    F --> F2(内幕信息知情人登记制度);
+
+    G --> G1(研发活动管理制度);
+    G --> G2(募集资金管理制度);
+
+    D1 & D2 & D3 & E1 & E2 & E3 & F1 & F2 --- M[核心要件];
+    G1 & G2 --- M;
+    M --> N(中介机构验证与招股书披露);
+    N --> O[顺利上市 <br/> <i class='fa-solid fa-rocket'></i>];
+
+    style A fill:#6A0DAD,stroke:#333,stroke-width:2px,color:#fff;
+    style B fill:#5A2A8F,stroke:#333,stroke-width:2px,color:#fff;
+    style C fill:#4A0D8F,stroke:#333,stroke-width:2px,color:#fff;
+    style M fill:#8A0DAA,stroke:#333,stroke-width:2px,color:#fff;
+    style N fill:#3498db,stroke:#333,stroke-width:2px,color:#fff;
+    style O fill:#2E8B57,stroke:#333,stroke-width:2px,color:#fff;
+                </pre>
+            </div>
+        </section>
+
+        <!-- Further Reading -->
+        <section id="further-reading" class="mb-12">
+            <h2><i class="fas fa-book-reader custom-list-icon"></i>延伸阅读</h2>
+            <p class="text-gray-300 dark:text-gray-400 mb-6">为深入理解IPO合规及公司治理，我们为您精选了以下推荐读物：</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover">
+                    <h3 class="text-purple-400 dark:text-indigo-400 mb-2 text-xl"><i class="fas fa-book mr-2"></i>《中国公司法》</h3>
+                    <p class="text-sm text-gray-400 mb-3">（最新修订版）</p>
+                    <p class="text-gray-300 dark:text-gray-300 text-sm">理解公司设立、组织机构、股东权利义务等法律基础的必备读物，是所有内部制度的根本法源。</p>
+                </div>
+                <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover">
+                    <h3 class="text-purple-400 dark:text-indigo-400 mb-2 text-xl"><i class="fas fa-book mr-2"></i>《上市公司治理准则》</h3>
+                    <p class="text-sm text-gray-400 mb-3">（证监会发布）</p>
+                    <p class="text-gray-300 dark:text-gray-300 text-sm">系统性学习上市公司治理结构、运作规范及内控要求的官方指南，是完善公司治理制度的直接依据。</p>
+                </div>
+                <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover">
+                    <h3 class="text-purple-400 dark:text-indigo-400 mb-2 text-xl"><i class="fas fa-book mr-2"></i>《企业内部控制基本规范》</h3>
+                    <p class="text-sm text-gray-400 mb-3">（财政部等五部委发布）</p>
+                    <p class="text-gray-300 dark:text-gray-300 text-sm">构建和评价企业内部控制体系的核心框架，对于建立健全财务与内控类制度具有指导意义。</p>
+                </div>
+                <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover">
+                    <h3 class="text-purple-400 dark:text-indigo-400 mb-2 text-xl"><i class="fas fa-book mr-2"></i>《首次公开发行股票并上市管理办法》</h3>
+                    <p class="text-sm text-gray-400 mb-3">（证监会发布）</p>
+                    <p class="text-gray-300 dark:text-gray-300 text-sm">了解IPO审核流程、条件及各环节合规要求的法规原文，是企业上市准备工作的总纲。</p>
+                </div>
+                <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover">
+                    <h3 class="text-purple-400 dark:text-indigo-400 mb-2 text-xl"><i class="fas fa-book mr-2"></i>《中国证监会关于科创板<br>注册制相关问答汇编》</h3>
+                    <p class="text-sm text-gray-400 mb-3">（各期）</p>
+                    <p class="text-gray-300 dark:text-gray-300 text-sm">针对科创板特有问题和疑难点的官方解答，对准备申报科创板的企业极具参考价值。</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 dark:bg-black py-8 text-center text-gray-500 text-sm">
+        <p>&copy; 2024 IPO合规指南. All rights reserved.</p>
+        <p class="mt-2">Designed by AI Expert</p>
+    </footer>
+
+    <!-- Mermaid.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid.js Configuration
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default', // Using 'default' which is light, then CSS will invert it for dark mode
+            themeVariables: {
+                primaryColor: '#F0F0F0', /* Light text color for diagram nodes */
+                secondaryColor: '#E0E0E0',
+                tertiaryColor: '#D0D0D0',
+                primaryTextColor: '#333', /* Dark text color for diagram labels */
+                lineColor: '#555',
+                primaryBorderColor: '#aaa',
+                secondaryBorderColor: '#bbb',
+                tertiaryBorderColor: '#ccc',
+                noteBkgColor: '#fcf8e3',
+                noteTextColor: '#8a6d3b'
+            },
+            flowchart: {
+                use</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- Data Visualization (Mermaid.js) -->
+<section id="visualization" class="mb-12">
+    <h2><i class="fas fa-chart-network custom-list-icon"></i>IPO合规制度体系概览</h2>
+    <p class="text-gray-300 dark:text-gray-400 mb-6">以下图示展现了拟上市公司强制性内部制度在IPO申报流程中的核心地位及类别关系：</p>
+    <div class="mermaid-container">
+        <pre class="mermaid">
+graph TD
+    A[IPO申报] --> B(股改完成前 <br/>制度生效);
+    B --> C{强制性内部制度建立};
+
+    C --> D[公司治理类];
+    C --> E[财务与内控类];
+    C --> F[信息披露与合规类];
+    C --> G[科创板特殊要求];
+
+    D --> D1(公司章程);
+    D --> D2(股东大会/董事会议事规则);
+    D --> D3(独立董事工作制度);
+
+    E --> E1(内部审计制度);
+    E --> E2(关联交易决策制度);
+    E --> E3(对外担保管理制度);
+
+    F --> F1(信息披露事务管理制度);
+    F --> F2(内幕信息知情人登记制度);
+
+    G --> G1(研发活动管理制度);
+    G --> G2(募集资金管理制度);
+
+    D1 & D2 & D3 & E1 & E2 & E3 & F1 & F2 --- M[核心要件];
+    G1 & G2 --- M;
+    M --> N(中介机构验证与招股书披露);
+    N --> O[顺利上市 <br/> <i class='fa-solid fa-rocket'></i>];
+
+    style A fill:#6A0DAD,stroke:#333,stroke-width:2px,color:#fff;
+    style B fill:#5A2A8F,stroke:#333,stroke-width:2px,color:#fff;
+    style C fill:#4A0D8F,stroke:#333,stroke-width:2px,color:#fff;
+    style M fill:#8A0DAA,stroke:#333,stroke-width:2px,color:#fff;
+    style N fill:#3498db,stroke:#333,stroke-width:2px,color:#fff;
+    style O fill:#2E8B57,stroke:#333,stroke-width:2px,color:#fff;
+        </pre>
+    </div>
+</section>
+
+<!-- Further Reading -->
+<section id="further-reading" class="mb-12">
+    <h2><i class="fas fa-book-reader custom-list-icon"></i>延伸阅读</h2>
+    <p class="text-gray-300 dark:text-gray-400 mb-6">为深入理解IPO合规及公司治理，我们为您精选了以下推荐读物：</p>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover">
+            <h3 class="text-purple-400 dark:text-indigo-400 mb-2 text-xl"><i class="fas fa-book mr-2"></i>《中国公司法》</h3>
+            <p class="text-sm text-gray-400 mb-3">（最新修订版）</p>
+            <p class="text-gray-300 dark:text-gray-300 text-sm">理解公司设立、组织机构、股东权利义务等法律基础的必备读物，是所有内部制度的根本法源。</p>
+        </div>
+        <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover">
+            <h3 class="text-purple-400 dark:text-indigo-400 mb-2 text-xl"><i class="fas fa-book mr-2"></i>《上市公司治理准则》</h3>
+            <p class="text-sm text-gray-400 mb-3">（证监会发布）</p>
+            <p class="text-gray-300 dark:text-gray-300 text-sm">系统性学习上市公司治理结构、运作规范及内控要求的官方指南，是完善公司治理制度的直接依据。</p>
+        </div>
+        <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover">
+            <h3 class="text-purple-400 dark:text-indigo-400 mb-2 text-xl"><i class="fas fa-book mr-2"></i>《企业内部控制基本规范》</h3>
+            <p class="text-sm text-gray-400 mb-3">（财政部等五部委发布）</p>
+            <p class="text-gray-300 dark:text-gray-300 text-sm">构建和评价企业内部控制体系的核心框架，对于建立健全财务与内控类制度具有指导意义。</p>
+        </div>
+        <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover">
+            <h3 class="text-purple-400 dark:text-indigo-400 mb-2 text-xl"><i class="fas fa-book mr-2"></i>《首次公开发行股票并上市管理办法》</h3>
+            <p class="text-sm text-gray-400 mb-3">（证监会发布）</p>
+            <p class="text-gray-300 dark:text-gray-300 text-sm">了解IPO审核流程、条件及各环节合规要求的法规原文，是企业上市准备工作的总纲。</p>
+        </div>
+        <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-md card-hover">
+            <h3 class="text-purple-400 dark:text-indigo-400 mb-2 text-xl"><i class="fas fa-book mr-2"></i>《中国证监会关于科创板<br>注册制相关问答汇编》</h3>
+            <p class="text-sm text-gray-400 mb-3">（各期）</p>
+            <p class="text-gray-300 dark:text-gray-300 text-sm">针对科创板特有问题和疑难点的官方解答，对准备申报科创板的企业极具参考价值。</p>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-gray-900 dark:bg-black py-8 text-center text-gray-500 text-sm">
+    <p>&copy; 2024 IPO合规指南. All rights reserved.</p>
+    <p class="mt-2">Designed by AI Expert</p>
+</footer>
+
+<!-- Mermaid.js Library -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+<script>
+    // Mermaid.js Configuration
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'default', // Using 'default' which is light, then CSS will invert it for dark mode
+        themeVariables: {
+            primaryColor: '#F0F0F0', /* Light text color for diagram nodes */
+            secondaryColor: '#E0E0E0',
+            tertiaryColor: '#D0D0D0',
+            primaryTextColor: '#333', /* Dark text color for diagram labels */
+            lineColor: '#555',
+            primaryBorderColor: '#aaa',
+            secondaryBorderColor: '#bbb',
+            tertiaryBorderColor: '#ccc',
+            noteBkgColor: '#fcf8e3',
+            noteTextColor: '#8a6d3b'
+        },
+        flowchart: {
+            use
+        }
+    });
+
+    // Theme Toggle Functionality
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+
+    // Function to set the theme
+    function setTheme(theme) {
+        if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+            localStorage.setItem('theme', 'light');
+        }
+    }
+
+    // Check saved theme or system preference on load
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (savedTheme) {
+        setTheme(savedTheme);
+    } else if (prefersDark) {
+        setTheme('dark');
+    } else {
+        setTheme('light');
+    }
+
+    // Event listener for the button
+    themeToggleBtn.addEventListener('click', () => {
+        if (document.documentElement.classList.contains('dark')) {
+            setTheme('light');
+        } else {
+            setTheme('dark');
+        }
+    });
+</script>
+
+</body>
+</html>
+```
