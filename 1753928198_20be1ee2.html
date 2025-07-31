@@ -1,0 +1,701 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO必备内部制度清单 | 合规与治理</title>
+    <meta name="description" content="根据《上市公司章程指引》等监管要求，为拟上市公司提供清晰、全面的内部制度指南，确保合规申报与顺利上市。">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📈</text></svg>">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC and Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Fonts & Base Styles */
+        body {
+            font-family: 'Noto Sans SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', sans-self;
+            line-height: 1.75;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', serif;
+            line-height: 1.3;
+            font-weight: 600; /* Noto Serif SC default might be lighter */
+        }
+        .text-accent {
+            color: #00C9B1; /* A teal-like accent */
+        }
+        .dark .bg-dark-primary {
+            background-color: #1a202c; /* Tailwind gray-900 */
+        }
+        .dark .text-dark-text {
+            color: #e2e8f0; /* Tailwind gray-200 */
+        }
+        .dark .bg-dark-secondary {
+            background-color: #2d3748; /* Tailwind gray-800 */
+        }
+        .dark .border-dark-line {
+            border-color: #4a5568; /* Tailwind gray-700 */
+        }
+        .light .bg-light-primary {
+            background-color: #ffffff;
+        }
+        .light .text-light-text {
+            color: #2d3748;
+        }
+        .light .bg-light-secondary {
+            background-color: #f7fafc;
+        }
+        .light .border-light-line {
+            border-color: #e2e8f0;
+        }
+
+        /* Mermaid container styling */
+        .mermaid {
+            background-color: #2d3748; /* Dark mode background for mermaid */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            overflow-x: auto; /* Enable horizontal scrolling for large graphs */
+        }
+        .light .mermaid {
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0; /* Light mode border */
+        }
+
+        /* Specific styles for reference links */
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+            line-height: 0;
+            margin-left: 2px;
+        }
+        a[href^="#fn:"] {
+            color: #00C9B1;
+            text-decoration: none;
+        }
+        a[href^="#fn:"]:hover {
+            text-decoration: underline;
+        }
+        .footnotes {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid;
+        }
+        .footnotes ol {
+            list-style-type: none; /* Remove default list numbers */
+            padding-left: 0;
+        }
+        .footnotes li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5em; /* Indent for alignment */
+            text-indent: -1.5em; /* Negative indent for number outside */
+        }
+        .footnotes li::before {
+            content: attr(id); /* Use the id attribute for the number */
+            display: inline-block;
+            width: 1.5em; /* Space for the number */
+            font-weight: bold;
+        }
+        .footnotes li a[href^="#fnref:"] {
+            margin-left: 0.5em;
+            font-size: 0.8em;
+            color: #00C9B1;
+        }
+
+        /* Subtle hover effect for cards */
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .dark .card-hover:hover {
+             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Table specific styles for dark/light mode */
+        .custom-table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .custom-table th, .custom-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid;
+        }
+        .dark .custom-table th {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            border-color: #4a5568;
+        }
+        .dark .custom-table td {
+            background-color: #1a202c;
+            color: #e2e8f0;
+            border-color: #4a5568;
+        }
+        .light .custom-table th {
+            background-color: #f7fafc;
+            color: #2d3748;
+            border-color: #e2e8f0;
+        }
+        .light .custom-table td {
+            background-color: #ffffff;
+            color: #2d3748;
+            border-color: #e2e8f0;
+        }
+
+        /* Hero section animations */
+        .animate-pulse-fade {
+            animation: pulse-fade 3s ease-in-out infinite alternate;
+        }
+        @keyframes pulse-fade {
+            0% { opacity: 0.8; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.02); }
+        }
+
+        /* Smooth scroll for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Initial state for scroll animation */
+        main section {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+    </style>
+</head>
+<body class="bg-dark-primary text-dark-text min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="p-6 md:p-8 flex justify-between items-center z-10 sticky top-0 bg-dark-primary transition-colors duration-300 shadow-lg">
+        <div class="text-3xl font-bold text-accent">IPO合规指南</div>
+        <button id="theme-toggle" aria-label="Toggle theme" class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-accent hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors duration-300">
+            <!-- Icon will be updated by JS -->
+            <i class="fas fa-sun text-yellow-500 text-xl hidden dark:block"></i>
+            <i class="fas fa-moon text-indigo-700 text-xl dark:hidden"></i>
+        </button>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-gray-900 to-black text-white py-24 md:py-32 overflow-hidden shadow-inner">
+        <!-- Background Overlay -->
+        <div class="absolute inset-0 z-0 opacity-40" style="background-image: url('https://images.unsplash.com/photo-1543286386-713ed136087b?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size: cover; background-position: center; filter: grayscale(50%) brightness(50%);"></div>
+        <!-- Content -->
+        <div class="relative z-10 container mx-auto px-6 max-w-4xl text-center">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-cyan-500 animate-pulse-fade">
+                IPO上市 | 内部制度建设核心清单
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 leading-relaxed mb-8">
+                深入解读监管要求，为拟上市公司提供清晰、全面的内部制度指南，确保合规申报与顺利上市。
+            </p>
+            <a href="#main-content" class="inline-block bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105">
+                <i class="fas fa-file-alt mr-2"></i> 查阅详细清单
+            </a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="main-content" class="flex-grow container mx-auto px-6 py-12 md:py-16">
+
+        <section class="mb-12 md:mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-accent text-center">
+                <i class="fas fa-clipboard-check mr-3"></i> 申报前必备核心内部制度
+            </h2>
+            <p class="text-lg text-gray-400 leading-relaxed text-center max-w-3xl mx-auto mb-10">
+                根据《上市公司章程指引》《上市规则》等监管要求，拟上市公司在IPO申报前必须建立以下核心内部制度。其依据来源于监管规则的<strong class="text-teal-400">强制性规定</strong>及审核实践中的<strong class="text-teal-400">实质要求</strong>。
+            </p>
+
+            <!-- Grid for Categories -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- 公司治理类 -->
+                <div class="bg-dark-secondary rounded-lg shadow-xl p-8 transform transition-transform duration-300 card-hover border border-dark-line">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center text-teal-400">
+                        <i class="fas fa-building mr-3 text-2xl"></i> 一、公司治理类 <span class="ml-auto text-sm text-gray-500">(强制设立)</span>
+                    </h3>
+                    <ul class="space-y-4 text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-sitemap mt-1 mr-3 text-teal-500"></i>
+                            <div>
+                                <strong class="text-lg">《公司章程》</strong><sup id="fnref:1"><a href="#fn:1" class="text-teal-500 hover:underline">1</a></sup>
+                                <p class="text-sm">依据证监会《上市公司章程指引》，需载明公司治理结构和基本规则。明确股东会、董事会、监事会（或审计委员会）的职权划分，以及董事、监事提名程序。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-users-cog mt-1 mr-3 text-teal-500"></i>
+                            <div>
+                                <strong class="text-lg">《股东大会议事规则》《董事会议事规则》《监事会议事规则》</strong><sup id="fnref:2"><a href="#fn:2" class="text-teal-500 hover:underline">2</a></sup><sup id="fnref:3"><a href="#fn:3" class="text-teal-500 hover:underline">3</a></sup>
+                                <p class="text-sm">作为章程附件制定。审核重点：股东大会提案机制、董事会专门委员会设置（科创板/创业板强制设审计委员会<sup id="fnref:4"><a href="#fn:4" class="text-teal-500 hover:underline">4</a></sup>）。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-user-tie mt-1 mr-3 text-teal-500"></i>
+                            <div>
+                                <strong class="text-lg">《独立董事工作制度》</strong><sup id="fnref:5"><a href="#fn:5" class="text-teal-500 hover:underline">5</a></sup>
+                                <p class="text-sm">依据《上市公司独立董事管理办法》，明确独立董事的职责、履职保障等。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 财务与内控类 -->
+                <div class="bg-dark-secondary rounded-lg shadow-xl p-8 transform transition-transform duration-300 card-hover border border-dark-line">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center text-teal-400">
+                        <i class="fas fa-chart-line mr-3 text-2xl"></i> 二、财务与内控类 <span class="ml-auto text-sm text-gray-500">(实质性必备)</span>
+                    </h3>
+                    <ul class="space-y-4 text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-magnifying-glass-dollar mt-1 mr-3 text-teal-500"></i>
+                            <div>
+                                <strong class="text-lg">《内部审计制度》</strong><sup id="fnref:6"><a href="#fn:6" class="text-teal-500 hover:underline">6</a></sup>
+                                <p class="text-sm">强制依据《上市公司章程指引》，需规定审计机构向董事会审计委员会报告，并明确审计范围（含财务收支、内部控制<sup id="fnref:7"><a href="#fn:7" class="text-teal-500 hover:underline">7</a></sup>）。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-handshake mt-1 mr-3 text-teal-500"></i>
+                            <div>
+                                <strong class="text-lg">《关联交易决策制度》</strong><sup id="fnref:8"><a href="#fn:8" class="text-teal-500 hover:underline">8</a></sup>
+                                <p class="text-sm">依据《上市规则》，区分一般/重大关联交易的审批权限（董事会或股东大会）。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-sack-dollar mt-1 mr-3 text-teal-500"></i>
+                            <div>
+                                <strong class="text-lg">《募集资金管理制度》</strong><sup id="fnref:9"><a href="#fn:9" class="text-teal-500 hover:underline">9</a></sup>
+                                <p class="text-sm">申报前必备，依据《首次公开发行股票注册管理办法》，要求披露募集资金专户存储及使用安排。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 信息披露与合规类 -->
+                <div class="bg-dark-secondary rounded-lg shadow-xl p-8 transform transition-transform duration-300 card-hover border border-dark-line">
+                    <h3 class="text-2xl font-bold mb-4 flex items-center text-teal-400">
+                        <i class="fas fa-bullhorn mr-3 text-2xl"></i> 三、信息披露与合规类 <span class="ml-auto text-sm text-gray-500">(提前适配)</span>
+                    </h3>
+                    <ul class="space-y-4 text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-file-invoice mt-1 mr-3 text-teal-500"></i>
+                            <div>
+                                <strong class="text-lg">《信息披露管理制度》</strong><sup id="fnref:10"><a href="#fn:10" class="text-teal-500 hover:underline">10</a></sup>
+                                <p class="text-sm">依据《上市公司信息披露管理办法》，公司需制定信息披露事务管理制度，申报时需提交并说明其有效性<sup id="fnref:11"><a href="#fn:11" class="text-teal-500 hover:underline">11</a></sup>。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-user-secret mt-1 mr-3 text-teal-500"></i>
+                            <div>
+                                <strong class="text-lg">《内幕信息知情人登记制度》</strong><sup id="fnref:12"><a href="#fn:12" class="text-teal-500 hover:underline">12</a></sup>
+                                <p class="text-sm">强制依据《关于上市公司内幕信息知情人登记管理制度的规定》，IPO申报阶段即适用。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Data Visualization Section (Mermaid) -->
+        <section class="mb-12 md:mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-accent text-center">
+                <i class="fas fa-project-diagram mr-3"></i> 内部制度体系结构概览
+            </h2>
+            <p class="text-lg text-gray-400 leading-relaxed text-center max-w-3xl mx-auto mb-10">
+                通过可视化图表，更直观地理解各项内部制度的层级关系与核心内容。
+            </p>
+            <div class="mermaid">
+                graph TD
+                    A[IPO申报前必备核心内部制度] --> B(一、公司治理类);
+                    A --> C(二、财务与内控类);
+                    A --> D(三、信息披露与合规类);
+                    A --> E(四、特殊行业补充要求);
+
+                    subgraph 公司治理类 (强制设立)
+                        B1[《公司章程》];
+                        B2[《股东大会议事规则》];
+                        B3[《董事会议事规则》];
+                        B4[《监事会议事规则》];
+                        B5[《独立董事工作制度》];
+                        B1 --- B2 & B3 & B4 & B5;
+                    end
+
+                    subgraph 财务与内控类 (实质性必备)
+                        C1[《内部审计制度》];
+                        C2[《关联交易决策制度》];
+                        C3[《募集资金管理制度》];
+                    end
+
+                    subgraph 信息披露与合规类 (提前适配)
+                        D1[《信息披露管理制度》];
+                        D2[《内幕信息知情人登记制度》];
+                        D1 --- D2;
+                    end
+
+                    subgraph 特殊行业补充要求 (按需补充)
+                        E1[《研发费用归集与核算制度》];
+                        E2[《保密工作制度》];
+                    end
+
+                    C1 -- 报告至 --> B3;
+                    C2 -- 决策于 --> B3 & B2;
+                    D1 -- 依赖 --> D2;
+                    E1 -- 依据 --> A;
+                    E2 -- 依据 --> A;
+
+                    classDef default fill:#2d3748,stroke:#00C9B1,stroke-width:2px,color:#e2e8f0;
+                    classDef subgraph fill:#1a202c,stroke:#4a5568,stroke-width:1px,color:#e2e8f0;
+                    class A,E subgraph; /* Apply subgraph style to main entry and special reqs */
+                    classDef important stroke:#00C9B1,stroke-width:3px;
+                    class B,C,D important; /* Highlight main categories */
+            </div>
+        </section>
+
+        <!-- 特殊行业补充要求 -->
+        <section class="mb-12 md:mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-accent text-center">
+                <i class="fas fa-industry mr-3"></i> 四、特殊行业补充要求
+            </h2>
+            <div class="bg-dark-secondary rounded-lg shadow-xl p-8 border border-dark-line">
+                <ul class="space-y-4 text-gray-300">
+                    <li class="flex items-start">
+                        <i class="fas fa-flask mt-1 mr-3 text-teal-500"></i>
+                        <div>
+                            <strong class="text-lg">研发型企业（如科创板）：</strong><br>
+                            必须制定 <strong class="text-teal-400">《研发费用归集与核算制度》</strong><sup id="fnref:13"><a href="#fn:13" class="text-teal-500 hover:underline">13</a></sup>，确保研发投入占比等指标可验证。
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-lock mt-1 mr-3 text-teal-500"></i>
+                        <div>
+                            <strong class="text-lg">涉及国家秘密企业：</strong><br>
+                            需建立 <strong class="text-teal-400">《保密工作制度》</strong><sup id="fnref:14"><a href="#fn:14" class="text-teal-500 hover:underline">14</a></sup>。
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 监管红线与整改时效 -->
+        <section class="mb-12 md:mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-accent text-center">
+                <i class="fas fa-exclamation-triangle mr-3"></i> 监管红线与整改时效
+            </h2>
+            <div class="overflow-x-auto rounded-lg shadow-xl border border-dark-line">
+                <table class="min-w-full custom-table">
+                    <thead>
+                        <tr>
+                            <th class="py-3 px-4 text-left font-semibold text-gray-200">制度类型</th>
+                            <th class="py-3 px-4 text-left font-semibold text-gray-200">最迟建立时间</th>
+                            <th class="py-3 px-4 text-left font-semibold text-gray-200">未建立的后果</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>公司治理类</td>
+                            <td>股改完成前</td>
+                            <td>影响上市主体合法性认定</td>
+                        </tr>
+                        <tr>
+                            <td>财务内控类</td>
+                            <td>报告期最后一年</td>
+                            <td>导致内控缺陷，构成上市实质障碍<sup id="fnref:15"><a href="#fn:15" class="text-teal-500 hover:underline">15</a></sup></td>
+                        </tr>
+                        <tr>
+                            <td>信息披露类</td>
+                            <td>IPO申报材料提交前</td>
+                            <td>反馈问询中需补充说明</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="mt-8 text-gray-400 text-sm">
+                <strong class="text-teal-400"><i class="fas fa-info-circle mr-2"></i> 注：</strong>所有制度需经<strong class="text-teal-400">董事会审议通过</strong>并保留执行记录（如内审报告、会议决议），中介机构将核查制度设计的有效性及执行一贯性。
+            </p>
+        </section>
+
+        <!-- Footnotes / References -->
+        <section class="footnotes text-gray-400 border-dark-line mb-12 md:mb-16">
+            <h2 class="text-2xl font-bold mb-6 text-accent">
+                <i class="fas fa-book-open mr-3"></i> 依据来源
+            </h2>
+            <ol class="text-sm">
+                <li id="fn:1">
+                    证监会《上市公司章程指引（2023年修订）》第一条：<a href="http://www.csrc.gov.cn/csrc/c101954/c7547791/7547791/files/附件1.上市公司章程指引.pdf" target="_blank" rel="noopener noreferrer" class="text-teal-500 hover:underline">链接 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                    <a href="#fnref:1" class="text-teal-500 hover:underline">&#8617;</a>
+                </li>
+                <li id="fn:2">
+                    《上市公司章程指引》第十一条：“公司应制定股东大会议事规则、董事会议事规则和监事会议事规则。”
+                    <a href="#fnref:2" class="text-teal-500 hover:underline">&#8617;</a>
+                </li>
+                <li id="fn:3">
+                    上交所《股票上市规则》4.1.2：“上市公司应制定股东大会议事规则，并列入公司章程或作为附件。”
+                    <a href="#fnref:3" class="text-teal-500 hover:underline">&#8617;</a>
+                </li>
+                <li id="fn:4">
+                    《上市公司治理准则》第三十八条：“科创板/创业板公司应在董事会下设审计委员会。”
+                    <a href="#fnref:4" class="text-teal-500 hover:underline">&#8617;</a>
+                </li>
+                <li id="fn:5">
+                    《上市公司独立董事管理办法》第十条：“上市公司应制定独立董事工作制度。”
+                    <a href="#fnref:5" class="text-teal-500 hover:underline">&#8617;</a>
+                </li>
+                <li id="fn:6">
+                    《上市公司章程指引》第一百五十七条：<a href="https://wltp.cninfo.com.cn/static/finalpage/2023-12-15/1221220012.PDF" target="_blank" rel="noopener noreferrer" class="text-teal-500 hover:underline">链接 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                    <a href="#fnref:6" class="text-teal-500 hover:underline">&#8617;</a>
+                </li>
+                <li id="fn:7">
+                    深交所《规范运作指引》第5.7条：<a href="http://www.szse.cn/lawrules/rule/allrules/bussiness/t20240227_643807.html" target="_blank" rel="noopener noreferrer" class="text-teal-500 hover:underline">链接 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                    <a href="#fnref:7" class="text-teal-500 hover:underline">&#8617;</a>
+                </li>
+                <li id="fn:8">
+                    《上海证券交易所股票上市规则》6.3.8条
+                    <a href="#fnref:8" class="text-teal-500 hover:underline">&#8617;</a>
+                </li>
+                <li id="fn:9">
+                    《首次公开发行股票注册管理办法》第四十五条：“发行人应披露募集资金管理制度。”
+                    <a href="#fnref:9" class="text-teal-500 hover:underline">&#8617;</a>
+                </li>
+                <li id="fn:10">
+                    《上市公司信息披露管理办法》第六条
+                    <a href="#fnref:10" class="text-teal-500 hover:underline">&#8617;</a>
+                </li>
+                <li id="fn:11">
+                    科创板招股说明书准则第四十四条
+                    <a href="#fnref:11" class="text-teal-500 hover:underline">&#8617;</a>
+                </li>
+                <li id="fn:12">
+                    《关于上市公司内幕信息知情人登记管理制度的规定》第三条：<a href="http://www.gov.cn/zhengce/zhengceku/2021-01/15/content_5580459.htm" target="_blank" rel="noopener noreferrer" class="text-teal-500 hover:underline">链接 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                    <a href="#fnref:12" class="text-teal-500 hover:underline">&#8617;</a>
+                </li>
+                <li id="fn:13">
+                    证监会《科创属性评价指引（试行）》第三条
+                    <a href="#fnref:13" class="text-teal-500 hover:underline">&#8617;</a>
+                </li>
+                <li id="fn:14">
+                    《军工企业信息披露特别规定》第七条
+                    <a href="#fnref:14" class="text-teal-500 hover:underline">&#8617;</a>
+                </li>
+                <li id="fn:15">
+                    证监会《首发业务若干问题解答（2020修订）》问题54：内控整改需在报告期最后一年完成。
+                    <a href="#fnref:15" class="text-teal-500 hover:underline">&#8617;</a>
+                </li>
+            </ol>
+        </section>
+
+        <!-- Further Reading -->
+        <section class="mb-12 md:mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-accent text-center">
+                <i class="fas fa-book mr-3"></i> 进一步阅读
+            </h2>
+            <p class="text-lg text-gray-400 leading-relaxed text-center max-w-3xl mx-auto mb-10">
+                深入探索企业上市、公司治理与内部控制的专业知识，推荐以下权威读物：
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
+                <div class="bg-dark-secondary rounded-lg shadow-xl p-6 flex flex-col items-center text-center transform transition-transform duration-300 card-hover border border-dark-line">
+                    <i class="fas fa-lightbulb text-5xl text-teal-500 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2 text-teal-300">《公司治理：理论与实践》</h3>
+                    <p class="text-gray-400 text-sm mb-4">深入探讨公司治理的理论基础、运行机制及挑战。</p>
+                    <a href="https://book.douban.com/subject/26912389/" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline text-sm"><i class="fas fa-external-link-alt mr-1 text-xs"></i> 了解更多</a>
+                </div>
+                <div class="bg-dark-secondary rounded-lg shadow-xl p-6 flex flex-col items-center text-center transform transition-transform duration-300 card-hover border border-dark-line">
+                    <i class="fas fa-balance-scale-right text-5xl text-teal-500 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2 text-teal-300">《内部控制与风险管理》</h3>
+                    <p class="text-gray-400 text-sm mb-4">系统讲解内部控制框架、风险评估和企业应用。</p>
+                    <a href="https://book.douban.com/subject/35222934/" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline text-sm"><i class="fas fa-external-link-alt mr-1 text-xs"></i> 了解更多</a>
+                </div>
+                <div class="bg-dark-secondary rounded-lg shadow-xl p-6 flex flex-col items-center text-center transform transition-transform duration-300 card-hover border border-dark-line">
+                    <i class="fas fa-gavel text-5xl text-teal-500 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2 text-teal-300">《中国资本市场法律制度》</h3>
+                    <p class="text-gray-400 text-sm mb-4">全面梳理中国资本市场法律法规，包括IPO实务。</p>
+                    <a href="https://book.douban.com/subject/35349603/" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline text-sm"><i class="fas fa-external-link-alt mr-1 text-xs"></i> 了解更多</a>
+                </div>
+                <div class="bg-dark-secondary rounded-lg shadow-xl p-6 flex flex-col items-center text-center transform transition-transform duration-300 card-hover border border-dark-line">
+                    <i class="fas fa-landmark text-5xl text-teal-500 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2 text-teal-300">《新公司法》权威解读</h3>
+                    <p class="text-gray-400 text-sm mb-4">对2023年新《公司法》修订内容的深度解析。</p>
+                    <a href="https://book.douban.com/subject/36737517/" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline text-sm"><i class="fas fa-external-link-alt mr-1 text-xs"></i> 了解更多</a>
+                </div>
+                <div class="bg-dark-secondary rounded-lg shadow-xl p-6 flex flex-col items-center text-center transform transition-transform duration-300 card-hover border border-dark-line">
+                    <i class="fas fa-chart-area text-5xl text-teal-500 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2 text-teal-300">《会计与财务管理实务》</h3>
+                    <p class="text-gray-400 text-sm mb-4">掌握财务管理技巧，理解企业经营与风险评估。</p>
+                    <a href="https://book.douban.com/subject/30419277/" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline text-sm"><i class="fas fa-external-link-alt mr-1 text-xs"></i> 了解更多</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark-secondary py-8 text-center text-gray-500 border-t border-dark-line">
+        <p>&copy; 2024 IPO合规指南. All rights reserved.</p>
+        <p class="text-sm mt-2">免责声明：本页面内容仅供参考，不构成任何法律或投资建议。</p>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid Configuration for Dark Mode
+        const mermaidConfigDark = {
+            startOnLoad: true,
+            theme: 'dark',
+            securityLevel: 'loose', // Allows for more complex diagram features if needed
+            flowchart: { curve: 'basis' }, // Smooth curves for flowcharts
+            themeVariables: {
+                darkMode: true,
+                fontFamily: "'Noto Sans SC', sans-serif",
+                primaryColor: '#1a202c', // Matches body background
+                primaryBorderColor: '#00C9B1', // Accent color for node borders
+                primaryTextColor: '#e2e8f0', // Primary text color
+                secondaryColor: '#2d3748', // Matches card background
+                secondaryBorderColor: '#4a5568', // Border for subgraphs
+                secondaryTextColor: '#e2e8f0',
+                tertiaryColor: '#4a5568', // Deeper shade for some elements
+                tertiaryBorderColor: '#607d8b',
+                tertiaryTextColor: '#e2e8f0',
+                lineColor: '#00C9B1', // Accent color for lines/arrows
+                textColor: '#e2e8f0', // General text color in graph
+                mainBkg: '#2d3748', // Main background of the graph itself
+                nodeBorder: '#00C9B1',
+                clusterBkg: '#2d3748',
+                clusterBorder: '#4a5568',
+                edgeLabelBackground: '#1a202c',
+            }
+        };
+
+        // Mermaid Configuration for Light Mode
+        const mermaidConfigLight = {
+            startOnLoad: true,
+            theme: 'default', // Mermaid's default theme is light
+            securityLevel: 'loose',
+            flowchart: { curve: 'basis' },
+            themeVariables: {
+                darkMode: false,
+                fontFamily: "'Noto Sans SC', sans-serif",
+                primaryColor: '#ffffff', // Matches body background
+                primaryBorderColor: '#00C9B1',
+                primaryTextColor: '#2d3748',
+                secondaryColor: '#f7fafc', // Matches card background
+                secondaryBorderColor: '#e2e8f0',
+                secondaryTextColor: '#2d3748',
+                tertiaryColor: '#e2e8f0',
+                tertiaryBorderColor: '#cbd5e0',
+                tertiaryTextColor: '#2d3748',
+                lineColor: '#00C9B1',
+                textColor: '#2d3748',
+                mainBkg: '#f7fafc',
+                nodeBorder: '#00C9B1',
+                clusterBkg: '#ffffff',
+                clusterBorder: '#e2e8f0',
+                edgeLabelBackground: '#ffffff',
+            }
+        };
+
+        // Theme Toggle JavaScript
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+        const mermaidDiv = document.querySelector('.mermaid');
+
+        /**
+         * Sets the current theme and updates MermaidJS config.
+         * @param {string} theme - 'dark' or 'light'.
+         */
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                localStorage.setItem('theme', 'dark');
+                mermaid.initialize(mermaidConfigDark);
+            } else {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+                mermaid.initialize(mermaidConfigLight);
+            }
+            updateThemeIcon(); // Update the theme toggle icon
+            // Re-render mermaid graph if it exists for dynamic theme switching
+            if (mermaidDiv) {
+                // Clear the rendered SVG to force a redraw with new theme
+                mermaidDiv.innerHTML = mermaidDiv.dataset.mermaid || mermaidDiv.textContent;
+                mermaidDiv.removeAttribute('data-processed'); // Mark as unprocessed
+                mermaid.init(undefined, mermaidDiv); // Re-render the specific div
+            }
+        }
+
+        /**
+         * Updates the theme toggle icon based on the current theme.
+         */
+        function updateThemeIcon() {
+            if (htmlElement.classList.contains('dark')) {
+                themeToggleBtn.innerHTML = '<i class="fas fa-sun text-yellow-500 text-xl"></i>';
+            } else {
+                themeToggleBtn.innerHTML = '<i class="fas fa-moon text-indigo-700 text-xl"></i>';
+            }
+        }
+
+        // Initialize theme based on local storage or system preference on page load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark'); // Default to dark if system prefers it
+        } else {
+            setTheme('light'); // Fallback to light
+        }
+
+        // Add event listener for theme toggle button
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Listen for system theme changes (if user hasn't manually set a theme)
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+            if (!localStorage.getItem('theme')) { // Only react if user hasn't manually set a theme
+                setTheme(event.matches ? 'dark' : 'light');
+            }
+        });
+
+        // Micro-interactions: Scroll-triggered animation for main content sections
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('main section'); // Select all sections within main
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1 // Trigger when 10% of the section is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        entry.target.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                // Initial state for animation (already set in CSS)
+                // section.style.opacity = '0';
+                // section.style.transform = 'translateY(20px)';
+                observer.observe(section);
+            });
+        });
+
+    </script>
+</body>
+</html>
+```
