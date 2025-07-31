@@ -1,0 +1,588 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO股东穿透核查：要求与底线深度解析</title>
+    <meta name="description" content="深度解析当前监管要求下IPO股东穿透核查的具体要求、底线标准、中介机构责任及监管依据。">
+
+    <!-- Google Fonts for Noto Sans SC (中文无衬线) & Noto Serif SC (中文衬线) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+
+    <style>
+        /* Custom base styles for dark mode */
+        body {
+            font-family: 'Noto Sans SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', sans-self;
+            @apply bg-slate-900 text-gray-200;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            line-height: 1.8; /* Increased line height for better readability */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', serif;
+            @apply text-white; /* Headings stand out in dark mode */
+        }
+
+        a {
+            @apply text-sky-400 hover:text-sky-300 transition-colors duration-200;
+        }
+
+        /* Light mode specific styles */
+        html.light body {
+            @apply bg-white text-gray-800;
+        }
+
+        html.light h1, html.light h2, html.light h3, html.light h4, html.light h5, html.light h6 {
+            @apply text-gray-900;
+        }
+
+        html.light a {
+            @apply text-blue-600 hover:text-blue-500;
+        }
+
+        /* Custom styles for Mermaid.js */
+        .mermaid-container .mermaid {
+            background-color: transparent !important;
+            fill: #E0E0E0 !important; /* Node fill in dark mode */
+            stroke: #667EEA !important; /* Node border in dark mode (indigo-500) */
+            color: #E0E0E0 !important; /* Text color in dark mode */
+        }
+        .mermaid-container .mermaid .node rect, .mermaid-container .mermaid .node circle, .mermaid-container .mermaid .node polygon {
+            stroke: #667EEA !important; /* Node border */
+            fill: #2C3E50 !important; /* Node background in dark mode (darker blue-gray) */
+        }
+        .mermaid-container .mermaid .node text {
+            fill: #E0E0E0 !important; /* Text color */
+            font-weight: 500;
+        }
+        .mermaid-container .mermaid .edgePath .path {
+            stroke: #9CA3AF !important; /* Edge line color (gray-400) */
+        }
+        .mermaid-container .mermaid .edgeLabel {
+            fill: #A78BFA !important; /* Edge label color (purple-400) */
+        }
+        .mermaid-container .mermaid .cluster rect {
+            fill: #1F2937 !important; /* Cluster background in dark mode (slate-800) */
+            stroke: #4B5563 !important; /* Cluster border in dark mode (gray-600) */
+        }
+        .mermaid-container .mermaid .cluster text {
+            fill: #E0E0E0 !important; /* Cluster text color */
+        }
+
+
+        /* Light mode for Mermaid */
+        html.light .mermaid-container .mermaid {
+            fill: #374151 !important; /* Node fill in light mode */
+            stroke: #3B82F6 !important; /* Node border in light mode (blue-500) */
+            color: #374151 !important; /* Text color in light mode */
+        }
+        html.light .mermaid-container .mermaid .node rect, html.light .mermaid-container .mermaid .node circle, html.light .mermaid-container .mermaid .node polygon {
+            stroke: #3B82F6 !important; /* Node border */
+            fill: #DBEAFE !important; /* Node background in light mode (blue-100) */
+        }
+        html.light .mermaid-container .mermaid .node text {
+            fill: #374151 !important; /* Text color */
+        }
+        html.light .mermaid-container .mermaid .edgePath .path {
+            stroke: #6B7280 !important; /* Edge line color (gray-600) */
+        }
+        html.light .mermaid-container .mermaid .edgeLabel {
+            fill: #6366F1 !important; /* Edge label color (indigo-500) */
+        }
+        html.light .mermaid-container .mermaid .cluster rect {
+            fill: #F3F4F6 !important; /* Cluster background in light mode (gray-100) */
+            stroke: #D1D5DB !important; /* Cluster border in light mode (gray-300) */
+        }
+        html.light .mermaid-container .mermaid .cluster text {
+            fill: #374151 !important; /* Cluster text color */
+        }
+
+        /* Custom scrollbar for subtle effect */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #2D3748; /* Darker track for dark mode */
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4A5568; /* Thumb color for dark mode */
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5A6A80;
+        }
+
+        html.light ::-webkit-scrollbar-track {
+            background: #F3F4F6; /* Lighter track for light mode */
+        }
+
+        html.light ::-webkit-scrollbar-thumb {
+            background: #CBD5E0; /* Thumb color for light mode */
+        }
+
+        html.light ::-webkit-scrollbar-thumb:hover {
+            background: #A0AEC0;
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Theme Switcher -->
+    <div class="fixed top-6 right-6 z-50">
+        <button id="theme-toggle" class="p-3 rounded-full bg-slate-700 text-gray-200 hover:bg-slate-600 transition-colors duration-200 shadow-lg
+                                         dark:bg-indigo-700 dark:hover:bg-indigo-600
+                                         light:bg-blue-500 light:hover:bg-blue-400 light:text-white">
+            <i class="fas fa-sun hidden dark:inline-block"></i>
+            <i class="fas fa-moon inline-block dark:hidden"></i>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative overflow-hidden py-20 md:py-32 bg-gradient-to-br from-slate-900 to-gray-900 text-white shadow-xl">
+        <div class="absolute inset-0 bg-cover bg-center opacity-10" style="background-image: url('https://images.unsplash.com/photo-1549298583-930b6287317d?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+        <div class="relative max-w-5xl mx-auto px-6 text-center z-10">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight">
+                IPO股东穿透核查：<br class="sm:hidden">要求与底线深度解析
+            </h1>
+            <p class="text-lg sm:text-xl font-light opacity-80 mb-8 max-w-3xl mx-auto">
+                深度解析当前监管要求下首次公开发行股票（IPO）股东穿透核查的具体要求、底线标准、中介机构责任及最新监管依据。
+            </p>
+            <div class="flex justify-center space-x-4">
+                <a href="#section-requirements" class="px-6 py-3 bg-sky-500 text-white rounded-lg shadow-md hover:bg-sky-600 transition-all duration-300 transform hover:scale-105">
+                    <i class="fas fa-clipboard-list mr-2"></i> 核查要求
+                </a>
+                <a href="#section-bottom-line" class="px-6 py-3 bg-indigo-500 text-white rounded-lg shadow-md hover:bg-indigo-600 transition-all duration-300 transform hover:scale-105">
+                    <i class="fas fa-compass mr-2"></i> 底线标准
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto py-12 px-6">
+
+        <!-- Section: 一、穿透核查具体要求 -->
+        <section id="section-requirements" class="mb-16">
+            <h2 class="text-3xl font-semibold mb-8 text-sky-400 border-b border-gray-700 pb-4 dark:border-indigo-500">
+                <i class="fas fa-search-dollar mr-3"></i>一、穿透核查具体要求
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- 核查范围 -->
+                <div class="bg-slate-800 p-8 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1">
+                    <h3 class="text-2xl font-medium mb-5 text-indigo-400">
+                        <i class="fas fa-bullseye mr-2"></i>1. 核查范围
+                    </h3>
+                    <p class="text-gray-300 mb-4">需穿透核查至最终持有人，包括以下类型：</p>
+                    <ul class="list-none space-y-3 pl-0 text-gray-300">
+                        <li><i class="fas fa-user-tie text-teal-400 mr-2"></i>自然人</li>
+                        <li><i class="fas fa-building text-teal-400 mr-2"></i>上市公司（含境外上市）、新三板挂牌公司等公众公司</li>
+                        <li><i class="fas fa-flag text-teal-400 mr-2"></i>国有控股主体（含事业单位、国有产业基金等）</li>
+                        <li><i class="fas fa-users-cog text-teal-400 mr-2"></i>集体所有制企业、境外政府投资基金、大学捐赠基金、养老基金、公益基金</li>
+                        <li><i class="fas fa-chart-pie text-teal-400 mr-2"></i>公募资产管理产品</li>
+                    </ul>
+
+                    <div class="mt-6 p-4 bg-slate-700 rounded-lg border border-slate-600 shadow-inner">
+                        <h4 class="text-xl font-medium mb-3 text-red-300">
+                            <i class="fas fa-times-circle mr-2"></i>豁免情形：
+                        </h4>
+                        <ul class="list-none space-y-2 pl-0 text-gray-300">
+                            <li><i class="fas fa-check-circle text-gray-400 mr-2"></i>外资股东若同时满足 **“出资人无境内主体”** 且 **“入股价格无异常”**，可不穿透<sup><a href="#footnote-knowledge" class="ml-1">[注1]</a></sup><sup><a href="#footnote-search" class="ml-1">[注2]</a></sup>。</li>
+                            <li><i class="fas fa-check-circle text-gray-400 mr-2"></i>境外私募基金等，若 **非单纯持股平台** 且 **入股价格合理**，可不穿透（但其境内出资人需穿透）<sup><a href="#footnote-knowledge" class="ml-1">[注1]</a></sup>。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 重点核查内容 -->
+                <div class="bg-slate-800 p-8 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1">
+                    <h3 class="text-2xl font-medium mb-5 text-indigo-400">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>2. 重点核查内容
+                    </h3>
+                    <ul class="list-none space-y-3 pl-0 text-gray-300">
+                        <li>
+                            <i class="fas fa-handshake-slash text-yellow-400 mr-2"></i>
+                            **股权代持**：必须解除并披露形成原因、解除过程及潜在纠纷。
+                        </li>
+                        <li>
+                            <i class="fas fa-bolt text-yellow-400 mr-2"></i>
+                            **突击入股**：申报前12个月内新增股东需锁定36个月，并披露入股原因、价格及关联关系。
+                        </li>
+                        <li>
+                            <i class="fas fa-dollar-sign text-yellow-400 mr-2"></i>
+                            **入股价格异常**：若交易价格明显偏离公允价值，需核查资金来源、定价依据及是否存在利益输送<sup><a href="#footnote-search" class="ml-1">[注2]</a></sup><sup><a href="#footnote-knowledge" class="ml-1">[注1]</a></sup>。
+                        </li>
+                        <li>
+                            <i class="fas fa-ban text-yellow-400 mr-2"></i>
+                            **股东适格性**：禁止三类主体持股（如禁止持股主体、中介机构相关人员、利益输送方）。
+                        </li>
+                        <li>
+                            <i class="fas fa-user-minus text-yellow-400 mr-2"></i>
+                            **离职人员核查**：对证监会系统离职人员入股需专项核查（无论持股比例）<sup><a href="#footnote-knowledge" class="ml-1">[注1]</a></sup>。
+                        </li>
+                    </ul>
+
+                    <div class="mt-6 p-4 bg-slate-700 rounded-lg border border-slate-600 shadow-inner">
+                        <h4 class="text-xl font-medium mb-3 text-indigo-300">
+                            <i class="fas fa-file-invoice mr-2"></i>3. 信息披露要求
+                        </h4>
+                        <ul class="list-none space-y-2 pl-0 text-gray-300">
+                            <li><i class="fas fa-clipboard-check text-gray-400 mr-2"></i>发行人需出具《股东信息披露专项承诺》，披露股东结构至最终持有人。</li>
+                            <li><i class="fas fa-layer-group text-gray-400 mr-2"></i>持股架构为两层以上且无实际经营的，若入股价格异常需逐层穿透<sup><a href="#footnote-search" class="ml-1">[注2]</a></sup>。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 二、穿透核查底线标准 -->
+        <section id="section-bottom-line" class="mb-16">
+            <h2 class="text-3xl font-semibold mb-8 text-sky-400 border-b border-gray-700 pb-4 dark:border-indigo-500">
+                <i class="fas fa-ruler-combined mr-3"></i>二、穿透核查底线标准
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- 最低穿透门槛 -->
+                <div class="bg-slate-800 p-8 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1">
+                    <h3 class="text-2xl font-medium mb-5 text-indigo-400">
+                        <i class="fas fa-minus-circle mr-2"></i>1. 最低穿透门槛<span class="text-lg opacity-70 ml-2">(重大性原则)</span>
+                    </h3>
+                    <p class="text-gray-300 mb-4">
+                        <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                        **直接或间接持股 <span class="text-yellow-300 font-bold">≤10万股</span>** 或 **持股比例 <span class="text-yellow-300 font-bold">≤0.01%</span>** 的股东，原则上可不穿透核查<sup><a href="#footnote-search1" class="ml-1">[注3]</a></sup><sup><a href="#footnote-search5" class="ml-1">[注4]</a></sup><sup><a href="#footnote-knowledge" class="ml-1">[注1]</a></sup>。
+                    </p>
+                    <div class="mt-6 p-4 bg-slate-700 rounded-lg border border-slate-600 shadow-inner">
+                        <h4 class="text-xl font-medium mb-3 text-red-300">
+                            <i class="fas fa-exclamation-circle mr-2"></i>例外：
+                        </h4>
+                        <p class="text-gray-300">
+                            若有线索指向涉及离职人员、违规代持或入股异常，即使持股低于门槛也需穿透<sup><a href="#footnote-knowledge" class="ml-1">[注1]</a></sup>。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 停穿层级标准 -->
+                <div class="bg-slate-800 p-8 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1">
+                    <h3 class="text-2xl font-medium mb-5 text-indigo-400">
+                        <i class="fas fa-stop-circle mr-2"></i>2. 停穿层级标准
+                    </h3>
+                    <p class="text-gray-300 mb-4">穿透至以下任一主体即可停止：</p>
+                    <ul class="list-none space-y-3 pl-0 text-gray-300">
+                        <li><i class="fas fa-user text-teal-400 mr-2"></i>自然人、上市公司/公众公司、国有主体、集体企业、境外主权基金、公募资管产品等<sup><a href="#footnote-search" class="ml-1">[注2]</a></sup><sup><a href="#footnote-knowledge" class="ml-1">[注1]</a></sup>。</li>
+                        <li><i class="fas fa-globe-americas text-teal-400 mr-2"></i>外资股东（须满足“无境内主体+入股价格无异常”）。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Visualization: 穿透核查流程示意图 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-semibold mb-8 text-sky-400 border-b border-gray-700 pb-4 dark:border-indigo-500">
+                <i class="fas fa-project-diagram mr-3"></i>穿透核查流程示意图
+            </h2>
+            <div class="bg-slate-800 p-8 rounded-lg shadow-xl overflow-x-auto">
+                <div class="mermaid-container">
+                    <pre class="mermaid">
+                    graph TD
+                        A[股东信息] --> B{持股数量/比例 <br> ≤10万股/0.01%?};
+                        B -- 是 --> C{有无违规线索 <br> (代持/异常入股/离职人员)?};
+                        C -- 否 --> D[无需穿透];
+                        C -- 是 --> E[继续穿透核查];
+                        B -- 否 --> E;
+                        E --> F{是否已穿透至最终持有人?};
+                        F -- 否 --> G[逐层穿透];
+                        F -- 是 --> H[核查完成];
+                        H --> I[信息披露];
+
+                        subgraph 最终持有人类型
+                            J(自然人);
+                            K(上市公司/公众公司);
+                            L(国有主体);
+                            M(集体企业);
+                            N(境外政府投资基金);
+                            O(公募资管产品);
+                            P(特定外资股东<br>(无境内主体+价格无异常));
+                        end
+
+                        F -- 是 --> J;
+                        F -- 是 --> K;
+                        F -- 是 --> L;
+                        F -- 是 --> M;
+                        F -- 是 --> N;
+                        F -- 是 --> O;
+                        F -- 是 --> P;
+                    </pre>
+                </div>
+                <p class="text-center text-gray-400 text-sm mt-4">（点击图表可拖动查看，鼠标滚轮缩放）</p>
+            </div>
+        </section>
+
+        <!-- Section: 三、中介机构核查责任 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-semibold mb-8 text-sky-400 border-b border-gray-700 pb-4 dark:border-indigo-500">
+                <i class="fas fa-gavel mr-3"></i>三、中介机构核查责任
+            </h2>
+            <div class="bg-slate-800 p-8 rounded-lg shadow-xl">
+                <ul class="list-none space-y-4 pl-0 text-gray-300">
+                    <li>
+                        <i class="fas fa-clipboard-list text-purple-400 mr-2"></i>
+                        保荐机构及律师需**逐层穿透**，核查方式包括：
+                        <ul class="list-disc list-inside ml-6 mt-2 space-y-2 text-gray-400">
+                            <li>审查股东协议、银行流水、出资凭证等客观证据；</li>
+                            <li>通过境外工商系统、网络公开信息（如裁判文书、招股书）或委托境外律师协助核查<sup><a href="#footnote-knowledge" class="ml-1">[注1]</a></sup>。</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <i class="fas fa-hand-point-right text-purple-400 mr-2"></i>
+                        **禁止以承诺替代核查**：需基于实质证据发表意见<sup><a href="#footnote-search" class="ml-1">[注2]</a></sup><sup><a href="#footnote-knowledge" class="ml-1">[注1]</a></sup>。
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section: 监管依据 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-semibold mb-8 text-sky-400 border-b border-gray-700 pb-4 dark:border-indigo-500">
+                <i class="fas fa-balance-scale mr-3"></i>监管依据
+            </h2>
+            <div class="bg-slate-800 p-8 rounded-lg shadow-xl">
+                <h3 class="text-2xl font-medium mb-4 text-indigo-400">
+                    <i class="fas fa-file-alt mr-2"></i>1. 核心文件
+                </h3>
+                <ul class="list-none space-y-3 pl-0 text-gray-300 mb-6">
+                    <li>
+                        <i class="fas fa-book-open text-orange-400 mr-2"></i>
+                        《监管规则适用指引——关于申请首发上市企业股东信息披露》（证监会，2021年2月）<sup><a href="#footnote-knowledge" class="ml-1">[注1]</a></sup>。
+                    </li>
+                    <li>
+                        <i class="fas fa-file-contract text-orange-400 mr-2"></i>
+                        《监管规则适用指引——发行类第2号》《关于进一步规范股东穿透核查的通知》等<sup><a href="#footnote-knowledge" class="ml-1">[注1]</a></sup>。
+                    </li>
+                </ul>
+
+                <h3 class="text-2xl font-medium mb-4 text-indigo-400">
+                    <i class="fas fa-cogs mr-2"></i>2. 实操细化
+                </h3>
+                <ul class="list-none space-y-3 pl-0 text-gray-300">
+                    <li>
+                        <i class="fas fa-chart-line text-orange-400 mr-2"></i>
+                        沪深交易所及北交所明确量化标准（10万股/0.01%），并统一“最终持有人”认定口径<sup><a href="#footnote-search1" class="ml-1">[注3]</a></sup><sup><a href="#footnote-knowledge" class="ml-1">[注1]</a></sup>。
+                    </li>
+                </ul>
+            </div>
+            <p class="mt-8 text-gray-400 text-sm italic border-t border-gray-700 pt-4">
+                <i class="fas fa-info-circle mr-2"></i>
+                注：当前政策（截至2025年7月）延续从严监管导向，重点打击违规代持、突击入股及利益输送，中介机构需避免“免责式核查”。
+            </p>
+        </section>
+
+        <!-- Data Visualization: 最终持有人类型概览 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-semibold mb-8 text-sky-400 border-b border-gray-700 pb-4 dark:border-indigo-500">
+                <i class="fas fa-sitemap mr-3"></i>最终持有人类型概览
+            </h2>
+            <div class="bg-slate-800 p-8 rounded-lg shadow-xl overflow-x-auto">
+                <div class="mermaid-container">
+                    <pre class="mermaid">
+                    mindmap
+                        root((IPO股东穿透核查))
+                            最终持有人类型
+                                自然人
+                                上市公司/公众公司
+                                国有控股主体
+                                    事业单位
+                                    国有产业基金
+                                集体所有制企业
+                                境外政府投资基金
+                                    大学捐赠基金
+                                    养老基金
+                                    公益基金
+                                公募资产管理产品
+                                特定外资股东
+                                    无境内主体
+                                    入股价格无异常
+                    </pre>
+                </div>
+                <p class="text-center text-gray-400 text-sm mt-4">（思维导图直观展示最终持有人类型）</p>
+            </div>
+        </section>
+
+        <!-- Further Reading -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-semibold mb-8 text-sky-400 border-b border-gray-700 pb-4 dark:border-indigo-500">
+                <i class="fas fa-book mr-3"></i>延伸阅读
+            </h2>
+            <div class="bg-slate-800 p-8 rounded-lg shadow-xl">
+                <p class="text-gray-300 mb-4">如果您想深入了解相关法律法规和实践，以下是几份推荐的官方文件及指南：</p>
+                <ul class="list-none space-y-4 pl-0 text-gray-300">
+                    <li class="flex items-start">
+                        <i class="fas fa-caret-right text-sky-400 mt-1 mr-2"></i>
+                        <div>
+                            <span class="font-semibold text-white">《首次公开发行股票注册管理办法》</span>
+                            <p class="text-gray-400 text-sm">IPO注册制的基石法规，规范发行条件、程序及信息披露要求。</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-caret-right text-sky-400 mt-1 mr-2"></i>
+                        <div>
+                            <span class="font-semibold text-white">《监管规则适用指引——关于申请首发上市企业股东信息披露》</span>
+                            <p class="text-gray-400 text-sm">直接针对股东穿透核查的专项指引，本文内容的核心依据。</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-caret-right text-sky-400 mt-1 mr-2"></i>
+                        <div>
+                            <span class="font-semibold text-white">《中国证监会行政许可实施程序规定》</span>
+                            <p class="text-gray-400 text-sm">了解证监会行政许可申请、审查、决定等环节的具体程序。</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-caret-right text-sky-400 mt-1 mr-2"></i>
+                        <div>
+                            <span class="font-semibold text-white">《上市公司收购管理办法》</span>
+                            <p class="text-gray-400 text-sm">虽然并非直接针对IPO，但对上市公司股权变动、控制权有详细规定，与穿透核查的理念相通。</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-caret-right text-sky-400 mt-1 mr-2"></i>
+                        <div>
+                            <span class="font-semibold text-white">《律师事务所从事证券法律业务管理办法》</span>
+                            <p class="text-gray-400 text-sm">规范律师事务所在证券业务中的执业行为和责任，对理解中介机构核查责任有帮助。</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+
+        <!-- Footnotes -->
+        <section id="footnotes" class="mt-16 pt-8 border-t border-gray-700 text-sm text-gray-400">
+            <h3 class="text-xl font-semibold mb-4 text-white">参考资料：</h3>
+            <ol class="list-decimal list-outside ml-5 space-y-2">
+                <li id="footnote-knowledge">
+                    知识库资料《IPO审核规则适用指引差异对比》（点击可预览相关内容），载明穿透核查范围、豁免标准及离职人员核查要求。
+                </li>
+                <li id="footnote-search">
+                    联网搜索《拟IPO企业的哪些股东需被穿透核查？沪深交易所的量化标准“红线”来了》（<a href="https://www.sohu.com/a/472356844_313745" target="_blank" rel="noopener noreferrer" class="underline">点击查看原文</a>）。
+                </li>
+                <li id="footnote-search1">
+                    联网搜索《拨云见日：全新境内外IPO规则下如何进行股东穿透核查》（<a href="http://www.haiwen-law.com/35/921" target="_blank" rel="noopener noreferrer" class="underline">点击查看原文</a>）。
+                </li>
+                <li id="footnote-search5">
+                    联网搜索《拟IPO股东穿透核查再规范：明确持股较少可不穿透核查》（<a href="https://www.thepaper.cn/newsDetail_forward_13203168" target="_blank" rel="noopener noreferrer" class="underline">点击查看原文</a>）。
+                </li>
+            </ol>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-900 py-8 text-center text-gray-400 text-sm">
+        <p>&copy; 2025 IPO股东穿透核查. All rights reserved.</p>
+        <p class="mt-2">Designed with <i class="fas fa-heart text-red-500"></i> by Your Expert Designer</p>
+    </footer>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid.js configuration
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base', // Use 'base' and then override with CSS for more control
+            flowchart: {
+                curve: 'basis'
+            },
+            mindmap: {
+                // Add mindmap specific options if needed
+            },
+            themeVariables: {
+                /* These are default light theme variables, overridden by custom CSS for dark/light */
+                /* Keeping them here for completeness but actual styling is in CSS block */
+                primaryColor: '#667EEA', /* Node border/stroke */
+                primaryTextColor: '#E0E0E0', /* Text color */
+                primaryBorderColor: '#667EEA', /* Node border */
+                lineColor: '#9CA3AF', /* Edge line */
+                textColor: '#E0E0E0', /* General text in graph */
+                mainBkg: '#2C3E50', /* Node fill */
+                nodeBorder: '#667EEA'
+            }
+        });
+
+        // Theme Switcher JavaScript
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme and re-render mermaid charts
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            }
+            // Re-render Mermaid charts after theme change
+            if (window.mermaid) {
+                document.querySelectorAll('.mermaid').forEach((element, index) => {
+                    const originalContent = element.textContent; // Store original diagram definition
+                    element.innerHTML = ''; // Clear existing SVG
+                    // Assign a unique ID for each render to avoid conflicts
+                    const chartId = 'mermaid-chart-' + Math.random().toString(36).substr(2, 9);
+                    mermaid.render(chartId, originalContent, (svgCode) => {
+                        element.innerHTML = svgCode;
+                    }, element); // Pass element as 4th arg for more specific rendering
+                });
+            }
+        }
+
+        // Check for saved theme preference or system preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (prefersDark) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Initial render of mermaid charts to ensure they apply theme correctly on page load
+        // This is important because the theme might be set by JS before Mermaid fully loads/renders
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.mermaid').forEach((element, index) => {
+                const originalContent = element.textContent;
+                element.innerHTML = '';
+                const chartId = 'mermaid-chart-initial-' + Math.random().toString(36).substr(2, 9);
+                mermaid.render(chartId, originalContent, (svgCode) => {
+                    element.innerHTML = svgCode;
+                }, element);
+            });
+        });
+    </script>
+</body>
+</html>
+```
