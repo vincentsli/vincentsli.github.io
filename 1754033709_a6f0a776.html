@@ -1,0 +1,572 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板上市要求：生产工时统计与成本核算深度解析</title>
+    <meta name="description" content="深入解析科创板对拟上市公司生产工时统计与成本核算的核心要求，助您洞悉审核要点，高效合规。">
+    <meta name="keywords" content="科创板, IPO, 生产工时, 成本核算, 研发费用, 审核要点, 财务规范, 上市公司, 财务尽调">
+
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+
+    <style>
+        /* Custom base styles for improved readability and aesthetics */
+        :root {
+            --bg-light: #f7fafc;
+            --text-light: #2d3748;
+            --header-light: #1a202c;
+            --accent-light: #3182ce;
+            --card-light: #ffffff;
+            --border-light: #e2e8f0;
+
+            --bg-dark: #121212; /* Deeper dark mode background */
+            --text-dark: #e0e0e0;
+            --header-dark: #f0f0f0;
+            --accent-dark: #4fd1c5; /* Teal for accent */
+            --card-dark: #1e1e1e; /* Slightly lighter card in dark mode */
+            --border-dark: #2d2d2d;
+        }
+
+        /* Default body styles (Light Mode) */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-light);
+            line-height: 1.75;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', serif; /* Prioritize Serif for headings */
+            color: var(--header-light);
+            line-height: 1.3;
+        }
+
+        a {
+            color: var(--accent-light);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        a:hover {
+            color: var(--header-light);
+        }
+
+        /* Dark Mode styles applied via .dark class on html */
+        .dark body {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+        }
+        .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+            color: var(--header-dark);
+        }
+        .dark a {
+            color: var(--accent-dark);
+        }
+        .dark a:hover {
+            color: var(--header-dark);
+        }
+
+        /* Specific Tailwind overrides for dark mode elements */
+        .dark .bg-white { background-color: var(--card-dark); }
+        .dark .border-gray-200 { border-color: var(--border-dark); }
+        .dark .text-gray-800 { color: var(--text-dark); }
+        .dark .text-gray-600 { color: var(--text-dark); }
+        .dark .hover\:bg-gray-100:hover { background-color: var(--border-dark); } /* For hover effects */
+        .dark .bg-gray-50 { background-color: var(--border-dark); } /* For lighter accents in dark mode */
+
+        /* Custom scrollbar for aesthetics in Webkit browsers */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-light);
+        }
+        .dark::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e0; /* light gray */
+            border-radius: 4px;
+        }
+        .dark::-webkit-scrollbar-thumb {
+            background: #4a5568; /* darker gray */
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a0aec0; /* slightly darker */
+        }
+        .dark::-webkit-scrollbar-thumb:hover {
+            background: #6a768c; /* slightly darker */
+        }
+
+        /* Mermaid specific styling to ensure dark mode compatibility */
+        .mermaid {
+            background-color: var(--card-light); /* Default light background for mermaid */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .dark .mermaid {
+            background-color: var(--card-dark); /* Dark background for mermaid in dark mode */
+            color: var(--text-dark); /* Ensure text is visible */
+        }
+        /* Further Mermaid styling for nodes and text in dark mode (manual overrides if needed) */
+        .dark .mermaid .node rect,
+        .dark .mermaid .node polygon,
+        .dark .mermaid .node circle,
+        .dark .mermaid .node ellipse {
+            fill: #2a2a2a !important; /* Dark node background */
+            stroke: var(--accent-dark) !important; /* Accent border */
+        }
+        .dark .mermaid .node text {
+            fill: var(--text-dark) !important; /* Light text */
+        }
+        .dark .mermaid .edge path {
+            stroke: #666 !important; /* Darker line for edges */
+            fill: none !important;
+        }
+        .dark .mermaid .edge text {
+            fill: var(--text-dark) !important; /* Light text for edge labels */
+        }
+        .dark .mermaid .arrowheadPath {
+            fill: #666 !important; /* Darker arrowheads */
+        }
+    </style>
+</head>
+<body class="min-h-screen transition-colors duration-300">
+    <!-- Mode Toggle Button -->
+    <button id="modeToggle" class="fixed top-4 right-4 z-50 p-3 rounded-full shadow-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-opacity-75 focus:ring-blue-400 dark:focus:ring-teal-400">
+        <i class="fas fa-sun block dark:hidden"></i>
+        <i class="fas fa-moon hidden dark:block"></i>
+    </button>
+
+    <div class="container mx-auto px-4 py-12 md:py-20 max-w-4xl">
+
+        <!-- Hero Module -->
+        <header class="text-center mb-16 md:mb-24 relative overflow-hidden rounded-xl shadow-2xl p-8 md:p-12 lg:p-16 bg-gradient-to-br from-blue-500 to-purple-600 dark:from-gray-800 dark:to-gray-900 transition-colors duration-500">
+            <div class="absolute inset-0 bg-pattern opacity-10 dark:opacity-5" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48ZyBmaWxsPSIjRkZGRkZGIiBmaWxsLW9wYWNpdHk9IjAuMDgiPjxwYXRoIGQ9Ik0zNiAzMGgydjJoLTJ2LTJ6bTAgLTRoMnYyYy0xLjEwNSAwLTIgLjg5NS0yIDJ2LTJ6bTMgNmgydjJoLTJ2LTJ6bTMgLTRoMnYyYy0xLjEwNSAwLTIgLjg5NS0yIDJ2LTJ6TTIwIDI0aDJ2MmgtMnYtMnptMC00aDJ2MmMtMS4xMDUgMC0yIC44OTUtMiAydj0yTTEyIDI0aDJ2MmgtMnYtMnptMC00aDJ2MmMtMS4xMDUgMC0yIC44OTUtMiAydj0yTTggMjhoMnYySC4zOTRBMi4wMDYgMi4wMDYgMCAwIDAgMCAyOGgyem0wLTRoMnYyYy0xLjEwNSAwLTIgLjg5NS0yIDJ2LTJ6bTctMTJoMnYyYy0xLjEwNSAwLTIgLjg5NS0yIDJ2LTJ6bTctLTRoMnYyYy0xLjEwNSAwLTIgLjg5NS0yIDJ2LTJ6TTEyIDQ0aDJ2MmgtMnYtMnptMC00aDJ2MmMtMS4xMDUgMC0yIC44OTUtMiAydj0yem0wLTQwaDJ2MmMtMS4xMDUgMC0yIC44OTUtMiAydj0yem0wLTQwaDJ2MmMtMS4xMDUgMC0yIC44OTUtMiAydj0yem00LTIwaDJ2MmgtMnYtMnptMC00aDJ2MmMtMS4xMDUgMC0yIC44OTUtMiAydj0yem00LTQwaDJ2MmMtMS4xMDUgMC0yIC44OTUtMiAydj0yem0tMTIgMmgydjJoLTJ2LTJ6bTAtNGgydjJjLTEuMTA1IDAtMiAuODk1LTIgMnYtMnpNMjAgNDhoMnYySDE2LjM5NGEyLjAwNiAyLjAwNiAwIDAgMCAuMzkyLTJoMnptMC00aDJ2MmgtMnYyTTM2IDBoMnYyYy0xLjEwNSAwLTIgLjg5NS0yIDJ2LTJ6bTAtLTRoMnYyYy0xLjEwNSAwLTIgLjg5NS0yIDJ2LTJ6TTQ0IDBoMnYySDR2LTJ6bTAtNGgydjJjLTEuMTA1IDAtMiAuODk1LTIgMnYtMnpNNjAgMzJoMnYySDU2LjM5NGEyLjAwNiAyLjAwNiAwIDAgMCAuMzkyLTJoMnptMC00aDJ2MmgtMnYyTTMyIDMyaDJ2MmgtMnYtMnptMC00aDJ2MmMtMS4xMDUgMC0yIC44OTUtMiAydj0yem00LTIwaDJ2MmgtMnYtMnptMC00aDJ2MmMtMS4xMDUgMC0yIC44OTUtMiAydj0yem0tMTIgMmgydjJoLTJ2LTJ6bTAtNGgydjJjLTEuMTA1IDAtMiAuODk1LTIgMnYtMnpNMjAgMjhoMnYySDE2LjM5NGEyLjAwNiAyLjAwNiAwIDAgMCAuMzkyLTJoMnptMC00aDJ2MmgtMnYyTTUyIDhoMnYyYy0xLjEwNSAwLTIgLjg5NS0yIDJ2LTJ6bTAtNGgydjJjLTEuMTA1IDAtMiAuODk1LTIgMnYtMnpNNjAgNDhoMnYySDU2LjM5NGEyLjAwNiAyLjAwNiAwIDAgMCAuMzkyLTJoMnptMC00aDJ2MmgtMnYyIi8+PC9nPjwvZz48L3N2Zz4='); background-size: 60px 60px;"></div>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-4 text-white dark:text-header-dark relative z-10 tracking-wide">
+                科创板上市要求：生产工时统计与成本核算
+            </h1>
+            <p class="text-lg md:text-xl lg:text-2xl text-white opacity-90 dark:text-gray-300 mb-8 relative z-10 max-w-2xl mx-auto">
+                深度解析科创板审核要点，助力拟上市公司高效合规，稳健迈向资本市场。
+            </p>
+            <div class="inline-flex items-center space-x-4 relative z-10">
+                <i class="fas fa-chart-line text-white dark:text-accent-dark text-3xl md:text-4xl animate-bounce-slow"></i>
+                <i class="fas fa-cogs text-white dark:text-accent-dark text-3xl md:text-4xl animate-pulse-slow animation-delay-200"></i>
+                <i class="fas fa-clipboard-check text-white dark:text-accent-dark text-3xl md:text-4xl animate-bounce-slow animation-delay-400"></i>
+            </div>
+        </header>
+
+        <!-- Introduction -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-serif font-semibold mb-6 text-gray-800 dark:text-header-dark flex items-center">
+                <i class="fas fa-info-circle mr-3 text-blue-500 dark:text-teal-400"></i> 引言：科创板对财务规范的严谨要求
+            </h2>
+            <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                根据科创板审核要求及实务案例，拟上市公司生产工时统计和成本核算需满足以下核心要求。本页结合联网搜索及知识库资料，为您全面剖析其重要性与具体操作规范，旨在为您的上市之路提供清晰指引。
+            </p>
+        </section>
+
+        <!-- Main Content Sections -->
+        <section class="grid md:grid-cols-2 gap-8 mb-12">
+            <!-- Section 1: 生产工时统计要求 -->
+            <div class="bg-white dark:bg-card-dark p-8 rounded-lg shadow-lg border border-gray-200 dark:border-border-dark group transition-all duration-300 hover:shadow-xl hover:scale-[1.01] hover:bg-gray-50 dark:hover:bg-gray-800">
+                <h3 class="text-2xl font-serif font-semibold mb-5 text-gray-800 dark:text-header-dark flex items-center">
+                    <i class="fas fa-clock mr-3 text-red-500 dark:text-amber-400"></i> 一、生产工时统计要求
+                </h3>
+                <ul class="space-y-6 text-gray-700 dark:text-gray-300">
+                    <li class="flex items-start">
+                        <i class="fas fa-clipboard-list mr-3 mt-1 text-lg text-red-400 dark:text-amber-300"></i>
+                        <div>
+                            <strong class="text-gray-900 dark:text-header-dark">系统性要求：</strong>
+                            工时统计需建立<span class="font-bold text-red-600 dark:text-amber-400">书面制度体系</span>（非口头沟通），采用ERP系统或标准化表单记录，确保数据可追溯至具体项目/产品。若仅依赖月度汇总表且无底层支撑（如Result 2案例），将被质疑统计可靠性<sup class="text-blue-500 dark:text-teal-400 font-bold ml-1"><a href="#footnote-1" class="hover:underline">[1]</a></sup>。
+                            <p class="text-sm italic mt-2 text-gray-500 dark:text-gray-400">
+                                <i class="fas fa-lightbulb mr-1"></i> <span class="font-semibold">依据案例：</span> IPO现场督导发现某发行人因“工时统计底层资料仅为月度汇总表，自下而上上报体系未形成”被问询<sup class="text-blue-500 dark:text-teal-400 font-bold ml-1"><a href="#footnote-2" class="hover:underline">[2]</a></sup>。
+                            </p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-object-group mr-3 mt-1 text-lg text-red-400 dark:text-amber-300"></i>
+                        <div>
+                            <strong class="text-gray-900 dark:text-header-dark">研发与生产工时分离：</strong>
+                            研发人员参与非研发活动（如生产）时，必须通过<span class="font-bold text-red-600 dark:text-amber-400">工时记录区分用途</span>，确保研发费用归集准确。
+                            <ul class="list-disc ml-6 mt-2 space-y-1">
+                                <li>知识库案例指出，研发人员薪酬需按<span class="font-bold">实际研发工时占比</span>分配，若未区分将导致费用核算错误<sup class="text-blue-500 dark:text-teal-400 font-bold ml-1"><a href="#footnote-3" class="hover:underline">[3]</a></sup>。</li>
+                                <li>Result 14案例（嘉和美康）明确要求工时费用按研发/生产活动分别计入研发费用或存货<sup class="text-blue-500 dark:text-teal-400 font-bold ml-1"><a href="#footnote-4" class="hover:underline">[4]</a></sup>。</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle mr-3 mt-1 text-lg text-red-400 dark:text-amber-300"></i>
+                        <div>
+                            <strong class="text-gray-900 dark:text-header-dark">准确性验证：</strong>
+                            工时数据需与<span class="font-bold text-red-600 dark:text-amber-400">生产记录、薪酬计算</span>匹配。如Result 6强调需设立台账按项目归集，定期复核技术可行性和市场情况<sup class="text-blue-500 dark:text-teal-400 font-bold ml-1"><a href="#footnote-5" class="hover:underline">[5]</a></sup>。
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Section 2: 成本核算要求 -->
+            <div class="bg-white dark:bg-card-dark p-8 rounded-lg shadow-lg border border-gray-200 dark:border-border-dark group transition-all duration-300 hover:shadow-xl hover:scale-[1.01] hover:bg-gray-50 dark:hover:bg-gray-800">
+                <h3 class="text-2xl font-serif font-semibold mb-5 text-gray-800 dark:text-header-dark flex items-center">
+                    <i class="fas fa-calculator mr-3 text-green-500 dark:text-lime-400"></i> 二、成本核算要求
+                </h3>
+                <ul class="space-y-6 text-gray-700 dark:text-gray-300">
+                    <li class="flex items-start">
+                        <i class="fas fa-money-bill-wave mr-3 mt-1 text-lg text-green-400 dark:text-lime-300"></i>
+                        <div>
+                            <strong class="text-gray-900 dark:text-header-dark">研发费用独立归集：</strong>
+                            研发材料、人工等支出必须与生产成本<span class="font-bold text-green-600 dark:text-lime-400">严格区分，避免混同</span>（Result 3）。若技术服务收入无对应成本（如禾信仪器案例），将被质疑核算完整性<sup class="text-blue-500 dark:text-teal-400 font-bold ml-1"><a href="#footnote-6" class="hover:underline">[6]</a></sup>。
+                            <ul class="list-disc ml-6 mt-2 space-y-1">
+                                <li>知识库明确要求：研发领料需与生产BOM清单分离，若共用材料须按合理标准（如工时）分摊<sup class="text-blue-500 dark:text-teal-400 font-bold ml-1"><a href="#footnote-3" class="hover:underline">[3]</a></sup>。</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-shield-alt mr-3 mt-1 text-lg text-green-400 dark:text-lime-300"></i>
+                        <div>
+                            <strong class="text-gray-900 dark:text-header-dark">内控制度健全性：</strong>
+                            成本核算需有明确流程（如BOM清单管理）。Result 1案例（华丰科技）显示，审核关注成本分配方法（如按工时分配人工成本）是否持续执行<sup class="text-blue-500 dark:text-teal-400 font-bold ml-1"><a href="#footnote-7" class="hover:underline">[7]</a></sup>。
+                            <ul class="list-disc ml-6 mt-2 space-y-1">
+                                <li>现场督导重点核查：ERP系统数据逻辑（如出库/验收日期倒挂）、账实差异分摊是否准确（Result 19）<sup class="text-blue-500 dark:text-teal-400 font-bold ml-1"><a href="#footnote-8" class="hover:underline">[8]</a></sup>。</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-balance-scale mr-3 mt-1 text-lg text-green-400 dark:text-lime-300"></i>
+                        <div>
+                            <strong class="text-gray-900 dark:text-header-dark">合规性底线：</strong>
+                            研发费用核算影响<span class="font-bold text-green-600 dark:text-lime-400">科创属性指标</span>（如三年累计研发投入占比≥5%）。若成本归集不准确：
+                            <ul class="list-disc ml-6 mt-2 space-y-1">
+                                <li>可能虚增研发费用，导致不符合上市条件<sup class="text-blue-500 dark:text-teal-400 font-bold ml-1"><a href="#footnote-9" class="hover:underline">[9]</a></sup>；</li>
+                                <li>加计扣除税务差异需充分披露<sup class="text-blue-500 dark:text-teal-400 font-bold ml-1"><a href="#footnote-10" class="hover:underline">[10]</a></sup>。</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 3: 整改与披露要求 -->
+        <section class="bg-white dark:bg-card-dark p-8 rounded-lg shadow-lg border border-gray-200 dark:border-border-dark mb-12 group transition-all duration-300 hover:shadow-xl hover:scale-[1.005] hover:bg-gray-50 dark:hover:bg-gray-800">
+            <h3 class="text-2xl font-serif font-semibold mb-5 text-gray-800 dark:text-header-dark flex items-center">
+                <i class="fas fa-pencil-alt mr-3 text-purple-500 dark:text-sky-400"></i> 三、整改与披露要求
+            </h3>
+            <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                若报告期内存在统计缺陷（如未建立工时体系），需在<span class="font-bold text-purple-600 dark:text-sky-400">最后一年完成规范并披露</span>：
+            </p>
+            <ul class="space-y-4 text-gray-700 dark:text-gray-300 mt-4">
+                <li class="flex items-start">
+                    <i class="fas fa-hammer mr-3 mt-1 text-lg text-purple-400 dark:text-sky-300"></i>
+                    <div>
+                        说明整改措施（如ERP系统上线、制度修订）。
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-chart-pie mr-3 mt-1 text-lg text-purple-400 dark:text-sky-300"></i>
+                    <div>
+                        测算前期核算误差对毛利率/净利润的影响（如新特电气案例）<sup class="text-blue-500 dark:text-teal-400 font-bold ml-1"><a href="#footnote-8" class="hover:underline">[8]</a></sup>。
+                    </div>
+                </li>
+            </ul>
+            <p class="text-base italic mt-4 text-gray-500 dark:text-gray-400">
+                <i class="fas fa-book-open mr-1"></i> <span class="font-semibold">知识库指引：</span> 研发费用核算需在报告期最后一年达到“规范、准确”状态<sup class="text-blue-500 dark:text-teal-400 font-bold ml-1"><a href="#footnote-3" class="hover:underline">[3]</a></sup>。
+            </p>
+        </section>
+
+        <!-- Data Visualization Section -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-serif font-semibold mb-6 text-gray-800 dark:text-header-dark flex items-center">
+                <i class="fas fa-project-diagram mr-3 text-indigo-500 dark:text-emerald-400"></i> 关键概念关联图
+            </h2>
+            <p class="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+                以下图表可视化展示了科创板审核中生产工时统计、成本核算与科创属性认定之间的核心关系和流程，帮助您更直观地理解其内在逻辑。
+            </p>
+            <div class="bg-white dark:bg-card-dark p-6 rounded-lg shadow-lg border border-gray-200 dark:border-border-dark overflow-x-auto">
+                <div class="mermaid" style="font-family: 'Noto Sans SC', sans-serif;">
+                    graph TD
+                        A[拟上市公司财务核算] --> B(工时统计)
+                        B -- 区分 --> B1(研发工时)
+                        B -- 区分 --> B2(生产工时)
+
+                        B1 --> C(研发费用归集)
+                        B2 --> D(生产成本核算)
+
+                        C --> E(科创属性指标认定)
+                        D -- 严格分离避免混同 --> C
+
+                        F{内控制度健全} -- 规范 --> A
+                        F -- 确保准确性 --> C
+                        F -- 确保准确性 --> D
+
+                        E -- 核心指标 --> G[符合科创板上市条件]
+                        D -- 准确性保障 --> G
+
+                        H[审核问询与案例] --> B
+                        H --> C
+                        H --> D
+
+                        I[报告期内缺陷] --> J(整改与披露)
+                        J -- 目标 --> G
+
+                        subgraph 监管关注重点
+                            B --- 工时底层数据完整性
+                            C --- 研发费用真实性与准确性
+                            D --- 成本分摊合理性
+                        end
+
+                        classDef default fill:#f7fafc,stroke:#a0aec0,stroke-width:2px,color:#2d3748; /* Light mode default */
+                        classDef darkDefault fill:#2a2a2a,stroke:#4a5568,stroke-width:2px,color:#e0e0e0; /* Dark mode default */
+                        classDef highlight fill:#ebf8ff,stroke:#63b3ed,stroke-width:2px,color:#2c5282; /* Light mode highlight */
+                        classDef darkHighlight fill:#2c3a4d,stroke:#4fd1c5,stroke-width:2px,color:#4fd1c5; /* Dark mode highlight */
+                        classDef warning fill:#fffbeb,stroke:#f6e05e,stroke-width:2px,color:#975a16; /* Light mode warning */
+                        classDef darkWarning fill:#3a3a2a,stroke:#d69e2e,stroke-width:2px,color:#d69e2e; /* Dark mode warning */
+                        classDef success fill:#f0fff4,stroke:#68d391,stroke-width:2px,color:#2f855a; /* Light mode success */
+                        classDef darkSuccess fill:#2a3a2a,stroke:#38a169,stroke-width:2px,color:#38a169; /* Dark mode success */
+
+                        class B,C,D,E highlight;
+                        class G success;
+                        class H,I warning;
+                        class J highlight;
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Concepts Explanation (Optional but good for understanding) -->
+        <section class="mb-12 bg-white dark:bg-card-dark p-8 rounded-lg shadow-lg border border-gray-200 dark:border-border-dark group transition-all duration-300 hover:shadow-xl hover:scale-[1.005] hover:bg-gray-50 dark:hover:bg-gray-800">
+            <h2 class="text-3xl font-serif font-semibold mb-6 text-gray-800 dark:text-header-dark flex items-center">
+                <i class="fas fa-lightbulb mr-3 text-yellow-500 dark:text-fuchsia-400"></i> 核心概念速览
+            </h2>
+            <dl class="space-y-4 text-gray-700 dark:text-gray-300">
+                <div class="border-b border-gray-200 dark:border-border-dark pb-3">
+                    <dt class="font-bold text-lg text-gray-900 dark:text-header-dark">BOM清单 (Bill of Materials)</dt>
+                    <dd class="mt-1 ml-4">产品物料清单，详细列出生产一个产品所需的所有零部件、材料及其数量。在成本核算中，用于核对材料领用与产品生产的对应关系，确保材料成本归集准确。</dd>
+                </div>
+                <div class="border-b border-gray-200 dark:border-border-dark pb-3">
+                    <dt class="font-bold text-lg text-gray-900 dark:text-header-dark">科创属性指标</dt>
+                    <dd class="mt-1 ml-4">科创板对拟上市企业设定的行业、研发投入、发明专利、营业收入等方面的量化指标，是判断企业是否符合科创板定位的关键。其中，“三年累计研发投入占营业收入比例”是重要指标之一，直接关联研发费用核算准确性。</dd>
+                </div>
+                <div>
+                    <dt class="font-bold text-lg text-gray-900 dark:text-header-dark">内部控制制度</dt>
+                    <dd class="mt-1 ml-4">企业为保证经营活动的效率和效果、资产安全、财务报告可靠以及遵循法规政策而建立的一系列程序、政策和方法。健全的内控制度是企业财务规范运行的基础，也是监管机构审核的重点。</dd>
+                </div>
+            </dl>
+        </section>
+
+        <!-- Further Reading Section -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-serif font-semibold mb-6 text-gray-800 dark:text-header-dark flex items-center">
+                <i class="fas fa-book-reader mr-3 text-cyan-500 dark:text-blue-400"></i> 延伸阅读
+            </h2>
+            <p class="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+                为了更深入理解科创板上市的财务与合规要求，我们为您推荐以下专业资料：
+            </p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white dark:bg-card-dark p-6 rounded-lg shadow-md border border-gray-200 dark:border-border-dark hover:shadow-lg transition-shadow duration-200 group">
+                    <h4 class="font-serif font-bold text-lg text-gray-900 dark:text-header-dark mb-2 group-hover:text-blue-600 dark:group-hover:text-teal-400">
+                        <i class="fas fa-file-alt mr-2 text-blue-400 dark:text-teal-300"></i> 科创板股票发行上市审核问答
+                    </h4>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">
+                        上海证券交易所官方发布，涵盖审核中的常见问题与解答，是理解监管意图的直接来源。
+                    </p>
+                    <a href="https://www.sse.com.cn/disclosure/listedinfo/pre_disclosure/audit/" target="_blank" class="mt-3 inline-block text-blue-500 dark:text-teal-400 hover:underline text-sm">
+                        阅读更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                    </a>
+                </div>
+                <div class="bg-white dark:bg-card-dark p-6 rounded-lg shadow-md border border-gray-200 dark:border-border-dark hover:shadow-lg transition-shadow duration-200 group">
+                    <h4 class="font-serif font-bold text-lg text-gray-900 dark:text-header-dark mb-2 group-hover:text-blue-600 dark:group-hover:text-teal-400">
+                        <i class="fas fa-handshake mr-2 text-blue-400 dark:text-teal-300"></i> IPO尽职调查实务
+                    </h4>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">
+                        由资深投行、律所、会计师事务所专家撰写，提供IPO各环节尽职调查的全面指导。
+                    </p>
+                    <a href="#" class="mt-3 inline-block text-blue-500 dark:text-teal-400 hover:underline text-sm">
+                        了解详情 <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                    </a>
+                </div>
+                <div class="bg-white dark:bg-card-dark p-6 rounded-lg shadow-md border border-gray-200 dark:border-border-dark hover:shadow-lg transition-shadow duration-200 group">
+                    <h4 class="font-serif font-bold text-lg text-gray-900 dark:text-header-dark mb-2 group-hover:text-blue-600 dark:group-hover:text-teal-400">
+                        <i class="fas fa-chart-pie mr-2 text-blue-400 dark:text-teal-300"></i> 成本会计学
+                    </h4>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">
+                        经典教材，系统讲解成本核算原理、方法与实务，是理解财务基础的必备书籍。
+                    </p>
+                    <a href="#" class="mt-3 inline-block text-blue-500 dark:text-teal-400 hover:underline text-sm">
+                        了解详情 <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                    </a>
+                </div>
+                <div class="bg-white dark:bg-card-dark p-6 rounded-lg shadow-md border border-gray-200 dark:border-border-dark hover:shadow-lg transition-shadow duration-200 group">
+                    <h4 class="font-serif font-bold text-lg text-gray-900 dark:text-header-dark mb-2 group-hover:text-blue-600 dark:group-hover:text-teal-400">
+                        <i class="fas fa-gavel mr-2 text-blue-400 dark:text-teal-300"></i> 中国证监会、上交所相关法规汇编
+                    </h4>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">
+                        定期查阅最新法规更新，确保企业始终符合最新的监管要求。
+                    </p>
+                    <a href="http://www.csrc.gov.cn/csrc/c101901/main.shtml" target="_blank" class="mt-3 inline-block text-blue-500 dark:text-teal-400 hover:underline text-sm">
+                        阅读更多 <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                    </a>
+                </div>
+                <div class="bg-white dark:bg-card-dark p-6 rounded-lg shadow-md border border-gray-200 dark:border-border-dark hover:shadow-lg transition-shadow duration-200 group">
+                    <h4 class="font-serif font-bold text-lg text-gray-900 dark:text-header-dark mb-2 group-hover:text-blue-600 dark:group-hover:text-teal-400">
+                        <i class="fas fa-briefcase mr-2 text-blue-400 dark:text-teal-300"></i> 审计实务指南
+                    </h4>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">
+                        从审计师视角了解企业财务核算中的风险点和关注要点，有助于企业加强内控。
+                    </p>
+                    <a href="#" class="mt-3 inline-block text-blue-500 dark:text-teal-400 hover:underline text-sm">
+                        了解详情 <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footnotes Section -->
+        <section class="mt-16 text-sm text-gray-600 dark:text-gray-400 border-t border-gray-200 dark:border-border-dark pt-8">
+            <h3 class="text-xl font-serif font-semibold mb-4 text-gray-800 dark:text-header-dark">参考文献</h3>
+            <ol class="list-decimal list-inside space-y-2">
+                <li id="footnote-1">来源：<a href="http://www.360doc.com/content/22/0124/08/29518726_1014660238.shtml" target="_blank" class="text-blue-500 dark:text-teal-400 hover:underline">IPO现场督导与现场检查问询问题解析（二）-- 成本和期间费用</a></li>
+                <li id="footnote-2">同<a href="#footnote-1" class="text-blue-500 dark:text-teal-400 hover:underline">[1]</a></li>
+                <li id="footnote-3">知识库资料：《研发投入尽职调查关注要点》</li>
+                <li id="footnote-4">来源：<a href="http://static.sse.com.cn/stock/disclosure/announcement/c/202105/000707_20210518_S5OS.pdf" target="_blank" class="text-blue-500 dark:text-teal-400 hover:underline">嘉和美康科创板问询回复</a></li>
+                <li id="footnote-5">来源：<a href="https://fisf.fudan.edu.cn/ffr/content/267" target="_blank" class="text-blue-500 dark:text-teal-400 hover:underline">莫让财务问题成为企业科创板上市的绊脚石</a></li>
+                <li id="footnote-6">知识库案例：禾信仪器现场督导问题</li>
+                <li id="footnote-7">来源：<a href="http://static.sse.com.cn/stock/disclosure/announcement/c/202211/001275_20221130_R1XF.pdf" target="_blank" class="text-blue-500 dark:text-teal-400 hover:underline">华丰科技科创板问询回复</a></li>
+                <li id="footnote-8">知识库案例：新特电气成本核算问询</li>
+                <li id="footnote-9">来源：<a href="https://stcn.com/article/detail/1200692.html" target="_blank" class="text-blue-500 dark:text-teal-400 hover:underline">"虚增"科创属性！这家公司及保代、会计师被"一锅端"</a></li>
+                <li id="footnote-10">来源：<a href="https://www.sohu.com/a/455864046_270543" target="_blank" class="text-blue-500 dark:text-teal-400 hover:underline">科创板IPO研发核算的关注问题和内控规范要求</a></li>
+            </ol>
+        </section>
+
+    </div>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid.js configuration for dark mode compatibility
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default', // Set default theme
+            themeVariables: { // Variables for light theme
+                darkMode: false,
+                primaryColor: '#F7FAF9',
+                secondaryColor: '#FFFFFF',
+                tertiaryColor: '#F7FAF9',
+                primaryTextColor: '#2d3748',
+                secondaryTextColor: '#2d3748',
+                tertiaryTextColor: '#2d3748',
+                lineColor: '#a0aec0',
+                noteBkgColor: '#ebf8ff',
+                noteTextColor: '#2c5282',
+                fontSize: '14px',
+                fontFamily: 'Noto Sans SC, sans-serif'
+            }
+        });
+
+        // Dark/Light Mode Toggle Logic
+        const htmlElement = document.documentElement;
+        const modeToggle = document.getElementById('modeToggle');
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                // Update Mermaid theme for dark mode
+                mermaid.initialize({
+                    theme: 'dark', // Use 'dark' built-in theme
+                    themeVariables: { // Override specific variables for dark mode
+                        primaryColor: '#121212',
+                        secondaryColor: '#1E1E1E',
+                        tertiaryColor: '#121212',
+                        primaryTextColor: '#e0e0e0',
+                        secondaryTextColor: '#e0e0e0',
+                        tertiaryTextColor: '#e0e0e0',
+                        lineColor: '#4a5568',
+                        noteBkgColor: '#2a3a2a',
+                        noteTextColor: '#4fd1c5',
+                        clusterBkg: '#1a1a1a',
+                        clusterBorder: '#4a5568',
+                        edgeLabelBackground: '#1e1e1e',
+                        mainBkg: '#1e1e1e',
+                        nodeBorder: '#4fd1c5',
+                        nodeTextColor: '#e0e0e0',
+                        fontSize: '14px',
+                        fontFamily: 'Noto Sans SC, sans-serif'
+                    }
+                });
+            } else {
+                htmlElement.classList.remove('dark');
+                localStorage.removeItem('theme'); // Remove specific theme, let it default or follow system
+                // Reset Mermaid theme to light
+                mermaid.initialize({
+                    theme: 'default',
+                    themeVariables: {
+                        darkMode: false,
+                        primaryColor: '#F7FAF9',
+                        secondaryColor: '#FFFFFF',
+                        tertiaryColor: '#F7FAF9',
+                        primaryTextColor: '#2d3748',
+                        secondaryTextColor: '#2d3748',
+                        tertiaryTextColor: '#2d3748',
+                        lineColor: '#a0aec0',
+                        noteBkgColor: '#ebf8ff',
+                        noteTextColor: '#2c5282',
+                        fontSize: '14px',
+                        fontFamily: 'Noto Sans SC, sans-serif'
+                    }
+                });
+            }
+            // Re-render mermaid diagrams to apply new theme
+            mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        }
+
+        // Check for saved preference or system preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light'); // Explicitly set light if no preference and not dark system
+        }
+
+        // Listen for system theme changes (optional, user preference overrides)
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (!localStorage.getItem('theme')) { // Only react if no manual override
+                setTheme(event.matches ? 'dark' : 'light');
+            }
+        });
+
+        // Toggle button click handler
+        modeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Dynamic classes for Mermaid based on theme
+        function updateMermaidClasses() {
+            const mermaidDiv = document.querySelector('.mermaid');
+            if (mermaidDiv) {
+                if (htmlElement.classList.contains('dark')) {
+                    mermaidDiv.classList.add('dark-mermaid');
+                } else {
+                    mermaidDiv.classList.remove('dark-mermaid');
+                }
+            }
+        }
+        updateMermaidClasses(); // Initial call
+        modeToggle.addEventListener('click', updateMermaidClasses); // Update on toggle
+    </script>
+</body>
+</html>
+```
