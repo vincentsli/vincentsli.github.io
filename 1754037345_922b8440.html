@@ -1,0 +1,594 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>固定资产存放供应商处的会计处理与IPO实践</title>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Fonts */
+        :root {
+            --font-serif-sc: 'Noto Serif SC', serif;
+            --font-sans-sc: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-self;
+        }
+
+        body {
+            font-family: var(--font-sans-sc);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-serif-sc);
+            font-weight: 600; /* Medium to bold for headings */
+        }
+
+        /* Dark Mode Styles */
+        html.dark {
+            background-color: #0d1117; /* GitHub Dark Mode bg */
+            color: #c9d1d9; /* GitHub Dark Mode text */
+        }
+
+        html.dark .bg-card-dark {
+            background-color: #161b22; /* Slightly lighter card bg */
+            border-color: #30363d;
+        }
+
+        html.dark a {
+            color: #58a6ff; /* Blue for links */
+        }
+
+        html.dark a:hover {
+            color: #79c0ff;
+        }
+
+        /* Light Mode Styles */
+        html.light {
+            background-color: #f0f2f5; /* Light gray bg */
+            color: #333;
+        }
+
+        html.light .bg-card-light {
+            background-color: #ffffff;
+            border-color: #e2e8f0;
+        }
+
+        html.light a {
+            color: #1a73e8; /* Google Blue */
+        }
+
+        html.light a:hover {
+            color: #155bb5;
+        }
+
+        /* General styles for both modes */
+        .mermaid {
+            background-color: transparent;
+            font-family: var(--font-sans-sc);
+        }
+
+        /* Mermaid specific styles for dark mode */
+        html.dark .mermaid .node rect,
+        html.dark .mermaid .node circle,
+        html.dark .mermaid .node ellipse,
+        html.dark .mermaid .node polygon {
+            fill: #22272e !important; /* Node background */
+            stroke: #30363d !important; /* Node border */
+        }
+
+        html.dark .mermaid .edge path {
+            stroke: #6a737d !important; /* Arrow/line color */
+        }
+
+        html.dark .mermaid .edgeText span {
+            color: #c9d1d9 !important; /* Text on lines */
+        }
+
+        html.dark .mermaid .node text {
+            fill: #c9d1d9 !important; /* Node text */
+        }
+        
+        html.dark .mermaid .cluster rect {
+            fill: #161b22 !important; /* Cluster background */
+            stroke: #30363d !important; /* Cluster border */
+        }
+
+        html.dark .mermaid .cluster text {
+            fill: #8b949e !important; /* Cluster title */
+        }
+
+        /* Mermaid specific styles for light mode */
+        html.light .mermaid .node rect,
+        html.light .mermaid .node circle,
+        html.light .mermaid .node ellipse,
+        html.light .mermaid .node polygon {
+            fill: #fdfdfd !important;
+            stroke: #d1d5db !important;
+        }
+
+        html.light .mermaid .edge path {
+            stroke: #6b7280 !important;
+        }
+
+        html.light .mermaid .edgeText span {
+            color: #374151 !important;
+        }
+
+        html.light .mermaid .node text {
+            fill: #374151 !important;
+        }
+
+        html.light .mermaid .cluster rect {
+            fill: #f5f5f5 !important;
+            stroke: #d1d5db !important;
+        }
+
+        html.light .mermaid .cluster text {
+            fill: #6b7280 !important;
+        }
+
+        /* First letter drop cap */
+        .dropcap::first-letter {
+            float: left;
+            font-size: 4.5em; /* Larger size */
+            line-height: 0.8; /* Adjust to align with text */
+            margin-right: 0.1em;
+            margin-top: 0.05em;
+            font-family: var(--font-serif-sc);
+            font-weight: 700;
+            color: #58a6ff; /* Accent color for dropcap in dark mode */
+        }
+
+        html.light .dropcap::first-letter {
+            color: #1a73e8; /* Accent color for dropcap in light mode */
+        }
+
+        /* Custom link hover effect */
+        .text-link:hover {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            text-decoration-thickness: 2px;
+        }
+    </style>
+</head>
+<body class="transition-colors duration-300">
+    <!-- Header/Navigation (Optional, but good for context) -->
+    <header class="py-4 shadow-sm">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold font-serif-sc text-blue-500 dark:text-blue-400">
+                <i class="fas fa-chart-line mr-2"></i>IPO 会计洞察
+            </a>
+            <button id="theme-toggle" class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400">
+                <i class="fas fa-sun text-xl dark:hidden text-gray-700"></i>
+                <i class="fas fa-moon text-xl hidden dark:inline-block text-gray-300"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-gray-900 to-black dark:from-gray-800 dark:to-gray-900 py-24 text-center overflow-hidden transition-colors duration-300">
+        <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path fill="%234A5568" d="M0 0h100v100H0z"/><path fill="%232D3748" d="M0 0l100 100M100 0L0 100"/><path fill="%232D3748" d="M0 50h100M50 0v100"/></svg>'); background-size: 200px; transform: rotate(15deg) scale(2);"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-4 drop-shadow-lg font-serif-sc">
+                <i class="fas fa-building mr-4 text-blue-400"></i>IPO路上：固定资产存放供应商处的会计处理与实践
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+                深度解析拟上市公司在特殊资产管理中的会计合规性，规避IPO审计风险
+            </p>
+            <div class="space-x-4">
+                <a href="#overview" class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                    <i class="fas fa-book-reader mr-2"></i>深入阅读
+                </a>
+                <a href="#mermaid-diagram" class="inline-flex items-center px-6 py-3 border-2 border-blue-500 text-blue-300 hover:bg-blue-500 hover:text-white font-semibold rounded-lg shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                    <i class="fas fa-sitemap mr-2"></i>核心决策流程
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto px-4 py-16">
+        <article class="prose max-w-5xl mx-auto dark:prose-invert">
+            <p class="text-lg mb-8 dropcap">根据企业会计准则及IPO审核实践，拟上市公司的固定资产在供应商处存放时的会计处理需严格遵循以下标准，核心依据是<strong class="font-bold text-blue-400 dark:text-blue-300">资产控制权归属</strong>和<strong class="font-bold text-blue-400 dark:text-blue-300">经济利益实现方式</strong>。</p>
+
+            <hr class="my-10 border-gray-700 dark:border-gray-600">
+
+            <section id="overview" class="mb-12">
+                <h2 class="text-4xl font-bold mb-8 text-blue-400 dark:text-blue-300 flex items-center">
+                    <i class="fas fa-coins mr-3 text-blue-500"></i>一、必须资本化（保留账内处理）的情形
+                </h2>
+                <p class="text-lg text-gray-300 dark:text-gray-400 mb-6">符合以下条件之一的，应确认为固定资产并计提折旧：</p>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Capitalization Case 1 -->
+                    <div class="bg-card-dark dark:bg-card-dark p-8 rounded-lg shadow-xl border border-gray-700 dark:border-gray-800 transform transition-transform duration-300 hover:scale-[1.01] hover:shadow-2xl">
+                        <h3 class="text-2xl font-bold mb-4 text-white flex items-center">
+                            <i class="fas fa-handshake mr-3 text-green-400"></i>1. 已取得法定所有权且承担主要风险
+                        </h3>
+                        <ul class="list-none space-y-4 text-gray-200 dark:text-gray-300">
+                            <li><i class="fas fa-dot-circle mr-2 text-blue-500"></i>设备/资产已付款并完成物权转移（如已开票、办理产权登记），存放在供应商处仅因<strong class="text-blue-300 dark:text-blue-200">生产、调试或定制化加工需要</strong>（例如：委托供应商安装核心部件）。</li>
+                            <li><i class="fas fa-balance-scale mr-2 text-blue-500"></i><strong class="text-blue-300 dark:text-blue-200">依据</strong>：财政部《企业会计准则第4号——固定资产》第四条，要求同时满足“与该资源有关的经济利益很可能流入企业”及“成本能够可靠计量”。<a href="http://czj.changchun.gov.cn/zwgk/zcjd/201904/P020190417505445550802.pdf" target="_blank" rel="noopener noreferrer" class="text-link text-blue-400 ml-2"><i class="fas fa-external-link-alt"></i> 预览知识库资料</a></li>
+                            <li><i class="fas fa-clipboard-check mr-2 text-blue-500"></i><strong class="text-blue-300 dark:text-blue-200">审计证据</strong>：采购合同、产权证明、保险单（投保人为发行人）、供应商仓储协议（明确权属归属发行人）。</li>
+                        </ul>
+                    </div>
+
+                    <!-- Capitalization Case 2 -->
+                    <div class="bg-card-dark dark:bg-card-dark p-8 rounded-lg shadow-xl border border-gray-700 dark:border-gray-800 transform transition-transform duration-300 hover:scale-[1.01] hover:shadow-2xl">
+                        <h3 class="text-2xl font-bold mb-4 text-white flex items-center">
+                            <i class="fas fa-warehouse mr-3 text-green-400"></i>2. 长期存放但发行人实质控制
+                        </h3>
+                        <ul class="list-none space-y-4 text-gray-200 dark:text-gray-300">
+                            <li><i class="fas fa-dot-circle mr-2 text-blue-500"></i>资产存放超过<strong class="text-blue-300 dark:text-blue-200">一个会计年度</strong>，且发行人承担保管费、保险费、毁损风险，供应商仅提供场地（如：定制化大型设备因场地限制暂存供应商处）。</li>
+                            <li><i class="fas fa-file-alt mr-2 text-blue-500"></i><strong class="text-blue-300 dark:text-blue-200">案例参考</strong>：某拟上市公司将检测设备存放供应商处3年，但因每月进行现场盘点、独立投保，审计认可资本化处理。<a href="http://www.ytpsgroup.com/?viewpoint/445.html" target="_blank" rel="noopener noreferrer" class="text-link text-blue-400 ml-2"><i class="fas fa-external-link-alt"></i> 查看上市案例关注点</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="my-10 border-gray-700 dark:border-gray-600">
+
+            <section class="mb-12">
+                <h2 class="text-4xl font-bold mb-8 text-blue-400 dark:text-blue-300 flex items-center">
+                    <i class="fas fa-file-invoice-dollar mr-3 text-red-400"></i>二、可费用化处理的情形
+                </h2>
+                <p class="text-lg text-gray-300 dark:text-gray-400 mb-6">符合以下条件之一的，应直接计入当期损益：</p>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Expense Case 1 -->
+                    <div class="bg-card-dark dark:bg-card-dark p-8 rounded-lg shadow-xl border border-gray-700 dark:border-gray-800 transform transition-transform duration-300 hover:scale-[1.01] hover:shadow-2xl">
+                        <h3 class="text-2xl font-bold mb-4 text-white flex items-center">
+                            <i class="fas fa-wrench mr-3 text-yellow-400"></i>1. 非资本性支出
+                        </h3>
+                        <p class="text-gray-200 dark:text-gray-300 leading-relaxed">日常维护费、保管费、小额搬运费等<strong class="text-blue-300 dark:text-blue-200">不增加资产未来经济效益的支出</strong>，按《企业会计准则——基本准则》第三十三条费用化处理。<a href="https://www.casc.org.cn/2025/0421/270469.shtml" target="_blank" rel="noopener noreferrer" class="text-link text-blue-400 ml-2"><i class="fas fa-external-link-alt"></i> 查看实施问答</a></p>
+                    </div>
+
+                    <!-- Expense Case 2 -->
+                    <div class="bg-card-dark dark:bg-card-dark p-8 rounded-lg shadow-xl border border-gray-700 dark:border-gray-800 transform transition-transform duration-300 hover:scale-[1.01] hover:shadow-2xl">
+                        <h3 class="text-2xl font-bold mb-4 text-white flex items-center">
+                            <i class="fas fa-flask mr-3 text-yellow-400"></i>2. 研发阶段样机/试制品
+                        </h3>
+                        <p class="text-gray-200 dark:text-gray-300 leading-relaxed">若存放供应商处的资产属于<strong class="text-blue-300 dark:text-blue-200">研发用样机</strong>，且未来销售可能性低（如：定制化研发阶段产品），根据《企业会计准则解释第15号》，相关成本应费用化。<a href="https://www.shui5.cn/article/36/1222.html" target="_blank" rel="noopener noreferrer" class="text-link text-blue-400 ml-2"><i class="fas fa-external-link-alt"></i> 查看解释原文</a></p>
+                    </div>
+
+                    <!-- Expense Case 3 -->
+                    <div class="bg-card-dark dark:bg-card-dark p-8 rounded-lg shadow-xl border border-gray-700 dark:border-gray-800 transform transition-transform duration-300 hover:scale-[1.01] hover:shadow-2xl">
+                        <h3 class="text-2xl font-bold mb-4 text-white flex items-center">
+                            <i class="fas fa-boxes mr-3 text-yellow-400"></i>3. 存放目的为销售而非自用
+                        </h3>
+                        <p class="text-gray-200 dark:text-gray-300 leading-relaxed">例如：为降低物流成本，将<strong class="text-blue-300 dark:text-blue-200">产成品</strong>暂存供应商仓库，此类资产应计入存货而非固定资产。</p>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="my-10 border-gray-700 dark:border-gray-600">
+
+            <section class="mb-12">
+                <h2 class="text-4xl font-bold mb-8 text-blue-400 dark:text-blue-300 flex items-center">
+                    <i class="fas fa-gavel mr-3 text-purple-400"></i>三、IPO审核关键建议
+                </h2>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- IPO Tip 1 -->
+                    <div class="bg-card-dark dark:bg-card-dark p-8 rounded-lg shadow-xl border border-gray-700 dark:border-gray-800 transform transition-transform duration-300 hover:scale-[1.01] hover:shadow-2xl">
+                        <h3 class="text-2xl font-bold mb-4 text-white flex items-center">
+                            <i class="fas fa-file-contract mr-3 text-blue-400"></i>1. 权属证明与审计程序
+                        </h3>
+                        <ul class="list-none space-y-4 text-gray-200 dark:text-gray-300">
+                            <li><i class="fas fa-check-circle mr-2 text-blue-500"></i>需取得供应商出具的<strong class="text-blue-300 dark:text-blue-200">资产权属声明函</strong>。</li>
+                            <li><i class="fas fa-map-marker-alt mr-2 text-blue-500"></i>执行现场监盘（每年至少1次），留存照片、GPS定位等证据。</li>
+                            <li><i class="fas fa-info-circle mr-2 text-blue-500"></i><strong class="text-blue-300 dark:text-blue-200">参考</strong>：证监会《首发业务若干问题解答》问题54要求核查“异地存放固定资产的权属清晰性”。<a href="http://www.csrc.gov.cn/csrc/c101493/c7457856/7457856/files/%E5%85%B3%E4%BA%8E%E4%B8%A5%E6%A0%BC%E6%89%A7%E8%A1%8C%E4%BC%81%E4%B8%9A%E4%BC%9A%E8%AE%A1%E5%87%86%E5%88%99%20%E5%88%87%E5%AE%9E%E5%81%9A%E5%A5%BD%E4%BC%81%E4%B8%9A2023%E5%B9%B4%E5%B9%B4%E6%8A%A5%E5%B7%A5%E4%BD%9C%E7%9A%84%E9%80%9A%E7%9F%A5-20240117122816236.pdf" target="_blank" rel="noopener noreferrer" class="text-link text-blue-400 ml-2"><i class="fas fa-external-link-alt"></i> 查看监管要求</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- IPO Tip 2 -->
+                    <div class="bg-card-dark dark:bg-card-dark p-8 rounded-lg shadow-xl border border-gray-700 dark:border-gray-800 transform transition-transform duration-300 hover:scale-[1.01] hover:shadow-2xl">
+                        <h3 class="text-2xl font-bold mb-4 text-white flex items-center">
+                            <i class="fas fa-exclamation-triangle mr-3 text-red-400"></i>2. 费用化处理的敏感点
+                        </h3>
+                        <p class="text-gray-200 dark:text-gray-300 leading-relaxed">大额费用化支出（如单笔超净利润5%）需在招股书中披露<strong class="text-blue-300 dark:text-blue-200">合理性</strong>，避免被质疑调节利润。</p>
+                    </div>
+
+                    <!-- IPO Tip 3 -->
+                    <div class="bg-card-dark dark:bg-card-dark p-8 rounded-lg shadow-xl border border-gray-700 dark:border-gray-800 transform transition-transform duration-300 hover:scale-[1.01] hover:shadow-2xl">
+                        <h3 class="text-2xl font-bold mb-4 text-white flex items-center">
+                            <i class="fas fa-shield-alt mr-3 text-green-400"></i>3. 供应商依赖风险披露
+                        </h3>
+                        <p class="text-gray-200 dark:text-gray-300 leading-relaxed">若固定资产长期依赖单一供应商存放，需说明<strong class="text-blue-300 dark:text-blue-200">资产安全性保障措施</strong>及替代方案。</p>
+                    </div>
+                </div>
+            </section>
+
+            <hr class="my-10 border-gray-700 dark:border-gray-600">
+
+            <!-- Mermaid Diagram Section -->
+            <section id="mermaid-diagram" class="mb-12">
+                <h2 class="text-4xl font-bold mb-8 text-blue-400 dark:text-blue-300 flex items-center">
+                    <i class="fas fa-project-diagram mr-3 text-teal-400"></i>核心决策流程图
+                </h2>
+                <p class="text-lg text-gray-300 dark:text-gray-400 mb-6">通过以下流程图，更直观地理解固定资产存放供应商处时的会计处理决策路径与IPO审核要点。</p>
+                <div class="bg-card-dark dark:bg-card-dark p-8 rounded-lg shadow-xl border border-gray-700 dark:border-gray-800 overflow-x-auto">
+                    <div class="mermaid text-center">
+                        graph TD
+                            A[<i class='fa-solid fa-industry'></i> 固定资产在供应商处存放的会计处理] --> B{<i class='fa-solid fa-scale-balanced'></i> 核心依据：资产控制权 & 经济利益};
+
+                            B -- 满足资产确认条件 --> C[<i class='fa-solid fa-coins'></i> 资本化 (保留账内)];
+                            B -- 不满足或为当期支出 --> D[<i class='fa-solid fa-file-invoice-dollar'></i> 费用化 (计入当期损益)];
+                            A -- IPO特殊考量 --> E[<i class='fa-solid fa-gavel'></i> IPO审核关注点];
+
+                            subgraph 必须资本化的情形
+                                C1[<i class='fa-solid fa-handshake'></i> 1. 已取得法定所有权 & 承担主要风险]
+                                C2[<i class='fa-solid fa-warehouse'></i> 2. 长期存放但发行人实质控制]
+                            end
+                            C --> C1;
+                            C --> C2;
+
+                            C1 -- "生产、调试或定制加工需要" --> C1a[审计证据: 合同, 产权, 保险, 仓储协议];
+                            C2 -- "存放超1会计年度 & 承担风险" --> C2a[案例: 现场盘点, 独立投保];
+
+
+                            subgraph 可费用化处理的情形
+                                D1[<i class='fa-solid fa-wrench'></i> 1. 存放期间发生非资本性支出]
+                                D2[<i class='fa-solid fa-flask'></i> 2. 研发阶段样机/试制品]
+                                D3[<i class='fa-solid fa-boxes'></i> 3. 存放目的为销售而非自用]
+                            end
+                            D --> D1;
+                            D --> D2;
+                            D --> D3;
+
+                            D1 -- "日常维护、保管、小额搬运" --> D1a[不增加资产未来经济效益];
+                            D2 -- "未来销售可能性低" --> D2a[研发用样机];
+                            D3 -- "产成品暂存仓库" --> D3a[应计入存货];
+
+
+                            subgraph IPO审核关键建议
+                                E1[<i class='fa-solid fa-file-contract'></i> 1. 权属证明与审计程序]
+                                E2[<i class='fa-solid fa-exclamation-triangle'></i> 2. 费用化处理的敏感点]
+                                E3[<i class='fa-solid fa-shield-alt'></i> 3. 供应商依赖风险披露]
+                            end
+                            E --> E1;
+                            E --> E2;
+                            E --> E3;
+
+                            E1 -- "声明函, 现场监盘" --> E1a[核查权属清晰性];
+                            E2 -- "大额支出披露合理性" --> E2a[避免调节利润质疑];
+                            E3 -- "安全性保障与替代方案" --> E3a[解释风险规避];
+
+                            style A fill:#293b5f,stroke:#4a5e7e,stroke-width:2px,color:#c9d1d9
+                            style B fill:#3e4b6b,stroke:#58a6ff,stroke-width:2px,color:#c9d1d9
+                            style C fill:#2a613d,stroke:#3fb950,stroke-width:2px,color:#c9d1d9
+                            style D fill:#6b3d3d,stroke:#f85149,stroke-width:2px,color:#c9d1d9
+                            style E fill:#4d3d6b,stroke:#8957e5,stroke-width:2px,color:#c9d1d9
+
+                            style C1 fill:#357a4b,stroke:#4ac465,color:#c9d1d9
+                            style C2 fill:#357a4b,stroke:#4ac465,color:#c9d1d9
+                            style D1 fill:#8a4d4d,stroke:#ff6a6a,color:#c9d1d9
+                            style D2 fill:#8a4d4d,stroke:#ff6a6a,color:#c9d1d9
+                            style D3 fill:#8a4d4d,stroke:#ff6a6a,color:#c9d1d9
+                            style E1 fill:#664d8a,stroke:#a66bff,color:#c9d1d9
+                            style E2 fill:#664d8a,stroke:#a66bff,color:#c9d1d9
+                            style E3 fill:#664d8a,stroke:#a66bff,color:#c9d1d9
+
+                            linkStyle 0 stroke:#58a6ff,stroke-width:2px,fill:none;
+                            linkStyle 1 stroke:#f85149,stroke-width:2px,fill:none;
+                            linkStyle 2 stroke:#8957e5,stroke-width:2px,fill:none;
+                    </div>
+                </div>
+            </section>
+
+            <hr class="my-10 border-gray-700 dark:border-gray-600">
+
+            <!-- Summary Section -->
+            <section class="mb-12 text-center bg-card-dark dark:bg-card-dark p-10 rounded-lg shadow-xl border border-gray-700 dark:border-gray-800">
+                <h2 class="text-4xl font-bold mb-6 text-blue-400 dark:text-blue-300 flex items-center justify-center">
+                    <i class="fas fa-lightbulb mr-3 text-yellow-400"></i>总结：核心原则与实践要点
+                </h2>
+                <p class="text-xl text-gray-200 dark:text-gray-300 leading-relaxed max-w-3xl mx-auto">
+                    会计处理取决于<strong class="text-blue-300 dark:text-blue-200">法定所有权</strong>和<strong class="text-blue-300 dark:text-blue-200">实际控制权</strong>，而非存放地点。资本化需满足资产确认条件，费用化需证明支出不提升资产效用。IPO申报前务必完善权属文件并执行严格监盘。
+                </p>
+            </section>
+
+            <hr class="my-10 border-gray-700 dark:border-gray-600">
+
+            <!-- Further Reading Section -->
+            <section class="mb-12">
+                <h2 class="text-4xl font-bold mb-8 text-blue-400 dark:text-blue-300 flex items-center">
+                    <i class="fas fa-book-open mr-3 text-cyan-400"></i>延伸阅读：提升您的专业洞察
+                </h2>
+                <p class="text-lg text-gray-300 dark:text-gray-400 mb-6">为了更深入理解企业会计准则、IPO实务及财务审计，我们推荐以下书籍或论文：</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Book 1 -->
+                    <div class="bg-card-dark dark:bg-card-dark p-6 rounded-lg shadow-md border border-gray-700 dark:border-gray-800 hover:shadow-lg transition-shadow duration-300">
+                        <h3 class="text-xl font-bold mb-2 text-white"><i class="fas fa-book mr-2 text-blue-400"></i>《企业会计准则》</h3>
+                        <p class="text-gray-200 dark:text-gray-300">理解中国会计体系的基础，是所有会计处理的根本依据。建议阅读最新修订版本。</p>
+                        <a href="http://www.mof.gov.cn/ztzt/qykjz/xzgs/" target="_blank" rel="noopener noreferrer" class="text-link text-blue-400 inline-flex items-center mt-3">
+                            阅读详情 <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                    <!-- Book 2 -->
+                    <div class="bg-card-dark dark:bg-card-dark p-6 rounded-lg shadow-md border border-gray-700 dark:border-gray-800 hover:shadow-lg transition-shadow duration-300">
+                        <h3 class="text-xl font-bold mb-2 text-white"><i class="fas fa-book mr-2 text-blue-400"></i>《企业会计准则讲解》</h3>
+                        <p class="text-gray-200 dark:text-gray-300">财政部会计司官方出版，对各项准则进行详细解读和案例分析，是实务操作的必备指南。</p>
+                        <a href="https://baike.baidu.com/item/%E4%BC%81%E4%B8%9A%E4%BC%9A%E8%AE%A1%E5%87%86%E5%88%99%E8%AE%B2%E8%A7%A3/10899849" target="_blank" rel="noopener noreferrer" class="text-link text-blue-400 inline-flex items-center mt-3">
+                            阅读详情 <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                    <!-- Book 3 -->
+                    <div class="bg-card-dark dark:bg-card-dark p-6 rounded-lg shadow-md border border-gray-700 dark:border-gray-800 hover:shadow-lg transition-shadow duration-300">
+                        <h3 class="text-xl font-bold mb-2 text-white"><i class="fas fa-book mr-2 text-blue-400"></i>《审计》</h3>
+                        <p class="text-gray-200 dark:text-gray-300">（中国注册会计师协会教材）涵盖审计理论与实务，了解IPO审计流程和重点。</p>
+                        <a href="https://www.cicpa.org.cn/kscj/kcjy/202302/t20230222_60641.html" target="_blank" rel="noopener noreferrer" class="text-link text-blue-400 inline-flex items-center mt-3">
+                            阅读详情 <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                    <!-- Book 4 -->
+                    <div class="bg-card-dark dark:bg-card-dark p-6 rounded-lg shadow-md border border-gray-700 dark:border-gray-800 hover:shadow-lg transition-shadow duration-300">
+                        <h3 class="text-xl font-bold mb-2 text-white"><i class="fas fa-book mr-2 text-blue-400"></i>《IPO发行上市实务与案例分析》</h3>
+                        <p class="text-gray-200 dark:text-gray-300">结合实际案例，深入剖析企业上市过程中可能遇到的各类问题及解决方案。</p>
+                        <a href="https://book.douban.com/subject/26966144/" target="_blank" rel="noopener noreferrer" class="text-link text-blue-400 inline-flex items-center mt-3">
+                            阅读详情 <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                    <!-- Book 5 -->
+                    <div class="bg-card-dark dark:bg-card-dark p-6 rounded-lg shadow-md border border-gray-700 dark:border-gray-800 hover:shadow-lg transition-shadow duration-300">
+                        <h3 class="text-xl font-bold mb-2 text-white"><i class="fas fa-book mr-2 text-blue-400"></i>《财务报表分析》</h3>
+                        <p class="text-gray-200 dark:text-gray-300">从投资者和分析师角度，理解企业财务数据背后的真实含义和潜在风险。</p>
+                        <a href="https://book.douban.com/subject/35340632/" target="_blank" rel="noopener noreferrer" class="text-link text-blue-400 inline-flex items-center mt-3">
+                            阅读详情 <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-10 bg-gray-900 dark:bg-black text-gray-400 text-center text-sm border-t border-gray-800 dark:border-gray-700 transition-colors duration-300">
+        <div class="container mx-auto px-4">
+            <p>&copy; 2023 IPO 会计洞察. All rights reserved.</p>
+            <p class="mt-2">本页面信息仅供参考，不构成任何财务或法律建议。</p>
+            <div class="mt-4 flex justify-center space-x-6">
+                <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors duration-200">
+                    <i class="fab fa-twitter text-lg"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors duration-200">
+                    <i class="fab fa-linkedin text-lg"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors duration-200">
+                    <i class="fab fa-github text-lg"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid configuration
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base', // Use base theme and apply custom CSS
+            themeVariables: {
+                // Common variables, can be overridden by light/dark specific styles
+                'primaryColor': '#22272e',
+                'primaryTextColor': '#c9d1d9',
+                'primaryBorderColor': '#30363d',
+                'lineColor': '#6a737d',
+                'secondaryColor': '#161b22',
+                'tertiaryColor': '#161b22',
+                'fontSize': '16px',
+                'fontFamily': 'var(--font-sans-sc)',
+                'clusterBkg': '#161b22',
+                'clusterBorder': '#30363d',
+                'textColor': '#c9d1d9'
+            }
+        });
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Set initial theme based on system preference or saved preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            htmlElement.classList.remove('dark', 'light');
+            htmlElement.classList.add(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            htmlElement.classList.add('dark');
+        } else {
+            htmlElement.classList.add('light');
+        }
+
+        // Apply Mermaid theme dynamically based on current mode
+        function applyMermaidTheme() {
+            const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+            if (currentTheme === 'dark') {
+                mermaid.initialize({
+                    theme: 'base',
+                    themeVariables: {
+                        'primaryColor': '#22272e',
+                        'primaryTextColor': '#c9d1d9',
+                        'primaryBorderColor': '#30363d',
+                        'lineColor': '#6a737d',
+                        'secondaryColor': '#161b22',
+                        'tertiaryColor': '#161b22',
+                        'fontSize': '16px',
+                        'fontFamily': 'var(--font-sans-sc)',
+                        'clusterBkg': '#161b22',
+                        'clusterBorder': '#30363d',
+                        'textColor': '#c9d1d9',
+                        // Specific custom styles for flowchart nodes
+                        'nodeBorder': '#30363d',
+                        'nodeBkg': '#22272e',
+                    }
+                });
+            } else {
+                mermaid.initialize({
+                    theme: 'base',
+                    themeVariables: {
+                        'primaryColor': '#fdfdfd',
+                        'primaryTextColor': '#374151',
+                        'primaryBorderColor': '#d1d5db',
+                        'lineColor': '#6b7280',
+                        'secondaryColor': '#f5f5f5',
+                        'tertiaryColor': '#f5f5f5',
+                        'fontSize': '16px',
+                        'fontFamily': 'var(--font-sans-sc)',
+                        'clusterBkg': '#f5f5f5',
+                        'clusterBorder': '#d1d5db',
+                        'textColor': '#374151',
+                        // Specific custom styles for flowchart nodes
+                        'nodeBorder': '#d1d5db',
+                        'nodeBkg': '#fdfdfd',
+                    }
+                });
+            }
+        }
+
+        // Initial apply
+        applyMermaidTheme();
+
+        // Toggle functionality
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            // Re-render Mermaid to apply new theme variables
+            applyMermaidTheme();
+            // Need to re-initiate mermaid to pick up theme changes
+            // This is a common workaround for mermaid's theme issues.
+            // A more robust solution might involve destroying and re-creating the graph.
+            // For now, simple re-initialization is often sufficient.
+            // Trigger a re-render by parsing the graph again.
+            document.querySelectorAll('.mermaid').forEach(el => {
+                const graphDefinition = el.textContent.trim();
+                if (graphDefinition) {
+                    el.removeAttribute('data-processed'); // Force re-process
+                    el.innerHTML = graphDefinition; // Put definition back
+                    mermaid.init(undefined, el); // Init specific element
+                }
+            });
+        });
+
+        // Add class to distinguish bg colors for cards/sections
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+            document.querySelectorAll('.bg-card-dark, .bg-card-light').forEach(el => {
+                el.classList.remove('bg-card-dark', 'bg-card-light');
+                el.classList.add(currentTheme === 'dark' ? 'bg-card-dark' : 'bg-card-light');
+            });
+        });
+    </script>
+</body>
+</html>
+```
