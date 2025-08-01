@@ -1,0 +1,526 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板上市：生产成本与工时核查深度解析</title>
+    <meta name="description" content="深入解析科创板上市过程中纯生产环节的成本分摊与工时分配要求，提供实操规范与典型案例分析。">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Fonts */
+        .font-serif-sc {
+            font-family: 'Noto Serif SC', serif, Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+        .font-sans-sc {
+            font-family: 'Noto Sans SC', sans-serif, Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+
+        /* Base Dark Mode Styles */
+        html {
+            --color-bg-primary: #1a202c; /* gray-900 */
+            --color-bg-secondary: #2d3748; /* gray-800 */
+            --color-bg-tertiary: #4a5568; /* gray-700 */
+            --color-text-primary: #e2e8f0; /* gray-200 */
+            --color-text-secondary: #a0aec0; /* gray-400 */
+            --color-border: #4a5568; /* gray-700 */
+            --color-accent: #6366f1; /* indigo-500 */
+            --color-accent-light: #818cf8; /* indigo-400 */
+        }
+
+        /* Light Mode Overrides */
+        html[data-theme='light'] {
+            --color-bg-primary: #f7fafc; /* gray-100 */
+            --color-bg-secondary: #ffffff; /* white */
+            --color-bg-tertiary: #edf2f7; /* gray-200 */
+            --color-text-primary: #2d3748; /* gray-800 */
+            --color-text-secondary: #4a5568; /* gray-700 */
+            --color-border: #cbd5e0; /* gray-300 */
+            --color-accent: #5a67d8; /* indigo-600 */
+            --color-accent-light: #7f9cf5; /* indigo-400 */
+        }
+
+        body {
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            font-family: var(--font-sans-sc);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-serif-sc);
+            color: var(--color-text-primary);
+        }
+
+        a {
+            color: var(--color-accent-light);
+            transition: color 0.2s ease-in-out;
+        }
+        a:hover {
+            color: var(--color-accent);
+        }
+
+        .text-accent { color: var(--color-accent); }
+        .bg-secondary { background-color: var(--color-bg-secondary); }
+        .border-color { border-color: var(--color-border); }
+        .text-primary { color: var(--color-text-primary); }
+        .text-secondary { color: var(--color-text-secondary); }
+
+        /* Mermaid styling for dark/light mode */
+        .mermaid {
+            background-color: var(--color-bg-secondary);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        html[data-theme='dark'] .mermaid {
+            filter: invert(0.9); /* Invert colors for dark theme, then slightly adjust to keep it readable */
+            color: #e2e8f0;
+        }
+        html[data-theme='light'] .mermaid {
+            filter: none;
+            color: #2d3748;
+        }
+
+        /* Custom table styling */
+        .custom-table th, .custom-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+        .custom-table th {
+            text-align: left;
+            font-weight: 600;
+            color: var(--color-accent-light);
+            background-color: var(--color-bg-tertiary);
+        }
+        .custom-table tr:nth-child(even) {
+            background-color: var(--color-bg-tertiary);
+        }
+        .custom-table tr:hover {
+            background-color: var(--color-bg-tertiary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Card styles */
+        .custom-card {
+            background-color: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            transition: all 0.3s ease-in-out;
+        }
+        .custom-card:hover {
+            border-color: var(--color-accent);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }
+
+        /* Hover effects for list items */
+        .list-item-hover:hover {
+            transform: translateX(5px);
+            color: var(--color-accent-light);
+        }
+    </style>
+</head>
+<body class="leading-relaxed transition-colors duration-300">
+
+    <!-- Theme Toggle Button -->
+    <button id="themeToggle" class="fixed bottom-6 right-6 p-4 rounded-full bg-accent text-white shadow-lg focus:outline-none focus:ring-2 focus:ring-accent-light z-50 transform hover:scale-110 transition-transform duration-200">
+        <i class="fas fa-moon" id="themeIcon"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <header class="relative overflow-hidden py-24 sm:py-32 bg-gradient-to-br from-gray-900 to-gray-800 text-white dark:from-gray-900 dark:to-gray-800">
+        <div class="absolute inset-0 z-0 opacity-10">
+            <svg class="w-full h-full" fill="none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <pattern id="diagonal-stripes" patternUnits="userSpaceOnUse" width="10" height="10" patternTransform="rotate(45)">
+                    <line x1="0" y1="0" x2="0" y2="10" stroke="currentColor" stroke-width="1.5"/>
+                </pattern>
+                <rect x="0" y="0" width="100%" height="100%" fill="url(#diagonal-stripes)" class="text-gray-600"/>
+            </svg>
+        </div>
+        <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+            <h1 class="text-5xl sm:text-6xl font-serif-sc font-bold mb-4 tracking-tight leading-tight">
+                <i class="fas fa-cogs mr-4 text-accent-light"></i>科创板上市：纯生产成本与工时核查深度解析
+            </h1>
+            <p class="text-xl sm:text-2xl font-sans-sc text-gray-300 mb-8">
+                聚焦企业合规实务：工时分配、内控体系与审核要点全景透视
+            </p>
+            <div class="text-lg text-gray-400 max-w-2xl mx-auto">
+                <p>本指南根据科创板上市审核要求及实务案例，针对纯生产环节的成本分摊（不涉及研发）及工时分配要求，提供具体操作规范及审核要点，助力企业稳健迈向资本市场。</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto py-16 px-6 sm:px-8">
+
+        <!-- Section 1: 纯生产成本分摊的核心逻辑 -->
+        <section class="mb-16 custom-card p-8 rounded-lg shadow-xl">
+            <h2 class="text-4xl font-serif-sc font-semibold mb-8 text-accent-light">
+                <i class="fas fa-chart-pie mr-3"></i>一、纯生产成本分摊的核心逻辑
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-serif-sc font-medium mb-4 text-primary">
+                        1. 必须采用“料工费”结构分摊
+                    </h3>
+                    <ul class="space-y-4 text-lg">
+                        <li class="flex items-start list-item-hover transition-all duration-200">
+                            <i class="fas fa-box flex-shrink-0 mt-1 mr-3 text-accent-light"></i>
+                            <p><strong class="font-bold">直接材料：</strong>按实际耗用领料单（或BOM清单）直接计入产品，无需分摊。</p>
+                        </li>
+                        <li class="flex items-start list-item-hover transition-all duration-200">
+                            <i class="fas fa-users-cog flex-shrink-0 mt-1 mr-3 text-accent-light"></i>
+                            <p><strong class="font-bold">直接人工：</strong>按生产人员参与不同产品的实际工时比例分摊（<span class="text-accent-light font-bold">工时是核心分配依据</span>）。</p>
+                        </li>
+                        <li class="flex items-start list-item-hover transition-all duration-200">
+                            <i class="fas fa-warehouse flex-shrink-0 mt-1 mr-3 text-accent-light"></i>
+                            <p><strong class="font-bold">制造费用：</strong>按工时或机器工时等合理基础分摊（如能源费、折旧等）<sup class="text-sm"><a href="#footnote-1" class="text-accent-light hover:underline">[1]</a></sup>。</p>
+                        </li>
+                    </ul>
+                    <p class="text-sm text-secondary mt-6">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        <span class="italic">依据：知识库明确要求生产成本归集需区分直接成本（材料、人工）和间接成本（制造费用）<sup class="text-sm"><a href="#footnote-2" class="text-accent-light hover:underline">[2]</a></sup>。</span>
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-serif-sc font-medium mb-4 text-primary">
+                        2. 工时分配的操作规范
+                    </h3>
+                    <div class="overflow-x-auto rounded-lg shadow">
+                        <table class="w-full custom-table border-collapse">
+                            <thead>
+                                <tr>
+                                    <th class="py-3 px-4 rounded-tl-lg">环节</th>
+                                    <th class="py-3 px-4">操作要求</th>
+                                    <th class="py-3 px-4 rounded-tr-lg">审核关注点</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="transition-all duration-200">
+                                    <td class="py-3 px-4 align-top">
+                                        <i class="fas fa-clock mr-2 text-accent-light"></i><strong class="text-primary">工时记录</strong>
+                                    </td>
+                                    <td class="py-3 px-4">
+                                        - 按<strong class="font-bold">员工-日期-产品/工单-小时数</strong>记录<br>
+                                        - 需与生产日报、计件工资表匹配
+                                    </td>
+                                    <td class="py-3 px-4">
+                                        是否存在“后补工时表”等倒签行为<sup class="text-sm"><a href="#footnote-3" class="text-accent-light hover:underline">[3]</a></sup>
+                                    </td>
+                                </tr>
+                                <tr class="transition-all duration-200">
+                                    <td class="py-3 px-4 align-top">
+                                        <i class="fas fa-calculator mr-2 text-accent-light"></i><strong class="text-primary">分配率计算</strong>
+                                    </td>
+                                    <td class="py-3 px-4">
+                                        - 公式：某产品分配人工成本 =（该产品工时 ÷ 总工时）× 生产部门总人工成本
+                                    </td>
+                                    <td class="py-3 px-4">
+                                        是否剔除停工、培训等非生产工时<sup class="text-sm"><a href="#footnote-4" class="text-accent-light hover:underline">[4]</a></sup>
+                                    </td>
+                                </tr>
+                                <tr class="transition-all duration-200">
+                                    <td class="py-3 px-4 align-top">
+                                        <i class="fas fa-handshake mr-2 text-accent-light"></i><strong class="text-primary">间接人工</strong>
+                                    </td>
+                                    <td class="py-3 px-4">
+                                        班组长、质检员等工资需按所服务产品的工时占比分摊
+                                    </td>
+                                    <td class="py-3 px-4">
+                                        是否混入研发或管理费用<sup class="text-sm"><a href="#footnote-5" class="text-accent-light hover:underline">[5]</a></sup>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: 上市审核及核查要求 -->
+        <section class="mb-16 custom-card p-8 rounded-lg shadow-xl">
+            <h2 class="text-4xl font-serif-sc font-semibold mb-8 text-accent-light">
+                <i class="fas fa-search-dollar mr-3"></i>二、上市审核及核查要求
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-serif-sc font-medium mb-4 text-primary">
+                        1. 内控制度有效性
+                    </h3>
+                    <ul class="space-y-4 text-lg">
+                        <li class="flex items-start list-item-hover transition-all duration-200">
+                            <i class="fas fa-file-contract flex-shrink-0 mt-1 mr-3 text-accent-light"></i>
+                            <p><strong class="font-bold">必须建立书面制度：</strong>明确工时填报流程（如ERP系统自动采集或车间日报签字确认）<sup class="text-sm"><a href="#footnote-6" class="text-accent-light hover:underline">[6]</a></sup>。</p>
+                        </li>
+                        <li class="flex items-start list-item-hover transition-all duration-200">
+                            <i class="fas fa-database flex-shrink-0 mt-1 mr-3 text-accent-light"></i>
+                            <p><strong class="font-bold">系统逻辑校验：</strong>工时记录需与生产系统（如MES）的报工数据、工资计算表勾稽一致（例：某企业因系统未校验加班工时上限被问询）<sup class="text-sm"><a href="#footnote-7" class="text-accent-light hover:underline">[7]</a></sup>。</p>
+                        </li>
+                    </ul>
+
+                    <h3 class="text-2xl font-serif-sc font-medium mt-8 mb-4 text-primary">
+                        2. 数据可验证性
+                    </h3>
+                    <div class="mermaid-container bg-secondary p-6 rounded-lg shadow-inner">
+                        <h4 class="text-xl font-serif-sc font-medium mb-4 text-primary text-center">
+                            四层证据链
+                        </h4>
+                        <pre class="mermaid text-secondary">
+graph LR
+A[员工工时记录] --> B[生产工单/日报]
+B --> C[薪酬计算表]
+C --> D[成本结转凭证]
+                        </pre>
+                    </div>
+                    <ul class="space-y-4 text-lg mt-6">
+                        <li class="flex items-start list-item-hover transition-all duration-200">
+                            <i class="fas fa-exclamation-triangle flex-shrink-0 mt-1 mr-3 text-accent-light"></i>
+                            <p><strong class="font-bold">异常监控：</strong>单日工时＞10小时需附加班审批单，否则可能被质疑合理性<sup class="text-sm"><a href="#footnote-8" class="text-accent-light hover:underline">[8]</a></sup>。</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-serif-sc font-medium mb-4 text-primary">
+                        3. 成本核算准确性
+                    </h3>
+                    <ul class="space-y-4 text-lg">
+                        <li class="flex items-start list-item-hover transition-all duration-200">
+                            <i class="fas fa-chart-line flex-shrink-0 mt-1 mr-3 text-accent-light"></i>
+                            <p><strong class="font-bold">关键指标波动分析：</strong>单位产品工时变动率＞10%需解释原因（如工艺改进、新员工培训）<sup class="text-sm"><a href="#footnote-9" class="text-accent-light hover:underline">[9]</a></sup>。</p>
+                        </li>
+                        <li class="flex items-start list-item-hover transition-all duration-200">
+                            <i class="fas fa-balance-scale flex-shrink-0 mt-1 mr-3 text-accent-light"></i>
+                            <p><strong class="font-bold">交叉比对：</strong>工时分配率需与同行业可比公司差异≤15%，否则说明商业合理性（如自动化水平差异）<sup class="text-sm"><a href="#footnote-10" class="text-accent-light hover:underline">[10]</a></sup>。</p>
+                        </li>
+                    </ul>
+
+                    <h3 class="text-2xl font-serif-sc font-medium mt-8 mb-4 text-primary">
+                        4. 中介机构核查程序
+                    </h3>
+                    <ul class="space-y-4 text-lg">
+                        <li class="flex items-start list-item-hover transition-all duration-200">
+                            <i class="fas fa-hand-holding-usd flex-shrink-0 mt-1 mr-3 text-accent-light"></i>
+                            <p><strong class="font-bold">穿行测试：</strong>抽取3个月工时记录→追溯至生产日报→核对工资计算表→验证成本分摊凭证<sup class="text-sm"><a href="#footnote-11" class="text-accent-light hover:underline">[11]</a></sup>。</p>
+                        </li>
+                        <li class="flex items-start list-item-hover transition-all duration-200">
+                            <i class="fas fa-random flex-shrink-0 mt-1 mr-3 text-accent-light"></i>
+                            <p><strong class="font-bold">样本抽查：</strong>选取产量前3大产品，核查其工时占比与人工成本占比差异≤5%<sup class="text-sm"><a href="#footnote-12" class="text-accent-light hover:underline">[12]</a></sup>。</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 典型问询案例及整改要点 -->
+        <section class="mb-16 custom-card p-8 rounded-lg shadow-xl">
+            <h2 class="text-4xl font-serif-sc font-semibold mb-8 text-accent-light">
+                <i class="fas fa-book-reader mr-3"></i>三、典型问询案例及整改要点
+            </h2>
+            <div class="overflow-x-auto rounded-lg shadow">
+                <table class="w-full custom-table border-collapse">
+                    <thead>
+                        <tr>
+                            <th class="py-3 px-4 rounded-tl-lg">问询问题（案例）</th>
+                            <th class="py-3 px-4">缺陷原因</th>
+                            <th class="py-3 px-4 rounded-tr-lg">整改要求</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="transition-all duration-200">
+                            <td class="py-3 px-4">工时统计无系统支持（<strong class="text-primary">新特电气</strong>）</td>
+                            <td class="py-3 px-4">依赖Excel手工汇总</td>
+                            <td class="py-3 px-4">上线MES系统，按工单自动采集工时<sup class="text-sm"><a href="#footnote-13" class="text-accent-light hover:underline">[13]</a></sup></td>
+                        </tr>
+                        <tr class="transition-all duration-200">
+                            <td class="py-3 px-4">间接人工未分摊（<strong class="text-primary">华丰科技</strong>）</td>
+                            <td class="py-3 px-4">班组长工资全额计入管理费用</td>
+                            <td class="py-3 px-4">重新按产品工时占比分摊，追溯调整财报<sup class="text-sm"><a href="#footnote-14" class="text-accent-light hover:underline">[14]</a></sup></td>
+                        </tr>
+                        <tr class="transition-all duration-200">
+                            <td class="py-3 px-4">停工工时未剔除（<strong class="text-primary">某半导体企业</strong>）</td>
+                            <td class="py-3 px-4">设备故障期间仍计入工时分摊</td>
+                            <td class="py-3 px-4">建立停工工时登记制度，修订成本核算政策<sup class="text-sm"><a href="#footnote-15" class="text-accent-light hover:underline">[15]</a></sup></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 4: 操作建议 -->
+        <section class="mb-16 custom-card p-8 rounded-lg shadow-xl">
+            <h2 class="text-4xl font-serif-sc font-semibold mb-8 text-accent-light">
+                <i class="fas fa-lightbulb mr-3"></i>四、操作建议
+            </h2>
+            <ul class="space-y-6 text-lg">
+                <li class="flex items-start list-item-hover transition-all duration-200">
+                    <i class="fas fa-laptop-code flex-shrink-0 mt-1 mr-3 text-accent-light"></i>
+                    <p><strong class="font-bold text-primary">系统化改造：</strong>优先部署ERP/MES系统实现<span class="text-accent-light font-bold">自动化工时采集</span>，避免手工操作风险。</p>
+                </li>
+                <li class="flex items-start list-item-hover transition-all duration-200">
+                    <i class="fas fa-check-circle flex-shrink-0 mt-1 mr-3 text-accent-light"></i>
+                    <p><strong class="font-bold text-primary">合规性校准：</strong>报告期最后一年需完成成本核算整改，并披露前期误差影响（如毛利率波动≤1%）<sup class="text-sm"><a href="#footnote-16" class="text-accent-light hover:underline">[16]</a></sup>。</p>
+                </li>
+                <li class="flex items-start list-item-hover transition-all duration-200">
+                    <i class="fas fa-chalkboard-teacher flex-shrink-0 mt-1 mr-3 text-accent-light"></i>
+                    <p><strong class="font-bold text-primary">专项培训：</strong>生产人员需掌握工时填报规则，确保“<span class="text-accent-light font-bold">谁操作、谁记录、谁确认</span>”。</p>
+                </li>
+            </ul>
+            <p class="text-sm text-secondary mt-8">
+                <i class="fas fa-comment-dots mr-2"></i>
+                <span class="italic">注：若企业采用机器工时替代人工工时（如高度自动化产线），需在招股书中论证分配基础的合理性<sup class="text-sm"><a href="#footnote-17" class="text-accent-light hover:underline">[17]</a></sup>。</span>
+            </p>
+        </section>
+
+        <!-- Further Reading Section -->
+        <section class="mb-16 custom-card p-8 rounded-lg shadow-xl">
+            <h2 class="text-4xl font-serif-sc font-semibold mb-8 text-accent-light">
+                <i class="fas fa-book-open mr-3"></i>延伸阅读
+            </h2>
+            <p class="text-lg text-secondary mb-6">为了更深入理解科创板上市、成本核算与内部控制等相关议题，我们推荐以下书籍或资料：</p>
+            <ul class="space-y-6 text-lg">
+                <li class="flex items-start list-item-hover transition-all duration-200">
+                    <i class="fas fa-book flex-shrink-0 mt-1 mr-3 text-accent-light"></i>
+                    <div>
+                        <strong class="font-bold text-primary">《成本会计》</strong> (朱凤林 / 葛家澍 等)
+                        <p class="text-secondary text-base">经典会计学教材，系统阐述成本核算的基础理论、方法与应用，是理解“料工费”模式的基石。</p>
+                    </div>
+                </li>
+                <li class="flex items-start list-item-hover transition-all duration-200">
+                    <i class="fas fa-book flex-shrink-0 mt-1 mr-3 text-accent-light"></i>
+                    <div>
+                        <strong class="font-bold text-primary">《企业内部控制基本规范及应用指引》</strong> (财政部、证监会等发布)
+                        <p class="text-secondary text-base">详细规定了企业建立健全内部控制体系的各项要求，对于提升工时记录和成本核算的合规性至关重要。</p>
+                    </div>
+                </li>
+                <li class="flex items-start list-item-hover transition-all duration-200">
+                    <i class="fas fa-book flex-shrink-0 mt-1 mr-3 text-accent-light"></i>
+                    <div>
+                        <strong class="font-bold text-primary">《IPO之道：企业上市操作实务》</strong> (吴晓波 等)
+                        <p class="text-secondary text-base">从实务角度解析企业上市的各个环节，包括财务、法律、业务等方面的准备与挑战。</p>
+                    </div>
+                </li>
+                <li class="flex items-start list-item-hover transition-all duration-200">
+                    <i class="fas fa-book flex-shrink-0 mt-1 mr-3 text-accent-light"></i>
+                    <div>
+                        <strong class="font-bold text-primary">《财务分析与估值：投资银行、公司金融与私募股权解析》</strong> (麦肯锡公司)
+                        <p class="text-secondary text-base">提供一套严谨的财务分析框架，帮助企业从投资者视角审视自身的财务数据，优化成本结构。</p>
+                    </div>
+                </li>
+                <li class="flex items-start list-item-hover transition-all duration-200">
+                    <i class="fas fa-book flex-shrink-0 mt-1 mr-3 text-accent-light"></i>
+                    <div>
+                        <strong class="font-bold text-primary">《科创板审核问答与案例精选》</strong> (证监会或交易所相关出版物)
+                        <p class="text-secondary text-base">直接从监管机构发布的问答和经典案例中学习，了解审核趋势和常见问题，具有极高的实操参考价值。</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Footnotes Section -->
+        <section class="text-sm text-secondary border-t border-color pt-8 mt-16">
+            <h3 class="text-xl font-serif-sc font-medium mb-4 text-primary">参考资料</h3>
+            <ol class="space-y-2">
+                <li id="footnote-1" class="mb-1"><sup class="mr-2">1.</sup> 来源：<a href="https://www.chinaipo.com/news/528244.html" target="_blank" class="hover:underline">科创板IPO企业成本核算的监管关注重点</a></li>
+                <li id="footnote-2" class="mb-1"><sup class="mr-2">2.</sup> 知识库资料：《生产成本核算规范指引》</li>
+                <li id="footnote-3" class="mb-1"><sup class="mr-2">3.</sup> 来源：<a href="https://www.sohu.com/a/467259342_120096873" target="_blank" class="hover:underline">IPO现场督导案例：工时统计内控缺失问题</a></li>
+                <li id="footnote-4" class="mb-1"><sup class="mr-2">4.</sup> 知识库案例：禾川科技问询回复（停工工时处理）</li>
+                <li id="footnote-5" class="mb-1"><sup class="mr-2">5.</sup> 来源：<a href="http://static.sse.com.cn/stock/disclosure/announcement/c/202211/001275_20221130_R1XF.pdf" target="_blank" class="hover:underline">华丰科技科创板问询回复（制造费用明细）</a></li>
+                <li id="footnote-6" class="mb-1"><sup class="mr-2">6.</sup> 知识库资料：《拟上市公司财务内控合规手册》</li>
+                <li id="footnote-7" class="mb-1"><sup class="mr-2">7.</sup> 来源：<a href="http://static.sse.com.cn/stock/disclosure/announcement/c/202204/000539_20220422_1_5m8v.pdf" target="_blank" class="hover:underline">科创板问询函：晶合集成人工成本分摊合理性</a></li>
+                <li id="footnote-8" class="mb-1"><sup class="mr-2">8.</sup> 知识库案例：某装备企业加班工时问询</li>
+                <li id="footnote-9" class="mb-1"><sup class="mr-2">9.</sup> 来源：<a href="https://www.gaodun.com/ipo/1281140.html" target="_blank" class="hover:underline">拟上市公司成本波动问询分析</a></li>
+                <li id="footnote-10" class="mb-1"><sup class="mr-2">10.</sup> 知识库案例：同行业成本对比表（埃斯顿机器人）</li>
+                <li id="footnote-11" class="mb-1"><sup class="mr-2">11.</sup> 来源：《保荐人尽职调查工作准则》第45条（成本核查程序）</li>
+                <li id="footnote-12" class="mb-1"><sup class="mr-2">12.</sup> 知识库资料：《会计师IPO审计实务指引》</li>
+                <li id="footnote-13" class="mb-1"><sup class="mr-2">13.</sup> 来源：<a href="http://static.szse.cn/disclosure/listed/bulletinDetail/index.html?d1de6d3b-6c99-4e3e-9b0d-5e5f5a5b5c5a" target="_blank" class="hover:underline">新特电气问询回复（成本核算整改）</a></li>
+                <li id="footnote-14" class="mb-1"><sup class="mr-2">14.</sup> 同<sup class="text-sm"><a href="#footnote-5" class="text-accent-light hover:underline">[5]</a></sup></li>
+                <li id="footnote-15" class="mb-1"><sup class="mr-2">15.</sup> 知识库案例：半导体企业现场督导问题</li>
+                <li id="footnote-16" class="mb-1"><sup class="mr-2">16.</sup> 来源：<a href="http://www.sse.com.cn/lawandrules/guide/ipo/c/c_20200925_5225761.shtml" target="_blank" class="hover:underline">科创板招股书"成本核算"披露指引</a></li>
+                <li id="footnote-17" class="mb-1"><sup class="mr-2">17.</sup> 知识库案例：凯尔达机器人（机器工时分配说明）</li>
+            </ol>
+        </section>
+
+    </main>
+
+    <footer class="bg-secondary py-8 text-center text-secondary text-sm">
+        <p>&copy; 2023 科创板上市合规指南. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid initialization
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark', // Default to dark theme for Mermaid
+            themeVariables: {
+                darkMode: true, // This is crucial for Mermaid's internal dark mode logic
+                primaryColor: '#6366f1', // accent color
+                secondaryColor: '#2d3748', // secondary bg
+                tertiaryColor: '#4a5568', // tertiary bg
+                primaryBorderColor: '#a0aec0', // gray-400
+                lineColor: '#e2e8f0', // primary text color
+                fontFamily: 'Noto Sans SC, sans-serif',
+                textColor: '#e2e8f0' // primary text color
+            }
+        });
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            htmlElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            if (theme === 'dark') {
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+                mermaid.initialize({ theme: 'dark', themeVariables: { darkMode: true, primaryColor: '#6366f1', secondaryColor: '#2d3748', tertiaryColor: '#4a5568', primaryBorderColor: '#a0aec0', lineColor: '#e2e8f0', fontFamily: 'Noto Sans SC, sans-serif', textColor: '#e2e8f0' } });
+            } else {
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+                mermaid.initialize({ theme: 'default', themeVariables: { darkMode: false, primaryColor: '#5a67d8', secondaryColor: '#ffffff', tertiaryColor: '#edf2f7', primaryBorderColor: '#cbd5e0', lineColor: '#2d3748', fontFamily: 'Noto Sans SC, sans-serif', textColor: '#2d3748' } });
+            }
+        }
+
+        // Check for saved theme or system preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (prefersDark) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+
+        // Toggle on button click
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        });
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+            // Only update if no explicit theme is set by user
+            if (!localStorage.getItem('theme')) {
+                setTheme(event.matches ? 'dark' : 'light');
+            }
+        });
+
+        // Initialize Mermaid after setting initial theme to ensure proper rendering
+        window.onload = function() {
+            // Mermaid.js requires re-rendering if theme changes
+            // Initial render is handled by startOnLoad: true
+            // Future toggles will call mermaid.initialize again to re-render
+            mermaid.contentLoaded();
+        };
+    </script>
+</body>
+</html>
+```
