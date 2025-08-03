@@ -1,0 +1,544 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拟上市公司固定资产会计处理指南</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS for utility classes -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC (headings) and Noto Sans SC (body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Fonts & Fallbacks for Chinese Readability */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-self;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-self;
+        }
+
+        /* --- Dark Mode Variables --- */
+        html.dark {
+            --color-bg-primary: #1a1a2e; /* Deep dark blue/purple for main background */
+            --color-bg-secondary: #2c2c4d; /* Slightly lighter for cards and elements */
+            --color-text-primary: #e0e0e0; /* Off-white for main text */
+            --color-text-secondary: #a0a0b0; /* Lighter grey for subtle text/footer */
+            --color-accent: #00bcd4; /* Vibrant Teal for accents, headings, highlights */
+            --color-accent-darker: #0097a7; /* Darker Teal for hover states */
+            --color-border: #444466; /* Subtle border color */
+        }
+        /* --- Light Mode Variables --- */
+        html.light {
+            --color-bg-primary: #f0f2f5; /* Light grey for main background */
+            --color-bg-secondary: #ffffff; /* White for cards and elements */
+            --color-text-primary: #333333; /* Dark grey for main text */
+            --color-text-secondary: #666666; /* Medium grey for subtle text/footer */
+            --color-accent: #007bff; /* Bright Blue for accents, headings, highlights */
+            --color-accent-darker: #0056b3; /* Darker Blue for hover states */
+            --color-border: #e0e0e0; /* Subtle border color */
+        }
+
+        /* Applying CSS variables to Tailwind classes */
+        body {
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth theme transition */
+        }
+        .bg-bg-primary { background-color: var(--color-bg-primary); }
+        .bg-bg-secondary { background-color: var(--color-bg-secondary); }
+        .text-primary { color: var(--color-text-primary); }
+        .text-secondary { color: var(--color-text-secondary); }
+        .text-accent { color: var(--color-accent); }
+        .hover\:bg-accent-darker:hover { background-color: var(--color-accent-darker); }
+        .border-base { border-color: var(--color-border); }
+
+        /* Custom highlight for key terms */
+        .highlight {
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+
+        /* Mermaid.js Specific Styling */
+        .mermaid {
+            background-color: var(--color-bg-secondary);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        /* Mermaid dark mode overrides */
+        html.dark .mermaid {
+            fill: var(--color-text-primary); /* Node fill color */
+            color: var(--color-text-primary); /* Text color */
+        }
+        html.dark .mermaid .edgePaths .path {
+            stroke: var(--color-text-secondary); /* Line color */
+        }
+        html.dark .mermaid .node rect, html.dark .mermaid .node circle, html.dark .mermaid .node polygon {
+            stroke: var(--color-border); /* Node border color */
+            fill: var(--color-bg-secondary);
+        }
+        html.dark .mermaid .label text {
+            fill: var(--color-text-primary);
+        }
+        html.dark .mermaid .cluster rect {
+            fill: var(--color-bg-primary); /* Background of subgraphs */
+            stroke: var(--color-border);
+        }
+        html.dark .mermaid .cluster text {
+            fill: var(--color-text-primary);
+        }
+        html.dark .mermaid .arrowheadPath {
+            fill: var(--color-text-secondary);
+            stroke: var(--color-text-secondary);
+        }
+        /* Mermaid light mode overrides (Ensures consistency) */
+        html.light .mermaid {
+            fill: var(--color-text-primary);
+            color: var(--color-text-primary);
+        }
+        html.light .mermaid .edgePaths .path {
+            stroke: var(--color-text-secondary);
+        }
+        html.light .mermaid .node rect, html.light .mermaid .node circle, html.light .mermaid .node polygon {
+            stroke: var(--color-border);
+            fill: var(--color-bg-secondary);
+        }
+        html.light .mermaid .label text {
+            fill: var(--color-text-primary);
+        }
+        html.light .mermaid .cluster rect {
+            fill: var(--color-bg-primary);
+            stroke: var(--color-border);
+        }
+        html.light .mermaid .cluster text {
+            fill: var(--color-text-primary);
+        }
+        html.light .mermaid .arrowheadPath {
+            fill: var(--color-text-secondary);
+            stroke: var(--color-text-secondary);
+        }
+
+        /* Custom Scrollbar Styles */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-bg-primary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-accent-darker);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-accent);
+        }
+
+        /* Micro-interactions: Subtle Hover Effects */
+        .card-hover:hover {
+            transform: translateY(-5px); /* Lift up slightly */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Deeper shadow */
+        }
+        .btn-hover:hover {
+            transform: translateY(-2px); /* Lift button slightly */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="min-h-screen antialiased">
+
+    <!-- Header & Dark/Light Mode Toggle -->
+    <header class="py-4 px-6 md:px-12 flex justify-between items-center sticky top-0 z-50 bg-opacity-95 bg-bg-primary backdrop-filter backdrop-blur-sm shadow-sm transition-colors duration-300">
+        <div class="flex items-center space-x-2">
+            <i class="fas fa-landmark text-accent text-2xl"></i>
+            <span class="text-xl md:text-2xl font-semibold text-primary">财务洞察</span>
+        </div>
+        <button id="theme-toggle" class="p-2 rounded-full hover:bg-bg-secondary btn-hover focus:outline-none focus:ring-2 focus:ring-accent transition-all duration-200">
+            <i class="fas fa-moon text-lg text-primary" id="theme-icon" aria-label="Toggle theme"></i>
+        </button>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-bg-primary to-bg-secondary py-20 px-6 md:py-24 md:px-12 text-center overflow-hidden">
+        <!-- Subtle background image for visual interest -->
+        <div class="absolute inset-0 opacity-10" style="background-image: url('https://source.unsplash.com/random/1920x1080/?abstract,finance,data'); background-size: cover; background-position: center;"></div>
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 text-primary drop-shadow-lg">
+                拟上市公司<br><span class="text-accent">固定资产</span>会计处理指南
+            </h1>
+            <p class="text-xl md:text-2xl text-secondary mb-8">
+                深度解析企业会计准则与IPO审核实践
+            </p>
+            <p class="text-lg md:text-xl text-primary max-w-3xl mx-auto leading-relaxed">
+                本指南旨在为拟上市公司提供关于存放在供应商处固定资产及相关支出的会计处理指引，帮助企业在IPO过程中规避潜在风险，确保财务报告的准确性和合规性。
+            </p>
+            <div class="mt-10 flex justify-center space-x-4">
+                <a href="#main-content" class="px-8 py-3 bg-accent text-white rounded-full text-lg font-bold hover:bg-accent-darker btn-hover transition-all duration-300 shadow-lg">
+                    <i class="fas fa-book-open mr-2"></i> 开始阅读
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main id="main-content" class="container mx-auto px-6 md:px-12 py-16 max-w-7xl">
+
+        <!-- Introduction Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center text-accent">
+                <i class="fas fa-info-circle mr-3"></i>核心标准概览
+            </h2>
+            <p class="text-lg leading-relaxed text-primary text-center max-w-3xl mx-auto">
+                根据企业会计准则及IPO审核实践，拟上市公司存放在供应商处的固定资产或相关支出，其会计处理需严格遵循
+                <span class="highlight">资产确认条件</span> 和 <span class="highlight">经济利益实现方式</span> 判断，以下为核心标准：
+            </p>
+        </section>
+
+        <hr class="border-t-2 border-border my-12">
+
+        <!-- Section 1: Capitalization (保留账内处理) -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-accent text-center">
+                <i class="fas fa-clipboard-check mr-3"></i>一、需保留账内处理（资本化）的情形
+            </h2>
+            <p class="text-lg leading-relaxed mb-8 text-primary max-w-3xl mx-auto text-center">
+                符合以下全部条件时，应确认为固定资产或存货，保留在账内：
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-bg-secondary rounded-xl p-8 shadow-md card-hover transition-all duration-300 border border-base">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-handshake text-accent text-3xl mr-4"></i>
+                        <h3 class="text-2xl font-semibold text-primary">1. 控制权归属明确</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-primary space-y-2">
+                        <li>实物资产（如模具、专用设备）的所有权及风险未转移给供应商；</li>
+                        <li>存放目的为 <span class="highlight">生产性储备</span>（如供应商代保管的原材料、半成品）或 <span class="highlight">委托加工</span>（如供应商按指令使用专用模具生产）；</li>
+                        <li>合同明确约定资产权属、使用限制及回收条款。</li>
+                    </ul>
+                </div>
+                <div class="bg-bg-secondary rounded-xl p-8 shadow-md card-hover transition-all duration-300 border border-base">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-sack-dollar text-accent text-3xl mr-4"></i>
+                        <h3 class="text-2xl font-semibold text-primary">2. 经济利益很可能流入企业</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-primary space-y-2">
+                        <li>资产直接用于公司主营业务（如供应商加工的部件将装入公司最终产品）；</li>
+                        <li>可通过销售产品或提供服务产生确定收益。</li>
+                    </ul>
+                </div>
+                <div class="bg-bg-secondary rounded-xl p-8 shadow-md card-hover transition-all duration-300 border border-base">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-calculator text-accent text-3xl mr-4"></i>
+                        <h3 class="text-2xl font-semibold text-primary">3. 成本可靠计量</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-primary space-y-2">
+                        <li>采购/制造成本、运输费用等能单独区分并准确核算。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-bg-secondary rounded-xl p-8 shadow-md border border-base max-w-4xl mx-auto">
+                <h4 class="text-2xl font-semibold text-accent mb-4"><i class="fas fa-lightbulb mr-2"></i>示例：</h4>
+                <ul class="list-disc list-inside text-primary space-y-2">
+                    <li>委托供应商加工的专用模具（所有权归公司，仅限指定订单使用）；</li>
+                    <li>为特定生产计划寄售在供应商处的原材料。</li>
+                </ul>
+            </div>
+        </section>
+
+        <hr class="border-t-2 border-border my-12">
+
+        <!-- Section 2: Expensing (费用化处理) -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-accent text-center">
+                <i class="fas fa-circle-minus mr-3"></i>二、需费用化处理的情形
+            </h2>
+            <p class="text-lg leading-relaxed mb-8 text-primary max-w-3xl mx-auto text-center">
+                若存放资产实质上 <span class="highlight">丧失控制权</span> 或 <span class="highlight">不满足资产定义</span>，应费用化：
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-bg-secondary rounded-xl p-8 shadow-md card-hover transition-all duration-300 border border-base">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-exchange-alt text-accent text-3xl mr-4"></i>
+                        <h3 class="text-2xl font-semibold text-primary">1. 控制权实质转移</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-primary space-y-2">
+                        <li>供应商可自由使用、处置或转售该资产（如通用模具、未限定用途的设备）；</li>
+                        <li>存放后无法追踪具体流向或使用情况。</li>
+                    </ul>
+                </div>
+                <div class="bg-bg-secondary rounded-xl p-8 shadow-md card-hover transition-all duration-300 border border-base">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-file-invoice-dollar text-accent text-3xl mr-4"></i>
+                        <h3 class="text-2xl font-semibold text-primary">2. 支出性质为费用</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-primary space-y-2">
+                        <li><span class="highlight">维修维护费</span>：供应商对资产的日常修理支出（准则要求费用化）；</li>
+                        <li><span class="highlight">低值易耗品</span>：单位价值低、周转快的物品（如工具、辅料）；</li>
+                        <li><span class="highlight">研发试制品</span>：研发阶段产出样品（除非符合无形资产资本化条件）。</li>
+                    </ul>
+                </div>
+                <div class="bg-bg-secondary rounded-xl p-8 shadow-md card-hover transition-all duration-300 border border-base">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-question-circle text-accent text-3xl mr-4"></i>
+                        <h3 class="text-2xl font-semibold text-primary">3. 无确定经济收益</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-primary space-y-2">
+                        <li>资产长期滞留供应商处且无明确使用计划；</li>
+                        <li>未来收益存在重大不确定性（如市场测试失败的产品）。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-bg-secondary rounded-xl p-8 shadow-md border border-base max-w-4xl mx-auto">
+                <h4 class="text-2xl font-semibold text-accent mb-4"><i class="fas fa-lightbulb mr-2"></i>示例：</h4>
+                <ul class="list-disc list-inside text-primary space-y-2">
+                    <li>供应商可自主使用的通用夹具；</li>
+                    <li>研发阶段留在供应商处的试制样品；</li>
+                    <li>日常设备维护保养费用。</li>
+                </ul>
+            </div>
+        </section>
+
+        <hr class="border-t-2 border-border my-12">
+
+        <!-- Data Visualization Section (Mermaid.js) -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-accent text-center">
+                <i class="fas fa-chart-network mr-3"></i>会计处理决策流程图
+            </h2>
+            <p class="text-lg leading-relaxed mb-8 text-primary text-center max-w-3xl mx-auto">
+                直观理解拟上市公司固定资产在供应商处存放的会计处理决策路径。
+            </p>
+            <div class="mermaid text-primary" id="mermaid-graph">
+                flowchart TD
+                    A[开始: 固定资产存放供应商处] -- 会计处理判断 --> B{控制权归属明确?};
+                    B -- 是 --> C{经济利益很可能流入?};
+                    B -- 否 --> G(费用化处理);
+                    C -- 是 --> D{成本可靠计量?};
+                    C -- 否 --> G;
+                    D -- 是 --> E(保留账内: 资本化);
+                    D -- 否 --> G;
+                    E -- 完成 --> F[结束];
+                    G -- 完成 --> F;
+
+                    subgraph 资本化关键要素
+                        C1(控制权归属)
+                        C2(经济利益流入)
+                        C3(成本计量)
+                    end
+
+                    subgraph 费用化常见情形
+                        E1(控制权实质转移)
+                        E2(支出性质为费用)
+                        E3(无确定经济收益)
+                    end
+
+                    E -.-> C1
+                    E -.-> C2
+                    E -.-> C3
+                    G -.-> E1
+                    G -.-> E2
+                    G -.-> E3
+            </div>
+        </section>
+
+        <hr class="border-t-2 border-border my-12">
+
+        <!-- Section 3: IPO Review Suggestions -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-accent text-center">
+                <i class="fas fa-gavel mr-3"></i>三、IPO审核建议
+            </h2>
+            <p class="text-lg leading-relaxed mb-8 text-primary max-w-3xl mx-auto text-center">
+                在拟上市过程中，以下建议有助于提升财务报告的透明度和合规性，应对审核挑战。
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-bg-secondary rounded-xl p-8 shadow-md card-hover transition-all duration-300 border border-base">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-file-contract text-accent text-3xl mr-4"></i>
+                        <h3 class="text-2xl font-semibold text-primary">1. 权属证据链</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-primary space-y-2">
+                        <li>保留采购合同、物流单据、供应商确认函等；</li>
+                        <li>证明控制权未转移。</li>
+                    </ul>
+                </div>
+                <div class="bg-bg-secondary rounded-xl p-8 shadow-md card-hover transition-all duration-300 border border-base">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-comments-dollar text-accent text-3xl mr-4"></i>
+                        <h3 class="text-2xl font-semibold text-primary">2. 费用化合理性说明</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-primary space-y-2">
+                        <li>若大额支出费用化，需在招股书中披露原因；</li>
+                        <li>说明是否符合行业惯例（如汽车模具行业允许供应商买断模具费用化）。</li>
+                    </ul>
+                </div>
+                <div class="bg-bg-secondary rounded-xl p-8 shadow-md card-hover transition-all duration-300 border border-base">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-shield-alt text-accent text-3xl mr-4"></i>
+                        <h3 class="text-2xl font-semibold text-primary">3. 内控完善性</h3>
+                    </div>
+                    <ul class="list-disc list-inside text-primary space-y-2">
+                        <li>建立资产台账管理机制；</li>
+                        <li>定期与供应商核对存放资产状态。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-t-2 border-border my-12">
+
+        <!-- Reference and Further Reading Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-accent text-center">
+                <i class="fas fa-book-reader mr-3"></i>依据与延伸阅读
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-bg-secondary rounded-xl p-8 shadow-md card-hover transition-all duration-300 border border-base">
+                    <h3 class="text-2xl font-semibold text-primary mb-4">主要依据：</h3>
+                    <ul class="list-decimal list-inside text-primary space-y-2">
+                        <li><a href="#" class="text-accent hover:underline" aria-label="企业会计准则讲解——固定资产">《企业会计准则讲解——固定资产》</a></li>
+                        <li><a href="https://docs.maoyanqing.com/accounting/ent/casq/" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline" aria-label="企业会计准则实施问答（固定资产控制权判断）">《企业会计准则实施问答（固定资产控制权判断）》</a></li>
+                        <li><a href="https://www.shui5.cn/article/36/1222.html" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline" aria-label="固定资产后续支出资本化标准">《固定资产后续支出之修理支出，资本化or费用化？》</a></li>
+                        <li><a href="https://shuo.news.esnai.com/article/202111/222820.shtml" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline" aria-label="IPO企业研发样品的财税处理">《IPO企业研发样品的财税处理探析》</a></li>
+                        <li><a href="https://czj.wuhan.gov.cn/kjfw/HJFWZQ/202207/t20220707_2001781.html" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline" aria-label="上市公司财务报告内控要求">《关于进一步提升上市公司财务报告内部控制有效性的通知》</a></li>
+                    </ul>
+                    <p class="text-sm text-secondary mt-4"><em>注：上述链接仅供参考，请以最新官方发布为准。</em></p>
+                </div>
+
+                <div class="bg-bg-secondary rounded-xl p-8 shadow-md card-hover transition-all duration-300 border border-base">
+                    <h3 class="text-2xl font-semibold text-primary mb-4">进一步阅读：</h3>
+                    <ul class="list-disc list-inside text-primary space-y-4">
+                        <li>
+                            <p class="font-semibold">《企业会计准则讲解（2022）》</p>
+                            <p class="text-secondary text-sm">财会专业必备，全面解读中国企业会计准则，是理解各项会计处理的权威参考。</p>
+                        </li>
+                        <li>
+                            <p class="font-semibold">《上市公司信息披露管理办法》</p>
+                            <p class="text-secondary text-sm">深入了解上市公司在信息披露方面的具体要求和法律责任，对IPO过程至关重要。</p>
+                        </li>
+                        <li>
+                            <p class="font-semibold">《IPO审核要点与案例精选》</p>
+                            <p class="text-secondary text-sm">通过实际案例剖析IPO审核中的常见问题和关注点，提供实务指导。</p>
+                        </li>
+                        <li>
+                            <p class="font-semibold">《内部控制——整合框架》（COSO报告）</p>
+                            <p class="text-secondary text-sm">国际公认的内部控制框架，有助于企业建立健全的内控制度，提升财务报告质量。</p>
+                        </li>
+                        <li>
+                            <p class="font-semibold">《审计理论与实务》</p>
+                            <p class="text-secondary text-sm">理解审计师在审查财务报表时的思路和方法，有助于从审计视角审视会计处理的合规性。</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-bg-secondary py-8 px-6 md:px-12 text-center text-secondary text-sm border-t border-base">
+        <p>&copy; 2023 会计准则研究. All rights reserved.</p>
+        <p class="mt-2">本指南内容仅供参考，不构成正式会计或法律意见。具体操作请咨询专业人士。</p>
+    </footer>
+
+    <!-- Mermaid.js for diagram rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid with dynamic theme based on current mode
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: localStorage.getItem('theme') === 'light' ? 'default' : 'dark',
+            securityLevel: 'loose', /* Allows more flexibility for complex graphs */
+            fontFamily: "'Noto Sans SC', Tahoma, Arial, Roboto, 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', Simsun, sans-self;"
+        });
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+
+        // Function to apply the chosen theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+                document.documentElement.classList.remove('light');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                mermaid.initialize({ theme: 'dark' }); // Re-render mermaid for dark theme
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.documentElement.classList.add('light');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                mermaid.initialize({ theme: 'default' }); // Re-render mermaid for light theme
+            }
+            localStorage.setItem('theme', theme); // Save user preference
+        }
+
+        // Check for saved theme preference or system setting on page load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark'); // Default to system dark if no preference
+        } else {
+            setTheme('light'); // Default to system light if no preference
+        }
+
+        // Event listener for theme toggle button
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark'); // Toggle theme
+        });
+
+        // Listen for system theme changes (if no manual override is set)
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) { /* Only react if user hasn't manually set a theme */
+                setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+
+        // Smooth scroll for "开始阅读" button (Micro-interaction)
+        document.querySelector('a[href="#main-content"]').addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+
+        // Scroll-triggered fade-in animation for content sections (Micro-interaction)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1 /* Element is 10% visible */
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-8');
+                    observer.unobserve(entry.target); /* Stop observing once animated */
+                }
+            });
+        }, observerOptions);
+
+        // Apply initial hidden state and transition classes to elements to be animated
+        document.querySelectorAll('section > *:not(h2, p):not(.mermaid), section h2, section p.max-w-3xl.mx-auto').forEach(el => {
+            el.classList.add('opacity-0', 'translate-y-8', 'transition-all', 'duration-700', 'ease-out');
+            observer.observe(el);
+        });
+        // Exclude Hero section's main text from initial animation as it's immediately visible
+        document.querySelector('.hero-section h1, .hero-section p').classList.remove('opacity-0', 'translate-y-8');
+        document.querySelector('.hero-section h1, .hero-section p').classList.add('opacity-100', 'translate-y-0');
+    </script>
+</body>
+</html>
+```
