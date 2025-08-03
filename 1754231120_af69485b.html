@@ -1,0 +1,425 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO股权激励与税务合规专题报告</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2360A5FA' d='M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 2c3.313 0 6 2.687 6 6v.086c0 .484-.393.878-.877.878H6.877c-.484 0-.877-.394-.877-.878V10c0-3.313 2.687-6 6-6zM6 14v-2h12v2c0 3.313-2.687 6-6 6s-6-2.687-6-6zm6-4a2 2 0 1 0 0-4 2 2 0 0 0 0 4z'/%3E%3C/svg%3E" type="image/svg+xml">
+
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Noto Fonts (Google Fonts) for Chinese and English fallbacks -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom Fonts */
+        .font-sans-sc {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+        .font-serif-sc {
+            font-family: 'Noto Serif SC', Georgia, "Times New Roman", "FangSong", serif;
+        }
+
+        /* Dark Mode Specific Styles */
+        .dark {
+            --color-bg-primary: #1a1a2e; /* Deep purple-blue */
+            --color-bg-secondary: #21213b; /* Slightly lighter */
+            --color-text-primary: #e0e0e0; /* Off-white */
+            --color-text-secondary: #a0a0a0; /* Muted grey */
+            --color-accent: #60A5FA; /* Blue for highlights */
+            --color-border: #3b3b5b; /* Darker border */
+            --color-card-bg: #2b2b4a; /* Card background */
+            --color-shadow: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Light Mode Specific Styles */
+        .light {
+            --color-bg-primary: #ffffff;
+            --color-bg-secondary: #f0f2f5;
+            --color-text-primary: #333333;
+            --color-text-secondary: #666666;
+            --color-accent: #1D4ED8; /* Darker blue */
+            --color-border: #e0e0e0;
+            --color-card-bg: #ffffff;
+            --color-shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Apply custom properties to Tailwind classes */
+        body {
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-primary);
+        }
+        .text-primary { color: var(--color-text-primary); }
+        .text-secondary { color: var(--color-text-secondary); }
+        .bg-primary { background-color: var(--color-bg-primary); }
+        .bg-secondary { background-color: var(--color-bg-secondary); }
+        .text-accent { color: var(--color-accent); }
+        .border-accent { border-color: var(--color-accent); }
+        .card-bg { background-color: var(--color-card-bg); }
+        .shadow-custom { box-shadow: 0 4px 6px -1px var(--color-shadow), 0 2px 4px -1px var(--color-shadow); }
+
+        /* General styles for Mermaid */
+        .mermaid {
+            background-color: var(--color-card-bg); /* Use card background for Mermaid */
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px var(--color-shadow), 0 2px 4px -1px var(--color-shadow);
+        }
+
+        /* Custom styles for footnotes */
+        .footnote-link {
+            vertical-align: super;
+            font-size: 0.75em;
+            margin-left: 0.1em;
+            text-decoration: none;
+            color: var(--color-accent);
+            cursor: pointer;
+        }
+        .footnote-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Micro-interactions */
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px var(--color-shadow), 0 4px 6px -2px var(--color-shadow);
+        }
+        .transition-all {
+            transition-property: all;
+            transition-duration: 300ms;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="font-sans-sc antialiased transition-all">
+    <!-- Theme Toggle Button -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="theme-toggle" class="p-3 rounded-full bg-secondary text-primary shadow-lg hover:text-accent transition-all focus:outline-none focus:ring-2 focus:ring-accent">
+            <i class="fas fa-sun hidden dark:block"></i>
+            <i class="fas fa-moon block dark:hidden"></i>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative overflow-hidden py-20 px-4 md:px-8 bg-gradient-to-br from-secondary to-color-bg-primary shadow-lg text-center md:text-left">
+        <div class="absolute inset-0 bg-no-repeat bg-cover bg-center opacity-10" style="background-image: url('https://images.unsplash.com/photo-1517431268393-27778b0d4024?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTMyNXwwfDF8c2VhcmNofDh8fGZpbmFuY2lhbCUyMHRlY2h8ZW58MHx8fHwxNzIxMjA5ODQ0fDA&ixlib=rb-4.0.3&q=80&w=1080');"></div>
+        <div class="relative max-w-4xl mx-auto z-10">
+            <h1 class="font-serif-sc text-5xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight text-primary">
+                IPO股权激励与税务合规专题报告
+            </h1>
+            <p class="font-sans-sc text-xl md:text-2xl lg:text-3xl text-secondary mb-8 leading-relaxed">
+                拟上市企业股权激励税务处理及代持还原合规性深度解析
+            </p>
+            <p class="font-sans-sc text-lg md:text-xl text-primary leading-relaxed max-w-3xl mx-auto">
+                面对复杂多变的资本市场与日益严格的监管要求，拟上市企业在股权激励及历史沿革税务处理中面临诸多挑战。本报告旨在从税务、法律及审核实务角度，为企业提供专业、可行的建议，助力企业顺利迈向资本市场。
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto py-16 px-4 md:px-8">
+        <section class="mb-16">
+            <h2 class="font-serif-sc text-4xl font-semibold mb-8 border-b-2 pb-4 text-accent border-border">
+                <i class="fas fa-balance-scale mr-3"></i>核心议题：税务处理方案选择
+            </h2>
+            <p class="text-lg text-primary mb-8 leading-relaxed">
+                这是企业在IPO过程中最关键的风险点之一，选择正确的税务处理方案至关重要。
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Option 1: 代持还原方案 -->
+                <div class="card-bg rounded-xl p-8 shadow-custom card-hover transition-all">
+                    <h3 class="font-serif-sc text-3xl font-bold text-accent mb-4 flex items-center">
+                        <i class="fas fa-check-circle mr-3"></i>优先选择代持还原方案
+                    </h3>
+                    <ul class="list-none space-y-4 text-primary text-lg">
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-accent mt-1 mr-3"></i>
+                            <p><strong>税务局立场明确：</strong> 巩义税务局已明确合伙企业间接持股无法适用股权激励税收优惠。这是近期监管的普遍趋势，如《北京市中伦律师事务所关于广东华庄科技股份有限公司首次公开发行...》<sup class="footnote-link"><a href="#fn1">[1]</a></sup> 显示，合伙企业代持还原按股权转让缴税属常见操作。</p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-accent mt-1 mr-3"></i>
+                            <p><strong>税负可控：</strong> 建议接受核定征收实控人700-1600万个税，有效避免触发1.3亿员工税款及巨额滞纳金风险。</p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-accent mt-1 mr-3"></i>
+                            <p><strong>行动项：</strong></p>
+                            <ul class="list-disc list-inside ml-4 text-secondary">
+                                <li>尽快取得税务局书面核定文件，明确最终处理意见。</li>
+                                <li>实控人需在**申报前完成税款缴纳**并保留完税凭证。</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Option 2: 上市后行权方案 -->
+                <div class="card-bg rounded-xl p-8 shadow-custom card-hover transition-all">
+                    <h3 class="font-serif-sc text-3xl font-bold text-red-400 mb-4 flex items-center">
+                        <i class="fas fa-exclamation-triangle mr-3"></i>上市后行权方案的高风险性
+                    </h3>
+                    <ul class="list-none space-y-4 text-primary text-lg">
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-red-400 mt-1 mr-3"></i>
+                            <p><strong>巨额税额与偿付能力：</strong> 员工1.3亿税额可能超出其质押融资能力，股价波动还可能导致补仓风险。</p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-red-400 mt-1 mr-3"></i>
+                            <p><strong>监管问询焦点：</strong> 审核中可能被质疑员工偿付能力，触发监管问询，如汉桑科技案例<sup class="footnote-link"><a href="#fn2">[2]</a></sup> 曾被问及股权激励合规性。</p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-red-400 mt-1 mr-3"></i>
+                            <p><strong>影响IPO进程：</strong> 高额未决税务风险可能直接影响IPO进程甚至导致失败。</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="font-serif-sc text-4xl font-semibold mb-8 border-b-2 pb-4 text-accent border-border">
+                <i class="fas fa-gavel mr-3"></i>代持还原的合规性操作
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card-bg rounded-xl p-8 shadow-custom card-hover transition-all">
+                    <h3 class="font-serif-sc text-2xl font-bold text-primary mb-4 flex items-center">
+                        <i class="fas fa-calendar-alt mr-3 text-accent"></i>股改时点代持问题
+                    </h3>
+                    <ul class="list-none space-y-4 text-primary text-lg">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-400 mt-1 mr-3"></i>
+                            <p>律师意见需补充依据：需核查**股改时股东是否穿透计算超过50人**。若还原后实际股东未超限，通常不影响，可参考《株洲科能新材料股份有限公司》问询<sup class="footnote-link"><a href="#fn3">[3]</a></sup>。</p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-400 mt-1 mr-3"></i>
+                            <p>若股改后付款，需取得代持双方书面确认文件，证明代持关系在股改前已成立。</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-bg rounded-xl p-8 shadow-custom card-hover transition-all">
+                    <h3 class="font-serif-sc text-2xl font-bold text-primary mb-4 flex items-center">
+                        <i class="fas fa-handshake mr-3 text-accent"></i>控制权保障
+                    </h3>
+                    <ul class="list-none space-y-4 text-primary text-lg">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-400 mt-1 mr-3"></i>
+                            <p>实控人直接持股还原后，可通过**一致行动协议**或**持股平台表决权委托**巩固控制权，如华泰联合证券案例中股权激励平台设计<sup class="footnote-link"><a href="#fn4">[4]</a></sup>。</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="font-serif-sc text-4xl font-semibold mb-8 border-b-2 pb-4 text-accent border-border">
+                <i class="fas fa-shield-alt mr-3"></i>审核风险应对措施
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card-bg rounded-xl p-6 shadow-custom card-hover transition-all">
+                    <h3 class="font-serif-sc text-2xl font-bold text-primary mb-3 flex items-center">
+                        <i class="fas fa-file-invoice-dollar mr-3 text-accent"></i>税务合规证明
+                    </h3>
+                    <p class="text-primary text-lg">
+                        向税务局申请**无重大违法违规证明**，明确代持还原税款已结清。完税凭证是关键，参考南通华新环保问询<sup class="footnote-link"><a href="#fn5">[5]</a></sup>。
+                    </p>
+                </div>
+                <div class="card-bg rounded-xl p-6 shadow-custom card-hover transition-all">
+                    <h3 class="font-serif-sc text-2xl font-bold text-primary mb-3 flex items-center">
+                        <i class="fas fa-book-open mr-3 text-accent"></i>信息披露与承诺
+                    </h3>
+                    <p class="text-primary text-lg">
+                        招股书如实说明代持还原及税务处理逻辑；实控人对潜在税务争议承担赔偿责任（华庄科技案例<sup class="footnote-link"><a href="#fn1">[1]</a></sup>）；取得激励对象关于不追偿税负的声明。
+                    </p>
+                </div>
+                <div class="card-bg rounded-xl p-6 shadow-custom card-hover transition-all">
+                    <h3 class="font-serif-sc text-2xl font-bold text-primary mb-3 flex items-center">
+                        <i class="fas fa-hand-holding-usd mr-3 text-accent"></i>在审期间补税可行性
+                    </h3>
+                    <p class="text-primary text-lg">
+                        若监管要求补缴，可设计**员工借款方案**，但需注意借款利率需符合市场水平，避免被认定利益输送。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="font-serif-sc text-4xl font-semibold mb-8 border-b-2 pb-4 text-accent border-border">
+                <i class="fas fa-chart-line mr-3"></i>长期股权激励架构优化
+            </h2>
+            <div class="card-bg rounded-xl p-8 shadow-custom card-hover transition-all">
+                <ul class="list-none space-y-4 text-primary text-lg">
+                    <li class="flex items-start">
+                        <i class="fas fa-angle-right text-accent mt-1 mr-3"></i>
+                        <p>上市后若需新增激励，采用**直接持股或有限责任公司型持股平台**，避免合伙企业税务备案障碍。</p>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-angle-right text-accent mt-1 mr-3"></i>
+                        <p>激励协议中**明确行权条件与税务承担机制**，吸取达诺尔终止激励计划后调整的教训<sup class="footnote-link"><a href="#fn6">[6]</a></sup>。</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Mermaid Diagram for Data Visualization -->
+        <section class="mb-16">
+            <h2 class="font-serif-sc text-4xl font-semibold mb-8 border-b-2 pb-4 text-accent border-border">
+                <i class="fas fa-sitemap mr-3"></i>IPO股权激励合规决策路径
+            </h2>
+            <div class="mermaid">
+                graph TD
+                    A[IPO上市筹备] --> B{股权激励与历史沿革问题？}
+                    B -- 是 --> C[代持还原 vs 股权激励]
+
+                    C -- 选择 代持还原方案 --> D1[实控人核定征收个税]
+                    D1 --> D2[取得税务局书面核定]
+                    D2 --> D3[实控人申报前完税]
+                    D3 --> E[代持合规性验证]
+
+                    C -- 坚持 上市后行权方案 --> F1[员工承担1.3亿税负]
+                    F1 --> F2{员工偿付能力与质押风险？}
+                    F2 -- 风险高 --> G[面临监管问询与IPO失败风险]
+                    F2 -- 风险可控 (借款方案) --> F3[招股书披露借款方案]
+                    F3 --> G
+
+                    E[代持合规性验证] --> E1{股改时股东穿透超50人？}
+                    E1 -- 否 --> E2[律师出具专项说明]
+                    E1 -- 是 --> G
+                    E --> H[控制权保障：一致行动/表决权委托]
+
+                    D3 & E2 & H --> I[审核风险应对]
+                    I --> J1[税务无违规证明]
+                    I --> J2[招股书充分披露]
+                    I --> J3[实控人兜底承诺]
+                    I --> K[考虑在审期间补税可行性]
+
+                    J1 & J2 & J3 & K --> L[通过IPO审核]
+                    L --> M[未来股权激励架构优化]
+            </div>
+        </section>
+
+        <!-- Conclusion Section -->
+        <section class="mb-16">
+            <h2 class="font-serif-sc text-4xl font-semibold mb-8 border-b-2 pb-4 text-accent border-border">
+                <i class="fas fa-lightbulb mr-3"></i>结论性建议
+            </h2>
+            <div class="card-bg rounded-xl p-8 shadow-custom border-l-4 border-accent">
+                <p class="text-primary text-xl leading-relaxed">
+                    <strong><i class="fas fa-arrow-circle-right mr-2 text-accent"></i>立即按代持还原方案缴税</strong>，同步完善代持法律文件及税务凭证。在上市审核阶段，务必主动披露并由实控人兜底。切勿博弈上市后缴税方案，高达1.3亿的税款可能直接导致IPO失败，甚至面临合规性处罚。时效性至关重要，监管审查日益趋严，务必留足整改时间。
+                </p>
+            </div>
+        </section>
+
+        <!-- Further Reading -->
+        <section class="mb-16">
+            <h2 class="font-serif-sc text-4xl font-semibold mb-8 border-b-2 pb-4 text-accent border-border">
+                <i class="fas fa-book-reader mr-3"></i>延伸阅读
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card-bg rounded-xl p-6 shadow-custom card-hover transition-all">
+                    <h3 class="font-serif-sc text-xl font-bold text-primary mb-2">
+                        1. 《公司治理》
+                    </h3>
+                    <p class="text-secondary text-base">
+                        作者：加里·P. 麦卡伦 (Gary P. McCann)<br>
+                        阐述公司治理结构、股权安排等基础，为理解企业股权架构提供理论支撑。
+                    </p>
+                </div>
+                <div class="card-bg rounded-xl p-6 shadow-custom card-hover transition-all">
+                    <h3 class="font-serif-sc text-xl font-bold text-primary mb-2">
+                        2. 《资本的游戏：中国企业IPO实务》
+                    </h3>
+                    <p class="text-secondary text-base">
+                        作者：王晓明<br>
+                        深入解析中国企业IPO全流程及常见问题，提供实战经验。
+                    </p>
+                </div>
+                <div class="card-bg rounded-xl p-6 shadow-custom card-hover transition-all">
+                    <h3 class="font-serif-sc text-xl font-bold text-primary mb-2">
+                        3. 《税务筹划与风险管理》
+                    </h3>
+                    <p class="text-secondary text-base">
+                        作者：国家税务总局等官方机构<br>
+                        理解税务政策与合规风险的权威指南，是企业进行税务规划的必备参考。
+                    </p>
+                </div>
+                <div class="card-bg rounded-xl p-6 shadow-custom card-hover transition-all">
+                    <h3 class="font-serif-sc text-xl font-bold text-primary mb-2">
+                        4. 《有限合伙企业法律实务》
+                    </h3>
+                    <p class="text-secondary text-base">
+                        作者：多位律师/学者<br>
+                        深入理解合伙企业作为持股平台的法律及税务属性，尤其对代持问题有借鉴意义。
+                    </p>
+                </div>
+                <div class="card-bg rounded-xl p-6 shadow-custom card-hover transition-all">
+                    <h3 class="font-serif-sc text-xl font-bold text-primary mb-2">
+                        5. 《股权设计与激励：从0到1构建高增长企业的股权体系》
+                    </h3>
+                    <p class="text-secondary text-base">
+                        作者：胡润<br>
+                        专注于股权激励的实务操作和顶层设计，为企业构建合理的激励体系提供指导。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footnotes Section -->
+        <section id="footnotes" class="mt-16 pt-8 border-t-2 border-border text-secondary text-sm">
+            <h2 class="font-serif-sc text-2xl font-semibold mb-4 text-primary">
+                <i class="fas fa-info-circle mr-3"></i>脚注
+            </h2>
+            <ol class="list-decimal list-outside pl-5 space-y-2">
+                <li id="fn1" class="mb-1">知识库资料《北京市中伦律师事务所关于广东华庄科技股份有限公司首次公开发行...》，载明代持还原按股权转让核定征税。<a href="https://qxb-pdf-osscache.qixin.com/AnBaseinfo/875dfa643dd0036543e2051c4df2658e.pdf" target="_blank" class="text-accent hover:underline">点击预览</a></li>
+                <li id="fn2" class="mb-1">联网搜索《汉桑科技(301491)首次公开发行股票并在创业板上市招股说明书(一)》，涉及股权激励合规性问询。<a href="https://www.stocke.com.cn/main/a/20250731/7846741.shtml" target="_blank" class="text-accent hover:underline">点击标题查看</a></li>
+                <li id="fn3" class="mb-1">知识库资料《株洲科能新材料股份有限公司》，交易所关注股东超200人问题。<a href="https://static.sse.com.cn/stock/disclosure/announcement/c/202506/001874_20250626_DRDS.pdf" target="_blank" class="text-accent hover:underline">点击预览</a></li>
+                <li id="fn4" class="mb-1">联网搜索《华泰联合证券有限责任公司关于公司首次公开发行股票并在创业板...》，提及股权激励平台控制权安排。<a href="https://q.stock.sohu.com/cn,gg,301327,8940451658.shtml" target="_blank" class="text-accent hover:underline">点击标题查看</a></li>
+                <li id="fn5" class="mb-1">联网搜索《关于南通华新环保科技股份有限公司股票公开转让并挂牌申请文件的...》，显示税务合规问询焦点。<a href="https://pdf.dfcfw.com/pdf/H2_AN202407161637955629_1.pdf?1721134331000.pdf" target="_blank" class="text-accent hover:underline">点击标题查看</a></li>
+                <li id="fn6" class="mb-1">知识库资料显示达诺尔终止股权激励计划案例，强调协议条款明确性。<a href="https://qccdata.qichacha.com/ReportData/PDF/6de6bbd269de9577ad0606922165aaec.pdf" target="_blank" class="text-accent hover:underline">点击预览</a></li>
+            </ol>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-secondary py-8 px-4 md:px-8 text-center text-primary text-sm">
+        <p>&copy; 2025 IPO合规研究中心. 保留所有权利。</p>
+        <p class="mt-2 text-secondary">本报告内容仅供参考，不构成任何法律或税务建议。</p>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Set initial theme based on system preference or saved preference
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const savedTheme = localStorage.getItem('theme');
+
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            htmlElement.classList.add('dark');
+            htmlElement.classList.remove('light');
+        } else {
+            htmlElement.classList.add('light');
+            htmlElement.classList.remove('dark');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    </script>
+</body>
+</html>
+```
