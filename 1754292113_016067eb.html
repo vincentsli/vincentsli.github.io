@@ -1,0 +1,571 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A股IPO股东锁定期深度解析</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <style>
+        /* Base styles for dark mode */
+        :root {
+            --bg-color: #0A0A0C; /* Dark background: Deep charcoal */
+            --text-color: #E0E0E0; /* Light text: Off-white */
+            --primary-color: #6366F1; /* Accent: Indigo-500 */
+            --card-bg: #1A1A1E; /* Slightly lighter dark for cards: Dark slate */
+            --border-color: #2D2D35; /* Subtle border: Dark gray */
+            --heading-color: #F3F4F6; /* Lighter heading text: Near white */
+            --mermaid-bg: #2B2D33; /* Darker bg for mermaid: Darker charcoal */
+            --mermaid-node-fill: #3F3F46; /* Zinc-700 */
+            --mermaid-node-stroke: #4B5563; /* Gray-600 */
+            --mermaid-text-color: #D1D5DB; /* Gray-300 */
+            --mermaid-arrow-color: #9CA3AF; /* Gray-400 */
+        }
+
+        /* Light mode override */
+        html.light {
+            --bg-color: #F8F8F8; /* Light background: Off-white */
+            --text-color: #333333; /* Dark text: Charcoal */
+            --primary-color: #4F46E5; /* Accent: Indigo-600 */
+            --card-bg: #FFFFFF; /* White for cards */
+            --border-color: #E0E0E0; /* Light border */
+            --heading-color: #1F2937; /* Darker heading text: Dark blue-gray */
+            --mermaid-bg: #FFFFFF;
+            --mermaid-node-fill: #F3F4F6; /* Gray-100 */
+            --mermaid-node-stroke: #D1D5DB; /* Gray-300 */
+            --mermaid-text-color: #4B5563; /* Gray-600 */
+            --mermaid-arrow-color: #9CA3AF; /* Gray-400 */
+        }
+
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+            color: var(--heading-color);
+            line-height: 1.3;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .text-primary {
+            color: var(--primary-color);
+        }
+        .bg-card {
+            background-color: var(--card-bg);
+        }
+        .border-card {
+            border-color: var(--border-color);
+        }
+        .heading-color {
+            color: var(--heading-color);
+        }
+
+        /* Custom styles for Mermaid to respect dark/light mode */
+        .mermaid {
+            background-color: var(--mermaid-bg) !important;
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 1rem; /* p-4 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-lg */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .mermaid .node rect, .mermaid .node circle, .mermaid .node polygon {
+            fill: var(--mermaid-node-fill) !important;
+            stroke: var(--mermaid-node-stroke) !important;
+        }
+        .mermaid .node text {
+            fill: var(--mermaid-text-color) !important;
+            font-weight: 500;
+        }
+        .mermaid .edgePaths .path {
+            stroke: var(--mermaid-arrow-color) !important;
+        }
+        .mermaid .edgeLabels text {
+            fill: var(--mermaid-text-color) !important;
+        }
+        .mermaid .cluster rect {
+            fill: var(--mermaid-bg) !important;
+            stroke: var(--mermaid-node-stroke) !important;
+        }
+        .mermaid .cluster text {
+            fill: var(--mermaid-text-color) !important;
+        }
+
+        /* Micro-interactions */
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .card-hover {
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Scroll reveal */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Custom scrollbar for webkit browsers */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--card-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4a42d0; /* A darker shade of primary-color */
+        }
+    </style>
+</head>
+<body class="selection:bg-primary selection:text-white">
+
+    <!-- Dark Mode Toggle -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="theme-toggle" class="p-3 rounded-full bg-card shadow-lg heading-color hover:text-primary transition-colors duration-200">
+            <i class="fas fa-sun text-xl dark:hidden"></i>
+            <i class="fas fa-moon text-xl hidden dark:inline"></i>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative overflow-hidden py-24 md:py-32 bg-gradient-to-br from-indigo-900 to-purple-900 dark:from-zinc-950 dark:to-slate-900 shadow-xl">
+        <div class="absolute inset-0 bg-cover bg-center opacity-10 dark:opacity-20" style="background-image: url('https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80');"></div>
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold heading-color mb-4 animate-on-scroll">
+                <i class="fas fa-scale-balanced text-primary mr-4"></i>A股IPO股东锁定期深度解析
+            </h1>
+            <p class="text-xl md:text-2xl text-zinc-300 dark:text-zinc-400 mb-8 animate-on-scroll delay-100">
+                拟上市公司股权转让与突击入股规则
+            </p>
+            <p class="max-w-3xl mx-auto text-lg text-zinc-200 dark:text-zinc-500 animate-on-scroll delay-200">
+                探索中国A股市场IPO前股东股权转让的复杂性，特别是实际控制人向老股东转让股权是否触发36个月锁定期，为您拨开监管迷雾。
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-16">
+
+        <!-- Core Conclusion Section -->
+        <section class="mb-16 animate-on-scroll">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 heading-color text-center">
+                <i class="fas fa-check-circle text-primary mr-3"></i>核心结论
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-card p-8 rounded-xl shadow-lg border border-card card-hover">
+                    <h3 class="text-2xl font-semibold heading-color mb-4 flex items-center">
+                        <i class="fas fa-clock text-primary mr-3"></i>申报前6个月内转让
+                    </h3>
+                    <p class="text-lg">
+                        <span class="font-bold text-primary">属于突击入股，受让方（老股东）需锁定36个月。</span>
+                        此规定旨在防止临近上市的突击套利行为，即使是老股东从实控人处受让股权，也需比照控股股东执行严格的锁定期。
+                    </p>
+                </div>
+                <div class="bg-card p-8 rounded-xl shadow-lg border border-card card-hover">
+                    <h3 class="text-2xl font-semibold heading-color mb-4 flex items-center">
+                        <i class="fas fa-calendar-alt text-primary mr-3"></i>申报前7–12个月内转让
+                    </h3>
+                    <p class="text-lg">
+                        <span class="font-bold text-primary">通常不视为突击入股，无需额外锁定36个月。</span>
+                        但仍需遵守一般股东的锁定期要求（如上市后锁定12个月）。此时间窗口给予股权结构调整一定的灵活性。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Analysis Section -->
+        <section class="mb-16 animate-on-scroll delay-100">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 heading-color text-center">
+                <i class="fas fa-microscope text-primary mr-3"></i>详细分析依据
+            </h2>
+            <div class="bg-card p-8 rounded-xl shadow-lg border border-card">
+                <h3 class="text-2xl font-semibold heading-color mb-4">
+                    1. 监管规则的核心要求
+                </h3>
+                <ul class="list-disc list-inside space-y-4 text-lg">
+                    <li>
+                        <span class="font-semibold text-primary">突击入股的定义：</span>根据《监管规则适用指引—关于申请首发上市企业股东信息披露》<sup><a href="#footnote-1" class="text-primary hover:underline">[1]</a></sup>，申报前12个月内通过增资或股权转让<strong class="text-primary">新增的股东</strong>（即首次成为股东的主体），需承诺所持股份自取得之日起锁定36个月。
+                    </li>
+                    <li>
+                        <span class="font-semibold text-primary">老股东的例外情况：</span>若受让方是<strong class="text-primary">老股东</strong>（即转让前已持有发行人股份），其在申报前12个月内通过受让新增的股份，一般<strong class="text-primary">不视为突击入股</strong>，无需锁定36个月<sup><a href="#footnote-2" class="text-primary hover:underline">[2]</a></sup>。
+                    </li>
+                    <li class="pl-6 border-l-4 border-primary italic">
+                        <span class="font-semibold text-primary">但有一个关键例外：</span>如转让发生在<strong class="text-primary">申报前6个月内</strong>，且转让方为控股股东或实际控制人（即实控人），则无论受让方是新股东还是老股东，均需<strong class="text-primary">比照控股股东锁定规则</strong>，自上市之日起锁定36个月<sup><a href="#footnote-3" class="text-primary hover:underline">[3]</a></sup>。
+                    </li>
+                </ul>
+
+                <h3 class="text-2xl font-semibold heading-color mt-8 mb-4">
+                    2. 应用到您的场景
+                </h3>
+                <p class="text-lg mb-4">
+                    <span class="font-semibold text-primary">情景描述：</span>实控人（转让方）在申报前12个月内将股权转让给老股东（受让方）。
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-zinc-800 dark:bg-zinc-900 p-6 rounded-lg border border-zinc-700 dark:border-zinc-800">
+                        <h4 class="text-xl font-medium heading-color mb-3">若转让发生在申报前6个月内：</h4>
+                        <ul class="list-disc list-inside text-base space-y-2">
+                            <li>属于突击入股，受让方（老股东）需锁定36个月（自上市之日起）。</li>
+                            <li>依据：因转让方是实控人，触发《上海证券交易所科创板股票发行上市审核问答》（适用于所有A股板块）的特殊规定，要求比照控股股东锁定期。</li>
+                        </ul>
+                    </div>
+                    <div class="bg-zinc-800 dark:bg-zinc-900 p-6 rounded-lg border border-zinc-700 dark:border-zinc-800">
+                        <h4 class="text-xl font-medium heading-color mb-3">若转让发生在申报前7–12个月内：</h4>
+                        <ul class="list-disc list-inside text-base space-y-2">
+                            <li>不属于突击入股，受让方（老股东）仅需遵守一般锁定期（如上市后锁定12个月），无需额外锁定36个月。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Visualization - Mermaid Diagram -->
+        <section class="mb-16 animate-on-scroll delay-200">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 heading-color text-center">
+                <i class="fas fa-project-diagram text-primary mr-3"></i>股权锁定期判断流程图
+            </h2>
+            <div class="mermaid mx-auto max-w-full overflow-x-auto" style="min-height: 400px;">
+                graph TD
+                    A[开始] --> B{申报前12个月内发生股权转让?};
+                    B -- 否 --> G[结束];
+                    B -- 是 --> C{是否为新增股东(首次持股)?};
+                    C -- 是 --> D[新股东: 锁定36个月];
+                    C -- 否 --> E{转让发生在申报前6个月内?};
+                    E -- 否 --> F[老股东一般锁定期(如12个月)];
+                    E -- 是 --> H{转让方是否为实控人/控股股东?};
+                    H -- 是 --> I[比照实控人/控股股东: 锁定36个月];
+                    H -- 否 --> F;
+                    D --> G;
+                    I --> G;
+                    F --> G;
+
+                    style A fill:#6366F1,stroke:#6366F1,stroke-width:2px,color:#fff
+                    style G fill:#6366F1,stroke:#6366F1,stroke-width:2px,color:#fff
+                    style D fill:#EF4444,stroke:#EF4444,stroke-width:2px,color:#fff /* Red for stricter lock */
+                    style I fill:#EF4444,stroke:#EF4444,stroke-width:2px,color:#fff
+                    style F fill:#22C55E,stroke:#22C55E,stroke-width:2px,color:#fff /* Green for general lock */
+                    style B fill:#3B82F6,stroke:#3B82F6,stroke-width:2px,color:#fff /* Blue for decisions */
+                    style C fill:#3B82F6,stroke:#3B82F6,stroke-width:2px,color:#fff
+                    style E fill:#3B82F6,stroke:#3B82F6,stroke-width:2px,color:#fff
+                    style H fill:#3B82F6,stroke:#3B82F6,stroke-width:2px,color:#fff
+
+                    classDef decisionNode fill:#1D4ED8,stroke:#1D4ED8,color:#fff
+                    class B,C,E,H decisionNode
+
+                    classDef actionNode fill:#DC2626,stroke:#DC2626,color:#fff
+                    class D,I actionNode
+
+                    classDef generalNode fill:#059669,stroke:#059669,color:#fff
+                    class F generalNode
+
+                    classDef startEndNode fill:#4F46E5,stroke:#4F46E5,color:#fff
+                    class A,G startEndNode
+
+                    linkStyle 0 stroke-width:2px,fill:none,stroke:#9CA3AF;
+                    linkStyle 1 stroke-width:2px,fill:none,stroke:#EF4444;
+                    linkStyle 2 stroke-width:2px,fill:none,stroke:#22C55E;
+                    linkStyle 3 stroke-width:2px,fill:none,stroke:#9CA3AF;
+                    linkStyle 4 stroke-width:2px,fill:none,stroke:#EF4444;
+                    linkStyle 5 stroke-width:2px,fill:none,stroke:#22C55E;
+                    linkStyle 6 stroke-width:2px,fill:none,stroke:#9CA3AF;
+                    linkStyle 7 stroke-width:2px,fill:none,stroke:#EF4444;
+                    linkStyle 8 stroke-width:2px,fill:none,stroke:#9CA3AF;
+                    linkStyle 9 stroke-width:2px,fill:none,stroke:#9CA3AF;
+                    linkStyle 10 stroke-width:2px,fill:none,stroke:#9CA3AF;
+                    linkStyle 11 stroke-width:2px,fill:none,stroke:#9CA3AF;
+                    linkStyle 12 stroke-width:2px,fill:none,stroke:#9CA3AF;
+
+                    subgraph Legend
+                        L1[强制锁定] --- L2(一般锁定)
+                        style L1 fill:#EF4444,stroke:#EF4444,stroke-width:2px,color:#fff
+                        style L2 fill:#22C55E,stroke:#22C55E,stroke-width:2px,color:#fff
+                    end
+            </div>
+            <p class="text-sm text-center text-zinc-500 mt-4">
+                注意：北交所对突击入股的锁定期为12个月，其他板块（主板、科创板、创业板）为36个月。流程图主要体现主板/科创板/创业板的通用逻辑。
+            </p>
+        </section>
+
+        <!-- Practical Advice Section -->
+        <section class="mb-16 animate-on-scroll delay-300">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 heading-color text-center">
+                <i class="fas fa-lightbulb text-primary mr-3"></i>实务建议
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-card p-6 rounded-xl shadow-lg border border-card card-hover">
+                    <h3 class="text-xl font-semibold heading-color mb-3 flex items-center">
+                        <i class="fas fa-search-plus text-primary mr-2"></i>核查重点
+                    </h3>
+                    <p class="text-base">
+                        发行人及中介机构需在招股说明书中披露该股权转让的细节（如时间、定价依据、关联关系），并验证受让方是否为老股东。
+                    </p>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-lg border border-card card-hover">
+                    <h3 class="text-xl font-semibold heading-color mb-3 flex items-center">
+                        <i class="fas fa-exclamation-triangle text-primary mr-2"></i>风险提示
+                    </h3>
+                    <p class="text-base">
+                        若转让价格异常或涉及利益输送，监管机构可能要求穿透核查，此时即使超过6个月也可能被重点关注。
+                    </p>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-lg border border-card card-hover">
+                    <h3 class="text-xl font-semibold heading-color mb-3 flex items-center">
+                        <i class="fas fa-cubes text-primary mr-2"></i>板块差异
+                    </h3>
+                    <p class="text-base">
+                        北交所对突击入股的锁定期为12个月，其他板块（主板、科创板、创业板）均为36个月。
+                    </p>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-lg text-zinc-400">
+                <p>
+                    <i class="fas fa-hands-helping text-primary mr-2"></i>
+                    <strong class="text-primary">最终建议：</strong>
+                    若转让发生在申报前6个月内，必须锁定36个月；若在7–12个月内，无需额外锁定36个月，但建议咨询保荐机构。
+                </p>
+            </div>
+        </section>
+
+        <!-- Key Concepts Section -->
+        <section class="mb-16 animate-on-scroll delay-400">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 heading-color text-center">
+                <i class="fas fa-book-open text-primary mr-3"></i>关键概念解析
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-card p-6 rounded-xl shadow-md border border-card card-hover">
+                    <h3 class="text-xl font-semibold heading-color mb-2 flex items-center">
+                        <i class="fas fa-user-plus text-primary mr-2"></i>突击入股
+                    </h3>
+                    <p class="text-base text-zinc-400">
+                        指拟上市公司在申报IPO前夕，通过增资扩股或股权转让引入新股东的行为。监管部门对此类行为有严格的锁定期要求，以防范不当套利和利益输送。
+                    </p>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-md border border-card card-hover">
+                    <h3 class="text-xl font-semibold heading-color mb-2 flex items-center">
+                        <i class="fas fa-user-tie text-primary mr-2"></i>控股股东
+                    </h3>
+                    <p class="text-base text-zinc-400">
+                        指持有公司50%以上股份，或持有股份虽然不足50%但依其持有的股份所享有的表决权已足以对股东大会的决议产生重大影响的股东。
+                    </p>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-md border border-card card-hover">
+                    <h3 class="text-xl font-semibold heading-color mb-2 flex items-center">
+                        <i class="fas fa-user-secret text-primary mr-2"></i>实际控制人
+                    </h3>
+                    <p class="text-base text-zinc-400">
+                        指通过投资关系、协议或者其他安排，能够实际支配公司行为的自然人、法人或其他组织。可能是控股股东，也可能不是。
+                    </p>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-md border border-card card-hover">
+                    <h3 class="text-xl font-semibold heading-color mb-2 flex items-center">
+                        <i class="fas fa-lock text-primary mr-2"></i>锁定期
+                    </h3>
+                    <p class="text-base text-zinc-400">
+                        指公司首次公开发行股票上市后，相关股东所持股份在特定期限内不得转让。旨在维护市场稳定，防止短期内大量抛售。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Further Reading -->
+        <section class="mb-16 animate-on-scroll delay-500">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 heading-color text-center">
+                <i class="fas fa-book text-primary mr-3"></i>延伸阅读
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-card p-6 rounded-xl shadow-md border border-card card-hover">
+                    <h3 class="text-xl font-semibold heading-color mb-2">《中华人民共和国公司法》</h3>
+                    <p class="text-base text-zinc-400 mb-2">
+                        中国公司治理的基础法律，规定了公司的设立、组织机构、股份、股权转让等基本制度。
+                    </p>
+                    <a href="https://www.gov.cn/fuwu/202312/content_6922248.htm" target="_blank" class="text-primary hover:underline text-sm">
+                        <i class="fas fa-external-link-alt mr-1"></i>查看详情
+                    </a>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-md border border-card card-hover">
+                    <h3 class="text-xl font-semibold heading-color mb-2">《中华人民共和国证券法》</h3>
+                    <p class="text-base text-zinc-400 mb-2">
+                        规范证券发行和交易行为，是A股市场监管的核心法律，涉及信息披露、内幕交易、市场操纵等。
+                    </p>
+                    <a href="http://www.gov.cn/flfg/2019-12/28/content_5464875.htm" target="_blank" class="text-primary hover:underline text-sm">
+                        <i class="fas fa-external-link-alt mr-1"></i>查看详情
+                    </a>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-md border border-card card-hover">
+                    <h3 class="text-xl font-semibold heading-color mb-2">《首次公开发行股票并上市管理办法》</h3>
+                    <p class="text-base text-zinc-400 mb-2">
+                        中国证监会发布的具体规定，详细阐述了IPO的条件、程序、信息披露等要求，是审核工作的核心依据。
+                    </p>
+                    <a href="https://www.csrc.gov.cn/csrc/c101967/c1677353/content.shtml" target="_blank" class="text-primary hover:underline text-sm">
+                        <i class="fas fa-external-link-alt mr-1"></i>查看详情
+                    </a>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-md border border-card card-hover">
+                    <h3 class="text-xl font-semibold heading-color mb-2">《上海证券交易所股票上市规则》</h3>
+                    <p class="text-base text-zinc-400 mb-2">
+                        针对沪市上市公司在上市、信息披露、公司治理等方面的具体要求，包含股东锁定期等细则。
+                    </p>
+                    <a href="http://www.sse.com.cn/regulation/cs/c/c_20230303_1206.shtml" target="_blank" class="text-primary hover:underline text-sm">
+                        <i class="fas fa-external-link-alt mr-1"></i>查看详情
+                    </a>
+                </div>
+                <div class="bg-card p-6 rounded-xl shadow-md border border-card card-hover">
+                    <h3 class="text-xl font-semibold heading-color mb-2">《A股IPO审核问答汇编（最新版）》</h3>
+                    <p class="text-base text-zinc-400 mb-2">
+                        汇集了IPO审核过程中的常见问题与官方解答，是理解监管思路和实务操作的重要参考。
+                    </p>
+                    <a href="#" class="text-primary hover:underline text-sm">
+                        <i class="fas fa-external-link-alt mr-1"></i>查看详情 (虚拟链接)
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footnotes -->
+        <section class="mt-16 pt-8 border-t border-card text-zinc-500 text-sm">
+            <h3 class="text-xl font-semibold heading-color mb-4">引用来源：</h3>
+            <ol class="list-decimal list-outside space-y-2 pl-5">
+                <li id="footnote-1" class="mb-2">
+                    <strong class="text-primary">知识库资料：</strong>监管规则适用指引——发行类第2号（问题5解答），明确老股东在申报前12个月内取得股份无需锁定36个月，除非涉及实控人转让。
+                </li>
+                <li id="footnote-2" class="mb-2">
+                    <strong class="text-primary">知识库资料：</strong>监管规则适用指引——发行类第2号（问题5补充），申报前6个月内从实控人处受让股份的老股东需比照锁定36个月。
+                </li>
+                <li id="footnote-3" class="mb-2">
+                    <strong class="text-primary">知识库资料：</strong>减持相关实务指南，提及北交所与其他板块锁定期差异。
+                </li>
+                <li id="footnote-4" class="mb-2">
+                    <strong class="text-primary">联网搜索：</strong><a href="https://www.dehenglaw.com/CN/tansuocontent/0008/026665/7.aspx?MID=0902&AID=" target="_blank" class="text-primary hover:underline">老股东突击入股的股份如何锁定？ - 德恒律师事务所</a>，讨论老股东新增股份的锁定争议。
+                </li>
+                <li id="footnote-5" class="mb-2">
+                    <strong class="text-primary">联网搜索：</strong><a href="https://www.sohu.com/a/449332649_120068290" target="_blank" class="text-primary hover:underline">“突击入股”新政下，PE入股拟IPO企业的锁定期及其变化_股东 - 搜狐</a>，要求新增股东锁定36个月。
+                </li>
+                <li id="footnote-6" class="mb-2">
+                    <strong class="text-primary">联网搜索：</strong><a href="https://www.lawyers.org.cn/info/4b205ceba9374d5dbb2b308bdab83fae" target="_blank" class="text-primary hover:underline">“突击入股”再上“紧箍咒” ——快评证监会《监管规则适用指引—关于申请首发上市企业股东信息披露》</a>，非控股股东受让股份也受36个月锁定期约束。
+                </li>
+                <li id="footnote-7" class="mb-2">
+                    <strong class="text-primary">联网搜索：</strong><a href="http://www.haiwen-law.com/35/506" target="_blank" class="text-primary hover:underline">投后管理实务之A股IPO上市后退出路径及注意事项</a>，申报前6个月内受让实控人老股需锁定36个月。
+                </li>
+                <li id="footnote-8" class="mb-2">
+                    <strong class="text-primary">联网搜索：</strong><a href="https://www.dehenglaw.com/CN/tansuocontent/0008/020681/7.aspx?MID=0902&AID=" target="_blank" class="text-primary hover:underline">《首发上市企业股东信息披露》核心要点法律解读 - 德恒律师事务所</a>，解释申报前6个月内的受让锁定期。
+                </li>
+                <li id="footnote-9" class="mb-2">
+                    <strong class="text-primary">联网搜索：</strong><a href="http://www.21jingji.com/article/20210207/herald/60e46f3ef96f08353c2fc85fcf0d3b8b.html" target="_blank" class="text-primary hover:underline">“突击入股锁定3年”被市场误读了 - 21财经</a>，老股东豁免锁定的例外。
+                </li>
+                <li id="footnote-10" class="mb-2">
+                    <strong class="text-primary">联网搜索：</strong><a href="https://www.hairunlawyer.com/Content/2021/07-14/0924365261.html" target="_blank" class="text-primary hover:underline">申请首发上市企业股东核查的规定和做法 - 海润天睿律师事务所</a>，强调入股价格异常时的穿透核查。
+                </li>
+            </ol>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-card py-8 border-t border-card text-center text-zinc-500 text-sm">
+        <div class="container mx-auto px-6">
+            <p>&copy; 2025 A股IPO信息助手. All rights reserved.</p>
+            <p class="mt-2">免责声明：本页面信息仅供参考，不构成任何投资建议或法律意见。具体操作请咨询专业人士。</p>
+        </div>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base', // Use base theme to allow custom CSS to override
+            securityLevel: 'loose', // Allow external links if any were in diagram
+            themeVariables: {
+                // These will be overridden by custom CSS for better dark/light mode integration
+                primaryColor: 'var(--mermaid-node-fill)',
+                nodeBorder: 'var(--mermaid-node-stroke)',
+                textColor: 'var(--mermaid-text-color)',
+                lineColor: 'var(--mermaid-arrow-color)',
+                mainBkg: 'var(--mermaid-bg)',
+                clusterBkg: 'var(--mermaid-bg)',
+                clusterBorder: 'var(--mermaid-node-stroke)',
+            }
+        });
+
+        // Dark/Light Mode Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // On page load, set theme based on localStorage or system preference
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            htmlElement.classList.add(currentTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            htmlElement.classList.add('dark');
+        } else {
+            htmlElement.classList.add('light');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            // Re-render mermaid after theme change to apply new CSS variables
+            mermaid.init(undefined, '.mermaid');
+        });
+
+        // Scroll Reveal Animation
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(section => {
+            observer.observe(section);
+        });
+
+    </script>
+</body>
+</html>
+```
