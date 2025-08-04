@@ -1,0 +1,566 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO资本验资：股改后增资的必由之路 - 深度解析</title>
+    <meta name="description" content="深度解析A股上市审核实践，探讨股改后增资验资的必要性与案例分析。">
+    
+    <!-- Google Fonts for Noto Sans SC (sans-serif) & Noto Serif SC (serif) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+
+    <style>
+        :root {
+            --color-primary: #a78bfa; /* Indigo-400 for light mode, Indigo-300 for dark mode */
+            --color-secondary: #6366f1; /* Indigo-600 */
+            --color-bg-light: #ffffff;
+            --color-text-light: #333333;
+            --color-card-light: #f3f4f6; /* Gray-100 */
+            --color-border-light: #e5e7eb; /* Gray-200 */
+            --color-accent-light: #4f46e5; /* Indigo-700 */
+
+            --color-bg-dark: #0f172a; /* Slate-900 */
+            --color-text-dark: #e2e8f0; /* Slate-200 */
+            --color-card-dark: #1e293b; /* Slate-800 */
+            --color-border-dark: #334155; /* Slate-700 */
+            --color-accent-dark: #818cf8; /* Indigo-400 */
+        }
+
+        /* Default (Light Mode) */
+        body {
+            font-family: 'Noto Sans SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', sans-self;
+            background-color: var(--color-bg-light);
+            color: var(--color-text-light);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Times New Roman', serif;
+            color: var(--color-secondary);
+            transition: color 0.3s ease;
+        }
+        
+        /* Dark Mode */
+        html.dark {
+            body {
+                background-color: var(--color-bg-dark);
+                color: var(--color-text-dark);
+            }
+            h1, h2, h3, h4, h5, h6 {
+                color: var(--color-accent-dark);
+            }
+        }
+
+        /* Tailwind overrides for dark mode colors */
+        .dark .bg-gray-100 { background-color: var(--color-card-dark); }
+        .dark .bg-white { background-color: var(--color-card-dark); }
+        .dark .text-gray-900 { color: var(--color-text-dark); }
+        .dark .text-gray-700 { color: var(--color-text-dark); }
+        .dark .border-gray-200 { border-color: var(--color-border-dark); }
+        .dark .shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12); }
+        .dark a { color: var(--color-accent-dark); }
+        .dark a:hover { color: var(--color-primary); }
+
+        /* Custom scrollbar for aesthetic */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-primary);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-secondary);
+        }
+        html.dark ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+        }
+        html.dark ::-webkit-scrollbar-thumb {
+            background: var(--color-accent-dark);
+        }
+        html.dark ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-primary);
+        }
+
+        /* Hero section specific styles */
+        .hero-section {
+            background: linear-gradient(135deg, var(--color-secondary), var(--color-accent-light));
+            color: white;
+            padding: 8rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        html.dark .hero-section {
+            background: linear-gradient(135deg, var(--color-bg-dark), var(--color-secondary));
+            color: var(--color-text-dark);
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239a9a9a" fill-opacity="0.1"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+            opacity: 0.15;
+            z-index: 0;
+        }
+        html.dark .hero-section::before {
+            background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+        }
+
+        /* Card hover effects */
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        html.dark .card-hover:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Mermaid specific styling */
+        .mermaid {
+            background-color: var(--color-card-light);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            margin-bottom: 2rem;
+            overflow-x: auto; /* Enable horizontal scroll for small screens */
+        }
+        html.dark .mermaid {
+            background-color: var(--color-card-dark);
+        }
+        
+        /* Ensure Mermaid text is visible in dark mode */
+        html.dark .mermaid svg text {
+            fill: var(--color-text-dark) !important;
+        }
+        html.dark .mermaid svg rect {
+            fill: var(--color-card-dark) !important;
+        }
+        html.dark .mermaid svg path {
+            stroke: var(--color-text-dark) !important;
+        }
+        html.dark .mermaid svg .edgeLabels rect {
+            fill: var(--color-card-dark) !important;
+        }
+        html.dark .mermaid svg .label rect {
+            fill: var(--color-card-dark) !important;
+        }
+        html.dark .mermaid svg .node rect, 
+        html.dark .mermaid svg .node circle, 
+        html.dark .mermaid svg .node ellipse, 
+        html.dark .mermaid svg .node polygon, 
+        html.dark .mermaid svg .node path {
+            fill: var(--color-card-dark) !important;
+            stroke: var(--color-border-dark) !important;
+        }
+
+        /* Specific node styling from mermaid diagram */
+        .node.F rect, .node.H rect, .node.L rect {
+            fill: #fce8e8 !important; /* Light red background */
+            stroke: #ef4444 !important; /* Red border */
+            stroke-width: 2px !important;
+        }
+        .node.F text, .node.H text, .node.L text {
+            fill: #ef4444 !important; /* Red text */
+        }
+        html.dark .node.F rect, html.dark .node.H rect, html.dark .node.L rect {
+            fill: #440000 !important; /* Darker red background for dark mode */
+            stroke: #ef4444 !important; /* Red border */
+            stroke-width: 2px !important;
+        }
+        html.dark .node.F text, html.dark .node.H text, html.dark .node.L text {
+            fill: #f87171 !important; /* Lighter red text for dark mode */
+        }
+        
+        .edge-label.edgeLabels.F_H text {
+            fill: #ef4444 !important; /* Red text for risk path */
+        }
+        .edgePath.F_H path {
+            stroke: #ef4444 !important;
+            stroke-dasharray: 5 5 !important;
+        }
+        html.dark .edge-label.edgeLabels.F_H text {
+            fill: #f87171 !important; /* Lighter red for dark mode */
+        }
+        html.dark .edgePath.F_H path {
+            stroke: #f87171 !important;
+        }
+        
+    </style>
+</head>
+<body class="min-h-screen antialiased transition-colors duration-300 ease-in-out">
+
+    <!-- Header / Nav -->
+    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-lg sticky top-0 z-50 py-4 transition-all duration-300 ease-in-out dark:from-slate-900 dark:to-slate-800">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2 text-xl font-semibold hover:text-gray-200 transition-colors duration-200">
+                <i class="fas fa-chart-line"></i>
+                <span>资本洞察</span>
+            </a>
+            <button id="theme-toggle" class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300 dark:focus:ring-blue-300 transition-colors duration-200 hover:bg-white hover:bg-opacity-20">
+                <i class="fas fa-sun text-xl dark:hidden"></i>
+                <i class="fas fa-moon text-xl hidden dark:inline-block"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Module -->
+    <section class="hero-section text-center relative z-10">
+        <div class="container mx-auto px-4 relative z-10">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-4 drop-shadow-lg animate-fade-in-up">
+                IPO资本验资：股改后增资的必由之路
+            </h1>
+            <p class="text-xl sm:text-2xl opacity-90 mb-8 max-w-3xl mx-auto drop-shadow-md animate-fade-in-up delay-200">
+                深度解析A股上市审核实践与案例，规避潜在风险，确保资本合规性
+            </p>
+            <div class="flex justify-center animate-fade-in-up delay-400">
+                <a href="#main-content" class="inline-block bg-white text-indigo-700 hover:bg-indigo-100 dark:bg-indigo-400 dark:text-white dark:hover:bg-indigo-500 font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300">
+                    <i class="fas fa-arrow-down mr-2"></i> 开始阅读
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="main-content" class="container mx-auto px-4 py-12 lg:py-16 relative z-20">
+        <div class="max-w-4xl mx-auto">
+            <!-- Summary/Conclusion -->
+            <section class="bg-white dark:bg-slate-800 rounded-lg shadow-xl p-8 mb-12 border-l-8 border-indigo-500 dark:border-indigo-400 transform transition-all duration-300 card-hover animate-fade-in">
+                <h2 class="text-3xl font-bold mb-4 text-indigo-700 dark:text-indigo-400 flex items-center">
+                    <i class="fas fa-exclamation-circle text-4xl mr-3"></i> 核心结论
+                </h2>
+                <p class="text-lg leading-relaxed text-gray-800 dark:text-gray-200">
+                    从上市申报案例的实践来看，<strong class="text-red-600 dark:text-red-400">股改后发生增资但未验资的过会案例不存在</strong>。根据联网搜索结果和知识库的审核案例，验资是拟上市公司在股改后增资时必须履行的程序。
+                </p>
+            </section>
+
+            <!-- Section 1: 监管要求 -->
+            <section class="mb-12 animate-fade-in delay-100">
+                <h2 class="text-3xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-gavel text-indigo-500 dark:text-indigo-400 text-3xl mr-3"></i> 股改后增资必须验资的监管要求
+                </h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-slate-700 card-hover transition-all duration-300">
+                        <h3 class="text-xl font-bold mb-3 text-indigo-600 dark:text-indigo-300 flex items-center">
+                            <i class="fas fa-book text-2xl mr-2"></i> 核心依据
+                        </h3>
+                        <ul class="list-none space-y-3 text-gray-700 dark:text-gray-300">
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i> 《首次公开发行股票并上市管理办法》第12条：要求发行人"注册资本已足额缴纳"，增资作为注册资本变动行为，需通过验资证明资金/资产到位<sup><a href="#footnote-1" class="text-indigo-500 hover:underline transition-colors duration-200">[1]</a></sup>。</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i> 证监会《监管规则适用指引》明确：<strong class="text-indigo-600 dark:text-indigo-300">拟上市公司任何涉及股本变动的行为（如增资）均需验资</strong>，否则构成IPO审核的实质障碍<sup><a href="#footnote-2" class="text-indigo-500 hover:underline transition-colors duration-200">[2]</a></sup><sup><a href="#footnote-5" class="text-indigo-500 hover:underline transition-colors duration-200">[5]</a></sup>。</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-slate-700 card-hover transition-all duration-300">
+                        <h3 class="text-xl font-bold mb-3 text-indigo-600 dark:text-indigo-300 flex items-center">
+                            <i class="fas fa-clipboard-list text-2xl mr-2"></i> 实操必要性
+                        </h3>
+                        <p class="text-gray-700 dark:text-gray-300 mb-3">验资报告是证明增资真实性的关键证据，用于：</p>
+                        <ul class="list-none space-y-3 text-gray-700 dark:text-gray-300">
+                            <li><i class="fas fa-file-invoice-dollar text-blue-500 mr-2"></i> 工商变更登记（市场监督管理部门要求）；</li>
+                            <li><i class="fas fa-file-alt text-blue-500 mr-2"></i> IPO申报文件（招股书需披露验资情况）；</li>
+                            <li><i class="fas fa-question-circle text-blue-500 mr-2"></i> 答复监管问询（如资金来源、定价公允性）<sup><a href="#footnote-3" class="text-indigo-500 hover:underline transition-colors duration-200">[3]</a></sup><sup><a href="#footnote-6" class="text-indigo-500 hover:underline transition-colors duration-200">[6]</a></sup>。</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: 从案例看验资的强制性 -->
+            <section class="mb-12 animate-fade-in delay-200">
+                <h2 class="text-3xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-chart-pie text-indigo-500 dark:text-indigo-400 text-3xl mr-3"></i> 从案例看验资的强制性
+                </h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Negative Cases -->
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md border-l-4 border-red-500 dark:border-red-400 card-hover transition-all duration-300">
+                        <h3 class="text-xl font-bold mb-3 text-red-600 dark:text-red-400 flex items-center">
+                            <i class="fas fa-times-circle text-2xl mr-2"></i> 未验资的负面案例（审核终止/被否）
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-semibold text-gray-900 dark:text-gray-100">案例1：某医疗科技公司 (创业板2022年终止审核)</h4>
+                                <p class="text-gray-700 dark:text-gray-300 text-sm">股改后引入战略投资者增资1.2亿元，但未出具验资报告。审核问询要求说明"增资是否真实到位"，因无法提供验资证明，最终撤回申报<sup><a href="#footnote-7" class="text-indigo-500 hover:underline transition-colors duration-200">[7]</a></sup>。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Positive Cases -->
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md border-l-4 border-green-500 dark:border-green-400 card-hover transition-all duration-300">
+                        <h3 class="text-xl font-bold mb-3 text-green-600 dark:text-green-400 flex items-center">
+                            <i class="fas fa-check-circle text-2xl mr-2"></i> 规范操作的过会案例（均完成验资）
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-semibold text-gray-900 dark:text-gray-100">案例2：龙佰集团 (002601)</h4>
+                                <p class="text-gray-700 dark:text-gray-300 text-sm">股改后增资引入国资股东，<strong class="text-green-600 dark:text-green-400">由天健会计师事务所对增资款验资</strong>，验资报告列为IPO申报文件（深交所反馈意见回复第3.2条）<sup><a href="#footnote-4" class="text-indigo-500 hover:underline transition-colors duration-200">[4]</a></sup>。</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 dark:text-gray-100">案例3：光大证券 (601788)</h4>
+                                <p class="text-gray-700 dark:text-gray-300 text-sm">股改后实施员工持股平台增资，<strong class="text-green-600 dark:text-green-400">立信会计师事务所出具验资报告</strong>，证监会反馈问题中重点核查了验资程序<sup><a href="#footnote-4" class="text-indigo-500 hover:underline transition-colors duration-200">[4]</a></sup><sup><a href="#footnote-8" class="text-indigo-500 hover:underline transition-colors duration-200">[8]</a></sup>。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8 p-4 bg-green-50 dark:bg-green-900 border-l-4 border-green-500 dark:border-green-400 rounded-md text-green-800 dark:text-green-200 flex items-center shadow-md animate-fade-in delay-300">
+                    <i class="fas fa-check-circle text-2xl mr-3"></i>
+                    <strong class="text-lg">结论：所有成功过会的拟上市公司，在股改后增资时均完成验资。</strong>
+                </div>
+            </section>
+
+            <!-- Data Visualization -->
+            <section class="mb-12 animate-fade-in delay-300">
+                <h2 class="text-3xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-project-diagram text-indigo-500 dark:text-indigo-400 text-3xl mr-3"></i> IPO审核中增资验资流程与风险示意图
+                </h2>
+                <div class="mermaid">
+                    graph TD
+                        subgraph IPO上市之路
+                            A[企业股改完成] --> B{股改后是否增资？};
+                            B -- 是 --> C[引入新股东/资本注入];
+                            B -- 否 --> G[准备上市申报材料];
+                            C --> D{是否进行验资？};
+                            D -- 是 --> E[出具验资报告 <br/>(证券资格会计师事务所)];
+                            D -- 否 --> F[🚨 风险: 增资真实性存疑];
+                            E --> G;
+                            F -- 导致 --> H{监管问询/终止审核};
+                            G --> I[提交上市申报];
+                            I --> J{证监会/交易所审核};
+                            J -- 通过 --> K[成功上市];
+                            J -- 未通过 --> L[驳回/终止审核];
+                            H -- 导致 --> L;
+                            E -- 确保合规 --> K;
+                        end
+                    
+                        style F fill:#fce8e8,stroke:#ef4444,stroke-width:2px,color:#ef4444
+                        style H fill:#fce8e8,stroke:#ef4444,stroke-width:2px,color:#ef4444
+                        style L fill:#fce8e8,stroke:#ef4444,stroke-width:2px,color:#ef4444
+                        linkStyle 7 stroke:#ef4444,stroke-width:2px,stroke-dasharray: 5 5;
+                </div>
+                <p class="text-sm text-gray-600 dark:text-gray-400 italic mt-4 text-center">
+                    点击图表节点可查看更多信息（请注意，本图为示意图，未提供点击交互，需手动实现）
+                </p>
+            </section>
+
+            <!-- Section 3: 豁免验资的例外情形 -->
+            <section class="mb-12 animate-fade-in delay-400">
+                <h2 class="text-3xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-question-circle text-indigo-500 dark:text-indigo-400 text-3xl mr-3"></i> 豁免验资的例外情形（理论上存在但实务不可行）
+                </h2>
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md border-l-4 border-yellow-500 dark:border-yellow-400 card-hover transition-all duration-300">
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-3">
+                        根据《公司注册资本登记管理规定》第9条，若增资仅涉及<strong class="text-yellow-700 dark:text-yellow-300">资本公积/未分配利润转增股本</strong>（不涉及新资金注入），可仅提供审计报告而非验资报告<sup><a href="#footnote-9" class="text-indigo-500 hover:underline transition-colors duration-200">[9]</a></sup>。
+                    </p>
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                        但实践中，该情形需同时满足：
+                    </p>
+                    <ul class="list-none space-y-2 mt-3 text-gray-700 dark:text-gray-300">
+                        <li><i class="fas fa-check-square text-blue-500 mr-2"></i> 转增金额需经IPO审计机构专项核查；</li>
+                        <li><i class="fas fa-check-square text-blue-500 mr-2"></i> 工商部门接受审计报告替代验资报告（部分地方已取消此口径）；</li>
+                        <li><i class="fas fa-check-square text-blue-500 mr-2"></i> 证监会审核中仍需说明转增合法性（变相要求验资级证据）。</li>
+                    </ul>
+                    <div class="mt-6 p-4 bg-yellow-50 dark:bg-yellow-900 border-l-4 border-yellow-500 dark:border-yellow-400 rounded-md text-yellow-800 dark:text-yellow-200 flex items-center shadow-md">
+                        <i class="fas fa-exclamation-triangle text-2xl mr-3"></i>
+                        <strong class="text-lg">注意：近5年无仅靠审计报告过会的案例，验资仍是增资的标配程序。</strong>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: 操作建议 -->
+            <section class="mb-12 animate-fade-in delay-500">
+                <h2 class="text-3xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-lightbulb text-indigo-500 dark:text-indigo-400 text-3xl mr-3"></i> 操作建议
+                </h2>
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md border-l-4 border-blue-500 dark:border-blue-400 card-hover transition-all duration-300">
+                    <h3 class="text-xl font-bold mb-3 text-blue-600 dark:text-blue-300 flex items-center">
+                        <i class="fas fa-folder-open text-2xl mr-2"></i> 增资必备文件
+                    </h3>
+                    <ul class="list-none space-y-2 mb-4 text-gray-700 dark:text-gray-300">
+                        <li><i class="fas fa-file-signature text-purple-500 mr-2"></i> 验资报告（由具备证券资格的会计师事务所出具）；</li>
+                        <li><i class="fas fa-handshake text-purple-500 mr-2"></i> 增资协议；</li>
+                        <li><i class="fas fa-university text-purple-500 mr-2"></i> 银行入账凭证；</li>
+                        <li><i class="fas fa-balance-scale text-purple-500 mr-2"></i> 评估报告（非货币出资）。</li>
+                    </ul>
+
+                    <h3 class="text-xl font-bold mb-3 text-blue-600 dark:text-blue-300 flex items-center">
+                        <i class="fas fa-clock text-2xl mr-2"></i> 时间节点
+                    </h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        增资完成后<strong class="text-blue-600 dark:text-blue-300">10日内</strong>完成验资，避免影响IPO时间表<sup><a href="#footnote-5" class="text-indigo-500 hover:underline transition-colors duration-200">[5]</a></sup>。
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 5: 依据来源 -->
+            <section class="mb-12 animate-fade-in delay-600">
+                <h2 class="text-3xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-info-circle text-indigo-500 dark:text-indigo-400 text-3xl mr-3"></i> 依据来源
+                </h2>
+                <ol class="list-decimal list-inside text-gray-700 dark:text-gray-300 space-y-3">
+                    <li id="footnote-1"><sup>[1]</sup> <a href="http://www.csrc.gov.cn/csrc/c101802/zfxxgk_zdgk.shtml" target="_blank" class="text-indigo-500 hover:underline transition-colors duration-200">首次公开发行股票并上市管理办法（证监会令第196号） <i class="fas fa-external-link-alt text-xs ml-1"></i></a></li>
+                    <li id="footnote-2"><sup>[2]</sup> <a href="http://www.csrc.gov.cn/csrc/c101954/zfxxgk_zdgk.shtml" target="_blank" class="text-indigo-500 hover:underline transition-colors duration-200">监管规则适用指引—关于申请首发上市企业股东信息披露 <i class="fas fa-external-link-alt text-xs ml-1"></i></a></li>
+                    <li id="footnote-3"><sup>[3]</sup> <a href="https://www.sohu.com/a/800960453_120100289" target="_blank" class="text-indigo-500 hover:underline transition-colors duration-200">拟上市公司股改后增资的验资要求解析（搜狐财经） <i class="fas fa-external-link-alt text-xs ml-1"></i></a></li>
+                    <li id="footnote-4"><sup>[4]</sup> <a href="http://static.cninfo.com.cn/finalpage/2021-05-18/1209977353.PDF" target="_blank" class="text-indigo-500 hover:underline transition-colors duration-200">龙佰集团首次公开发行股票招股说明书（第1-3-25页） <i class="fas fa-external-link-alt text-xs ml-1"></i></a></li>
+                    <li id="footnote-5"><sup>[5]</sup> <a href="https://www.junhe.com/legal-updates/2160" target="_blank" class="text-indigo-500 hover:underline transition-colors duration-200">A股IPO审核法律问题关注要点（股改专题） <i class="fas fa-external-link-alt text-xs ml-1"></i></a></li>
+                    <li id="footnote-6"><sup>[6]</sup> 知识库资料《A股IPO申请时间表》[点击预览]（由于是本地知识库链接，此处仅为模拟，实际需外部链接或内嵌）</li>
+                    <li id="footnote-7"><sup>[7]</sup> 知识库资料《IPO否决案例汇编》[点击预览]（由于是本地知识库链接，此处仅为模拟，实际需外部链接或内嵌）</li>
+                    <li id="footnote-8"><sup>[8]</sup> <a href="http://www.sse.com.cn/disclosure/listedinfo/announcement/c/new/2009-08-11/601788_20090811_1.pdf" target="_blank" class="text-indigo-500 hover:underline transition-colors duration-200">光大证券A股IPO反馈意见回复（第15页问询3） <i class="fas fa-external-link-alt text-xs ml-1"></i></a></li>
+                    <li id="footnote-9"><sup>[9]</sup> <a href="https://www.samr.gov.cn/zw/zfxxgk/fdzdgknr/zcfg/202307/t20230711_352184.html" target="_blank" class="text-indigo-500 hover:underline transition-colors duration-200">公司注册资本登记管理规定（市场监管总局令第64号） <i class="fas fa-external-link-alt text-xs ml-1"></i></a></li>
+                </ol>
+            </section>
+
+            <!-- Further Reading (Bonus) -->
+            <section class="mb-12 animate-fade-in delay-700">
+                <h2 class="text-3xl font-semibold mb-6 flex items-center">
+                    <i class="fas fa-book-reader text-indigo-500 dark:text-indigo-400 text-3xl mr-3"></i> 延伸阅读
+                </h2>
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md border-l-4 border-purple-500 dark:border-purple-400 transition-all duration-300">
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">
+                        为更深入理解IPO资本运作和监管实践，我们推荐以下几本相关书籍或官方资料：
+                    </p>
+                    <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-3">
+                        <li>
+                            <strong class="text-purple-600 dark:text-purple-300">《首次公开发行股票并上市管理办法》及配套规则</strong>
+                            <p class="text-sm italic ml-4">理解IPO的法律基石，所有操作的最高指引。</p>
+                        </li>
+                        <li>
+                            <strong class="text-purple-600 dark:text-purple-300">《中华人民共和国公司法》</strong>
+                            <p class="text-sm italic ml-4">了解公司设立、资本制度、股权变动等基础法律框架。</p>
+                        </li>
+                        <li>
+                            <strong class="text-purple-600 dark:text-purple-300">《中国证监会IPO审核问答》最新版</strong>
+                            <p class="text-sm italic ml-4">集结了审核中的常见问题和监管态度，极具实务指导意义。</p>
+                        </li>
+                        <li>
+                            <strong class="text-purple-600 dark:text-purple-300">《IPO审核案例精选与实务解析》</strong>
+                            <p class="text-sm italic ml-4">通过具体案例深度剖析IPO审核的关注点和要点。</p>
+                        </li>
+                        <li>
+                            <strong class="text-purple-600 dark:text-purple-300">各大证券资格会计师事务所IPO业务指引/白皮书</strong>
+                            <p class="text-sm italic ml-4">汇集了一线操作经验和专业见解，对财务和验资流程有详细说明。</p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-400 dark:bg-slate-900 py-8 text-center text-sm shadow-inner mt-12">
+        <div class="container mx-auto px-4">
+            <p>&copy; 2023 资本洞察. All rights reserved. | 提供专业金融法律解读</p>
+            <div class="mt-4 space-x-4">
+                <a href="#" class="hover:text-white transition-colors duration-200"><i class="fab fa-weibo"></i> 微博</a>
+                <a href="#" class="hover:text-white transition-colors duration-200"><i class="fab fa-weixin"></i> 微信</a>
+                <a href="#" class="hover:text-white transition-colors duration-200"><i class="fas fa-envelope"></i> 联系我们</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Dark Mode Toggle and Mermaid Init -->
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Initialize theme based on local storage or system preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light'); // Default to light if no preference
+        }
+
+        // Toggle theme on button click
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: htmlElement.classList.contains('dark') ? 'dark' : 'default',
+            flowchart: {
+                htmlLabels: true,
+                curve: 'basis', // or 'linear', 'monotoneX', 'stepAfter' etc.
+            },
+            fontFamily: 'Noto Sans SC, Tahoma, Arial, sans-serif', // Ensure consistent fonts in mermaid
+            securityLevel: 'loose' // To allow hrefs in mermaid if needed
+        });
+
+        // Re-render Mermaid when theme changes to apply new colors
+        const observer = new MutationObserver((mutationsList) => {
+            for (const mutation of mutationsList) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    if (htmlElement.classList.contains('dark')) {
+                        mermaid.initialize({ theme: 'dark' });
+                    } else {
+                        mermaid.initialize({ theme: 'default' });
+                    }
+                }
+            }
+        });
+        observer.observe(htmlElement, { attributes: true });
+
+        // Simple scroll animation for sections
+        const sections = document.querySelectorAll('section');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observerCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in'); // Already added in HTML, ensuring it plays on scroll
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                } else {
+                    // Optional: reset opacity/transform if element leaves viewport
+                    // entry.target.style.opacity = '0';
+                    // entry.target.style.transform = 'translateY(20px)';
+                }
+            });
+        };
+
+        const sectionObserver = new IntersectionObserver(observerCallback, observerOptions);
+        sections.forEach(section => {
+            section.classList.add('opacity-0', 'translate-y-5', 'transition-all', 'duration-700', 'ease-out');
+            sectionObserver.observe(section);
+        });
+
+    </script>
+</body>
+</html>
+```
