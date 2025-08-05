@@ -1,0 +1,640 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拟上市公司独立董事股权激励限制深度解析</title>
+    <meta name="description" content="深入解析拟上市公司聘请独立董事并授予股权激励的合规限制与实务要点。">
+
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts for Noto Serif SC (Serif) and Noto Sans SC (Sans-serif) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Fonts */
+        :root {
+            --font-serif-sc: 'Noto Serif SC', 'Source Han Serif SC', 'Heiti SC', serif;
+            --font-sans-sc: 'Noto Sans SC', 'Source Han Sans SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            --font-base: Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-sans-sc), var(--font-base);
+            /* Default Dark Mode Styles */
+            background-color: #1a1a2e; /* Deep dark blue-purple */
+            color: #e0e0e0; /* Off-white text */
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Light Mode Styles (controlled by 'light' class on html) */
+        html.light body {
+            background-color: #f7f9fc; /* Light background */
+            color: #333; /* Darker text */
+        }
+
+        /* Specific element overrides for light mode */
+        html.light .bg-gray-800 {
+            background-color: #ffffff;
+            color: #333;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+        }
+
+        html.light .border-gray-700 {
+            border-color: #e0e0e0;
+        }
+
+        html.light .text-indigo-400 {
+            color: #4F46E5; /* Indigo-600 */
+        }
+
+        html.light .text-purple-400 {
+            color: #8B5CF6; /* Violet-600 */
+        }
+
+        html.light .mermaid-container {
+            background-color: #f0f0f5; /* Light background for chart */
+            border: 1px solid #dcdcdc;
+            color: #333; /* Dark text for chart */
+        }
+
+        /* Hero section specific styles */
+        .hero-section {
+            background: linear-gradient(135deg, #1A1A2E 0%, #2E2E4A 100%); /* Subtle gradient */
+            color: #e0e0e0;
+        }
+        html.light .hero-section {
+            background: linear-gradient(135deg, #f7f9fc 0%, #e0e6f0 100%);
+            color: #333;
+        }
+
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-serif-sc), var(--font-base);
+            font-weight: 700;
+            line-height: 1.25;
+            margin-bottom: 0.5em;
+        }
+
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-indigo-purple {
+            background-image: linear-gradient(to right, #6366F1, #8B5CF6);
+        }
+        html.light .gradient-indigo-purple {
+            background-image: linear-gradient(to right, #4F46E5, #7C3AED);
+        }
+
+        /* Custom scrollbar for subtle aesthetic in dark mode */
+        body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        body::-webkit-scrollbar-track {
+            background: #2a2a3e; /* Darker track */
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background-color: #6366F1; /* Indigo thumb */
+            border-radius: 4px;
+            border: 2px solid #2a2a3e;
+        }
+
+        html.light body::-webkit-scrollbar-track {
+            background: #e9eff5;
+        }
+
+        html.light body::-webkit-scrollbar-thumb {
+            background-color: #4F46E5;
+            border: 2px solid #e9eff5;
+        }
+
+        /* Mermaid chart specific styling within the dark/light theme */
+        .mermaid-container {
+            background-color: #2a2a3e; /* Darker background for chart */
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            margin-top: 2rem;
+            overflow-x: auto;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .mermaid-container svg {
+            max-width: none !important; /* Allow chart to expand if needed */
+            height: auto;
+        }
+
+        /* Styling for Mermaid nodes */
+        .mermaid-container .node rect,
+        .mermaid-container .node circle,
+        .mermaid-container .node ellipse,
+        .mermaid-container .node polygon {
+            stroke: #6366F1; /* Indigo border */
+            fill: #3F3F46; /* Gray-700 like fill */
+        }
+        .mermaid-container .node.primary rect,
+        .mermaid-container .node.primary circle,
+        .mermaid-container .node.primary ellipse,
+        .mermaid-container .node.primary polygon {
+             fill: #6366F1 !important; /* Indigo-500 */
+             stroke: #4F46E5 !important; /* Indigo-600 */
+        }
+
+
+        .mermaid-container .node.secondary rect,
+        .mermaid-container .node.secondary circle,
+        .mermaid-container .node.secondary ellipse,
+        .mermaid-container .node.secondary polygon {
+            fill: #8B5CF6 !important; /* Violet-500 */
+            stroke: #7C3AED !important; /* Violet-600 */
+        }
+
+        .mermaid-container .node text {
+            fill: #e0e0e0; /* Light text for nodes */
+            font-family: var(--font-sans-sc), var(--font-base) !important;
+            font-size: 14px;
+        }
+        .mermaid-container .edgePath .path {
+            stroke: #a78bfa; /* Light purple for lines */
+            stroke-width: 2px;
+        }
+        .mermaid-container .edgeLabel text {
+            fill: #e0e0e0;
+            background-color: #2a2a3e;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        /* Light mode specific styling for Mermaid chart */
+        html.light .mermaid-container {
+            background-color: #ffffff;
+            border: 1px solid #dcdcdc;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+        }
+
+        html.light .mermaid-container .node rect,
+        html.light .mermaid-container .node circle,
+        html.light .mermaid-container .node ellipse,
+        html.light .mermaid-container .node polygon {
+            stroke: #4F46E5; /* Indigo-600 border */
+            fill: #ffffff; /* White fill */
+        }
+
+        html.light .mermaid-container .node.primary rect,
+        html.light .mermaid-container .node.primary circle,
+        html.light .mermaid-container .node.primary ellipse,
+        html.light .mermaid-container .node.primary polygon {
+             fill: #4F46E5 !important; /* Indigo-600 */
+             stroke: #3730A3 !important; /* Indigo-800 */
+        }
+
+        html.light .mermaid-container .node.secondary rect,
+        html.light .mermaid-container .node.secondary circle,
+        html.light .mermaid-container .node.secondary ellipse,
+        html.light .mermaid-container .node.secondary polygon {
+            fill: #7C3AED !important; /* Violet-600 */
+            stroke: #6B21A8 !important; /* Violet-800 */
+        }
+
+
+        html.light .mermaid-container .node text {
+            fill: #333; /* Dark text for nodes */
+        }
+        html.light .mermaid-container .edgePath .path {
+            stroke: #6D28D9; /* Darker purple for lines */
+        }
+        html.light .mermaid-container .edgeLabel text {
+            fill: #333;
+            background-color: #ffffff;
+        }
+
+
+        /* Scroll-to-top button */
+        #scrollToTopBtn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+            transform: translateY(20px);
+        }
+        #scrollToTopBtn.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Hover effects for cards */
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        html.light .card-hover:hover {
+             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Footnote styling */
+        .footnote {
+            font-size: 0.85em;
+            color: #b0b0b0;
+            margin-top: 2rem;
+            line-height: 1.6;
+        }
+        html.light .footnote {
+            color: #666;
+        }
+
+        .footnote a {
+            color: #8B5CF6;
+            text-decoration: none;
+        }
+        html.light .footnote a {
+            color: #6D28D9;
+        }
+        .footnote a:hover {
+            text-decoration: underline;
+        }
+
+        /* First letter styling */
+        .first-letter::first-letter {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #6366F1; /* Indigo-500 */
+            float: left;
+            line-height: 1;
+            margin-right: 0.1em;
+            padding-right: 0.05em;
+            /* Adjust for better alignment with Chinese characters */
+            transform: translateY(0.1em); /* Fine-tune vertical position */
+            display: inline-block;
+        }
+        html.light .first-letter::first-letter {
+            color: #4F46E5; /* Indigo-600 */
+        }
+
+    </style>
+</head>
+<body class="antialiased leading-relaxed transition-colors duration-300 ease-in-out">
+    <!-- Theme Toggle Button -->
+    <button id="themeToggle" class="fixed top-6 right-6 z-50 p-3 rounded-full bg-gray-800 text-white shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-300 hover:scale-105">
+        <i class="fas fa-moon text-xl"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <header class="hero-section py-24 px-4 sm:px-6 lg:px-8 text-center border-b border-gray-700 light:border-gray-200 transition-colors duration-300">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-5xl sm:text-6xl font-extrabold mb-4 leading-tight text-gradient gradient-indigo-purple">
+                <i class="fas fa-gavel text-4xl mr-4 sm:mr-6 align-middle"></i>
+                拟上市公司独立董事股权激励限制深度解析
+            </h1>
+            <p class="text-xl sm:text-2xl mt-6 max-w-2xl mx-auto text-gray-300 light:text-gray-700 opacity-90 first-letter">
+                深入剖析现行监管框架下，拟上市公司在构建合规治理结构、特别是聘请独立董事并实施股权激励时，所面临的明确限制与关键合规要点。理解这些规定，对于企业顺利推进IPO进程至关重要。
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <!-- Core Conclusion Section -->
+        <section class="mb-16">
+            <h2 class="text-4xl font-bold mb-10 text-center text-gradient gradient-indigo-purple">
+                核心结论：监督与激励分离原则
+            </h2>
+            <div class="bg-gray-800 light:bg-white p-8 rounded-2xl shadow-xl border border-gray-700 light:border-gray-200 transition-all duration-300 card-hover">
+                <p class="text-lg leading-relaxed text-gray-200 light:text-gray-800">
+                    根据现行监管规定及实务操作，拟上市公司在聘请独立董事并授予股权激励时存在明确限制，核心结论是**独立董事不得成为股权激励对象**。这严格遵循了**“监督与激励分离”**的原则，以确保独立董事职能的纯粹性，避免因治理结构缺陷影响IPO审核。
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 1: 独立董事不得成为股权激励对象 -->
+        <section class="mb-16">
+            <h3 class="text-3xl font-bold mb-8 text-indigo-400 light:text-indigo-600">
+                <i class="fas fa-ban mr-3 text-purple-400 light:text-purple-600"></i>
+                一、独立董事不得成为股权激励对象
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-800 light:bg-white p-6 rounded-xl shadow-md border border-gray-700 light:border-gray-200 transition-all duration-300 card-hover">
+                    <h4 class="text-xl font-semibold mb-3 text-indigo-300 light:text-indigo-700 flex items-center">
+                        <i class="fas fa-balance-scale mr-2"></i> 独立性要求
+                    </h4>
+                    <p class="text-gray-300 light:text-gray-700 leading-relaxed">
+                        独立董事的核心职能是对公司决策进行独立监督，若接受股权激励可能导致其利益与公司绑定，丧失监督中立性。这是维护公司治理公正性的基石。
+                    </p>
+                </div>
+                <div class="bg-gray-800 light:bg-white p-6 rounded-xl shadow-md border border-gray-700 light:border-gray-200 transition-all duration-300 card-hover">
+                    <h4 class="text-xl font-semibold mb-3 text-indigo-300 light:text-indigo-700 flex items-center">
+                        <i class="fas fa-check-circle mr-2"></i> 监管一致性
+                    </h4>
+                    <p class="text-gray-300 light:text-gray-700 leading-relaxed">
+                        该规定在《上市公司股权激励管理办法》第八条[^1]、<cite>《国有控股上市公司（境内）实施股权激励试行办法》</cite>[^2]、<cite>《非上市公众公司监管指引第6号》</cite>[^3]、<cite>《全国股转系统股权激励规则》</cite>[^4]等文件中均被重申，明确挂牌公司或拟上市公司参照执行。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: 拟上市公司需提前合规安排 -->
+        <section class="mb-16">
+            <h3 class="text-3xl font-bold mb-8 text-indigo-400 light:text-indigo-600">
+                <i class="fas fa-clipboard-check mr-3 text-purple-400 light:text-purple-600"></i>
+                二、拟上市公司需提前合规安排
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-800 light:bg-white p-6 rounded-xl shadow-md border border-gray-700 light:border-gray-200 transition-all duration-300 card-hover">
+                    <h4 class="text-xl font-semibold mb-3 text-indigo-300 light:text-indigo-700 flex items-center">
+                        <i class="fas fa-user-tie mr-2"></i> 独立董事的合规聘任
+                    </h4>
+                    <p class="text-gray-300 light:text-gray-700 leading-relaxed">
+                        依据<cite>《公司法（2023年修订）》</cite>第一百三十六条[^5]，上市公司需在章程中载明独立董事的职权及薪酬机制，拟上市公司应提前设计相关治理结构。独立董事薪酬**仅限于固定津贴**，不得与公司业绩或股价挂钩[^6]。
+                    </p>
+                </div>
+                <div class="bg-gray-800 light:bg-white p-6 rounded-xl shadow-md border border-gray-700 light:border-gray-200 transition-all duration-300 card-hover">
+                    <h4 class="text-xl font-semibold mb-3 text-indigo-300 light:text-indigo-700 flex items-center">
+                        <i class="fas fa-user-slash mr-2"></i> 股权激励对象的范围限制
+                    </h4>
+                    <p class="text-gray-300 light:text-gray-700 leading-relaxed">
+                        除独立董事外，**监事**无论上市与否均不得成为激励对象[^1]。持股5%以上股东、实际控制人及其亲属，若作为核心员工被激励，需充分论证必要性与合理性[^7]。
+                    </p>
+                </div>
+                <div class="bg-gray-800 light:bg-white p-6 rounded-xl shadow-md border border-gray-700 light:border-gray-200 transition-all duration-300 card-hover">
+                    <h4 class="text-xl font-semibold mb-3 text-indigo-300 light:text-indigo-700 flex items-center">
+                        <i class="fas fa-hourglass-half mr-2"></i> 过渡期安排
+                    </h4>
+                    <p class="text-gray-300 light:text-gray-700 leading-relaxed">
+                        若公司在IPO申报前已实施股权激励，需确保激励计划中**未包含独立董事**；存在不当安排的，应在申报前终止或调整（如回购已授予权益）[^8]。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 实操建议 -->
+        <section class="mb-16">
+            <h3 class="text-3xl font-bold mb-8 text-indigo-400 light:text-indigo-600">
+                <i class="fas fa-lightbulb mr-3 text-purple-400 light:text-purple-600"></i>
+                三、实操建议
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-800 light:bg-white p-6 rounded-xl shadow-md border border-gray-700 light:border-gray-200 transition-all duration-300 card-hover">
+                    <h4 class="text-xl font-semibold mb-3 text-indigo-300 light:text-indigo-700 flex items-center">
+                        <i class="fas fa-user-times mr-2"></i> 提名回避机制
+                    </h4>
+                    <p class="text-gray-300 light:text-gray-700 leading-relaxed">
+                        控股股东不得提名独立董事候选人，以避免影响其独立性[^9]。
+                    </p>
+                </div>
+                <div class="bg-gray-800 light:bg-white p-6 rounded-xl shadow-md border border-gray-700 light:border-gray-200 transition-all duration-300 card-hover">
+                    <h4 class="text-xl font-semibold mb-3 text-indigo-300 light:text-indigo-700 flex items-center">
+                        <i class="fas fa-users-cog mr-2"></i> 薪酬委员会设置
+                    </h4>
+                    <p class="text-gray-300 light:text-gray-700 leading-relaxed">
+                        建议提前设立由独立董事主导的薪酬委员会，审议股权激励方案。例如，央企控股公司明确要求外部董事占半数以上[^10]。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Visualization Section (Mermaid Chart) -->
+        <section class="mb-16">
+            <h2 class="text-4xl font-bold mb-10 text-center text-gradient gradient-indigo-purple">
+                <i class="fas fa-sitemap mr-3"></i> 概念关系图：股权激励限制框架
+            </h2>
+            <div class="mermaid-container">
+                <pre class="mermaid">
+graph TD
+    A[拟上市公司股权激励限制]:::primary --> B{核心原则: 监督与激励分离};
+
+    B --> C[独立董事限制];
+    C --> C1[禁止成为股权激励对象];
+    C1 --> C1a[独立性要求]
+    C1 --> C1b[监管一致性];
+    C --> C2[薪酬仅限固定津贴];
+
+    B --> D[其他受限人员];
+    D --> D1[监事: 禁止成为激励对象];
+    D --> D2[持股5%+股东/实控人亲属: 需论证合理性];
+
+    B --> E[拟上市公司合规安排];
+    E --> E1[独立董事合规聘任];
+    E1 --> E1a[公司法2023修订];
+    E --> E2[股权激励对象范围限制];
+    E --> E3[过渡期安排];
+
+    B --> F[实操建议];
+    F --> F1[提名回避机制];
+    F --> F2[薪酬委员会设置];
+
+    classDef primary fill:#6366F1,stroke:#4F46E5,stroke-width:2px,color:#fff;
+    classDef secondary fill:#8B5CF6,stroke:#7C3AED,stroke-width:2px,color:#fff;
+    linkStyle default stroke:#A78BFA,stroke-width:2px;
+                </pre>
+            </div>
+            <p class="text-center text-gray-400 light:text-gray-600 mt-4 text-sm">点击图表可展开查看详细关联，帮助您直观理解股权激励的合规体系。</p>
+        </section>
+
+        <!-- Extended Reading Section -->
+        <section class="mb-16">
+            <h2 class="text-4xl font-bold mb-10 text-center text-gradient gradient-indigo-purple">
+                <i class="fas fa-book-reader mr-3"></i> 延伸阅读：推荐书目与资源
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-800 light:bg-white p-6 rounded-xl shadow-md border border-gray-700 light:border-gray-200 transition-all duration-300 card-hover">
+                    <h4 class="text-xl font-semibold mb-3 text-indigo-300 light:text-indigo-700">
+                        1. 《公司法（2023年修订）释义与适用》
+                    </h4>
+                    <p class="text-gray-300 light:text-gray-700 text-sm">
+                        深入理解最新公司法对公司治理、独立董事、董监高职责等方面的规定，是理解合规基石的必备参考。
+                    </p>
+                </div>
+                <div class="bg-gray-800 light:bg-white p-6 rounded-xl shadow-md border border-gray-700 light:border-gray-200 transition-all duration-300 card-hover">
+                    <h4 class="text-xl font-semibold mb-3 text-indigo-300 light:text-indigo-700">
+                        2. 《上市公司股权激励实务操作与案例精选》
+                    </h4>
+                    <p class="text-gray-300 light:text-gray-700 text-sm">
+                        结合具体案例分析股权激励方案设计、合规要点及常见问题，提供实务指导。
+                    </p>
+                </div>
+                <div class="bg-gray-800 light:bg-white p-6 rounded-xl shadow-md border border-gray-700 light:border-gray-200 transition-all duration-300 card-hover">
+                    <h4 class="text-xl font-semibold mb-3 text-indigo-300 light:text-indigo-700">
+                        3. 《中国证监会上市公司监管法律法规汇编》
+                    </h4>
+                    <p class="text-gray-300 light:text-gray-700 text-sm">
+                        核心监管文件（如《上市公司股权激励管理办法》、《上市公司独立董事管理办法》等）的集合，便于查阅原文，掌握第一手政策信息。
+                    </p>
+                </div>
+                <div class="bg-gray-800 light:bg-white p-6 rounded-xl shadow-md border border-gray-700 light:border-gray-200 transition-all duration-300 card-hover">
+                    <h4 class="text-xl font-semibold mb-3 text-indigo-300 light:text-indigo-700">
+                        4. 《企业IPO上市全程指引》
+                    </h4>
+                    <p class="text-gray-300 light:text-gray-700 text-sm">
+                        从整体流程上把握拟上市公司在IPO前的各项准备工作，包括公司治理、股权架构、信息披露等方方面面。
+                    </p>
+                </div>
+                <div class="bg-gray-800 light:bg-white p-6 rounded-xl shadow-md border border-gray-700 light:border-gray-200 transition-all duration-300 card-hover">
+                    <h4 class="text-xl font-semibold mb-3 text-indigo-300 light:text-indigo-700">
+                        5. 《公司治理：理论与实践》
+                    </h4>
+                    <p class="text-gray-300 light:text-gray-700 text-sm">
+                        理论层面的经典著作，帮助理解独立董事制度的本质和公司治理的深层逻辑，从宏观视角审视制度设计。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Legal Basis Footnotes -->
+        <section class="footnote">
+            <h4 class="text-xl font-bold mb-4 text-indigo-400 light:text-indigo-600"><i class="fas fa-code-branch mr-2"></i> 法律依据脚注</h4>
+            <ol class="list-decimal list-outside pl-5 space-y-2">
+                <li><a href="javascript:void(0);" title="查看《上市公司股权激励管理办法》">《上市公司股权激励管理办法》第八条（证监会令第148号）</a></li>
+                <li><a href="javascript:void(0);" title="查看《国有控股上市公司（境内）实施股权激励试行办法》">《国有控股上市公司（境内）实施股权激励试行办法》第十九条（国资发分配〔2006〕175号）</a></li>
+                <li><a href="javascript:void(0);" title="查看《非上市公众公司监管指引第6号》">《非上市公众公司监管指引第6号》第二条（证监会公告〔2020〕57号）</a></li>
+                <li><a href="javascript:void(0);" title="查看《全国股转系统股权激励和员工持股计划业务指引》">《全国股转系统股权激励和员工持股计划业务指引》第三条（股转系统公告〔2021〕901号）</a></li>
+                <li><a href="javascript:void(0);" title="查看《公司法（2023年修订）》">《公司法（2023年修订）》第一百三十六条（主席令第十五号）</a></li>
+                <li><a href="javascript:void(0);" title="查看中伦律师事务所《非上市科创企业股权激励操作要点》">实务案例参考：中伦律师事务所《非上市科创企业股权激励操作要点》</a></li>
+                <li><a href="javascript:void(0);" title="查看《创业板股票上市规则》">《创业板股票上市规则》第8.4.2条</a></li>
+                <li><a href="javascript:void(0);" title="查看上市审核指引">上市审核指引：证监会系统离职人员入股监管要求（2021）</a></li>
+                <li><a href="javascript:void(0);" title="查看《上市公司独立董事管理办法》">《上市公司独立董事管理办法》第二十一条（证监会令第196号）</a></li>
+                <li><a href="javascript:void(0);" title="查看《中央企业控股上市公司股权激励工作指引》">《中央企业控股上市公司股权激励工作指引》第十条（国资考分〔2020〕178号）</a></li>
+            </ol>
+        </section>
+    </main>
+
+    <footer class="text-center py-10 px-4 text-gray-400 light:text-gray-600 border-t border-gray-700 light:border-gray-200">
+        <p>&copy; 2023 拟上市公司合规指南. All rights reserved.</p>
+        <p class="mt-2 text-sm">本页面内容仅供参考，不构成法律意见。</p>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" class="p-4 rounded-full bg-indigo-600 text-white shadow-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 hover:bg-indigo-700 transition-all duration-300">
+        <i class="fas fa-arrow-up text-lg"></i>
+    </button>
+
+    <!-- Mermaid JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base', // Use 'base' and apply custom CSS for dark/light themes
+            flowchart: {
+                curve: 'basis',
+            },
+            themeVariables: {
+                darkMode: true, // Default to dark mode for Mermaid
+                primaryColor: '#6366F1', // Indigo-500
+                primaryBorderColor: '#4F46E5', // Indigo-600
+                lineColor: '#A78BFA', // Purple-300
+                textColor: '#e0e0e0',
+                clusterBkg: '#2A2A3E',
+                clusterBorder: '#6366F1',
+                mainBkg: '#2A2A3E',
+                secondaryColor: '#8B5CF6',
+                tertiaryColor: '#C4B5FD'
+            }
+        });
+
+        // Theme Toggle Functionality
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                themeToggleBtn.innerHTML = '<i class="fas fa-moon text-xl"></i>';
+                // Update Mermaid theme variables for dark mode
+                mermaid.initialize({
+                    themeVariables: {
+                        darkMode: true,
+                        primaryColor: '#6366F1',
+                        primaryBorderColor: '#4F46E5',
+                        lineColor: '#A78BFA',
+                        textColor: '#e0e0e0',
+                        clusterBkg: '#2A2A3E',
+                        clusterBorder: '#6366F1',
+                        mainBkg: '#2A2A3E',
+                        secondaryColor: '#8B5CF6',
+                        tertiaryColor: '#C4B5FD'
+                    }
+                });
+            } else {
+                htmlElement.classList.add('light');
+                htmlElement.classList.remove('dark');
+                themeToggleBtn.innerHTML = '<i class="fas fa-sun text-xl"></i>';
+                // Update Mermaid theme variables for light mode
+                mermaid.initialize({
+                    themeVariables: {
+                        darkMode: false,
+                        primaryColor: '#4F46E5',
+                        primaryBorderColor: '#3730A3',
+                        lineColor: '#6D28D9',
+                        textColor: '#333',
+                        clusterBkg: '#F7F9FC',
+                        clusterBorder: '#4F46E5',
+                        mainBkg: '#FFFFFF',
+                        secondaryColor: '#7C3AED',
+                        tertiaryColor: '#DDA0DD'
+                    }
+                });
+            }
+            localStorage.setItem('theme', theme);
+            // Re-render Mermaid chart after theme change
+            mermaid.contentLoaded();
+        }
+
+        // Set initial theme based on local storage or system preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+        } else {
+            setTheme('light'); // Default to light if no preference is set and system is not dark
+        }
+
+        // Event listener for theme toggle button
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) { // Only follow system if user hasn't manually set a preference
+                setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+
+
+        // Scroll to Top Button functionality
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) { // Show button after scrolling 300px
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
+```
