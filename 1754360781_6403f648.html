@@ -1,0 +1,600 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拟上市公司股权激励：合规路径与实操指南</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <style>
+        /* Define custom CSS variables for theme-specific colors */
+        :root {
+            --font-serif: 'Noto Serif SC', 'Times New Roman', Times, serif;
+            --font-sans: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+
+            /* Light mode defaults */
+            --bg-primary: #ffffff;
+            --text-primary: #1a202c;
+            --bg-secondary: #f7fafc;
+            --text-secondary: #4a5568;
+            --border-line: #e2e8f0;
+            --accent-color: #6366f1; /* indigo-500 */
+            --accent-color-darker: #4f46e5; /* indigo-600 */
+        }
+
+        /* Dark mode overrides */
+        html.dark {
+            --bg-primary: #1a202c; /* neutral-900 */
+            --text-primary: #e2e8f0; /* neutral-100 */
+            --bg-secondary: #2d3748; /* neutral-800 */
+            --text-secondary: #a0aec0; /* neutral-400 */
+            --border-line: #4a5568; /* neutral-700 */
+            --accent-color: #818cf8; /* indigo-400 */
+            --accent-color-darker: #6366f1; /* indigo-500 */
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-serif);
+        }
+
+        /* Apply dynamic colors via variables */
+        .bg-primary { background-color: var(--bg-primary); }
+        .text-primary { color: var(--text-primary); }
+        .bg-secondary { background-color: var(--bg-secondary); }
+        .text-secondary { color: var(--text-secondary); }
+        .border-line { border-color: var(--border-line); }
+        .accent-color { color: var(--accent-color); }
+        .bg-accent-color { background-color: var(--accent-color); }
+        .hover\:bg-accent-color-darker:hover { background-color: var(--accent-color-darker); }
+        .hover\:text-accent-color-darker:hover { color: var(--accent-color-darker); }
+
+        /* Fixed colors for Font Awesome icons or specific elements for visual variety */
+        .text-emerald-500 { color: #34d399; } /* green */
+        .text-yellow-500 { color: #f59e0b; } /* orange */
+        .text-green-500 { color: #22c55e; } /* stronger green */
+        .text-purple-400 { color: #a78bfa; } /* light purple */
+
+        /* Mermaid styling to ensure theme consistency */
+        .mermaid {
+            background-color: transparent !important; /* Let parent handle background */
+        }
+        /* Styles applied dynamically by JS for Mermaid nodes/text */
+        .mermaid .node rect {
+            fill: var(--mermaid-node-fill, #f0f4f8);
+            stroke: var(--mermaid-node-stroke, #cbd5e1);
+        }
+        .mermaid .node text {
+            fill: var(--mermaid-text-color, #1a202c);
+        }
+        .mermaid .edgePaths .edgeLabel text {
+             fill: var(--mermaid-text-color, #1a202c);
+        }
+        .mermaid .edgePaths .path {
+            stroke: var(--mermaid-node-stroke, #cbd5e1);
+        }
+        
+        /* Responsive table for small screens */
+        @media screen and (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            tr {
+                border: 1px solid var(--border-line);
+                margin-bottom: 0.75rem;
+                display: block;
+                border-radius: 0.5rem;
+            }
+            td {
+                border: none;
+                position: relative;
+                padding-left: 50% !important;
+                text-align: right;
+                display: block;
+            }
+            td:before {
+                position: absolute;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                content: attr(data-label);
+                text-align: left;
+                font-weight: 600;
+                color: var(--text-primary);
+            }
+        }
+        
+        /* Dark/Light Mode Toggle Animation */
+        .dark-mode-toggle {
+            transition: all 0.3s ease;
+        }
+        .dark-mode-toggle i {
+            transition: transform 0.3s ease;
+        }
+        .dark-mode-toggle.dark-mode-active i.fa-moon {
+            transform: rotate(360deg);
+        }
+        .dark-mode-toggle.light-mode-active i.fa-sun {
+            transform: rotate(360deg);
+        }
+    </style>
+</head>
+<body class="bg-primary text-primary transition-colors duration-300">
+
+    <!-- Dark/Light Mode Toggle Button -->
+    <button id="themeToggle" class="fixed top-6 right-6 p-3 rounded-full bg-secondary hover:bg-opacity-80 transition-all duration-300 z-50 shadow-lg dark-mode-toggle">
+        <i class="fas fa-sun text-xl text-yellow-500 dark-mode-icon hidden"></i>
+        <i class="fas fa-moon text-xl accent-color dark-mode-icon"></i>
+    </button>
+
+    <!-- Header / Hero Section -->
+    <header class="relative bg-gradient-to-br from-indigo-900 to-purple-900 py-24 md:py-32 text-white overflow-hidden shadow-xl">
+        <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1504868582730-80ea28ac8795?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <h1 class="text-4xl md:text-6xl font-serif font-bold leading-tight mb-4">
+                拟上市公司股权激励：合规路径与实操指南
+            </h1>
+            <p class="text-xl md:text-2xl font-light mb-8 opacity-90">
+                透视《上市公司股权激励管理办法》在拟上市阶段的适用性与风险规避
+            </p>
+            <p class="max-w-3xl mx-auto text-lg opacity-80">
+                在企业迈向资本市场的关键阶段，股权激励是吸引和留住核心人才、激发团队活力的重要工具。然而，对于拟上市公司而言，如何设计既能满足上市审核要求，又能充分发挥激励作用的方案，是摆在管理者面前的一大挑战。本文将深入解析相关法规，提供实用建议，助您规避潜在风险，铺就上市坦途。
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto px-6 py-16 md:py-20 max-w-5xl">
+
+        <!-- Section 1: Regulatory Logic -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-8 accent-color">
+                <i class="fas fa-balance-scale mr-3 text-2xl"></i>一、拟上市公司股权激励的监管逻辑
+            </h2>
+            <div class="space-y-8">
+                <div>
+                    <h3 class="text-2xl font-serif font-semibold mb-3 text-primary">
+                        1. 直接适用性有限，但审核标准趋同
+                    </h3>
+                    <p class="text-lg leading-relaxed text-secondary mb-4">
+                        《上市公司股权激励管理办法》（以下简称《管理办法》）第二条明确规定其适用范围为<strong class="accent-color font-bold">境内上市公司</strong>（含主板、科创板、创业板、北交所）。拟上市公司（未上市阶段）不受该法规直接约束，但需满足以下要求：
+                    </p>
+                    <ul class="list-none space-y-3 pl-4">
+                        <li class="relative pl-6">
+                            <i class="fas fa-check-circle absolute left-0 top-1 text-emerald-500"></i>
+                            <strong class="font-semibold text-primary">IPO审核标准：</strong>证监会及交易所要求拟上市公司股权激励方案在<strong class="accent-color">公司治理、定价公允性、股份支付处理</strong>等方面需实质符合《管理办法》精神（如北交所《审核问答》第20条<sup class="text-sm"><a href="#footnote1" class="accent-color hover:underline transition-colors duration-200">1</a></sup>）。
+                        </li>
+                        <li class="relative pl-6">
+                            <i class="fas fa-check-circle absolute left-0 top-1 text-emerald-500"></i>
+                            <strong class="font-semibold text-primary">过渡期衔接：</strong>若激励计划延续至上市后，则上市后部分需严格遵守《管理办法》（如行权安排、限售要求等）。
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-serif font-semibold mb-3 text-primary">
+                        2. 专项规则补充
+                    </h3>
+                    <p class="text-lg leading-relaxed text-secondary mb-4">
+                        拟上市公司可参考的专门规定包括：
+                    </p>
+                    <ul class="list-none space-y-3 pl-4">
+                        <li class="relative pl-6">
+                            <i class="fas fa-book-open absolute left-0 top-1 text-yellow-500"></i>
+                            <strong class="font-semibold text-primary">《非上市公众公司监管指引第6号》</strong>（2020年发布）<sup class="text-sm"><a href="#footnote2" class="accent-color hover:underline transition-colors duration-200">2</a></sup>：
+                            明确新三板挂牌公司实施股权激励的规范（如信息披露、定价机制），拟上市公司可参照执行。
+                        </li>
+                        <li class="relative pl-6">
+                            <i class="fas fa-book-open absolute left-0 top-1 text-yellow-500"></i>
+                            <strong class="font-semibold text-primary">《首发业务若干问题解答》</strong>（2020年修订）<sup class="text-sm"><a href="#footnote3" class="accent-color hover:underline transition-colors duration-200">3</a></sup>：
+                            要求拟上市公司说明股权激励的<strong class="accent-color">公允性、合理性及会计处理合规性</strong>（如股份支付费用计提）。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <div class="border-b border-line my-12"></div>
+
+        <!-- Section 2: Special Constraints (Table) -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-8 accent-color">
+                <i class="fas fa-handcuffs mr-3 text-2xl"></i>二、拟上市公司股权激励的特殊约束
+            </h2>
+            <div class="overflow-x-auto rounded-lg shadow-xl border border-line">
+                <table class="min-w-full divide-y divide-line">
+                    <thead class="bg-secondary">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-secondary uppercase tracking-wider md:w-1/4">关键事项</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-secondary uppercase tracking-wider md:w-2/4">拟上市公司特殊要求</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-secondary uppercase tracking-wider md:w-1/4">依据</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-line">
+                        <tr class="bg-primary hover:bg-secondary transition-colors duration-200">
+                            <td class="px-6 py-4 whitespace-normal text-sm font-medium text-primary" data-label="关键事项">激励对象</td>
+                            <td class="px-6 py-4 whitespace-normal text-sm text-secondary" data-label="拟上市公司特殊要求">允许包含外部顾问、供应商（需论证合理性），但<strong class="accent-color">独立董事、监事仍禁止</strong></td>
+                            <td class="px-6 py-4 whitespace-normal text-sm text-secondary" data-label="依据">上市审核案例<sup class="text-xs"><a href="#footnote4" class="accent-color hover:underline transition-colors duration-200">4</a></sup></td>
+                        </tr>
+                        <tr class="bg-primary hover:bg-secondary transition-colors duration-200">
+                            <td class="px-6 py-4 whitespace-normal text-sm font-medium text-primary" data-label="关键事项">定价机制</td>
+                            <td class="px-6 py-4 whitespace-normal text-sm text-secondary" data-label="拟上市公司特殊要求">允许低于净资产或市场价（如1元/股），但需证明<strong class="accent-color">商业合理性</strong>（如早期员工激励）</td>
+                            <td class="px-6 py-4 whitespace-normal text-sm text-secondary" data-label="依据">《监管指引第6号》第二条<sup class="text-xs"><a href="#footnote2" class="accent-color hover:underline transition-colors duration-200">2</a></sup></td>
+                        </tr>
+                        <tr class="bg-primary hover:bg-secondary transition-colors duration-200">
+                            <td class="px-6 py-4 whitespace-normal text-sm font-medium text-primary" data-label="关键事项">股份支付处理</td>
+                            <td class="px-6 py-4 whitespace-normal text-sm text-secondary" data-label="拟上市公司特殊要求">必须计提费用并冲减利润，可能影响报告期业绩（如净利润为负需充分披露）</td>
+                            <td class="px-6 py-4 whitespace-normal text-sm text-secondary" data-label="依据">《企业会计准则第11号》<sup class="text-xs"><a href="#footnote5" class="accent-color hover:underline transition-colors duration-200">5</a></sup></td>
+                        </tr>
+                        <tr class="bg-primary hover:bg-secondary transition-colors duration-200">
+                            <td class="px-6 py-4 whitespace-normal text-sm font-medium text-primary" data-label="关键事项">股份锁定</td>
+                            <td class="px-6 py-4 whitespace-normal text-sm text-secondary" data-label="拟上市公司特殊要求">激励对象所持股份需承诺<strong class="accent-color">上市后36个月锁定</strong>（若入股价格显著偏低）</td>
+                            <td class="px-6 py-4 whitespace-normal text-sm text-secondary" data-label="依据">《创业板股票首次公开发行上市审核问答》第13条<sup class="text-xs"><a href="#footnote6" class="accent-color hover:underline transition-colors duration-200">6</a></sup></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <div class="border-b border-line my-12"></div>
+
+        <!-- Section 3: Practical Advice -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-8 accent-color">
+                <i class="fas fa-shield-alt mr-3 text-2xl"></i>三、实操建议：规避IPO审核风险
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-secondary rounded-lg p-6 shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                    <h3 class="text-xl font-serif font-semibold mb-3 text-primary flex items-center">
+                        <i class="fas fa-hand-holding-usd text-emerald-400 mr-3"></i> 定价合理性设计
+                    </h3>
+                    <ul class="list-none space-y-3 text-secondary text-base">
+                        <li class="relative pl-6">
+                            <i class="fas fa-caret-right absolute left-0 top-1 text-purple-400"></i>若授予价低于净资产，需提供<strong class="accent-color">评估报告</strong>或<strong class="accent-color">同期外部融资估值</strong>作为支撑（如知识库案例《达诺尔新三板定增终止后重启》<sup class="text-xs"><a href="#footnote7" class="accent-color hover:underline transition-colors duration-200">7</a></sup>）。
+                        </li>
+                        <li class="relative pl-6">
+                            <i class="fas fa-caret-right absolute left-0 top-1 text-purple-400"></i>避免上市前1年内突击实施<strong class="accent-color">大幅折价激励</strong>（易被质疑利益输送）。
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-secondary rounded-lg p-6 shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                    <h3 class="text-xl font-serif font-semibold mb-3 text-primary flex items-center">
+                        <i class="fas fa-hourglass-half text-emerald-400 mr-3"></i> 激励周期安排
+                    </h3>
+                    <ul class="list-none space-y-3 text-secondary text-base">
+                        <li class="relative pl-6">
+                            <i class="fas fa-caret-right absolute left-0 top-1 text-purple-400"></i>建议在<strong class="accent-color">申报前12个月完成授予</strong>，避免上市审核期新增激励（如安靠智电案例<sup class="text-xs"><a href="#footnote8" class="accent-color hover:underline transition-colors duration-200">8</a></sup>）。
+                        </li>
+                        <li class="relative pl-6">
+                            <i class="fas fa-caret-right absolute left-0 top-1 text-purple-400"></i>期权计划需设定<strong class="accent-color">上市前已行权</strong>或<strong class="accent-color">上市后行权价符合《管理办法》</strong>的过渡条款。
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-secondary rounded-lg p-6 shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                    <h3 class="text-xl font-serif font-semibold mb-3 text-primary flex items-center">
+                        <i class="fas fa-ban text-emerald-400 mr-3"></i> 负面清单规避
+                    </h3>
+                    <ul class="list-none space-y-3 text-secondary text-base">
+                        <li class="relative pl-6">
+                            <i class="fas fa-caret-right absolute left-0 top-1 text-purple-400"></i>禁止包含<strong class="accent-color">证监会系统离职人员</strong>（穿透核查要求）；
+                        </li>
+                        <li class="relative pl-6">
+                            <i class="fas fa-caret-right absolute left-0 top-1 text-purple-400"></i>避免涉及<strong class="accent-color">对赌协议</strong>（需在申报前清理）。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <div class="border-b border-line my-12"></div>
+
+        <!-- Section 4: Alternative Solution -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-8 accent-color">
+                <i class="fas fa-lightbulb mr-3 text-2xl"></i>四、替代方案：员工持股计划（ESOP）
+            </h2>
+            <div class="bg-secondary rounded-lg p-8 shadow-xl">
+                <p class="text-lg leading-relaxed text-secondary mb-6">
+                    若需更灵活安排，可选择<strong class="accent-color font-bold">员工持股计划（ESOP）</strong>作为股权激励替代，其优势包括：
+                </p>
+                <ul class="list-none space-y-4 pl-4">
+                    <li class="relative pl-8">
+                        <i class="fas fa-check-square absolute left-0 top-1 text-green-500 text-xl"></i>
+                        <strong class="font-semibold text-primary">不受《管理办法》约束：</strong>可通过资管计划、合伙企业间接持股；
+                    </li>
+                    <li class="relative pl-8">
+                        <i class="fas fa-check-square absolute left-0 top-1 text-green-500 text-xl"></i>
+                        <strong class="font-semibold text-primary">定价更灵活：</strong>允许份额折价授予（无需股份支付处理）；
+                    </li>
+                    <li class="relative pl-8">
+                        <i class="fas fa-check-square absolute left-0 top-1 text-green-500 text-xl"></i>
+                        <strong class="font-semibold text-primary">锁定豁免：</strong>符合“闭环原则”（仅内部员工持有）时，上市后无需穿透计算股东人数<sup class="text-xs"><a href="#footnote9" class="accent-color hover:underline transition-colors duration-200">9</a></sup>。
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="border-b border-line my-12"></div>
+
+        <!-- Section 5: Data Visualization - Mermaid Graph -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-8 accent-color">
+                <i class="fas fa-project-diagram mr-3 text-2xl"></i>五、股权激励合规路径示意图
+            </h2>
+            <div class="bg-secondary rounded-lg p-6 shadow-xl flex justify-center items-center h-96 md:h-auto overflow-auto">
+                <div class="mermaid w-full h-full text-center" id="mermaidGraph">
+                    graph TD
+                        A[拟上市公司股权激励]:::primaryNode --> B(监管逻辑):::sectionNode;
+                        B --> B1(直接适用性有限);
+                        B --> B2(审核标准趋同);
+                        B --> B3(专项规则补充);
+
+                        A --> C(特殊约束):::constraintNode;
+                        C --> C1(激励对象限定);
+                        C --> C2(定价机制);
+                        C --> C3(股份支付处理);
+                        C --> C4(股份锁定);
+
+                        A --> D(实操建议：规避IPO风险):::adviceNode;
+                        D --> D1(定价合理性);
+                        D --> D2(激励周期);
+                        D --> D3(负面清单);
+
+                        A --> E(替代方案：员工持股计划 ESOP):::alternativeNode;
+                        E --> E1(不受《管理办法》约束);
+                        E --> E2(定价更灵活);
+                        E --> E3(锁定豁免);
+
+                        D1 -- 需提供 --> F(评估报告/融资估值);
+                        D2 -- 建议在 --> G(申报前12个月授予);
+                        D3 -- 规避 --> H(离职人员/对赌);
+
+                        C2 -- 影响 --> C3;
+                        B2 -- 影响 --> D;
+                        E -- 提供更灵活的 --> A;
+
+                        classDef primaryNode fill:#4F46E5,stroke:#fff,stroke-width:2px,color:#fff; /* Indigo for main */
+                        classDef sectionNode fill:#3B82F6,stroke:#fff,color:#fff; /* Blue for sections */
+                        classDef constraintNode fill:#DC2626,stroke:#fff,color:#fff; /* Red for constraints */
+                        classDef adviceNode fill:#10B981,stroke:#fff,color:#fff; /* Green for advice */
+                        classDef alternativeNode fill:#F59E0B,stroke:#fff,color:#fff; /* Orange for alternatives */
+                </div>
+            </div>
+        </section>
+
+        <div class="border-b border-line my-12"></div>
+
+        <!-- Section 6: Conclusion -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-8 accent-color">
+                <i class="fas fa-check-double mr-3 text-2xl"></i>结论
+            </h2>
+            <div class="bg-secondary rounded-lg p-8 shadow-xl">
+                <p class="text-lg leading-relaxed text-primary">
+                    拟上市公司虽不直接适用《上市公司股权激励管理办法》，但需以该法规为合规底线，结合非上市公众公司监管规则及IPO审核要求设计方案。
+                    <strong class="accent-color font-bold">优先选择员工持股计划可降低合规成本</strong>，若采用期权/限制性股权模式，则需重点把控<strong class="accent-color font-bold">定价公允性与会计处理合规性</strong>。
+                </p>
+            </div>
+        </section>
+
+        <!-- Footnotes Section -->
+        <section id="footnotes" class="mt-20 text-sm text-secondary leading-loose border-t border-line pt-8">
+            <h3 class="text-xl font-serif font-semibold mb-4 text-primary">法规依据脚注</h3>
+            <ol>
+                <li id="footnote1" class="mb-2">
+                    <span class="font-bold text-primary"><sup>1</sup></span> 北交所《发行上市审核规则适用指引第1号》第20条（2021年）
+                </li>
+                <li id="footnote2" class="mb-2">
+                    <span class="font-bold text-primary"><sup>2</sup></span> 《非上市公众公司监管指引第6号》第二条（证监会公告〔2020〕57号）
+                </li>
+                <li id="footnote3" class="mb-2">
+                    <span class="font-bold text-primary"><sup>3</sup></span> 《首发业务若干问题解答（2020修订）》问题25（证监会发行部）
+                </li>
+                <li id="footnote4" class="mb-2">
+                    <span class="font-bold text-primary"><sup>4</sup></span> 华绿生物（300970）IPO问询案例（激励对象含外部顾问）
+                </li>
+                <li id="footnote5" class="mb-2">
+                    <span class="font-bold text-primary"><sup>5</sup></span> 《企业会计准则第11号——股份支付》第五条
+                </li>
+                <li id="footnote6" class="mb-2">
+                    <span class="font-bold text-primary"><sup>6</sup></span> 《创业板股票首次公开发行上市审核问答》第13条（深交所〔2020〕）
+                </li>
+                <li id="footnote7" class="mb-2">
+                    <span class="font-bold text-primary"><sup>7</sup></span> 达诺尔新三板终止激励计划案例
+                    <span class="accent-color hover:underline transition-colors duration-200 cursor-pointer">[点击可以预览知识库资料的相关内容]</span>
+                </li>
+                <li id="footnote8" class="mb-2">
+                    <span class="font-bold text-primary"><sup>8</sup></span> 安靠智电（300617）上市前期权计划调整案例
+                </li>
+                <li id="footnote9" class="mb-2">
+                    <span class="font-bold text-primary"><sup>9</sup></span> 《关于上市公司实施员工持股计划试点的指导意见》第三条（证监会公告〔2014〕33号）
+                </li>
+            </ol>
+        </section>
+
+        <!-- Further Reading Section -->
+        <section class="mt-20">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-8 accent-color">
+                <i class="fas fa-book-reader mr-3 text-2xl"></i>延伸阅读
+            </h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-secondary rounded-lg p-6 shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                    <h3 class="text-xl font-serif font-semibold mb-2 text-primary">
+                        1. 《公司法》
+                    </h3>
+                    <p class="text-secondary text-base">
+                        理解公司股权结构、股份发行、股东权利等基本法律框架，是设计股权激励方案的基础。
+                        <a href="https://www.gov.cn/gongbao/2023/issue_9/202312/content_2550186.htm" target="_blank" class="accent-color hover:underline ml-2">查阅最新版</a>
+                    </p>
+                </div>
+                <div class="bg-secondary rounded-lg p-6 shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                    <h3 class="text-xl font-serif font-semibold mb-2 text-primary">
+                        2. 《首次公开发行股票并上市管理办法》
+                    </h3>
+                    <p class="text-secondary text-base">
+                        全面了解IPO审核的关键要求，特别是对公司治理、关联交易、同业竞争等方面的规定，与股权激励合规性息息相关。
+                        <a href="http://www.csrc.gov.cn/csrc/c100028/c2057393/content.shtml" target="_blank" class="accent-color hover:underline ml-2">查阅</a>
+                    </p>
+                </div>
+                <div class="bg-secondary rounded-lg p-6 shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                    <h3 class="text-xl font-serif font-semibold mb-2 text-primary">
+                        3. 《企业会计准则第11号——股份支付》
+                    </h3>
+                    <p class="text-secondary text-base">
+                        财务专业人士的必备，详细解读股权激励的会计处理方法，确保方案的财务合规性。
+                        <a href="http://www.mof.gov.cn/zhengwuxinxi/zhengcefabu/200602/t20060215_1456346.htm" target="_blank" class="accent-color hover:underline ml-2">查阅</a>
+                    </p>
+                </div>
+                <div class="bg-secondary rounded-lg p-6 shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                    <h3 class="text-xl font-serif font-semibold mb-2 text-primary">
+                        4. 《上市公司股权激励实务与案例精解》
+                    </h3>
+                    <p class="text-secondary text-base">
+                        一本结合理论与实践的工具书，通过大量真实案例深入分析股权激励的实施细节与常见问题。
+                        <span class="accent-color ml-2">(书籍推荐，无直接链接)</span>
+                    </p>
+                </div>
+                <div class="bg-secondary rounded-lg p-6 shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                    <h3 class="text-xl font-serif font-semibold mb-2 text-primary">
+                        5. 《IPO审核关注要点与实务》
+                    </h3>
+                    <p class="text-secondary text-base">
+                        由资深投行专家撰写，系统梳理IPO审核过程中监管机构关注的重点和实务操作技巧。
+                        <span class="accent-color ml-2">(书籍推荐，无直接链接)</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-secondary text-secondary py-12 mt-20 text-center">
+        <div class="container mx-auto px-6">
+            <p>&copy; 2024 股权激励合规指南. All rights reserved.</p>
+            <p class="text-sm mt-2">免责声明：本内容仅供参考，不构成任何法律或投资建议。</p>
+        </div>
+    </footer>
+
+    <!-- Mermaid.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid Configuration Object
+        const mermaidConfig = {
+            startOnLoad: true, // Auto-render Mermaid diagrams found in the DOM
+            securityLevel: 'loose', // Allows more flexibility for diagram syntax
+            flowchart: {
+                curve: 'linear', // Straight lines for arrows in flowcharts
+                htmlLabels: true // Allows HTML content in labels (e.g., strong tags)
+            },
+            theme: 'default' // Default Mermaid theme (light), will be updated by JS
+        };
+
+        // DOM Elements
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set the theme (dark/light)
+        function setTheme(theme) {
+            // Update HTML class for Tailwind styling
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                // Toggle Font Awesome icons
+                themeToggle.querySelector('.fa-sun').classList.add('hidden');
+                themeToggle.querySelector('.fa-moon').classList.remove('hidden');
+                localStorage.setItem('theme', 'dark'); // Store user preference
+                mermaidConfig.theme = 'dark'; // Set Mermaid theme to dark
+                // Set custom CSS variables for Mermaid (overriding default Mermaid behavior)
+                htmlElement.style.setProperty('--mermaid-node-fill', '#334155');
+                htmlElement.style.setProperty('--mermaid-node-stroke', '#94a3b8');
+                htmlElement.style.setProperty('--mermaid-text-color', '#e2e8f0');
+            } else {
+                htmlElement.classList.add('light');
+                htmlElement.classList.remove('dark');
+                // Toggle Font Awesome icons
+                themeToggle.querySelector('.fa-moon').classList.add('hidden');
+                themeToggle.querySelector('.fa-sun').classList.remove('hidden');
+                localStorage.setItem('theme', 'light'); // Store user preference
+                mermaidConfig.theme = 'default'; // Set Mermaid theme to default (light)
+                // Set custom CSS variables for Mermaid
+                htmlElement.style.setProperty('--mermaid-node-fill', '#f0f4f8');
+                htmlElement.style.setProperty('--mermaid-node-stroke', '#cbd5e1');
+                htmlElement.style.setProperty('--mermaid-text-color', '#1a202c');
+            }
+            // Add/remove active class for subtle animation on the toggle button
+            themeToggle.classList.toggle('dark-mode-active', theme === 'dark');
+            themeToggle.classList.toggle('light-mode-active', theme === 'light');
+
+            // Re-render Mermaid graph with the new theme settings
+            renderMermaidGraph();
+        }
+
+        // Function to render/re-render the Mermaid graph
+        function renderMermaidGraph() {
+            mermaid.initialize(mermaidConfig); // Re-initialize Mermaid with the current theme config
+            const mermaidDiv = document.getElementById('mermaidGraph');
+            if (mermaidDiv) {
+                // Get the graph definition from the HTML content
+                const graphDefinition = mermaidDiv.innerText;
+                // Clear the existing SVG to prevent duplicates
+                mermaidDiv.innerHTML = ''; 
+                // Render the graph using Mermaid API
+                mermaid.render('mermaidGraphSvg', graphDefinition)
+                    .then(({ svg, bindFunctions }) => {
+                        mermaidDiv.innerHTML = svg; // Inject the new SVG
+                        if (bindFunctions) bindFunctions(); // Bind any interactive functions (if applicable)
+                    })
+                    .catch(error => console.error('Mermaid render error:', error)); // Log errors
+            }
+        }
+
+        // Initial theme setup on page load
+        // 1. Check user's stored preference in localStorage
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme) {
+            setTheme(storedTheme);
+        } 
+        // 2. If no stored preference, check system's preferred color scheme
+        else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark');
+        } 
+        // 3. Default to light theme if neither is set
+        else {
+            setTheme('light');
+        }
+
+        // Event Listener for the theme toggle button
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark'); // Toggle the theme
+        });
+
+        // Event Listener for system theme changes (only if user hasn't manually set a preference)
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) { // Only update if no explicit user preference
+                setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+
+        // Ensure Mermaid graph is rendered after the DOM is fully loaded and initial theme is set
+        document.addEventListener('DOMContentLoaded', renderMermaidGraph);
+    </script>
+</body>
+</html>
+```
