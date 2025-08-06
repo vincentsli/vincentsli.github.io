@@ -1,0 +1,626 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板IPO研发合规指南：全流程文档与管控深度解析</title>
+    <meta name="description" content="深入解析科创板IPO中研发全流程必备文件与关键流程管控要求，结合上市规则、审核问询案例及监管指引，助您规避核查雷区，提升合规性。">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💡</text></svg>">
+
+    <!-- Google Fonts for Chinese (Noto Serif SC for headings, Noto Sans SC for body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+
+    <style>
+        /* Custom base styles for dark mode and font overrides */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Noto Sans SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', sans-self;
+            @apply bg-gray-900 text-gray-100;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Dark mode specific styles */
+        .dark body {
+            @apply bg-gray-900 text-gray-100;
+        }
+        .dark .bg-white {
+            @apply bg-gray-800;
+        }
+        .dark .text-gray-900 {
+            @apply text-gray-100;
+        }
+        .dark .border-gray-200 {
+            @apply border-gray-700;
+        }
+        .dark .hover\:bg-gray-100:hover {
+            @apply hover:bg-gray-700;
+        }
+        .dark .bg-gray-100 {
+             @apply bg-gray-800;
+        }
+        .dark .text-gray-700 {
+            @apply text-gray-300;
+        }
+        .dark a {
+            @apply text-sky-400 hover:text-sky-300;
+        }
+        .dark strong {
+            @apply text-sky-300; /* Highlight strong tags in dark mode */
+        }
+        .dark h1, .dark h2, .dark h3, .dark h4 {
+            font-family: 'Noto Serif SC', serif;
+            @apply text-sky-300;
+        }
+        .dark table {
+            @apply bg-gray-800;
+        }
+        .dark thead {
+            @apply bg-gray-700;
+        }
+        .dark th {
+            @apply border-gray-600;
+        }
+        .dark td {
+            @apply border-gray-700;
+        }
+        .dark .mermaid svg {
+            background-color: transparent !important; /* Ensure mermaid background is transparent in dark mode */
+        }
+        .dark .mermaid .edge path {
+            stroke: #9ca3af !important; /* Edge color */
+        }
+        .dark .mermaid .node rect, .dark .mermaid .node circle {
+            fill: #374151 !important; /* Node background */
+            stroke: #60a5fa !important; /* Node border */
+        }
+        .dark .mermaid .node text {
+            fill: #e5e7eb !important; /* Node text */
+        }
+
+
+        /* Light mode specific styles */
+        .light body {
+            @apply bg-gray-50 text-gray-900;
+        }
+        .light .bg-white {
+            @apply bg-white;
+        }
+        .light .text-gray-900 {
+            @apply text-gray-900;
+        }
+        .light .border-gray-200 {
+            @apply border-gray-200;
+        }
+        .light .hover\:bg-gray-100:hover {
+            @apply hover:bg-gray-100;
+        }
+        .light .bg-gray-100 {
+             @apply bg-gray-100;
+        }
+        .light .text-gray-700 {
+            @apply text-gray-700;
+        }
+        .light a {
+            @apply text-blue-600 hover:text-blue-700;
+        }
+        .light strong {
+            @apply text-blue-700; /* Highlight strong tags in light mode */
+        }
+        .light h1, .light h2, .light h3, .light h4 {
+            font-family: 'Noto Serif SC', serif;
+            @apply text-blue-700;
+        }
+        .light table {
+            @apply bg-white;
+        }
+        .light thead {
+            @apply bg-gray-100;
+        }
+        .light th {
+            @apply border-gray-300;
+        }
+        .light td {
+            @apply border-gray-200;
+        }
+        .light .mermaid svg {
+            background-color: transparent !important; /* Ensure mermaid background is transparent in light mode */
+        }
+        .light .mermaid .edge path {
+            stroke: #6b7280 !important; /* Edge color */
+        }
+        .light .mermaid .node rect, .light .mermaid .node circle {
+            fill: #e0f2f7 !important; /* Node background - light blue */
+            stroke: #2563eb !important; /* Node border - blue-600 */
+        }
+        .light .mermaid .node text {
+            fill: #1f2937 !important; /* Node text - gray-900 */
+        }
+
+        /* General styles */
+        h1, h2, h3, h4 {
+            font-family: 'Noto Serif SC', serif;
+        }
+        .container {
+            max-width: 960px; /* Equivalent to max-w-4xl for better readability */
+        }
+        .section-separator {
+            @apply flex items-center my-12;
+        }
+        .section-separator .line {
+            @apply flex-grow border-t border-current;
+        }
+        .section-separator .icon {
+            @apply mx-4 text-3xl;
+        }
+        .list-icon {
+            @apply text-sky-400 dark:text-sky-300;
+        }
+        .mermaid {
+            background-color: transparent !important;
+        }
+    </style>
+</head>
+<body class="transition-colors duration-300">
+    <div class="relative min-h-screen">
+        <!-- Theme Toggle Button -->
+        <button id="theme-toggle" class="fixed bottom-6 right-6 p-3 rounded-full shadow-lg z-50 transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200">
+            <i class="fas fa-sun text-xl hidden dark:block"></i>
+            <i class="fas fa-moon text-xl block dark:hidden"></i>
+        </button>
+
+        <!-- Hero Section -->
+        <header class="relative overflow-hidden pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-gray-800 to-gray-900 dark:from-gray-900 dark:to-black text-white shadow-2xl">
+            <!-- Background texture/pattern -->
+            <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiM5YTE2MmIuMDUiIGZpbGwtb3BhY2l0eT0iLjMiIGZpbGwtcnVsZT0ibm9uemVybyI+PHBhdGggZD0iTTM2IDM0djEyYzAgLjU1LS40NSAxLTMgMVMyOSA0Ni41NSAyOSA0NnYtMTJoN2wtLjE2LTJMLTQuMjEtMi44NS00IDIxLS4yMiA0Ny42Ny0uMzkgNjAuMyA1OC44NCA1MC4xMiA2MC40IDU4Ljk1eiIvPjxwYXRoIGQ9Ik0wIDYwYzAtLjU1LjQ1LTExLjUgMi4yMS0zMi4xNkw0LjY0LTMuOTZsNC44OCAyOS42OS00LjMzIDIzLjkyYzAgLjU1LS40NSAxLTEgMXMtMS0uNDUtMS0xVjM2aDRsLjE2IDJMNzMuMiAzNC4yMSAzNCA1LjUxIDUuOTktNC4wOSAxLjE0IDU2LjczLTEuNjEgNTcuMjV6Ii8+PC9nPjwvZz48L3N2Zz4=')]"></div>
+
+            <div class="relative z-10 container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg text-sky-300">
+                    <i class="fas fa-award mr-3 text-sky-400"></i>科创板IPO研发合规指南
+                </h1>
+                <p class="text-xl md:text-3xl font-light italic mb-8 text-gray-300">
+                    全流程文档与管控深度解析
+                </p>
+                <div class="max-w-3xl mx-auto text-lg leading-relaxed text-gray-200 bg-gray-800 bg-opacity-70 p-6 rounded-xl shadow-lg border border-gray-700">
+                    <p class="mb-4">
+                        从科创板IPO审核实践看，发行人研发过程需建立完整的文档体系和流程管控机制。
+                    </p>
+                    <p>
+                        本指南基于<strong>上市规则、审核问询案例及监管指引</strong>，为您深度分析必备文件与流程，核心依据包括《科创属性评价指引》《监管规则适用指引——发行类第9号》及2023-2025年终止案例，助您高效规避合规风险。
+                    </p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-6 py-12 md:py-16">
+
+            <!-- Section 1: 研发全流程必备文件 -->
+            <section id="essential-documents" class="mb-16">
+                <div class="section-separator text-sky-400 dark:text-sky-300">
+                    <span class="line"></span>
+                    <i class="fas fa-clipboard-list icon"></i>
+                    <span class="line"></span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">
+                    一、研发全流程必备文件
+                </h2>
+                <p class="text-lg mb-8 text-center text-gray-300">
+                    根据监管问询及案例总结，以下文件缺一不可，是研发合规的基石。
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Document Type 1 -->
+                    <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-gray-700">
+                        <h3 class="text-2xl font-semibold mb-4 text-sky-300">
+                            <i class="fas fa-file-invoice mr-3 list-icon"></i>1. 项目立项文件
+                        </h3>
+                        <ul class="list-disc pl-5 text-gray-300 space-y-2">
+                            <li><strong>立项建议书</strong>：明确技术目标、可行性分析（需引用行业技术报告）</li>
+                            <li><strong>立项批复</strong>：需体现<strong class="text-sky-400 dark:text-sky-200">管理层书面审批痕迹</strong>（如签批页），防止“先研发后补程序”</li>
+                        </ul>
+                        <p class="mt-4 text-sm text-gray-400 italic">
+                            <i class="fas fa-lightbulb mr-2"></i><strong class="text-yellow-400">案例警示：</strong> 江苏XX技术（2024年终止）因2个项目无书面立项被质疑研发真实性。
+                        </p>
+                    </div>
+
+                    <!-- Document Type 2 -->
+                    <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-gray-700">
+                        <h3 class="text-2xl font-semibold mb-4 text-sky-300">
+                            <i class="fas fa-tasks mr-3 list-icon"></i>2. 过程管理文档
+                        </h3>
+                        <ul class="list-disc pl-5 text-gray-300 space-y-2">
+                            <li><strong>项目计划书</strong>：细化阶段目标、预算、人员分工（与工时系统匹配）</li>
+                            <li><strong>阶段性评审报告</strong>：至少按季度记录进度偏差分析（如测试数据与预期的差异）</li>
+                            <li><strong>研发日志</strong>：每日记录关键实验参数、失败原因（<strong class="text-sky-400 dark:text-sky-200">现场督导重点检查对象</strong>）</li>
+                        </ul>
+                        <p class="mt-4 text-sm text-gray-400 italic">
+                            <i class="fas fa-search mr-2"></i><strong class="text-yellow-400">问询案例：</strong> 思特威（688213）被要求说明“研发日志是否完整覆盖所有关键实验”。
+                        </p>
+                    </div>
+
+                    <!-- Document Type 3 -->
+                    <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-gray-700">
+                        <h3 class="text-2xl font-semibold mb-4 text-sky-300">
+                            <i class="fas fa-flask mr-3 list-icon"></i>3. 成果转化证据
+                        </h3>
+                        <ul class="list-disc pl-5 text-gray-300 space-y-2">
+                            <li><strong>试制样品检测报告</strong>：需由<strong class="text-sky-400 dark:text-sky-200">第三方检测机构</strong>出具（如性能测试报告）</li>
+                            <li><strong>客户验证文件</strong>：小批量订单合同及验收单据（证明技术落地能力）</li>
+                            <li><strong>专利/软著申请底稿</strong>：记录发明人贡献占比（避免权属纠纷）</li>
+                        </ul>
+                        <p class="mt-4 text-sm text-gray-400 italic">
+                            <i class="fas fa-check-circle mr-2"></i><strong class="text-yellow-400">监管要求：</strong> 《科创属性评价指引》强调研发成果需支撑主营业务收入。
+                        </p>
+                    </div>
+
+                    <!-- Document Type 4 -->
+                    <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-gray-700">
+                        <h3 class="text-2xl font-semibold mb-4 text-sky-300">
+                            <i class="fas fa-dollar-sign mr-3 list-icon"></i>4. 费用归集凭证
+                        </h3>
+                        <ul class="list-disc pl-5 text-gray-300 space-y-2">
+                            <li><strong>研发领料单</strong>：需标注项目编号、领用人和用途（与BOM表关联）</li>
+                            <li><strong>设备使用记录</strong>：共享设备的工时分配表（如分项目记录机台使用时长）</li>
+                        </ul>
+                        <p class="mt-4 text-sm text-gray-400 italic">
+                            <i class="fas fa-times-circle mr-2"></i><strong class="text-yellow-400">违规案例：</strong> 2024年某芯片企业因“设备使用记录缺失”被现场督导终止。
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: 关键流程管控要求 -->
+            <section id="process-control" class="mb-16">
+                <div class="section-separator text-sky-400 dark:text-sky-300">
+                    <span class="line"></span>
+                    <i class="fas fa-project-diagram icon"></i>
+                    <span class="line"></span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">
+                    二、关键流程管控要求
+                </h2>
+                <p class="text-lg mb-8 text-center text-gray-300">
+                    审核重点关注流程的<strong>闭环性</strong>和<strong>可验证性</strong>。以下是研发项目生命周期中的关键节点。
+                </p>
+
+                <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-xl border border-gray-700 mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-sky-300 flex items-center">
+                        <i class="fas fa-sitemap mr-2"></i>研发流程概览
+                    </h3>
+                    <div class="mermaid-diagram text-center p-4">
+                        <pre class="mermaid text-white">
+graph LR
+A[立项评审] -- 风险评估 & 资源分配 --> B[阶段验收]
+B -- 进度跟踪 & 质量检查 --> C[变更控制]
+C -- 调整与优化 --> D[结项评估]
+D -- 成果确认 & 知识沉淀 --> E[资料归档]
+
+classDef default fill:#374151,stroke:#60a5fa,stroke-width:2px,text-align:center,font-family:'Noto Sans SC',sans-serif;
+classDef highlight fill:#10b981,stroke:#059669; /* Example: highlight specific nodes if needed */
+                        </pre>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Process 1 -->
+                    <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-gray-700">
+                        <h3 class="text-xl font-semibold mb-4 text-sky-300 flex items-center">
+                            <i class="fas fa-clipboard-check mr-2"></i>1. 立项评审流程
+                        </h3>
+                        <ul class="list-disc pl-5 text-gray-300 space-y-2">
+                            <li><strong>技术委员会评估</strong>：需保存专家签字版评估意见</li>
+                            <li><strong>预算审批</strong>：财务部门需复核资金合理性（<strong class="text-sky-400 dark:text-sky-200">超10%调整需重新审批</strong>）</li>
+                        </ul>
+                        <p class="mt-4 text-sm text-gray-400 italic">
+                            <i class="fas fa-balance-scale mr-2"></i><strong class="text-yellow-400">规则依据：</strong> 上交所要求研发投入与项目规模匹配。
+                        </p>
+                    </div>
+
+                    <!-- Process 2 -->
+                    <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-gray-700">
+                        <h3 class="text-xl font-semibold mb-4 text-sky-300 flex items-center">
+                            <i class="fas fa-exchange-alt mr-2"></i>2. 变更控制流程
+                        </h3>
+                        <ul class="list-disc pl-5 text-gray-300 space-y-2">
+                            <li><strong>范围/预算变更</strong>：需提交书面申请并说明原因（如技术路线调整）</li>
+                            <li><strong>人员变更</strong>：记录交接清单（防止知识资产流失）</li>
+                        </ul>
+                        <p class="mt-4 text-sm text-gray-400 italic">
+                            <i class="fas fa-question-circle mr-2"></i><strong class="text-yellow-400">问询案例：</strong> 奇安信（688561）被要求说明“研发团队变更对项目进度的影响”。
+                        </p>
+                    </div>
+
+                    <!-- Process 3 -->
+                    <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-gray-700">
+                        <h3 class="text-xl font-semibold mb-4 text-sky-300 flex items-center">
+                            <i class="fas fa-cogs mr-2"></i>3. 结项管理流程
+                        </h3>
+                        <ul class="list-disc pl-5 text-gray-300 space-y-2">
+                            <li><strong>成果验收报告</strong>：需包含测试数据与立项目标的对比</li>
+                            <li><strong>费用决算表</strong>：实际支出与预算差异需≤15%（<strong class="text-sky-400 dark:text-sky-200">异常需专项说明</strong>）</li>
+                        </ul>
+                        <p class="mt-4 text-sm text-gray-400 italic">
+                            <i class="fas fa-book-reader mr-2"></i><strong class="text-yellow-400">监管指引：</strong> 《发行类第9号》要求结项报告由项目负责人及财务负责人双签。
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: 监管核查雷区与案例 -->
+            <section id="audit-minefields" class="mb-16">
+                <div class="section-separator text-sky-400 dark:text-sky-300">
+                    <span class="line"></span>
+                    <i class="fas fa-exclamation-triangle icon"></i>
+                    <span class="line"></span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">
+                    三、监管核查雷区与案例
+                </h2>
+                <p class="text-lg mb-8 text-center text-gray-300">
+                    知己知彼，百战不殆。以下是常见审核雷区，务必引起高度重视。
+                </p>
+
+                <div class="overflow-x-auto bg-gray-800 dark:bg-gray-800 rounded-lg shadow-xl border border-gray-700">
+                    <table class="w-full table-auto text-left whitespace-no-wrap">
+                        <thead class="bg-gray-700 dark:bg-gray-700 text-gray-200 uppercase text-sm">
+                            <tr>
+                                <th class="py-3 px-4 border-b border-gray-600 dark:border-gray-600 font-semibold">问题类型</th>
+                                <th class="py-3 px-4 border-b border-gray-600 dark:border-gray-600 font-semibold">典型案例及后果</th>
+                                <th class="py-3 px-4 border-b border-gray-600 dark:border-gray-600 font-semibold">合规要点</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700 dark:divide-gray-700 text-gray-300">
+                            <tr>
+                                <td class="py-3 px-4"><strong>文档缺失</strong></td>
+                                <td class="py-3 px-4">某生物企业因缺失3个项目日志被终止</td>
+                                <td class="py-3 px-4">建立研发文档管理系统（如PLM）</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4"><strong>流程倒签</strong></td>
+                                <td class="py-3 px-4">江苏XX公司补签立项书遭监管警示</td>
+                                <td class="py-3 px-4">禁止报告期后补充关键文件</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4"><strong>费用归集失真</strong></td>
+                                <td class="py-3 px-4">材料成本跨期调节超500万被否</td>
+                                <td class="py-3 px-4">领料单需关联生产工单号</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Section 4: 实务操作建议 -->
+            <section id="practical-advice" class="mb-16">
+                <div class="section-separator text-sky-400 dark:text-sky-300">
+                    <span class="line"></span>
+                    <i class="fas fa-lightbulb icon"></i>
+                    <span class="line"></span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">
+                    四、实务操作建议
+                </h2>
+                <p class="text-lg mb-8 text-center text-gray-300">
+                    将合规要求融入日常研发管理，是提升IPO成功率的关键。
+                </p>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-gray-700 flex flex-col items-center text-center">
+                        <i class="fas fa-cogs text-5xl text-sky-400 dark:text-sky-300 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-3 text-sky-300">系统化管控</h3>
+                        <p class="text-gray-300">部署PLM（产品生命周期管理）系统，实现文档自动归档，确保数据完整性和可追溯性。</p>
+                    </div>
+                    <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-gray-700 flex flex-col items-center text-center">
+                        <i class="fas fa-sync-alt text-5xl text-sky-400 dark:text-sky-300 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-3 text-sky-300">交叉验证</h3>
+                        <p class="text-gray-300">研发日志与考勤记录、设备使用记录的日期/人员需一致，构建多维度的证据链。</p>
+                    </div>
+                    <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-gray-700 flex flex-col items-center text-center">
+                        <i class="fas fa-user-shield text-5xl text-sky-400 dark:text-sky-300 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-3 text-sky-300">中介核查</h3>
+                        <p class="text-gray-300">保荐机构需抽查20%以上研发文档的原始记录（监管指引明确要求），确保内部符合外部标准。</p>
+                    </div>
+                </div>
+
+                <div class="mt-12 p-6 bg-gray-800 dark:bg-gray-800 border border-yellow-500 rounded-lg shadow-inner text-yellow-100 italic">
+                    <p class="font-bold text-lg mb-2"><i class="fas fa-exclamation-circle mr-2 text-yellow-400"></i>重要提示：</p>
+                    <p>以上要求源于近3年科创板问询函及终止案例，未满足将导致审核周期延长或上市失败。</p>
+                </div>
+            </section>
+
+            <!-- Section: 延伸阅读 -->
+            <section id="further-reading" class="mb-16">
+                <div class="section-separator text-sky-400 dark:text-sky-300">
+                    <span class="line"></span>
+                    <i class="fas fa-book-open icon"></i>
+                    <span class="line"></span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">
+                    延伸阅读：深化理解与实践
+                </h2>
+                <p class="text-lg mb-8 text-center text-gray-300">
+                    为帮助您更全面地掌握科创板IPO研发合规的精髓，我们推荐以下经典读物。
+                </p>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-gray-700">
+                        <h3 class="text-xl font-semibold mb-3 text-sky-300">
+                            <i class="fas fa-balance-scale-right mr-2 list-icon"></i>《中华人民共和国公司法》
+                        </h3>
+                        <p class="text-gray-300 mb-3">
+                            企业设立、组织架构及治理的法律基石，理解公司作为独立法人的权利义务。
+                        </p>
+                        <a href="https://www.gov.cn/zhengce/202312/content_6921382.htm" target="_blank" rel="noopener noreferrer" class="text-sky-400 dark:text-sky-300 hover:underline text-sm">
+                            阅读原文 <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                    <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-gray-700">
+                        <h3 class="text-xl font-semibold mb-3 text-sky-300">
+                            <i class="fas fa-chart-line mr-2 list-icon"></i>《中华人民共和国证券法》
+                        </h3>
+                        <p class="text-gray-300 mb-3">
+                            规范证券发行和交易活动的核心法律，掌握IPO审核、信息披露等法律责任。
+                        </p>
+                        <a href="http://www.gov.cn/zhengce/2019-12/28/content_5464879.htm" target="_blank" rel="noopener noreferrer" class="text-sky-400 dark:text-sky-300 hover:underline text-sm">
+                            阅读原文 <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                    <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-gray-700">
+                        <h3 class="text-xl font-semibold mb-3 text-sky-300">
+                            <i class="fas fa-gavel mr-2 list-icon"></i>《上海证券交易所科创板股票发行上市审核规则》及配套指引
+                        </h3>
+                        <p class="text-gray-300 mb-3">
+                            最直接的科创板上市依据，详细了解审核标准、问询流程及特定要求。
+                        </p>
+                        <a href="http://www.sse.com.cn/lawsrules/sserules/kcblec/" target="_blank" rel="noopener noreferrer" class="text-sky-400 dark:text-sky-300 hover:underline text-sm">
+                            查看规则 <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                    <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-gray-700">
+                        <h3 class="text-xl font-semibold mb-3 text-sky-300">
+                            <i class="fas fa-cogs mr-2 list-icon"></i>《企业内部控制基本规范》
+                        </h3>
+                        <p class="text-gray-300 mb-3">
+                            构建研发内部控制体系的指导原则，确保研发活动全流程的规范性与有效性。
+                        </p>
+                        <a href="https://www.mof.gov.cn/czbxzjd/200812/t20081223_96631.htm" target="_blank" rel="noopener noreferrer" class="text-sky-400 dark:text-sky-300 hover:underline text-sm">
+                            了解详情 <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                    <div class="bg-gray-800 dark:bg-gray-800 p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 border border-gray-700">
+                        <h3 class="text-xl font-semibold mb-3 text-sky-300">
+                            <i class="fas fa-brain mr-2 list-icon"></i>《知识产权管理体系 要求》 (GB/T 29490-2013)
+                        </h3>
+                        <p class="text-gray-300 mb-3">
+                            指导企业建立、实施、保持和改进知识产权管理体系，保障研发成果的权属与价值。
+                        </p>
+                        <a href="https://baike.baidu.com/item/GB%2FT%2029490-2013/18671680" target="_blank" rel="noopener noreferrer" class="text-sky-400 dark:text-sky-300 hover:underline text-sm">
+                            查看标准 <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footnotes -->
+            <section id="footnotes" class="mt-16 text-gray-400 text-sm border-t border-gray-700 pt-8">
+                <h3 class="text-lg font-semibold mb-4 text-sky-300">参考文献：</h3>
+                <ol class="list-decimal pl-5 space-y-2">
+                    <li id="fn1">知识库资料《2025年A股IPO审核动态与政策解读（投行视角）》：研发管理缺失成终止主因</li>
+                    <li id="fn2">思特威：首次公开发行股票并在科创板上市申请文件审核问询函的回复. <a href="http://kcb.sse.com.cn/renewal/xmxq/index.shtml?auditId=1052" target="_blank" rel="noopener noreferrer" class="text-sky-500 hover:underline">http://kcb.sse.com.cn/renewal/xmxq/index.shtml?auditId=1052</a></li>
+                    <li id="fn3">《科创属性评价指引（试行）》第三条：形成主营业务收入的发明专利≥5项</li>
+                    <li id="fn4">IPO企业研发费用审核关注要点. <a href="http://www.360doc.com/content/23/0603/08/78825344_1083293316.shtml" target="_blank" rel="noopener noreferrer" class="text-sky-500 hover:underline">http://www.360doc.com/content/23/0603/08/78825344_1083293316.shtml</a></li>
+                    <li id="fn5">上交所《科创板股票发行上市审核问答》问题14：研发投入的归集范围与依据</li>
+                    <li id="fn6">奇安信上市问询函：发行人及保荐机构回复意见(2020). <a href="http://kcb.sse.com.cn/renewal/xmxq/index.shtml?auditId=678" target="_blank" rel="noopener noreferrer" class="text-sky-500 hover:underline">http://kcb.sse.com.cn/renewal/xmxq/index.shtml?auditId=678</a></li>
+                    <li id="fn7">《监管规则适用指引——发行类第9号》4.3条：研发内控制度的有效性</li>
+                    <li id="fn8">锦之翼|2025年各交易所最新发行上市审核动态法律问题问答汇编. <a href="https://www.allbrightlaw.com/CN/10475/b73bdcfac7fb6900.aspx" target="_blank" rel="noopener noreferrer" class="text-sky-500 hover:underline">https://www.allbrightlaw.com/CN/10475/b73bdcfac7fb6900.aspx</a></li>
+                </ol>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 dark:bg-gray-900 text-gray-400 py-8 text-center border-t border-gray-700">
+            <div class="container mx-auto px-6">
+                <p>&copy; 2024 科创板IPO合规研究. All rights reserved.</p>
+                <p class="mt-2 text-sm">免责声明：本内容仅供参考，不构成任何法律或投资建议。</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base', // Use 'base' to allow custom CSS to fully control theming
+            themeVariables: {
+                primaryColor: '#374151', // Dark node background
+                secondaryColor: '#60a5fa', // Blue border
+                tertiaryColor: '#e5e7eb', // Light text
+                primaryTextColor: '#e5e7eb',
+                lineColor: '#9ca3af',
+                fontSize: '16px',
+                fontFamily: "'Noto Sans SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', sans-self"
+            }
+        });
+
+        // Theme Toggle JavaScript
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+            } else {
+                htmlElement.classList.add('light');
+                htmlElement.classList.remove('dark');
+            }
+            localStorage.setItem('theme', theme);
+        }
+
+        // Check for saved theme or system preference on load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark'); // Default to dark if system prefers it
+        } else {
+            setTheme('light'); // Default to light if no preference
+        }
+
+        // Toggle theme on button click
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+            // Re-render mermaid diagrams to apply new theme variables
+            // This is a workaround as mermaid doesn't automatically re-apply themes on class change
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'base',
+                themeVariables: htmlElement.classList.contains('dark') ? {
+                    primaryColor: '#374151', 
+                    secondaryColor: '#60a5fa',
+                    tertiaryColor: '#e5e7eb',
+                    primaryTextColor: '#e5e7eb',
+                    lineColor: '#9ca3af',
+                    fontSize: '16px',
+                    fontFamily: "'Noto Sans SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', sans-self"
+                } : {
+                    primaryColor: '#e0f2f7', 
+                    secondaryColor: '#2563eb',
+                    tertiaryColor: '#1f2937',
+                    primaryTextColor: '#1f2937',
+                    lineColor: '#6b7280',
+                    fontSize: '16px',
+                    fontFamily: "'Noto Sans SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', sans-self"
+                }
+            });
+            // You might need to force a re-render of existing diagrams if they are not re-initialized
+            // A simple way is to clear and re-add their content or trigger mermaid.init()
+            document.querySelectorAll('.mermaid').forEach(el => {
+                const graphDefinition = el.textContent || el.innerText;
+                el.innerHTML = ''; // Clear previous SVG
+                mermaid.render('graphDiv' + Math.random().toString(36).substring(7), graphDefinition, (svgGraph) => {
+                    el.innerHTML = svgGraph;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+```
