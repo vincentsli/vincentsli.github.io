@@ -1,0 +1,458 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板研发合规白皮书：工时系统与内控全解析</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <style>
+        /* Custom Fonts & Fallbacks */
+        body {
+            font-family: 'Noto Sans SC', 'Roboto', Tahoma, Arial, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        /* Dark Mode Specific Styles */
+        html.dark {
+            --tw-bg-primary: #1a202c; /* dark gray */
+            --tw-text-primary: #e2e8f0; /* light gray */
+            --tw-text-secondary: #cbd5e0; /* slightly darker light gray */
+            --tw-text-accent: #6ee7b7; /* emerald-300 */
+            --tw-border-color: #4a5568; /* gray-700 */
+            --tw-card-bg: #2d3748; /* gray-800 */
+            --tw-highlight-bg: #4a5568; /* gray-700 */
+            --tw-link-color: #93c5fd; /* blue-300 */
+            --tw-heading-color: #63b3ed; /* blue-400 */
+        }
+        html.dark body {
+            background-color: var(--tw-bg-primary);
+            color: var(--tw-text-primary);
+        }
+        html.dark .text-primary { color: var(--tw-text-primary); }
+        html.dark .text-secondary { color: var(--tw-text-secondary); }
+        html.dark .text-accent { color: var(--tw-text-accent); }
+        html.dark .border-default { border-color: var(--tw-border-color); }
+        html.dark .card-bg { background-color: var(--tw-card-bg); }
+        html.dark .highlight-bg { background-color: var(--tw-highlight-bg); }
+        html.dark .text-link { color: var(--tw-link-color); }
+        html.dark h1, html.dark h2, html.dark h3, html.dark h4 { color: var(--tw-heading-color); }
+
+        /* Light Mode Specific Styles (default Tailwind if not overridden) */
+        html.light {
+            --tw-bg-primary: #ffffff; /* white */
+            --tw-text-primary: #2d3748; /* gray-800 */
+            --tw-text-secondary: #4a5568; /* gray-700 */
+            --tw-text-accent: #059669; /* emerald-600 */
+            --tw-border-color: #e2e8f0; /* gray-200 */
+            --tw-card-bg: #f7fafc; /* gray-100 */
+            --tw-highlight-bg: #edf2f7; /* gray-100 */
+            --tw-link-color: #2b6cb0; /* blue-700 */
+            --tw-heading-color: #2a4365; /* blue-800 */
+        }
+        html.light body {
+            background-color: var(--tw-bg-primary);
+            color: var(--tw-text-primary);
+        }
+        html.light .text-primary { color: var(--tw-text-primary); }
+        html.light .text-secondary { color: var(--tw-text-secondary); }
+        html.light .text-accent { color: var(--tw-text-accent); }
+        html.light .border-default { border-color: var(--tw-border-color); }
+        html.light .card-bg { background-color: var(--tw-card-bg); }
+        html.light .highlight-bg { background-color: var(--tw-highlight-bg); }
+        html.light .text-link { color: var(--tw-link-color); }
+        html.light h1, html.light h2, html.light h3, html.light h4 { color: var(--tw-heading-color); }
+
+        /* Micro-interactions */
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .btn-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* First-letter drop cap */
+        .drop-cap:first-letter {
+            float: left;
+            font-size: 4em;
+            line-height: 0.8;
+            margin-right: 0.1em;
+            font-family: 'Noto Serif SC', serif;
+            color: var(--tw-text-accent);
+        }
+
+        /* Mermaid custom styling for dark mode */
+        html.dark .mermaid {
+            filter: invert(1) hue-rotate(180deg) brightness(1.2); /* Invert colors for dark mode */
+        }
+        /* Specific override for Mermaid nodes to keep dark mode text readable */
+        html.dark .mermaid .node text,
+        html.dark .mermaid .edgePaths .path text {
+            fill: #e2e8f0 !important; /* light text for dark mode */
+        }
+    </style>
+</head>
+<body class="min-h-screen text-primary transition-colors duration-300">
+
+    <!-- Theme Switcher -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="theme-toggle" class="btn-hover p-3 rounded-full bg-gray-700 text-white shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <i class="fas fa-moon" id="theme-toggle-icon"></i>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800 text-white py-20 md:py-32">
+        <div class="absolute inset-0 z-0 opacity-10" style="background-image: url('https://source.unsplash.com/random/1600x900/?abstract-tech,data,compliance'); background-size: cover; background-position: center;"></div>
+        <div class="container mx-auto px-4 relative z-10 max-w-5xl">
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight text-heading mb-4 animate-fade-in-down">
+                科创板研发合规白皮书
+            </h1>
+            <p class="text-xl md:text-3xl font-light leading-snug text-secondary mb-6 animate-fade-in-right">
+                工时系统与内控全解析
+            </p>
+            <p class="text-lg md:text-xl leading-relaxed max-w-3xl text-primary animate-fade-in-up drop-cap">
+                根据最新监管规定、审核实践及现场检查案例，本文旨在全面解析科创板拟上市公司在研发工时系统建设与内部管理制度设计上的核心要点，为企业IPO之路提供权威指南。
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12 md:py-20 max-w-5xl">
+
+        <!-- Section 1: 研发工时系统的核心要求 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-heading flex items-center">
+                <i class="fas fa-flask-gear text-accent mr-4"></i>
+                一、研发工时系统的核心要求
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="card-bg p-6 rounded-lg shadow-lg card-hover transition duration-300">
+                    <h3 class="text-xl font-semibold mb-3 text-heading flex items-center">
+                        <i class="fas fa-desktop text-accent mr-2"></i>系统化与可验证性
+                    </h3>
+                    <ul class="list-none space-y-2 text-secondary">
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i> 必须建立 **正式上线的电子化工时记录系统**（如ERP模块或专业软件），禁止依赖手工台账<sup class="text-xs text-link ml-1"><a href="#footnote-1" class="hover:underline">[1]</a></sup><sup class="text-xs text-link ml-1"><a href="#footnote-2" class="hover:underline">[2]</a></sup>。</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i> 系统需支持 **按项目、人员、日期多维度的工时记录**，确保数据可追溯、可复核（例如区分研发/非研发活动工时）<sup class="text-xs text-link ml-1"><a href="#footnote-2" class="hover:underline">[2]</a></sup><sup class="text-xs text-link ml-1"><a href="#footnote-4" class="hover:underline">[4]</a></sup>。</li>
+                    </ul>
+                </div>
+                <!-- Card 2 -->
+                <div class="card-bg p-6 rounded-lg shadow-lg card-hover transition duration-300">
+                    <h3 class="text-xl font-semibold mb-3 text-heading flex items-center">
+                        <i class="fas fa-user-tie text-accent mr-2"></i>人员分类与工时统计标准
+                    </h3>
+                    <ul class="list-none space-y-2 text-secondary">
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i> **非全时研发人员认定**：研发工时占比低于50%的人员原则上不得认定为研发人员（上交所《监管规则适用指引——发行类第9号》明确要求）<sup class="text-xs text-link ml-1"><a href="#footnote-5" class="hover:underline">[5]</a></sup><sup class="text-xs text-link ml-1"><a href="#footnote-8" class="hover:underline">[8]</a></sup>。</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i> **全时研发人员界定**：需明确其岗位职责、考核指标与研发活动的直接关联性<sup class="text-xs text-link ml-1"><a href="#footnote-2" class="hover:underline">[2]</a></sup><sup class="text-xs text-link ml-1"><a href="#footnote-4" class="hover:underline">[4]</a></sup>。</li>
+                    </ul>
+                </div>
+                <!-- Card 3 -->
+                <div class="card-bg p-6 rounded-lg shadow-lg card-hover transition duration-300">
+                    <h3 class="text-xl font-semibold mb-3 text-heading flex items-center">
+                        <i class="fas fa-clock-rotate-left text-accent mr-2"></i>数据真实性与内控执行
+                    </h3>
+                    <ul class="list-none space-y-2 text-secondary">
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i> 工时记录需与 **实际研发活动、项目进度匹配**，避免“工时填报与实际执行脱节”（2024年现场督导发现多例因数据矛盾导致审核终止）<sup class="text-xs text-link ml-1"><a href="#footnote-1" class="hover:underline">[1]</a></sup><sup class="text-xs text-link ml-1"><a href="#footnote-4" class="hover:underline">[4]</a></sup>。</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i> 系统应设置 **审批流程和异常预警机制**，防止跨期调节费用（如材料领用与投料时点混淆）<sup class="text-xs text-link ml-1"><a href="#footnote-1" class="hover:underline">[1]</a></sup><sup class="text-xs text-link ml-1"><a href="#footnote-10" class="hover:underline">[10]</a></sup>。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: 研发内部管理制度的必备内容 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-heading flex items-center">
+                <i class="fas fa-clipboard-list text-accent mr-4"></i>
+                二、研发内部管理制度的必备内容
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="card-bg p-6 rounded-lg shadow-lg card-hover transition duration-300">
+                    <h3 class="text-xl font-semibold mb-3 text-heading flex items-center">
+                        <i class="fas fa-user-cog text-accent mr-2"></i>研发人员管理制度
+                    </h3>
+                    <ul class="list-none space-y-2 text-secondary">
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i> 明确研发人员的 **认定标准、岗位职责、绩效考核机制**，并制定人员转岗或职责变动的流程规范<sup class="text-xs text-link ml-1"><a href="#footnote-2" class="hover:underline">[2]</a></sup><sup class="text-xs text-link ml-1"><a href="#footnote-5" class="hover:underline">[5]</a></sup>。</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i> 需建立 **产学研合作中技术成果归属的内部控制**，避免权属纠纷<sup class="text-xs text-link ml-1"><a href="#footnote-2" class="hover:underline">[2]</a></sup>。</li>
+                    </ul>
+                </div>
+                <!-- Card 2 -->
+                <div class="card-bg p-6 rounded-lg shadow-lg card-hover transition duration-300">
+                    <h3 class="text-xl font-semibold mb-3 text-heading flex items-center">
+                        <i class="fas fa-dollar-sign text-accent mr-2"></i>研发费用归集与核算
+                    </h3>
+                    <ul class="list-none space-y-2 text-secondary">
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i> 制定 **研发支出审批程序**，规范费用归集范围（如材料、人工、折旧的分摊标准）<sup class="text-xs text-link ml-1"><a href="#footnote-10" class="hover:underline">[10]</a></sup>。</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i> 确保费用确认时点准确（如材料成本按投料而非领料时点确认），防止跨期调节<sup class="text-xs text-link ml-1"><a href="#footnote-1" class="hover:underline">[1]</a></sup>。</li>
+                    </ul>
+                </div>
+                <!-- Card 3 -->
+                <div class="card-bg p-6 rounded-lg shadow-lg card-hover transition duration-300">
+                    <h3 class="text-xl font-semibold mb-3 text-heading flex items-center">
+                        <i class="fas fa-eye text-accent mr-2"></i>内控监督与持续改进
+                    </h3>
+                    <ul class="list-none space-y-2 text-secondary">
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i> 制度需规定 **定期内部审计机制**，检查工时系统数据与财务核算的一致性<sup class="text-xs text-link ml-1"><a href="#footnote-1" class="hover:underline">[1]</a></sup><sup class="text-xs text-link ml-1"><a href="#footnote-4" class="hover:underline">[4]</a></sup>。</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mr-2 mt-1"></i> 保荐机构需核查 **11项关键内容**，包括研发活动真实性、投入口径合理性、内控有效性等<sup class="text-xs text-link ml-1"><a href="#footnote-5" class="hover:underline">[5]</a></sup>。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 监管重点与违规后果 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-heading flex items-center">
+                <i class="fas fa-gavel text-accent mr-4"></i>
+                三、监管重点与违规后果
+            </h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card-bg p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-3 text-heading flex items-center">
+                        <i class="fas fa-search-dollar text-yellow-500 mr-2"></i>审核焦点
+                    </h3>
+                    <ul class="list-none space-y-2 text-secondary">
+                        <li class="flex items-start"><i class="fas fa-dot-circle text-blue-400 mr-2 mt-1"></i> 研发工时占比是否真实反映人员投入（如技术副总同时参与管理，需拆分工时）<sup class="text-xs text-link ml-1"><a href="#footnote-8" class="hover:underline">[8]</a></sup>。</li>
+                        <li class="flex items-start"><i class="fas fa-dot-circle text-blue-400 mr-2 mt-1"></i> 研发费用是否具备充分支持性证据（如项目计划书、验收报告）<sup class="text-xs text-link ml-1"><a href="#footnote-4" class="hover:underline">[4]</a></sup><sup class="text-xs text-link ml-1"><a href="#footnote-10" class="hover:underline">[10]</a></sup>。</li>
+                    </ul>
+                </div>
+                <div class="card-bg p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-3 text-heading flex items-center">
+                        <i class="fas fa-exclamation-triangle text-red-500 mr-2"></i>违规案例
+                    </h3>
+                    <ul class="list-none space-y-2 text-secondary">
+                        <li class="flex items-start"><i class="fas fa-times-circle text-red-500 mr-2 mt-1"></i> <strong class="text-accent">近40%科创板终止案例</strong> 因 **研发内控缺陷**（如工时系统未上线、记录缺失）导致<sup class="text-xs text-link ml-1"><a href="#footnote-1" class="hover:underline">[1]</a></sup>。</li>
+                        <li class="flex items-start"><i class="fas fa-times-circle text-red-500 mr-2 mt-1"></i> 2024年某企业因“研发工时填报与考勤记录矛盾”被现场督导后撤回申请<sup class="text-xs text-link ml-1"><a href="#footnote-4" class="hover:underline">[4]</a></sup>。</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="mt-8 text-secondary italic border-l-4 border-accent pl-4 py-2 highlight-bg rounded-md">
+                <i class="fas fa-info-circle text-accent mr-2"></i>
+                <strong class="text-primary">重要提示：</strong> 以上要求综合自证监会、上交所监管指引及终止案例，未满足可能导致IPO审核受阻。
+            </p>
+        </section>
+
+        <!-- Section 4: 合规建议 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-heading flex items-center">
+                <i class="fas fa-lightbulb text-accent mr-4"></i>
+                四、合规建议
+            </h2>
+            <div class="card-bg p-8 rounded-lg shadow-lg">
+                <ul class="list-none space-y-4 text-secondary">
+                    <li class="flex items-start">
+                        <i class="fas fa-laptop-code text-green-500 text-xl mr-3 mt-1"></i>
+                        <div>
+                            <strong class="text-primary block mb-1">系统部署：</strong>
+                            优先选择可集成财务核算的研发管理系统（如SAP、用友研发模块），确保数据流转自动化、可追溯。
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-scroll text-green-500 text-xl mr-3 mt-1"></i>
+                        <div>
+                            <strong class="text-primary block mb-1">制度设计：</strong>
+                            参考《监管规则适用指引——发行类第9号》细化人员认定和费用归集规则，构建严谨、可操作的内部管理制度。
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-chart-line text-green-500 text-xl mr-3 mt-1"></i>
+                        <div>
+                            <strong class="text-primary block mb-1">持续优化：</strong>
+                            每季度复核系统数据与研发成果的匹配度，及时调整优化，并留存完整的审计轨迹，以应对穿透式审查。
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Data Visualization with Mermaid -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-heading flex items-center">
+                <i class="fas fa-sitemap text-accent mr-4"></i>
+                核心概念关系图
+            </h2>
+            <div class="card-bg p-6 rounded-lg shadow-lg overflow-x-auto">
+                <div class="mermaid text-primary">
+                    graph TD
+                        A[科创板研发合规要求] --> B(研发工时系统核心)
+                        A --> C(研发内控制度必备)
+                        A --> D(监管重点与后果)
+                        A --> E(合规建议路径)
+
+                        B -- 支撑 --> D
+                        C -- 支撑 --> D
+                        D -- 反馈 --> E
+
+                        B1(系统化与可验证性)
+                        B2(人员分类与工时标准)
+                        B3(数据真实性与内控)
+
+                        C1(研发人员管理制度)
+                        C2(研发费用归集与核算)
+                        C3(内控监督与改进)
+
+                        B -- 包含 --> B1
+                        B -- 包含 --> B2
+                        B -- 包含 --> B3
+
+                        C -- 包含 --> C1
+                        C -- 包含 --> C2
+                        C -- 包含 --> C3
+
+                        D1(审核焦点)
+                        D2(违规案例警示)
+
+                        D -- 包含 --> D1
+                        D -- 包含 --> D2
+
+                        E1(系统部署策略)
+                        E2(制度设计细化)
+                        E3(持续优化实践)
+
+                        E -- 包含 --> E1
+                        E -- 包含 --> E2
+                        E -- 包含 --> E3
+
+                        B1 & B2 & B3 --- "共同影响" --- D1
+                        C1 & C2 & C3 --- "共同影响" --- D1
+
+                        D2 --- "直接导致" --- A[IPO审核受阻]
+
+                        E1 -- 助力 --> B
+                        E2 -- 助力 --> C
+                        E3 -- 提升 --> A
+                </div>
+            </div>
+        </section>
+
+        <!-- Further Reading Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-heading flex items-center">
+                <i class="fas fa-book-open text-accent mr-4"></i>
+                延伸阅读
+            </h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Book 1 -->
+                <div class="card-bg p-6 rounded-lg shadow-lg card-hover transition duration-300 flex items-start">
+                    <i class="fas fa-book text-blue-400 text-3xl mr-4 flex-shrink-0"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-heading">《公司法》</h3>
+                        <p class="text-secondary mb-2">中华人民共和国公司注册、运营、治理的法律基础，理解企业合规的根本。</p>
+                        <a href="https://www.gov.cn/fuwu/2017-12/28/content_5250499.htm" target="_blank" rel="noopener noreferrer" class="text-link hover:underline text-sm">官方解读 &raquo;</a>
+                    </div>
+                </div>
+                <!-- Book 2 -->
+                <div class="card-bg p-6 rounded-lg shadow-lg card-hover transition duration-300 flex items-start">
+                    <i class="fas fa-gavel text-blue-400 text-3xl mr-4 flex-shrink-0"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-heading">《中华人民共和国证券法》</h3>
+                        <p class="text-secondary mb-2">规制证券发行、交易及相关活动的法律，是理解IPO审核逻辑的关键。</p>
+                        <a href="http://www.gov.cn/flfg/2019-12/28/content_5465243.htm" target="_blank" rel="noopener noreferrer" class="text-link hover:underline text-sm">官方解读 &raquo;</a>
+                    </div>
+                </div>
+                <!-- Book 3 -->
+                <div class="card-bg p-6 rounded-lg shadow-lg card-hover transition duration-300 flex items-start">
+                    <i class="fas fa-chart-pie text-blue-400 text-3xl mr-4 flex-shrink-0"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-heading">《IPO财务核查与案例分析》</h3>
+                        <p class="text-secondary mb-2">深度剖析IPO过程中财务尽职调查的重点、常见问题及应对策略，对研发费用核算有启发。</p>
+                        <a href="#" class="text-link hover:underline text-sm opacity-70 cursor-not-allowed" onclick="alert('此为示例链接，请自行查找相关书籍')">查找相关书籍 &raquo;</a>
+                    </div>
+                </div>
+                <!-- Book 4 -->
+                <div class="card-bg p-6 rounded-lg shadow-lg card-hover transition duration-300 flex items-start">
+                    <i class="fas fa-lightbulb text-blue-400 text-3xl mr-4 flex-shrink-0"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-heading">《企业研发管理与创新》</h3>
+                        <p class="text-secondary mb-2">探讨企业研发项目的管理流程、风险控制和知识产权保护，有助于构建健全的研发体系。</p>
+                        <a href="#" class="text-link hover:underline text-sm opacity-70 cursor-not-allowed" onclick="alert('此为示例链接，请自行查找相关书籍')">查找相关书籍 &raquo;</a>
+                    </div>
+                </div>
+                <!-- Book 5 -->
+                <div class="card-bg p-6 rounded-lg shadow-lg card-hover transition duration-300 flex items-start">
+                    <i class="fas fa-shield-alt text-blue-400 text-3xl mr-4 flex-shrink-0"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2 text-heading">《内部控制与风险管理》</h3>
+                        <p class="text-secondary mb-2">系统介绍内部控制理论与实践，为建立健全研发内控制度提供理论框架和操作指导。</p>
+                        <a href="#" class="text-link hover:underline text-sm opacity-70 cursor-not-allowed" onclick="alert('此为示例链接，请自行查找相关书籍')">查找相关书籍 &raquo;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footnotes -->
+        <section id="footnotes" class="mb-8 text-sm text-secondary border-t border-default pt-8 mt-16">
+            <h2 class="text-xl font-semibold mb-4 text-heading">参考文献</h2>
+            <ol class="list-decimal list-inside space-y-2">
+                <li id="footnote-1" class="text-secondary"><strong class="font-medium text-primary">知识库资料</strong>《2025年A股IPO审核动态与政策解读（投行视角）》：监管转向“全流程穿透式审查”，研发内控缺陷成终止主因。</li>
+                <li id="footnote-2" class="text-secondary"><strong class="font-medium text-primary">上交所定了！</strong>IPO企业中这种情况，原则上不应认定为研发人员 <a href="https://stcn.com/article/detail/1518002.html" target="_blank" rel="noopener noreferrer" class="text-link hover:underline">stcn.com</a>：明确非全时研发人员认定标准及内控要求。</li>
+                <li id="footnote-4" class="text-secondary"><strong class="font-medium text-primary">IPO企业研发费用审核关注要点</strong> <a href="http://www.360doc.com/content/23/0603/08/78825344_1083293316.shtml" target="_blank" rel="noopener noreferrer" class="text-link hover:underline">360doc.com</a>：分析研发费用跨期调节风险及现场检查案例。</li>
+                <li id="footnote-5" class="text-secondary"><strong class="font-medium text-primary">锦之翼|2025年各交易所最新发行上市审核动态法律问题问答汇编</strong> <a href="https://www.allbrightlaw.com/CN/10475/b73bdcfac7fb6900.aspx" target="_blank" rel="noopener noreferrer" class="text-link hover:underline">allbrightlaw.com</a>：解读研发工时占比低于50%的监管限制。</li>
+                <li id="footnote-8" class="text-secondary"><strong class="font-medium text-primary">IPO企业研发人员认定标准细化，上交所新一期审核动态明确四方面要求</strong> <a href="https://www.cls.cn/detail/1936038" target="_blank" rel="noopener noreferrer" class="text-link hover:underline">cls.cn</a>：强调工时系统需支撑人员分类管理。</li>
+                <li id="footnote-10" class="text-secondary"><strong class="font-medium text-primary">关于无锡德林海环保科技股份有限公司首次公开发行股票并在科创板上市的回复</strong> <a href="http://www.csrc.gov.cn/csrc/c100090/c1520303/1520303/files/8-1%20%E5%8F%91%E8%A1%8C%E4%BA%BA%E5%8F%8A%E4%BF%9D%E8%8D%90%E6%9C%BA%E6%9E%84%E5%85%B3%E4%BA%8E%E8%AF%81%E7%9B%91%E4%BC%9A%E6%B3%A8%E5%86%8C%E7%8E%AF%E8%8A%82%E9%97%AE%E8%AF%A2%E7%9A%84%E5%9B%9E%E5%A4%8D.pdf" target="_blank" rel="noopener noreferrer" class="text-link hover:underline">csrc.gov.cn</a>：披露研发支出审批程序及内控制度设计。</li>
+            </ol>
+        </section>
+
+    </main>
+
+    <footer class="py-8 text-center text-secondary text-sm border-t border-default mt-12">
+        <p>&copy; 2024 科创板研发合规研究. All rights reserved.</p>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleIcon = document.getElementById('theme-toggle-icon');
+        const htmlElement = document.documentElement;
+
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                htmlElement.classList.remove('light');
+                themeToggleIcon.classList.remove('fa-sun');
+                themeToggleIcon.classList.add('fa-moon');
+            } else {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                themeToggleIcon.classList.remove('fa-moon');
+                themeToggleIcon.classList.add('fa-sun');
+            }
+            localStorage.setItem('theme', theme);
+        }
+
+        // Initialize theme based on localStorage or system preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark'); // Default to dark if system prefers it
+        } else {
+            setTheme('light'); // Default to light if no preference or system prefers light
+        }
+
+        // Toggle theme on button click
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+    </script>
+</body>
+</html>
+```
