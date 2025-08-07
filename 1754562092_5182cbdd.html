@@ -1,0 +1,585 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>战略配售高管减持规则深度解析</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%236366F1' d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z'/%3E%3C/svg%3E" type="image/svg+xml">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            color-scheme: light dark;
+        }
+        body {
+            font-family: 'Noto Sans SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'Droid Sans Fallback', 'Heiti SC', 'Hiragino Sans GB', 'Simsun', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', 'Times New Roman', serif;
+            letter-spacing: 0.02em; /* Subtle letter spacing for headings */
+        }
+        /* Dark Mode Styles */
+        html.dark {
+            --bg-primary: #1a1a1a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --accent-color: #818cf8; /* Indigo 400 */
+            --border-color: #3f3f46; /* Zinc 700 */
+            --card-bg: #2a2a2a;
+            --highlight-bg: #3c3c42; /* Zinc 800 */
+            --table-header-bg: #3f3f46; /* Zinc 700 */
+        }
+        /* Light Mode Styles */
+        html:not(.dark) {
+            --bg-primary: #f8f8f8;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --accent-color: #4f46e5; /* Indigo 600 */
+            --border-color: #e5e7eb; /* Gray 200 */
+            --card-bg: #ffffff;
+            --highlight-bg: #f3f4f6; /* Gray 100 */
+            --table-header-bg: #e0e0e0; /* Gray 300 */
+        }
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        .text-primary { color: var(--text-primary); }
+        .text-secondary { color: var(--text-secondary); }
+        .text-accent { color: var(--accent-color); }
+        .bg-card { background-color: var(--card-bg); }
+        .border-color { border-color: var(--border-color); }
+        .bg-highlight { background-color: var(--highlight-bg); }
+        .table-header-bg { background-color: var(--table-header-bg); }
+
+        /* Custom Scrollbar for subtle elegance */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--text-secondary);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+        }
+
+        /* Micro-interactions */
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Tailwind shadow-lg */
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        html.dark .card-hover:hover {
+             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+        }
+        .btn-toggle:hover {
+            transform: scale(1.05);
+            transition: transform 0.1s ease-in-out;
+        }
+        .link-underline {
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+        }
+        .link-underline::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--accent-color);
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+        .link-underline:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Mermaid styling */
+        .mermaid {
+            background-color: var(--card-bg) !important;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            /* Dark mode specific for mermaid nodes */
+            filter: invert(var(--mermaid-invert, 0)); /* Default to no invert for light mode */
+        }
+        html.dark .mermaid {
+            --mermaid-invert: 100%; /* Invert colors for dark mode */
+        }
+
+        /* Custom styling for blockquotes/references */
+        blockquote {
+            border-left: 4px solid var(--accent-color);
+            padding-left: 1.25rem;
+            margin-left: 1rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .footnote {
+            font-size: 0.8em;
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+        .footnote:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body class="min-h-screen antialiased flex flex-col">
+
+    <!-- Dark Mode Toggle Button -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="theme-toggle" class="btn-toggle p-3 rounded-full bg-card shadow-lg text-accent focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-75">
+            <i class="fas fa-moon hidden dark:inline"></i>
+            <i class="fas fa-sun dark:hidden"></i>
+        </button>
+    </div>
+
+    <!-- Hero Module -->
+    <header class="relative py-24 md:py-32 text-center overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-indigo-900 to-purple-900 dark:from-indigo-900 dark:to-purple-900 opacity-90 transition-opacity duration-300"></div>
+        <div class="relative z-10 container mx-auto px-6 max-w-5xl">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4 drop-shadow-lg">
+                <i class="fas fa-gavel text-white mr-4"></i>战略配售高管减持规则深度解析
+            </h1>
+            <p class="text-xl md:text-2xl text-indigo-200 font-light mb-8 drop-shadow">
+                深入剖析资管计划持股，解锁科创板减持合规要点
+            </p>
+            <div class="max-w-xl mx-auto text-center">
+                <p class="text-lg text-indigo-100 italic font-serif">
+                    “合规是资本市场的生命线，尤其对于战略配售股份，细节决定成败。”
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow container mx-auto px-6 py-16 md:py-24 max-w-5xl">
+
+        <!-- 核心结论 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-8 text-accent">
+                <i class="fas fa-lightbulb mr-3"></i>核心结论
+            </h2>
+            <div class="bg-card p-8 rounded-lg shadow-xl border border-color card-hover">
+                <p class="text-lg leading-relaxed text-primary mb-4">
+                    **除12个月锁定期外，高管通过资管计划认购的战略配售股份，在减持时仍需遵守以下全部限制**：
+                </p>
+                <ul class="list-none space-y-4 text-primary">
+                    <li class="flex items-center text-xl font-medium">
+                        <i class="fas fa-percent text-accent mr-3"></i>
+                        每年25%的持股减持比例限制
+                        <span class="text-sm text-secondary ml-2">(适用于在职高管)</span>
+                    </li>
+                    <li class="flex items-center text-xl font-medium">
+                        <i class="fas fa-bullhorn text-accent mr-3"></i>
+                        减持预披露要求
+                        <span class="text-sm text-secondary ml-2">(需提前公告减持计划)</span>
+                    </li>
+                    <li class="flex items-center text-xl font-medium">
+                        <i class="fas fa-ban text-accent mr-3"></i>
+                        窗口期禁止减持
+                        <span class="text-sm text-secondary ml-2">(定期报告/业绩预告等敏感期)</span>
+                    </li>
+                    <li class="flex items-center text-xl font-medium">
+                        <i class="fas fa-star text-accent mr-3"></i>
+                        科创板特殊限制
+                        <span class="text-sm text-secondary ml-2">(如公司未盈利、破发/破净等情形)</span>
+                    </li>
+                    <li class="flex items-center text-xl font-medium">
+                        <i class="fas fa-handshake text-accent mr-3"></i>
+                        资管计划独立减持申报
+                        <span class="text-sm text-secondary ml-2">(需通过管理人操作)</span>
+                    </li>
+                </ul>
+                <p class="text-md leading-relaxed text-secondary mt-6 border-t border-dashed border-color pt-4">
+                    具体规则依据及操作细节如下：
+                </p>
+            </div>
+        </section>
+
+        <hr class="border-t border-dashed border-color my-12">
+
+        <!-- 一、25%的年度减持比例限制（核心约束） -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-8 text-accent">
+                <i class="fas fa-scale-balanced mr-3"></i>一、25%的年度减持比例限制<span class="text-xl text-secondary ml-2">(核心约束)</span>
+            </h2>
+
+            <h3 class="text-2xl font-medium mb-4 text-primary">法规依据</h3>
+            <blockquote class="bg-highlight p-6 rounded-md mb-6 border-color shadow-sm">
+                <p class="text-lg leading-relaxed">根据《上市公司董事、监事和高级管理人员所持本公司股份及其变动管理规则》（证监会公告〔2024〕9号）**第四条**：</p>
+                <p class="text-lg leading-relaxed mt-2 italic">
+                    **在任职期间，每年转让的股份不得超过其持有本公司股份总数的25%**。
+                </p>
+                <p class="text-lg leading-relaxed mt-2 italic">
+                    **“持有”包括直接持股和间接持股**（如通过资管计划、信托计划等控制或受益的股份）<sup class="text-accent ml-1 font-bold"><a href="#footnote1" class="footnote">[1]</a></sup>。
+                </p>
+            </blockquote>
+
+            <h3 class="text-2xl font-medium mb-4 text-primary">关键解读</h3>
+            <div class="bg-card p-6 rounded-lg shadow-md border border-color card-hover">
+                <ul class="list-disc list-inside space-y-3 text-lg text-primary">
+                    <li>
+                        <strong class="text-accent">适用范围</strong>：高管通过资管计划持有的战略配售股份，与其直接持股合并计算减持基数。
+                        <p class="text-base text-secondary mt-1">
+                            <em>例如：某高管直接持股100万股 + 资管计划持股200万股 → 合计基数300万股，每年最多减持75万股（25%）</em>。
+                        </p>
+                    </li>
+                    <li>
+                        <strong class="text-accent">计算方式</strong>：以“上年末持股总数”为基数（含锁定期满的存量股），<strong class="text-blue-400">每年1月1日重置额度</strong>。
+                    </li>
+                    <li>
+                        <strong class="text-accent">豁免情形</strong>：<strong class="text-green-400">离职后6个月起不再受25%限制</strong>（但仍受其他规则约束）<sup class="text-accent ml-1 font-bold"><a href="#footnote2" class="footnote">[2]</a></sup>。
+                    </li>
+                </ul>
+                <div class="mt-6 p-4 rounded-md bg-green-900 bg-opacity-30 text-green-300 flex items-center shadow-inner">
+                    <i class="fas fa-check-circle mr-3 text-green-400 text-xl"></i>
+                    <p class="font-bold text-lg">结论</p>
+                    <span class="ml-2 text-lg">：只要高管仍在任职，资管计划减持股份必须纳入25%的年度限额管理。</span>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-t border-dashed border-color my-12">
+
+        <!-- 二、其他潜在减持限制 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-8 text-accent">
+                <i class="fas fa-exclamation-triangle mr-3"></i>二、其他潜在减持限制
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 1. 减持预披露要求 -->
+                <div class="bg-card p-6 rounded-lg shadow-md border border-color card-hover">
+                    <h3 class="text-2xl font-medium mb-4 text-primary"><i class="fas fa-info-circle mr-2 text-blue-400"></i>1. 减持预披露要求</h3>
+                    <p class="text-lg leading-relaxed text-primary mb-3">
+                        <strong class="text-accent">规则</strong>：减持前需提前<strong class="text-blue-400">15个交易日</strong>向交易所备案并公告减持计划（内容含减持数量、方式、时间区间等）。
+                    </p>
+                    <p class="text-lg leading-relaxed text-primary">
+                        <strong class="text-accent">依据</strong>：
+                        《上海证券交易所科创板上市公司股东及董事、监事、高级管理人员减持股份实施细则》**第七条**<sup class="text-accent ml-1 font-bold"><a href="#footnote3" class="footnote">[3]</a></sup>。
+                    </p>
+                </div>
+
+                <!-- 2. 窗口期禁止减持 -->
+                <div class="bg-card p-6 rounded-lg shadow-md border border-color card-hover">
+                    <h3 class="text-2xl font-medium mb-4 text-primary"><i class="fas fa-calendar-times mr-2 text-red-400"></i>2. 窗口期禁止减持</h3>
+                    <p class="text-lg leading-relaxed text-primary mb-3">
+                        <strong class="text-accent">禁止期间</strong>（任一时点均不可减持）：
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 text-lg text-primary">
+                        <li>公司年度/半年度报告公告前<strong class="text-red-400">30日内</strong>；</li>
+                        <li>业绩预告/快报公告前<strong class="text-red-400">10日内</strong>；</li>
+                        <li>重大事项（如并购重组）决策期间至公告后<strong class="text-red-400">2个交易日</strong>内。</li>
+                    </ul>
+                    <p class="text-lg leading-relaxed text-primary mt-3">
+                        <strong class="text-accent">依据</strong>：
+                        证监会《上市公司董事、监事和高级管理人员所持本公司股份及其变动管理规则》**第五条**<sup class="text-accent ml-1 font-bold"><a href="#footnote1" class="footnote">[1]</a></sup>。
+                    </p>
+                </div>
+
+                <!-- 3. 科创板特殊限制 -->
+                <div class="md:col-span-2 bg-card p-6 rounded-lg shadow-md border border-color card-hover">
+                    <h3 class="text-2xl font-medium mb-4 text-primary"><i class="fas fa-lightbulb mr-2 text-purple-400"></i>3. 科创板特殊限制</h3>
+                    <p class="text-lg leading-relaxed text-primary mb-4">
+                        若公司存在以下情形，高管减持资管计划股份将受额外约束：
+                    </p>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left table-auto border-collapse">
+                            <thead>
+                                <tr class="bg-table-header-bg">
+                                    <th class="py-3 px-4 border-b border-color text-primary">情形</th>
+                                    <th class="py-3 px-4 border-b border-color text-primary">限制内容</th>
+                                    <th class="py-3 px-4 border-b border-color text-primary">依据</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="even:bg-highlight">
+                                    <td class="py-3 px-4 border-b border-color text-primary font-medium">公司未盈利</td>
+                                    <td class="py-3 px-4 border-b border-color text-primary">自上市起<strong class="text-orange-400">第4个会计年度</strong>仍亏损的，高管不得减持（含资管计划）</td>
+                                    <td class="py-3 px-4 border-b border-color text-secondary"><a href="#footnote4" class="link-underline">《科创板上市规则》2.4.10条</a><sup class="text-accent ml-1 font-bold">[4]</sup></td>
+                                </tr>
+                                <tr class="even:bg-highlight">
+                                    <td class="py-3 px-4 border-b border-color text-primary font-medium">股价破发/破净</td>
+                                    <td class="py-3 px-4 border-b border-color text-primary">连续20日收盘价低于发行价或净资产时，控股股东/实控人不得减持（高管虽无直接限制，但交易所可窗口指导审慎操作）</td>
+                                    <td class="py-3 px-4 border-b border-color text-secondary"><a href="#footnote5" class="link-underline">证监会减持新规（2023年8月）</a><sup class="text-accent ml-1 font-bold">[5]</sup></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 4. 资管计划独立操作要求 -->
+                <div class="md:col-span-2 bg-card p-6 rounded-lg shadow-md border border-color card-hover">
+                    <h3 class="text-2xl font-medium mb-4 text-primary"><i class="fas fa-user-tie mr-2 text-cyan-400"></i>4. 资管计划独立操作要求</h3>
+                    <p class="text-lg leading-relaxed text-primary mb-3">
+                        资管计划减持由管理人（如券商资管子公司）执行，但需遵守：
+                    </p>
+                    <ul class="list-disc list-inside space-y-3 text-lg text-primary">
+                        <li><strong class="text-accent">穿透申报</strong>：管理人需向交易所申报最终持有人（高管）身份及减持额度；</li>
+                        <li><strong class="text-accent">避免超额</strong>：管理人需确保减持不超过高管当年剩余额度；</li>
+                        <li><strong class="text-accent">合规留痕</strong>：减持后5日内向证监会及交易所提交书面报告<sup class="text-accent ml-1 font-bold"><a href="#footnote6" class="footnote">[6]</a></sup>。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-t border-dashed border-color my-12">
+
+        <!-- 三、违规案例警示（科创板实践） -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-8 text-accent">
+                <i class="fas fa-bell mr-3"></i>三、违规案例警示<span class="text-xl text-secondary ml-2">(科创板实践)</span>
+            </h2>
+            <div class="bg-card p-8 rounded-lg shadow-xl border border-red-700 bg-red-900 bg-opacity-20 card-hover">
+                <h3 class="text-2xl font-medium mb-4 text-primary"><i class="fas fa-times-circle mr-2 text-red-500"></i>案例：乐鑫科技（688018）核心技术人员通过资管计划减持</h3>
+                <ul class="list-disc list-inside space-y-3 text-lg text-primary">
+                    <li><strong class="text-red-400">违规点</strong>：2022年7月窗口期（半年报预告前10日）减持资管计划份额。</li>
+                    <li><strong class="text-red-400">处罚</strong>：上交所予以监管警示，认定其“间接减持违反窗口期禁令”<sup class="text-accent ml-1 font-bold"><a href="#footnote7" class="footnote">[7]</a></sup>。</li>
+                </ul>
+                <div class="mt-6 p-4 rounded-md bg-yellow-900 bg-opacity-30 text-yellow-300 flex items-center shadow-inner">
+                    <i class="fas fa-exclamation-triangle mr-3 text-yellow-400 text-xl"></i>
+                    <p class="font-bold text-lg">启示</p>
+                    <span class="ml-2 text-lg">：<strong class="text-yellow-400">资管计划减持视同高管本人行为</strong>，程序与合规责任不可分割。</span>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-t border-dashed border-color my-12">
+
+        <!-- 总结：高管战略配售资管计划减持全约束 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-8 text-accent">
+                <i class="fas fa-clipboard-list mr-3"></i>总结：高管战略配售资管计划减持全约束
+            </h2>
+            <div class="overflow-x-auto bg-card p-6 rounded-lg shadow-xl border border-color card-hover">
+                <table class="w-full text-left table-auto border-collapse">
+                    <thead>
+                        <tr class="table-header-bg">
+                            <th class="py-3 px-4 border-b border-color text-primary">限制类型</th>
+                            <th class="py-3 px-4 border-b border-color text-primary">具体规则</th>
+                            <th class="py-3 px-4 border-b border-color text-primary">是否穿透适用</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="even:bg-highlight">
+                            <td class="py-3 px-4 border-b border-color text-primary font-medium">锁定期</td>
+                            <td class="py-3 px-4 border-b border-color text-primary">上市后锁定12个月</td>
+                            <td class="py-3 px-4 border-b border-color text-green-400 font-bold">是</td>
+                        </tr>
+                        <tr class="even:bg-highlight">
+                            <td class="py-3 px-4 border-b border-color text-primary font-medium">25%年度比例限制</td>
+                            <td class="py-3 px-4 border-b border-color text-primary">每年减持≤上年末持股总数的25%</td>
+                            <td class="py-3 px-4 border-b border-color text-green-400 font-bold">是</td>
+                        </tr>
+                        <tr class="even:bg-highlight">
+                            <td class="py-3 px-4 border-b border-color text-primary font-medium">减持预披露</td>
+                            <td class="py-3 px-4 border-b border-color text-primary">提前15日公告计划</td>
+                            <td class="py-3 px-4 border-b border-color text-green-400 font-bold">是</td>
+                        </tr>
+                        <tr class="even:bg-highlight">
+                            <td class="py-3 px-4 border-b border-color text-primary font-medium">窗口期禁令</td>
+                            <td class="py-3 px-4 border-b border-color text-primary">定期报告/业绩预告等敏感期禁止减持</td>
+                            <td class="py-3 px-4 border-b border-color text-green-400 font-bold">是</td>
+                        </tr>
+                        <tr class="even:bg-highlight">
+                            <td class="py-3 px-4 border-b border-color text-primary font-medium">未盈利企业限制</td>
+                            <td class="py-3 px-4 border-b border-color text-primary">上市第4年未盈利则禁止减持</td>
+                            <td class="py-3 px-4 border-b border-color text-green-400 font-bold">是</td>
+                        </tr>
+                        <tr class="even:bg-highlight">
+                            <td class="py-3 px-4 border-b border-color text-primary font-medium">破发/破净审慎要求</td>
+                            <td class="py-3 px-4 border-b border-color text-primary">交易所可能窗口指导放缓减持</td>
+                            <td class="py-3 px-4 border-b border-color text-orange-400">间接影响</td>
+                        </tr>
+                        <tr class="even:bg-highlight">
+                            <td class="py-3 px-4 border-b border-color text-primary font-medium">资管计划操作规范</td>
+                            <td class="py-3 px-4 border-b border-color text-primary">管理人需穿透申报、按额度减持</td>
+                            <td class="py-3 px-4 border-b border-color text-green-400 font-bold">是</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Data Visualization - Mermaid Diagram -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-8 text-accent">
+                <i class="fas fa-sitemap mr-3"></i>减持限制关系图
+            </h2>
+            <div class="mermaid-container">
+                <div class="mermaid">
+                    graph TD
+                        A[高管战略配售减持] --> B{主要限制类型}
+
+                        B --> C[1. 锁定期 (12个月)]
+                        B --> D[2. 年度比例限制 (25%)]
+                        B --> E[3. 预披露要求]
+                        B --> F[4. 窗口期禁止]
+                        B --> G[5. 科创板特殊限制]
+                        B --> H[6. 资管计划操作规范]
+
+                        D --&gt; D1[在职期间适用]
+                        D --&gt; D2[离职后6个月豁免]
+
+                        G --> G1[公司未盈利 (第4年)]
+                        G --> G2[股价破发/破净]
+
+                        H --&gt; H1[管理人穿透申报]
+                        H --&gt; H2[避免超额减持]
+                        H --&gt; H3[合规留痕]
+
+                        click G2 href "https://www.csrc.gov.cn/csrc/c100028/c1000978/content.shtml" "证监会减持新规"
+                        click G1 href "https://www.sse.com.cn/lawandrules/sse/jyzn/kcbls/kcblsztf_kcblsgjz/c/c_20200828_2267866.shtml" "科创板上市规则"
+                        linkStyle 0 stroke:#818cf8,stroke-width:2px;
+                        linkStyle 1 stroke:#818cf8,stroke-width:2px;
+                        linkStyle 2 stroke:#818cf8,stroke-width:2px;
+                        linkStyle 3 stroke:#818cf8,stroke-width:2px;
+                        linkStyle 4 stroke:#818cf8,stroke-width:2px;
+                        linkStyle 5 stroke:#818cf8,stroke-width:2px;
+                        linkStyle 6 stroke:#818cf8,stroke-width:2px;
+                </div>
+            </div>
+        </section>
+
+        <!-- 操作建议 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-8 text-accent">
+                <i class="fas fa-hand-point-right mr-3"></i>操作建议
+            </h2>
+            <div class="bg-card p-8 rounded-lg shadow-xl border border-green-700 bg-green-900 bg-opacity-20 card-hover">
+                <p class="text-lg leading-relaxed text-primary mb-4">
+                    高管减持资管计划份额前需确认：
+                </p>
+                <ul class="list-disc list-inside space-y-3 text-lg text-primary">
+                    <li><strong class="text-accent">是否在职</strong>（决定25%限额是否适用）；</li>
+                    <li><strong class="text-accent">当年剩余减持额度</strong>；</li>
+                    <li><strong class="text-accent">避开所有窗口期</strong>；</li>
+                    <li><strong class="text-accent">公司是否触及未盈利/破发等特殊情形</strong>。</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 延伸阅读 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-semibold mb-8 text-accent">
+                <i class="fas fa-book-open mr-3"></i>延伸阅读：重要法规及文件
+            </h2>
+            <div class="bg-card p-8 rounded-lg shadow-xl border border-color card-hover">
+                <ul class="list-disc list-inside space-y-4 text-lg text-primary">
+                    <li>
+                        <strong class="text-accent">《中华人民共和国证券法》</strong>
+                        <p class="text-secondary text-sm mt-1">中国资本市场的核心法律，理解所有市场规则的基础。</p>
+                    </li>
+                    <li>
+                        <strong class="text-accent">《首次公开发行股票注册管理办法》</strong>
+                        <p class="text-secondary text-sm mt-1">规范IPO发行及战略配售的直接依据。</p>
+                    </li>
+                    <li>
+                        <strong class="text-accent">《上市公司董事、监事和高级管理人员所持本公司股份及其变动管理规则》</strong>
+                        <p class="text-secondary text-sm mt-1">直接规定董监高持股及变动的详细规则，本文多次引用。</p>
+                    </li>
+                    <li>
+                        <strong class="text-accent">《上海证券交易所科创板上市公司股东及董事、监事、高级管理人员减持股份实施细则》</strong>
+                        <p class="text-secondary text-sm mt-1">针对科创板减持的专门细则，包含预披露等特殊要求。</p>
+                    </li>
+                    <li>
+                        <strong class="text-accent">《上市公司信息披露管理办法》</strong>
+                        <p class="text-secondary text-sm mt-1">规范上市公司信息披露的总体框架，与减持公告要求紧密相关。</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Footnotes -->
+        <section class="mt-20 text-sm text-secondary border-t border-dashed border-color pt-8">
+            <h3 class="text-xl font-medium mb-4 text-primary">参考文献</h3>
+            <ol class="space-y-2">
+                <li id="footnote1">
+                    <span class="font-bold">[1]</span> 证监会《上市公司董事、监事和高级管理人员所持本公司股份及其变动管理规则》（2024年修订），第四条、第五条。
+                </li>
+                <li id="footnote2">
+                    <span class="font-bold">[2]</span> 联网搜索：<a href="https://jianchiwang.com/%E9%AB%98%E7%AE%A1%E5%8F%8A%E6%A0%B8%E5%BF%83%E5%91%98%E5%B7%A5%E5%87%8F%E6%8C%81%E9%A6%96%E5%8F%91%E6%88%98%E7%95%A5%E9%85%8D%E5%94%AE%E8%82%A1%E4%BB%BD%E5%90%88%E8%A7%84%E8%A6%81%E7%82%B9-2/" target="_blank" class="link-underline">高管及核心员工减持首发战略配售股份合规要点</a>（明确间接持股纳入25%计算）。
+                </li>
+                <li id="footnote3">
+                    <span class="font-bold">[3]</span> 《上海证券交易所科创板上市公司股东及董事、监事、高级管理人员减持股份实施细则》第七条。
+                </li>
+                <li id="footnote4">
+                    <span class="font-bold">[4]</span> 《上海证券交易所科创板股票上市规则》第2.4.10条（未盈利企业减持限制）。
+                </li>
+                <li id="footnote5">
+                    <span class="font-bold">[5]</span> 联网搜索：<a href="http://www.csrc.gov.cn/csrc/c100028/c1000978/content.shtml" target="_blank" class="link-underline">证监会有关负责人就规范股份减持行为答记者问</a>（2023年8月）。
+                </li>
+                <li id="footnote6">
+                    <span class="font-bold">[6]</span> 知识库资料：“战略配售”（资管计划减持需管理人申报及合规操作）。
+                </li>
+                <li id="footnote7">
+                    <span class="font-bold">[7]</span> 上交所监管警示函（乐鑫科技核心技术人员，2022年7月）。
+                </li>
+            </ol>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-card text-secondary py-8 border-t border-color text-center text-sm">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <p>&copy; 2024 战略配售高管减持合规解析. 版权所有。</p>
+            <p class="mt-2">本网页内容仅供参考，不构成法律意见。</p>
+        </div>
+    </footer>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default', // Theme will be adjusted by CSS invert filter
+            securityLevel: 'loose' // Allows clickable links
+        });
+
+        // Dark/Light Mode Toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Check user's preferred theme from local storage or system
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            htmlElement.className = currentTheme;
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            htmlElement.classList.add('dark');
+        } else {
+            htmlElement.classList.remove('dark');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    </script>
+</body>
+</html>
+```
