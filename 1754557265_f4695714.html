@@ -1,0 +1,572 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板IPO发行数量深度解析</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base styles for dark mode by default */
+        html.dark {
+            background-color: #0f172a; /* slate-900 */
+            color: #e2e8f0; /* slate-200 */
+        }
+        html.light {
+            background-color: #f8fafc; /* slate-50 */
+            color: #1e293b; /* slate-800 */
+        }
+
+        /* Custom fonts */
+        .font-serif-sc {
+            font-family: 'Noto Serif SC', Georgia, "Times New Roman", Times, serif;
+        }
+        .font-sans-sc {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+
+        /* Custom scrollbar for aesthetic (optional, but enhances "premium" feel) */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #2b3a53; /* slate-800 for dark, gray-200 for light */
+            border-radius: 10px;
+        }
+        html.light ::-webkit-scrollbar-track {
+            background: #e2e8f0; /* slate-200 for light */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #60a5fa; /* blue-400 */
+            border-radius: 10px;
+        }
+        html.dark ::-webkit-scrollbar-thumb {
+            background: #38bdf8; /* sky-400 */
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b82f6; /* blue-500 */
+        }
+        html.dark ::-webkit-scrollbar-thumb:hover {
+            background: #0ea5e9; /* sky-600 */
+        }
+
+        /* Smooth scroll for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Micro-interactions */
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Tailwind shadow-lg */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        html.dark .card-hover:hover {
+             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15); /* Darker shadow for dark mode */
+        }
+        .hover-underline:hover {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+        .footnote-link {
+            transition: color 0.2s ease-in-out;
+        }
+        .footnote-link:hover {
+            color: #60a5fa; /* blue-400 */
+        }
+        html.dark .footnote-link:hover {
+            color: #38bdf8; /* sky-400 */
+        }
+
+        /* Mermaid container styling */
+        .mermaid {
+            background-color: #1e293b; /* slate-800 */
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 1.5rem; /* p-6 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            overflow-x: auto; /* Ensure horizontal scroll on small screens */
+            color: #e2e8f0; /* Default text color for mermaid */
+        }
+        html.light .mermaid {
+            background-color: #f1f5f9; /* slate-100 */
+            color: #1e293b; /* slate-800 */
+        }
+
+        /* Specific Mermaid theme adjustments (dark mode) */
+        html.dark .mermaid {
+            --mermaid-font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, sans-serif;
+            --mermaid-node-fill: #334155; /* slate-700 */
+            --mermaid-node-stroke: #64748b; /* slate-500 */
+            --mermaid-node-text-color: #e2e8f0; /* slate-200 */
+            --mermaid-edge-color: #94a3b8; /* slate-400 */
+            --mermaid-cluster-fill: #1e293b; /* slate-800 */
+            --mermaid-cluster-stroke: #475569; /* slate-600 */
+            --mermaid-cluster-text-color: #cbd5e1; /* slate-300 */
+            --mermaid-line-color: #cbd5e1; /* slate-300 */
+            --mermaid-text-color: #e2e8f0;
+            --mermaid-border-color: #475569;
+            --mermaid-background-color: #1e293b; /* slate-800 */
+        }
+
+        /* Specific Mermaid theme adjustments (light mode) */
+        html.light .mermaid {
+            --mermaid-font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, sans-serif;
+            --mermaid-node-fill: #e2e8f0; /* slate-200 */
+            --mermaid-node-stroke: #94a3b8; /* slate-400 */
+            --mermaid-node-text-color: #1e293b; /* slate-800 */
+            --mermaid-edge-color: #475569; /* slate-600 */
+            --mermaid-cluster-fill: #f8fafc; /* slate-50 */
+            --mermaid-cluster-stroke: #cbd5e1; /* slate-300 */
+            --mermaid-cluster-text-color: #334155; /* slate-700 */
+            --mermaid-line-color: #475569; /* slate-600 */
+            --mermaid-text-color: #1e293b;
+            --mermaid-border-color: #cbd5e1;
+            --mermaid-background-color: #f1f5f9; /* slate-100 */
+        }
+
+        /* Styles for footnotes */
+        .footnotes {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid;
+            border-color: #334155; /* slate-700 */
+        }
+        html.light .footnotes {
+            border-color: #cbd5e1; /* slate-300 */
+        }
+        .footnote-item {
+            font-size: 0.875rem; /* text-sm */
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body class="font-sans-sc transition-colors duration-300">
+
+    <!-- Dark/Light Mode Toggle Button -->
+    <button id="themeToggle" class="fixed bottom-6 right-6 p-4 rounded-full shadow-lg z-50 transition-all duration-300
+        bg-white dark:bg-slate-800 text-gray-800 dark:text-gray-200
+        hover:bg-gray-100 dark:hover:bg-slate-700">
+        <i class="fas fa-sun hidden dark:block"></i>
+        <i class="fas fa-moon block dark:hidden"></i>
+    </button>
+
+    <div class="min-h-screen flex flex-col items-center">
+        <!-- Hero Section -->
+        <header class="relative w-full overflow-hidden py-24 md:py-32 lg:py-40 bg-gradient-to-br from-indigo-900 to-blue-900 dark:from-slate-900 dark:to-slate-800 transition-all duration-300">
+            <div class="absolute inset-0 opacity-10">
+                <img src="https://images.unsplash.com/photo-1620701049969-906f363c46d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Abstract finance background" class="w-full h-full object-cover">
+            </div>
+            <div class="relative max-w-5xl mx-auto px-6 text-center z-10">
+                <h1 class="font-serif-sc text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-white mb-4 drop-shadow-md">
+                    科创板IPO发行数量深度解析
+                </h1>
+                <p class="text-xl md:text-2xl text-indigo-200 dark:text-slate-300 mb-8 max-w-3xl mx-auto">
+                    揭秘企业上市融资的关键比例与实操策略
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#core-concepts" class="px-8 py-3 bg-teal-500 text-white font-semibold rounded-full shadow-lg hover:bg-teal-600 transition-transform duration-300 transform hover:-translate-y-1 inline-flex items-center">
+                        <i class="fas fa-lightbulb mr-2"></i> 了解核心概念
+                    </a>
+                    <a href="#case-studies" class="px-8 py-3 bg-white bg-opacity-20 text-white font-semibold rounded-full shadow-lg hover:bg-opacity-30 transition-transform duration-300 transform hover:-translate-y-1 inline-flex items-center">
+                        <i class="fas fa-chart-line mr-2"></i> 查看案例分析
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="flex-grow w-full max-w-5xl mx-auto px-6 py-16 md:py-20 lg:py-24">
+
+            <!-- Introduction Section -->
+            <section class="mb-16">
+                <p class="text-lg md:text-xl leading-relaxed text-gray-700 dark:text-slate-300">
+                    在科创板上市，确定合适的IPO发行数量是企业融资成功的关键一步。这不仅涉及复杂的法规要求，更需要结合市场情况与企业自身发展战略进行周密考量。本文将从概念、法规、实际案例及实操策略等多个维度，为您深入解析科创板IPO发行数量的奥秘。
+                </p>
+            </section>
+
+            <!-- 1. IPO发行数量的核心概念 -->
+            <section id="core-concepts" class="mb-20">
+                <h2 class="font-serif-sc text-4xl md:text-5xl font-bold text-teal-500 dark:text-teal-300 mb-8 flex items-center">
+                    <i class="fas fa-cube mr-4 text-teal-400"></i> IPO发行数量的核心概念
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-gray-50 dark:bg-slate-800 p-8 rounded-xl shadow-lg card-hover">
+                        <h3 class="font-serif-sc text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center">
+                            <i class="fas fa-balance-scale mr-3 text-blue-500"></i> 最低比例限制 <span class="text-base text-gray-500 dark:text-gray-400 ml-2">(核心约束)</span>
+                        </h3>
+                        <p class="text-lg leading-relaxed text-gray-700 dark:text-slate-300 mb-4">
+                            根据《证券发行与承销管理办法》及《科创板股票发行与承销实施办法》，IPO数量需满足发行后总股本的最低比例要求。
+                        </p>
+                        <ul class="list-none space-y-3 pl-0">
+                            <li class="flex items-start text-lg text-gray-700 dark:text-slate-300">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <div>
+                                    <strong class="text-teal-600 dark:text-teal-400">发行后总股本 ≤ 4亿股：</strong>
+                                    IPO数量 ≥ 发行后总股本的 <span class="text-xl font-bold text-blue-500 dark:text-sky-400">25%</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start text-lg text-gray-700 dark:text-slate-300">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <div>
+                                    <strong class="text-teal-600 dark:text-teal-400">发行后总股本 > 4亿股：</strong>
+                                    IPO数量 ≥ 发行后总股本的 <span class="text-xl font-bold text-blue-500 dark:text-sky-400">10%</span>
+                                </div>
+                            </li>
+                        </ul>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-4">
+                            <i class="fas fa-info-circle mr-1"></i>
+                            此规则源于《首次公开发行股票注册管理办法》第十二条<a href="#fn1" id="ref1" class="text-blue-500 dark:text-sky-400 hover-underline footnote-link"><sup>[1]</sup></a>。
+                        </p>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-slate-800 p-8 rounded-xl shadow-lg card-hover">
+                        <h3 class="font-serif-sc text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center">
+                            <i class="fas fa-cogs mr-3 text-purple-500"></i> 绝对数量限制 <span class="text-base text-gray-500 dark:text-gray-400 ml-2">(隐性约束)</span>
+                        </h3>
+                        <p class="text-lg leading-relaxed text-gray-700 dark:text-slate-300">
+                            除了最低比例，发行数量还需符合企业的实际融资需求和市场的承受能力，并需通过交易所的严格审核与证监会的注册。这是一项平衡艺术，既要满足资金需求，又要避免过度稀释股权或给市场带来压力。
+                        </p>
+                        <ul class="list-none space-y-3 mt-6 pl-0">
+                            <li class="flex items-start text-lg text-gray-700 dark:text-slate-300">
+                                <i class="fas fa-dollar-sign text-green-500 mt-1 mr-3"></i>
+                                <div>
+                                    <strong class="text-teal-600 dark:text-teal-400">融资需求：</strong> 需与企业未来发展规划、募投项目资金缺口相匹配。
+                                </div>
+                            </li>
+                            <li class="flex items-start text-lg text-gray-700 dark:text-slate-300">
+                                <i class="fas fa-chart-pie text-red-500 mt-1 mr-3"></i>
+                                <div>
+                                    <strong class="text-teal-600 dark:text-teal-400">市场承受力：</strong> 考虑当前市场流动性、投资者偏好及估值水平。
+                                </div>
+                            </li>
+                            <li class="flex items-start text-lg text-gray-700 dark:text-slate-300">
+                                <i class="fas fa-gavel text-yellow-500 mt-1 mr-3"></i>
+                                <div>
+                                    <strong class="text-teal-600 dark:text-teal-400">监管审批：</strong> 最终需通过交易所审核与证监会注册流程。
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. 科创板实际发行案例中的比例突破 -->
+            <section id="case-studies" class="mb-20">
+                <h2 class="font-serif-sc text-4xl md:text-5xl font-bold text-teal-500 dark:text-teal-300 mb-8 flex items-center">
+                    <i class="fas fa-chart-bar mr-4 text-teal-400"></i> 科创板实际发行案例中的比例突破
+                </h2>
+                <p class="text-lg leading-relaxed text-gray-700 dark:text-slate-300 mb-8">
+                    科创板在发行比例上没有明确的上限限制，这为部分特殊企业提供了灵活性。实际案例中，发行比例远超最低下限的情况并不少见，主要分为以下两类：
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <div class="bg-gray-50 dark:bg-slate-800 p-8 rounded-xl shadow-lg card-hover">
+                        <h3 class="font-serif-sc text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center">
+                            <i class="fas fa-industry mr-3 text-orange-500"></i> 常规企业：发行比例通常为10%-30%
+                        </h3>
+                        <p class="text-lg leading-relaxed text-gray-700 dark:text-slate-300 mb-4">
+                            多数科创板上市企业在平衡原股东控制权稀释和融资需求后，会选择在这个区间内发行。
+                        </p>
+                        <ul class="list-disc list-inside space-y-2 text-lg text-gray-700 dark:text-slate-300 pl-4">
+                            <li><strong class="text-blue-500 dark:text-sky-400">中国通号 (688009)：</strong> 发行后总股本105.9亿股，IPO数量18亿股 → 比例 <span class="font-bold">17%</span> （<span class="text-green-500">符合 >10% 下限</span>）<a href="#fn2" id="ref2" class="text-blue-500 dark:text-sky-400 hover-underline footnote-link"><sup>[2]</sup></a>。</li>
+                            <li><strong class="text-blue-500 dark:text-sky-400">中芯国际 (688981)：</strong> 发行后总股本71.36亿股，IPO数量16.86亿股 → 比例 <span class="font-bold">23.6%</span> （<span class="text-green-500">符合 >10% 下限</span>）<a href="#fn2" class="text-blue-500 dark:text-sky-400 hover-underline footnote-link"><sup>[2]</sup></a>。</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-slate-800 p-8 rounded-xl shadow-lg card-hover">
+                        <h3 class="font-serif-sc text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center">
+                            <i class="fas fa-magic mr-3 text-pink-500"></i> 特殊情形：比例突破30%的案例及原因
+                        </h3>
+                        <p class="text-lg leading-relaxed text-gray-700 dark:text-slate-300 mb-4">
+                            科创板为特定类型的企业（如红筹企业、未盈利企业）提供了更灵活的发行空间。
+                        </p>
+                        <ul class="list-disc list-inside space-y-2 text-lg text-gray-700 dark:text-slate-300 pl-4">
+                            <li><strong class="text-blue-500 dark:text-sky-400">红筹企业豁免比例限制：</strong> 如 <strong class="text-blue-500 dark:text-sky-400">中芯国际（二次上市）</strong> 实际占比 <span class="font-bold">23.6%</span><a href="#fn3" id="ref3" class="text-blue-500 dark:text-sky-400 hover-underline footnote-link"><sup>[3]</sup></a>。<br><strong class="text-blue-500 dark:text-sky-400">华润微 (688396)</strong> 红筹结构，比例 <span class="font-bold">25%</span><a href="#fn3" class="text-blue-500 dark:text-sky-400 hover-underline footnote-link"><sup>[3]</sup></a>。</li>
+                            <li><strong class="text-blue-500 dark:text-sky-400">未盈利企业适用更高比例：</strong> <strong class="text-blue-500 dark:text-sky-400">君实生物 (688180)</strong> 比例 <span class="font-bold">10%</span> （<span class="text-green-500">仅守下限</span>）<a href="#fn2" class="text-blue-500 dark:text-sky-400 hover-underline footnote-link"><sup>[2]</sup></a>。这类企业因估值压力，实践中较少高比例发行。</li>
+                            <li><strong class="text-blue-500 dark:text-sky-400">最高纪录：中芯国际（港股回A）：</strong> 网传 <span class="font-bold text-red-500">85.71%</span> 系误解，其法定发行比例仍为 <span class="font-bold">23.6%</span><a href="#fn4" id="ref4" class="text-blue-500 dark:text-sky-400 hover-underline footnote-link"><sup>[4]</sup></a>。</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Data Visualization Section -->
+            <section class="mb-20">
+                <h2 class="font-serif-sc text-4xl md:text-5xl font-bold text-teal-500 dark:text-teal-300 mb-8 flex items-center">
+                    <i class="fas fa-project-diagram mr-4 text-teal-400"></i> IPO发行数量决策流程图
+                </h2>
+                <p class="text-lg leading-relaxed text-gray-700 dark:text-slate-300 mb-8">
+                    以下图表直观展示了科创板IPO发行数量决策中的关键概念、比例要求与影响因素：
+                </p>
+                <div class="mermaid-container bg-slate-800 dark:bg-slate-800 light:bg-slate-100 p-6 rounded-xl shadow-lg transition-colors duration-300">
+                    <pre class="mermaid">
+graph TD
+    A[IPO发行数量分析] --> B(核心概念);
+    B --> C(最低比例限制);
+    C --> C1{发行后总股本};
+    C1 -- "≤ 4亿股" --> C1a[要求 ≥ 25%];
+    C1 -- "> 4亿股" --> C1b[要求 ≥ 10%];
+    B --> D(绝对数量限制);
+
+    A --> E(实际发行案例与突破);
+    E --> E1(常规企业);
+    E1 -- "通常区间" --> E1a[10% - 30%];
+    E --> E2(特殊情形);
+    E2 --> E2a(红筹企业);
+    E2a -- "豁免比例限制" --> E2a1[案例: 中芯国际, 华润微];
+    E2 --> E2b(未盈利企业);
+    E2b -- "估值压力影响" --> E2b1[通常守下限];
+
+    A --> F(理论上限与实操约束);
+    F --> F1(理论上限: 100%);
+    F --> F2(实操约束);
+    F2 -- "影响因素" --> F2a[原股东控制权];
+    F2 -- "影响因素" --> F2b[市场接受度];
+    F2 -- "影响因素" --> F2c[证监会个案审核];
+
+    G[结论与建议] --> G1(下限约束，无上限);
+    G --> G2(实际区间: 10%-30%);
+    G --> G3(红筹/未盈利可突破);
+    G --> G4(建议发行比例: 15%-25%);
+
+    style A fill:#3b82f6,stroke:#3b82f6,stroke-width:2px,color:#fff
+    style G fill:#06b6d4,stroke:#06b6d4,stroke-width:2px,color:#fff
+    style C1a fill:#10b981,stroke:#10b981,color:#fff
+    style C1b fill:#10b981,stroke:#10b981,color:#fff
+    style E1a fill:#facc15,stroke:#facc15,color:#333
+    linkStyle 0 stroke:#60a5fa,stroke-width:2px,fill:none;
+    linkStyle 1 stroke:#60a5fa,stroke-width:2px,fill:none;
+    linkStyle 2 stroke:#60a5fa,stroke-width:2px,fill:none;
+    linkStyle 3 stroke:#60a5fa,stroke-width:2px,fill:none;
+    linkStyle 4 stroke:#60a5fa,stroke-width:2px,fill:none;
+    linkStyle 5 stroke:#60a5fa,stroke-width:2px,fill:none;
+    linkStyle 6 stroke:#60a5fa,stroke-width:2px,fill:none;
+    linkStyle 7 stroke:#60a5fa,stroke-width:2px,fill:none;
+    linkStyle 8 stroke:#60a5fa,stroke-width:2px,fill:none;
+    linkStyle 9 stroke:#60a5fa,stroke-width:2px,fill:none;
+    linkStyle 10 stroke:#60a5fa,stroke-width:2px,fill:none;
+    linkStyle 11 stroke:#60a5fa,stroke-width:2px,fill:none;
+    linkStyle 12 stroke:#60a5fa,stroke-width:2px,fill:none;
+    linkStyle 13 stroke:#60a5fa,stroke-width:2px,fill:none;
+    linkStyle 14 stroke:#60a5fa,stroke-width:2px,fill:none;
+    linkStyle 15 stroke:#60a5fa,stroke-width:2px,fill:none;
+                    </pre>
+                </div>
+            </section>
+
+            <!-- 3. 理论发行上限与实操约束 -->
+            <section class="mb-20">
+                <h2 class="font-serif-sc text-4xl md:text-5xl font-bold text-teal-500 dark:text-teal-300 mb-8 flex items-center">
+                    <i class="fas fa-balance-scale-left mr-4 text-teal-400"></i> 理论上限与实操约束
+                </h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left table-auto border-collapse">
+                        <thead>
+                            <tr class="bg-gray-200 dark:bg-slate-700 text-gray-800 dark:text-gray-100 uppercase text-sm leading-normal">
+                                <th class="py-3 px-6 text-left rounded-tl-lg">情形</th>
+                                <th class="py-3 px-6 text-left">理论发行比例上限</th>
+                                <th class="py-3 px-6 text-left rounded-tr-lg">实操约束条件</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-700 dark:text-slate-300 text-lg">
+                            <tr class="border-b border-gray-200 dark:border-slate-700 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-200">
+                                <td class="py-4 px-6">一般科创板企业</td>
+                                <td class="py-4 px-6 font-bold text-teal-600 dark:text-teal-400">100%</td>
+                                <td class="py-4 px-6">需保留原股东控制权，通常≤30%；超高比例需证明必要性且易引发市场质疑</td>
+                            </tr>
+                            <tr class="border-b border-gray-200 dark:border-slate-700 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-200">
+                                <td class="py-4 px-6">红筹/VIE架构企业</td>
+                                <td class="py-4 px-6 font-bold text-teal-600 dark:text-teal-400">100%</td>
+                                <td class="py-4 px-6">需符合《科创板上市规则》第2.1.3条特殊表决权规定，且需交易所个案审核<a href="#fn3" class="text-blue-500 dark:text-sky-400 hover-underline footnote-link"><sup>[3]</sup></a></td>
+                            </tr>
+                            <tr class="border-b border-gray-200 dark:border-slate-700 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-200">
+                                <td class="py-4 px-6">未盈利企业</td>
+                                <td class="py-4 px-6 font-bold text-teal-600 dark:text-teal-400">100%</td>
+                                <td class="py-4 px-6">受估值承受力限制，通常接近10%下限（如泽璟制药发行比例10%）</td>
+                            </tr>
+                            <tr class="hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-200">
+                                <td class="py-4 px-6 rounded-bl-lg"><strong>极端案例支持</strong></td>
+                                <td class="py-4 px-6 font-bold text-teal-600 dark:text-teal-400"><strong>无明文上限</strong></td>
+                                <td class="py-4 px-6 rounded-br-lg">中芯国际实际发行23.6%，但若发行前股本更小（如1亿股），理论可接近100%<a href="#fn4" class="text-blue-500 dark:text-sky-400 hover-underline footnote-link"><sup>[4]</sup></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 4. 结论与建议 -->
+            <section class="mb-20">
+                <h2 class="font-serif-sc text-4xl md:text-5xl font-bold text-teal-500 dark:text-teal-300 mb-8 flex items-center">
+                    <i class="fas fa-check-double mr-4 text-teal-400"></i> 结论与建议
+                </h2>
+                <div class="bg-gray-50 dark:bg-slate-800 p-8 rounded-xl shadow-lg border-l-4 border-teal-500 dark:border-teal-400">
+                    <ul class="list-none space-y-4 pl-0">
+                        <li class="flex items-start text-lg text-gray-700 dark:text-slate-300">
+                            <i class="fas fa-caret-right text-teal-500 mt-1 mr-3"></i>
+                            <div>
+                                <strong class="text-teal-600 dark:text-teal-400">比例要求：</strong> 科创板IPO仅存在<strong class="text-blue-500 dark:text-sky-400">下限约束</strong>（10%或25%），<strong class="text-red-500 dark:text-rose-400">无上限</strong>。
+                            </div>
+                        </li>
+                        <li class="flex items-start text-lg text-gray-700 dark:text-slate-300">
+                            <i class="fas fa-caret-right text-teal-500 mt-1 mr-3"></i>
+                            <div>
+                                <strong class="text-teal-600 dark:text-teal-400">实际发行区间：</strong> <br>
+                                <ul class="list-none space-y-2 mt-2">
+                                    <li class="flex items-start"><i class="fas fa-minus text-gray-500 mt-1 mr-2"></i>多数公司：发行比例介于<strong class="text-blue-500 dark:text-sky-400">10%-30%</strong>（平衡原股东权益与融资需求）。</li>
+                                    <li class="flex items-start"><i class="fas fa-minus text-gray-500 mt-1 mr-2"></i>红筹/未盈利企业：可突破30%，但需充分披露必要性（如中芯国际23.6%）。</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="flex items-start text-lg text-gray-700 dark:text-slate-300">
+                            <i class="fas fa-caret-right text-teal-500 mt-1 mr-3"></i>
+                            <div>
+                                <strong class="text-teal-600 dark:text-teal-400">理论最大值：</strong> 若发行前股本极小，发行后股本>4亿股时，IPO数量可达发行后总股本的<strong class="text-red-500 dark:text-rose-400">近100%</strong>，但需证监会特批且市场接受度极低。
+                            </div>
+                        </li>
+                    </ul>
+                    <p class="text-xl font-semibold text-gray-800 dark:text-gray-100 mt-8 mb-4">
+                        <i class="fas fa-hand-point-right mr-3 text-orange-500"></i> 我们的建议：
+                    </p>
+                    <p class="text-lg leading-relaxed text-gray-700 dark:text-slate-300">
+                        拟上市企业应根据自身股本规模、估值预期及战略投资者安排，将发行比例设定在<strong class="text-purple-600 dark:text-purple-400">15%-25%</strong>区间（发行后总股本>4亿股时），以兼顾合规性与市场稳定性。
+                    </p>
+                </div>
+            </section>
+
+            <!-- Further Reading Section -->
+            <section class="mb-16">
+                <h2 class="font-serif-sc text-3xl md:text-4xl font-bold text-teal-500 dark:text-teal-300 mb-8 flex items-center">
+                    <i class="fas fa-book-open mr-4 text-teal-400"></i> 延伸阅读
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-gray-50 dark:bg-slate-800 p-6 rounded-xl shadow-lg card-hover">
+                        <h3 class="font-serif-sc text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">《公司金融》</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">作者: 罗斯、威斯特菲尔德、贾菲</p>
+                        <p class="text-base text-gray-700 dark:text-slate-300">全球经典的金融学教材，深入剖析公司估值、资本结构、股权融资等核心概念。</p>
+                        <a href="https://book.douban.com/subject/26915160/" target="_blank" class="text-blue-500 dark:text-sky-400 text-sm mt-3 inline-block hover-underline">查看详情 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-slate-800 p-6 rounded-xl shadow-lg card-hover">
+                        <h3 class="font-serif-sc text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">《中华人民共和国证券法》</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">立法机构: 全国人民代表大会常务委员会</p>
+                        <p class="text-base text-gray-700 dark:text-slate-300">了解中国证券市场的法律基石，是理解所有规则的前提。</p>
+                        <a href="http://www.gov.cn/zhengce/2019-12/28/content_5464522.htm" target="_blank" class="text-blue-500 dark:text-sky-400 text-sm mt-3 inline-block hover-underline">官方文本 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-slate-800 p-6 rounded-xl shadow-lg card-hover">
+                        <h3 class="font-serif-sc text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">《首次公开发行股票注册管理办法》</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">发布机构: 中国证券监督管理委员会</p>
+                        <p class="text-base text-gray-700 dark:text-slate-300">直接规范IPO注册制的核心法规，对发行条件、程序等有详细规定。</p>
+                        <a href="http://www.csrc.gov.cn/pub/zjhpublic/zjh/202302/t20230217_797530.htm" target="_blank" class="text-blue-500 dark:text-sky-400 text-sm mt-3 inline-block hover-underline">官方文本 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-slate-800 p-6 rounded-xl shadow-lg card-hover">
+                        <h3 class="font-serif-sc text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">《上海证券交易所科创板股票上市规则》</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">发布机构: 上海证券交易所</p>
+                        <p class="text-base text-gray-700 dark:text-slate-300">详细规定科创板企业的上市条件、审核要求及后续监管细则。</p>
+                        <a href="http://www.sse.com.cn/lawandrules/sserules/tib/star/c/c_20200918_5397918.shtml" target="_blank" class="text-blue-500 dark:text-sky-400 text-sm mt-3 inline-block hover-underline">官方文本 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-slate-800 p-6 rounded-xl shadow-lg card-hover">
+                        <h3 class="font-serif-sc text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">《上市公司并购重组管理办法》</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">发布机构: 中国证券监督管理委员会</p>
+                        <p class="text-base text-gray-700 dark:text-slate-300">虽非IPO直接相关，但了解上市后的资本运作和股权结构变化，有助于全面理解企业融资与发展。</p>
+                        <a href="http://www.csrc.gov.cn/pub/zjhpublic/zjh/202302/t20230217_797538.htm" target="_blank" class="text-blue-500 dark:text-sky-400 text-sm mt-3 inline-block hover-underline">官方文本 <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footnotes -->
+            <section class="footnotes text-gray-600 dark:text-slate-400">
+                <h3 class="font-serif-sc text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">参考资料</h3>
+                <ol class="footnote-list">
+                    <li id="fn1" class="footnote-item">
+                        <a href="#ref1" class="text-blue-500 dark:text-sky-400 hover-underline footnote-link"><sup>[1]</sup></a> 联网搜索：中国证监会《首次公开发行股票注册管理办法》第十二条（2023年修订），规定发行比例要求。
+                    </li>
+                    <li id="fn2" class="footnote-item">
+                        <a href="#ref2" class="text-blue-500 dark:text-sky-400 hover-underline footnote-link"><sup>[2]</sup></a> 知识库资料：科创板IPO案例数据库 - 收录中国通号、中芯国际等公司招股书发行数据。
+                    </li>
+                    <li id="fn3" class="footnote-item">
+                        <a href="#ref3" class="text-blue-500 dark:text-sky-400 hover-underline footnote-link"><sup>[3]</sup></a> 联网搜索：上海证券交易所《科创板股票上市规则》第2.1.3条（红筹企业特殊规定），<a href="http://www.sse.com.cn/lawandrules/sserules/tib/star/c/c_20200918_5397918.shtml" target="_blank" class="text-blue-500 dark:text-sky-400 hover-underline">http://www.sse.com.cn/lawandrules/sserules/tib/star/c/c_20200918_5397918.shtml</a>
+                    </li>
+                    <li id="fn4" class="footnote-item">
+                        <a href="#ref4" class="text-blue-500 dark:text-sky-400 hover-underline footnote-link"><sup>[4]</sup></a> 联网搜索：中芯国际科创板IPO招股说明书（注册稿），<a href="https://pdf.dfcfw.com/pdf/H2_AN202007051389087728_1.pdf" target="_blank" class="text-blue-500 dark:text-sky-400 hover-underline">https://pdf.dfcfw.com/pdf/H2_AN202007051389087728_1.pdf</a> 其发行前股本5.14亿股，IPO数量16.86亿股，发行后总股本71.36亿股。
+                    </li>
+                </ol>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="w-full bg-slate-900 text-slate-400 py-12 text-center text-sm border-t border-slate-700">
+            <p>&copy; 2023 IPO深度解析. 保留所有权利. | 设计与开发: 专业网页设计专家</p>
+            <div class="mt-4 flex justify-center space-x-6">
+                <a href="#" class="text-slate-400 hover:text-white transition-colors duration-200"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-slate-400 hover:text-white transition-colors duration-200"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="text-slate-400 hover:text-white transition-colors duration-200"><i class="fas fa-envelope"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Mermaid.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({ startOnLoad: true });
+
+        // Dark/Light Mode Toggle Logic
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        // Check for system preference on load
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (localStorage.getItem('theme') === 'light') {
+            htmlElement.classList.remove('dark');
+        } else if (localStorage.getItem('theme') === 'dark') {
+            htmlElement.classList.add('dark');
+        } else if (systemPrefersDark) {
+            htmlElement.classList.add('dark');
+        } else {
+            htmlElement.classList.remove('dark');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            // Re-render Mermaid chart to apply new theme colors
+            mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        });
+
+        // Add class to change scrollbar style on theme change
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (!localStorage.getItem('theme')) { // Only react to system changes if no manual override
+                if (event.matches) {
+                    htmlElement.classList.add('dark');
+                } else {
+                    htmlElement.classList.remove('dark');
+                }
+                mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+            }
+        });
+
+        // Observe elements for card-hover animation (optional, for more advanced effects)
+        // const cards = document.querySelectorAll('.card-hover');
+        // const observer = new IntersectionObserver(entries => {
+        //     entries.forEach(entry => {
+        //         if (entry.isIntersecting) {
+        //             entry.target.classList.add('animate-in'); // Add a class for animation
+        //         } else {
+        //             entry.target.classList.remove('animate-in');
+        //         }
+        //     });
+        // }, { threshold: 0.1 }); // Trigger when 10% of element is visible
+        // cards.forEach(card => observer.observe(card));
+    </script>
+</body>
+</html>
+```
