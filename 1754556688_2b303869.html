@@ -1,0 +1,469 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板IPO股本设计：战略配售深度解析</title>
+    <meta name="description" content="深入解析科创板IPO股本设计，特别是发行前股本4亿股对战略配售的影响，助您优化发行结构。">
+    <meta name="keywords" content="科创板IPO, 股本设计, 战略配售, 资本公积转增, 证券发行承销管理办法">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    
+    <!-- Google Fonts for Chinese (Noto Serif SC for headings, Noto Sans SC for body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom Fonts & Fallbacks */
+        .font-sans {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+        .font-serif {
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        /* Dark Mode Specific Styles */
+        body.dark {
+            background-color: #121212; /* Deep dark background */
+            color: #E0E0E0; /* Light gray text */
+        }
+        body.dark .text-secondary {
+            color: #B0B0B0; /* Slightly darker gray for secondary text */
+        }
+        body.dark .bg-card {
+            background-color: #1A1A1A; /* Slightly lighter dark for cards */
+        }
+        body.dark .border-primary {
+            border-color: #262626; /* Darker border */
+        }
+        body.dark .text-accent {
+            color: #38BDF8; /* Sky Blue for accent */
+        }
+        body.dark .bg-highlight {
+            background-color: #262626; /* Highlight background in dark mode */
+        }
+        body.dark .mermaid-dark-theme {
+            background-color: #1A1A1A !important; /* Ensure mermaid matches card bg */
+        }
+
+        /* Light Mode Specific Styles */
+        body.light {
+            background-color: #F8F8F8; /* Light background */
+            color: #333333; /* Dark text */
+        }
+        body.light .text-secondary {
+            color: #555555;
+        }
+        body.light .bg-card {
+            background-color: #FFFFFF; /* White for cards */
+        }
+        body.light .border-primary {
+            border-color: #E0E0E0; /* Light border */
+        }
+        body.light .text-accent {
+            color: #0284C7; /* Blue for accent */
+        }
+        body.light .bg-highlight {
+            background-color: #E0F2F7; /* Light blue for highlight */
+        }
+
+        /* Common Styles */
+        .transition-all-ease {
+            transition: all 0.3s ease-in-out;
+        }
+        .text-gradient {
+            background: linear-gradient(90deg, #38BDF8 0%, #A78BFA 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card-shadow {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        body.dark .card-shadow {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Mermaid container specific for theming */
+        .mermaid {
+            background-color: var(--mermaid-bg-color); /* Controlled by JS */
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            margin-bottom: 2rem;
+        }
+        /* Mermaid specific node styles (override mermaid default) */
+        .mermaid .node rect, .mermaid .node polygon, .mermaid .node ellipse {
+            fill: var(--node-fill-color) !important;
+            stroke: var(--node-stroke-color) !important;
+        }
+        .mermaid .node text {
+            fill: var(--node-text-color) !important;
+        }
+        .mermaid .edgePath .path {
+            stroke: var(--edge-color) !important;
+        }
+        .mermaid .edgeLabel text {
+            fill: var(--edge-label-color) !important;
+        }
+
+    </style>
+</head>
+<body class="font-sans transition-all-ease">
+    <!-- Header with Theme Toggle -->
+    <header class="sticky top-0 z-50 bg-card bg-opacity-95 backdrop-blur-sm shadow-md py-4 transition-all-ease">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="#" class="text-2xl md:text-3xl font-serif font-bold text-gradient">
+                <i class="fas fa-chart-line mr-2"></i>资本策略研究院
+            </a>
+            <button id="theme-toggle" class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-accent hover:bg-gray-700 transition-all-ease text-secondary">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center text-center overflow-hidden bg-cover bg-center" 
+             style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1590283603417-3dd4df201e5a?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-position: center 30%;">
+        <div class="relative z-10 p-8 md:p-12 max-w-4xl mx-auto rounded-lg backdrop-blur-md bg-black bg-opacity-30">
+            <h1 class="text-4xl md:text-6xl font-serif font-extrabold mb-4 leading-tight text-white drop-shadow-lg">
+                科创板IPO股本设计：战略配售深度解析
+            </h1>
+            <p class="text-xl md:text-2xl text-secondary mb-8 leading-relaxed">
+                优化发行结构，助力企业稳健上市与长期发展
+            </p>
+            <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
+                本文旨在深入探讨科创板拟上市公司在IPO过程中如何通过巧妙的股本设计，特别是将发行前股本调整至4亿股，以充分利用战略配售政策，实现更高效、更稳定的资本运作。
+            </p>
+            <a href="#content" class="mt-8 inline-block px-8 py-4 bg-accent text-white font-bold rounded-full shadow-lg hover:bg-sky-600 transition-all-ease transform hover:scale-105">
+                <i class="fas fa-arrow-down mr-2"></i> 开始阅读
+            </a>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <main id="content" class="container mx-auto px-4 py-16 md:py-24 max-w-5xl">
+        <article class="prose dark:prose-invert prose-lg mx-auto">
+            <p class="lead mb-8 text-xl text-secondary">
+                作为一家科创板拟上市公司，您正面临一个关键的资本决策：如何通过股本设计，最大化IPO战略配售的优势。以下分析将为您提供全面洞察。
+            </p>
+
+            <!-- 1. 关键法规分析 -->
+            <section class="mb-12">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6 text-accent">
+                    <i class="fas fa-gavel mr-3 text-secondary"></i>1. 关键法规分析：战略配售的门槛与比例限制
+                </h2>
+                <div class="bg-card p-6 md:p-8 rounded-lg card-shadow border-primary border">
+                    <h3 class="text-2xl md:text-3xl font-serif font-semibold mb-4 text-white">
+                        <i class="fas fa-file-contract mr-2"></i>战略配售条件
+                    </h3>
+                    <p class="mb-4 text-lg">根据《证券发行承销管理办法》第十四条（最新修订版），首次公开发行股票（IPO数量）在<strong class="text-accent">4亿股以上</strong>的，可以向战略投资者配售股票<sup class="text-accent-light-blue">[1]</sup>。</p>
+                    <p class="mb-6 text-lg">战略投资者不参与网下询价，且须承诺持股期限<strong class="text-accent">不少于12个月</strong>。</p>
+
+                    <h3 class="text-2xl md:text-3xl font-serif font-semibold mb-4 text-white">
+                        <i class="fas fa-chart-pie mr-2"></i>战略配售比例上限
+                    </h3>
+                    <ul class="list-none space-y-3 pl-0 mb-6 text-lg">
+                        <li class="flex items-start">
+                            <i class="fas fa-angle-right text-accent mt-1 mr-2"></i>
+                            <span class="flex-1">IPO数量<strong class="text-accent">不足1亿股</strong>：战略配售比例不超过<strong class="text-accent">20%</strong>。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-angle-right text-accent mt-1 mr-2"></i>
+                            <span class="flex-1">IPO数量<strong class="text-accent">1亿股以上、不足4亿股</strong>：战略配售比例不超过<strong class="text-accent">30%</strong>。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-angle-right text-accent mt-1 mr-2"></i>
+                            <span class="flex-1">IPO数量<strong class="text-accent">4亿股以上</strong>：战略配售比例不超过<strong class="text-accent">50%</strong><sup class="text-accent-light-blue">[2]</sup>。</span>
+                        </li>
+                    </ul>
+
+                    <h3 class="text-2xl md:text-3xl font-serif font-semibold mb-4 text-white">
+                        <i class="fas fa-balance-scale-left mr-2"></i>科创板发行比例要求
+                    </h3>
+                    <ul class="list-none space-y-3 pl-0 text-lg">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-accent mt-1 mr-2"></i>
+                            <span class="flex-1">发行后总股本<strong class="text-accent">不超过4亿股</strong>的，IPO比例不低于<strong class="text-accent">25%</strong>。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-accent mt-1 mr-2"></i>
+                            <span class="flex-1">发行后总股本<strong class="text-accent">超过4亿股</strong>的，IPO比例不低于<strong class="text-accent">10%</strong><sup class="text-accent-light-blue">[3]</sup>。</span>
+                        </li>
+                    </ul>
+                    <div class="mt-6 p-4 bg-highlight rounded-md text-secondary border border-primary">
+                        <i class="fas fa-info-circle mr-2 text-accent"></i>
+                        <span class="font-bold text-white">结论：</span>IPO数量在4亿股以上时，战略配售比例上限最高（50%），这能减少公开发行压力、锁定长期资金。因此，设计股本时应优先确保IPO数量<strong class="text-accent">≥4亿股</strong>。
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mermaid Chart - Data Visualization -->
+            <section class="mb-12">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6 text-accent text-center">
+                    <i class="fas fa-project-diagram mr-3 text-secondary"></i>IPO股本设计核心逻辑可视化
+                </h2>
+                <div class="mermaid-container">
+                    <div class="mermaid mermaid-dark-theme" style="text-align: center;">
+                        graph TD
+                            A[发行前股本: 4亿股] --&gt; B{计划IPO数量?};
+        
+                            subgraph IPO数量与战略配售比例
+                                B -- 少于1亿股 --&gt; C1[战略配售: ≤20%];
+                                B -- 1亿股 ≤ X &lt; 4亿股 --&gt; C2[战略配售: ≤30%];
+                                B -- 4亿股以上 (如4亿股) --&gt; C3[战略配售: ≤50%];
+                            end
+        
+                            C3 -- 优化融资结构 --&gt; D[高比例战略配售优势];
+        
+                            D -- 降低发行风险 &amp; 锁定长期资本 --&gt; E[稳健上市路径];
+        
+                            style C1 fill:#ef4444,stroke:#ef4444,stroke-width:2px,color:#fff;
+                            style C2 fill:#f97316,stroke:#f97316,stroke-width:2px,color:#fff;
+                            style C3 fill:#22c55e,stroke:#22c55e,stroke-width:2px,color:#fff;
+                            style A fill:#3b82f6,stroke:#3b82f6,stroke-width:2px,color:#fff;
+                            style B fill:#8b5cf6,stroke:#8b5cf6,stroke-width:2px,color:#fff;
+                            style D fill:#0ea5e9,stroke:#0ea5e9,stroke-width:2px,color:#fff;
+                            style E fill:#a855f7,stroke:#a855f7,stroke-width:2px,color:#fff;
+                    </div>
+                </div>
+                <p class="text-center text-secondary mt-4 text-lg">
+                    此图展示了不同IPO数量下战略配售比例的对应关系，以及发行前4亿股股本在争取高比例战略配售中的核心作用。
+                </p>
+            </section>
+
+            <!-- 2. 股本设计建议 -->
+            <section class="mb-12">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6 text-accent">
+                    <i class="fas fa-lightbulb mr-3 text-secondary"></i>2. 股本设计建议：发行前4亿股是合适的
+                </h2>
+                <div class="bg-card p-6 md:p-8 rounded-lg card-shadow border-primary border">
+                    <p class="mb-6 text-lg">您的计划是将发行前股本通过资本公积转增股本设为4亿股。这<strong class="text-accent">是合适的</strong>，原因如下：</p>
+
+                    <h3 class="text-2xl md:text-3xl font-serif font-semibold mb-4 text-white">
+                        <i class="fas fa-bullseye mr-2"></i>满足战略配售高比例条件
+                    </h3>
+                    <ul class="list-none space-y-3 pl-0 mb-6 text-lg">
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-accent mt-1 mr-2"></i>
+                            <span class="flex-1">发行前股本为4亿股时，若IPO数量设为<strong class="text-accent">4亿股或以上</strong>，则IPO数量<strong class="text-accent">≥4亿股</strong>，触发战略配售比例上限<strong class="text-accent">50%</strong><sup class="text-accent-light-blue">[2]</sup>。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-accent mt-1 mr-2"></i>
+                            <span class="flex-1">此时，发行后总股本为8亿股（4亿股 + 4亿股），IPO比例为50%（<strong class="text-accent">≥10%</strong>），完全合规<sup class="text-accent-light-blue">[3]</sup>。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-accent mt-1 mr-2"></i>
+                            <span class="flex-1">战略配售可分配最多50%的IPO股份（即<strong class="text-accent">2亿股</strong>），剩余股份可网下/网上发行，这优化了融资结构。</span>
+                        </li>
+                    </ul>
+
+                    <h3 class="text-2xl md:text-3xl font-serif font-semibold mb-4 text-white">
+                        <i class="fas fa-not-equal mr-2"></i>比较其他股本设计的劣势
+                    </h3>
+                    <ul class="list-none space-y-3 pl-0 mb-6 text-lg">
+                        <li class="flex items-start">
+                            <i class="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                            <span class="flex-1">若发行前股本小于4亿股（如2亿股），需IPO数量≥4亿股才能启用50%战略配售。但这可能导致IPO比例过高（如发行后总股本6亿股时，IPO比例≥66.7%），虽合规但可能稀释原股东权益或市场接受度低。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-times-circle text-red-500 mt-1 mr-2"></i>
+                            <span class="flex-1">若发行前股本大于4亿股（如5亿股），IPO数量仍需≥4亿股才能触发高比例战略配售。这虽更易达标，但通过资本公积转增增加股本可能涉及税负成本<sup class="text-accent-light-blue">[4]</sup>，且无额外战略配收优势，故不必要增大。</span>
+                        </li>
+                    </ul>
+
+                    <h3 class="text-2xl md:text-3xl font-serif font-semibold mb-4 text-white">
+                        <i class="fas fa-book-open mr-2"></i>知识库支持
+                    </h3>
+                    <p class="mb-4 text-lg">知识库中的“IPO发行方案建议”指出，科创板企业发行数量（IPO数量）建议不低于发行后总股本的10%，且发行后股本规模常超过4亿股<sup class="text-accent-light-blue">[4]</sup>。这与您的计划相符，发行前4亿股可灵活设置IPO数量在4亿股以上。</p>
+                </div>
+            </section>
+
+            <!-- 3. 实操建议 -->
+            <section class="mb-12">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6 text-accent">
+                    <i class="fas fa-cogs mr-3 text-secondary"></i>3. 实操建议：IPO数量与战略配售实施
+                </h2>
+                <div class="bg-card p-6 md:p-8 rounded-lg card-shadow border-primary border">
+                    <h3 class="text-2xl md:text-3xl font-serif font-semibold mb-4 text-white">
+                        <i class="fas fa-hand-holding-usd mr-2"></i>推荐IPO数量与计算
+                    </h3>
+                    <p class="mb-4 text-lg">
+                        建议将IPO数量设为<strong class="text-accent">4亿股</strong>（最小可行值以启用50%上限）。具体计算如下：
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 mb-6 text-lg">
+                        <li>发行前股本：<strong class="text-accent">4亿股</strong></li>
+                        <li>IPO数量：<strong class="text-accent">4亿股</strong></li>
+                        <li>发行后总股本：<strong class="text-accent">8亿股</strong>（4亿股 + 4亿股）</li>
+                        <li>IPO比例：<strong class="text-accent">50%</strong>（≥10%，合规）</li>
+                        <li>战略配售比例：最高<strong class="text-accent">50%</strong>（即<strong class="text-accent">2亿股</strong>可分配给战略投资者）<sup class="text-accent-light-blue">[2]</sup></li>
+                    </ul>
+
+                    <h3 class="text-2xl md:text-3xl font-serif font-semibold mb-4 text-white">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>注意事项
+                    </h3>
+                    <ul class="list-none space-y-3 pl-0 text-lg">
+                        <li class="flex items-start">
+                            <i class="fas fa-dollar-sign text-accent mt-1 mr-2"></i>
+                            <span class="flex-1"><strong class="text-white">税负成本：</strong>知识库中的“IPO发行方案建议”强调，资本公积转增股本可能涉及个人所得税（自然人股东需缴税），转增前应评估税负<sup class="text-accent-light-blue">[4]</sup>。建议咨询税务顾问优化方案。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-users-gear text-accent mt-1 mr-2"></i>
+                            <span class="flex-1"><strong class="text-white">战略投资者要求：</strong>根据法规，战略投资者需为大型基金、保荐机构子公司或核心员工资管计划等，数量不超过35名（IPO数量≥4亿股时）<sup class="text-accent-light-blue">[2]</sup>。知识库“战略配售”资料提示，高管及核心员工可设资管计划参与，配售比例不超过IPO数量的10%<sup class="text-accent-light-blue">[5]</sup>。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-chart-line text-accent mt-1 mr-2"></i>
+                            <span class="flex-1"><strong class="text-white">发行风险：</strong>IPO数量4亿股较大，需确保市场估值支持（如通过询价确定发行价）。知识库“IPO发行方案建议”建议结合募资需求（如您的业务规划）确定IPO规模<sup class="text-accent-light-blue">[4]</sup>。</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Summary -->
+            <section class="mb-12 text-center">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6 text-gradient">
+                    <i class="fas fa-star mr-3 text-secondary"></i>总结
+                </h2>
+                <div class="bg-card p-6 md:p-8 rounded-lg card-shadow border-primary border">
+                    <p class="text-xl md:text-2xl text-secondary mb-4 leading-relaxed">
+                        将<strong class="text-accent">发行前股本设为4亿股是合适的</strong>，它能使IPO数量轻松达到4亿股或以上，从而启用最高<strong class="text-accent">50%的战略配售比例</strong>，显著优化融资结构，降低发行风险。
+                    </p>
+                    <p class="text-lg text-gray-400">
+                        <i class="fas fa-hand-point-right mr-2 text-accent"></i>后续步骤应着重于评估资本公积转增的税负、确定战略投资者，并与您的保荐机构紧密合作，制定详细的发行与配售方案。
+                    </p>
+                </div>
+            </section>
+
+            <!-- Key Concepts (Supplemental Information) -->
+            <section class="mb-12">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6 text-accent">
+                    <i class="fas fa-info-circle mr-3 text-secondary"></i>关键概念速览
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-card p-6 rounded-lg card-shadow border border-primary hover:scale-105 transition-all-ease">
+                        <h3 class="text-xl font-semibold mb-2 text-white"><i class="fas fa-coins mr-2 text-accent"></i>IPO数量</h3>
+                        <p class="text-secondary text-base">首次公开发行股票（Initial Public Offering）时，公司向公众发行的新增股份总数。</p>
+                    </div>
+                    <div class="bg-card p-6 rounded-lg card-shadow border border-primary hover:scale-105 transition-all-ease">
+                        <h3 class="text-xl font-semibold mb-2 text-white"><i class="fas fa-users mr-2 text-accent"></i>战略配售</h3>
+                        <p class="text-secondary text-base">在IPO中，向符合特定条件（如长期战略合作、大型基金、保荐机构子公司）的特定投资者配售股票，不参与网下询价，且有锁定期。</p>
+                    </div>
+                    <div class="bg-card p-6 rounded-lg card-shadow border border-primary hover:scale-105 transition-all-ease">
+                        <h3 class="text-xl font-semibold mb-2 text-white"><i class="fas fa-share-alt mr-2 text-accent"></i>资本公积转增股本</h3>
+                        <p class="text-secondary text-base">将公司的资本公积金（如股本溢价等）按股东持股比例转为注册资本，增加公司总股本，通常不改变股东持股比例，但可能涉及税收。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Further Reading (Extra Credit) -->
+            <section class="mb-12">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6 text-accent">
+                    <i class="fas fa-book mr-3 text-secondary"></i>延伸阅读推荐
+                </h2>
+                <div class="bg-card p-6 md:p-8 rounded-lg card-shadow border-primary border">
+                    <ul class="list-disc list-inside space-y-4 text-lg">
+                        <li>
+                            <strong class="text-white">《公司金融》</strong>（Ross, Westerfield, Jaffe）：经典公司金融教材，提供关于资本结构、融资决策的全面理论基础。
+                            <a href="https://www.amazon.com/Corporate-Finance-Stephen-Ross/dp/1260091931" target="_blank" class="text-accent hover:underline ml-2 text-base"><i class="fas fa-external-link-alt"></i></a>
+                        </li>
+                        <li>
+                            <strong class="text-white">《投资银行：估值、杠杆收购、兼并与收购》</strong>（Joshua Rosenbaum, Joshua Pearl）：实务性书籍，深入讲解IPO、估值等投行核心业务。
+                            <a href="https://www.amazon.com/Investment-Banking-Valuation-Buyouts-Acquisitions/dp/1118131338" target="_blank" class="text-accent hover:underline ml-2 text-base"><i class="fas fa-external-link-alt"></i></a>
+                        </li>
+                        <li>
+                            <strong class="text-white">《中国资本市场发展报告》</strong>（中国证监会研究中心）：官方发布的年度报告，分析中国资本市场最新政策和趋势。
+                            <a href="http://www.csrc.gov.cn/pub/zjhpublic/G00306202/202306/t20230621_390197.htm" target="_blank" class="text-accent hover:underline ml-2 text-base"><i class="fas fa-external-link-alt"></i></a>
+                        </li>
+                        <li>
+                            <strong class="text-white">《证券法》</strong>（中华人民共和国）：了解中国证券市场法律框架的根本，包括发行、交易等核心规定。
+                            <a href="http://www.npc.gov.cn/npc/c30834/201912/c8b2591e2b6a4a758d927c32b535d506.shtml" target="_blank" class="text-accent hover:underline ml-2 text-base"><i class="fas fa-external-link-alt"></i></a>
+                        </li>
+                        <li>
+                            <strong class="text-white">《科创板上市规则与实务操作》</strong>（相关券商投行部门）：探讨科创板特有规则，包括发行上市的具体流程和注意事项。
+                            <a href="https://www.sse.com.cn/lawandrules/sse/kcb/kcbywgz/" target="_blank" class="text-accent hover:underline ml-2 text-base"><i class="fas fa-external-link-alt"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </article>
+
+        <!-- Footnotes -->
+        <section class="mt-20 pt-8 border-t border-primary text-secondary text-sm">
+            <h2 class="text-2xl font-serif font-bold mb-4 text-white">参考文献</h2>
+            <ol class="list-decimal list-outside pl-4 space-y-2">
+                <li>联网搜索：证券发行承销管理办法 - 中国证监会，<a href="http://www.csrc.gov.cn/csrc/c106256/c1654028/content.shtml" target="_blank" class="text-accent hover:underline">http://www.csrc.gov.cn/csrc/c106256/c1654028/content.shtml</a> （引用第十四条：首次公开发行股票数量在4亿股以上的，可以向战略投资者配售）。</li>
+                <li>联网搜索：中国证券监督管理委员会令（第208号） 证券发行与承销管理办法，<a href="https://www.gov.cn/gongbao/content/2023/content_5752307.htm" target="_blank" class="text-accent hover:underline">https://www.gov.cn/gongbao/content/2023/content_5752307.htm</a> （战略配售比例上限规定）。</li>
+                <li>联网搜索：上海证券交易所科创板股票发行与承销实施办法，<a href="https://www.sse.com.cn/lawandrules/sselawsrules/repeal/rules/c/10118849/files/fa4067405ef6448f8f070a1c0427306f.pdf" target="_blank" class="text-accent hover:underline">https://www.sse.com.cn/lawandrules/sselawsrules/repeal/rules/c/10118849/files/fa4067405ef6448f8f070a1c0427306f.pdf</a> （网下发行比例要求，反映IPO比例门槛）。</li>
+                <li>知识库资料：IPO发行方案建议 - 建议发行数量不低于发行完成后总股数的10%（发行后股本规模预计超过4亿股），并提及资本公积转增的税负测算。</li>
+                <li>知识库资料：战略配售 - 描述战略配售投资者要求和比例限制。</li>
+            </ol>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-card py-8 mt-12 border-t border-primary text-secondary text-center">
+        <div class="container mx-auto px-4">
+            <p>&copy; 2023 资本策略研究院. All rights reserved.</p>
+            <p class="mt-2 text-xs">免责声明：本内容仅供参考，不构成任何投资建议。具体操作请咨询专业人士。</p>
+        </div>
+    </footer>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid Configuration (for dark mode compatibility)
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark', // Default to dark theme for mermaid
+            securityLevel: 'loose', // Allows for more styling options if needed
+            flowchart: {
+                curve: 'basis'
+            },
+            themeVariables: {
+                // These will be overridden by JS based on actual theme
+                'darkMode': true,
+                'primaryColor': '#3b82f6', // blue-500
+                'secondaryColor': '#8b5cf6', // purple-500
+                'tertiaryColor': '#a855f7', // purple-400
+                'primaryBorderColor': '#3b82f6',
+                'secondaryBorderColor': '#8b5cf6',
+                'tertiaryBorderColor': '#a855f7',
+                'lineColor': '#6b7280', // gray-500
+                'textColor': '#E0E0E0', // Light gray
+                'mainBkg': '#1A1A1A', // Card background
+                'nodeBorder': '#262626', // Border for nodes
+                'nodeTextColor': '#E0E0E0',
+                'clusterBkg': '#262626', // Cluster background
+                'clusterBorder': '#3b82f6' // Cluster border
+            }
+        });
+
+        // Theme Toggle Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const htmlElement = document.documentElement;
+
+            // Check for saved theme in localStorage
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                htmlElement.classList.add(savedTheme);
+            } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                htmlElement.classList.add('dark');
+            } else {
+                htmlElement.classList.add('light');
+            }
+
+            const applyMermaidTheme = (isDark) => {
+                const root = document.documentElement;
+                if (isDark) {
+                    root.style.setProperty('--mermaid-bg-color', '#1A1A1A');
+                    root.style.setProperty('--node-fill-color', 'var(--mermaid-node-fill-dark, #3b82f6)');
+                    root.style.setProperty('--node-stroke-color', 'var(--mermaid-node-stroke-dark, #3b82f6)');
+                    root.style.setProperty('--node-text-color', 'var(--mermaid-node-text-dark, #E0E0E0)');
+                    root.style.setProperty('--edge-color', 'var(--mermaid-edge-dark, #6b7280)');
+                    root.style.setProperty('--edge-label-color', 'var(--mermaid-edge-label-dark, #E0E0E0)');
+                    mermaid.get</td>
+```
