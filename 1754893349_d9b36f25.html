@@ -1,0 +1,472 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>股权激励对象资金流水核查：IPO合规核心要点</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles to override or enhance Tailwind */
+        :root {
+            --bg-dark: #1a1a2e;
+            --text-dark: #e0e7ff; /* Lighter blue-grey for text */
+            --heading-dark: #fff;
+            --accent-blue-dark: #4A6B9C; /* A sophisticated blue */
+            --accent-green-dark: #84a98c; /* Muted sage green */
+            --border-dark: #2a2a4a;
+            --card-bg-dark: #2a2a4a; /* Slightly lighter than background */
+            --hero-gradient-start-dark: rgba(26, 26, 46, 0.8);
+            --hero-gradient-end-dark: rgba(26, 26, 46, 1);
+
+            --bg-light: #ffffff;
+            --text-light: #333333;
+            --heading-light: #1a1a2e;
+            --accent-blue-light: #5B7EA5;
+            --accent-green-light: #6A9C8E;
+            --border-light: #e0e0e0;
+            --card-bg-light: #f5f5f5;
+            --hero-gradient-start-light: rgba(255, 255, 255, 0.8);
+            --hero-gradient-end-light: rgba(255, 255, 255, 1);
+        }
+
+        /* Default (Dark Mode) */
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+            color: var(--heading-dark);
+        }
+
+        .hero-section {
+            background: linear-gradient(to bottom, var(--hero-gradient-start-dark), var(--hero-gradient-end-dark)), url('https://source.unsplash.com/random/1600x900/?finance,legal,compliance') no-repeat center center/cover;
+            background-attachment: fixed;
+        }
+
+        .section-card {
+            background-color: var(--card-bg-dark);
+            border-color: var(--border-dark);
+        }
+
+        .mermaid {
+            background-color: var(--card-bg-dark);
+            border-radius: 0.75rem; /* Equivalent to rounded-xl */
+            padding: 1.5rem; /* Equivalent to p-6 */
+        }
+
+        /* Light Mode */
+        html.light body {
+            background-color: var(--bg-light);
+            color: var(--text-light);
+        }
+
+        html.light h1, html.light h2, html.light h3, html.light h4, html.light h5, html.light h6 {
+            color: var(--heading-light);
+        }
+
+        html.light .hero-section {
+            background: linear-gradient(to bottom, var(--hero-gradient-start-light), var(--hero-gradient-end-light)), url('https://source.unsplash.com/random/1600x900/?finance,legal,compliance') no-repeat center center/cover;
+            background-attachment: fixed;
+        }
+
+        html.light .section-card {
+            background-color: var(--card-bg-light);
+            border-color: var(--border-light);
+        }
+
+        html.light .mermaid {
+            background-color: var(--card-bg-light);
+        }
+        
+        /* Specific accent colors based on theme */
+        .text-accent-blue { color: var(--accent-blue-dark); }
+        .text-accent-green { color: var(--accent-green-dark); }
+        .bg-accent-blue-soft { background-color: var(--accent-blue-dark); }
+        .bg-accent-green-soft { background-color: var(--accent-green-dark); }
+        
+        html.light .text-accent-blue { color: var(--accent-blue-light); }
+        html.light .text-accent-green { color: var(--accent-green-light); }
+        html.light .bg-accent-blue-soft { background-color: var(--accent-blue-light); }
+        html.light .bg-accent-green-soft { background-color: var(--accent-green-light); }
+
+        /* Custom scrollbar for subtle aesthetic */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-blue-dark);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-green-dark);
+        }
+        html.light ::-webkit-scrollbar-track {
+            background: var(--bg-light);
+        }
+        html.light ::-webkit-scrollbar-thumb {
+            background: var(--accent-blue-light);
+        }
+        html.light ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-green-light);
+        }
+    </style>
+</head>
+<body class="antialiased leading-relaxed text-lg">
+
+    <!-- Theme Toggle Button -->
+    <button id="themeToggle" class="fixed bottom-6 right-6 p-4 rounded-full shadow-lg z-50 transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 bg-accent-blue-soft text-white hover:bg-accent-green-soft">
+        <i class="fas fa-sun hidden dark:inline-block"></i>
+        <i class="fas fa-moon dark:hidden"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <header class="hero-section py-24 md:py-32 text-white relative overflow-hidden">
+        <div class="absolute inset-0 z-0"></div>
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg leading-tight">
+                股权激励对象资金流水核查：IPO合规核心要点
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 font-light text-blue-100 drop-shadow-md">
+                深度解析监管要求与实操边界
+            </p>
+            <p class="max-w-3xl mx-auto text-lg md:text-xl leading-relaxed opacity-90">
+                针对股权激励对象的资金流水核查，存在明确的监管要求，但具体要求需结合其身份属性及资金来源的合规风险综合判断。本文将为您详细梳理分层监管框架及实操要点，助您精准把握合规脉络。
+            </p>
+            <div class="mt-8 flex justify-center space-x-4">
+                <a href="#main-content" class="px-8 py-3 bg-accent-blue-soft text-white rounded-full text-lg font-semibold hover:bg-accent-green-soft transition duration-300 transform hover:scale-105 shadow-xl flex items-center">
+                    <i class="fas fa-arrow-circle-down mr-3"></i> 深入了解
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="container mx-auto px-6 py-12 md:py-20 max-w-7xl">
+        
+        <!-- Mermaid Diagram - Conceptual Overview -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center text-accent-blue">
+                <i class="fas fa-sitemap mr-4"></i>核查逻辑概览
+            </h2>
+            <div class="mermaid-container section-card p-6 md:p-8 rounded-xl shadow-xl border border-gray-700 dark:border-gray-800 transition duration-300 ease-in-out hover:shadow-2xl">
+                <pre class="mermaid text-sm md:text-base whitespace-pre-wrap">
+graph TD
+    A["股权激励对象资金流水核查"] --> B{"身份属性?"};
+    A --> C{"资金来源风险?"};
+
+    B -- "关联自然人/董监高/关键岗位" --> D["强制核查<br>(身份决定)"];
+    B -- "持股5%以上股东" --> D;
+
+    C -- "资金来源异常" --> E["扩大核查<br>(风险触发)"];
+    C -- "股权代持嫌疑" --> E;
+    C -- "利益输送风险" --> E;
+
+    D -- "核查标准: <br/>- 全账户覆盖<br/>- 单笔≥5万逐笔核查" --> F["高合规要求"];
+    E -- "核查标准: <br/>- 追溯全部出资流水<br/>- 验证还款能力<br/>- 交易对手穿透" --> F;
+
+    F --> G["防范合规风险 & 利益输送<br/>(监管核心关注)"];
+
+    subgraph 结论
+        H["核查强度 = 身份属性 + 资金来源风险"]
+    end
+    G --> H;
+
+    classDef default stroke:#4A6B9C,fill:#2a2a4a,stroke-width:2px,color:#e0e7ff;
+    classDef highlight stroke:#84a98c,fill:#3a3a5a,stroke-width:2px,color:#fff;
+    classDef decision fill:#3a3a5a,stroke:#84a98c,color:#e0e7ff;
+    class A,F,G,H highlight;
+    class B,C decision;
+                </pre>
+            </div>
+        </section>
+
+        <!-- Main Content Sections -->
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+
+            <!-- 强制核查情形 -->
+            <div class="section-card p-6 md:p-8 rounded-xl shadow-xl border border-gray-700 dark:border-gray-800 hover:shadow-2xl transition duration-300 ease-in-out">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-accent-blue">
+                    <i class="fas fa-gavel mr-3"></i>一、强制核查情形
+                </h2>
+                <h3 class="text-xl md:text-2xl font-semibold mb-4 text-accent-green">
+                    明确监管要求
+                </h3>
+                <ul class="space-y-4 text-gray-200 dark:text-gray-300">
+                    <li><i class="fas fa-check-circle mr-3 text-green-500"></i><strong class="text-white">关联自然人：</strong>控股股东、实控人及其配偶、父母、成年子女（依据《首发业务若干问题解答》问题54）</li>
+                    <li><i class="fas fa-check-circle mr-3 text-green-500"></i><strong class="text-white">董监高及关键岗位人员：</strong>现任或报告期内的董事、监事、高级管理人员、财务负责人、核心技术人员等（《监管规则适用指引——发行类第5号》）</li>
+                    <li><i class="fas fa-check-circle mr-3 text-green-500"></i><strong class="text-white">持股5%以上股东：</strong>无论是否任职，均需核查其流水（深交所《创业板发行上市审核业务指南第2号》）</li>
+                </ul>
+                <div class="mt-6 p-4 rounded-lg border border-yellow-600 bg-yellow-900 bg-opacity-30 text-yellow-200 text-base">
+                    <i class="fas fa-info-circle mr-2"></i>
+                    <strong>监管依据提示：</strong> 知识库资料与联网搜索文章均强调，上述人员（含离职关键岗位）的流水核查属于强制要求，需严格比照《首发问答》问题54核查。
+                </div>
+            </div>
+
+            <!-- 扩大核查情形 -->
+            <div class="section-card p-6 md:p-8 rounded-xl shadow-xl border border-red-700 dark:border-red-800 hover:shadow-2xl transition duration-300 ease-in-out">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-red-400">
+                    <i class="fas fa-exclamation-triangle mr-3"></i>二、扩大核查情形
+                </h2>
+                <h3 class="text-xl md:text-2xl font-semibold mb-4 text-red-300">
+                    高风险触发
+                </h3>
+                <ul class="space-y-4 text-gray-200 dark:text-gray-300">
+                    <li><i class="fas fa-hand-holding-usd mr-3 text-red-500"></i><strong class="text-white">资金来源异常：</strong>向实控人/控股股东借款认购股权且未支付利息；认购资金与个人收入明显不匹配（如年薪20万员工突击出资300万购股）。</li>
+                    <li><i class="fas fa-user-secret mr-3 text-red-500"></i><strong class="text-white">股权代持嫌疑：</strong>股权转让价格显著低于公允价值。</li>
+                    <li><i class="fas fa-exchange-alt mr-3 text-red-500"></i><strong class="text-white">利益输送风险：</strong>激励对象为发行人客户/供应商关联方。</li>
+                </ul>
+                <div class="mt-6 p-4 rounded-lg border border-red-600 bg-red-900 bg-opacity-30 text-red-200 text-base">
+                    <i class="fas fa-lightbulb mr-2"></i>
+                    <strong>监管案例警示：</strong> 某科创板项目因员工向实控人无息借款购股，被要求补充核查借款资金流向及还款能力。
+                </div>
+            </div>
+
+            <!-- 核查标准与关键事项 -->
+            <div class="lg:col-span-1 section-card p-6 md:p-8 rounded-xl shadow-xl border border-gray-700 dark:border-gray-800 hover:shadow-2xl transition duration-300 ease-in-out">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-accent-blue">
+                    <i class="fas fa-clipboard-list mr-3"></i>三、核查标准与关键事项
+                </h2>
+                <h3 class="text-xl md:text-2xl font-semibold mb-4 text-accent-green">
+                    1. 核查范围
+                </h3>
+                <div class="overflow-x-auto mb-6">
+                    <table class="w-full text-left table-auto">
+                        <thead>
+                            <tr class="border-b border-gray-600">
+                                <th class="py-2 px-4 text-gray-400 font-medium">账户类型</th>
+                                <th class="py-2 px-4 text-gray-400 font-medium">强制要求</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-700">
+                                <td class="py-2 px-4"><i class="fas fa-bank mr-2 text-blue-400"></i>境内银行账户</td>
+                                <td class="py-2 px-4 text-white">全覆盖（含已注销卡）</td>
+                            </tr>
+                            <tr class="border-b border-gray-700">
+                                <td class="py-2 px-4"><i class="fab fa-weixin mr-2 text-green-400"></i>第三方支付</td>
+                                <td class="py-2 px-4 text-white">单笔5万元以上交易必查</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4"><i class="fas fa-globe mr-2 text-purple-400"></i>境外账户</td>
+                                <td class="py-2 px-4 text-white">若涉购股资金跨境流动则需核查</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="text-xl md:text-2xl font-semibold mb-4 text-accent-green">
+                    2. 核查金额阈值
+                </h3>
+                <ul class="space-y-3 text-gray-200 dark:text-gray-300 mb-6">
+                    <li><i class="fas fa-dollar-sign mr-3 text-orange-400"></i><strong class="text-white">关联自然人/董监高：</strong>单笔≥5万元交易逐笔核查。</li>
+                    <li><i class="fas fa-dollar-sign mr-3 text-orange-400"></i><strong class="text-white">普通员工激励对象：</strong>若涉及购股资金，需追溯全部出资流水（无论金额大小）。</li>
+                </ul>
+
+                <h3 class="text-xl md:text-2xl font-semibold mb-4 text-accent-green">
+                    3. 重点验证事项
+                </h3>
+                <ul class="space-y-3 text-gray-200 dark:text-gray-300">
+                    <li><i class="fas fa-search-dollar mr-3 text-purple-400"></i><strong class="text-white">购股资金来源：</strong>是否来源于发行人、实控人、客户/供应商的异常资金输送；</li>
+                    <li><i class="fas fa-file-invoice-dollar mr-3 text-purple-400"></i><strong class="text-white">还款能力匹配性：</strong>如存在借款，需验证其工资流水与还款计划的匹配度；</li>
+                    <li><i class="fas fa-users-cog mr-3 text-purple-400"></i><strong class="text-white">交易对手穿透：</strong>大额流水对手方是否涉及发行人关联方或潜在利益相关方。</li>
+                </ul>
+                <div class="mt-6 p-4 rounded-lg border border-blue-600 bg-blue-900 bg-opacity-30 text-blue-200 text-base">
+                    <i class="fas fa-tools mr-2"></i>
+                    <strong>实操工具建议：</strong> 可通过“云闪付”核验个人银行卡完整性，确保数据无遗漏。
+                </div>
+            </div>
+        </section>
+
+        <!-- 监管处罚边界 -->
+        <section class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center text-red-400">
+                <i class="fas fa-ban mr-4"></i>四、监管处罚边界
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="section-card p-6 md:p-8 rounded-xl shadow-xl border border-red-700 dark:border-red-800 hover:shadow-2xl transition duration-300 ease-in-out flex items-start">
+                    <i class="fas fa-frown-open text-red-500 text-3xl mr-4 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-semibold mb-2 text-white">未核查高风险对象</h3>
+                        <p class="text-gray-200 dark:text-gray-300">
+                            某项目因未核查核心技术骨干（非董监高）向供应商借款购股，被认定“核查程序缺失”（知识库资料《IPO 月度动态（2021 年 8 月）》）。
+                        </p>
+                    </div>
+                </div>
+                <div class="section-card p-6 md:p-8 rounded-xl shadow-xl border border-red-700 dark:border-red-800 hover:shadow-2xl transition duration-300 ease-in-out flex items-start">
+                    <i class="fas fa-times-circle text-red-500 text-3xl mr-4 mt-1"></i>
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-semibold mb-2 text-white">流水不完整</h3>
+                        <p class="text-gray-200 dark:text-gray-300">
+                            保荐机构仅要求激励对象自主提供流水（未陪同打印），遭监管警示（联网搜索文章《重磅合辑！近期IPO现场督导情况深度解读》）。强调核查的独立性与完整性。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 结论 -->
+        <section class="mb-16 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-accent-blue">
+                <i class="fas fa-lightbulb mr-4"></i>结论：监管核心逻辑
+            </h2>
+            <div class="section-card p-6 md:p-10 rounded-xl shadow-2xl border-2 border-accent-green-soft bg-gradient-to-br from-accent-blue-soft to-accent-green-soft text-white max-w-4xl mx-auto transform hover:scale-105 transition duration-500 ease-in-out">
+                <p class="text-2xl md:text-3xl font-extrabold leading-relaxed">
+                    股权激励对象的流水核查要求 = <br class="md:hidden">
+                    <span class="text-yellow-200">身份属性</span>（是否关联方/关键人员） + <br class="md:hidden">
+                    <span class="text-yellow-200">资金来源风险</span>（是否异常）
+                </p>
+                <p class="text-lg md:text-xl mt-6 opacity-90">
+                    普通员工激励对象若涉及大额异常资金，其核查强度等同于董监高。
+                </p>
+            </div>
+        </section>
+
+        <!-- Further Reading & References -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+            <div class="section-card p-6 md:p-8 rounded-xl shadow-xl border border-gray-700 dark:border-gray-800 hover:shadow-2xl transition duration-300 ease-in-out">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-accent-blue">
+                    <i class="fas fa-book-reader mr-3"></i>延伸阅读
+                </h2>
+                <ul class="space-y-4 text-gray-200 dark:text-gray-300">
+                    <li>
+                        <strong class="text-white">1. 《中国企业IPO法律实务指引》</strong>
+                        <p class="text-sm mt-1">全面涵盖中国企业IPO的法律实务，包括股权激励的合规要点。</p>
+                    </li>
+                    <li>
+                        <strong class="text-white">2. 《上市公司股权激励实务与案例精解》</strong>
+                        <p class="text-sm mt-1">深入探讨上市公司股权激励方案设计、实施及合规性，提供丰富案例。</p>
+                    </li>
+                    <li>
+                        <strong class="text-white">3. 《财务尽职调查与并购实务》</strong>
+                        <p class="text-sm mt-1">虽侧重并购，但其财务尽职调查原则与方法对资金流水核查具有普适指导意义。</p>
+                    </li>
+                    <li>
+                        <strong class="text-white">4. 《IPO内核常见问题与解答》</strong>
+                        <p class="text-sm mt-1">直接回应监管机构在IPO审核中关注的常见问题，包含资金流水核查的具体疑问。</p>
+                    </li>
+                    <li>
+                        <strong class="text-white">5. 《资本市场法律法规精选》</strong>
+                        <p class="text-sm mt-1">提供资本市场最基础的法律法规框架，是理解监管逻辑的基石。</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section-card p-6 md:p-8 rounded-xl shadow-xl border border-gray-700 dark:border-gray-800 hover:shadow-2xl transition duration-300 ease-in-out">
+                <h2 class="text-2xl md:text-3xl font-bold mb-6 text-accent-blue">
+                    <i class="fas fa-link mr-3"></i>附：依据来源
+                </h2>
+                <ul class="space-y-3 text-gray-200 dark:text-gray-300 text-base">
+                    <li>[^1]: 知识库资料《IPO 月度动态（2021 年 8 月）》：关联自然人范围定义。</li>
+                    <li>[^2]: 《监管规则适用指引——发行类第5号》：董监高及关键岗位人员核查要求。</li>
+                    <li>[^3]: <a href="https://zhuanlan.zhihu.com/p/529607237" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">联网搜索文章《股权激励| 激励对象银行流水核查关注要点》<i class="fas fa-external-link-alt ml-2 text-sm"></i></a></li>
+                    <li>[^4]: <a href="https://zhuanlan.zhihu.com/p/616069679" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">联网搜索文章《关于拟上市企业股权激励对象向实际控制人借款用于出资的审核要点》<i class="fas fa-external-link-alt ml-2 text-sm"></i></a></li>
+                    <li>[^5]: 知识库资料《重组季度动态（2020 年 10-12 月）》：利益输送的核查要点。</li>
+                    <li>[^6]: 同上注4。</li>
+                    <li>[^7]: <a href="https://zhuanlan.zhihu.com/p/149638260" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">联网搜索文章《IPO审核中，资金流水核查如此重要，核查的标准应该怎么定？》<i class="fas fa-external-link-alt ml-2 text-sm"></i></a></li>
+                    <li>[^8]: <a href="https://zhuanlan.zhihu.com/p/396276312" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">联网搜索文章《IPO实务：资金流水核查中，如何核验个人银行卡提供完整性？》<i class="fas fa-external-link-alt ml-2 text-sm"></i></a></li>
+                    <li>[^9]: <a href="https://zhuanlan.zhihu.com/p/446201760" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">联网搜索文章《重磅合辑！近期IPO现场督导情况深度解读》<i class="fas fa-external-link-alt ml-2 text-sm"></i></a></li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="py-8 text-center text-gray-400 text-sm border-t border-gray-700 dark:border-gray-800">
+        <p>&copy; 2023 合规研究中心. All rights reserved.</p>
+    </footer>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid Configuration
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark', // Default to dark theme for Mermaid
+            themeVariables: {
+                // Dark mode specific variables for mermaid
+                'primaryColor': '#2a2a4a', // Card background
+                'primaryBorderColor': '#4A6B9C', // Accent blue
+                'lineColor': '#4A6B9C', // Accent blue
+                'textColor': '#e0e7ff', // Text color
+                'secondaryColor': '#84a98c', // Accent green
+                'tertiaryColor': '#6a7d9b', // Softer blue
+                'noteBkgColor': '#3a3a5a',
+                'noteBorderColor': '#4A6B9C'
+            }
+        });
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        // Set initial theme based on system preference or saved setting
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            htmlElement.classList.add(currentTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+            htmlElement.classList.add('light');
+        } else {
+            htmlElement.classList.add('dark'); // Default to dark if no preference/match
+        }
+
+        // Update Mermaid theme based on HTML theme
+        function updateMermaidTheme() {
+            const isLightMode = htmlElement.classList.contains('light');
+            mermaid.initialize({
+                theme: isLightMode ? 'default' : 'dark', // 'default' for light theme in Mermaid
+                themeVariables: {
+                    // Adjust variables based on light/dark mode
+                    'primaryColor': isLightMode ? '#f5f5f5' : '#2a2a4a',
+                    'primaryBorderColor': isLightMode ? '#5B7EA5' : '#4A6B9C',
+                    'lineColor': isLightMode ? '#5B7EA5' : '#4A6B9C',
+                    'textColor': isLightMode ? '#333333' : '#e0e7ff',
+                    'secondaryColor': isLightMode ? '#6A9C8E' : '#84a98c',
+                    'tertiaryColor': isLightMode ? '#b0c4de' : '#6a7d9b',
+                    'noteBkgColor': isLightMode ? '#e0e0e0' : '#3a3a5a',
+                    'noteBorderColor': isLightMode ? '#5B7EA5' : '#4A6B9C'
+                }
+            });
+            mermaid.init(); // Re-render existing diagrams
+        }
+
+        // Initial Mermaid theme set
+        updateMermaidTheme();
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('light')) {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            }
+            // Update Mermaid theme after HTML theme change
+            updateMermaidTheme();
+        });
+
+        // Optional: Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>
+```
