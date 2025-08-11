@@ -1,0 +1,559 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>股权激励对象银行流水核查：监管要求与实操要点</title>
+    <meta name="description" content="深入解析股权激励对象银行流水核查的监管要求、操作流程、风险领域及处罚案例。">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Serif SC & Noto Sans SC -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+
+    <style>
+        /* Custom base font styles */
+        html {
+            /* Fallback fonts as requested */
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-self;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-self;
+        }
+
+        /* Dark Mode Styles */
+        .dark {
+            --tw-bg-opacity: 1;
+            background-color: rgb(24 24 27 / var(--tw-bg-opacity)); /* zinc-950 */
+            color: rgb(229 231 235 / var(--tw-text-opacity)); /* gray-200 */
+        }
+
+        .dark .bg-white { background-color: rgb(39 39 42 / var(--tw-bg-opacity)); } /* zinc-900 for cards/secondary elements */
+        .dark .bg-gray-50 { background-color: rgb(63 63 70 / var(--tw-bg-opacity)); } /* zinc-800 for lighter cards */
+        .dark .text-gray-800 { color: rgb(229 231 235 / var(--tw-text-opacity)); }
+        .dark .text-gray-600 { color: rgb(156 163 175 / var(--tw-text-opacity)); } /* gray-400 */
+        .dark .text-teal-600 { color: rgb(75 192 192 / var(--tw-text-opacity)); } /* teal-400 */
+        .dark .border-gray-200 { border-color: rgb(82 82 91 / var(--tw-border-opacity)); } /* zinc-700 */
+        .dark .border-gray-300 { border-color: rgb(63 63 70 / var(--tw-border-opacity)); } /* zinc-800 */
+        .dark .border-gray-400 { border-color: rgb(39 39 42 / var(--tw-border-opacity)); } /* zinc-900 */
+        .dark .bg-teal-200 { background-color: rgb(43 122 122 / var(--tw-bg-opacity)); } /* teal-800 */
+        .dark .hover\:bg-gray-100:hover { background-color: rgb(54 54 59 / var(--tw-bg-opacity)); } /* hover on cards */
+        .dark .hover\:text-gray-900:hover { color: rgb(245 245 245 / var(--tw-text-opacity)); }
+
+        /* General Link Styling */
+        a {
+            color: inherit; /* Inherit color from parent */
+            text-decoration: none; /* No underline by default */
+        }
+        a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+
+        /* Mermaid Styles for Dark Mode */
+        .dark .mermaid {
+            filter: invert(0.9) hue-rotate(180deg); /* Simple invert for dark mode */
+        }
+
+        /* Table specific styles for responsiveness */
+        .table-responsive {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Smooth transitions for theme switching */
+        body {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .text-teal-600, .bg-teal-200, .border-teal-400 {
+            transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* First letter drop cap */
+        .drop-cap:first-letter {
+            float: left;
+            font-size: 3.5em; /* Larger size */
+            line-height: 0.8;
+            font-family: 'Noto Serif SC', serif;
+            margin-right: 0.1em;
+            font-weight: 700; /* Bold */
+            color: theme('colors.teal.600'); /* Accent color */
+        }
+        .dark .drop-cap:first-letter {
+            color: theme('colors.teal.400');
+        }
+
+        /* Custom underline for titles */
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 80%; /* Adjust width as needed */
+            height: 4px;
+            background-color: theme('colors.teal.600');
+            border-radius: 2px;
+        }
+        .dark .section-title::after {
+            background-color: theme('colors.teal.400');
+        }
+
+        /* Custom list style */
+        .custom-list li {
+            position: relative;
+            padding-left: 1.75rem; /* Space for the icon */
+            margin-bottom: 0.75rem;
+        }
+        .custom-list li::before {
+            content: '\f058'; /* Font Awesome check-circle icon */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 0.15em; /* Adjust vertical alignment */
+            color: theme('colors.teal.500'); /* Icon color */
+        }
+        .dark .custom-list li::before {
+            color: theme('colors.teal.300');
+        }
+
+        /* Custom icon list for risks/cases */
+        .icon-card-list li {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .icon-card-list li .icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.5rem;
+            color: theme('colors.teal.500');
+        }
+        .dark .icon-card-list li .icon {
+            color: theme('colors.teal.300');
+        }
+
+        /* Card hover effect */
+        .card-hover-effect {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Tailwind shadow-md */
+        }
+        .dark .card-hover-effect:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 transition-colors duration-300">
+
+    <!-- Theme Switcher -->
+    <button id="theme-toggle" class="fixed bottom-6 right-6 z-50 p-3 rounded-full shadow-lg bg-teal-600 text-white dark:bg-teal-400 dark:text-gray-900 transition-all duration-300 hover:scale-110" aria-label="Toggle theme">
+        <i class="fas fa-sun text-lg theme-icon"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <header class="relative bg-gray-900 text-white dark:bg-zinc-900 py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 dark:from-zinc-950 dark:via-zinc-900 dark:to-zinc-950 opacity-90"></div>
+        <div class="absolute inset-0 z-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23a1a1aa\' fill-opacity=\'0.2\' fill-rule=\'evenodd\'%3E%3Cpath d=\'M0 60V0h60v60h-4V56h-4V52h-4V48h-4V44h-4V40h-4V36h-4V32h-4V28h-4V24h-4V20h-4V16h-4V12h-4V8h-4V4H0V0h60v60H0zm2 0h2V2h56v56H2v2z\'/%3E%3C/g%3E%3C/svg%3E');"></div>
+
+        <div class="relative z-10 max-w-4xl mx-auto text-center">
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold mb-4 tracking-tight leading-tight">
+                股权激励对象<br class="hidden sm:inline">银行流水核查
+            </h1>
+            <p class="text-2xl sm:text-3xl text-teal-400 font-light mb-8 italic">
+                <i class="fas fa-balance-scale mr-3"></i>监管要求与实操要点深度解析
+            </p>
+            <p class="text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto opacity-90 drop-cap">
+                在资本市场日益规范的背景下，针对拟上市企业股权激励对象的银行流水核查已成为监管机构关注的重中之重。此举旨在穿透股权背后的真实出资方，防范代持、利益输送及其他违规行为，确保股权结构清晰透明。本文将详细阐述相关监管要求、核查核心步骤及潜在风险点，为实务操作提供指引。
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+        <!-- Section 1: 明确的监管要求 -->
+        <section class="mb-16">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-8 section-title">
+                <i class="fas fa-gavel text-teal-600 mr-3 dark:text-teal-400"></i>一、明确的监管要求
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect dark:bg-gray-800 border border-gray-200 dark:border-zinc-700">
+                    <h3 class="text-2xl font-semibold mb-4 text-teal-600 dark:text-teal-400"><i class="fas fa-users-line mr-2"></i>核查范围强制覆盖</h3>
+                    <ul class="list-disc list-inside space-y-3 text-lg custom-list">
+                        <li>
+                            **必须核查的对象**：
+                            <ul class="list-disc ml-6 mt-2 space-y-1">
+                                <li>通过持股平台（如有限合伙企业）间接持股的**激励对象**（无论是否仍在职）；</li>
+                                <li>**直接持股比例≥5%的自然人股东**（含通过股权激励取得股份）；</li>
+                                <li>**实控人及其配偶、子女**等近亲属（若其为激励对象）<sup class="text-teal-600 dark:text-teal-400">1</sup>。</li>
+                            </ul>
+                        </li>
+                        <li>
+                            **扩大核查的情形**：
+                            <ul class="list-disc ml-6 mt-2 space-y-1">
+                                <li>若激励对象入股价格显著低于公允价值（如1元/股），或存在**分期付款、神秘还款来源**等异常，需延伸核查其近亲属及密切资金往来方<sup class="text-teal-600 dark:text-teal-400">2</sup>。</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect dark:bg-gray-800 border border-gray-200 dark:border-zinc-700">
+                    <h3 class="text-2xl font-semibold mb-4 text-teal-600 dark:text-teal-400"><i class="fas fa-file-invoice-dollar mr-2"></i>核查内容及深度要求</h3>
+                    <ul class="list-disc list-inside space-y-3 text-lg custom-list">
+                        <li>
+                            **入股资金来源**：
+                            <ul class="list-disc ml-6 mt-2 space-y-1">
+                                <li>必须核查激励对象向持股平台**实缴出资的资金流水**，确认是否为自有资金<sup class="text-teal-600 dark:text-teal-400">3</sup>；</li>
+                                <li>若存在借款，需穿透核查**还款资金来源**（如是否来自发行人关联方或客户/供应商）<sup class="text-teal-600 dark:text-teal-400">4</sup>。</li>
+                            </ul>
+                        </li>
+                        <li>
+                            **异常资金往来**：
+                            <ul class="list-disc ml-6 mt-2 space-y-1">
+                                <li>入股前后**6个月内单笔≥5万元**的交易需逐笔说明对手方及合理性<sup class="text-teal-600 dark:text-teal-400">5</sup>；</li>
+                                <li>重点关注与**发行人客户、供应商、实控人**的资金往来（防范商业贿赂或代持）<sup class="text-teal-600 dark:text-teal-400">6</sup>。</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: 核查步骤及重点事项 -->
+        <section class="mb-16">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-8 section-title">
+                <i class="fas fa-clipboard-list text-teal-600 mr-3 dark:text-teal-400"></i>二、核查步骤及重点事项
+            </h2>
+
+            <h3 class="text-2xl font-semibold mb-6 text-teal-600 dark:text-teal-400"><i class="fas fa-list-ol mr-2"></i>（一）操作流程</h3>
+            <div class="table-responsive bg-white rounded-lg shadow-md mb-12 dark:bg-gray-800 border border-gray-200 dark:border-zinc-700">
+                <table class="w-full text-lg text-left text-gray-700 dark:text-gray-300">
+                    <thead class="text-xs text-gray-900 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-100">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 rounded-tl-lg">步骤</th>
+                            <th scope="col" class="px-6 py-3">操作要点</th>
+                            <th scope="col" class="px-6 py-3 rounded-tr-lg">监管依据</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-150">
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"><i class="fas fa-fingerprint text-teal-500 mr-2"></i>1. 账户完整性核验</td>
+                            <td class="px-6 py-4">使用“云闪付”核验所有银行卡（含已注销账户），要求对象签署《账户完整性承诺函》</td>
+                            <td class="px-6 py-4">深交所审核指南<sup class="text-teal-600 dark:text-teal-400">7</sup></td>
+                        </tr>
+                        <tr class="bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-150">
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"><i class="fas fa-magnifying-glass-dollar text-teal-500 mr-2"></i>2. 入股资金流追溯</td>
+                            <td class="px-6 py-4">逐笔追踪入股款转账记录，核查：<br> • 是否来自薪酬/家庭积累<br> • 若为借款，需查验《借款合同》及还款流水</td>
+                            <td class="px-6 py-4">《监管规则适用指引》<sup class="text-teal-600 dark:text-teal-400">8</sup></td>
+                        </tr>
+                        <tr class="bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-150">
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"><i class="fas fa-filter text-teal-500 mr-2"></i>3. 异常交易筛查</td>
+                            <td class="px-6 py-4">对入股前后6个月流水筛查：<br> • 大额取现（≥5万元）<br> • 与发行人关联方/客户/供应商的往来款<br> • 频繁整数倍转账</td>
+                            <td class="px-6 py-4">IPO问询案例<sup class="text-teal-600 dark:text-teal-400">9</sup></td>
+                        </tr>
+                        <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-150">
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"><i class="fas fa-file-alt text-teal-500 mr-2"></i>4. 底稿留痕</td>
+                            <td class="px-6 py-4">保存银行流水原件、访谈记录、资金路径图，由保荐人/会计师双签</td>
+                            <td class="px-6 py-4">《证券发行上市保荐业务工作底稿指引》<sup class="text-teal-600 dark:text-teal-400">10</sup></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="text-2xl font-semibold mb-6 text-teal-600 dark:text-teal-400"><i class="fas fa-triangle-exclamation mr-2"></i>（二）重点风险领域</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect dark:bg-gray-800 border border-gray-200 dark:border-zinc-700">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-mask text-4xl text-red-500 mr-4"></i>
+                        <h4 class="text-xl font-bold">股权代持嫌疑</h4>
+                    </div>
+                    <ul class="icon-card-list text-lg">
+                        <li>
+                            <i class="fas fa-circle-info icon"></i>若激励对象**无合理还款能力**（如年薪20万元却出资500万元），需核查是否替他人代持<sup class="text-teal-600 dark:text-teal-400">11</sup>；
+                        </li>
+                        <li>
+                            <i class="fas fa-exclamation-triangle icon"></i>监管案例：某科创板企业因员工入股资金来自实控人朋友，被认定为代持并否决定<sup class="text-teal-600 dark:text-teal-400">12</sup>。
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect dark:bg-gray-800 border border-gray-200 dark:border-zinc-700">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-handshake-slash text-4xl text-red-500 mr-4"></i>
+                        <h4 class="text-xl font-bold">利益输送问题</h4>
+                    </div>
+                    <ul class="icon-card-list text-lg">
+                        <li>
+                            <i class="fas fa-circle-info icon"></i>关注入股后是否出现**神秘还款**（如第三方代为偿还借款）；
+                        </li>
+                        <li>
+                            <i class="fas fa-exclamation-triangle icon"></i>案例：某拟上市公司因激励对象入股后获客户“还款”500万元，被质疑利益输送<sup class="text-teal-600 dark:text-teal-400">13</sup>。
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect dark:bg-gray-800 border border-gray-200 dark:border-zinc-700">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-chart-line text-4xl text-red-500 mr-4"></i>
+                        <h4 class="text-xl font-bold">股份支付费用操纵</h4>
+                    </div>
+                    <ul class="icon-card-list text-lg">
+                        <li>
+                            <i class="fas fa-circle-info icon"></i>若发行人通过“**过桥资金**”帮助员工虚假出资，可能虚增股份支付费用，需核验资金闭环<sup class="text-teal-600 dark:text-teal-400">14</sup>。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Visualization Section (Mermaid) -->
+        <section class="mb-16">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-8 section-title">
+                <i class="fas fa-chart-network text-teal-600 mr-3 dark:text-teal-400"></i>核心核查逻辑示意图
+            </h2>
+            <div class="bg-white p-6 rounded-lg shadow-md overflow-x-auto dark:bg-gray-800 border border-gray-200 dark:border-zinc-700">
+                <pre class="mermaid text-center text-gray-900 dark:text-gray-100">
+graph TD
+    A[股权激励银行流水核查] --> B{核查对象};
+    B -- 强制覆盖 --> C[激励对象/持股平台];
+    B -- 强制覆盖 --> D[≥5%自然人股东];
+    B -- 强制覆盖 --> E[实控人近亲属(激励对象)];
+    B -- 扩大核查 --> F[价格异常/神秘还款];
+
+    A --> G{核查内容};
+    G -- 资金来源 --> H[实缴出资流水];
+    G -- 资金来源 --> I[还款资金来源];
+    G -- 异常往来 --> J[入股前后6个月≥5万交易];
+    G -- 异常往来 --> K[与关联方/客户/供应商往来];
+
+    A --> L{核查步骤};
+    L --> M[账户完整性核验];
+    L --> N[入股资金流追溯];
+    L --> O[异常交易筛查];
+    L --> P[底稿留痕];
+
+    A --> Q{风险领域};
+    Q --> R[股权代持嫌疑];
+    Q --> S[利益输送问题];
+    Q --> T[股份支付费用操纵];
+
+    R -- 导致 --> U[IPO终止/警示函];
+    S -- 导致 --> U;
+    T -- 导致 --> U;
+
+    subgraph 监管处罚与后果
+        U
+    end
+                </pre>
+            </div>
+        </section>
+
+        <!-- Section 3: 监管处罚案例 -->
+        <section class="mb-16">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-8 section-title">
+                <i class="fas fa-scale-balanced text-teal-600 mr-3 dark:text-teal-400"></i>三、监管处罚案例
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect dark:bg-gray-800 border border-gray-200 dark:border-zinc-700">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-exclamation-circle text-4xl text-red-500 mr-4"></i>
+                        <h4 class="text-xl font-bold">未穿透核查还款来源</h4>
+                    </div>
+                    <p class="text-lg">
+                        某创业板项目因未发现激励对象还款资金实为实控人提供，保荐人被出具警示函<sup class="text-teal-600 dark:text-teal-400">15</sup>。
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect dark:bg-gray-800 border border-gray-200 dark:border-zinc-700">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-ban text-4xl text-red-500 mr-4"></i>
+                        <h4 class="text-xl font-bold">隐瞒关联方参与激励</h4>
+                    </div>
+                    <p class="text-lg">
+                        隐瞒客户高管通过持股平台间接入股，被认定信息披露重大遗漏，IPO终止<sup class="text-teal-600 dark:text-teal-400">16</sup>。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practical Tip -->
+        <section class="mb-16">
+            <div class="bg-teal-100 text-teal-800 p-8 rounded-lg shadow-lg flex flex-col md:flex-row items-start md:items-center dark:bg-teal-800 dark:text-teal-100 border border-teal-200 dark:border-teal-700">
+                <div class="flex-shrink-0 mb-4 md:mb-0 md:mr-6">
+                    <i class="fas fa-lightbulb text-5xl opacity-75"></i>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-3">实务提示</h3>
+                    <p class="text-lg leading-relaxed">
+                        2024年多家被现场督导的IPO项目中，股权激励对象流水核查漏洞占比超30%，建议优先确保入股资金闭环证据链完整，并排查所有单笔≥5万元的异常流水。务必做到**穿透核查、全面覆盖、留痕有据**。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: 附：法规及案例依据 -->
+        <section class="mb-16">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-8 section-title">
+                <i class="fas fa-book-open text-teal-600 mr-3 dark:text-teal-400"></i>附：法规及案例依据
+            </h2>
+            <ol class="list-decimal pl-5 text-lg space-y-3">
+                <li>知识库资料《IPO 月度动态（2024 年 4 月）》：明确持股≥5%的自然人股东必须核查。</li>
+                <li>联网搜索《拟IPO企业股权激励审核要点解析》：入股价格异常需扩大核查范围 (<a href="#" class="text-teal-600 hover:underline dark:text-teal-400">点击标题查看原文 <i class="fas fa-external-link-alt text-xs ml-1"></i></a>)。</li>
+                <li>证监会《监管规则适用指引——发行类第5号》问题5：需核查员工出资来源 (<a href="#" class="text-teal-600 hover:underline dark:text-teal-400">点击查看原文链接 <i class="fas fa-external-link-alt text-xs ml-1"></i></a>)。</li>
+                <li>联网搜索《IPO企业股权激励方案中员工出资问题的监管关注点》：穿透核查还款资金来源 (<a href="#" class="text-teal-600 hover:underline dark:text-teal-400">点击标题查看原文 <i class="fas fa-external-link-alt text-xs ml-1"></i></a>)。</li>
+                <li>深交所《审核业务指南第3号》4.3条：入股前后大额流水需重点核查 (<a href="#" class="text-teal-600 hover:underline dark:text-teal-400">点击查看原文链接 <i class="fas fa-external-link-alt text-xs ml-1"></i></a>)。</li>
+                <li>联网搜索《从否决案例看股权激励流水核查要点》：客户/供应商往来款是高风险信号 (<a href="#" class="text-teal-600 hover:underline dark:text-teal-400">点击标题查看原文 <i class="fas fa-external-link-alt text-xs ml-1"></i></a>)。</li>
+                <li>知识库资料《IPO 月度动态（2023 年 11 月）》：云闪付核验账户为当前监管标配。</li>
+                <li>证监会《监管规则适用指引——发行类第5号》问题5 (<a href="#" class="text-teal-600 hover:underline dark:text-teal-400">点击查看原文链接 <i class="fas fa-external-link-alt text-xs ml-1"></i></a>)。</li>
+                <li>科创板问询函（某半导体设备公司，2024）：要求说明激励对象入股前后与供应商资金往来合理性。</li>
+                <li>证监会《证券发行上市保荐业务工作底稿指引》第七条：流水核查底稿需完整留痕。</li>
+                <li>联网搜索《股权激励对象资金来源核查的七大雷区》：无还款能力者必查代持 (<a href="#" class="text-teal-600 hover:underline dark:text-teal-400">点击标题查看原文 <i class="fas fa-external-link-alt text-xs ml-1"></i></a>)。</li>
+                <li>科创板终止案例（某生物医药企业，2023）：员工入股资金源于外部第三人被否。</li>
+                <li>创业板现场督导案例（2024）：客户“还款”实为掩盖利益输送。</li>
+                <li>联网搜索《股份支付舞弊的识别与应对》：过桥资金伪造出资的典型模式 (<a href="#" class="text-teal-600 hover:underline dark:text-teal-400">点击标题查看原文 <i class="fas fa-external-link-alt text-xs ml-1"></i></a>)。</li>
+                <li>深交所监管函（某保荐机构，2024）：未穿透核查激励对象还款来源。</li>
+                <li>主板IPO终止案例（某消费公司，2023）：隐瞒客户关联方参与持股平台。</li>
+            </ol>
+        </section>
+
+        <!-- Further Reading Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-8 section-title">
+                <i class="fas fa-book-bookmark text-teal-600 mr-3 dark:text-teal-400"></i>延伸阅读
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Book 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect dark:bg-gray-800 border border-gray-200 dark:border-zinc-700">
+                    <h3 class="text-xl font-bold mb-2 text-teal-600 dark:text-teal-400">
+                        《IPO全流程操作指南》
+                    </h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-3 text-lg">
+                        一本系统介绍企业上市全过程的实用手册，覆盖法律、财务、保荐等各环节。
+                    </p>
+                    <a href="#" class="text-teal-500 hover:underline dark:text-teal-300 text-lg">了解更多 <i class="fas fa-external-link-alt text-xs ml-1"></i></a>
+                </div>
+                <!-- Book 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect dark:bg-gray-800 border border-gray-200 dark:border-zinc-700">
+                    <h3 class="text-xl font-bold mb-2 text-teal-600 dark:text-teal-400">
+                        《股权激励：法律与实践》
+                    </h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-3 text-lg">
+                        深度探讨股权激励的法律框架、税务处理、方案设计及实务操作中的常见问题。
+                    </p>
+                    <a href="#" class="text-teal-500 hover:underline dark:text-teal-300 text-lg">了解更多 <i class="fas fa-external-link-alt text-xs ml-1"></i></a>
+                </div>
+                <!-- Book 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect dark:bg-gray-800 border border-gray-200 dark:border-zinc-700">
+                    <h3 class="text-xl font-bold mb-2 text-teal-600 dark:text-teal-400">
+                        《上市公司信息披露实务》
+                    </h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-3 text-lg">
+                        解读上市公司信息披露的原则、要求与案例，对于理解监管精神至关重要。
+                    </p>
+                    <a href="#" class="text-teal-500 hover:underline dark:text-teal-300 text-lg">了解更多 <i class="fas fa-external-link-alt text-xs ml-1"></i></a>
+                </div>
+                <!-- Book 4 -->
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect dark:bg-gray-800 border border-gray-200 dark:border-zinc-700">
+                    <h3 class="text-xl font-bold mb-2 text-teal-600 dark:text-teal-400">
+                        《企业并购重组法律实务》
+                    </h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-3 text-lg">
+                        虽然不是直接关于股权激励，但其对企业股权结构变动和合规性的论述有借鉴意义。
+                    </p>
+                    <a href="#" class="text-teal-500 hover:underline dark:text-teal-300 text-lg">了解更多 <i class="fas fa-external-link-alt text-xs ml-1"></i></a>
+                </div>
+                <!-- Book 5 -->
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover-effect dark:bg-gray-800 border border-gray-200 dark:border-zinc-700">
+                    <h3 class="text-xl font-bold mb-2 text-teal-600 dark:text-teal-400">
+                        《中国证券监督管理委员会发行审核委员会工作规则》
+                    </h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-3 text-lg">
+                        直接了解证监会审核机制和关注点的官方文件，对实务操作有指导作用。
+                    </p>
+                    <a href="#" class="text-teal-500 hover:underline dark:text-teal-300 text-lg">了解更多 <i class="fas fa-external-link-alt text-xs ml-1"></i></a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 dark:bg-zinc-950 py-10 px-4 sm:px-6 lg:px-8 text-center text-sm">
+        <p>&copy; 2024 股权激励对象银行流水核查. All rights reserved.</p>
+        <p class="mt-2">设计与内容提供：AI专业助手</p>
+    </footer>
+
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Mermaid.js configuration
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default', // Managed by CSS filter, keep default here
+            flowchart: {
+                curve: 'basis',
+                htmlLabels: true
+            },
+            securityLevel: 'loose' // Allows clickable links if needed in complex diagrams
+        });
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+        const themeIcon = themeToggleBtn.querySelector('.theme-icon');
+
+        // Function to set theme based on preference
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            } else {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        }
+
+        // Check for saved theme preference or system preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            setTheme('dark'); // Default to dark if system preference is dark
+        } else {
+            setTheme('light'); // Default to light otherwise (or if system preference is light)
+        }
+
+        // Toggle theme on button click
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (!localStorage.getItem('theme')) { // Only update if no manual preference is set
+                setTheme(event.matches ? 'dark' : 'light');
+            }
+        });
+    </script>
+</body>
+</html>
+```
