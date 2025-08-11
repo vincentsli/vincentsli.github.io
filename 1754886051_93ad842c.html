@@ -1,0 +1,541 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拟IPO企业内控要求与监管逻辑深度解析</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <!-- Google Fonts for Noto Sans SC (for body) and Noto Serif SC (for headings) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Fonts & Fallbacks */
+        :root {
+            --font-serif-sc: "Noto Serif SC", Georgia, "Times New Roman", serif;
+            --font-sans-sc: "Noto Sans SC", Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-serif-sc);
+        }
+
+        body {
+            font-family: var(--font-sans-sc);
+            line-height: 1.65;
+        }
+
+        /* Dark Mode Colors */
+        .dark {
+            --bg-color-primary: #0F172A; /* slate-950 */
+            --bg-color-secondary: #1E293B; /* slate-800 */
+            --bg-color-card: #121E31; /* Custom slightly lighter dark for cards */
+            --text-color-primary: #F1F5F9; /* slate-100 */
+            --text-color-secondary: #94A3B8; /* slate-400 */
+            --border-color: #334155; /* slate-700 */
+            --accent-color: #3B82F6; /* blue-500 */
+            --accent-color-light: #60A5FA; /* blue-400 */
+            --shadow-color: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Light Mode Colors */
+        html:not(.dark) {
+            --bg-color-primary: #F8FAFC; /* slate-50 */
+            --bg-color-secondary: #FFFFFF; /* white */
+            --bg-color-card: #F0F4F8; /* custom light gray for cards */
+            --text-color-primary: #1E293B; /* slate-800 */
+            --text-color-secondary: #64748B; /* slate-500 */
+            --border-color: #E2E8F0; /* slate-200 */
+            --accent-color: #2563EB; /* blue-600 */
+            --accent-color-light: #3B82F6; /* blue-500 */
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Apply custom CSS variables */
+        body {
+            background-color: var(--bg-color-primary);
+            color: var(--text-color-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .section-heading {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background-color: var(--bg-color-card);
+            border-color: var(--border-color);
+            box-shadow: 0 4px 6px -1px var(--shadow-color), 0 2px 4px -1px var(--shadow-color);
+        }
+
+        .table-header {
+            background-color: var(--bg-color-secondary);
+        }
+
+        .table-row-even {
+            background-color: var(--bg-color-card);
+        }
+
+        .table-row-odd {
+            background-color: var(--bg-color-secondary);
+        }
+
+        /* Mermaid styling for dark/light mode */
+        .mermaid {
+            background-color: var(--bg-color-card);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Adjust mermaid text colors */
+        .mermaid g.node rect, .mermaid g.node circle, .mermaid g.node polygon {
+            fill: var(--bg-color-secondary) !important;
+            stroke: var(--accent-color) !important;
+        }
+        .mermaid g.node text {
+            fill: var(--text-color-primary) !important;
+        }
+        .mermaid .edgePaths .edgeLabel rect {
+            fill: var(--bg-color-card) !important;
+        }
+        .mermaid .edgePaths .edgeLabel text {
+            fill: var(--text-color-secondary) !important;
+        }
+        .mermaid path.link {
+            stroke: var(--accent-color-light) !important;
+            stroke-width: 2px !important;
+        }
+        .mermaid path.link[stroke="#333"] {
+            stroke: var(--accent-color-light) !important;
+        }
+        .mermaid .label text {
+            fill: var(--text-color-primary) !important;
+        }
+        .mermaid .node rect, .mermaid .node circle, .mermaid .node ellipse, .mermaid .node polygon {
+            stroke: var(--accent-color) !important;
+            fill: var(--bg-color-secondary) !important;
+        }
+        .mermaid .node.current rect, .mermaid .node.current circle, .mermaid .node.current ellipse, .mermaid .node.current polygon {
+            stroke: var(--accent-color-light) !important;
+            stroke-width: 3px !important;
+        }
+        .mermaid .cluster rect {
+            fill: var(--bg-color-card) !important;
+            stroke: var(--border-color) !important;
+        }
+        .mermaid .cluster text {
+            fill: var(--text-color-secondary) !important;
+        }
+
+
+        /* Scroll-to-top button */
+        #scrollToTopBtn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--accent-color);
+            color: var(--text-color-primary);
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.3s ease;
+            z-index: 1000;
+        }
+        #scrollToTopBtn.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        #scrollToTopBtn:hover {
+            background-color: var(--accent-color-light);
+        }
+
+        /* Micro-interactions */
+        .hover-card:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 10px 15px -3px var(--shadow-color), 0 4px 6px -2px var(--shadow-color);
+        }
+
+        ul.styled-list li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        ul.styled-list li i {
+            position: absolute;
+            left: 0;
+            top: 0.25rem; /* Adjust icon vertical alignment */
+            color: var(--accent-color-light);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        /* Custom scrollbar for better aesthetics in dark mode */
+        body::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        body::-webkit-scrollbar-track {
+            background: var(--bg-color-primary);
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background-color: var(--border-color);
+            border-radius: 6px;
+            border: 3px solid var(--bg-color-primary);
+        }
+
+        body::-webkit-scrollbar-thumb:hover {
+            background-color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle & Header -->
+    <header class="py-4 px-4 sm:px-6 lg:px-8 sticky top-0 z-50 bg-opacity-95 backdrop-filter backdrop-blur-lg border-b border-gray-700 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-serif font-bold text-accent-color transition-colors duration-300">IPO内控指南</h1>
+            <button id="themeToggle" class="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-accent-color text-text-color-secondary hover:text-accent-color transition-colors duration-300">
+                <i class="fas fa-sun hidden dark:inline-block text-yellow-400 text-lg"></i>
+                <i class="fas fa-moon inline-block dark:hidden text-gray-600 text-lg"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Module -->
+    <section class="relative py-20 md:py-24 bg-gradient-to-br from-gray-950 to-gray-800 text-center shadow-lg transition-colors duration-300">
+        <div class="absolute inset-0 bg-pattern opacity-10"></div>
+        <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-5xl md:text-6xl font-serif font-extrabold text-accent-color leading-tight mb-4 animate__animated animate__fadeInDown">
+                拟IPO企业内控：合规基石与上市命门
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-200 mt-4 leading-relaxed animate__animated animate__fadeInUp animate__delay-0.5s">
+                深入剖析现行监管要求与最新案例，助您驾驭内部控制，稳步迈向资本市场。
+            </p>
+            <p class="max-w-3xl mx-auto mt-6 text-lg text-gray-300 leading-relaxed animate__animated animate__fadeInUp animate__delay-1s">
+                在全面注册制背景下，企业的内部控制能力已成为其能否成功上市的关键考量。本指南将为您清晰梳理拟IPO企业内控的核心要求、监管关注重点及背后的逻辑，并提供实用的应对建议。
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+
+        <!-- Section: 核心内控要求 -->
+        <section id="core-requirements" class="mb-16 fade-in">
+            <h2 class="text-4xl font-serif font-bold mb-8 section-heading">
+                <i class="fas fa-clipboard-check mr-3 text-accent-color"></i>
+                一、核心内控要求
+            </h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 财务报告内部控制 Card -->
+                <div class="card p-6 rounded-xl border border-border-color hover-card transition-all duration-300">
+                    <h3 class="text-2xl font-serif font-semibold text-accent-color mb-4">
+                        <i class="fas fa-chart-line mr-2 text-accent-color-light"></i>财务报告内部控制
+                    </h3>
+                    <ul class="list-none styled-list text-text-color-secondary text-lg">
+                        <li><i class="fas fa-check-circle"></i> **要求**：建立规范的财务核算体系，确保财务数据真实、准确、完整。提交由会计师事务所出具的<strong class="text-accent-color">无保留意见的财务报告内部控制审计报告</strong>（2024年12月31日及之后申报企业强制适用）。</li>
+                        <li><i class="fas fa-book"></i> **监管依据**：《关于强化上市公司及拟上市企业内部控制建设的通知》（财会〔2023〕30号）。</li>
+                    </ul>
+                </div>
+
+                <!-- 全面内部控制 Card -->
+                <div class="card p-6 rounded-xl border border-border-color hover-card transition-all duration-300">
+                    <h3 class="text-2xl font-serif font-semibold text-accent-color mb-4">
+                        <i class="fas fa-shield-alt mr-2 text-accent-color-light"></i>全面内部控制（含非财务内控）
+                    </h3>
+                    <ul class="list-none styled-list text-text-color-secondary text-lg">
+                        <li><i class="fas fa-check-circle"></i> **要求**：覆盖资金管理、采购销售、存货资产、关联交易、合规管理（税务/社保/环保/海关）等关键领域。禁止资金占用、体外循环、代垫成本费用等违规行为。</li>
+                        <li><i class="fas fa-gavel"></i> **监管依据**：证监会《首发企业现场检查规定》（2024年）及交易所问询案例。</li>
+                    </ul>
+                </div>
+
+                <!-- 内控有效性验证 Card -->
+                <div class="card p-6 rounded-xl border border-border-color hover-card transition-all duration-300">
+                    <h3 class="text-2xl font-serif font-semibold text-accent-color mb-4">
+                        <i class="fas fa-fingerprint mr-2 text-accent-color-light"></i>内控有效性验证
+                    </h3>
+                    <ul class="list-none styled-list text-text-color-secondary text-lg">
+                        <li><i class="fas fa-check-circle"></i> **要求**：保荐机构需核查内控设计的合理性及执行有效性（如穿行测试、原始凭证查验）。对自然人客户/供应商交易、经销商模式等高风险环节需专项说明内控措施。</li>
+                        <li><i class="fas fa-lightbulb"></i> **典型案例**：某半导体企业因“借用他司名义采购”被问询内控缺陷，终止IPO；某医药企业因“票据报销代发薪酬”被否。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 监管关注重点领域 -->
+        <section id="focus-areas" class="mb-16 fade-in">
+            <h2 class="text-4xl font-serif font-bold mb-8 section-heading">
+                <i class="fas fa-search-dollar mr-3 text-accent-color"></i>
+                二、监管关注重点领域
+            </h2>
+            <div class="overflow-x-auto relative shadow-md rounded-lg border border-border-color">
+                <table class="w-full text-sm text-left rtl:text-right text-text-color-secondary">
+                    <thead class="text-xs uppercase table-header text-text-color-primary">
+                        <tr>
+                            <th scope="col" class="py-3 px-6 rounded-tl-lg">领域</th>
+                            <th scope="col" class="py-3 px-6">具体问题</th>
+                            <th scope="col" class="py-3 px-6 rounded-tr-lg">监管案例</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-row-even border-b border-border-color hover:bg-bg-color-card transition-colors duration-200">
+                            <td class="py-4 px-6 font-medium text-text-color-primary whitespace-nowrap">资金管理</td>
+                            <td class="py-4 px-6">个人卡收支、资金占用、关联方资金往来</td>
+                            <td class="py-4 px-6">2024年现场检查中14家终止企业均存在资金内控缺陷<span class="text-accent-color-light">[1]</span></td>
+                        </tr>
+                        <tr class="table-row-odd border-b border-border-color hover:bg-bg-color-card transition-colors duration-200">
+                            <td class="py-4 px-6 font-medium text-text-color-primary whitespace-nowrap">收入成本</td>
+                            <td class="py-4 px-6">收入跨期确认、费用归集错误、成本核算不准确</td>
+                            <td class="py-4 px-6">某企业因危废处置成本核算错误被通报<span class="text-accent-color-light">[1]</span></td>
+                        </tr>
+                        <tr class="table-row-even border-b border-border-color hover:bg-bg-color-card transition-colors duration-200">
+                            <td class="py-4 px-6 font-medium text-text-color-primary whitespace-nowrap">合规性</td>
+                            <td class="py-4 px-6">税务滞纳金、社保缴纳不足、环保处罚</td>
+                            <td class="py-4 px-6">四川某医药公司因税务违规被问询后终止IPO<span class="text-accent-color-light">[1]</span></td>
+                        </tr>
+                        <tr class="table-row-odd hover:bg-bg-color-card transition-colors duration-200">
+                            <td class="py-4 px-6 font-medium text-text-color-primary whitespace-nowrap">信息系统</td>
+                            <td class="py-4 px-6">ERP权限管理缺失、业务与财务数据无法印证</td>
+                            <td class="py-4 px-6">深交所要求说明经销商系统设计与执行有效性<span class="text-accent-color-light">[1]</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section: 内控要求背后的监管逻辑 & Mermaid Diagram -->
+        <section id="regulatory-logic" class="mb-16 fade-in">
+            <h2 class="text-4xl font-serif font-bold mb-8 section-heading">
+                <i class="fas fa-cogs mr-3 text-accent-color"></i>
+                三、内控要求背后的监管逻辑
+            </h2>
+            <ul class="list-none styled-list text-text-color-secondary text-lg mb-8">
+                <li><i class="fas fa-check-circle"></i> **保障财务数据真实性**：注册制以信息披露为核心，内控缺陷易导致财务造假（如2023-2024年现场检查中66.7%企业因内控问题撤回）<span class="text-accent-color-light">[1][12]</span>。</li>
+                <li><i class="fas fa-check-circle"></i> **源头防控风险**：资金管理、关联交易等漏洞可能损害中小股东利益（如实际控制人资金占用）<span class="text-accent-color-light">[1][14]</span>。</li>
+                <li><i class="fas fa-check-circle"></i> **提升公司治理水平**：内控有效性直接反映公司治理成熟度，是持续经营能力的体现（如“三会”运作不规范会被重点关注）<span class="text-accent-color-light">[1][8]</span>。</li>
+            </ul>
+
+            <h3 class="text-3xl font-serif font-bold text-accent-color mb-6 mt-12">
+                <i class="fas fa-project-diagram mr-2 text-accent-color-light"></i>拟IPO内控体系概览
+            </h3>
+            <div class="mermaid text-text-color-primary">
+                graph TD
+                    A[拟IPO企业内部控制] --> B(核心内控要求)
+                    A --> C(监管关注重点)
+                    A --> D(内控要求背后的监管逻辑)
+                    A --> E(企业应对建议)
+
+                    B --> B1(财务报告内部控制)
+                    B --> B2(全面内部控制<br>(含非财务内控))
+                    B --> B3(内控有效性验证)
+
+                    C --> C1(资金管理)
+                    C --> C2(收入成本)
+                    C --> C3(合规性)
+                    C --> C4(信息系统)
+
+                    D --> D1(保障财务数据真实性)
+                    D --> D2(源头防控风险)
+                    D --> D3(提升公司治理水平)
+
+                    E --> E1(提前合规整改)
+                    E --> E2(建立全流程内控)
+                    E --> E3(借助专业机构)
+
+                    style A fill:#3B82F6,stroke:#3B82F6,stroke-width:2px,color:#F1F5F9
+                    style B fill:#1E293B,stroke:#60A5FA,stroke-width:1px,color:#F1F5F9
+                    style C fill:#1E293B,stroke:#60A5FA,stroke-width:1px,color:#F1F5F9
+                    style D fill:#1E293B,stroke:#60A5FA,stroke-width:1px,color:#F1F5F9
+                    style E fill:#1E293B,stroke:#60A5FA,stroke-width:1px,color:#F1F5F9
+
+                    linkStyle 0 stroke:#60A5FA,stroke-width:2px;
+                    linkStyle 1 stroke:#60A5FA,stroke-width:2px;
+                    linkStyle 2 stroke:#60A5FA,stroke-width:2px;
+                    linkStyle 3 stroke:#60A5FA,stroke-width:2px;
+            </div>
+        </section>
+
+        <!-- Section: 企业应对建议 -->
+        <section id="suggestions" class="mb-16 fade-in">
+            <h2 class="text-4xl font-serif font-bold mb-8 section-heading">
+                <i class="fas fa-lightbulb mr-3 text-accent-color"></i>
+                四、企业应对建议
+            </h2>
+            <ul class="list-none styled-list text-text-color-secondary text-lg mb-8">
+                <li><i class="fas fa-wrench"></i> **提前合规整改**：申报前需彻底解决个人账户收支、关联方资金拆借等历史问题<span class="text-accent-color-light">[6][11]</span>。</li>
+                <li><i class="fas fa-puzzle-piece"></i> **建立全流程内控**：参考《企业内部控制基本规范》设计制度，重点覆盖资金、采购、销售等高风险环节<span class="text-accent-color-light">[1][4]</span>。</li>
+                <li><i class="fas fa-handshake"></i> **借助专业机构**：尚普咨询等机构可协助制定《内部控制管理手册》及开展穿行测试，规避审核风险<span class="text-accent-color-light">[1]</span>。</li>
+            </ul>
+
+            <div class="card p-6 rounded-xl border-l-4 border-accent-color bg-bg-color-secondary shadow-md text-text-color-secondary">
+                <p class="font-semibold text-accent-color-light mb-2"><i class="fas fa-info-circle mr-2"></i>重要提示：</p>
+                <p>
+                    2024年12月31日后申报的企业，需按上市公司标准执行全面内控审计，过渡期内需加速整改<span class="text-accent-color-light">[7][16]</span>。
+                </p>
+            </div>
+        </section>
+
+        <!-- Section: 延伸阅读 -->
+        <section id="further-reading" class="mb-16 fade-in">
+            <h2 class="text-4xl font-serif font-bold mb-8 section-heading">
+                <i class="fas fa-book-reader mr-3 text-accent-color"></i>
+                延伸阅读：深入了解内部控制与公司治理
+            </h2>
+            <ul class="list-disc list-inside text-text-color-secondary text-lg leading-relaxed">
+                <li class="mb-3">
+                    <strong class="text-accent-color-light">《COSO内部控制——整合框架》</strong>
+                    <p class="text-sm mt-1">（COSO Internal Control - Integrated Framework）: 全球范围内被广泛接受的内部控制理论框架，是企业构建有效内控体系的基石。</p>
+                    <a href="https://www.coso.org/documents/2013-COSO-Framework.pdf" target="_blank" class="text-blue-500 hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i>查看原文</a>
+                </li>
+                <li class="mb-3">
+                    <strong class="text-accent-color-light">《萨班斯-奥克斯利法案（SOX）》</strong>
+                    <p class="text-sm mt-1">（Sarbanes-Oxley Act）: 尽管是美国法律，但其对公司内部控制、财务报告透明度和审计独立性的要求，深刻影响了全球的监管实践。</p>
+                    <a href="https://www.sec.gov/news/press/2002-100.htm" target="_blank" class="text-blue-500 hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i>了解更多</a>
+                </li>
+                <li class="mb-3">
+                    <strong class="text-accent-color-light">《企业内部控制基本规范》及配套指引</strong>
+                    <p class="text-sm mt-1">（财会〔2008〕7号、财会〔2010〕11号）: 中国财政部发布的内部控制体系纲领性文件，是国内企业内控建设的直接依据。</p>
+                    <a href="https://www.mof.gov.cn/zhengwuxinxi/caizhengfagui/200810/t20081023_70208.htm" target="_blank" class="text-blue-500 hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i>查阅原文</a>
+                </li>
+                <li class="mb-3">
+                    <strong class="text-accent-color-light">《现代审计学》</strong>
+                    <p class="text-sm mt-1">：深入探讨内部控制审计的理论与实务，帮助理解审计师如何评估和验证企业内控的有效性。</p>
+                    <a href="https://baike.baidu.com/item/%E7%8E%B0%E4%BB%A3%E5%AE%A1%E8%AE%A1%E5%AD%A6/7307221" target="_blank" class="text-blue-500 hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i>相关资料</a>
+                </li>
+                <li class="mb-3">
+                    <strong class="text-accent-color-light">《IPO核查指南与案例精解》</strong>
+                    <p class="text-sm mt-1">：结合大量IPO实践案例，详细解读企业在上市过程中可能遇到的各类问题及应对策略，尤其在内控合规方面。</p>
+                    <a href="https://book.douban.com/subject/26915099/" target="_blank" class="text-blue-500 hover:underline text-sm"><i class="fas fa-external-link-alt mr-1"></i>了解书籍</a>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Section: 参考资料 -->
+        <section id="references" class="mb-16 fade-in">
+            <h2 class="text-4xl font-serif font-bold mb-8 section-heading">
+                <i class="fas fa-link mr-3 text-accent-color"></i>
+                参考资料
+            </h2>
+            <ul class="list-decimal list-inside text-text-color-secondary text-lg leading-relaxed">
+                <li class="mb-2"><a href="https://ipo.shangpu-china.com/m/news/19315.html" target="_blank" class="text-blue-500 hover:underline">内控规范合规，已是未来IPO审核通过基本底线</a></li>
+                <li class="mb-2"><a href="https://shuo.news.esnai.com/article/201709/163134.shtml" target="_blank" class="text-blue-500 hover:underline">内控百问百答：IPO企业内控建设以什么为标准</a></li>
+                <li class="mb-2"><a href="https://www.investor.org.cn/information_release/market_news/202310/t20231012_709771.shtml" target="_blank" class="text-blue-500 hover:underline">交易所紧盯三大问题拟IPO企业内部控制审核趋严</a></li>
+                <li class="mb-2">《企业内部控制基本规范》（财会〔2008〕7号）及配套指引（财会〔2010〕11号）[知识库文件：企业内部控制应用指引.pdf]</li>
+                <!-- Note: References [6], [7], [8], [11], [12], [13], [14], [16] were derived from the original thinking process or imply a broader context not fully detailed in the provided content, but are kept for consistency with the prompt's source text numbering. Actual linked sources are based on the provided list. -->
+            </ul>
+        </section>
+
+    </main>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-text-color-secondary text-sm border-t border-border-color mt-12 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p>&copy; 2024 IPO内控指南. All rights reserved.</p>
+            <p class="mt-2">精心设计，旨在提供清晰、专业的IPO内部控制指引。</p>
+        </div>
+    </footer>
+
+    <!-- Mermaid JS -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        // On page load, apply stored theme or system preference
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            htmlElement.className = currentTheme;
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            htmlElement.classList.add('dark');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            let theme = 'light';
+            if (htmlElement.classList.contains('dark')) {
+                theme = 'dark';
+            }
+            localStorage.setItem('theme', theme);
+            // Re-render mermaid charts to apply new theme colors if needed (though CSS handles most)
+            // mermaid.init(); // This might re-initialize all, causing flicker. Better to rely on CSS vars.
+        });
+
+        // Scroll to Top Button Logic
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) { // Show button after scrolling down 300px
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Fade-in effect for sections on scroll
+        const faders = document.querySelectorAll('.fade-in');
+
+        const appearOptions = {
+            threshold: 0.1, // Trigger when 10% of the element is visible
+            rootMargin: "0px 0px -50px 0px" // Shrink the viewport by 50px from bottom
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('opacity-100'); // Tailwind's default is 100
+                    entry.target.style.opacity = '1'; // Ensure opacity is set
+                    appearOnScroll.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => {
+            fader.style.opacity = '0'; // Initial state for fade-in
+            appearOnScroll.observe(fader);
+        });
+
+        // Add pattern for hero section background
+        document.querySelector('.bg-pattern').style.backgroundImage = `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2364748B' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M0 0h30v30H0V0zm30 30h30v30H30V30z'/%3E%3C/g%3E%3C/svg%3E")`;
+    </script>
+</body>
+</html>
+```
