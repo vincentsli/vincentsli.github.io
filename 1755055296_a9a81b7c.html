@@ -1,0 +1,504 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>可转债包销：券商责任与市场实践</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    
+    <!-- Mermaid -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    
+    <style>
+        :root {
+            --body-font: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", sans-serif;
+            --headings-font: 'Noto Serif SC', serif;
+        }
+        
+        * {
+            font-family: var(--body-font);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--headings-font);
+        }
+        
+        /* Dark mode styles */
+        .dark {
+            background-color: #0f0f0f;
+            color: #e5e5e5;
+        }
+        
+        .dark body {
+            background-color: #0f0f0f;
+            color: #e5e5e5;
+        }
+        
+        /* Gradient backgrounds */
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        }
+        
+        .dark .gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        /* Card hover effect */
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Smooth transitions */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Drop cap */
+        .drop-cap::first-letter {
+            float: left;
+            font-family: var(--headings-font);
+            font-size: 4rem;
+            line-height: 3rem;
+            padding-right: 8px;
+            padding-top: 4px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Divider */
+        .divider {
+            position: relative;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+        }
+        
+        .divider span {
+            position: relative;
+            background: inherit;
+            padding: 0 20px;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .dark ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        /* Highlight text */
+        .highlight {
+            background: linear-gradient(105deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+        
+        /* Timeline styles */
+        .timeline-item {
+            position: relative;
+            padding-left: 40px;
+            padding-bottom: 30px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: -10px;
+            width: 2px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .timeline-item:last-child::before {
+            display: none;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 5px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: white;
+            border: 3px solid #667eea;
+            border-radius: 50%;
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="fixed top-4 right-4 z-50 p-3 rounded-full bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all">
+        <i class="fas fa-sun text-yellow-500 dark:hidden"></i>
+        <i class="fas fa-moon text-blue-400 hidden dark:block"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <header class="gradient-bg text-white min-h-screen flex items-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-20"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-4xl mx-auto text-center fade-in">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                    可转债包销
+                    <span class="block text-3xl md:text-4xl mt-4 font-normal opacity-90">券商责任与市场实践深度解析</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 opacity-90 max-w-3xl mx-auto">
+                    探索上市公司公开发行可转债时，主承销商必须承担的余额包销责任及其市场影响
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#regulations" class="px-8 py-4 bg-white text-blue-900 rounded-full font-semibold hover:bg-opacity-90 transform hover:scale-105 transition-all">
+                        <i class="fas fa-book-open mr-2"></i>法规解析
+                    </a>
+                    <a href="#cases" class="px-8 py-4 border-2 border-white rounded-full font-semibold hover:bg-white hover:text-blue-900 transition-all">
+                        <i class="fas fa-chart-line mr-2"></i>案例研究
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-3xl opacity-70"></i>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-16 max-w-6xl">
+        <!-- Introduction -->
+        <section class="mb-16 fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">包销责任的核心要点</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card-hover bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+                    <div class="text-5xl mb-4 text-blue-600 dark:text-blue-400">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">法规强制要求</h3>
+                    <p class="text-gray-600 dark:text-gray-300">根据《证券法》和证监会规章，主承销商必须对认购不足的可转债承担余额包销责任</p>
+                </div>
+                <div class="card-hover bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+                    <div class="text-5xl mb-4 text-purple-600 dark:text-purple-400">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">包销比例范围</h3>
+                    <p class="text-gray-600 dark:text-gray-300">实践中包销比例通常为发行规模的 0.5%-30%，取决于市场认购热度</p>
+                </div>
+                <div class="card-hover bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+                    <div class="text-5xl mb-4 text-green-600 dark:text-green-400">
+                        <i class="fas fa-chart-area"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">风险与收益并存</h3>
+                    <p class="text-gray-600 dark:text-gray-300">券商面临破发风险，但也可能获得上市溢价收益</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Regulations Section -->
+        <section id="regulations" class="mb-16">
+            <div class="divider mb-12">
+                <span class="px-4 py-2 bg-white dark:bg-gray-900"><i class="fas fa-gavel mr-2"></i>法规依据</span>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-2xl md:text-3xl font-bold mb-6">强制性包销规定</h3>
+                    <p class="drop-cap text-lg leading-relaxed mb-6">
+                        根据中国证监会《证券发行与承销管理办法》第二十二条规定，发行人和主承销商应当签订承销协议，采用包销方式的，应当明确包销责任。对于可转债发行，<span class="highlight">主承销商必须承担余额包销责任</span>，即对投资者认购不足的剩余部分全额购入。
+                    </p>
+                    <div class="bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-600 p-4 rounded-r-lg">
+                        <p class="font-semibold text-blue-800 dark:text-blue-200">
+                            <i class="fas fa-info-circle mr-2"></i>触发条件
+                        </p>
+                        <p class="mt-2 text-blue-700 dark:text-blue-300">
+                            当原股东优先认购和公众投资者申购的可转债总量不足本次发行总量的70%时，主承销商需包销全部剩余份额。
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-xl">
+                    <h4 class="text-xl font-semibold mb-4">包销流程概览</h4>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <h5 class="font-semibold mb-2">1. 优先配售</h5>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">向原股东优先配售转债，比例在发行公告中披露</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <h5 class="font-semibold mb-2">2. 公众认购</h5>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">剩余部分向公众投资者发售</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <h5 class="font-semibold mb-2">3. 包销执行</h5>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">主承销商购入未认购部分</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <h5 class="font-semibold mb-2">4. 上市流通</h5>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">转债上市后择机卖出</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Visualization -->
+        <section id="visualization" class="mb-16">
+            <div class="divider mb-12">
+                <span class="px-4 py-2 bg-white dark:bg-gray-900"><i class="fas fa-project-diagram mr-2"></i>风险收益关系图</span>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-xl">
+                <div id="mermaid-container" class="flex justify-center">
+                    <div class="mermaid">
+                        graph LR
+                            A[可转债包销] --> B[风险因素]
+                            A --> C[收益来源]
+                            B --> B1[市场破发]
+                            B --> B2[包销比例高]
+                            B --> B3[流动性风险]
+                            C --> C1[上市溢价]
+                            C --> C2[承销费收入]
+                            C --> C3[客户关系维护]
+                            B1 --> D[潜在亏损]
+                            C1 --> E[潜在盈利]
+                            D --> F[风险管理策略]
+                            E --> F
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Case Studies -->
+        <section id="cases" class="mb-16">
+            <div class="divider mb-12">
+                <span class="px-4 py-2 bg-white dark:bg-gray-900"><i class="fas fa-briefcase mr-2"></i>典型案例分析</span>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="bg-gradient-to-r from-red-500 to-pink-500 p-6 text-white">
+                        <h3 class="text-2xl font-bold mb-2">湖广转债（2018年）</h3>
+                        <p class="opacity-90">高包销比例案例</p>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-gray-600 dark:text-gray-400">包销比例</span>
+                            <span class="text-3xl font-bold text-red-600 dark:text-red-400">33.6%</span>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">
+                            2018年市场低迷，湖广转债面临认购不足，主承销商被迫包销超过三分之一发行规模。
+                        </p>
+                        <div class="flex items-center space-x-4 text-sm">
+                            <span class="bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 px-3 py-1 rounded-full">
+                                <i class="fas fa-exclamation-triangle mr-1"></i>高风险
+                            </span>
+                            <span class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full">
+                                <i class="fas fa-calendar mr-1"></i>2018年
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden card-hover">
+                    <div class="bg-gradient-to-r from-green-500 to-teal-500 p-6 text-white">
+                        <h3 class="text-2xl font-bold mb-2">南药转债（2025年）</h3>
+                        <p class="opacity-90">包销获利案例</p>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-gray-600 dark:text-gray-400">上市涨幅</span>
+                            <span class="text-3xl font-bold text-green-600 dark:text-green-400">+18%</span>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">
+                            2025年南药转债上市大涨，中信建投因包销获得显著收益，成为券商包销业务的典范案例。
+                        </p>
+                        <div class="flex items-center space-x-4 text-sm">
+                            <span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full">
+                                <i class="fas fa-chart-line mr-1"></i>高收益
+                            </span>
+                            <span class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full">
+                                <i class="fas fa-calendar mr-1"></i>2025年
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Further Reading -->
+        <section class="mb-16">
+            <div class="divider mb-12">
+                <span class="px-4 py-2 bg-white dark:bg-gray-900"><i class="fas fa-book mr-2"></i>延伸阅读</span>
+            </div>
+            
+            <h3 class="text-2xl font-bold mb-8 text-center">推荐书籍与资料</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="#" class="block bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all card-hover">
+                    <div class="text-3xl text-blue-600 dark:text-blue-400 mb-3">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h4 class="font-semibold mb-2">《证券发行与承销实务》</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">深入解析证券承销全过程，包括可转债包销的实操细节</p>
+                </a>
+                <a href="#" class="block bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all card-hover">
+                    <div class="text-3xl text-purple-600 dark:text-purple-400 mb-3">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h4 class="font-semibold mb-2">《可转债投资指南》</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">从投资者角度分析可转债市场，了解包销机制对市场的影响</p>
+                </a>
+                <a href="#" class="block bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all card-hover">
+                    <div class="text-3xl text-green-600 dark:text-green-400 mb-3">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h4 class="font-semibold mb-2">《证监会法规汇编》</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">官方发布的证券发行法规合集，包含最新政策解读</p>
+                </a>
+                <a href="#" class="block bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all card-hover">
+                    <div class="text-3xl text-red-600 dark:text-red-400 mb-3">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <h4 class="font-semibold mb-2">《中国证券市场年度报告》</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">包含历年可转债市场的详细数据分析和趋势预测</p>
+                </a>
+                <a href="#" class="block bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all card-hover">
+                    <div class="text-3xl text-yellow-600 dark:text-yellow-400 mb-3">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h4 class="font-semibold mb-2">《金融机构风险管理》</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">探讨包销业务的风险控制策略和最佳实践</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-20">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-4">© 2024 可转债包销研究 | 专业解读券商责任与市场实践</p>
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="hover:text-blue-400 transition-colors">
+                    <i class="fab fa-twitter text-xl"></i>
+                </a>
+                <a href="#" class="hover:text-blue-400 transition-colors">
+                    <i class="fab fa-linkedin text-xl"></i>
+                </a>
+                <a href="#" class="hover:text-blue-400 transition-colors">
+                    <i class="fas fa-envelope text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        html.classList.toggle('dark', currentTheme === 'dark');
+        
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            const newTheme = html.classList.contains('dark') ? 'dark' : 'light';
+            localStorage.setItem('theme', newTheme);
+        });
+        
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#667eea',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#764ba2',
+                lineColor: '#ddd',
+                secondaryColor: '#f3f4f6',
+                tertiaryColor: '#fff'
+            }
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Add fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
+```
