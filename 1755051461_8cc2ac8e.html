@@ -1,0 +1,579 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO股东穿透核查规定与要求 - 深度指南</title>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #2a2a2a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --accent-primary: #3b82f6;
+            --accent-secondary: #8b5cf6;
+            --accent-tertiary: #10b981;
+            --border-color: #333;
+        }
+        
+        .light-mode {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --bg-tertiary: #f3f4f6;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --accent-primary: #2563eb;
+            --accent-secondary: #7c3aed;
+            --accent-tertiary: #059669;
+            --border-color: #e5e7eb;
+        }
+        
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        body {
+            font-family: "Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+        
+        .serif {
+            font-family: "Noto Serif SC", Georgia, serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .link-hover {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .link-hover::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-primary);
+            transition: width 0.3s ease;
+        }
+        
+        .link-hover:hover::after {
+            width: 100%;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--accent-secondary) 0%, transparent 70%);
+            opacity: 0.1;
+            animation: rotate 30s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .theme-toggle {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            transform: rotate(360deg);
+        }
+        
+        .mermaid {
+            background-color: var(--bg-tertiary);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin: 2rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem !important;
+            }
+            
+            .section-padding {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-opacity-90 backdrop-blur-lg z-50 shadow-lg" style="background-color: var(--bg-secondary);">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-balance-scale text-2xl" style="color: var(--accent-primary);"></i>
+                <span class="text-xl font-bold">IPO穿透核查</span>
+            </div>
+            <div class="flex items-center space-x-6">
+                <a href="#regulations" class="link-hover" style="color: var(--text-secondary);">核心法规</a>
+                <a href="#key-points" class="link-hover" style="color: var(--text-secondary);">核查重点</a>
+                <a href="#requirements" class="link-hover" style="color: var(--text-secondary);">中介要求</a>
+                <a href="#special-cases" class="link-hover" style="color: var(--text-secondary);">特殊情形</a>
+                <button id="theme-toggle" class="theme-toggle p-2 rounded-full" style="background-color: var(--bg-tertiary);">
+                    <i class="fas fa-moon" style="color: var(--text-primary);"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center justify-center relative pt-16">
+        <div class="container mx-auto px-4 text-center z-10">
+            <h1 class="hero-title text-6xl md:text-7xl font-bold mb-6">
+                <span class="gradient-text">IPO股东穿透核查</span>
+            </h1>
+            <p class="text-2xl mb-8" style="color: var(--text-secondary);">全面掌握监管要求，精准执行核查程序</p>
+            <div class="flex justify-center space-x-4 mb-12">
+                <button class="px-8 py-3 rounded-full font-semibold transition-all hover:scale-105" style="background-color: var(--accent-primary); color: white;">
+                    <i class="fas fa-book-reader mr-2"></i>开始阅读
+                </button>
+                <button class="px-8 py-3 rounded-full font-semibold border transition-all hover:scale-105" style="border-color: var(--accent-primary); color: var(--accent-primary);">
+                    <i class="fas fa-download mr-2"></i>下载指南
+                </button>
+            </div>
+            <div class="scroll-indicator">
+                <i class="fas fa-chevron-down text-3xl" style="color: var(--text-secondary);"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Regulations Section -->
+    <section id="regulations" class="section-padding py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-12 text-center serif">
+                <i class="fas fa-gavel mr-3" style="color: var(--accent-primary);"></i>核心法规依据
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card-hover p-8 rounded-2xl" style="background-color: var(--bg-secondary);">
+                    <div class="mb-6">
+                        <i class="fas fa-file-contract text-4xl" style="color: var(--accent-primary);"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">监管规则适用指引</h3>
+                    <p class="mb-4" style="color: var(--text-secondary);">《监管规则适用指引—关于申请首发上市企业股东信息披露》</p>
+                    <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
+                        <li><i class="fas fa-check-circle mr-2" style="color: var(--accent-tertiary);"></i>穿透核查至最终持有人</li>
+                        <li><i class="fas fa-check-circle mr-2" style="color: var(--accent-tertiary);"></i>突击入股锁定36个月</li>
+                        <li><i class="fas fa-check-circle mr-2" style="color: var(--accent-tertiary);"></i>外资股东特殊要求</li>
+                    </ul>
+                </div>
+                
+                <div class="card-hover p-8 rounded-2xl" style="background-color: var(--bg-secondary);">
+                    <div class="mb-6">
+                        <i class="fas fa-user-shield text-4xl" style="color: var(--accent-secondary);"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">发行类第2号指引</h3>
+                    <p class="mb-4" style="color: var(--text-secondary);">《监管规则适用指引——发行类第2号》</p>
+                    <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
+                        <li><i class="fas fa-check-circle mr-2" style="color: var(--accent-tertiary);"></i>离职人员穿透核查</li>
+                        <li><i class="fas fa-check-circle mr-2" style="color: var(--accent-tertiary);"></i>取消0.01%豁免标准</li>
+                        <li><i class="fas fa-check-circle mr-2" style="color: var(--accent-tertiary);"></i>专用系统信息比对</li>
+                    </ul>
+                </div>
+                
+                <div class="card-hover p-8 rounded-2xl" style="background-color: var(--bg-secondary);">
+                    <div class="mb-6">
+                        <i class="fas fa-chart-line text-4xl" style="color: var(--accent-tertiary);"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">交易所规范通知</h3>
+                    <p class="mb-4" style="color: var(--text-secondary);">《关于进一步规范股东穿透核查的通知》</p>
+                    <ul class="space-y-2 text-sm" style="color: var(--text-secondary);">
+                        <li><i class="fas fa-check-circle mr-2" style="color: var(--accent-tertiary);"></i>量化豁免标准</li>
+                        <li><i class="fas fa-check-circle mr-2" style="color: var(--accent-tertiary);"></i>持股10万股豁免</li>
+                        <li><i class="fas fa-check-circle mr-2" style="color: var(--accent-tertiary);"></i>比例低于0.01%豁免</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Visualization -->
+    <section class="py-20" style="background-color: var(--bg-secondary);">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-12 text-center serif">
+                <i class="fas fa-project-diagram mr-3" style="color: var(--accent-primary);"></i>核查流程关系图
+            </h2>
+            
+            <div class="mermaid">
+                <pre class="mermaid">
+graph TD
+    A[申请IPO] --> B[股东信息披露]
+    B --> C{股权架构是否>2层?}
+    C -->|是| D[无实际经营业务?]
+    C -->|否| K[常规披露]
+    D -->|是| E[入股价格异常?]
+    D -->|否| K
+    E -->|是| F[穿透核查至最终持有人]
+    E -->|否| K
+    F --> G[最终持有人分类]
+    G --> H1[自然人]
+    G --> H2[上市公司/新三板]
+    G --> H3[国有主体]
+    G --> H4[公益基金]
+    G --> H5[外资股东]
+    H5 --> I1[论证无境内主体]
+    H5 --> I2[入股价格无异常]
+    B --> L[申报前12个月新增股东?]
+    L -->|是| M[锁定36个月]
+                    </pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Points Section -->
+    <section id="key-points" class="section-padding py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-12 text-center serif">
+                <i class="fas fa-bullseye mr-3" style="color: var(--accent-primary);"></i>核查重点内容
+            </h2>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full rounded-xl overflow-hidden" style="background-color: var(--bg-secondary);">
+                    <thead>
+                        <tr style="background-color: var(--bg-tertiary);">
+                            <th class="px-8 py-4 text-left">核查事项</th>
+                            <th class="px-8 py-4 text-left">具体要求</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-t" style="border-color: var(--border-color);">
+                            <td class="px-8 py-6 font-semibold">
+                                <i class="fas fa-user-check mr-2" style="color: var(--accent-primary);"></i>股东适格性
+                            </td>
+                            <td class="px-8 py-6" style="color: var(--text-secondary);">
+                                禁止公务员、党政机关等持股；私募基金需完成备案；清理股权代持
+                            </td>
+                        </tr>
+                        <tr class="border-t" style="border-color: var(--border-color);">
+                            <td class="px-8 py-6 font-semibold">
+                                <i class="fas fa-dollar-sign mr-2" style="color: var(--accent-secondary);"></i>入股价格异常
+                            </td>
+                            <td class="px-8 py-6" style="color: var(--text-secondary);">
+                                与同期其他投资者价格差异过大需重点核查，说明是否存在利益输送
+                            </td>
+                        </tr>
+                        <tr class="border-t" style="border-color: var(--border-color);">
+                            <td class="px-8 py-6 font-semibold">
+                                <i class="fas fa-globe-asia mr-2" style="color: var(--accent-tertiary);"></i>外资股东核查
+                            </td>
+                            <td class="px-8 py-6" style="color: var(--text-secondary);">
+                                无法穿透的，需由直接股东承诺无境内主体，并提供入股合理性证据
+                            </td>
+                        </tr>
+                        <tr class="border-t" style="border-color: var(--border-color);">
+                            <td class="px-8 py-6 font-semibold">
+                                <i class="fas fa-users mr-2" style="color: var(--accent-primary);"></i>"三类股东"披露
+                            </td>
+                            <td class="px-8 py-6" style="color: var(--text-secondary);">
+                                需明确非控股股东，依法备案，符合锁定期/减持规则
+                            </td>
+                        </tr>
+                        <tr class="border-t" style="border-color: var(--border-color);">
+                            <td class="px-8 py-6 font-semibold">
+                                <i class="fas fa-money-check-alt mr-2" style="color: var(--accent-secondary);"></i>资金流水核查
+                            </td>
+                            <td class="px-8 py-6" style="color: var(--text-secondary);">
+                                对董监高、主要股东核查银行流水，验证资金来源合法性
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intermediary Requirements Section -->
+    <section id="requirements" class="py-20" style="background-color: var(--bg-secondary);">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-12 text-center serif">
+                <i class="fas fa-clipboard-check mr-3" style="color: var(--accent-primary);"></i>中介机构核查要求
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-8 rounded-2xl" style="background-color: var(--bg-primary);">
+                    <h3 class="text-2xl font-bold mb-6">
+                        <i class="fas fa-search-plus mr-3" style="color: var(--accent-secondary);"></i>穿透原则
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right mt-1 mr-3" style="color: var(--accent-tertiary);"></i>
+                            <div>
+                                <strong>实质重于形式</strong>
+                                <p class="text-sm mt-1" style="color: var(--text-secondary);">穿透核查应关注实际控制关系和利益关系</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right mt-1 mr-3" style="color: var(--accent-tertiary);"></i>
+                            <div>
+                                <strong>重要性原则</strong>
+                                <p class="text-sm mt-1" style="color: var(--text-secondary);">避免免责式核查，聚焦重要股东和异常情况</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right mt-1 mr-3" style="color: var(--accent-tertiary);"></i>
+                            <div>
+                                <strong>合理推断</strong>
+                                <p class="text-sm mt-1" style="color: var(--text-secondary);">对无法取得联系的自然人，可通过公开渠道检索并要求间接股东出具承诺函</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="p-8 rounded-2xl" style="background-color: var(--bg-primary);">
+                    <h3 class="text-2xl font-bold mb-6">
+                        <i class="fas fa-file-alt mr-3" style="color: var(--accent-primary);"></i>文件与责任
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-folder-open mt-1 mr-3" style="color: var(--accent-tertiary);"></i>
+                            <div>
+                                <strong>专项核查报告</strong>
+                                <p class="text-sm mt-1" style="color: var(--text-secondary);">保荐人/律师需提交《股东信息披露专项核查报告》</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-paperclip mt-1 mr-3" style="color: var(--accent-tertiary);"></i>
+                            <div>
+                                <strong>证据链完整</strong>
+                                <p class="text-sm mt-1" style="color: var(--text-secondary);">包含入股协议、交易对价、资金来源等完整证据</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-balance-scale mr-3" style="color: var(--accent-tertiary);"></i>
+                            <div>
+                                <strong>责任边界</strong>
+                                <p class="text-sm mt-1" style="color: var(--text-secondary);">穷尽手段仍无法穿透的，需说明原因并评估影响</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Cases Section -->
+    <section id="special-cases" class="section-padding py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-12 text-center serif">
+                <i class="fas fa-star mr-3" style="color: var(--accent-primary);"></i>特殊情形处理
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card-hover p-8 rounded-2xl relative overflow-hidden" style="background-color: var(--bg-secondary);">
+                    <div class="absolute top-0 right-0 w-32 h-32 opacity-10">
+                        <i class="fas fa-user-friends text-8xl float-right" style="color: var(--accent-secondary);"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 relative z-10">员工持股计划</h3>
+                    <p class="mb-4" style="color: var(--text-secondary);">依法实施的员工持股计划不计算200人股东限制</p>
+                    <div class="flex items-center space-x-2 text-sm" style="color: var(--accent-tertiary);">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>需提供员工持股计划实施方案、持股人名册及证明文件</span>
+                    </div>
+                </div>
+                
+                <div class="card-hover p-8 rounded-2xl relative overflow-hidden" style="background-color: var(--bg-secondary);">
+                    <div class="absolute top-0 right-0 w-32 h-32 opacity-10">
+                        <i class="fas fa-exchange-alt text-8xl float-right" style="color: var(--accent-primary);"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 relative z-10">历史沿革代持</h3>
+                    <p class="mb-4" style="color: var(--text-secondary);">申报前必须彻底清理，披露形成/解除过程及纠纷情况</p>
+                    <div class="flex items-center space-x-2 text-sm" style="color: var(--accent-tertiary);">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>重点核查代持原因、背景及解除过程的合法性</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Further Reading Section -->
+    <section class="py-20" style="background-color: var(--bg-secondary);">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-12 text-center serif">
+                <i class="fas fa-book-open mr-3" style="color: var(--accent-primary);"></i>延伸阅读
+            </h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+                <div class="card-hover p-6 rounded-xl" style="background-color: var(--bg-primary);">
+                    <div class="mb-4">
+                        <i class="fas fa-landmark text-3xl" style="color: var(--accent-primary);"></i>
+                    </div>
+                    <h4 class="font-bold mb-2">证券法精解</h4>
+                    <p class="text-sm" style="color: var(--text-secondary);">全面解析中国证券法最新修订内容</p>
+                </div>
+                
+                <div class="card-hover p-6 rounded-xl" style="background-color: var(--bg-primary);">
+                    <div class="mb-4">
+                        <i class="fas fa-briefcase text-3xl" style="color: var(--accent-secondary);"></i>
+                    </div>
+                    <h4 class="font-bold mb-2">IPO审核要点</h4>
+                    <p class="text-sm" style="color: var(--text-secondary);">证监会最新审核标准与实务操作</p>
+                </div>
+                
+                <div class="card-hover p-6 rounded-xl" style="background-color: var(--bg-primary);">
+                    <div class="mb-4">
+                        <i class="fas fa-chart-pie text-3xl" style="color: var(--accent-tertiary);"></i>
+                    </div>
+                    <h4 class="font-bold mb-2">股权结构设计</h4>
+                    <p class="text-sm" style="color: var(--text-secondary);">企业上市前股权架构优化策略</p>
+                </div>
+                
+                <div class="card-hover p-6 rounded-xl" style="background-color: var(--bg-primary);">
+                    <div class="mb-4">
+                        <i class="fas fa-shield-alt text-3xl" style="color: var(--accent-primary);"></i>
+                    </div>
+                    <h4 class="font-bold mb-2">合规风险管理</h4>
+                    <p class="text-sm" style="color: var(--text-secondary);">IPO过程中的法律风险防控要点</p>
+                </div>
+                
+                <div class="card-hover p-6 rounded-xl" style="background-color: var(--bg-primary);">
+                    <div class="mb-4">
+                        <i class="fas fa-file-invoice-dollar text-3xl" style="color: var(--accent-secondary);"></i>
+                    </div>
+                    <h4 class="font-bold mb-2">资本运作实务</h4>
+                    <p class="text-sm" style="color: var(--text-secondary);">上市前融资与股东权益管理</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 text-center" style="background-color: var(--bg-tertiary);">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="text-2xl hover:scale-110 transition-transform">
+                    <i class="fab fa-weixin" style="color: var(--accent-primary);"></i>
+                </a>
+                <a href="#" class="text-2xl hover:scale-110 transition-transform">
+                    <i class="fab fa-weibo" style="color: var(--accent-secondary);"></i>
+                </a>
+                <a href="#" class="text-2xl hover:scale-110 transition-transform">
+                    <i class="fas fa-envelope" style="color: var(--accent-tertiary);"></i>
+                </a>
+            </div>
+            <p class="text-sm" style="color: var(--text-secondary);">
+                © 2024 IPO股东穿透核查指南. 专业、权威、及时.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#3b82f6',
+                primaryTextColor: '#e0e0e0',
+                primaryBorderColor: '#2563eb',
+                lineColor: '#666',
+                secondaryColor: '#1f2937',
+                tertiaryColor: '#111827'
+            }
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        // Check system preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+            html.classList.add('light-mode');
+            themeToggle.innerHTML = '<i class="fas fa-sun" style="color: var(--text-primary);"></i>';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('light-mode');
+            const isLight = html.classList.contains('light-mode');
+            themeToggle.innerHTML = isLight ? 
+                '<i class="fas fa-sun" style="color: var(--text-primary);"></i>' : 
+                '<i class="fas fa-moon" style="color: var(--text-primary);"></i>';
+            
+            // Update Mermaid theme
+            mermaid.initialize({ 
+                startOnLoad: false,
+                theme: isLight ? 'default' : 'dark'
+            });
+            location.reload();
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            } else {
+                nav.style.boxShadow = '';
+            }
+        });
+    </script>
+</body>
+</html>
+```
