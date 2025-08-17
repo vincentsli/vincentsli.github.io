@@ -1,0 +1,564 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板IPO股权激励最晚授予时点指南</title>
+    <meta name="description" content="深度解析科创板拟上市公司通过持股平台授予限制性股票的最晚时点及相关监管依据">
+    
+    <!-- 外部资源 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.css">
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --accent: #0ea5e9;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --border: #334155;
+            --mermaid-bg: #1e293b;
+            --mermaid-text: #f8fafc;
+        }
+        
+        [data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f1f5f9;
+            --accent: #0ea5e9;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --border: #e2e8f0;
+            --mermaid-bg: #ffffff;
+            --mermaid-text: #1e293b;
+        }
+        
+        * {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Tahoma, Arial, Roboto, "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+        }
+        
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            transition: all 0.3s ease;
+        }
+        
+        .glass-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            box-shadow: 0 8px 32px rgba(14, 165, 233, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 24px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 3px solid var(--bg-primary);
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -1px;
+            top: 36px;
+            width: 2px;
+            height: calc(100% - 24px);
+            background: linear-gradient(to bottom, var(--accent), transparent);
+        }
+        
+        .citation {
+            color: var(--accent);
+            cursor: pointer;
+            text-decoration: underline dashed var(--accent);
+            text-underline-offset: 3px;
+        }
+        
+        /* Mermaid 主题适配 */
+        .mermaid-container {
+            background: var(--mermaid-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+        }
+        
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+            font-family: inherit;
+        }
+        
+        .mermaid g.node text,
+        .mermaid text {
+            fill: var(--mermaid-text) !important;
+            font-family: inherit !important;
+        }
+        
+        .mermaid .edgeLabel {
+            background-color: var(--bg-secondary) !important;
+            border-radius: 6px;
+            padding: 4px 8px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .mermaid-container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <nav class="fixed top-0 w-full z-50 glass-card bg-opacity-80">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-chart-line text-2xl gradient-text"></i>
+                <h1 class="text-lg font-semibold">科创板股权激励指南</h1>
+            </div>
+            <button id="theme-toggle" class="p-2 rounded-lg glass-card hover:bg-opacity-50 transition-all">
+                <i class="fas fa-moon dark:hidden"></i>
+                <i class="fas fa-sun hidden dark:block"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-6 pt-20 pb-16">
+        <!-- Hero 区域 -->
+        <section class="text-center py-16">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                <span class="gradient-text italic block">科创板股权激励</span>
+                <span class="block mt-2">最后授予时点解密</span>
+            </h1>
+            <p class="text-xl text-gray-500 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                深度解析限制性股票授予的最晚时间点与监管依据，为科创板IPO企业提供战略性合规指引
+            </p>
+        </section>
+
+        <!-- 核心结论模块 -->
+        <section class="mb-16">
+            <div class="glass-card rounded-2xl p-8 md:p-12">
+                <div class="flex items-center mb-6">
+                    <div class="w-3 h-3 bg-red-500 rounded-full mr-3 animate-pulse"></div>
+                    <h2 class="text-2xl font-bold">核心结论</h2>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-red-500 pl-6">
+                            <h3 class="text-lg font-semibold mb-2 text-red-400">绝对禁止时点</h3>
+                            <p class="text-gray-300 dark:text-gray-400">
+                                自<strong class="text-white">正式提交上市申请之日起</strong>，严格禁止新增任何股权激励计划或授予行为
+                            </p>
+                        </div>
+                        
+                        <div class="border-l-4 border-yellow-500 pl-6">
+                            <h3 class="text-lg font-semibold mb-2 text-yellow-400">审慎操作区间</h3>
+                            <p class="text-gray-300 dark:text-gray-400">
+                                <strong class="text-white">申报基准日后至提交申请前</strong>可新增授授予，但需充分披露定价依据并补提费用
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-green-500 pl-6">
+                            <h3 class="text-lg font-semibold mb-2 text-green-400">理想操作时点</h3>
+                            <p class="text-gray-300 dark:text-gray-400">
+                                强烈推荐在<strong class="text-white">申报基准日前</strong>完成所有授予，规避审核风险
+                            </p>
+                        </div>
+                        
+                        <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+                            <i class="fas fa-exclamation-triangle text-red-500 mr-2"></i>
+                            <span class="text-sm font-semibold">风险提示：违规新增可能导致发行中止</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 可视化时间轴 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 flex items-center">
+                <i class="fas fa-timeline mr-3 gradient-text"></i>
+                关键时序解析图
+            </h2>
+            <div class="mermaid-container">
+                <div class="mermaid">
+                    timeline
+                        title 科创板股权激励时间节点
+                        section 理想情况
+                            申报基准日 : 完成授予 : 审计报告完整
+                        section 可接受情况
+                            基准日后 : 提交申请前 : 补充披露
+                            财务数据更新 : 股份支付计提 : 控制权稳定
+                        section 禁止情况
+                            提交申请后 : ❌新增激励 : ❌任何变动
+                </div>
+            </div>
+        </section>
+
+        <!-- 监管依据模块 -->
+        <section class="grid lg:grid-cols-3 gap-8 mb-16">
+            <div class="lg:col-span-2">
+                <h2 class="text-3xl font-bold mb-8 flex items-center">
+                    <i class="fas fa-gavel mr-3 gradient-text"></i>
+                    核心监管依据
+                </h2>
+                
+                <div class="space-y-6">
+                    <div class="glass-card rounded-xl p-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-sm font-bold">
+                                1
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold mb-2">审核期间稳定性要求</h3>
+                                <p class="text-gray-300 dark:text-gray-400 leading-relaxed">
+                                    《上海证券交易所科创板股票发行上市审核问答》明确规定：
+                                    <em class="block mt-2 bg-blue-500/10 p-3 rounded-lg border-l-4 border-blue-500">
+                                        "在审期间，发行人不应新增期权激励计划，相关激励对象不得行权。"
+                                        <span class="text-sm block mt-1">[- <a href="#" class="citation">上交所审核问答问题12</a>]</span>
+                                    </em>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-card rounded-xl p-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-sm font-bold">
+                                2
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold mb-2">股权结构稳定性</h3>
+                                <p class="text-gray-300 dark:text-gray-400 leading-relaxed">
+                                    《监管规则适用指引——发行类第5号》要求：
+                                    <em class="block mt-2 bg-purple-500/10 p-3 rounded-lg border-l-4 border-purple-500">
+                                        "发行人需保持股权清晰，在审期间原则上不得发生可能引致控制权变更的股权变动。"
+                                        <span class="text-sm block mt-1">[- <a href="#" class="citation">证监会发行类第5号指引</a>]</span>
+                                    </em>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-card rounded-xl p-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center text-sm font-bold">
+                                3
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold mb-2">财务数据完整性</h3>
+                                <p class="text-gray-300 dark:text-gray-400 leading-relaxed">
+                                    基于企业会计准则第11号的股份支付处理要求，授予日确定需确保费用完整计入审计报告，避免申报后重大财务数据调整。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="glass-card rounded-xl p-6 sticky top-24">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center">
+                        <i class="fas fa-lightbulb mr-2 text-yellow-400"></i>
+                        实务提醒
+                    </h3>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-400 mt-1.5 mr-2 text-xs"></i>
+                            <span>优先在基准日前完成，确保审计数据完整性</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-400 mt-1.5 mr-2 text-xs"></i>
+                            <span>基准日后操作需专业律师出具合规意见</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-400 mt-1.5 mr-2 text-xs"></i>
+                            <span>申报材料需增加"特殊事项说明"章节</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-400 mt-1.5 mr-2 text-xs"></i>
+                            <span>定价合理性论证不得低于净资产50%</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 典型案例 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 flex items-center">
+                <i class="fas fa-balance-scale mr-3 gradient-text"></i>
+                权威案例参考
+            </h2>
+            
+            <div class="space-y-6">
+                <div class="glass-card rounded-xl p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-semibold">杰普特 (688025)</h3>
+                        <span class="text-sm bg-blue-500/20 px-3 py-1 rounded-full">
+                            已科创板上市
+                        </span>
+                    </div>
+                    <p class="text-gray-300 dark:text-gray-400 mb-3">
+                        在第二轮监管问询中被要求说明：申报基准日后新增股权激励的合理性和定价依据，以及是否充分计提股份支付费用。 
+                        <a href="#" class="citation">[来源材料：IPO股权激励审核要点]</a>
+                    </p>
+                    <div class="text-sm text-blue-400">
+                        <i class="fas fa-info-circle mr-1"></i>
+                        该案例明确显示授予行为发生在申报前，基准日后操作需接受严格问询
+                    </div>
+                </div>
+                
+                <div class="glass-card rounded-xl p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-semibold">天兵科技 申报流程示意</h3>
+                        <span class="text-sm bg-green-500/20 px-3 py-1 rounded-full">
+                            知识库文档
+                        </span>
+                    </div>
+                    <p class="text-gray-300 dark:text-gray-400">
+                        在IPO整体流程节点图中明确标注：股权激励需在"提交IPO申请前"完成，与监管要求完全一致。
+                        <a href="#" class="citation">[来源材料：天兵科技整体流程]</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 操作建议模块 -->
+        <section>
+            <h2 class="text-3xl font-bold mb-8 flex items-center">
+                <i class="fas fa-road mr-3 gradient-text"></i>
+                实战操作路线图
+            </h2>
+            
+            <div class="glass-card rounded-xl p-8">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-green-400">理想路径（推荐）</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-xs flex-shrink-0 mt-1">
+                                    1
+                                </div>
+                                <div>
+                                    <p class="font-medium">确定激励方案</p>
+                                    <p class="text-sm text-gray-400">董事会决议、定价依据论证</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-xs flex-shrink-0 mt-1">
+                                    2
+                                </div>
+                                <div>
+                                    <p class="font-medium">申报基准日前完成</p>
+                                    <p class="text-sm text-gray-400">协议签署、出资到位、工商变更</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-xs flex-shrink-0 mt-1">
+                                    3
+                                </div>
+                                <div>
+                                    <p class="font-medium">标准申报流程</p>
+                                    <p class="text-sm text-gray-400">无额外披露义务，审核周期最短</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-yellow-400">应急路径（审慎）</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center text-white text-xs flex-shrink-0 mt-1">
+                                    1
+                                </div>
+                                <div>
+                                    <p class="font-medium">申报基准日后决策</p>
+                                    <p class="text-sm text-gray-400">需充分评估风险</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center text-white text-xs flex-shrink-0 mt-1">
+                                    2
+                                </div>
+                                <div>
+                                    <p class="font-medium">提交申请前完成</p>
+                                    <p class="text-sm text-gray-400">律师意见、补充审计、费用计算</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center text-white text-xs flex-shrink-0 mt-1">
+                                    3
+                                </div>
+                                <div>
+                                    <p class="font-medium">增加特殊披露</p>
+                                    <p class="text-sm text-gray-400">可能被问询、延长审核周期</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-8 p-6 bg-blue-500/10 rounded-lg border border-blue-500/20">
+                    <div class="flex items-start">
+                        <i class="fas fa-shield-alt text-blue-500 mr-3 mt-1"></i>
+                        <div>
+                            <h4 class="font-semibold mb-2">风险提示</h4>
+                            <p class="text-sm text-gray-300 dark:text-gray-400">
+                                违规在审核期间新增股权激励将直接触发中止审核程序，建议投资者严格遵循以上时间表，必要时咨询专业IPO律师。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-gray-700 dark:border-gray-200/10 py-8">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <p class="text-gray-400 text-sm">
+                本指南仅供参考，最终解释权归监管机构所有。建议咨询专业法律顾问。
+            </p>
+        </div>
+    </footer>
+
+    <!-- Mermaid 初始化 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                // 深色主题
+                primaryColor: '#1e293b',
+                primaryTextColor: '#f8fafc',
+                primaryBorderColor: '#0ea5e9',
+                lineColor: '#475569',
+                secondaryColor: '#334155',
+                tertiaryColor: '#0f172a',
+                background: '#1e293b',
+                mainBkg: '#1e293b',
+                secondaryBkg: '#334155',
+                tertiaryBkg: '#475569'
+            },
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            },
+            timeline: {
+                padding: 20
+            }
+        });
+    </script>
+
+    <!-- JavaScript -->
+    <script>
+        // 主题切换
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+
+        // 初始化主题
+        if (localStorage.theme === 'dark' || 
+            (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.setAttribute('data-theme', 'dark');
+        } else {
+            html.setAttribute('data-theme', 'light');
+            themeToggle.querySelector('i').className = 'fas fa-moon';
+        }
+
+        // 主题切换处理
+        themeToggle.addEventListener('click', () => {
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+                themeToggle.querySelector('i').className = 'fas fa-moon';
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                themeToggle.querySelector('i').className = 'fas fa-sun';
+            }
+            
+            // 重新渲染图表以适应新主题
+            setTimeout(() => mermaid.init(), 300);
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // 引用链接点击反馈
+        document.querySelectorAll('.citation').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                // 这里可以添加实际的引用跳转逻辑
+                const tooltip = document.createElement('div');
+                tooltip.className = 'fixed top-20 right-6 bg-blue-500 text-white px-4 py-2 rounded-lg text-sm';
+                tooltip.textContent = '引用链接 - 实际应用时跳转到相关文档';
+                document.body.appendChild(tooltip);
+                
+                setTimeout(() => {
+                    tooltip.remove();
+                }, 2000);
+            });
+        });
+
+        // 滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // 应用观察
+        document.querySelectorAll('.glass-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
+```
