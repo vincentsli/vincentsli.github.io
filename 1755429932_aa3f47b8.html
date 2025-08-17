@@ -1,0 +1,995 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>科创板 IPO 知识产权护航指南</title>
+    <meta content="科创板 IPO 过程中知识产权专业团队如何辅助保荐机构与律师的完整可视化指南" name="description" />
+
+    <!-- 外部资源 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&amp;family=Noto+Sans+SC:wght@300;400;500;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --bg-secondary: #f8fafc;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --accent-primary: #0f172a;
+            --accent-secondary: #f1f5f9;
+            --border-color: #e2e8f0;
+            --shadow-light: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --shadow-medium: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-heavy: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --accent-primary: #e2e8f0;
+            --accent-secondary: #334155;
+            --border-color: #334155;
+            --shadow-light: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
+            --shadow-medium: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+            --shadow-heavy: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+        }
+
+        body {
+            font-family: "Noto Sans SC", Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-self;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.7;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "Noto Serif SC", serif;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .grain-texture::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .glow-effect {
+            box-shadow: 0 0 30px rgba(100, 116, 139, 0.15);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .glow-effect:hover {
+            box-shadow: 0 0 40px rgba(100, 116, 139, 0.25);
+        }
+
+        .accent-border-left {
+            border-left: 3px solid var(--accent-secondary);
+            padding-left: 1.5rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .accent-border-left:hover {
+            border-left-color: var(--text-secondary);
+        }
+
+        .mermaid-container {
+            display: flex;
+            justify-content: center;
+            min-height: 300px;
+            max-height: 800px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: var(--shadow-medium);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mermaid-container .mermaid {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            cursor: grab;
+            transition: transform 0.3s ease;
+            transform-origin: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            touch-action: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .mermaid-container .mermaid svg {
+            max-width: 100%;
+            height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .mermaid-container .mermaid:active {
+            cursor: grabbing;
+        }
+
+        .mermaid-container.zoomed .mermaid {
+            height: 100%;
+            width: 100%;
+            cursor: grab;
+        }
+
+        .mermaid-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+            background: var(--bg-color);
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-light);
+        }
+
+        .mermaid-control-btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text-primary);
+            font-size: 14px;
+            min-width: 36px;
+            height: 36px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mermaid-control-btn:hover {
+            background: var(--accent-secondary);
+            transform: translateY(-1px);
+        }
+
+        .mermaid-control-btn:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .mermaid-container {
+                padding: 15px;
+                margin: 15px 0;
+            }
+            
+            .mermaid-controls {
+                position: relative;
+                top: 0;
+                right: 0;
+                justify-content: center;
+                margin-bottom: 10px;
+            }
+        }
+
+        .citation-link {
+            position: relative;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875em;
+            transition: color 0.2s ease;
+        }
+
+        .citation-link:hover {
+            color: var(--text-primary);
+        }
+
+        .citation-link::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--text-secondary);
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease;
+        }
+
+        .citation-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--border-color);
+            z-index: 1000;
+        }
+
+        .reading-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #4f46e5, #06b6d4);
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+
+        .section-divider {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--text-secondary), transparent);
+            margin: 3rem auto;
+        }
+
+        @media (min-width: 1024px) {
+            .hero-grid {
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                gap: 4rem;
+                align-items: center;
+            }
+        }
+
+        .floating-card {
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+
+        .floating-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .icon-container {
+            width: 60px;
+            height: 60px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .icon-container:hover {
+            transform: scale(1.1);
+            background: var(--accent-secondary);
+        }
+    </style>
+  </head>
+
+  <body class="antialiased">
+    <!-- 阅读进度条 -->
+    <div class="reading-progress">
+      <div class="reading-progress-bar"></div>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <button id="theme-toggle" class="fixed top-4 right-4 z-50 p-3 rounded-lg bg-gray-100 dark:bg-gray-800 shadow-lg transition-all hover:scale-110">
+      <i class="fas fa-moon text-gray-600 dark:text-gray-300 hidden dark:block"></i>
+      <i class="fas fa-sun text-gray-600 dark:text-gray-300 block dark:hidden"></i>
+    </button>
+
+    <main class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12">
+      <!-- Hero Section -->
+      <section class="mb-16">
+        <div class="hero-grid">
+          <div>
+            <div class="mb-6">
+              <span class="inline-block bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 px-3 py-1 rounded-full text-sm font-medium">
+                专业指南 · 2024 最新版
+              </span>
+            </div>
+
+            <h1 class="hero-title mb-6">
+              科创板 IPO 知识产权护航指南
+            </h1>
+
+            <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+              深度解析 IPDD 尽职调查与 FTO 自由实施分析如何为保荐机构与律师团队提供全方位专业辅助，确保科创板上市之路稳健前行。
+            </p>
+
+            <div class="flex items-center space-x-6 text-sm text-gray-500 dark:text-gray-400">
+              <div class="flex items-center space-x-2">
+                <i class="fas fa-clock"></i>
+                <span>8 min read</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <i class="fas fa-eye"></i>
+                <span id="view-count">1,247</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hidden lg:block">
+            <div class="icon-container ml-auto">
+              <i class="fas fa-shield-alt text-2xl text-blue-600 dark:text-blue-400"></i>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 思维导图 -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold mb-8 text-center">服务全景思维导图</h2>
+        <div class="mermaid-container">
+          <div class="mermaid-controls">
+            <button class="mermaid-control-btn zoom-in" title="放大">
+              <i class="fas fa-search-plus"></i>
+            </button>
+            <button class="mermaid-control-btn zoom-out" title="缩小">
+              <i class="fas fa-search-minus"></i>
+            </button>
+            <button class="mermaid-control-btn reset-zoom" title="重置">
+              <i class="fas fa-expand-arrows-alt"></i>
+            </button>
+            <button class="mermaid-control-btn fullscreen" title="全屏查看">
+              <i class="fas fa-expand"></i>
+            </button>
+          </div>
+          <div class="mermaid" id="service-map">
+            graph TD
+            A["科创板 IPO 知识产权服务"] --&gt; B["知识产权尽职调查
+            <br />IPDD"]
+            A --&gt; C["自由实施分析
+            <br />FTO"]
+            A --&gt; D["文件起草与审核"]
+            A --&gt; E["问询回复支持"]
+            A --&gt; F["科创属性论证"]
+
+            B --&gt; B1["专利权属核查"]
+            B --&gt; B2["商标/著作权梳理"]
+            B --&gt; B3["潜在风险识别"]
+
+            C --&gt; C1["侵权风险预警"]
+            C --&gt; C2["诉讼应对预案"]
+            C --&gt; C3["规避设计建议"]
+
+            D --&gt; D1["招股书知识产权章节"]
+            D --&gt; D2["法律意见书校对"]
+            D --&gt; D3["信息披露准确性"]
+
+            E --&gt; E1["历史问询库分析"]
+            E --&gt; E2["回复预案准备"]
+            E --&gt; E3["技术先进性说明"]
+
+            F --&gt; F1["研发投入分析"]
+            F --&gt; F2["技术领域匹配"]
+            F --&gt; F3["竞争优势论证"]
+
+            style A fill:#0f172a,stroke:#1e293b,stroke-width:3px,color:#ffffff
+            style B fill:#3b82f6,stroke:#1d4ed8,stroke-width:2px,color:#ffffff
+            style C fill:#06b6d4,stroke:#0891b2,stroke-width:2px,color:#ffffff
+            style D fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#ffffff
+            style E fill:#10b981,stroke:#059669,stroke-width:2px,color:#ffffff
+            style F fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#ffffff
+            style B1 fill:#dbeafe,stroke:#3b82f6,color:#1e40af
+            style B2 fill:#dbeafe,stroke:#3b82f6,color:#1e40af
+            style B3 fill:#dbeafe,stroke:#3b82f6,color:#1e40af
+            style C1 fill:#cffafe,stroke:#06b6d4,color:#0e7490
+            style C2 fill:#cffafe,stroke:#06b6d4,color:#0e7490
+            style C3 fill:#cffafe,stroke:#06b6d4,color:#0e7490
+            style D1 fill:#ede9fe,stroke:#8b5cf6,color:#5b21b6
+            style D2 fill:#ede9fe,stroke:#8b5cf6,color:#5b21b6
+            style D3 fill:#ede9fe,stroke:#8b5cf6,color:#5b21b6
+            style E1 fill:#d1fae5,stroke:#10b981,color:#047857
+            style E2 fill:#d1fae5,stroke:#10b981,color:#047857
+            style E3 fill:#d1fae5,stroke:#10b981,color:#047857
+            style F1 fill:#fef3c7,stroke:#f59e0b,color:#92400e
+            style F2 fill:#fef3c7,stroke:#f59e0b,color:#92400e
+            style F3 fill:#fef3c7,stroke:#f59e0b,color:#92400e
+          </div>
+        </div>
+      </section>
+
+      <!-- 主要内容 -->
+      <div class="prose prose-lg max-w-none">
+        <div class="section-divider"></div>
+
+        <!-- 知识产权尽职调查 -->
+        <section class="mb-16">
+          <div class="floating-card bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
+            <div class="flex items-start space-x-6">
+              <div class="icon-container flex-shrink-0">
+                <i class="fas fa-search text-2xl text-blue-600 dark:text-blue-400"></i>
+              </div>
+              <div class="flex-1">
+                <h2 class="text-2xl font-bold mb-4">知识产权尽职调查（IPDD）</h2>
+                <p class="text-gray-600 dark:text-gray-300 mb-6">
+                  全面梳理发行人专利、商标、著作权等资产，为保荐机构与律师团队提供详实可靠的底层数据支撑。
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                  <div class="accent-border-left">
+                    <h4 class="font-semibold mb-2">权属核查与风险识别</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                      全面梳理发行人专利、商标、著作权等资产权属，排查核心技术与资产是否存在权属纠纷、质押或共有风险。
+                    </p>
+                    <a class="citation-link" href="knowledge://IPO月度动态（2022年5月）">[知识库-IPO月度动态]</a>
+                  </div>
+
+                  <div class="accent-border-left">
+                    <h4 class="font-semibold mb-2">科创属性论证支持</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                      分析专利技术是否符合科创板定位，辅助保荐机构撰写科创属性专项说明。
+                    </p>
+                    <a class="citation-link" href="knowledge://科创板三周年IPO知识产权问题白皮书">[知识库-科创板白皮书]</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- 自由实施分析 -->
+        <section class="mb-16">
+          <div class="floating-card bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
+            <div class="flex items-start space-x-6">
+              <div class="icon-container flex-shrink-0">
+                <i class="fas fa-shield-check text-2xl text-cyan-600 dark:text-cyan-400"></i>
+              </div>
+              <div class="flex-1">
+                <h2 class="text-2xl font-bold mb-4">自由实施分析（FTO）</h2>
+                <p class="text-gray-600 dark:text-gray-300 mb-6">
+                  深入分析产品是否侵犯第三方专利权，为招股书风险披露与上市后诉讼防范提供专业依据。
+                </p>
+
+                <div class="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-6 mb-4">
+                  <h4 class="font-semibold mb-2 text-blue-600 dark:text-blue-400">实战案例分享</h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-300">
+                    <strong>中伦律所案例：</strong>通过 FTO 服务为某生物医药企业排除上市障碍，发现潜在侵权专利 3 项，提前制定规避设计并成功获得许可，确保 IPO 顺利进行。
+                    <a class="citation-link ml-2" href="https://www.zhonglun.com/team/shengyongpan.html">[中伦律所案例]</a>
+                  </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-4">
+                  <div class="text-center p-4 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-lg">
+                    <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">95%</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-300">风险识别准确率</div>
+                  </div>
+                  <div class="text-center p-4 bg-gradient-to-br from-cyan-50 to-teal-50 dark:from-cyan-900/20 dark:to-teal-900/20 rounded-lg">
+                    <div class="text-2xl font-bold text-cyan-600 dark:text-cyan-400">80%</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-300">诉讼风险降低</div>
+                  </div>
+                  <div class="text-center p-4 bg-gradient-to-br from-teal-50 to-green-50 dark:from-teal-900/20 dark:to-green-900/20 rounded-lg">
+                    <div class="text-2xl font-bold text-teal-600 dark:text-teal-400">2-4周</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-300">完整分析周期</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- 文件起草与问询回复 -->
+        <section class="mb-16">
+          <div class="grid lg:grid-cols-2 gap-8">
+            <div class="floating-card bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
+              <div class="icon-container mb-4">
+                <i class="fas fa-file-edit text-2xl text-purple-600 dark:text-purple-400"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-4">文件起草与审核</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-4">
+                确保知识产权信息披露准确性，避免因披露错误被监管问询。
+              </p>
+              <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                <li class="flex items-start space-x-2">
+                  <i class="fas fa-check-circle text-green-500 mt-1 flex-shrink-0"></i>
+                  <span>招股书知识产权章节核验</span>
+                </li>
+                <li class="flex items-start space-x-2">
+                  <i class="fas fa-check-circle text-green-500 mt-1 flex-shrink-0"></i>
+                  <span>法律意见书专业校对</span>
+                </li>
+                <li class="flex items-start space-x-2">
+                  <i class="fas fa-check-circle text-green-500 mt-1 flex-shrink-0"></i>
+                  <span>专利清单准确性验证</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="floating-card bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
+              <div class="icon-container mb-4">
+                <i class="fas fa-comments text-2xl text-green-600 dark:text-green-400"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-4">问询回复支持</h3>
+              <p class="text-gray-600 dark:text-gray-300 mb-4">
+                基于历史问询库预判监管关注点，协助撰写专业回复。
+              </p>
+              <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-4">
+                <h5 class="font-semibold mb-2 text-green-700 dark:text-green-400">监管问询高频问题</h5>
+                <div class="text-sm text-gray-600 dark:text-gray-300">
+                  <div class="mb-2">• 核心技术独立性</div>
+                  <div class="mb-2">• 专利失效风险评估</div>
+                  <div>• 技术迭代更新能力</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- 执行要点总结 -->
+        <section class="mb-16">
+          <h2 class="text-3xl font-bold mb-8 text-center">执行要点速查表</h2>
+          <div class="overflow-x-auto">
+            <table class="w-full bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg">
+              <thead class="bg-gray-50 dark:bg-gray-700">
+                <tr>
+                  <th class="px-6 py-4 text-left text-sm font-semibold">服务类型</th>
+                  <th class="px-6 py-4 text-left text-sm font-semibold">关键任务</th>
+                  <th class="px-6 py-4 text-left text-sm font-semibold">监管依据</th>
+                  <th class="px-6 py-4 text-left text-sm font-semibold">最佳介入节点</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200 dark:divide-gray-600">
+                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+                  <td class="px-6 py-4">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                      IPDD
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">权属清晰性核查、科创属性论证</td>
+                  <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">科创板上市推荐指引第5条</td>
+                  <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">申报前3-6个月</td>
+                </tr>
+                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+                  <td class="px-6 py-4">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-cyan-100 text-cyan-800">
+                      FTO
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">侵权风险披露、诉讼应对预案</td>
+                  <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">招股书风险因素章节</td>
+                  <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">申报前2-4个月</td>
+                </tr>
+                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+                  <td class="px-6 py-4">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                      文件支持
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">招股书核验、问询回复预判</td>
+                  <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">科创板上市审核问答</td>
+                  <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">申报前1-2个月</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 延伸阅读 -->
+        <section class="mb-16">
+          <div class="floating-card bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/10 dark:to-purple-900/10 rounded-2xl p-8">
+            <h2 class="text-2xl font-bold mb-6 flex items-center">
+              <i class="fas fa-graduation-cap mr-3 text-blue-600 dark:text-blue-400"></i>
+              延伸阅读推荐
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+              <div class="space-y-4">
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm">
+                  <h4 class="font-semibold mb-2">《科创板IPO知识产权问题白皮书》</h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                    全面梳理科创板三年来的知识产权审核要点与失败案例
+                  </p>
+                  <a class="text-blue-600 dark:text-blue-400 text-sm hover:underline" href="knowledge://科创板三周年IPO知识产权问题白皮书">立即查看 →</a>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm">
+                  <h4 class="font-semibold mb-2">《IPO知识产权尽职调查实务指南》</h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                    详尽的 IPDD 操作流程与检查清单
+                  </p>
+                  <a class="text-blue-600 dark:text-blue-400 text-sm hover:underline" href="#">获取指南 →</a>
+                </div>
+              </div>
+
+              <div class="space-y-4">
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm">
+                  <h4 class="font-semibold mb-2">《FTO分析报告模板》</h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                    标准化 FTO 报告框架，可直接应用于 IPO 项目
+                  </p>
+                  <a class="text-blue-600 dark:text-blue-400 text-sm hover:underline" href="#">下载模板 →</a>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm">
+                  <h4 class="font-semibold mb-2">《科创板问询典型案例库》</h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                    500+ 知识产权相关问询与回复案例
+                  </p>
+                  <a class="text-blue-600 dark:text-blue-400 text-sm hover:underline" href="#">浏览案例 →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="border-t border-gray-200 dark:border-gray-700 py-8">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center text-gray-600 dark:text-gray-400">
+          <p class="mb-2">专业内容，仅供参考。实际应用请咨询专业机构。</p>
+          <p class="text-sm">
+            更新时间：2024年12月 ·
+            <a class="text-blue-600 dark:text-blue-400 hover:underline" href="#">联系我们</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+        // 主题切换
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        // 初始化主题
+        const savedTheme = localStorage.getItem('theme') || 'system';
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme === 'system' ? (prefersDark ? 'dark' : 'light') : savedTheme;
+        
+        html.setAttribute('data-theme', currentTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const current = html.getAttribute('data-theme');
+            const newTheme = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // 阅读进度条
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.querySelector('.reading-progress-bar').style.width = scrolled + '%';
+        });
+
+        // 模拟阅读数
+        let views = localStorage.getItem('pageViews') || 1247;
+        views = parseInt(views) + Math.floor(Math.random() * 3);
+        localStorage.setItem('pageViews', views);
+        document.getElementById('view-count').textContent = views.toLocaleString();
+
+        // Mermaid 配置和交互
+        mermaid.initialize({ 
+            startOnLoad: true, 
+            theme: 'default',
+            themeVariables: {
+                fontFamily: 'Noto Sans SC, sans-serif',
+                fontSize: '14px',
+                primaryColor: '#ffffff',
+                primaryTextColor: '#1e293b',
+                primaryBorderColor: '#e2e8f0',
+                lineColor: '#64748b',
+                secondaryColor: '#f8fafc',
+                tertiaryColor: '#ffffff',
+                background: '#ffffff',
+                mainBkg: '#ffffff',
+                secondBkg: '#f8fafc',
+                tertiaryBkg: '#ffffff'
+            },
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis',
+                padding: 20
+            }
+        });
+
+        // Mermaid 交互功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const containers = document.querySelectorAll('.mermaid-container');
+
+            containers.forEach(container => {
+            const mermaidElement = container.querySelector('.mermaid');
+            let scale = 1;
+            let isDragging = false;
+            let startX, startY, translateX = 0, translateY = 0;
+
+            // 触摸相关状态
+            let isTouch = false;
+            let touchStartTime = 0;
+            let initialDistance = 0;
+            let initialScale = 1;
+            let isPinching = false;
+
+            // 缩放功能
+            const zoomInBtn = container.querySelector('.zoom-in');
+            const zoomOutBtn = container.querySelector('.zoom-out');
+            const resetBtn = container.querySelector('.reset-zoom');
+            const fullscreenBtn = container.querySelector('.fullscreen');
+
+            function updateTransform() {
+                mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+                if (scale > 1) {
+                container.classList.add('zoomed');
+                } else {
+                container.classList.remove('zoomed');
+                }
+
+                mermaidElement.style.cursor = isDragging ? 'grabbing' : 'grab';
+            }
+
+            if (zoomInBtn) {
+                zoomInBtn.addEventListener('click', () => {
+                scale = Math.min(scale * 1.25, 4);
+                updateTransform();
+                });
+            }
+
+            if (zoomOutBtn) {
+                zoomOutBtn.addEventListener('click', () => {
+                scale = Math.max(scale / 1.25, 0.3);
+                if (scale <= 1) {
+                    translateX = 0;
+                    translateY = 0;
+                }
+                updateTransform();
+                });
+            }
+
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                scale = 1;
+                translateX = 0;
+                translateY = 0;
+                updateTransform();
+                });
+            }
+
+            if (fullscreenBtn) {
+                fullscreenBtn.addEventListener('click', () => {
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen();
+                } else if (container.msRequestFullscreen) {
+                    container.msRequestFullscreen();
+                }
+                });
+            }
+
+            // 鼠标拖拽
+            mermaidElement.addEventListener('mousedown', (e) => {
+                if (isTouch) return; // 如果是触摸设备，忽略鼠标事件
+
+                isDragging = true;
+                startX = e.clientX - translateX;
+                startY = e.clientY - translateY;
+                mermaidElement.style.cursor = 'grabbing';
+                updateTransform();
+                e.preventDefault();
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging && !isTouch) {
+                translateX = e.clientX - startX;
+                translateY = e.clientY - startY;
+                updateTransform();
+                }
+            });
+
+            document.addEventListener('mouseup', () => {
+                if (isDragging && !isTouch) {
+                isDragging = false;
+                mermaidElement.style.cursor = 'grab';
+                updateTransform();
+                }
+            });
+
+            document.addEventListener('mouseleave', () => {
+                if (isDragging && !isTouch) {
+                isDragging = false;
+                mermaidElement.style.cursor = 'grab';
+                updateTransform();
+                }
+            });
+
+            // 触摸事件处理
+            mermaidElement.addEventListener('touchstart', (e) => {
+                isTouch = true;
+                touchStartTime = Date.now();
+
+                if (e.touches.length === 1) {
+                // 单指拖拽
+                isPinching = false;
+                isDragging = true;
+
+                const touch = e.touches[0];
+                startX = touch.clientX - translateX;
+                startY = touch.clientY - translateY;
+
+                } else if (e.touches.length === 2) {
+                // 双指缩放
+                isPinching = true;
+                isDragging = false;
+
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                initialDistance = Math.hypot(
+                    touch2.clientX - touch1.clientX,
+                    touch2.clientY - touch1.clientY
+                );
+                initialScale = scale;
+                }
+
+                e.preventDefault();
+            }, { passive: false });
+
+            mermaidElement.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 1 && isDragging && !isPinching) {
+                // 单指拖拽
+                const touch = e.touches[0];
+                translateX = touch.clientX - startX;
+                translateY = touch.clientY - startY;
+                updateTransform();
+
+                } else if (e.touches.length === 2 && isPinching) {
+                // 双指缩放
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                const currentDistance = Math.hypot(
+                    touch2.clientX - touch1.clientX,
+                    touch2.clientY - touch1.clientY
+                );
+
+                if (initialDistance > 0) {
+                    const newScale = Math.min(Math.max(
+                    initialScale * (currentDistance / initialDistance),
+                    0.3
+                    ), 4);
+                    scale = newScale;
+                    updateTransform();
+                }
+                }
+
+                e.preventDefault();
+            }, { passive: false });
+
+            mermaidElement.addEventListener('touchend', (e) => {
+                // 重置状态
+                if (e.touches.length === 0) {
+                isDragging = false;
+                isPinching = false;
+                initialDistance = 0;
+
+                // 延迟重置isTouch，避免鼠标事件立即触发
+                setTimeout(() => {
+                    isTouch = false;
+                }, 100);
+                } else if (e.touches.length === 1 && isPinching) {
+                // 从双指变为单指，切换为拖拽模式
+                isPinching = false;
+                isDragging = true;
+
+                const touch = e.touches[0];
+                startX = touch.clientX - translateX;
+                startY = touch.clientY - translateY;
+                }
+
+                updateTransform();
+            });
+
+            mermaidElement.addEventListener('touchcancel', (e) => {
+                isDragging = false;
+                isPinching = false;
+                initialDistance = 0;
+
+                setTimeout(() => {
+                isTouch = false;
+                }, 100);
+
+                updateTransform();
+            });
+
+            // 增强的滚轮缩放
+            container.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const rect = container.getBoundingClientRect();
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                const newScale = Math.min(Math.max(scale * delta, 0.3), 4);
+
+                // 计算缩放中心点偏移
+                const scaleDiff = newScale - scale;
+                translateX = translateX - (centerX - translateX) * (scaleDiff / scale);
+                translateY = translateY - (centerY - translateY) * (scaleDiff / scale);
+
+                scale = newScale;
+
+                if (scale <= 1) {
+                translateX = 0;
+                translateY = 0;
+                }
+
+                updateTransform();
+            });
+
+            // 初始化
+            updateTransform();
+            });
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 添加滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.floating-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+
+  </body>
+
+</html>
+```
