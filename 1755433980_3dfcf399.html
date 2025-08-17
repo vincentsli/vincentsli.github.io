@@ -1,0 +1,1021 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>涉军企业IPO章程条款指南</title>
+    <meta name="description" content="持有武器装备科研生产许可证的拟上市公司章程涉军条款合规指南">
+    
+    <!-- External Resources -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    
+    <style>
+        :root {
+            --primary: #1e293b;
+            --secondary: #475569;
+            --accent: #3b82f6;
+            --surface: #f8fafc;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+        }
+
+        [data-theme="dark"] {
+            --primary: #0f172a;
+            --secondary: #334155;
+            --accent: #60a5fa;
+            --surface: #1e293b;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: #334155;
+        }
+
+        body {
+            font-family: "Noto Sans SC", Tahoma, Arial, Roboto, sans-serif;
+            background-color: var(--surface);
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .font-serif {
+            font-family: "Noto Serif SC", serif;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--surface) 0%, var(--primary) 100%);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="dark"] .glass-card {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--text), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hover-lift {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .mermaid-container {
+            display: flex;
+            justify-content: center;
+            min-height: 300px;
+            max-height: 800px;
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            overflow: auto;
+            cursor: grab;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .mermaid-container:active {
+            cursor: grabbing;
+        }
+
+        .mermaid-container .mermaid {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease;
+            transform-origin: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            touch-action: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .mermaid-container .mermaid svg {
+            max-width: 100%;
+            height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .mermaid-container .mermaid:active {
+            cursor: grabbing;
+        }
+
+        @media (max-width: 768px) {
+            .mermaid-container {
+                padding: 15px;
+                margin: 15px 0;
+                overflow-x: auto;
+            }
+        }
+
+        /* Mermaid theme adjustments for dark mode */
+        [data-theme="dark"] .mermaid .node rect,
+        [data-theme="dark"] .mermaid .node circle,
+        [data-theme="dark"] .mermaid .node ellipse,
+        [data-theme="dark"] .mermaid .node polygon {
+            stroke: var(--text) !important;
+            stroke-width: 2px !important;
+        }
+
+        [data-theme="dark"] .mermaid .edgePath .path,
+        [data-theme="dark"] .mermaid .flowchart-link {
+            stroke: var(--text-muted) !important;
+            stroke-width: 2px !important;
+        }
+
+        [data-theme="dark"] .mermaid .edgeLabel {
+            background-color: var(--surface) !important;
+            color: var(--text) !important;
+            border: 1px solid var(--border) !important;
+        }
+
+        [data-theme="dark"] .mermaid text {
+            fill: var(--text) !important;
+            font-family: "Noto Sans SC", sans-serif !important;
+            font-size: 14px !important;
+            font-weight: 500 !important;
+        }
+
+        [data-theme="dark"] .mermaid .cluster rect {
+            fill: var(--surface) !important;
+            stroke: var(--border) !important;
+            stroke-width: 2px !important;
+        }
+
+        [data-theme="dark"] .mermaid .cluster text {
+            fill: var(--accent) !important;
+            font-weight: 600 !important;
+        }
+
+        /* Light mode adjustments */
+        .mermaid .node rect,
+        .mermaid .node circle,
+        .mermaid .node ellipse,
+        .mermaid .node polygon {
+            stroke: var(--text) !important;
+            stroke-width: 2px !important;
+            fill: var(--surface) !important;
+        }
+
+        .mermaid .edgePath .path,
+        .mermaid .flowchart-link {
+            stroke: var(--text-muted) !important;
+            stroke-width: 2px !important;
+        }
+
+        .mermaid .edgeLabel {
+            background-color: var(--surface) !important;
+            color: var(--text) !important;
+            border: 1px solid var(--border) !important;
+            border-radius: 6px !important;
+            padding: 4px 8px !important;
+            font-size: 12px !important;
+        }
+
+        .mermaid text {
+            fill: var(--text) !important;
+            font-family: "Noto Sans SC", sans-serif !important;
+            font-size: 14px !important;
+            font-weight: 500 !important;
+        }
+
+        .mermaid .cluster rect {
+            fill: rgba(59, 130, 246, 0.1) !important;
+            stroke: var(--accent) !important;
+            stroke-width: 2px !important;
+            stroke-dasharray: 5,5 !important;
+        }
+
+        .mermaid .cluster text {
+            fill: var(--accent) !important;
+            font-weight: 600 !important;
+        }
+
+        /* Enhanced node styling for specific node types */
+        .mermaid .node[id*="start"] rect,
+        .mermaid .node[id*="end"] rect {
+            fill: var(--accent) !important;
+            stroke: var(--accent) !important;
+        }
+
+        .mermaid .node[id*="start"] text,
+        .mermaid .node[id*="end"] text {
+            fill: white !important;
+            font-weight: 600 !important;
+        }
+
+        /* Animation for diagram */
+        .mermaid .node {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 3rem 0;
+        }
+
+        .citation-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .citation-link:hover {
+            color: var(--text);
+            text-decoration: underline;
+        }
+
+        .floating-action {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive typography scale */
+        @media (max-width: 768px) {
+            .hero-gradient h1 {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+            
+            .hero-gradient p {
+                font-size: 1.125rem;
+            }
+            
+            .mermaid-container {
+                padding: 1rem;
+                margin: 1rem 0;
+            }
+            
+            .floating-action {
+                bottom: 1rem;
+                right: 1rem;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--surface);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <button id="themeToggle" class="fixed top-4 right-4 z-50 p-3 rounded-full glass-card hover-lift transition-all duration-300">
+        <i class="fas fa-moon dark:hidden"></i>
+        <i class="fas fa-sun hidden dark:block"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen hero-gradient flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-5xl md:text-7xl font-serif font-bold mb-6 text-gradient leading-tight">
+                    涉军企业IPO
+                    <br>
+                    <span class="text-3xl md:text-5xl">章程条款合规指南</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-muted mb-8 leading-relaxed">
+                    武器装备科研生产许可证持有企业上市前章程规范实务
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#analysis" class="px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all hover-lift font-medium">
+                        <i class="fas fa-rocket mr-2"></i>立即查看分析
+                    </a>
+                    <a href="#checklist" class="px-8 py-4 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-all hover-lift">
+                        <i class="fas fa-clipboard-check mr-2"></i>条款清单
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-2xl text-muted"></i>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-16">
+        <!-- Core Analysis -->
+        <section id="analysis" class="mb-20">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-8 text-center">
+                    核心问题分析
+                </h2>
+                
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <div class="glass-card rounded-xl p-8 hover-lift">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-check-circle text-blue-600 dark:text-blue-400 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold">必须添加</h3>
+                        </div>
+                        <p class="text-muted leading-relaxed">
+                            根据《涉军企事业单位改制重组上市军工事项审查工作管理暂行办法》强制要求，IPO申报前最后一版公司章程必须包含军工事项特别条款。
+                        </p>
+                    </div>
+                    
+                    <div class="glass-card rounded-xl p-8 hover-lift">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-red-100 dark:bg-red-900 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-exclamation-triangle text-red-600 dark:text-red-400 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold">风险警示</h3>
+                        </div>
+                        <p class="text-muted leading-relaxed">
+                            未添加涉军条款将导致军工审查不通过，直接影响IPO进程，甚至可能面临行政处罚。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Process Flow Chart -->
+                <div class="glass-card rounded-xl p-8 mb-12">
+                    <h3 class="text-2xl font-semibold mb-6 text-center">合规审查流程</h3>
+                    <div class="mermaid-container">
+                        <div class="mermaid">
+                            flowchart TD
+                                A[IPO启动] --> B[聘请中介机构]
+                                B --> C[法律尽调]
+                                C --> D{是否涉军?}
+                                D -->|是| E[军工事项审查]
+                                D -->|否| F[常规IPO流程]
+                                E --> G[章程修订]
+                                G --> H[添加涉军条款]
+                                H --> I[国防科工局审查]
+                                I --> J{审查通过?}
+                                J -->|是| K[继续IPO]
+                                J -->|否| L[整改重报]
+                                K --> M[IPO申报]
+                                L --> E
+                                
+                                style A fill:#3b82f6,stroke:#1e40af,stroke-width:2px,color:#fff
+                                style K fill:#10b981,stroke:#047857,stroke-width:2px,color:#fff
+                                style L fill:#ef4444,stroke:#dc2626,stroke-width:2px,color:#fff
+                                style E fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff
+                                style H fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Required Clauses -->
+        <section id="checklist" class="mb-20">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-12 text-center">
+                    必须添加的涉军条款清单
+                </h2>
+                
+                <div class="grid gap-8">
+                    <!-- Clause 1 -->
+                    <div class="glass-card rounded-xl p-8 hover-lift">
+                        <div class="flex items-start mb-4">
+                            <div class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold mr-4 mt-1">1</div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">军工业务合规义务条款</h3>
+                                <p class="text-muted mb-4">
+                                    明确公司及下属涉军单位严格遵守武器装备科研生产许可法规的义务
+                                </p>
+                                <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+                                    <p class="text-sm font-mono leading-relaxed">
+                                        "公司及下属涉军单位应严格遵守《武器装备科研生产许可管理条例》及相关配套法规，持续保持与武器装备科研生产许可证相适应的科研生产能力，不得擅自降低许可条件或变更许可范围。"
+                                    </p>
+                                </div>
+                                <div class="mt-3 text-sm text-muted">
+                                    依据：<a href="https://www.sastind.gov.cn/n10086167/n10086216/c10403770/content.html" class="citation-link">科工计〔2016〕209号</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Clause 2 -->
+                    <div class="glass-card rounded-xl p-8 hover-lift">
+                        <div class="flex items-start mb-4">
+                            <div class="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold mr-4 mt-1">2</div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">主管部门监管机制条款</h3>
+                                <p class="text-muted mb-4">
+                                    建立涉及军工事项重大事项的事前审查机制
+                                </p>
+                                <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+                                    <p class="text-sm font-mono leading-relaxed">
+                                        "公司涉及军工资产处置、股权变更、重大投资、技术转让、对外合作等可能影响军工科研生产能力的重大事项，应提前向国家国防科技工业主管部门申报，履行军工事项审查程序，未经批准不得实施。"
+                                    </p>
+                                </div>
+                                <div class="mt-3 text-sm text-muted">
+                                    依据：<a href="https://www.gov.cn/zhengce/2022-08/23/content_5722678.htm" class="citation-link">《武器装备科研生产许可实施办法》第二十条</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Clause 3 -->
+                    <div class="glass-card rounded-xl p-8 hover-lift">
+                        <div class="flex items-start mb-4">
+                            <div class="w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center font-bold mr-4 mt-1">3</div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">保密责任条款</h3>
+                                <p class="text-muted mb-4">
+                                    明确公司各级人员的保密义务和保密管理要求
+                                </p>
+                                <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+                                    <p class="text-sm font-mono leading-relaxed">
+                                        "公司及董事、监事、高级管理人员、员工应严格遵守国家保密法律法规，建立健全保密管理制度，确保涉军科研生产活动中获取的国家秘密、国防专利、技术诀窍等信息安全。违反保密规定的，依法承担相应法律责任。"
+                                    </p>
+                                </div>
+                                <div class="mt-3 text-sm text-muted">
+                                    依据：<a href="https://www.gjbmj.gov.cn/n1/2025/0604/c419767-40494024.html" class="citation-link">《武器装备科研生产单位保密资格认定办法》</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Clause 4 -->
+                    <div class="glass-card rounded-xl p-8 hover-lift">
+                        <div class="flex items-start mb-4">
+                            <div class="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold mr-4 mt-1">4</div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">外资限制条款</h3>
+                                <p class="text-muted mb-4">
+                                    限制外资持股，确保国家安全和军工资产控制权
+                                </p>
+                                <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+                                    <p class="text-sm font-mono leading-relaxed">
+                                        "公司股东不得为境外投资者（包括外国自然人、外国法人、港澳台投资者及其一致行动人），通过协议控制、信托持股等间接方式持有的公司股份，最终外资持股比例不得超过公司总股本的20%。"
+                                    </p>
+                                </div>
+                                <div class="mt-3 text-sm text-muted">
+                                    依据：国防科工局军工事项审查要求
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Key Requirements Diagram -->
+        <section class="mb-20">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-12 text-center">
+                    涉军条款要素关系图
+                </h2>
+                <div class="glass-card rounded-xl p-8">
+                    <div class="mermaid-container">
+                        <div class="mermaid">
+                            graph TB
+                                subgraph "涉军企业IPO章程核心要素"
+                                    A[军工业务合规] --> B[许可条件维持]
+                                    A --> C[法规遵守义务]
+                                    
+                                    D[主管部门监管] --> E[事前审查机制]
+                                    D --> F[重大决策报批]
+                                    
+                                    G[保密责任体系] --> H[涉密人员管理]
+                                    G --> I[信息安全保护]
+                                    
+                                    J[外资限制] --> K[直接持股限制]
+                                    J --> L[间接比例控制]
+                                end
+                                
+                                B -.-> M[持续经营能力]
+                                C -.-> N[法律合规性]
+                                E -.-> O[军工审查通过]
+                                H -.-> P[保密资格维持]
+                                K -.-> Q[国家安全保障]
+                                L -.-> Q
+                                
+                                style A fill:#3b82f6,stroke:#1e40af,stroke-width:3px,color:#fff
+                                style D fill:#8b5cf6,stroke:#7c3aed,stroke-width:3px,color:#fff
+                                style G fill:#ef4444,stroke:#dc2626,stroke-width:3px,color:#fff
+                                style J fill:#10b981,stroke:#047857,stroke-width:3px,color:#fff
+                                style M fill:#fbbf24,stroke:#f59e0b,stroke-width:2px,color:#000
+                                style O fill:#fbbf24,stroke:#f59e0b,stroke-width:2px,color:#000
+                                style Q fill:#fbbf24,stroke:#f59e0b,stroke-width:2px,color:#000
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline -->
+        <section class="mb-20">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-12 text-center">
+                    IPO前章程修订时间线
+                </h2>
+                
+                <div class="relative">
+                    <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-purple-500"></div>
+                    
+                    <div class="space-y-8">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm">1</div>
+                            <div class="ml-6 glass-card rounded-lg p-6 flex-1">
+                                <h3 class="font-semibold mb-2">T-6个月：启动军工尽调</h3>
+                                <p class="text-sm text-muted">聘请具有军工上市经验的律师团队，开展军工事项专项法律尽职调查</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold text-sm">2</div>
+                            <div class="ml-6 glass-card rounded-lg p-6 flex-1">
+                                <h3 class="font-semibold mb-2">T-4个月：章程草案起草</h3>
+                                <p class="text-sm text-muted">根据尽调结果起草涉军条款，与国防科工办预沟通条款内容</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-sm">3</div>
+                            <div class="ml-6 glass-card rounded-lg p-6 flex-1">
+                                <h3 class="font-semibold mb-2">T-3个月：正式审查申请</h3>
+                                <p class="text-sm text-muted">向国防科工局提交军工事项审查申请，包含修订后章程草案</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-red-500 rounded-full flex items-center justify-center text-white font-bold text-sm">4</div>
+                            <div class="ml-6 glass-card rounded-lg p-6 flex-1">
+                                <h3 class="font-semibold mb-2">T-1个月：审查意见落实</h3>
+                                <p class="text-sm text-muted">根据审查意见完善章程条款，完成最终版本并召开股东大会审议通过</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center text-white font-bold text-sm">5</div>
+                            <div class="ml-6 glass-card rounded-lg p-6 flex-1">
+                                <h3 class="font-semibold mb-2">T日：IPO正式申报</h3>
+                                <p class="text-sm text-muted">将包含完整涉军条款的章程作为IPO申报文件之一正式提交</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Best Practices -->
+        <section class="mb-20">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-12 text-center">
+                    实务操作建议
+                </h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="glass-card rounded-xl p-8">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-lightbulb text-yellow-500 mr-3"></i>
+                            最佳实践
+                        </h3>
+                        <ul class="space-y-3 text-muted">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1 text-sm"></i>
+                                <span>提前6个月启动军工合规准备工作</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1 text-sm"></i>
+                                <span>与属地国防科工办建立常态化沟通机制</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1 text-sm"></i>
+                                <span>参考已上市公司最新章程范本</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1 text-sm"></i>
+                                <span>建立军工合规专员制度</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="glass-card rounded-xl p-8">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-exclamation-triangle text-red-500 mr-3"></i>
+                            常见陷阱
+                        </h3>
+                        <ul class="space-y-3 text-muted">
+                            <li class="flex items-start">
+                                <i class="fas fa-times text-red-500 mr-2 mt-1 text-sm"></i>
+                                <span>临近申报才匆忙添加条款</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times text-red-500 mr-2 mt-1 text-sm"></i>
+                                <span>条款表述过于笼统，缺乏可执行性</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times text-red-500 mr-2 mt-1 text-sm"></i>
+                                <span>忽视外资间接持股的穿透核查</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times text-red-500 mr-2 mt-1 text-sm"></i>
+                                <span>未建立配套的保密管理制度</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact CTA -->
+        <section class="text-center">
+            <div class="glass-card rounded-xl p-12 max-w-2xl mx-auto">
+                <h2 class="text-2xl font-serif font-bold mb-4">需要专业协助？</h2>
+                <p class="text-muted mb-6">
+                    军工上市涉及复杂的监管要求，建议与具有军工上市经验的律师团队和专业咨询机构合作
+                </p>
+                <a href="#checklist" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                    <i class="fas fa-download mr-2"></i>
+                    下载条款模板
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Action Button -->
+    <div class="floating-action">
+        <button id="scrollToTop" class="w-12 h-12 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-all hover-lift">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference or default to system preference
+        const currentTheme = localStorage.getItem('theme') || 
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        
+        if (currentTheme === 'dark') {
+            html.setAttribute('data-theme', 'dark');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            const current = html.getAttribute('data-theme');
+            const newTheme = current === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Reinitialize Mermaid for theme change
+            mermaid.init();
+        });
+        
+        // Smooth scroll to top
+        document.getElementById('scrollToTop').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Show/hide scroll to top button
+        window.addEventListener('scroll', () => {
+            const scrollButton = document.getElementById('scrollToTop');
+            if (window.scrollY > 300) {
+                scrollButton.style.opacity = '1';
+                scrollButton.style.transform = 'scale(1)';
+            } else {
+                scrollButton.style.opacity = '0';
+                scrollButton.style.transform = 'scale(0.8)';
+            }
+        });
+        
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#3b82f6',
+                primaryTextColor: '#0f172a',
+                primaryBorderColor: '#1e40af',
+                lineColor: '#64748b',
+                secondaryColor: '#f1f5f9',
+                tertiaryColor: '#e2e8f0',
+                background: '#f8fafc',
+                mainBkg: '#ffffff',
+                secondBkg: '#f1f5f9',
+                tertiaryBkg: '#e2e8f0'
+            },
+            flowchart: {
+                useMaxWidth: false,
+                htmlLabels: true,
+                curve: 'basis',
+                padding: 20
+            },
+            fontFamily: 'Noto Sans SC, sans-serif',
+            fontSize: 14
+        });
+
+        // Add zoom and pan functionality for mermaid diagrams
+        function initializeMermaidControls() {
+            const containers = document.querySelectorAll('.mermaid-container');
+
+            containers.forEach(container => {
+            const mermaidElement = container.querySelector('.mermaid');
+            let scale = 1;
+            let isDragging = false;
+            let startX, startY, translateX = 0, translateY = 0;
+
+            // 触摸相关状态
+            let isTouch = false;
+            let touchStartTime = 0;
+            let initialDistance = 0;
+            let initialScale = 1;
+            let isPinching = false;
+
+            // Zoom controls
+            const zoomControls = document.createElement('div');
+            zoomControls.className = 'zoom-controls';
+            zoomControls.innerHTML = `
+                <button class="zoom-btn zoom-in" title="放大">
+                <i class="fas fa-search-plus"></i>
+                </button>
+                <button class="zoom-btn zoom-out" title="缩小">
+                <i class="fas fa-search-minus"></i>
+                </button>
+                <button class="zoom-btn zoom-reset" title="重置">
+                <i class="fas fa-expand-arrows-alt"></i>
+                </button>
+            `;
+            container.appendChild(zoomControls);
+
+            // 样式
+            const style = document.createElement('style');
+            style.textContent = `
+                .zoom-controls {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                display: flex;
+                gap: 5px;
+                z-index: 20;
+                }
+                .zoom-btn {
+                background: rgba(255, 255, 255, 0.9);
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                padding: 8px;
+                cursor: pointer;
+                font-size: 14px;
+                color: #333;
+                transition: all 0.2s;
+                }
+                [data-theme="dark"] .zoom-btn {
+                background: rgba(30, 41, 59, 0.9);
+                border-color: #475569;
+                color: #e2e8f0;
+                }
+                .zoom-btn:hover {
+                background: rgba(59, 130, 246, 0.9);
+                color: white;
+                transform: scale(1.1);
+                }
+            `;
+            if (!document.querySelector('#mermaid-zoom-styles')) {
+                style.id = 'mermaid-zoom-styles';
+                document.head.appendChild(style);
+            }
+
+            function updateTransform() {
+                mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+                if (scale > 1) {
+                container.style.cursor = 'grab';
+                } else {
+                container.style.cursor = 'default';
+                translateX = 0;
+                translateY = 0;
+                mermaidElement.style.transform = `translate(0, 0) scale(1)`;
+                }
+
+                mermaidElement.style.transition = isDragging ? 'none' : 'transform 0.2s ease';
+            }
+
+            // 缩放功能
+            const zoomInBtn = zoomControls.querySelector('.zoom-in');
+            const zoomOutBtn = zoomControls.querySelector('.zoom-out');
+            const zoomResetBtn = zoomControls.querySelector('.zoom-reset');
+
+            zoomInBtn.addEventListener('click', () => {
+                scale = Math.min(scale * 1.25, 4);
+                updateTransform();
+            });
+
+            zoomOutBtn.addEventListener('click', () => {
+                scale = Math.max(scale / 1.25, 0.3);
+                updateTransform();
+            });
+
+            zoomResetBtn.addEventListener('click', () => {
+                scale = 1;
+                translateX = 0;
+                translateY = 0;
+                updateTransform();
+            });
+
+            // 鼠标滚轮缩放
+            container.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const rect = container.getBoundingClientRect();
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                const newScale = Math.min(Math.max(scale * delta, 0.3), 4);
+
+                if (newScale !== scale) {
+                const scaleFactor = newScale / scale;
+                translateX = translateX * scaleFactor;
+                translateY = translateY * scaleFactor;
+                scale = newScale;
+                updateTransform();
+                }
+            });
+
+            // 鼠标拖拽
+            container.addEventListener('mousedown', (e) => {
+                if (isTouch) return; // 如果是触摸设备，忽略鼠标事件
+
+                isDragging = true;
+                startX = e.clientX - translateX;
+                startY = e.clientY - translateY;
+                container.style.cursor = 'grabbing';
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging || isTouch) return;
+
+                e.preventDefault();
+                translateX = e.clientX - startX;
+                translateY = e.clientY - startY;
+                updateTransform();
+            });
+
+            document.addEventListener('mouseup', () => {
+                if (isDragging) {
+                isDragging = false;
+                container.style.cursor = scale > 1 ? 'grab' : 'default';
+                }
+            });
+
+            // 触摸事件处理
+            container.addEventListener('touchstart', (e) => {
+                isTouch = true;
+                touchStartTime = Date.now();
+
+                if (e.touches.length === 1) {
+                // 单指拖动
+                isPinching = false;
+                isDragging = true;
+
+                const touch = e.touches[0];
+                startX = touch.clientX - translateX;
+                startY = touch.clientY - translateY;
+
+                } else if (e.touches.length === 2) {
+                // 双指缩放
+                isPinching = true;
+                isDragging = false;
+
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                initialDistance = Math.hypot(
+                    touch2.clientX - touch1.clientX,
+                    touch2.clientY - touch1.clientY
+                );
+                initialScale = scale;
+                }
+            });
+
+            container.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+
+                if (isPinching && e.touches.length === 2) {
+                // 双指缩放
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                const currentDistance = Math.hypot(
+                    touch2.clientX - touch1.clientX,
+                    touch2.clientY - touch1.clientY
+                );
+
+                const newScale = Math.min(Math.max(
+                    initialScale * (currentDistance / initialDistance),
+                    0.3
+                ), 4);
+
+                if (newScale !== scale) {
+                    const scaleFactor = newScale / scale;
+                    translateX = translateX * scaleFactor;
+                    translateY = translateY * scaleFactor;
+                    scale = newScale;
+                    updateTransform();
+                }
+
+                } else if (isDragging && e.touches.length === 1) {
+                // 单指拖动
+                const touch = e.touches[0];
+                translateX = touch.clientX - startX;
+                translateY = touch.clientY - startY;
+                updateTransform();
+                }
+            });
+
+            container.addEventListener('touchend', (e) => {
+                if (e.touches.length === 0) {
+                isDragging = false;
+                isPinching = false;
+
+                // 延迟重置isTouch，避免鼠标事件立即触发
+                setTimeout(() => {
+                    isTouch = false;
+                }, 100);
+                } else if (e.touches.length === 1 && isPinching) {
+                // 从双指变为单指，切换为拖动模式
+                isPinching = false;
+                isDragging = true;
+
+                const touch = e.touches[0];
+                startX = touch.clientX - translateX;
+                startY = touch.clientY - translateY;
+                }
+            });
+
+            container.addEventListener('touchcancel', (e) => {
+                isDragging = false;
+                isPinching = false;
+                setTimeout(() => {
+                isTouch = false;
+                }, 100);
+            });
+
+            // 初始化
+            updateTransform();
+            });
+        }
+
+        // Initialize mermaid controls after mermaid renders
+        setTimeout(initializeMermaidControls, 1000);
+    </script>
+</body>
+</html>
+```
