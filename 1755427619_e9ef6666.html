@@ -1,0 +1,925 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板IPO股权激励：何时必须追加审计？</title>
+    <meta name="description" content="深度解析科创板拟上市公司在申报基准日后授予限制性股票是否必须增加审计的专业指南">
+
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+
+    <style>
+        :root {
+            --bg-light: #fafafa;
+            --bg-dark: #0f0f0f;
+            --text-light: #fafafa;
+            --text-dark: #0f0f0f;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --surface-light: #f8fafc;
+            --surface-dark: #1e1e1e;
+            --border-light: #e2e8f0;
+            --border-dark: #334155;
+        }
+
+        body {
+            font-family: Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .font-serif {
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        .font-sans {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+
+        /* Dark mode styles */
+        body.dark {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        body.light {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Card styles */
+        .card {
+            backdrop-filter: blur(10px);
+            border: 1px solid;
+            transition: all 0.3s ease;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
+
+        body.dark .card {
+            background: rgba(30, 30, 30, 0.8);
+            border-color: var(--border-dark);
+        }
+
+        body.light .card {
+            background: rgba(248, 250, 252, 0.8);
+            border-color: var(--border-light);
+        }
+
+        /* Hover effects */
+        .hover-lift {
+            transition: transform 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-2px);
+        }
+
+        /* First letter drop cap */
+        .prose > p:first-child::first-letter {
+            font-size: 3.5rem;
+            font-weight: 700;
+            float: left;
+            line-height: 1;
+            margin: 0.1em 0.1em 0 0;
+            font-family: 'Noto Serif SC', serif;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Mermaid styles */
+        .mermaid-container {
+            display: flex;
+            justify-content: center;
+            min-height: 300px;
+            max-height: 800px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        body.dark .mermaid-container {
+            background: transparent;
+        }
+
+        body.light .mermaid-container {
+            background: transparent;
+        }
+
+        .mermaid-container .mermaid {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            cursor: grab;
+            transition: transform 0.3s ease;
+            transform-origin: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            touch-action: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .mermaid-container .mermaid svg {
+            max-width: 100%;
+            height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .mermaid-container .mermaid:active {
+            cursor: grabbing;
+        }
+
+        .mermaid-container.zoomed .mermaid {
+            height: 100%;
+            width: 100%;
+            cursor: grab;
+        }
+
+        .mermaid-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 5px;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mermaid-container:hover .mermaid-controls {
+            opacity: 1;
+        }
+
+        .mermaid-control-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            font-size: 14px;
+        }
+
+        .mermaid-control-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Responsive fixes */
+        @media (max-width: 768px) {
+            .mermaid-control-btn:not(.reset-zoom) {
+                display: none;
+            }
+            .mermaid-controls {
+                top: auto;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+    </style>
+  </head>
+
+  <body class="dark">
+    <!-- Theme Toggle -->
+    <button id="themeToggle" class="fixed top-4 right-4 z-50 p-3 rounded-full bg-gray-800 dark:bg-gray-200 text-gray-200 dark:text-gray-800 shadow-lg hover-lift">
+      <i class="fas fa-sun hidden dark:block"></i>
+      <i class="fas fa-moon block dark:hidden"></i>
+    </button>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-40 backdrop-blur-lg bg-opacity-80 border-b transition-all duration-300">
+      <div class="max-w-6xl mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <div class="font-serif text-xl font-bold gradient-text">科创板IPO指南</div>
+          <div class="hidden md:flex space-x-8">
+            <a href="#overview" class="hover:text-blue-400 transition-colors">概览</a>
+            <a href="#analysis" class="hover:text-blue-400 transition-colors">深度分析</a>
+            <a href="#cases" class="hover:text-blue-400 transition-colors">案例研究</a>
+            <a href="#recommendations" class="hover:text-blue-400 transition-colors">建议</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center">
+      <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-gray-900 to-black dark:from-gray-100 dark:via-slate-100 dark:to-white opacity-90"></div>
+      <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
+        <h1 class="font-serif text-4xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight">
+          <span class="gradient-text">科创板IPO</span>
+          <br>
+          <span class="text-white dark:text-gray-800">股权激励审计边界</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-300 dark:text-gray-600 mb-8 font-light">
+          深度解析申报基准日后股权授予的审计要求与实务边界
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <button class="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full font-medium hover-lift">
+            <i class="fas fa-play mr-2"></i>开始阅读
+          </button>
+          <button class="px-8 py-3 border border-gray-400 dark:border-gray-600 rounded-full font-medium hover-lift">
+            <i class="fas fa-download mr-2"></i>下载PDF
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-16 space-y-20">
+
+      <!-- Overview Section -->
+      <section id="overview" class="grid md:grid-cols-3 gap-8">
+        <div class="md:col-span-2">
+          <h2 class="font-serif text-3xl font-bold mb-6 gradient-text">核心问题概述</h2>
+          <div class="prose prose-lg max-w-none">
+            <p class="text-lg leading-relaxed mb-4">
+              科创板拟上市公司在<strong>申报基准日后、提交IPO申请前</strong>通过持股平台新增授予限制性股票，是否必须增加一期审计？这是众多准上市公司面临的棘手问题。
+            </p>
+            <p class="text-lg leading-relaxed">
+              根据现行监管规则，<strong>并非所有情况下都必须追加审计</strong>。关键在于股权激励是否导致发行人<strong>股本结构变动</strong>以及<strong>财务数据重大变化</strong>。
+            </p>
+          </div>
+        </div>
+
+        <div class="card rounded-2xl p-6">
+          <h3 class="font-serif text-xl font-bold mb-4 flex items-center">
+            <i class="fas fa-exclamation-triangle text-yellow-500 mr-2"></i>
+            关键提醒
+          </h3>
+          <ul class="space-y-2 text-sm">
+            <li>• 增资扩股式授予必须加审</li>
+            <li>• 老股转让模式下可豁免</li>
+            <li>• 费用重大性判断至关重要</li>
+            <li>• 建议提前与监管沟通</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Analysis Section -->
+      <section id="analysis" class="space-y-12">
+        <h2 class="font-serif text-4xl font-bold text-center gradient-text">深度规则分析</h2>
+
+        <!-- Must Audit Section -->
+        <div class="card rounded-2xl p-8">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center mr-4">
+              <i class="fas fa-times text-white"></i>
+            </div>
+            <h3 class="font-serif text-2xl font-bold">必须增加审计的情形</h3>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">情形一：涉及股本变动</h4>
+              <p class="text-sm leading-relaxed">
+                若限制性股票通过<strong>增资方式</strong>授予（如员工持股平台对公司增资），导致发行人注册资本/股本变化，则属于"增资扩股引入新股东"情形，<strong>必须增加一期审计</strong>。
+              </p>
+            </div>
+            <div>
+              <div class="bg-red-50 dark:bg-red-900/20 p-4 rounded-lg">
+                <h5 class="font-bold text-red-600 dark:text-red-400 mb-2">法律依据</h5>
+                <blockquote class="text-sm italic">
+                  "最近一年末资产负债表日后增资扩股引入新股东的，申报前须增加一期审计。"
+                  <br>
+                  <span class="text-xs">— 《首发业务若干问题解答》问题12</span>
+                </blockquote>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Exception Section -->
+        <div class="card rounded-2xl p-8">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mr-4">
+              <i class="fas fa-check text-white"></i>
+            </div>
+            <h3 class="font-serif text-2xl font-bold">无需增加审计的例外情形</h3>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-lg mb-3">情形一：老股转让模式</h4>
+              <p class="text-sm leading-relaxed">
+                新增授予仅为<strong>既有股东之间的股份转让</strong>（如实际控制人向持股平台转让存量股份），<strong>未改变发行人总股本</strong>，可豁免加审要求。
+              </p>
+            </div>
+            <div>
+              <h4 class="font-bold text-lg mb-3">情形二：费用不重大</h4>
+              <p class="text-sm leading-relaxed">
+                若股份支付费用<strong>微小</strong>（通常不超过当期利润5%），可通过补充披露方式处理，无需调整财务报表。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual Decision Tree -->
+        <div class="card rounded-2xl p-8">
+          <h3 class="font-serif text-2xl font-bold mb-6 text-center">决策流程图</h3>
+          <div class="mermaid-container relative">
+            <div class="mermaid-controls">
+              <button class="mermaid-control-btn zoom-in" title="放大">
+                <i class="fas fa-search-plus"></i>
+              </button>
+              <button class="mermaid-control-btn zoom-out" title="缩小">
+                <i class="fas fa-search-minus"></i>
+              </button>
+              <button class="mermaid-control-btn reset-zoom" title="重置">
+                <i class="fas fa-expand-arrows-alt"></i>
+              </button>
+              <button class="mermaid-control-btn fullscreen" title="全屏查看">
+                <i class="fas fa-expand"></i>
+              </button>
+            </div>
+            <div class="mermaid">
+              flowchart TD
+              A["基准日后授予限制性股票"] --> B{"是否涉及增资扩股
+              <br />导致股本变动？"}
+              B -->|"是"| C["必须增加一期审计
+              <br />《首发业务若干问题解答》问题12"]
+              B -->|"否"| D{"是否产生重大
+              <br />股份支付费用？"}
+              D -->|"是"| E["建议增加审计
+              <br />或详细披露"]
+              D -->|"否"| F["无需增加审计
+              <br />补充披露即可"]
+
+              style A fill:#fbbf24,stroke:#f59e0b,stroke-width:2px
+              style C fill:#ef4444,stroke:#dc2626,stroke-width:2px,color:#fff
+              style F fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+              style E fill:#f97316,stroke:#ea580c,stroke-width:2px,color:#fff
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cases Section -->
+      <section id="cases" class="space-y-8">
+        <h2 class="font-serif text-4xl font-bold text-center gradient-text">实务案例研究</h2>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Case 1 -->
+          <div class="card rounded-2xl p-6">
+            <div class="flex items-center mb-4">
+              <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-3">
+                <i class="fas fa-building text-white text-sm"></i>
+              </div>
+              <h3 class="font-bold">天兵科技案例</h3>
+            </div>
+            <p class="text-sm leading-relaxed mb-3">
+              <strong>背景：</strong>在2025年12月31日基准日后，通过增资方式向员工持股平台新增授予限制性股票。
+            </p>
+            <p class="text-sm leading-relaxed mb-3">
+              <strong>处理：</strong>保荐机构要求以2026年6月30日为基准加审半年报数据。
+            </p>
+            <div class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded text-xs">
+              <i class="fas fa-lightbulb text-blue-500 mr-1"></i>
+              验证了增资扩股需加审的监管要求
+            </div>
+          </div>
+
+          <!-- Case 2 -->
+          <div class="card rounded-2xl p-6">
+            <div class="flex items-center mb-4">
+              <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                <i class="fas fa-chart-line text-white text-sm"></i>
+              </div>
+              <h3 class="font-bold">杰普特案例</h3>
+            </div>
+            <p class="text-sm leading-relaxed mb-3">
+              <strong>背景：</strong>基准日后通过老股转让方式向员工授予期权，未导致股本变动。
+            </p>
+            <p class="text-sm leading-relaxed mb-3">
+              <strong>处理：</strong>交易所问询费用计提合理性，公司补充披露后未要求加审。
+            </p>
+            <div class="bg-green-50 dark:bg-green-900/20 p-3 rounded text-xs">
+              <i class="fas fa-check text-green-500 mr-1"></i>
+              老股转让模式的豁免案例
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recommendations Section -->
+      <section id="recommendations" class="card rounded-2xl p-8">
+        <h2 class="font-serif text-3xl font-bold mb-8 gradient-text">专业建议与最佳实践</h2>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="space-y-4">
+            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center">
+              <i class="fas fa-calendar-check text-white text-xl"></i>
+            </div>
+            <h3 class="font-bold">时点规划</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              优先在申报基准日前完成股权激励授予，避免后续审计复杂性。
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl flex items-center justify-center">
+              <i class="fas fa-handshake text-white text-xl"></i>
+            </div>
+            <h3 class="font-bold">结构设计</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              采用老股转让方式实施激励，避免触发增资扩股的强制审计要求。
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center">
+              <i class="fas fa-comments text-white text-xl"></i>
+            </div>
+            <h3 class="font-bold">监管沟通</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              提前与交易所预沟通，确认审计必要性及披露要求的细节。
+            </p>
+          </div>
+        </div>
+
+        <!-- Warning Box -->
+        <div class="mt-8 p-6 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-xl border border-yellow-500/20">
+          <div class="flex items-start">
+            <i class="fas fa-exclamation-triangle text-yellow-500 text-xl mr-3 mt-1"></i>
+            <div>
+              <h4 class="font-bold text-lg mb-2">重要提醒</h4>
+              <p class="text-sm">
+                虽然老股转让模式可以豁免强制审计，但仍需严格按照会计准则确认股份支付费用，并在招股说明书中充分披露相关信息。建议聘请专业中介机构进行合规性评估。
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Further Reading -->
+      <section class="space-y-8">
+        <h2 class="font-serif text-3xl font-bold text-center gradient-text">延伸阅读</h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="card rounded-xl p-6 hover-lift">
+            <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center mb-4">
+              <i class="fas fa-book text-white"></i>
+            </div>
+            <h3 class="font-bold mb-2">《首发业务若干问题解答》</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+              证监会发布的权威解答，问题12明确规定增资扩股的审计要求。
+            </p>
+            <a href="#" class="text-blue-500 text-sm hover:underline">查看详情 →</a>
+          </div>
+
+          <div class="card rounded-xl p-6 hover-lift">
+            <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center mb-4">
+              <i class="fas fa-file-alt text-white"></i>
+            </div>
+            <h3 class="font-bold mb-2">《企业会计准则第11号》</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+              股份支付费用的确认、计量及披露要求，股权激励会计处理的核心依据。
+            </p>
+            <a href="#" class="text-green-500 text-sm hover:underline">查看详情 →</a>
+          </div>
+
+          <div class="card rounded-xl p-6 hover-lift">
+            <div class="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center mb-4">
+              <i class="fas fa-gavel text-white"></i>
+            </div>
+            <h3 class="font-bold mb-2">《科创板上市审核问答》</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+              上交所对科创板IPO审核中的股权激勵问题的专项问答及监管标准。
+            </p>
+            <a href="#" class="text-purple-500 text-sm hover:underline">查看详情 →</a>
+          </div>
+
+          <div class="card rounded-xl p-6 hover-lift">
+            <div class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center mb-4">
+              <i class="fas fa-chart-bar text-white"></i>
+            </div>
+            <h3 class="font-bold mb-2">《股权激励实务操作指南》</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+              资深投行人士撰写的IPO前股权激励全程操作手册，含大量案例。
+            </p>
+            <a href="#" class="text-orange-500 text-sm hover:underline">查看详情 →</a>
+          </div>
+
+          <div class="card rounded-xl p-6 hover-lift">
+            <div class="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center mb-4">
+              <i class="fas fa-clipboard-check text-white"></i>
+            </div>
+            <h3 class="font-bold mb-2">《IPO审核财务核查要点》</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+              专门针对IPO财务核查的权威性指导，包含股权激励专项核查清单。
+            </p>
+            <a href="#" class="text-red-500 text-sm hover:underline">查看详情 →</a>
+          </div>
+
+          <div class="card rounded-xl p-6 hover-lift">
+            <div class="w-12 h-12 bg-indigo-500 rounded-lg flex items-center justify-center mb-4">
+              <i class="fas fa-users text-white"></i>
+            </div>
+            <h3 class="font-bold mb-2">《科创板IPO案例精选》</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+              收录50个科创板IPO成功案例的股权激励处理经验，含监管问询回复。
+            </p>
+            <a href="#" class="text-indigo-500 text-sm hover:underline">查看详情 →</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t mt-20">
+      <div class="max-w-6xl mx-auto px-4 py-12">
+        <div class="text-center">
+          <div class="font-serif text-2xl font-bold gradient-text mb-4">科创板IPO指南</div>
+          <p class="text-gray-500 dark:text-gray-400 mb-6">
+            专业、准确、及时的IPO监管规则解读
+          </p>
+          <div class="flex justify-center space-x-6">
+            <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+              <i class="fab fa-weibo"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+              <i class="fab fa-wechat"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+              <i class="fas fa-envelope"></i>
+            </a>
+          </div>
+          <div class="mt-8 pt-8 border-t text-sm text-gray-400">
+            © 2024 科创板IPO指南. 仅供专业参考，具体案例请咨询专业机构.
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        // Check for saved theme or system preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            body.classList.add('dark');
+            body.classList.remove('light');
+        } else {
+            body.classList.add('light');
+            body.classList.remove('dark');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark')) {
+                body.classList.remove('dark');
+                body.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.classList.remove('light');
+                body.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Initialize Mermaid with enhanced configuration
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#3b82f6',
+                primaryTextColor: '#ffffff',
+                primaryBorderColor: '#2563eb',
+                lineColor: '#64748b',
+                secondaryColor: '#8b5cf6',
+                tertiaryColor: '#f1f5f9',
+                background: 'transparent',
+                mainBkg: 'transparent',
+                secondBkg: 'transparent',
+                tertiaryBkg: 'transparent',
+                fontFamily: 'Noto Sans SC, sans-serif'
+            },
+            flowchart: {
+                useMaxWidth: false,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+
+        // Initialize Mermaid Controls for zoom and pan
+        function initializeMermaidControls() {
+            const containers = document.querySelectorAll('.mermaid-container');
+
+            containers.forEach(container => {
+            const mermaidElement = container.querySelector('.mermaid');
+            let scale = 1;
+            let isDragging = false;
+            let startX, startY, translateX = 0, translateY = 0;
+
+            // 触摸相关状态
+            let isTouch = false;
+            let touchStartTime = 0;
+            let initialDistance = 0;
+            let initialScale = 1;
+            let isPinching = false;
+
+            // Zoom controls
+            const zoomInBtn = container.querySelector('.zoom-in');
+            const zoomOutBtn = container.querySelector('.zoom-out');
+            const resetBtn = container.querySelector('.reset-zoom');
+            const fullscreenBtn = container.querySelector('.fullscreen');
+
+            function updateTransform() {
+                mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+                if (scale > 1) {
+                container.classList.add('zoomed');
+                } else {
+                container.classList.remove('zoomed');
+                }
+
+                mermaidElement.style.cursor = isDragging ? 'grabbing' : 'grab';
+            }
+
+            if (zoomInBtn) {
+                zoomInBtn.addEventListener('click', () => {
+                scale = Math.min(scale * 1.25, 4);
+                updateTransform();
+                });
+            }
+
+            if (zoomOutBtn) {
+                zoomOutBtn.addEventListener('click', () => {
+                scale = Math.max(scale / 1.25, 0.3);
+                if (scale <= 1) {
+                    translateX = 0;
+                    translateY = 0;
+                }
+                updateTransform();
+                });
+            }
+
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                scale = 1;
+                translateX = 0;
+                translateY = 0;
+                updateTransform();
+                });
+            }
+
+            if (fullscreenBtn) {
+                fullscreenBtn.addEventListener('click', () => {
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen();
+                } else if (container.msRequestFullscreen) {
+                    container.msRequestFullscreen();
+                }
+                });
+            }
+
+            // Mouse Events
+            mermaidElement.addEventListener('mousedown', (e) => {
+                if (isTouch) return; // 如果是触摸设备，忽略鼠标事件
+
+                isDragging = true;
+                startX = e.clientX - translateX;
+                startY = e.clientY - translateY;
+                mermaidElement.style.cursor = 'grabbing';
+                updateTransform();
+                e.preventDefault();
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging && !isTouch) {
+                translateX = e.clientX - startX;
+                translateY = e.clientY - startY;
+                updateTransform();
+                }
+            });
+
+            document.addEventListener('mouseup', () => {
+                if (isDragging && !isTouch) {
+                isDragging = false;
+                mermaidElement.style.cursor = 'grab';
+                updateTransform();
+                }
+            });
+
+            document.addEventListener('mouseleave', () => {
+                if (isDragging && !isTouch) {
+                isDragging = false;
+                mermaidElement.style.cursor = 'grab';
+                updateTransform();
+                }
+            });
+
+            // 获取两点之间的距离
+            function getTouchDistance(touch1, touch2) {
+                return Math.hypot(
+                touch2.clientX - touch1.clientX,
+                touch2.clientY - touch1.clientY
+                );
+            }
+
+            // Touch Events - 触摸开始
+            mermaidElement.addEventListener('touchstart', (e) => {
+                isTouch = true;
+                touchStartTime = Date.now();
+
+                if (e.touches.length === 1) {
+                // 单指拖动
+                isPinching = false;
+                isDragging = true;
+
+                const touch = e.touches[0];
+                startX = touch.clientX - translateX;
+                startY = touch.clientY - translateY;
+
+                } else if (e.touches.length === 2) {
+                // 双指缩放
+                isPinching = true;
+                isDragging = false;
+
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                initialDistance = getTouchDistance(touch1, touch2);
+                initialScale = scale;
+                }
+
+                e.preventDefault();
+            }, { passive: false });
+
+            // Touch Events - 触摸移动
+            mermaidElement.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 1 && isDragging && !isPinching) {
+                // 单指拖动
+                const touch = e.touches[0];
+                translateX = touch.clientX - startX;
+                translateY = touch.clientY - startY;
+                updateTransform();
+
+                } else if (e.touches.length === 2 && isPinching) {
+                // 双指缩放
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                const currentDistance = getTouchDistance(touch1, touch2);
+
+                if (initialDistance > 0) {
+                    const newScale = Math.min(Math.max(
+                    initialScale * (currentDistance / initialDistance),
+                    0.3
+                    ), 4);
+                    scale = newScale;
+                    updateTransform();
+                }
+                }
+
+                e.preventDefault();
+            }, { passive: false });
+
+            // Touch Events - 触摸结束
+            mermaidElement.addEventListener('touchend', (e) => {
+                // 重置状态
+                if (e.touches.length === 0) {
+                isDragging = false;
+                isPinching = false;
+                initialDistance = 0;
+
+                // 延迟重置isTouch，避免鼠标事件立即触发
+                setTimeout(() => {
+                    isTouch = false;
+                }, 100);
+                } else if (e.touches.length === 1 && isPinching) {
+                // 从双指变为单指，切换为拖动模式
+                isPinching = false;
+                isDragging = true;
+
+                const touch = e.touches[0];
+                startX = touch.clientX - translateX;
+                startY = touch.clientY - translateY;
+                }
+
+                updateTransform();
+            });
+
+            mermaidElement.addEventListener('touchcancel', (e) => {
+                isDragging = false;
+                isPinching = false;
+                initialDistance = 0;
+
+                setTimeout(() => {
+                isTouch = false;
+                }, 100);
+
+                updateTransform();
+            });
+
+            // Enhanced wheel zoom with better center point handling
+            container.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const rect = container.getBoundingClientRect();
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                const newScale = Math.min(Math.max(scale * delta, 0.3), 4);
+
+                // Adjust translation to zoom towards center
+                if (newScale !== scale) {
+                const scaleDiff = newScale / scale;
+                translateX = translateX * scaleDiff;
+                translateY = translateY * scaleDiff;
+                scale = newScale;
+
+                if (scale <= 1) {
+                    translateX = 0;
+                    translateY = 0;
+                }
+
+                updateTransform();
+                }
+            });
+
+            // Initialize display
+            updateTransform();
+            });
+        }
+
+        // Initialize mermaid controls after DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for mermaid to render
+            setTimeout(initializeMermaidControls, 1000);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards for scroll animations
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+  </body>
+
+</html>
+```
