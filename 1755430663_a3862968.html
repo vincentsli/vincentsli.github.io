@@ -1,0 +1,385 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板 IPO 知识产权团队辅助指南</title>
+    <meta name="description" content="深度解析科创板IPO阶段知识产权团队如何以IPDD与FTO为核心，为保荐机构提供全流程、专业化辅助。">
+
+    <!-- 外部资源 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js" defer></script>
+    
+    <style>
+        :root {
+            --bg: #111827;
+            --bg-soft: #1F2937;
+            --bg-softer: #374151;
+            --text: #F9FAFB;
+            --text-soft: #D1D5DB;
+            --text-softer: #9CA3AF;
+            --accent: #38BDF8;
+            --accent-soft: #0EA5E9;
+            --accent-softer: #0284C7;
+            --border: #374151;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+        }
+
+        [data-theme='light'] {
+            --bg: #F9FAFB;
+            --bg-soft: #FFFFFF;
+            --bg-softer: #E5E7EB;
+            --text: #1F2937;
+            --text-soft: #4B5563;
+            --text-softer: #6B7280;
+            --accent: #0EA5E9;
+            --accent-soft: #0284C7;
+            --accent-softer: #0369A1;
+            --border: #D1D5DB;
+            --warning: #D97706;
+            --danger: #DC2626;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-self;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .serif {
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        .text-gradient {
+            background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .bg-card {
+            background-color: var(--bg-soft);
+            border: 1px solid var(--border);
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+        
+        .bg-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            transform: translateY(-2px);
+        }
+
+        .border-accent {
+            border-color: var(--accent);
+        }
+
+        .text-warning { color: var(--warning); }
+        .text-danger { color: var(--danger); }
+
+        /* Mermaid Chart Styling */
+        .mermaid-container {
+            display: flex;
+            justify-content: center;
+            min-height: 300px;
+            max-height: 600px;
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin: 2rem 0;
+            overflow: auto;
+        }
+        [data-theme='light'] .mermaid .node rect,
+        [data-theme='light'] .mermaid .node circle,
+        [data-theme='light'] .mermaid .node ellipse,
+        [data-theme='light'] .mermaid .node polygon,
+        [data-theme='light'] .mermaid .node path {
+            fill: #E0F2FE;
+            stroke: #0EA5E9;
+            color: #0369A1;
+        }
+        [data-theme='light'] .mermaid .edgeLabel {
+            background-color: #FFFFFF !important;
+            color: #1F2937 !important;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div id="app">
+        <!-- Theme Toggle Button -->
+        <button id="theme-toggle" class="fixed top-4 right-4 z-50 p-3 rounded-full bg-card text-text-soft hover:bg-softer transition-colors">
+            <i class="fas fa-moon dark:hidden"></i>
+            <i class="fas fa-sun hidden dark:block"></i>
+        </button>
+
+        <!-- Hero Section -->
+        <header class="relative min-h-[70vh] flex items-center justify-center py-20 px-6 bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 dark:from-gray-100 dark:to-blue-200 text-white dark:text-gray-900">
+            <div class="absolute inset-0 bg-black/20 dark:bg-white/20"></div>
+            <div class="relative z-10 text-center max-w-4xl mx-auto">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold serif mb-6 leading-tight">
+                    <span class="text-gradient block">科创板IPO</span>
+                    <span class="block mt-2">知识产权团队辅助指南</span>
+                </h1>
+                <p class="text-lg sm:text-xl md:text-2xl text-gray-300 dark:text-gray-700 max-w-3xl mx-auto">
+                    聚焦IPDD尽调与FTO分析，为保荐机构与申报律师构筑全流程、专业化的知识产权护城河。
+                </p>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <!-- Introduction -->
+            <section class="mb-16">
+                <div class="bg-card rounded-xl p-8">
+                    <h2 class="text-3xl font-bold serif mb-4 text-accent">核心洞察</h2>
+                    <p class="text-lg text-text-soft leading-relaxed">
+                        在科创板IPO核查阶段，知识产权专业团队的核心价值在于将“事后补救”转化为“事前预防”。通过系统性的IPDD（知识产权尽职调查）和FTO（自由实施分析），我们不仅识别潜在的致命风险，更为主承销商、发行人律师提供可直接落地的解决方案和合规披露模板，确保上市之路行稳致远。
+                    </p>
+                </div>
+            </section>
+            
+            <!-- Core Tasks Overview (Mermaid Diagram) -->
+            <section class="mb-16">
+                <h2 class="text-3xl font-bold serif mb-6 text-center">IPDD & FTO 核心工作流</h2>
+                <div class="mermaid-container">
+                    <div class="mermaid" id="workflow-chart">
+                        graph TD
+                            A[科创板IPO启动] --> B{核心知识产权<br/>风险识别};
+                            B --> C[IPDD: 权属核查与风险隔离];
+                            B --> D[FTO: 侵权风险预警];
+                            C --> E[权属清晰性验证];
+                            C --> F[科创属性论证支持];
+                            D --> G[全球侵权风险扫描];
+                            D --> H[风险分级与应对策略];
+                            E & F & G & H --> I[招股书信息披露合规审查];
+                            I --> J{监管问询};
+                            I --> K[持续督导与内控建设];
+                            J --> L[问询回复预判与支持];
+                            K --> M[上市后IP风险监控机制];
+                            L --> N[IPO成功];
+                            M --> N;
+                            
+                            classDef default fill:#0EA5E9,stroke:#0369A1,color:#FFFFFF,stroke-width:2px
+                            classDef riskNode fill:#F59E0B,stroke:#D97706,color:#1F2937,stroke-width:2px
+                            classDef successNode fill:#10B981,stroke:#059669,color:#FFFFFF,stroke-width:2px
+                            class B,L riskNode
+                            class N successNode
+                    </div>
+                </div>
+            </section>
+
+            <!-- Detailed Sections -->
+            <div class="space-y-16">
+                <!-- Section 1 -->
+                <section class="bg-card rounded-xl overflow-hidden">
+                    <header class="p-6 bg-gray-800 dark:bg-gray-200 border-b border-border">
+                        <h3 class="text-2xl font-bold serif flex items-center text-accent">
+                            <i class="fas fa-search-plus fa-fw mr-3"></i>
+                            一、核心权属风险核查：IPDD的立体扫描
+                        </h3>
+                    </header>
+                    <div class="p-6 space-y-6">
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3 flex items-center">
+                                <i class="fas fa-certificate fa-fw mr-2 text-accent-soft"></i>
+                                权属清晰性验证
+                            </h4>
+                            <p class="text-text-soft leading-relaxed">
+                                我们深入核查每一项核心专利与技术的“出生证明”。这包括：<strong class="text-accent">识别职务发明风险</strong>、厘清<strong class="text-accent">合作研发成果归属</strong>（尤其警惕高校合作项目中的潜在纠纷），确保无任何权属瑕疵能够动摇上市的根基。我们的专业输出是详尽的IPDD报告，它不仅构成保荐机构的核心底稿，更直接支撑招股书“核心技术权属”章节的精准披露。
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3 flex items-center">
+                                <i class="fas fa-star fa-fw mr-2 text-accent-soft"></i>
+                                科创属性论证支持
+                            </h4>
+                            <p class="text-text-soft leading-relaxed">
+                                超越简单的“专利数量堆砌”，我们量化分析专利与核心技术的内在关联性。通过构建“研发投入-专利产出-技术先进性”的多维指标体系，我们协助企业论证其符合《科创板科创属性评价指引》的严苛要求。同时，我们善于挖掘技术秘密、软件著作权等非专利创新成果，构建一个更加立体、更具说服力的技术先进性说明。
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 2 -->
+                <section class="bg-card rounded-xl overflow-hidden">
+                    <header class="p-6 bg-gray-800 dark:bg-gray-200 border-b border-border">
+                        <h3 class="text-2xl font-bold serif flex items-center text-accent">
+                            <i class="fas fa-shield-alt fa-fw mr-3"></i>
+                            二、侵权风险预警与应对：FTO的攻防一体
+                        </h3>
+                    </header>
+                    <div class="p-6 space-y-6">
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3 flex items-center">
+                                <i class="fas fa-globe fa-fw mr-2 text-accent-soft"></i>
+                                全球侵权风险扫描
+                            </h4>
+                            <p class="text-text-soft leading-relaxed">
+                                FTO（自由实施分析）是我们为企业构筑的“专利雷达”。我们针对企业核心产品与技术，在全球主要市场（尤其聚焦中国大陆）进行地毯式搜索，识别潜在的专利侵权障碍。一份权威的FTO法律意见书不仅是招股书“风险因素”章节的核心披露内容，更是应对未来任何“专利狙击”的坚固盾牌。
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3 flex items-center">
+                                <i class="fas fa-chess-knight fa-fw mr-2 text-accent-soft"></i>
+                                风险分级与应对策略
+                            </h4>
+                            <p class="text-text-soft leading-relaxed">
+                                发现风险只是第一步，关键在于如何化解。我们对识别出的每一项高风险专利进行专业评估，并提供从“规避设计”、“专利无效宣告”到“许可谈判”的一整套分级处置方案。我们的目标是确保企业上市之路不受任何专利诉讼的干扰。
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3 -->
+                <section class="bg-card rounded-xl overflow-hidden">
+                    <header class="p-6 bg-gray-800 dark:bg-gray-200 border-b border-border">
+                        <h3 class="text-2xl font-bold serif flex items-center text-accent">
+                            <i class="fas fa-file-signature fa-fw mr-3"></i>
+                            三、信息披露与问询回复：从合规到卓越
+                        </h3>
+                    </header>
+                    <div class="p-6 space-y-6">
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3 flex items-center">
+                                <i class="fas fa-check-double fa-fw mr-2 text-accent-soft"></i>
+                                招股书“知识产权”章节核验
+                            </h4>
+                            <p class="text-text-soft leading-relaxed">
+                                一字千金，披露即责任。我们对招股书中“知识产权”章节的每一处数据、每一项描述进行交叉核验，确保其准确无误。我们的目标是帮助企业规避类似<strong class="text-danger">“兴嘉生物因专利数量披露错误被否”</strong>和<strong class="text-danger">“泽达易盛因信披不实被处罚”</strong>的惨痛教训，真正做到信息披露的“零瑕疵”。
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3 flex items-center">
+                                <i class="fas fa-comments fa-fw mr-2 text-accent-soft"></i>
+                                监管问询预判与回复
+                            </h4>
+                            <p class="text-text-soft leading-relaxed">
+                                监管问询是上市路上的“终极考验”。我们基于对历年科创板审核案例的深度研究，提前为企业准备高频问询（如“核心技术来源合法性”、“核心人员竞业限制”）的完整证据链和专业回复模板，确保企业在面对监管质询时能够胸有成竹、对答如流。
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4 -->
+                <section class="bg-card rounded-xl overflow-hidden">
+                    <header class="p-6 bg-gray-800 dark:bg-gray-200 border-b border-border">
+                        <h3 class="text-2xl font-bold serif flex items-center text-accent">
+                            <i class="fas fa-cogs fa-fw mr-3"></i>
+                            四、持续督导与内控建设：上市后的护城河
+                        </h3>
+                    </header>
+                    <div class="p-6 space-y-6">
+                        <p class="text-text-soft leading-relaxed">
+                            上市不是终点，而是新的起点。我们协助企业建立一套动态、可持续的知识产权管理体系，包括实时的第三方侵权预警、核心员工离职IP审查等内控流程。更重要的是，我们为企业量身定制上市后IP风险的快速响应预案，确保企业在面对任何突发专利诉讼时，都能从容不迫，将风险影响降至最低。
+                        </p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Warning Case Highlight -->
+            <aside class="mt-16 bg-warning/10 border-l-4 border-warning p-6 rounded-r-lg">
+                <h4 class="text-lg font-bold text-warning mb-2">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>
+                    监管警示案例
+                </h4>
+                <p class="text-text-soft leading-relaxed">
+                    据知识库《IPO 月度动态（2022年5月）》记录，某项目因专利信息披露质量问题（申报后修改专利数量从53项改为51项）被监管质疑真实性，最终否决。知识产权团队的核心价值，正在于通过专业审查，将此类“看似微小”的硬伤消弭于无形。
+                </p>
+            </aside>
+            
+            <!-- Further Reading -->
+            <section class="mt-16">
+                <h2 class="text-3xl font-bold serif mb-6 text-center">延伸阅读</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <a href="https://guantao.com/page2241" target="_blank" class="bg-card rounded-lg p-6 hover:shadow-lg transition-all">
+                        <h4 class="font-bold text-accent mb-2">观韬视点：科创板IPO期间知识产权专项法律服务</h4>
+                        <p class="text-sm text-text-softer">深入解析IPO全流程中的知识产权法律要点。</p>
+                    </a>
+                    <a href="https://www.mhplawyer.com/CN/05-11623.aspx" target="_blank" class="bg-card rounded-lg p-6 hover:shadow-lg transition-all">
+                        <h4 class="font-bold text-accent mb-2">科创板IPO涉及知识产权法律问题的审核要点</h4>
+                        <p class="text-sm text-text-softer">聚焦监管视角下的审核核心关注点。</p>
+                    </a>
+                    <a href="https://www.grandall.com.cn/ghsd/info.aspx?itemid=24246" target="_blank" class="bg-card rounded-lg p-6 hover:shadow-lg transition-all">
+                        <h4 class="font-bold text-accent mb-2">国浩：从问询回复看科创板IP风险</h4>
+                        <p class="text-sm text-text-softer">通过真实案例学习如何构建有力的问询回复。</p>
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="mt-20 py-8 text-center text-text-softer border-t border-border">
+            <p>&copy; <span id="year"></span> 科创板知识产权指南. 专业洞察，赋能未来.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+        function setTheme(theme) {
+            if (theme === 'dark' || (!theme && prefersDarkScheme.matches)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.body.classList.add('dark');
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                document.body.classList.remove('dark');
+            }
+            localStorage.setItem('theme', theme);
+        }
+
+        function toggleTheme() {
+            const currentTheme = localStorage.getItem('theme');
+            if (currentTheme === 'dark') {
+                setTheme('light');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            } else {
+                setTheme('dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        }
+        
+        themeToggle.addEventListener('click', toggleTheme);
+        
+        // Set initial theme
+        const savedTheme = localStorage.getItem('theme');
+        setTheme(savedTheme);
+        if (savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches)) {
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+
+        // Mermaid Chart Config
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#0284C7',
+                primaryTextColor: '#FFFFFF',
+                primaryBorderColor: '#0369A1',
+                lineColor: '#9CA3AF',
+                background: '#1F2937',
+                mainBkg: '#0284C7',
+                secondBkg: '#38BDF8',
+                tertiaryColor: '#0EA5E9',
+                primaryBorderColor: '#0369A1',
+                primaryTextColor: '#FFFFFF',
+                secondaryTextColor: '#FFFFFF',
+                tertiaryTextColor: '#FFFFFF',
+                fontFamily: 'Noto Sans SC, sans-serif',
+            }
+        });
+
+        // Dynamic Year for Footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
+```
