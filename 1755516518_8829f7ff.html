@@ -1,0 +1,807 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板拟上市公司必备内部制度清单</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --accent-blue: #3b82f6;
+            --accent-amber: #f59e0b;
+            --border: #334155;
+        }
+        
+        [data-theme="light"] {
+            --bg-dark: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --border: #e2e8f0;
+        }
+        
+        * {
+            font-family: "Noto Sans SC", Tahoma, Arial, Roboto, sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.8;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%);
+        }
+        
+        .glass-card {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+        }
+        
+        [data-theme="light"] .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+        
+        .icon-ring {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-amber));
+            color: white;
+            font-size: 16px;
+        }
+        
+        .regulation-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--accent-blue);
+            margin-right: 8px;
+        }
+        
+        .priority-indicator {
+            width: 4px;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .priority-high { background: #ef4444; }
+        .priority-medium { background: #f59e0b; }
+        .priority-low { background: #10b981; }
+        
+        .mermaid-container {
+            display: flex;
+            justify-content: center;
+            min-height: 300px;
+            max-height: 800px;
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mermaid-container .mermaid {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            cursor: grab;
+            transition: transform 0.3s ease;
+            transform-origin: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            touch-action: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        .mermaid-container .mermaid svg {
+            max-width: 100%;
+            height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .mermaid-container .mermaid:active {
+            cursor: grabbing;
+        }
+        
+        .mermaid-container.zoomed .mermaid {
+            height: 100%;
+            width: 100%;
+            cursor: grab;
+        }
+        
+        .mermaid-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .mermaid-control-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 6px;
+            padding: 10px;
+            cursor: pointer;
+            color: var(--text-primary);
+            font-size: 14px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 36px;
+            height: 36px;
+        }
+        
+        .mermaid-control-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .mermaid-control-btn:active {
+            transform: scale(0.95);
+        }
+        
+        @media (max-width: 768px) {
+            .mermaid-control-btn:not(.reset-zoom) {
+                display: none;
+            }
+            .mermaid-controls {
+                top: auto;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 主题切换按钮 -->
+    <button id="theme-toggle" class="fixed top-4 right-4 z-50 p-3 rounded-full glass-card hover:scale-110 transition-transform">
+        <i class="fas fa-moon dark:hidden"></i>
+        <i class="fas fa-sun hidden dark:inline"></i>
+    </button>
+
+    <!-- Hero 区域 -->
+    <section class="relative min-h-[60vh] flex items-center justify-center hero-gradient">
+        <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        <div class="relative z-10 text-center max-w-4xl mx-auto px-6">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-amber-400 bg-clip-text text-transparent">
+                <i class="fas fa-building-columns mr-4"></i>
+                科创板拟上市公司必备制度清单
+            </h1>
+            <p class="text-lg md:text-xl text-gray-400 mb-8 leading-relaxed">
+                基于2025年最新监管要求，为您梳理从股改到IPO申报的完整制度框架
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 text-sm">
+                <span class="regulation-tag">上交所科创板规则2025修订版</span>
+                <span class="regulation-tag">内部控制审计新规</span>
+                <span class="regulation-tag">审计委员会替代监事会</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 制度体系可视化 -->
+    <section class="py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                <i class="fas fa-project-diagram mr-3 text-blue-400"></i>
+                制度体系框架图
+            </h2>
+            <div class="mermaid-container">
+                <div class="mermaid-controls">
+                    <button class="mermaid-control-btn zoom-in" title="放大">
+                        <i class="fas fa-search-plus"></i>
+                    </button>
+                    <button class="mermaid-control-btn zoom-out" title="缩小">
+                        <i class="fas fa-search-minus"></i>
+                    </button>
+                    <button class="mermaid-control-btn reset-zoom" title="重置">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </button>
+                    <button class="mermaid-control-btn fullscreen" title="全屏查看">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                </div>
+                <div class="mermaid" id="mermaid-chart">
+                    graph TD
+                        A["科创板拟上市公司"] --> B["公司治理类"]
+                        A --> C["财务内控类"]
+                        A --> D["信息披露类"]
+                        A --> E["科创板特色"]
+                        
+                        B --> B1["《公司章程》"]
+                        B --> B2["三会议事规则"]
+                        B --> B3["独立董事制度"]
+                        
+                        C --> C1["内部审计制度"]
+                        C --> C2["财务管理制度"]
+                        C --> C3["关联交易制度"]
+                        C --> C4["内控评价制度"]
+                        
+                        D --> D1["信息披露制度"]
+                        D --> D2["内幕信息登记制度"]
+                        D --> D3["投资者关系制度"]
+                        
+                        E --> E1["核心技术管理制度"]
+                        E --> E2["募集资金制度"]
+                        
+                        style A fill:#3b82f6,stroke:#1e40af,stroke-width:3px,color:#fff
+                        style B fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff
+                        style C fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+                        style D fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff
+                        style E fill:#ef4444,stroke:#dc2626,stroke-width:2px,color:#fff
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 制度详细清单 -->
+    <section class="py-16 px-6">
+        <div class="max-w-6xl mx-auto">
+            <!-- 公司治理类 -->
+            <div class="mb-16">
+                <div class="flex items-center mb-8">
+                    <div class="icon-ring mr-4">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold">公司治理类（核心必备）</h2>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="glass-card p-6 rounded-xl relative">
+                        <div class="priority-indicator priority-high"></div>
+                        <div class="ml-6">
+                            <h3 class="text-xl font-semibold mb-3 flex items-center">
+                                <i class="fas fa-file-contract text-blue-400 mr-2"></i>
+                                《公司章程》
+                            </h3>
+                            <p class="text-gray-400 mb-4">
+                                公司治理的根本大法，2025年新规要求2026年1月1日前取消监事会，由审计委员会行使监督职能。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="regulation-tag">《公司法》第11条</span>
+                                <span class="regulation-tag">《科创板上市规则》4.1.1</span>
+                                <span class="regulation-tag">2025年4月修订版</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-xl relative">
+                        <div class="priority-indicator priority-high"></div>
+                        <div class="ml-6">
+                            <h3 class="text-xl font-semibold mb-3 flex items-center">
+                                <i class="fas fa-users text-blue-400 mr-2"></i>
+                                三会议事规则（股改过渡期）
+                            </h3>
+                            <p class="text-gray-400 mb-4">
+                                包括股东大会议事规则、董事会议事规则、监事会议事规则，需作为章程附件。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="regulation-tag">《上市公司章程指引》第11条</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-xl relative">
+                        <div class="priority-indicator priority-medium"></div>
+                        <div class="ml-6">
+                            <h3 class="text-xl font-semibold mb-3 flex items-center">
+                                <i class="fas fa-user-tie text-blue-400 mr-2"></i>
+                                《独立董事工作制度》
+                            </h3>
+                            <p class="text-gray-400 mb-4">
+                                明确独立董事职责、履职保障及问责机制，审计委员会需包含独立董事。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="regulation-tag">《独立董事管理办法》第10条</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 财务内控类 -->
+            <div class="mb-16">
+                <div class="flex items-center mb-8">
+                    <div class="icon-ring mr-4">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold">财务与内控类（实质性必备）</h2>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="glass-card p-6 rounded-xl relative">
+                        <div class="priority-indicator priority-high"></div>
+                        <div class="ml-6">
+                            <h3 class="text-xl font-semibold mb-3 flex items-center">
+                                <i class="fas fa-search text-green-400 mr-2"></i>
+                                《内部审计制度》
+                            </h3>
+                            <p class="text-gray-400 mb-4">
+                                强制配备专职审计人员，审计部门直接向审计委员会报告，覆盖财务收支、内控有效性审查。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="regulation-tag">《上市公司章程指引》第157条</span>
+                                <span class="regulation-tag">必须配备专职审计人员</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-xl relative">
+                        <div class="priority-indicator priority-high"></div>
+                        <div class="ml-6">
+                            <h3 class="text-xl font-semibold mb-3 flex items-center">
+                                <i class="fas fa-chart-line text-green-400 mr-2"></i>
+                                《内部控制评价制度》
+                            </h3>
+                            <p class="text-gray-400 mb-4">
+                                2024年起，需提交无保留意见的财务报告内部控制审计报告，必须保留执行痕迹。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="regulation-tag">《企业内部控制评价指引》</span>
+                                <span class="regulation-tag">2024年新规</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-xl relative">
+                        <div class="priority-indicator priority-medium"></div>
+                        <div class="ml-6">
+                            <h3 class="text-xl font-semibold mb-3 flex items-center">
+                                <i class="fas fa-handshake text-green-400 mr-2"></i>
+                                《关联交易管理制度》
+                            </h3>
+                            <p class="text-gray-400 mb-4">
+                                规范资金使用的决策程序，关联交易需区分董事会/股东大会审议层级，明确回避表决。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="regulation-tag">《科创板上市规则》5.3.2</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 信息披露类 -->
+            <div class="mb-16">
+                <div class="flex items-center mb-8">
+                    <div class="icon-ring mr-4">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold">信息披露与合规类</h2>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="glass-card p-6 rounded-xl relative">
+                        <div class="priority-indicator priority-high"></div>
+                        <div class="ml-6">
+                            <h3 class="text-xl font-semibold mb-3 flex items-center">
+                                <i class="fas fa-info-circle text-purple-400 mr-2"></i>
+                                《信息披露事务管理制度》
+                            </h3>
+                            <p class="text-gray-400 mb-4">
+                                科创板强调"新三性"（充分性、一致性、可理解性），区别于传统的真实性、准确性、完整性。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="regulation-tag">《科创板上市规则》第五章</span>
+                                <span class="regulation-tag">新三性要求</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-xl relative">
+                        <div class="priority-indicator priority-medium"></div>
+                        <div class="ml-6">
+                            <h3 class="text-xl font-semibold mb-3 flex items-center">
+                                <i class="fas fa-lock text-purple-400 mr-2"></i>
+                                《内幕信息知情人登记管理制度》
+                            </h3>
+                            <p class="text-gray-400 mb-4">
+                                登记范围覆盖董监高、中介机构等，需定期向交易所报备，防止内幕交易。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="regulation-tag">《信息披露管理办法》第45条</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-xl relative">
+                        <div class="priority-indicator priority-low"></div>
+                        <div class="ml-6">
+                            <h3 class="text-xl font-semibold mb-3 flex items-center">
+                                <i class="fas fa-comments text-purple-400 mr-2"></i>
+                                《投资者关系管理制度》
+                            </h3>
+                            <p class="text-gray-400 mb-4">
+                                规定业绩说明会、路演等活动，需编制《投资者关系活动记录表》并披露。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="regulation-tag">《科创板上市规则》4.6.8</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 科创板特色制度 -->
+            <div class="mb-16">
+                <div class="flex items-center mb-8">
+                    <div class="icon-ring mr-4">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold">科创板特色制度</h2>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="glass-card p-6 rounded-xl relative">
+                        <div class="priority-indicator priority-high"></div>
+                        <div class="ml-6">
+                            <h3 class="text-xl font-semibold mb-3 flex items-center">
+                                <i class="fas fa-cog text-red-400 mr-2"></i>
+                                《核心技术管理制度》
+                            </h3>
+                            <p class="text-gray-400 mb-4">
+                                科创板定位要求，需披露研发投入、科研人员占比、专利情况，并建立技术保密机制。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="regulation-tag">《科创属性评价指引》</span>
+                                <span class="regulation-tag">差异化披露要求</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-xl relative">
+                        <div class="priority-indicator priority-high"></div>
+                        <div class="ml-6">
+                            <h3 class="text-xl font-semibold mb-3 flex items-center">
+                                <i class="fas fa-piggy-bank text-red-400 mr-2"></i>
+                                《募集资金专项制度》
+                            </h3>
+                            <p class="text-gray-400 mb-4">
+                                募投项目变更需经股东大会审议，必须有详细的可行性分析和风险控制措施。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="regulation-tag">《科创板上市公司自律监管指南》</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 实施时间轴 -->
+    <section class="py-16 px-6">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                <i class="fas fa-timeline mr-3 text-amber-400"></i>
+                实施时间轴
+            </h2>
+            <div class="relative">
+                <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-400 to-amber-400"></div>
+                
+                <div class="relative flex items-center mb-8">
+                    <div class="absolute left-0 w-8 h-8 bg-blue-400 rounded-full flex items-center justify-center">
+                        <i class="fas fa-play text-xs"></i>
+                    </div>
+                    <div class="ml-12 glass-card p-4 rounded-lg">
+                        <h4 class="font-semibold">股改启动前</h4>
+                        <p class="text-sm text-gray-400">完成《公司章程》制定，确立公司治理框架</p>
+                    </div>
+                </div>
+
+                <div class="relative flex items-center mb-8">
+                    <div class="absolute left-0 w-8 h-8 bg-green-400 rounded-full flex items-center justify-center">
+                        <i class="fas fa-cog text-xs"></i>
+                    </div>
+                    <div class="ml-12 glass-card p-4 rounded-lg">
+                        <h4 class="font-semibold">股改完成前</h4>
+                        <p class="text-sm text-gray-400">所有核心制度建立完毕，经董事会审议通过</p>
+                    </div>
+                </div>
+
+                <div class="relative flex items-center mb-8">
+                    <div class="absolute left-0 w-8 h-8 bg-purple-400 rounded-full flex items-center justify-center">
+                        <i class="fas fa-upload text-xs"></i>
+                    </div>
+                    <div class="ml-12 glass-card p-4 rounded-lg">
+                        <h4 class="font-semibold">IPO申报前</h4>
+                        <p class="text-sm text-gray-400">提交内控审计报告，制度执行痕迹完整</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 延伸阅读 -->
+    <section class="py-16 px-6">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">
+                <i class="fas fa-book-open mr-3 text-green-400"></i>
+                进一步阅读推荐
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="glass-card p-6 rounded-xl">
+                    <h4 class="font-semibold mb-2 text-lg">《上海证券交易所科创板股票上市规则（2025年修订）》</h4>
+                    <p class="text-sm text-gray-400 mb-3">最新监管要求全文，包含取消监事会等重大变化</p>
+                    <a href="https://www.sse.com.cn/lawandrules/sselawsrules/repeal/rules/c/10118921/files/9bd863640cc44cfb8db0a7e756df68dc.pdf" 
+                       class="text-blue-400 hover:text-blue-300 text-sm">
+                        <i class="fas fa-external-link-alt mr-1"></i>阅读原文
+                    </a>
+                </div>
+                
+                <div class="glass-card p-6 rounded-xl">
+                    <h4 class="font-semibold mb-2 text-lg">《企业内部控制评价指引》</h4>
+                    <p class="text-sm text-gray-400 mb-3">财政部制定的内控评价标准，IPO必备参考</p>
+                    <a href="#" class="text-blue-400 hover:text-blue-300 text-sm">
+                        <i class="fas fa-external-link-alt mr-1"></i>查看详情
+                    </a>
+                </div>
+                
+                <div class="glass-card p-6 rounded-xl">
+                    <h4 class="font-semibold mb-2 text-lg">《科创属性评价指引》</h4>
+                    <p class="text-sm text-gray-400 mb-3">科创板定位要求详解，核心技术管理制度制定依据</p>
+                    <a href="#" class="text-blue-400 hover:text-blue-300 text-sm">
+                        <i class="fas fa-external-link-alt mr-1"></i>查看详情
+                    </a>
+                </div>
+                
+                <div class="glass-card p-6 rounded-xl">
+                    <h4 class="font-semibold mb-2 text-lg">《上市公司独立董事管理办法》</h4>
+                    <p class="text-sm text-gray-400 mb-3">独立董事制度建设的权威指引，包含履职保障要求</p>
+                    <a href="#" class="text-blue-400 hover:text-blue-300 text-sm">
+                        <i class="fas fa-external-link-alt mr-1"></i>查看详情
+                    </a>
+                </div>
+                
+                <div class="glass-card p-6 rounded-xl">
+                    <h4 class="font-semibold mb-2 text-lg">《科创板上市公司自律监管指南》</h4>
+                    <p class="text-sm text-gray-400 mb-3">募集资金管理等特色制度的实务操作指南</p>
+                    <a href="#" class="text-blue-400 hover:text-blue-300 text-sm">
+                        <i class="fas fa-external-link-alt mr-1"></i>查看详情
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="py-8 px-6 border-t border-gray-700">
+        <div class="max-w-4xl mx-auto text-center">
+            <p class="text-gray-400 text-sm">
+                <i class="fas fa-info-circle mr-1"></i>
+                本清单基于2025年4月最新监管要求整理，建议与专业律师、会计师共同确认适用性
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // 主题切换
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        // 检查系统主题偏好
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        function setTheme(isDark) {
+            if (isDark) {
+                html.setAttribute('data-theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                html.setAttribute('data-theme', 'light');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        }
+        
+        // 初始设置
+        setTheme(prefersDarkScheme.matches);
+        
+        // 监听系统主题变化
+        prefersDarkScheme.addEventListener('change', (e) => {
+            setTheme(e.matches);
+        });
+        
+        // 手动切换
+        themeToggle.addEventListener('click', () => {
+            const isDark = html.getAttribute('data-theme') === 'dark';
+            setTheme(!isDark);
+        });
+
+        // Mermaid 图表配置
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#3b82f6',
+                primaryTextColor: '#ffffff',
+                primaryBorderColor: '#1e40af',
+                lineColor: '#64748b',
+                secondaryColor: '#f59e0b',
+                tertiaryColor: '#10b981',
+                background: '#1e293b',
+                mainBkg: '#1e293b',
+                secondaryBkg: '#334155',
+                tertiaryBkg: '#475569'
+            },
+            flowchart: {
+                useMaxWidth: false,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+
+        // 图表交互控制
+        let mermaidScales = {};
+        let mermaidTransforms = {};
+
+        function setupMermaidControls() {
+            const containers = document.querySelectorAll('.mermaid-container');
+
+            containers.forEach(container => {
+                const mermaidElement = container.querySelector('.mermaid');
+                const chartId = container.querySelector('.mermaid').id || 'mermaid-chart';
+                
+                // 初始化缩放和位置状态
+                mermaidScales[chartId] = 1;
+                mermaidTransforms[chartId] = { x: 0, y: 0 };
+                
+                // 缩放功能
+                const zoomInBtn = container.querySelector('.zoom-in');
+                const zoomOutBtn = container.querySelector('.zoom-out');
+                const resetBtn = container.querySelector('.reset-zoom');
+                const fullscreenBtn = container.querySelector('.fullscreen');
+
+                function updateTransform() {
+                    mermaidElement.style.transform = `translate(${mermaidTransforms[chartId].x}px, ${mermaidTransforms[chartId].y}px) scale(${mermaidScales[chartId]})`;
+                }
+
+                if (zoomInBtn) {
+                    zoomInBtn.addEventListener('click', () => {
+                        mermaidScales[chartId] = Math.min(mermaidScales[chartId] * 1.25, 4);
+                        updateTransform();
+                    });
+                }
+
+                if (zoomOutBtn) {
+                    zoomOutBtn.addEventListener('click', () => {
+                        mermaidScales[chartId] = Math.max(mermaidScales[chartId] / 1.25, 0.5);
+                        updateTransform();
+                    });
+                }
+
+                if (resetBtn) {
+                    resetBtn.addEventListener('click', () => {
+                        mermaidScales[chartId] = 1;
+                        mermaidTransforms[chartId] = { x: 0, y: 0 };
+                        updateTransform();
+                        container.classList.remove('zoomed');
+                    });
+                }
+
+                if (fullscreenBtn) {
+                    fullscreenBtn.addEventListener('click', () => {
+                        if (container.requestFullscreen) {
+                            container.requestFullscreen();
+                        } else if (container.webkitRequestFullscreen) {
+                            container.webkitRequestFullscreen();
+                        } else if (container.msRequestFullscreen) {
+                            container.msRequestFullscreen();
+                        }
+                    });
+                }
+
+                // 拖拽功能
+                let isDragging = false;
+                let startX, startY;
+                let lastX = 0, lastY = 0;
+
+                mermaidElement.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    startX = e.clientX - lastX;
+                    startY = e.clientY - lastY;
+                    mermaidElement.style.cursor = 'grabbing';
+                    e.preventDefault();
+                });
+
+                document.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return;
+                    const deltaX = e.clientX - startX;
+                    const deltaY = e.clientY - startY;
+                    lastX = deltaX;
+                    lastY = deltaY;
+                    mermaidTransforms[chartId].x = deltaX;
+                    mermaidTransforms[chartId].y = deltaY;
+                    updateTransform();
+                });
+
+                document.addEventListener('mouseup', () => {
+                    isDragging = false;
+                    mermaidElement.style.cursor = 'grab';
+                });
+
+                // 触摸设备支持
+                mermaidElement.addEventListener('touchstart', (e) => {
+                    if (e.touches.length === 1) {
+                        isDragging = true;
+                        startX = e.touches[0].clientX - lastX;
+                        startY = e.touches[0].clientY - lastY;
+                    }
+                });
+
+                document.addEventListener('touchmove', (e) => {
+                    if (!isDragging || e.touches.length !== 1) return;
+                    const deltaX = e.touches[0].clientX - startX;
+                    const deltaY = e.touches[0].clientY - startY;
+                    lastX = deltaX;
+                    lastY = deltaY;
+                    mermaidTransforms[chartId].x = deltaX;
+                    mermaidTransforms[chartId].y = deltaY;
+                    updateTransform();
+                });
+
+                document.addEventListener('touchend', () => {
+                    isDragging = false;
+                });
+            });
+        }
+
+        // 页面加载完成后设置图表控制
+        document.addEventListener('DOMContentLoaded', () => {
+            setupMermaidControls();
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+```
