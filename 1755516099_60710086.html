@@ -1,0 +1,525 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板拟IPO股权激励时间线指南</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Mermaid -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'serif': ['Noto Serif SC', 'serif'],
+                        'sans': ['Noto Sans SC', 'sans-serif']
+                    },
+                    colors: {
+                        'primary': '#1e293b',
+                        'secondary': '#334155',
+                        'accent': '#3b82f6',
+                        'muted': '#64748b'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 100%);
+        }
+        
+        .timeline-card {
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .mermaid-container {
+            display: flex;
+            justify-content: center;
+            min-height: 300px;
+            max-height: 800px;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+        
+        @media (max-width: 768px) {
+            .mermaid-container {
+                overflow-x: auto;
+            }
+        }
+        
+        .mermaid svg {
+            max-width: 100%;
+            height: 100%;
+            cursor: grab;
+            transition: transform 0.3s ease;
+            transform-origin: center center;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .mermaid svg:active {
+            cursor: grabbing;
+        }
+        
+        .mermaid .node rect,
+        .mermaid .node circle,
+        .mermaid .node polygon {
+            stroke-width: 2px;
+        }
+        
+        /* Dark mode styles for Mermaid */
+        [data-theme="dark"] .mermaid .node rect,
+        [data-theme="dark"] .mermaid .node circle,
+        [data-theme="dark"] .mermaid .node polygon {
+            fill: #1e293b;
+            stroke: #3b82f6;
+        }
+        
+        [data-theme="dark"] .mermaid .node .label {
+            color: #f1f5f9;
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 14px;
+        }
+        
+        [data-theme="dark"] .mermaid .edgePath .path {
+            stroke: #64748b;
+            stroke-width: 2px;
+        }
+        
+        [data-theme="dark"] .mermaid .edgeLabel {
+            background-color: #1e293b;
+            color: #cbd5e1;
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 12px;
+        }
+        
+        /* Light mode styles for Mermaid */
+        [data-theme="light"] .mermaid .node rect,
+        [data-theme="light"] .mermaid .node circle,
+        [data-theme="light"] .mermaid .node polygon {
+            fill: #ffffff;
+            stroke: #3b82f6;
+        }
+        
+        [data-theme="light"] .mermaid .node .label {
+            color: #1e293b;
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 14px;
+        }
+        
+        [data-theme="light"] .mermaid .edgePath .path {
+            stroke: #64748b;
+            stroke-width: 2px;
+        }
+        
+        [data-theme="light"] .mermaid .edgeLabel {
+            background-color: #ffffff;
+            color: #475569;
+            font-family: 'Noto Sans SC', sans-serif;
+            font-size: 12px;
+        }
+        
+        /* Timeline styles */
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            background: #3b82f6;
+            border-radius: 50%;
+            border: 3px solid #1e293b;
+        }
+        
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        
+        [data-theme="dark"] ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        
+        [data-theme="dark"] ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300">
+    
+    <!-- Theme Toggle -->
+    <button id="theme-toggle" class="fixed top-4 right-4 z-50 p-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all duration-300">
+        <i class="fas fa-moon text-slate-600 dark:text-yellow-400"></i>
+    </button>
+    
+    <!-- Hero Section -->
+    <section class="relative min-h-[60vh] flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900">
+        <div class="absolute inset-0 bg-black/20"></div>
+        <div class="relative z-10 text-center max-w-4xl mx-auto px-4">
+            <h1 class="text-4xl md:text-6xl font-serif font-bold mb-6 leading-tight">
+                <span class="text-white">科创板拟IPO</span>
+                <br>
+                <span class="gradient-text">股权激励时间线</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-300 font-light max-w-2xl mx-auto">
+                深度解析科创板拟上市公司股权激励计划的关键时间节点与合规要求
+            </p>
+            <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#timeline" class="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 font-medium">
+                    <i class="fas fa-clock mr-2"></i>查看时间线
+                </a>
+                <a href="#analysis" class="px-8 py-3 border border-slate-400 text-slate-200 rounded-lg hover:bg-white/10 transition-all duration-300 font-medium">
+                    <i class="fas fa-chart-line mr-2"></i>深度分析
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-16">
+        
+        <!-- Key Insights -->
+        <section id="insights" class="mb-16">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="timeline-card bg-white dark:bg-slate-800 rounded-xl p-6 shadow-lg">
+                    <div class="w-12 h-12 bg-blue-500/10 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-calendar-check text-blue-500 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">基准日要求</h3>
+                    <p class="text-slate-600 dark:text-slate-400">
+                        无需在财务报告基准日前完成所有授予，但需确保股份支付费用充分计提
+                    </p>
+                </div>
+                
+                <div class="timeline-card bg-white dark:bg-slate-800 rounded-xl p-6 shadow-lg">
+                    <div class="w-12 h-12 bg-purple-500/10 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-paper-plane text-purple-500 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">申报前限制</h3>
+                    <p class="text-slate-600 dark:text-slate-400">
+                        提交IPO申请前需完成主要授予，申报后禁止新增激励对象或扩大预留
+                    </p>
+                </div>
+                
+                <div class="timeline-card bg-white dark:bg-slate-800 rounded-xl p-6 shadow-lg">
+                    <div class="w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-percentage text-green-500 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">预留份额</h3>
+                    <p class="text-slate-600 dark:text-slate-400">
+                        允许保留不超过20%的预留份额，但需在招股说明书中详细披露计划
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Timeline Visualization -->
+        <section id="timeline" class="mb-16">
+            <h2 class="text-3xl font-serif font-bold mb-8 text-center">股权激励关键时间线</h2>
+            <div class="mermaid-container mb-8">
+                <div class="mermaid" id="timeline-chart">
+                    timeline
+                        title 科创板拟IPO股权激励时间线
+                        报告期开始 : 股权激励启动
+                                    : 持续授予阶段
+                        财务基准日 : 股份支付计提
+                                    : 可继续授予
+                        申报前30日 : 完成主要授予
+                                    : 预留份额≤20%
+                        IPO申报日 : 禁止新增授予
+                                    : 冻结激励计划
+                        上市成功 : 可重启激励
+                </div>
+            </div>
+        </section>
+        
+        <!-- Detailed Analysis -->
+        <section id="analysis" class="mb-16">
+            <div class="bg-white dark:bg-slate-800 rounded-xl shadow-lg overflow-hidden">
+                <div class="p-8">
+                    <h2 class="text-3xl font-serif font-bold mb-6">详细分析框架</h2>
+                    
+                    <!-- Process Flow -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-sitemap text-blue-500 mr-3"></i>
+                            决策流程图
+                        </h3>
+                        <div class="mermaid-container">
+                            <div class="mermaid" id="process-chart">
+                                flowchart TD
+                                    A[股权激励启动] --> B{是否在<br>报告期内}
+                                    B -->|是| C[持续授予阶段]
+                                    B -->|否| D[重新规划]
+                                    C --> E{是否接近<br>财务基准日}
+                                    E -->|是| F[评估股份支付影响]
+                                    E -->|否| C
+                                    F --> G{影响是否重大}
+                                    G -->|是| H[调整授予计划]
+                                    G -->|否| I[继续执行]
+                                    H --> C
+                                    I --> J{是否接近<br>IPO申报}
+                                    J -->|是| K[完成主要授予]
+                                    J -->|否| C
+                                    K --> L{预留份额≤20%}
+                                    L -->|是| M[准备申报]
+                                    L -->|否| N[调整预留比例]
+                                    N --> K
+                                    M --> O[IPO申报]
+                                    O --> P[冻结激励计划]
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Key Requirements -->
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4 flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                合规要点
+                            </h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <span class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                    <span class="text-slate-600 dark:text-slate-400">股份支付费用需在报告期内充分计提</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                    <span class="text-slate-600 dark:text-slate-400">申报前完成主要授予，避免重大变动</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                    <span class="text-slate-600 dark:text-slate-400">预留份额不超过20%，需详细披露</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                    <span class="text-slate-600 dark:text-slate-400">避免股权结构重大变化影响控制</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4 flex items-center">
+                                <i class="fas fa-exclamation-triangle text-amber-500 mr-3"></i>
+                                风险警示
+                            </h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <span class="w-2 h-2 bg-amber-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                    <span class="text-slate-600 dark:text-slate-400">申报后新增授予可能导致审核终止</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-2 h-2 bg-amber-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                    <span class="text-slate-600 dark:text-slate-400">股份支付费用计算错误影响财务数据</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-2 h-2 bg-amber-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                    <span class="text-slate-600 dark:text-slate-400">预留份额未明确可能导致披露瑕疵</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="w-2 h-2 bg-amber-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                    <span class="text-slate-600 dark:text-slate-400">激励对象离职影响计划执行</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Further Reading -->
+        <section id="reading" class="mb-16">
+            <h2 class="text-3xl font-serif font-bold mb-8 text-center">延伸阅读推荐</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <article class="timeline-card bg-white dark:bg-slate-800 rounded-xl p-6 shadow-lg">
+                    <h3 class="text-lg font-semibold mb-2">《科创板股票发行上市审核问答》</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">上海证券交易所官方规则文件，详细解读IPO审核要点</p>
+                    <a href="#" class="text-blue-500 hover:text-blue-600 text-sm font-medium">
+                        <i class="fas fa-external-link-alt mr-1"></i>查看原文
+                    </a>
+                </article>
+                
+                <article class="timeline-card bg-white dark:bg-slate-800 rounded-xl p-6 shadow-lg">
+                    <h3 class="text-lg font-semibold mb-2">《上市公司股权激励管理办法》</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">证监会发布的基础性规范文件，涵盖预留份额等关键条款</p>
+                    <a href="#" class="text-blue-500 hover:text-blue-600 text-sm font-medium">
+                        <i class="fas fa-external-link-alt mr-1"></i>查看原文
+                    </a>
+                </article>
+                
+                <article class="timeline-card bg-white dark:bg-slate-800 rounded-xl p-6 shadow-lg">
+                    <h3 class="text-lg font-semibold mb-2">《科创板拟IPO企业股权激励审核规则》</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">德恒律师事务所专业解读，实务案例与规则结合分析</p>
+                    <a href="#" class="text-blue-500 hover:text-blue-600 text-sm font-medium">
+                        <i class="fas fa-external-link-alt mr-1"></i>查看原文
+                    </a>
+                </article>
+                
+                <article class="timeline-card bg-white dark:bg-slate-800 rounded-xl p-6 shadow-lg">
+                    <h3 class="text-lg font-semibold mb-2">《IPO股权激励审核要点》</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">他山咨询深度研究，涵盖授予时点、股份支付处理等细节</p>
+                    <a href="#" class="text-blue-500 hover:text-blue-600 text-sm font-medium">
+                        <i class="fas fa-external-link-alt mr-1"></i>查看原文
+                    </a>
+                </article>
+                
+                <article class="timeline-card bg-white dark:bg-slate-800 rounded-xl p-6 shadow-lg">
+                    <h3 class="text-lg font-semibold mb-2">《科创板股票上市规则》</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">上交所权威规则，包含定价机制、总量限制等核心条款</p>
+                    <a href="#" class="text-blue-500 hover:text-blue-600 text-sm font-medium">
+                        <i class="fas fa-external-link-alt mr-1"></i>查看原文
+                    </a>
+                </article>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-slate-100 dark:bg-slate-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-slate-600 dark:text-slate-400 mb-4">
+                <i class="fas fa-info-circle mr-2"></i>
+                本指南仅供参考，具体操作请咨询专业律师和会计师
+            </p>
+            <p class="text-sm text-slate-500 dark:text-slate-500">
+                最后更新：2024年1月 · 基于现行法规整理
+            </p>
+        </div>
+    </footer>
+    
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#1e293b',
+                primaryTextColor: '#f1f5f9',
+                primaryBorderColor: '#3b82f6',
+                lineColor: '#64748b',
+                secondaryColor: '#334155',
+                tertiaryColor: '#475569',
+                background: 'transparent',
+                mainBkg: '#1e293b',
+                secondBkg: '#334155',
+                tertiaryBkg: '#475569'
+            },
+            flowchart: {
+                useMaxWidth: false,
+                htmlLabels: true,
+                curve: 'basis'
+            },
+            timeline: {
+                useMaxWidth: false
+            }
+        });
+        
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference or default to system preference
+        const savedTheme = localStorage.getItem('theme');
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        const currentTheme = savedTheme || systemTheme;
+        
+        html.setAttribute('data-theme', currentTheme);
+        updateThemeIcon(currentTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+            
+            // Reinitialize mermaid for theme change
+            mermaid.init();
+        });
+        
+        function updateThemeIcon(theme) {
+            const icon = themeToggle.querySelector('i');
+            if (theme === 'dark') {
+                icon.className = 'fas fa-sun text-yellow-400';
+            } else {
+                icon.className = 'fas fa-moon text-slate-600';
+            }
+        }
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            if (scrollY > 100) {
+                document.body.classList.add('scrolled');
+            } else {
+                document.body.classList.remove('scrolled');
+            }
+        });
+        
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>
+```
