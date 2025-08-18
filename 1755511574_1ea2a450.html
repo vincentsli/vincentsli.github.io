@@ -1,0 +1,846 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板拟上市公司内部制度规范指南</title>
+
+    <!-- External Resources -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --accent-blue: #0ea5e9;
+            --accent-gold: #f59e0b;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --border-color: #475569;
+            --gradient-primary: linear-gradient(135deg, #0ea5e9, #10b981);
+            --gradient-secondary: linear-gradient(135deg, #f59e0b, #ef4444);
+            --font-serif: 'Noto Serif SC', serif;
+            --font-sans: 'Noto Sans SC', sans-serif;
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --gradient-primary: linear-gradient(135deg, #0f172a, #334155);
+            --gradient-secondary: linear-gradient(135deg, #1e293b, #475569);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+
+        .font-serif {
+            font-family: var(--font-serif);
+        }
+
+        .hero-gradient {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--border-color);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: var(--accent-blue);
+        }
+
+        .section-divider {
+            background: var(--gradient-primary);
+            height: 1px;
+            margin: 3rem 0;
+            opacity: 0.3;
+        }
+
+        .citation-link {
+            color: var(--accent-blue);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--accent-blue);
+            transition: all 0.2s;
+        }
+
+        .citation-link:hover {
+            color: var(--accent-gold);
+            border-bottom-color: var(--accent-gold);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--bg-primary);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1.5rem;
+            width: 2px;
+            height: calc(100% - 1rem);
+            background: var(--border-color);
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        /* Mermaid overrides for dark mode */
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 100%;
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: 12px;
+            background: var(--bg-secondary);
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] .mermaid svg {
+            filter: invert(0.9) brightness(1.1) contrast(1.1);
+        }
+
+        /* Responsive fixes for small screens */
+        @media (max-width: 640px) {
+            body {
+                overflow-x: hidden;
+            }
+
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .hero-gradient {
+                font-size: 2.5rem;
+            }
+
+            .timeline-item {
+                padding-left: 1.5rem;
+            }
+
+            .timeline-item::before {
+                left: -0.5rem;
+            }
+
+            .timeline-item::after {
+                left: 0;
+            }
+
+            /* Mermaid responsive adjustments for small screens */
+            .mermaid {
+                padding: 1rem;
+                overflow-x: auto;
+            }
+
+            .mermaid svg {
+                max-width: 100%;
+                height: auto;
+            }
+
+            /* Prevent horizontal overflow */
+            .overflow-hidden {
+                overflow-x: hidden;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Hero background animation */
+        .hero-bg {
+            background: linear-gradient(-45deg, var(--bg-primary), var(--bg-secondary), var(--bg-tertiary), var(--accent-blue));
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-blue);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-gold);
+        }
+
+        /* Interactive elements */
+        .interactive-card {
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interactive-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .interactive-card:hover::before {
+            left: 100%;
+        }
+
+        /* Mobile menu animations */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mobile-menu {
+            animation: slideDown 0.3s ease-out;
+        }
+    </style>
+  </head>
+
+  <body class="bg-slate-900 text-slate-100">
+    <!-- Theme Toggle -->
+    <button id="themeToggle" class="fixed top-6 right-6 z-50 p-3 rounded-full bg-slate-800 hover:bg-slate-700 transition-colors duration-300 shadow-lg">
+      <i class="fas fa-sun text-yellow-400 hidden dark:block"></i>
+      <i class="fas fa-moon text-slate-400 block dark:hidden"></i>
+    </button>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center justify-center relative overflow-hidden">
+      <div class="absolute inset-0 bg-black/20"></div>
+      <div class="relative z-10 text-center max-w-4xl mx-auto px-6">
+        <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold font-serif mb-6 hero-gradient italic">
+          科创板拟上市公司
+          <br>
+          <span class="text-3xl sm:text-4xl md:text-6xl">内部制度规范指南</span>
+        </h1>
+        <p class="text-lg sm:text-xl md:text-2xl text-slate-300 mb-8 leading-relaxed px-4">
+          基于注册制要求的全面制度构建框架
+          <br>
+          <span class="text-emerald-400 font-medium">合规 • 专业 • 可执行</span>
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-8 text-sm text-slate-400">
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-shield-alt text-blue-400"></i>
+            <span>监管合规</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-chart-line text-emerald-400"></i>
+            <span>实务导向</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-users text-amber-400"></i>
+            <span>专业支撑</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-sm border-b border-slate-700">
+      <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <div class="text-lg font-serif font-bold text-blue-400">
+            科创板制度指南
+          </div>
+          <div class="hidden md:flex space-x-8">
+            <a href="#overview" class="text-slate-300 hover:text-blue-400 transition-colors">概览</a>
+            <a href="#framework" class="text-slate-300 hover:text-blue-400 transition-colors">制度框架</a>
+            <a href="#timeline" class="text-slate-300 hover:text-blue-400 transition-colors">时间节点</a>
+            <a href="#requirements" class="text-slate-300 hover:text-blue-400 transition-colors">合规要求</a>
+            <a href="#references" class="text-slate-300 hover:text-blue-400 transition-colors">参考文献</a>
+          </div>
+          <button id="mobileMenuBtn" class="md:hidden text-slate-300 hover:text-blue-400">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile Menu -->
+      <div id="mobileMenu" class="md:hidden bg-slate-800 border-t border-slate-700 hidden">
+        <div class="px-6 py-4 space-y-4 mobile-menu">
+          <a href="#overview" class="block text-slate-300 hover:text-blue-400 transition-colors">概览</a>
+          <a href="#framework" class="block text-slate-300 hover:text-blue-400 transition-colors">制度框架</a>
+          <a href="#timeline" class="block text-slate-300 hover:text-blue-400 transition-colors">时间节点</a>
+          <a href="#requirements" class="block text-slate-300 hover:text-blue-400 transition-colors">合规要求</a>
+          <a href="#references" class="block text-slate-300 hover:text-blue-400 transition-colors">参考文献</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-12">
+
+      <!-- Overview Section -->
+      <section id="overview" class="mb-16">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-serif font-bold text-slate-100 mb-4">核心制度概览</h2>
+          <p class="text-xl text-slate-400 max-w-3xl mx-auto">
+            基于科创板注册制要求，企业必须建立覆盖公司治理、风险控制、信息披露的全方位制度体系
+          </p>
+        </div>
+
+        <!-- Mermaid Diagram -->
+        <div class="mermaid">
+          graph TD
+          A["科创板拟上市公司内部制度"] --> B["公司治理制度"]
+          A --> C["内部控制制度"]
+          A --> D["信息披露制度"]
+          A --> E["科创属性制度"]
+          A --> F["投资者关系制度"]
+
+          B --> B1["三会议事规则"]
+          B --> B2["独立董事制度"]
+          B --> B3["董事会专门委员会"]
+
+          C --> C1["财务管理制度"]
+          C --> C2["内部审计制度"]
+          C --> C3["风险控制制度"]
+
+          D --> D1["信息披露事务管理"]
+          D --> D2["重大信息报告"]
+          D --> D3["内幕信息管理"]
+
+          E --> E1["研发项目管理"]
+          E --> E2["知识产权管理"]
+          E --> E3["核心技术保密"]
+
+          F --> F1["投资者关系管理"]
+          F --> F2["承诺管理制度"]
+
+          style A fill:#0ea5e9,stroke:#0284c7,stroke-width:3px,color:#fff
+          style B fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+          style C fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff
+          style D fill="#8b5cf6",stroke="#7c3aed",stroke-width:2px,color:#fff
+          style E fill="#06b6d4",stroke="#0891b2",stroke-width:2px,color:#fff
+          style F fill="#84cc16",stroke="#65a30d",stroke-width:2px,color:#fff
+        </div>
+      </section>
+
+      <!-- Framework Section -->
+      <section id="framework" class="mb-16">
+        <h2 class="text-3xl font-serif font-bold text-slate-100 mb-8">制度框架详解</h2>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Governance -->
+          <div class="card-hover bg-slate-800 rounded-xl p-8 interactive-card">
+            <div class="flex items-center mb-6">
+              <div class="w-12 h-12 bg-emerald-500 rounded-lg flex items-center justify-center mr-4">
+                <i class="fas fa-users text-white text-xl"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold text-emerald-400">公司治理</h3>
+            </div>
+            <ul class="space-y-3 text-slate-300">
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-emerald-400 mt-1 mr-3"></i>
+                <span>公司章程及三会议事规则</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-emerald-400 mt-1 mr-3"></i>
+                <span>独立董事制度及工作细则</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-emerald-400 mt-1 mr-3"></i>
+                <span>董事会专门委员会工作规则</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-emerald-400 mt-1 mr-3"></i>
+                <span>关联交易管理制度</span>
+              </li>
+            </ul>
+            <div class="mt-6 p-4 bg-slate-700/50 rounded-lg">
+              <p class="text-sm text-slate-400">
+                <strong>法律依据：</strong>
+                <a href="https://www.sse.com.cn/lawandrules/sselawsrules/repeal/rules/c/10118921/files/9bd863640cc44cfb8db0a7e756df68dc.pdf" class="citation-link">《科创板股票上市规则》第4.2.1条</a>
+              </p>
+            </div>
+          </div>
+
+          <!-- Internal Control -->
+          <div class="card-hover bg-slate-800 rounded-xl p-8 interactive-card">
+            <div class="flex items-center mb-6">
+              <div class="w-12 h-12 bg-amber-500 rounded-lg flex items-center justify-center mr-4">
+                <i class="fas fa-shield-alt text-white text-xl"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold text-amber-400">内部控制</h3>
+            </div>
+            <ul class="space-y-3 text-slate-300">
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-amber-400 mt-1 mr-3"></i>
+                <span>财务管理制度（含资金管理）</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-amber-400 mt-1 mr-3"></i>
+                <span>内部审计制度</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-amber-400 mt-1 mr-3"></i>
+                <span>风险控制制度</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-amber-400 mt-1 mr-3"></i>
+                <span>合规管理制度</span>
+              </li>
+            </ul>
+            <div class="mt-6 p-4 bg-slate-700/50 rounded-lg">
+              <p class="text-sm text-slate-400">
+                <strong>审计要求：</strong>
+                <a href="http://www.csrc.gov.cn/csrc/c100028/c7565137/content.shtml" class="citation-link">注册管理办法第44条</a>要求无保留意见审计报告
+              </p>
+            </div>
+          </div>
+
+          <!-- Information Disclosure -->
+          <div class="card-hover bg-slate-800 rounded-xl p-8 interactive-card">
+            <div class="flex items-center mb-6">
+              <div class="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center mr-4">
+                <i class="fas fa-eye text-white text-xl"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold text-purple-400">信息披露</h3>
+            </div>
+            <ul class="space-y-3 text-slate-300">
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-purple-400 mt-1 mr-3"></i>
+                <span>信息披露事务管理制度</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-purple-400 mt-1 mr-3"></i>
+                <span>重大信息内部报告制度</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-purple-400 mt-1 mr-3"></i>
+                <span>内幕信息知情人登记制度</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-purple-400 mt-1 mr-3"></i>
+                <span>自愿信息披露内部制度</span>
+              </li>
+            </ul>
+            <div class="mt-6 p-4 bg-slate-700/50 rounded-lg">
+              <p class="text-sm text-slate-400">
+                <strong>披露要求：</strong>招股说明书需完整列示制度名称及执行情况
+              </p>
+            </div>
+          </div>
+
+          <!-- Innovation -->
+          <div class="card-hover bg-slate-800 rounded-xl p-8 interactive-card">
+            <div class="flex items-center mb-6">
+              <div class="w-12 h-12 bg-cyan-500 rounded-lg flex items-center justify-center mr-4">
+                <i class="fas fa-lightbulb text-white text-xl"></i>
+              </div>
+              <h3 class="text-2xl font-serif font-bold text-cyan-400">科创属性</h3>
+            </div>
+            <ul class="space-y-3 text-slate-300">
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-cyan-400 mt-1 mr-3"></i>
+                <span>研发项目管理制度</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-cyan-400 mt-1 mr-3"></i>
+                <span>知识产权管理制度</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-cyan-400 mt-1 mr-3"></i>
+                <span>核心技术保密制度</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-cyan-400 mt-1 mr-3"></i>
+                <span>研发投入核算管理办法</span>
+              </li>
+            </ul>
+            <div class="mt-6 p-4 bg-slate-700/50 rounded-lg">
+              <p class="text-sm text-slate-400">
+                <strong>科创要求：</strong>研发投入占比≥5%，需配套研发管理机制
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- Timeline Section -->
+      <section id="timeline" class="mb-16">
+        <h2 class="text-3xl font-serif font-bold text-slate-100 mb-8">关键时间节点</h2>
+
+        <div class="max-w-4xl mx-auto">
+          <div class="timeline-item mb-8">
+            <div class="bg-slate-800 rounded-lg p-6">
+              <h3 class="text-xl font-bold text-emerald-400 mb-2">股改前</h3>
+              <p class="text-slate-300 mb-3">公司治理类制度必须完成制定</p>
+              <ul class="text-sm text-slate-400 space-y-1">
+                <li>• 公司章程及三会议事规则</li>
+                <li>• 独立董事制度</li>
+                <li>• 董事会专门委员会工作细则</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item mb-8">
+            <div class="bg-slate-800 rounded-lg p-6">
+              <h3 class="text-xl font-bold text-amber-400 mb-2">IPO申请前一个完整会计年度</h3>
+              <p class="text-slate-300 mb-3">财务内控制度需运行满一年</p>
+              <ul class="text-sm text-slate-400 space-y-1">
+                <li>• 财务管理制度</li>
+                <li>• 内部审计制度</li>
+                <li>• 资金管理制度</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item mb-8">
+            <div class="bg-slate-800 rounded-lg p-6">
+              <h3 class="text-xl font-bold text-purple-400 mb-2">申报时</h3>
+              <p class="text-slate-300 mb-3">所有制度必须建立并有效执行</p>
+              <ul class="text-sm text-slate-400 space-y-1">
+                <li>• 信息披露相关制度</li>
+                <li>• 科创属性相关制度</li>
+                <li>• 投资者关系管理制度</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="bg-slate-800 rounded-lg p-6">
+              <h3 class="text-xl font-bold text-blue-400 mb-2">2024年12月31日后</h3>
+              <p class="text-slate-300 mb-3">需提交无保留意见内部控制审计报告</p>
+              <ul class="text-sm text-slate-400 space-y-1">
+                <li>• 会计师事务所出具的审计报告</li>
+                <li>• 制度执行痕迹留存</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Requirements Section -->
+      <section id="requirements" class="mb-16">
+        <h2 class="text-3xl font-serif font-bold text-slate-100 mb-8">合规要求与实务要点</h2>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-slate-800 rounded-xl p-6">
+            <div class="text-center mb-4">
+              <i class="fas fa-file-alt text-3xl text-blue-400 mb-3"></i>
+              <h3 class="text-lg font-bold text-slate-100">制度文档</h3>
+            </div>
+            <ul class="text-sm text-slate-300 space-y-2">
+              <li>• 制度文本需经董事会审议通过</li>
+              <li>• 需留档备查，执行痕迹完整</li>
+              <li>• 制度修订需履行相应程序</li>
+            </ul>
+          </div>
+
+          <div class="bg-slate-800 rounded-xl p-6">
+            <div class="text-center mb-4">
+              <i class="fas fa-users-cog text-3xl text-emerald-400 mb-3"></i>
+              <h3 class="text-lg font-bold text-slate-100">人员配备</h3>
+            </div>
+            <ul class="text-sm text-slate-300 space-y-2">
+              <li>• 指定信息披露负责人</li>
+              <li>• 设立内审部门或岗位</li>
+              <li>• 配备专职财务人员</li>
+            </ul>
+          </div>
+
+          <div class="bg-slate-800 rounded-xl p-6">
+            <div class="text-center mb-4">
+              <i class="fas fa-shield-check text-3xl text-amber-400 mb-3"></i>
+              <h3 class="text-lg font-bold text-slate-100">执行验证</h3>
+            </div>
+            <ul class="text-sm text-slate-300 space-y-2">
+              <li>• 制度执行案例留存</li>
+              <li>• 定期评估制度有效性</li>
+              <li>• 中介机构核查确认</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- References Section -->
+      <section id="references" class="mb-16">
+        <h2 class="text-3xl font-serif font-bold text-slate-100 mb-8">权威参考文献</h2>
+
+        <div class="space-y-4">
+          <div class="bg-slate-800 rounded-lg p-6">
+            <h3 class="text-lg font-bold text-slate-100 mb-2 flex items-center">
+              <i class="fas fa-book-open text-blue-400 mr-3"></i>
+              基础法规文件
+            </h3>
+            <div class="grid md:grid-cols-2 gap-4 text-sm">
+              <a href="https://www.sse.com.cn/lawandrules/sselawsrules/repeal/rules/c/10118921/files/9bd863640cc44cfb8db0a7e756df68dc.pdf" class="citation-link block hover:bg-slate-700 p-3 rounded transition-colors">
+                <strong>科创板股票上市规则</strong>
+                <br>
+                <span class="text-slate-400">上海证券交易所 - 上市规则第4章</span>
+              </a>
+              <a href="http://www.csrc.gov.cn/csrc/c100028/c7565137/content.shtml" class="citation-link block hover:bg-slate-700 p-3 rounded transition-colors">
+                <strong>科创板首次公开发行股票注册管理办法</strong>
+                <br>
+                <span class="text-slate-400">证监会 - 第44条内控制度要求</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="bg-slate-800 rounded-lg p-6">
+            <h3 class="text-lg font-bold text-slate-100 mb-2 flex items-center">
+              <i class="fas fa-file-contract text-emerald-400 mr-3"></i>
+              实务指引
+            </h3>
+            <div class="grid md:grid-cols-2 gap-4 text-sm">
+              <a href="http://www.sse.com.cn/lawandrules/sselawsrules/stocks/staripo/c/10118389/files/80cbf34e8cad4b5f94e9995ac13c4c52.doc" class="citation-link block hover:bg-slate-700 p-3 rounded transition-colors">
+                <strong>科创板上市公司自律监管指引第1号</strong>
+                <br>
+                <span class="text-slate-400">上交所 - 规范运作要求</span>
+              </a>
+              <div class="p-3 rounded bg-slate-700/50">
+                <strong>财务内控要点——制度执行痕迹</strong>
+                <br>
+                <span class="text-slate-400">实务案例研究 - 强调执行痕迹留存</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Extended Reading -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-serif font-bold text-slate-100 mb-8">延伸阅读推荐</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="card-hover bg-slate-800 rounded-xl p-6">
+            <h3 class="text-lg font-bold text-emerald-400 mb-3">《科创板IPO审核实务》</h3>
+            <p class="text-sm text-slate-400 mb-3">深入解析科创板IPO全过程的制度要求与实务操作</p>
+            <span class="text-xs text-amber-400 bg-amber-400/10 px-2 py-1 rounded">实务导向</span>
+          </div>
+
+          <div class="card-hover bg-slate-800 rounded-xl p-6">
+            <h3 class="text-lg font-bold text-blue-400 mb-3">《注册制下的公司治理》</h3>
+            <p class="text-sm text-slate-400 mb-3">系统阐述注册制框架下的公司治理结构与制度设计</p>
+            <span class="text-xs text-blue-400 bg-blue-400/10 px-2 py-1 rounded">理论框架</span>
+          </div>
+
+          <div class="card-hover bg-slate-800 rounded-xl p-6">
+            <h3 class="text-lg font-bold text-purple-400 mb-3">《科创板企业内控手册》</h3>
+            <p class="text-sm text-slate-400 mb-3">提供可操作的内部控制制度模板与实施指南</p>
+            <span class="text-xs text-purple-400 bg-purple-400/10 px-2 py-1 rounded">实用工具</span>
+          </div>
+
+          <div class="card-hover bg-slate-800 rounded-xl p-6">
+            <h3 class="text-lg font-bold text-cyan-400 mb-3">《科创板信息披露指引》</h3>
+            <p class="text-sm text-slate-400 mb-3">详细解读信息披露制度的具体要求与操作要点</p>
+            <span class="text-xs text-cyan-400 bg-cyan-400/10 px-2 py-1 rounded">合规指南</span>
+          </div>
+
+          <div class="card-hover bg-slate-800 rounded-xl p-6">
+            <h3 class="text-lg font-bold text-amber-400 mb-3">《科创板案例精选与评析》</h3>
+            <p class="text-sm text-slate-400 mb-3">通过实际案例分析制度建立的常见问题与解决方案</p>
+            <span class="text-xs text-amber-400 bg-amber-400/10 px-2 py-1 rounded">案例研究</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 border-t border-slate-700 py-8">
+      <div class="max-w-7xl mx-auto px-6 text-center">
+        <p class="text-slate-400 mb-4">
+          本指南基于现行监管要求整理，具体实施请结合企业实际情况并咨询专业机构
+        </p>
+        <div class="flex justify-center space-x-6 text-sm">
+          <a href="#" class="text-slate-500 hover:text-blue-400 transition-colors">
+            <i class="fas fa-file-alt mr-1"></i>制度模板下载
+          </a>
+          <a href="#" class="text-slate-500 hover:text-blue-400 transition-colors">
+            <i class="fas fa-headset mr-1"></i>专业咨询
+          </a>
+          <a href="#" class="text-slate-500 hover:text-blue-400 transition-colors">
+            <i class="fas fa-sync mr-1"></i>内容更新
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference or use system preference
+        const savedTheme = localStorage.getItem('theme');
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        const currentTheme = savedTheme || systemTheme;
+        
+        html.setAttribute('data-theme', currentTheme);
+        updateThemeIcon(currentTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+        
+        function updateThemeIcon(theme) {
+            const icons = themeToggle.querySelectorAll('i');
+            icons.forEach(icon => icon.classList.toggle('hidden'));
+        }
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                
+                // Close mobile menu if open
+                const mobileMenu = document.getElementById('mobileMenu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+        
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#0ea5e9',
+                primaryTextColor: '#f8fafc',
+                primaryBorderColor: '#0284c7',
+                lineColor: '#475569',
+                secondaryColor: '#1e293b',
+                tertiaryColor: '#334155',
+                background: '#1e293b',
+                mainBkg: '#1e293b',
+                secondBkg: '#334155',
+                tertiaryBkg: '#475569'
+            },
+            flowchart: {
+                htmlLabels: true,
+                curve: 'basis',
+                padding: 20
+            }
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.classList.contains('hidden') && 
+                !mobileMenu.contains(e.target) && 
+                !mobileMenuBtn.contains(e.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+        
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all cards for animation
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+  </body>
+
+</html>
+```
