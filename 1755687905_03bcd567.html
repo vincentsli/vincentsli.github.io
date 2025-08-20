@@ -1,0 +1,591 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板IPO股权激励授予时点要求分析</title>
+    
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Mermaid -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: #8b5cf6;
+            --secondary-color: #ec4899;
+            --accent-color: #06b6d4;
+            --dark-bg: #0f172a;
+            --dark-card: #1e293b;
+            --dark-text: #e2e8f0;
+            --light-bg: #f8fafc;
+            --light-card: #ffffff;
+            --light-text: #1e293b;
+        }
+        
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            line-height: 1.7;
+        }
+        
+        body.light-mode {
+            background-color: var(--light-bg);
+            color: var(--light-text);
+        }
+        
+        .serif-font {
+            font-family: 'Noto Serif SC', serif;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.1));
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.5), transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            bottom: -70px;
+            left: -70px;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.4), transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .card {
+            background-color: var(--dark-card);
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        body.light-mode .card {
+            background-color: var(--light-card);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .accent-border {
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .timeline-dot {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline-dot::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+        }
+        
+        .timeline-dot::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 22px;
+            width: 2px;
+            height: calc(100% + 10px);
+            background-color: rgba(6, 182, 212, 0.3);
+        }
+        
+        .timeline-dot:last-child::after {
+            display: none;
+        }
+        
+        .footnote {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+        
+        body.light-mode .footnote {
+            color: #64748b;
+        }
+        
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 50;
+            background-color: var(--dark-card);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        body.light-mode .theme-toggle {
+            background-color: var(--light-card);
+        }
+        
+        .mermaid-container {
+            background-color: var(--dark-card);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        body.light-mode .mermaid-container {
+            background-color: var(--light-card);
+        }
+        
+        .highlight-box {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+        
+        .key-point {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+        
+        body.light-mode .key-point {
+            color: #0284c7;
+        }
+        
+        .reference-link {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        body.light-mode .reference-link {
+            color: #db2777;
+        }
+        
+        .reference-link:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .hero-bg::before, .hero-bg::after {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 深色/浅色模式切换按钮 -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon text-xl" id="themeIcon"></i>
+    </div>
+
+    <!-- Hero 模块 -->
+    <header class="hero-bg py-20 px-4 md:px-8 text-center relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 serif-font gradient-text">科创板IPO股权激励授予时点要求分析</h1>
+            <p class="text-xl md:text-2xl mb-8 text-gray-300">探索限制性股票激励计划在科创板上市审核中的关键时间节点</p>
+            <div class="flex flex-wrap justify-center gap-4 mb-10">
+                <span class="px-4 py-2 bg-purple-900 bg-opacity-30 rounded-full text-purple-300"><i class="fas fa-calendar-alt mr-2"></i>申报基准日</span>
+                <span class="px-4 py-2 bg-pink-900 bg-opacity-30 rounded-full text-pink-300"><i class="fas fa-file-alt mr-2"></i>正式申报前</span>
+                <span class="px-4 py-2 bg-cyan-900 bg-opacity-30 rounded-full text-cyan-300"><i class="fas fa-clock mr-2"></i>预留份额</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容 -->
+    <main class="max-w-6xl mx-auto px-4 py-12">
+        <!-- 核心结论 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 serif-font"><i class="fas fa-star-of-life mr-3 text-purple-500"></i>核心结论</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="card p-6">
+                    <div class="text-4xl text-purple-500 mb-4"><i class="fas fa-balance-scale"></i></div>
+                    <h3 class="text-xl font-bold mb-3">申报基准日前</h3>
+                    <p class="mb-4"><span class="key-point">无需</span>全部授予完毕，但建议完成主要授予并计提股份支付费用</p>
+                    <div class="text-sm text-gray-400">
+                        <p>• 允许新增授予</p>
+                        <p>• 需足额计提费用</p>
+                    </div>
+                </div>
+                <div class="card p-6">
+                    <div class="text-4xl text-pink-500 mb-4"><i class="fas fa-file-contract"></i></div>
+                    <h3 class="text-xl font-bold mb-3">正式申报前</h3>
+                    <p class="mb-4"><span class="key-point">必须</span>完成所有授予（含预留份额），且不得新增激励计划</p>
+                    <div class="text-sm text-gray-400">
+                        <p>• 禁止新增激励</p>
+                        <p>• 预留份额≤20%</p>
+                    </div>
+                </div>
+                <div class="card p-6">
+                    <div class="text-4xl text-cyan-500 mb-4"><i class="fas fa-lock"></i></div>
+                    <h3 class="text-xl font-bold mb-3">提交IPO申请后</h3>
+                    <p class="mb-4"><span class="key-point">完全禁止</span>任何变动，直至上市完成</p>
+                    <div class="text-sm text-gray-400">
+                        <p>• 不得新增激励</p>
+                        <p>• 不得行权或解锁</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mermaid 流程图 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 serif-font"><i class="fas fa-project-diagram mr-3 text-cyan-500"></i>关键时点要求流程</h2>
+            <div class="mermaid-container">
+                <div class="mermaid">
+                    graph TD
+                        A[基准日前] -->|允许新增授予<br>但需计提费用| B[申报前]
+                        B -->|必须完成所有授予<br>含预留份额| C[提交IPO申请]
+                        B -->|禁止新增激励| C
+                        C -->|完全禁止任何变动| D[上市完成]
+                        classDef default fill:#1e293b,stroke:#8b5cf6,stroke-width:2px,color:#e2e8f0
+                        class A,B,C,D default
+                </div>
+            </div>
+        </section>
+
+        <!-- 具体依据 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 serif-font"><i class="fas fa-book-open mr-3 text-pink-500"></i>具体依据</h2>
+            
+            <!-- 基准日（审计报告截止日）前无强制要求 -->
+            <div class="mb-10">
+                <h3 class="text-2xl font-semibold mb-4"><i class="fas fa-calendar-day mr-2 text-purple-500"></i>基准日（审计报告截止日）前无强制要求</h3>
+                <div class="card p-6 mb-6">
+                    <h4 class="text-xl font-semibold mb-3">允许新增授予</h4>
+                    <p class="mb-4">根据《上海证券交易所科创板股票发行上市审核问答》问题12，拟上市公司在报告期内可继续实施股权激励，但需确保：</p>
+                    <ul class="list-disc pl-6 mb-4">
+                        <li>股份支付费用在报告期内<span class="key-point">足额计提</span>，避免影响财务数据可比性</li>
+                        <li>若基准日后新增授予导致股份支付费用重大（如影响净利润超5%），可能需补充审计并更新申报材料</li>
+                    </ul>
+                    <div class="text-sm bg-purple-900 bg-opacity-20 p-3 rounded-lg">
+                        <p class="font-semibold">引用来源：</p>
+                        <p>知识库《上海证券交易所科创板股票发行上市审核问答》问题12：允许带期权计划申报，但需满足激励对象、行权价格等条件。</p>
+                    </div>
+                </div>
+                <div class="card p-6">
+                    <h4 class="text-xl font-semibold mb-3">授予日无强制要求</h4>
+                    <p class="mb-4">授予日可以是股东大会/董事会召开日、协议签署日等，未要求必须在基准日前完成。</p>
+                    <div class="text-sm bg-purple-900 bg-opacity-20 p-3 rounded-lg">
+                        <p class="font-semibold">引用来源：</p>
+                        <p>联网搜索Result 1：<a href="https://www.tashansz.com/TashanResearch/info.aspx?itemid=592" class="reference-link">IPO股权激励审核要点（上篇）</a>：授予日可为协议签署日或工商变更日，无基准日前强制要求。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 正式申报IPO前必须完成授予 -->
+            <div class="mb-10">
+                <h3 class="text-2xl font-semibold mb-4"><i class="fas fa-file-signature mr-2 text-pink-500"></i>正式申报IPO前必须完成授予</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="card p-6">
+                        <h4 class="text-xl font-semibold mb-3">禁止新增激励</h4>
+                        <p class="mb-4">根据《监管规则适用指引——发行类第5号》，提交IPO申请时股权结构需<span class="key-point">保持稳定</span>，不得新增激励对象或扩大激励范围。</p>
+                        <div class="text-sm bg-pink-900 bg-opacity-20 p-3 rounded-lg">
+                            <p class="font-semibold">引用来源：</p>
+                            <p>知识库《监管规则适用指引——发行类第5号》5-1条：IPO在审期间股权结构需稳定。</p>
+                        </div>
+                    </div>
+                    <div class="card p-6">
+                        <h4 class="text-xl font-semibold mb-3">预留份额处理</h4>
+                        <p class="mb-4">允许保留≤20%预留权益（依据《上市公司股权激励管理办法》第十五条），但需在招股书中披露：</p>
+                        <ul class="list-disc pl-6 mb-4">
+                            <li>预留对象选择标准</li>
+                            <li>预计授予时间表（如上市后12个月内完成）</li>
+                        </ul>
+                        <p class="text-sm text-gray-400">若未明确计划，建议在申报前注销预留份额。</p>
+                        <div class="text-sm bg-pink-900 bg-opacity-20 p-3 rounded-lg mt-3">
+                            <p class="font-semibold">引用来源：</p>
+                            <p>知识库《上市公司股权激励管理办法》第十五条：预留权益不得超过拟授予总量的20%。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 申报后完全禁止变动 -->
+            <div class="mb-10">
+                <h3 class="text-2xl font-semibold mb-4"><i class="fas fa-ban mr-2 text-cyan-500"></i>申报后完全禁止变动</h3>
+                <div class="card p-6">
+                    <p class="mb-4">根据德恒律师事务所分析，<span class="key-point">提交IPO申请后</span>：</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        <div class="bg-cyan-900 bg-opacity-20 p-4 rounded-lg text-center">
+                            <i class="fas fa-user-plus text-3xl text-cyan-400 mb-2"></i>
+                            <p class="font-semibold">不得新增</p>
+                            <p class="text-sm">任何股权激励计划</p>
+                        </div>
+                        <div class="bg-cyan-900 bg-opacity-20 p-4 rounded-lg text-center">
+                            <i class="fas fa-unlock text-3xl text-cyan-400 mb-2"></i>
+                            <p class="font-semibold">不得行权</p>
+                            <p class="text-sm">或解锁</p>
+                        </div>
+                        <div class="bg-cyan-900 bg-opacity-20 p-4 rounded-lg text-center">
+                            <i class="fas fa-chart-line text-3xl text-cyan-400 mb-2"></i>
+                            <p class="font-semibold">持股平台</p>
+                            <p class="text-sm">份额不得变动</p>
+                        </div>
+                    </div>
+                    <div class="text-sm bg-cyan-900 bg-opacity-20 p-3 rounded-lg">
+                        <p class="font-semibold">引用来源：</p>
+                        <p>联网搜索Result 4：<a href="https://www.sse.com.cn/disclosure/listedinfo/announcement/c/new/2024-10-25/688322_20241025_Z74M.pdf" class="reference-link">奥比中光2024年限制性股票激励计划草案</a>：明确股东会审议前5日公示激励名单，申报前需完成授予。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 操作建议 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 serif-font"><i class="fas fa-lightbulb mr-3 text-yellow-500"></i>操作建议</h2>
+            <div class="highlight-box">
+                <ol class="list-decimal pl-6 space-y-4">
+                    <li>
+                        <h4 class="font-semibold text-lg mb-2">基准日前</h4>
+                        <p>完成≥80%授予，确保股份支付费用在报告期内充分反映。</p>
+                    </li>
+                    <li>
+                        <h4 class="font-semibold text-lg mb-2">申报前</h4>
+                        <ul class="list-disc pl-6">
+                            <li>签署全部授予协议并完成出资</li>
+                            <li>对预留部分制定明确授予计划</li>
+                            <li>披露定价依据及会计处理</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4 class="font-semibold text-lg mb-2">回避风险</h4>
+                        <p>避免在申报基准日后集中授予，防止被质疑调节利润。</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- 依据来源 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 serif-font"><i class="fas fa-link mr-3 text-green-500"></i>依据来源</h2>
+            <div class="footnote">
+                <ol>
+                    <li>知识库《上海证券交易所科创板股票发行上市审核问答》问题12：允许带期权计划申报，但需满足激励对象、行权价格等条件。</li>
+                    <li>联网搜索Result 1：<a href="https://www.tashansz.com/TashanResearch/info.aspx?itemid=592" class="reference-link">IPO股权激励审核要点（上篇）</a>：授予日可为协议签署日或工商变更日，无基准日前强制要求。</li>
+                    <li>知识库《监管规则适用指引——发行类第5号》5-1条：IPO在审期间股权结构需稳定。</li>
+                    <li>联网搜索Result 4：<a href="https://www.sse.com.cn/disclosure/listedinfo/announcement/c/new/2024-10-25/688322_20241025_Z74M.pdf" class="reference-link">奥比中光2024年限制性股票激励计划草案</a>：明确股东会审议前5日公示激励名单，申报前需完成授予。</li>
+                    <li>知识库《上市公司股权激励管理办法》第十五条：预留权益不得超过拟授予总量的20%。</li>
+                    <li>联网搜索Result 11：<a href="https://www.dehenglaw.com/CN/tansuocontent/0008/016645/7.aspx?MID=0902&AID=" class="reference-link">科创板拟IPO企业股权激励审核规则的创新与实践</a>：申报基准日后新增激励可能需更新财务数据。</li>
+                    <li>联网搜索Result 1（他山咨询）：若股份支付影响净利润超5%，需补充审计。</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- 进一步阅读 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 serif-font"><i class="fas fa-book-reader mr-3 text-indigo-500"></i>进一步阅读</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card p-6">
+                    <h4 class="text-xl font-semibold mb-3">《科创板拟IPO企业股权激励审核规则的创新与实践》</h4>
+                    <p class="mb-4">德恒律师事务所专业分析科创板股权激励审核规则的创新点及实践案例。</p>
+                    <a href="https://www.dehenglaw.com/CN/tansuocontent/0008/016645/7.aspx?MID=0902&AID=" class="reference-link"><i class="fas fa-external-link-alt mr-2"></i>阅读原文</a>
+                </div>
+                <div class="card p-6">
+                    <h4 class="text-xl font-semibold mb-3">《上市公司股权激励管理办法》</h4>
+                    <p class="mb-4">中国证监会发布的股权激励管理法规，全面规范上市公司股权激励计划。</p>
+                    <a href="http://www.csrc.gov.cn/csrc/c101954/c3314611/content.shtml" class="reference-link"><i class="fas fa-external-link-alt mr-2"></i>阅读原文</a>
+                </div>
+                <div class="card p-6">
+                    <h4 class="text-xl font-semibold mb-3">《上海证券交易所科创板股票发行上市审核问答》</h4>
+                    <p class="mb-4">上交所针对科创板发行上市审核常见问题的官方解答。</p>
+                    <a href="http://www.sse.com.cn/lawandrules/guide/star/c/c_20190505_4945280.shtml" class="reference-link"><i class="fas fa-external-link-alt mr-2"></i>阅读原文</a>
+                </div>
+                <div class="card p-6">
+                    <h4 class="text-xl font-semibold mb-3">《监管规则适用指引——发行类第5号》</h4>
+                    <p class="mb-4">证监会关于IPO审核中股权结构稳定性的监管指引。</p>
+                    <a href="http://www.csrc.gov.cn/csrc/c101954/c3314611/content.shtml" class="reference-link"><i class="fas fa-external-link-alt mr-2"></i>阅读原文</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="py-8 border-t border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-500">
+            <p>© 2023 科创板IPO股权激励研究 | 专业分析报告</p>
+        </div>
+    </footer>
+
+    <script>
+        // 初始化 Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#8b5cf6',
+                primaryTextColor: '#e2e8f0',
+                primaryBorderColor: '#8b5cf6',
+                lineColor: '#94a3b8',
+                secondaryColor: '#1e293b',
+                tertiaryColor: '#0f172a'
+            }
+        });
+
+        // 深色/浅色模式切换
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const body = document.body;
+
+        // 检查系统偏好设置
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+        // 初始化主题
+        function initTheme() {
+            if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !prefersDarkScheme.matches)) {
+                body.classList.add('light-mode');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                
+                // 更新 Mermaid 主题
+                mermaid.initialize({
+                    startOnLoad: true,
+                    theme: 'default',
+                    themeVariables: {
+                        primaryColor: '#8b5cf6',
+                        primaryTextColor: '#1e293b',
+                        primaryBorderColor: '#8b5cf6',
+                        lineColor: '#cbd5e1',
+                        secondaryColor: '#ffffff',
+                        tertiaryColor: '#f8fafc'
+                    }
+                });
+            }
+        }
+
+        initTheme();
+
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('light-mode')) {
+                body.classList.remove('light-mode');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'dark');
+                
+                // 更新 Mermaid 主题
+                mermaid.initialize({
+                    startOnLoad: true,
+                    theme: 'dark',
+                    themeVariables: {
+                        primaryColor: '#8b5cf6',
+                        primaryTextColor: '#e2e8f0',
+                        primaryBorderColor: '#8b5cf6',
+                        lineColor: '#94a3b8',
+                        secondaryColor: '#1e293b',
+                        tertiaryColor: '#0f172a'
+                    }
+                });
+            } else {
+                body.classList.add('light-mode');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'light');
+                
+                // 更新 Mermaid 主题
+                mermaid.initialize({
+                    startOnLoad: true,
+                    theme: 'default',
+                    themeVariables: {
+                        primaryColor: '#8b5cf6',
+                        primaryTextColor: '#1e293b',
+                        primaryBorderColor: '#8b5cf6',
+                        lineColor: '#cbd5e1',
+                        secondaryColor: '#ffffff',
+                        tertiaryColor: '#f8fafc'
+                    }
+                });
+            }
+            
+            // 重新渲染 Mermaid 图表
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            mermaidElements.forEach(element => {
+                const code = element.textContent;
+                element.innerHTML = '';
+                mermaid.render('mermaid-' + Math.random().toString(36).substr(2, 9), code, (svgCode) => {
+                    element.innerHTML = svgCode;
+                });
+            });
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 添加滚动动画效果
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card, section').forEach(el => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
+```
