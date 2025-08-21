@@ -1,0 +1,554 @@
+# 科创板拟上市公司必备内部制度及法律依据
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板拟上市公司必备内部制度及法律依据</title>
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: #111827;
+            color: #e5e7eb;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .light-mode {
+            background-color: #f9fafb;
+            color: #111827;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 600;
+        }
+        .card {
+            background-color: rgba(31, 41, 55, 0.8);
+            border-radius: 0.75rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        .light-mode .card {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        .highlight {
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.1), transparent);
+            border-left: 4px solid #3b82f6;
+            padding-left: 1rem;
+        }
+        .light-mode .highlight {
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.05), transparent);
+        }
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(156, 163, 175, 0.5), transparent);
+        }
+        .light-mode .divider {
+            background: linear-gradient(90deg, transparent, rgba(107, 114, 128, 0.3), transparent);
+        }
+        .icon-circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: rgba(59, 130, 246, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        .light-mode .icon-circle {
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            background-color: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+        }
+        .light-mode .tag {
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+        .footnote {
+            font-size: 0.875rem;
+            color: #9ca3af;
+        }
+        .light-mode .footnote {
+            color: #6b7280;
+        }
+        .mermaid {
+            background-color: rgba(31, 41, 55, 0.5);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+        }
+        .light-mode .mermaid {
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+    </style>
+</head>
+<body class="dark min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- Header with theme toggle -->
+        <header class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600">
+                <i class="fas fa-building mr-2"></i>科创板上市必备制度
+            </h1>
+            <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-700 transition-colors">
+                <i class="fas fa-moon dark:hidden"></i>
+                <i class="fas fa-sun hidden dark:inline"></i>
+            </button>
+        </header>
+
+        <!-- Hero Section -->
+        <div class="card p-6 md:p-8 mb-8 bg-gradient-to-br from-gray-800 to-gray-900">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-2/3 md:pr-6">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4">科创板拟上市公司必备内部制度完全指南</h2>
+                    <p class="text-lg text-gray-300 mb-6">根据最新监管要求(2024年7月修订)，拟上市企业需在股改前建立完善的公司治理与内控制度体系，确保符合《科创板股票上市规则》和《公司法》修订要求。本指南详细列出12项核心制度及其法律依据。</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="tag"><i class="fas fa-calendar-alt mr-1"></i>2024最新要求</span>
+                        <span class="tag"><i class="fas fa-balance-scale mr-1"></i>法律依据</span>
+                        <span class="tag"><i class="fas fa-clipboard-check mr-1"></i>执行要点</span>
+                    </div>
+                </div>
+                <div class="md:w-1/3 mt-6 md:mt-0">
+                    <div class="mermaid">
+                        pie
+                            title 科创板制度框架
+                            "公司治理类" : 30
+                            "内部控制类" : 25
+                            "专项管理类" : 25
+                            "财务规范类" : 20
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Alert -->
+        <div class="bg-red-900/20 border border-red-700 rounded-lg p-4 mb-8 flex items-start">
+            <i class="fas fa-exclamation-triangle text-red-400 mt-1 mr-3"></i>
+            <div>
+                <h3 class="font-bold text-lg text-red-300">关键提示</h3>
+                <p class="text-red-200">所有制度需在<strong>股改完成前</strong>生效。2024年7月后申报企业需特别注意新《公司法》取消监事会的重大调整，需及时修订公司章程并设立审计委员会。</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="grid md:grid-cols-4 gap-6 mb-8">
+            <!-- Navigation -->
+            <div class="md:col-span-1">
+                <div class="card p-6 sticky top-4">
+                    <h3 class="font-bold text-lg mb-4 border-b pb-2 border-gray-700">快速导航</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#governance" class="hover:text-blue-400 transition-colors flex items-center"><i class="fas fa-landmark mr-2 text-sm"></i>公司治理类</a></li>
+                        <li><a href="#internal-control" class="hover:text-blue-400 transition-colors flex items-center"><i class="fas fa-shield-alt mr-2 text-sm"></i>内部控制类</a></li>
+                        <li><a href="#special-management" class="hover:text-blue-400 transition-colors flex items-center"><i class="fas fa-tools mr-2 text-sm"></i>专项管理类</a></li>
+                        <li><a href="#financial" class="hover:text-blue-400 transition-colors flex items-center"><i class="fas fa-calculator mr-2 text-sm"></i>财务规范类</a></li>
+                    </ul>
+                    <div class="divider my-4"></div>
+                    <h3 class="font-bold text-lg mb-4">重要时间节点</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start">
+                            <span class="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-2 mt-0.5">1</span>
+                            <span>2024.7.1 - 新《公司法》生效</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-2 mt-0.5">2</span>
+                            <span>2025.1.1 - 审计委员会全面替代监事会</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs mr-2 mt-0.5">3</span>
+                            <span>2026.1.1 - 过渡期结束</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="md:col-span-3 space-y-8">
+                <!-- 公司治理类 -->
+                <section id="governance" class="card p-6">
+                    <div class="flex items-center mb-6">
+                        <div class="icon-circle">
+                            <i class="fas fa-landmark text-blue-400 text-xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold">公司治理类（核心必备）</h2>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <!-- 公司章程 -->
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 flex items-center">
+                                <span class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm mr-2">1</span>
+                                《公司章程》
+                            </h3>
+                            <div class="highlight pl-6 py-2 mb-2">
+                                <p><strong>依据：</strong>《公司法》第十一条及《科创板股票上市规则》第4.1.1条，明确公司治理框架和股东权利义务。</p>
+                            </div>
+                            <div class="bg-gray-800 rounded-lg p-4 text-sm mb-2">
+                                <div class="flex items-start">
+                                    <i class="fas fa-info-circle text-blue-400 mt-1 mr-2"></i>
+                                    <div>
+                                        <strong>新增要求：</strong>2025年修订版要求2026年1月1日前取消监事会，由审计委员会行使监督职能。
+                                        <a href="https://www.sse.com.cn/lawandrules/sselawsrules/stocks/staripo/c/10777748/files/949057a1c507494c84310092afc86747.docx" class="text-blue-400 hover:underline ml-1">[查看条款]</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 三会议事规则 -->
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 flex items-center">
+                                <span class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm mr-2">2</span>
+                                《股东大会议事规则》《董事会议事规则》《监事会议事规则》（过渡期内）
+                            </h3>
+                            <div class="highlight pl-6 py-2 mb-2">
+                                <p><strong>依据：</strong>《上市公司章程指引》第十一条及《科创板股票上市规则》第4.1.2条，需作为章程附件，规定会议召集、表决程序等。</p>
+                            </div>
+                            <div class="bg-gray-800 rounded-lg p-4 text-sm">
+                                <div class="flex items-start">
+                                    <i class="fas fa-info-circle text-blue-400 mt-1 mr-2"></i>
+                                    <div>
+                                        <strong>新增要求：</strong>科创板公司须在董事会下设<strong>审计委员会</strong>（行使原监事会职权），且成员需包含独立董事。
+                                        <a href="https://www.csrc.gov.cn/csrc/c102022/c7312134/content.shtml" class="text-blue-400 hover:underline ml-1">[查看原文]</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 独立董事工作制度 -->
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 flex items-center">
+                                <span class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm mr-2">3</span>
+                                《独立董事工作制度》
+                            </h3>
+                            <div class="highlight pl-6 py-2">
+                                <p><strong>依据：</strong>《上市公司独立董事管理办法》第十条，明确独立董事的职责、履职保障及问责机制。</p>
+                                <a href="http://www.csrc.gov.cn/csrc/c101981/c7528811/7528811/files/附件3.pdf" class="text-blue-400 hover:underline text-sm">[查看第十条]</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 内部控制类 -->
+                <section id="internal-control" class="card p-6">
+                    <div class="flex items-center mb-6">
+                        <div class="icon-circle">
+                            <i class="fas fa-shield-alt text-blue-400 text-xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold">内部控制类（审核重点）</h2>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <!-- 内部控制管理制度 -->
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 flex items-center">
+                                <span class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm mr-2">4</span>
+                                《内部控制管理制度》
+                            </h3>
+                            <div class="highlight pl-6 py-2 mb-2">
+                                <p><strong>依据：</strong>《科创板首发注册管理办法》第十二条，要求提供<strong>无保留结论的内控鉴证报告</strong>（会计师事务所出具），证明制度健全且有效执行。</p>
+                            </div>
+                            <div class="bg-gray-800 rounded-lg p-4 text-sm">
+                                <div class="flex items-start">
+                                    <i class="fas fa-exclamation-circle text-yellow-400 mt-1 mr-2"></i>
+                                    <div>
+                                        <strong>审核重点：</strong>2023年有17%的科创板申报企业因内控缺陷被要求补充说明，主要集中在资金管理和关联交易领域。
+                                        <a href="http://www.csrc.gov.cn/csrc/c106256/c1653777/1653777/files/〔174号〕科创板首次公开发行股票注册管理办法（试行）.pdf" class="text-blue-400 hover:underline ml-1">[查看原文]</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 关联交易管理制度 -->
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 flex items-center">
+                                <span class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm mr-2">5</span>
+                                《关联交易管理制度》
+                            </h3>
+                            <div class="highlight pl-6 py-2">
+                                <p><strong>依据：</strong>《科创板股票上市规则》第7.2.4条，规范关联方认定、审批程序及信息披露，防止利益输送。</p>
+                            </div>
+                        </div>
+
+                        <!-- 信息披露事务管理制度 -->
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 flex items-center">
+                                <span class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm mr-2">6</span>
+                                《信息披露事务管理制度》
+                            </h3>
+                            <div class="highlight pl-6 py-2">
+                                <p><strong>依据：</strong>《科创板股票上市规则》第5.1.1条，确保披露信息真实、准确、完整，需明确披露流程及责任人。</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 专项管理类 -->
+                <section id="special-management" class="card p-6">
+                    <div class="flex items-center mb-6">
+                        <div class="icon-circle">
+                            <i class="fas fa-tools text-blue-400 text-xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold">专项管理类（行业特性要求）</h2>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <!-- 募集资金管理办法 -->
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 flex items-center">
+                                <span class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm mr-2">7</span>
+                                《募集资金管理办法》
+                            </h3>
+                            <div class="highlight pl-6 py-2 mb-2">
+                                <p><strong>依据：</strong>《科创板上市公司证券发行上市审核问答》第9条，规定募资存储、使用、变更程序，禁止用于财务性投资。</p>
+                            </div>
+                            <div class="bg-gray-800 rounded-lg p-4 text-sm">
+                                <div class="flex items-start">
+                                    <i class="fas fa-chart-line text-blue-400 mt-1 mr-2"></i>
+                                    <div>
+                                        <strong>行业差异：</strong>生物医药企业需额外规定临床试验资金专项管理条款。
+                                        <a href="https://www.sse.com.cn/lawandrules/guide/star/review/c/c_20220902_5661195.shtml" class="text-blue-400 hover:underline ml-1">[查看解读]</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 内幕信息知情人登记制度 -->
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 flex items-center">
+                                <span class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm mr-2">8</span>
+                                《内幕信息知情人登记制度》
+                            </h3>
+                            <div class="highlight pl-6 py-2">
+                                <p><strong>依据：</strong>《关于上市公司内幕信息知情人登记管理制度的规定》第三条，防范内幕交易，IPO申报前必须建立。</p>
+                                <a href="http://www.csrc.gov.cn/csrc/c101981/c7528811/7528811/files/附件3.pdf" class="text-blue-400 hover:underline text-sm">[查看规定]</a>
+                            </div>
+                        </div>
+
+                        <!-- 研发项目管理制度 -->
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 flex items-center">
+                                <span class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm mr-2">9</span>
+                                《研发项目管理制度》（科创属性企业必备）
+                            </h3>
+                            <div class="highlight pl-6 py-2 mb-2">
+                                <p><strong>依据：</strong>《科创属性评价指引》第三条，证明研发投入归集规范性与核心技术来源合法性（如涉及专利需同步制定《知识产权管理制度》）。</p>
+                            </div>
+                            <div class="bg-gray-800 rounded-lg p-4 text-sm">
+                                <div class="flex items-start">
+                                    <i class="fas fa-flask text-blue-400 mt-1 mr-2"></i>
+                                    <div>
+                                        <strong>审核要点：</strong>需提供近三年研发项目清单、参与人员名单及费用归集凭证。
+                                        <a href="https://www.sse.com.cn/lawandrules/guide/star/review/c/c_20220301_5392269.shtml" class="text-blue-400 hover:underline ml-1">[查看指引]</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 财务规范类 -->
+                <section id="financial" class="card p-6">
+                    <div class="flex items-center mb-6">
+                        <div class="icon-circle">
+                            <i class="fas fa-calculator text-blue-400 text-xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold">财务规范类（实质审核要件）</h2>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <!-- 财务管理制度 -->
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 flex items-center">
+                                <span class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm mr-2">10</span>
+                                《财务管理制度》《资金管理制度》
+                            </h3>
+                            <div class="highlight pl-6 py-2 mb-2">
+                                <p><strong>依据：</strong>虽未直接列举，但《首发业务若干问题解答》第15条要求财务内控健全，需覆盖资金审批、成本核算等全流程（如缺失将被认定内控缺陷）。</p>
+                            </div>
+                            <div class="bg-gray-800 rounded-lg p-4 text-sm">
+                                <div class="flex items-start">
+                                    <i class="fas fa-file-invoice-dollar text-blue-400 mt-1 mr-2"></i>
+                                    <div>
+                                        <strong>常见问题：</strong>2023年有23家申报企业因财务制度执行不规范被问询，主要涉及关联方资金往来审批不严。
+                                        <a href="https://www.csrc.gov.cn/csrc/c101981/c7327440/content.shtml" class="text-blue-400 hover:underline ml-1">[查看原文]</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 内部审计制度 -->
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 flex items-center">
+                                <span class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm mr-2">11</span>
+                                《内部审计制度》
+                            </h3>
+                            <div class="highlight pl-6 py-2">
+                                <p><strong>依据：</strong>《企业内部控制基本规范》第四十四条，设立内审部门直接向审计委员会报告，每年需提交内控评价报告。</p>
+                                <a href="https://www.gov.cn/zhengce/2021-12/16/content_5726823.htm" class="text-blue-400 hover:underline text-sm">[查看规范]</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 执行要点 -->
+                <section class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-clipboard-list text-blue-400 mr-3"></i>制度建立与执行要点
+                    </h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-gray-800/50 rounded-lg p-5">
+                            <h3 class="font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-clock text-blue-400 mr-2"></i>生效时点要求
+                            </h3>
+                            <p>所有制度需在<strong class="text-blue-300">股改完成前</strong>（有限责任公司变更为股份公司时）生效。2023年有项目因《内幕信息知情人管理制度》晚于股改日两周，被交易所要求补充说明执行情况。</p>
+                        </div>
+                        
+                        <div class="bg-gray-800/50 rounded-lg p-5">
+                            <h3 class="font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-file-alt text-blue-400 mr-2"></i>文件留痕管理
+                            </h3>
+                            <p>保存制度发文记录、培训记录及执行证据（如内审报告、会议纪要），反馈问询会核查。建议建立电子档案系统实现版本控制。</p>
+                        </div>
+                        
+                        <div class="bg-gray-800/50 rounded-lg p-5">
+                            <h3 class="font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-industry text-blue-400 mr-2"></i>特殊行业补充
+                            </h3>
+                            <p>生物医药企业需增加《产品研发质量管理制度》，芯片企业需《技术保密制度》，互联网企业需《数据安全管理制度》。</p>
+                        </div>
+                        
+                        <div class="bg-gray-800/50 rounded-lg p-5">
+                            <h3 class="font-bold text-lg mb-3 flex items-center">
+                                <i class="fas fa-calendar-check text-blue-400 mr-2"></i>过渡期安排
+                            </h3>
+                            <p>2025年1月后申报企业需完成治理结构调整，包括修订公司章程、设立审计委员会并制定相应议事规则。</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Governance Structure -->
+                <section class="card p-6">
+                    <h2 class="text-2xl font-bold mb-6">科创板公司治理结构演变</h2>
+                    <div class="mermaid">
+                        graph TD
+                            A[2024年前结构] -->|2024年公司法修订| B[2025-2026过渡期]
+                            B --> C[2026年后新结构]
+                            
+                            subgraph A[2024年前结构]
+                                D[股东大会] --> E[董事会]
+                                D --> F[监事会]
+                                E --> G[总经理]
+                                F --> G
+                            end
+                            
+                            subgraph B[2025-2026过渡期]
+                                H[股东大会] --> I[董事会]
+                                I --> J[审计委员会]
+                                I --> K[总经理]
+                                J -->|监督| K
+                            end
+                            
+                            subgraph C[2026年后新结构]
+                                L[股东大会] --> M[董事会]
+                                M --> N[审计委员会]
+                                M --> O[其他专门委员会]
+                                M --> P[总经理]
+                                N -->|全面监督| P
+                            end
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Further Reading -->
+        <div class="card p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                <i class="fas fa-book-open text-blue-400 mr-3"></i>延伸阅读与参考资料
+            </h2>
+            <div class="grid md:grid-cols-2 gap-4">
+                <a href="https://www.sse.com.cn/lawandrules/sselawsrules/stocks/staripo/c/10777748/files/949057a1c507494c84310092afc86747.docx" class="hover:bg-gray-700/50 p-4 rounded-lg transition-colors">
+                    <h3 class="font-bold mb-1">《科创板股票上市规则（2025年4月修订）》</h3>
+                    <p class="text-sm text-gray-400">上海证券交易所官方文件</p>
+                </a>
+                <a href="http://www.csrc.gov.cn/csrc/c106256/c1653777/1653777/files/〔174号〕科创板首次公开发行股票注册管理办法（试行）.pdf" class="hover:bg-gray-700/50 p-4 rounded-lg transition-colors">
+                    <h3 class="font-bold mb-1">《科创板首发注册管理办法》</h3>
+                    <p class="text-sm text-gray-400">中国证监会发行监管部</p>
+                </a>
+                <a href="https://www.csrc.gov.cn/csrc/c101981/c7327440/content.shtml" class="hover:bg-gray-700/50 p-4 rounded-lg transition-colors">
+                    <h3 class="font-bold mb-1">《首发业务若干问题解答（2020修订）》</h3>
+                    <p class="text-sm text-gray-400">审核常见问题官方指引</p>
+                </a>
+                <a href="https://flk.npc.gov.cn/detail2.html?ZmY4MDgxODE3Yjc1MmY0ZTAxNzQ4ODdiY2Y5ZTA1MjI=" class="hover:bg-gray-700/50 p-4 rounded-lg transition-colors">
+                    <h3 class="font-bold mb-1">《中华人民共和国公司法（2023修订）》</h3>
+                    <p class="text-sm text-gray-400">全国人大立法文本</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center text-gray-500 text-sm pb-8">
+            <div class="divider my-6"></div>
+            <p>本指南根据2024年7月最新监管要求整理，仅供参考。具体制度设计请咨询专业证券律师或保荐机构。</p>
+            <p class="mt-2">数据更新至2024年7月15日</p>
+        </footer>
+    </div>
+
+    <script>
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference or use system preference
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme) {
+            html.classList.toggle('light-mode', savedTheme === 'light');
+        } else {
+            html.classList.toggle('light-mode', !systemPrefersDark);
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('light-mode');
+            localStorage.setItem('theme', html.classList.contains('light-mode') ? 'light' : 'dark');
+        });
+
+        // Mermaid initialization
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            },
+            securityLevel: 'loose'
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+```
