@@ -1,0 +1,623 @@
+我将基于您提供的内容，设计一个专业、现代且具有高级感的深色模式网页，展示上市前交易不同价格的监管案例分析。
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上市前交易价格差异的监管问询案例分析</title>
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: #111827;
+            color: #e5e7eb;
+            transition: background-color 0.3s ease;
+        }
+        .serif {
+            font-family: 'Noto Serif SC', serif;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #111827 100%);
+        }
+        .card {
+            background-color: #1f2937;
+            border-radius: 0.75rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #3b82f6;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+        }
+        .highlight {
+            position: relative;
+            z-index: 1;
+        }
+        .highlight:after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background-color: rgba(59, 130, 246, 0.3);
+            z-index: -1;
+            transition: height 0.3s ease;
+        }
+        .highlight:hover:after {
+            height: 40%;
+        }
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
+        }
+        .tooltip {
+            position: relative;
+        }
+        .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: #1f2937;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 1px solid #3b82f6;
+        }
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        .step-number {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #3b82f6;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background-color: #1e40af;
+            color: #bfdbfe;
+        }
+        .tag-warning {
+            background-color: #92400e;
+            color: #fde68a;
+        }
+        .tag-success {
+            background-color: #065f46;
+            color: #a7f3d0;
+        }
+        .mermaid {
+            background-color: #1f2937;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Hero Section -->
+        <section class="hero-gradient rounded-2xl p-8 mb-12 shadow-xl">
+            <div class="max-w-3xl mx-auto text-center">
+                <span class="inline-block mb-4 px-4 py-2 bg-blue-900 bg-opacity-50 rounded-full text-blue-200 text-sm font-medium">监管案例分析</span>
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white serif">上市前交易不同价格的监管问询研究</h1>
+                <p class="text-xl text-blue-100 mb-8 leading-relaxed">基于剑桥科技与润建股份的典型案例，分析交易所对价格差异的审核要点及应对策略</p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#cases" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-medium text-white transition-colors duration-300 flex items-center">
+                        <i class="fas fa-landmark mr-2"></i> 查看案例
+                    </a>
+                    <a href="#recommendations" class="px-6 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-medium text-gray-200 transition-colors duration-300 flex items-center">
+                        <i class="fas fa-lightbulb mr-2"></i> 实务建议
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Overview Section -->
+        <section class="mb-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 text-blue-400 serif">核心发现</h2>
+                <div class="w-24 h-1 bg-blue-500 mx-auto mb-6"></div>
+                <p class="max-w-3xl mx-auto text-lg text-gray-300">监管机构对上市前交易价格差异高度关注，问询焦点集中在价格合理性、程序合规性、会计处理及潜在利益输送风险等方面。</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card p-6">
+                    <div class="text-blue-400 mb-4">
+                        <i class="fas fa-balance-scale text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">价格合理性</h3>
+                    <p class="text-gray-300">不同批次投资者入股价格差异是否匹配企业价值增长曲线，回购溢价是否符合市场惯例。</p>
+                </div>
+                <div class="card p-6">
+                    <div class="text-blue-400 mb-4">
+                        <i class="fas fa-gavel text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">程序合规性</h3>
+                    <p class="text-gray-300">减资/回购是否履行法定程序，包括股东会决议、债权人公告等必要步骤。</p>
+                </div>
+                <div class="card p-6">
+                    <div class="text-blue-400 mb-4">
+                        <i class="fas fa-file-invoice-dollar text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">会计处理</h3>
+                    <p class="text-gray-300">高溢价回购的会计处理是否合规，是否涉及利润调节或资本公积违规冲减。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cases Section -->
+        <section id="cases" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 text-blue-400 serif">典型案例分析</h2>
+                <div class="w-24 h-1 bg-blue-500 mx-auto mb-6"></div>
+            </div>
+
+            <!-- Case 1 -->
+            <div class="card overflow-hidden mb-12">
+                <div class="md:flex">
+                    <div class="md:w-1/3 bg-gray-800 p-8 flex items-center">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2 text-white serif">剑桥科技(603083)</h3>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="tag">对赌协议</span>
+                                <span class="tag-warning">股份回购</span>
+                                <span class="tag">价格差异</span>
+                            </div>
+                            <p class="text-gray-300">2012年及2016年Pre-IPO融资中签订对赌协议，未按期上市触发回购条款。</p>
+                        </div>
+                    </div>
+                    <div class="md:w-2/3 p-8">
+                        <div class="mb-6">
+                            <h4 class="text-lg font-semibold mb-3 text-blue-300"><i class="fas fa-chart-line mr-2"></i>交易价格差异</h4>
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div class="bg-gray-800 p-4 rounded-lg">
+                                    <p class="text-sm text-gray-400 mb-1">2012年入股本金</p>
+                                    <p class="text-xl font-bold">1.21亿元</p>
+                                </div>
+                                <div class="bg-gray-800 p-4 rounded-lg">
+                                    <p class="text-sm text-gray-400 mb-1">2014年回购支付</p>
+                                    <p class="text-xl font-bold text-green-400">1.52亿元 <span class="text-sm">(+25.6%)</span></p>
+                                </div>
+                            </div>
+                            <p class="text-gray-300">按照10%单利计算回购价格，溢价显著高于原始投资额。</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-3 text-blue-300"><i class="fas fa-search mr-2"></i>监管问询焦点</h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-blue-400 mt-1 mr-2">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <span class="text-gray-300">减资程序的合法合规性（是否履行法定程序）</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-blue-400 mt-1 mr-2">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <span class="text-gray-300">回购定价依据的合理性（10%单利是否符合市场惯例）</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-blue-400 mt-1 mr-2">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <span class="text-gray-300">是否涉及利益输送（国资股东部分退出是否损害公共利益）</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Case 2 -->
+            <div class="card overflow-hidden">
+                <div class="md:flex">
+                    <div class="md:w-1/3 bg-gray-800 p-8 flex items-center">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2 text-white serif">润建股份(002929)</h3>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="tag">减资退出</span>
+                                <span class="tag-warning">资本公积</span>
+                                <span class="tag">价格差异</span>
+                            </div>
+                            <p class="text-gray-300">2012年PE入股后触发对赌，2013年通过减资形式退出，支付总额1.32亿元。</p>
+                        </div>
+                    </div>
+                    <div class="md:w-2/3 p-8">
+                        <div class="mb-6">
+                            <h4 class="text-lg font-semibold mb-3 text-blue-300"><i class="fas fa-chart-line mr-2"></i>交易价格差异</h4>
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div class="bg-gray-800 p-4 rounded-lg">
+                                    <p class="text-sm text-gray-400 mb-1">原始入股价格</p>
+                                    <p class="text-xl font-bold">0.18亿元（股本）</p>
+                                </div>
+                                <div class="bg-gray-800 p-4 rounded-lg">
+                                    <p class="text-sm text-gray-400 mb-1">2013年退出支付</p>
+                                    <p class="text-xl font-bold text-green-400">1.32亿元 <span class="text-sm">(差异率>200%)</span></p>
+                                </div>
+                            </div>
+                            <p class="text-gray-300">支付款项包含股本0.18亿和资本公积1.14亿，会计处理引发关注。</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-3 text-blue-300"><i class="fas fa-search mr-2"></i>监管问询焦点</h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-blue-400 mt-1 mr-2">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <span class="text-gray-300">减资原因及定价公允性（是否偷逃税款）</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-blue-400 mt-1 mr-2">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <span class="text-gray-300">会计处理的合规性（冲减资本公积是否违反《企业会计准则》）</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="flex-shrink-0 h-5 w-5 text-blue-400 mt-1 mr-2">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <span class="text-gray-300">对赌协议清理是否彻底（是否存在未披露的特殊权利条款）</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visualization Section -->
+        <section class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 text-blue-400 serif">监管问询关键要素关系图</h2>
+                <div class="w-24 h-1 bg-blue-500 mx-auto mb-6"></div>
+            </div>
+            <div class="mermaid">
+                graph TD
+                    A[上市前交易价格差异] --> B[价格合理性]
+                    A --> C[程序合规性]
+                    A --> D[会计处理]
+                    A --> E[利益输送风险]
+                    
+                    B --> B1[时间推移因素]
+                    B --> B2[业绩变化]
+                    B --> B3[战略价值]
+                    B --> B4[市场惯例]
+                    
+                    C --> C1[减资程序]
+                    C --> C2[股东会决议]
+                    C --> C3[债权人公告]
+                    C --> C4[信息披露]
+                    
+                    D --> D1[股份支付处理]
+                    D --> D2[资本公积冲减]
+                    D --> D3[税务合规]
+                    
+                    E --> E1[关联关系]
+                    E --> E2[国资评估]
+                    E --> E3[对赌清理]
+                    
+                    style A fill:#1e3a8a,stroke:#3b82f6,color:#fff
+                    style B fill:#1e40af,stroke:#3b82f6,color:#fff
+                    style C fill:#1e40af,stroke:#3b82f6,color:#fff
+                    style D fill:#1e40af,stroke:#3b82f6,color:#fff
+                    style E fill:#1e40af,stroke:#3b82f6,color:#fff
+            </div>
+        </section>
+
+        <!-- Key Points Section -->
+        <section class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 text-blue-400 serif">监管核心关注要点</h2>
+                <div class="w-24 h-1 bg-blue-500 mx-auto mb-6"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card p-8">
+                    <h3 class="text-xl font-bold mb-4 text-blue-300"><i class="fas fa-exclamation-triangle mr-2"></i>价格差异的合理性</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="step-number mr-4 flex-shrink-0">1</div>
+                            <div>
+                                <h4 class="font-semibold mb-1">时间价值与业绩支撑</h4>
+                                <p class="text-gray-300">价格差异是否因时间推移、业绩变化、战略价值提升等客观因素导致。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="step-number mr-4 flex-shrink-0">2</div>
+                            <div>
+                                <h4 class="font-semibold mb-1">价值增长曲线匹配</h4>
+                                <p class="text-gray-300">不同批次投资者入股价格差异是否匹配企业价值增长曲线。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card p-8">
+                    <h3 class="text-xl font-bold mb-4 text-blue-300"><i class="fas fa-gavel mr-2"></i>程序合规与透明度</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="step-number mr-4 flex-shrink-0">1</div>
+                            <div>
+                                <h4 class="font-semibold mb-1">法定程序履行</h4>
+                                <p class="text-gray-300">涉及股份回购/减资时，是否履行股东会决议、债权人公告等法定程序。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="step-number mr-4 flex-shrink-0">2</div>
+                            <div>
+                                <h4 class="font-semibold mb-1">完整披露</h4>
+                                <p class="text-gray-300">是否完整披露对赌协议、回购条款等影响定价的特殊安排。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card p-8">
+                    <h3 class="text-xl font-bold mb-4 text-blue-300"><i class="fas fa-file-invoice-dollar mr-2"></i>会计与税务处理</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="step-number mr-4 flex-shrink-0">1</div>
+                            <div>
+                                <h4 class="font-semibold mb-1">股份支付处理</h4>
+                                <p class="text-gray-300">高溢价回购是否计提股份支付费用（如未处理可能调节利润）。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="step-number mr-4 flex-shrink-0">2</div>
+                            <div>
+                                <h4 class="font-semibold mb-1">资金来源合规</h4>
+                                <p class="text-gray-300">支付款项来源是否合法（如冲减资本公积需论证是否符合准则）。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card p-8">
+                    <h3 class="text-xl font-bold mb-4 text-blue-300"><i class="fas fa-hand-holding-usd mr-2"></i>利益输送风险</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="step-number mr-4 flex-shrink-0">1</div>
+                            <div>
+                                <h4 class="font-semibold mb-1">关联关系核查</h4>
+                                <p class="text-gray-300">低价入股方是否与实控人/董监高存在关联关系。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="step-number mr-4 flex-shrink-0">2</div>
+                            <div>
+                                <h4 class="font-semibold mb-1">国资评估备案</h4>
+                                <p class="text-gray-300">国资股东退出定价是否履行评估备案程序。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommendations Section -->
+        <section id="recommendations" class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4 text-blue-400 serif">实务建议与应对策略</h2>
+                <div class="w-24 h-1 bg-blue-500 mx-auto mb-6"></div>
+                <p class="max-w-3xl mx-auto text-lg text-gray-300">若企业存在类似情形，需提前准备以下应对材料以应对监管问询</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card p-6">
+                    <div class="flex mb-4">
+                        <div class="bg-blue-900 bg-opacity-50 rounded-lg p-3 text-blue-400 mr-4">
+                            <i class="fas fa-file-alt text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">定价依据文件</h3>
+                            <p class="text-gray-300">证明价格差异合理性的客观证据</p>
+                        </div>
+                    </div>
+                    <ul class="space-y-2 pl-16 text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-400 mr-2 mt-1"></i>
+                            <span>第三方评估报告</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-400 mr-2 mt-1"></i>
+                            <span>同期可比交易价格</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-400 mr-2 mt-1"></i>
+                            <span>业绩增长数据</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card p-6">
+                    <div class="flex mb-4">
+                        <div class="bg-blue-900 bg-opacity-50 rounded-lg p-3 text-blue-400 mr-4">
+                            <i class="fas fa-file-signature text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">协议清理证明</h3>
+                            <p class="text-gray-300">消除监管对特殊权利条款的疑虑</p>
+                        </div>
+                    </div>
+                    <ul class="space-y-2 pl-16 text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-400 mr-2 mt-1"></i>
+                            <span>对赌条款终止的书面补充协议</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-400 mr-2 mt-1"></i>
+                            <span>股东确认函</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-400 mr-2 mt-1"></i>
+                            <span>法律意见书</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card p-6">
+                    <div class="flex mb-4">
+                        <div class="bg-blue-900 bg-opacity-50 rounded-lg p-3 text-blue-400 mr-4">
+                            <i class="fas fa-clipboard-check text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">程序合规证据</h3>
+                            <p class="text-gray-300">证明交易程序的合法合规性</p>
+                        </div>
+                    </div>
+                    <ul class="space-y-2 pl-16 text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-400 mr-2 mt-1"></i>
+                            <span>减资/回购的股东会决议</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-400 mr-2 mt-1"></i>
+                            <span>债权人公告证明</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-400 mr-2 mt-1"></i>
+                            <span>税务完税证明</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-12 p-6 rounded-lg bg-gray-800 border-l-4 border-yellow-500">
+                <div class="md:flex items-start">
+                    <div class="md:w-1/6 mb-4 md:mb-0">
+                        <div class="bg-yellow-900 bg-opacity-50 rounded-lg p-3 text-yellow-400 inline-block">
+                            <i class="fas fa-exclamation-triangle text-2xl"></i>
+                        </div>
+                    </div>
+                    <div class="md:w-5/6">
+                        <h3 class="text-xl font-bold mb-2 text-yellow-300">2023年全面注册制重要提示</h3>
+                        <p class="text-gray-300">监管更强调"实质重于形式"，如价格差异无合理商业逻辑，可能被认定为利益输送并构成上市实质障碍。建议在申报前全面梳理交易背景、定价依据及程序合规性，必要时聘请专业中介机构出具专项核查意见。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Further Reading -->
+        <section class="mb-12">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold mb-4 text-blue-400 serif">延伸阅读</h2>
+                <div class="w-24 h-1 bg-blue-500 mx-auto mb-6"></div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <a href="#" class="card p-6 hover:bg-gray-800 transition-colors duration-300">
+                    <h3 class="text-lg font-bold mb-2 flex items-center">
+                        <i class="fas fa-book mr-3 text-blue-400"></i>
+                        《上市公司股份回购实务指南》
+                    </h3>
+                    <p class="text-gray-400">详细解析股份回购的法律程序、会计处理及监管要求</p>
+                </a>
+                <a href="#" class="card p-6 hover:bg-gray-800 transition-colors duration-300">
+                    <h3 class="text-lg font-bold mb-2 flex items-center">
+                        <i class="fas fa-book mr-3 text-blue-400"></i>
+                        《对赌协议风险防范与实务操作》
+                    </h3>
+                    <p class="text-gray-400">系统分析对赌协议的设计要点及上市前清理实务</p>
+                </a>
+                <a href="#" class="card p-6 hover:bg-gray-800 transition-colors duration-300">
+                    <h3 class="text-lg font-bold mb-2 flex items-center">
+                        <i class="fas fa-book mr-3 text-blue-400"></i>
+                        《企业会计准则第37号——金融工具列报》
+                    </h3>
+                    <p class="text-gray-400">规范金融负债与权益工具的划分及会计处理要求</p>
+                </a>
+                <a href="#" class="card p-6 hover:bg-gray-800 transition-colors duration-300">
+                    <h3 class="text-lg font-bold mb-2 flex items-center">
+                        <i class="fas fa-book mr-3 text-blue-400"></i>
+                        《证券发行上市审核案例解析》
+                    </h3>
+                    <p class="text-gray-400">收录近年典型IPO问询案例及监管关注要点分析</p>
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <h3 class="text-xl font-bold mb-4 text-blue-400">上市前交易价格差异的监管问询研究</h3>
+                <div class="flex justify-center space-x-6 mb-6">
+                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors duration-300">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors duration-300">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors duration-300">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </a>
+                </div>
+                <p class="text-gray-500 text-sm">本报告基于公开信息整理，仅供专业参考，不构成任何投资建议</p>
+                <p class="text-gray-500 text-sm mt-2">© 2023 金融合规研究中心. 保留所有权利</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: {
+                useMaxWidth: false,
+                htmlLabels: true,
+                curve: 'basis'
+            },
+            securityLevel: 'loose'
+        });
+
+        // Theme switcher functionality
+        function toggleTheme() {
+            const html = document.querySelector('html');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Check for saved theme preference or use system preference
+        function checkTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'light' || (!savedTheme && !systemDark)) {
+                document.querySelector('html').classList.remove('dark');
+            } else {
+                document.querySelector('html').classList.add('dark');
+            }
+        }
+
+        // Run theme check on page load
+        document.addEventListener('DOMContentLoaded', checkTheme);
+    </script>
+</body>
+</html>
+```
