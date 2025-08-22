@@ -1,0 +1,492 @@
+# 科创板IPO采购与研发费用穿行测试指南
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板IPO采购与研发费用穿行测试指南</title>
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: #111827;
+            color: #e5e7eb;
+        }
+        .serif {
+            font-family: 'Noto Serif SC', serif;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e40af 0%, #7c3aed 50%, #9d174d 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .highlight-box {
+            border-left: 4px solid #7c3aed;
+            background-color: rgba(124, 58, 237, 0.1);
+        }
+        .tab-active {
+            border-bottom: 3px solid #7c3aed;
+            color: #7c3aed;
+            font-weight: 500;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        table {
+            min-width: 640px;
+        }
+        .mermaid {
+            background-color: #1f2937;
+            border-radius: 0.5rem;
+            padding: 1rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- 主题切换按钮 -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="themeToggle" class="bg-gray-800 hover:bg-gray-700 text-gray-200 p-2 rounded-full shadow-lg transition-colors duration-200">
+            <i class="fas fa-moon dark:hidden"></i>
+            <i class="fas fa-sun hidden dark:inline"></i>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center">
+                <h1 class="serif text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">科创板IPO穿行测试指南</h1>
+                <p class="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto">
+                    采购与研发费用穿行测试的核心要求与核查要点
+                </p>
+                <div class="mt-10 flex flex-wrap justify-center gap-4">
+                    <a href="#procurement" class="px-6 py-3 bg-white text-indigo-900 font-medium rounded-full hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-shopping-cart mr-2"></i>采购穿行测试
+                    </a>
+                    <a href="#rd-expenses" class="px-6 py-3 bg-indigo-800 text-white font-medium rounded-full hover:bg-indigo-700 transition-colors">
+                        <i class="fas fa-flask mr-2"></i>研发费用测试
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <!-- Introduction -->
+        <section class="mb-16">
+            <div class="bg-gray-800 rounded-xl p-6 md:p-8 shadow-lg">
+                <h2 class="serif text-3xl font-bold text-white mb-6">科创板审核关键要点</h2>
+                <p class="text-gray-300 mb-6 leading-relaxed">
+                    科创板对内部控制和财务规范要求严苛，采购与研发费用穿行测试是IPO审核的核心环节。根据监管案例，约35%的IPO终止案例与穿行测试暴露的内控缺陷直接相关。
+                </p>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-gray-700 rounded-lg p-6 card-hover">
+                        <div class="text-indigo-400 text-3xl mb-4">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">高风险领域</h3>
+                        <p class="text-gray-300">采购职责分离、研发工时记录、试制品管理等环节问题频发</p>
+                    </div>
+                    <div class="bg-gray-700 rounded-lg p-6 card-hover">
+                        <div class="text-indigo-400 text-3xl mb-4">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">文档完整性</h3>
+                        <p class="text-gray-300">需覆盖全流程单据链，确保编号连续且逻辑一致</p>
+                    </div>
+                    <div class="bg-gray-700 rounded-lg p-6 card-hover">
+                        <div class="text-indigo-400 text-3xl mb-4">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">监管警示</h3>
+                        <p class="text-gray-300">无书面工时制度或研发预算管理缺失可能导致终止审核</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tabs Navigation -->
+        <div class="flex border-b border-gray-700 mb-8">
+            <button id="procurementTab" class="tab-active px-6 py-3 font-medium text-lg">采购穿行测试</button>
+            <button id="rdTab" class="px-6 py-3 font-medium text-lg text-gray-400 hover:text-white">研发费用测试</button>
+        </div>
+
+        <!-- Procurement Section -->
+        <section id="procurement" class="mb-20">
+            <div class="bg-gray-800 rounded-xl p-6 md:p-8 shadow-lg mb-10">
+                <h2 class="serif text-3xl font-bold text-white mb-6">采购穿行测试要求及核查事项</h2>
+                
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">1. 单据链完整性</h3>
+                    <div class="highlight-box p-4 mb-6 rounded-r-lg">
+                        <p class="font-medium">要求：覆盖采购全流程单据，包括订单、验收单、入库单、发票、付款单。</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold mb-2 text-indigo-300">核查重点</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                                <li>单据编号连续且逻辑一致（如出库单地址需匹配物流单）</li>
+                                <li>采购订单与实际入库数量差异率＞5%需说明原因</li>
+                                <li>同一客户同型号产品单价差异＞50%需核查合理性</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold mb-2 text-indigo-300">常见问题案例</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                                <li>某企业因分批入库未标记导致差异率超标（被要求补充说明）</li>
+                                <li>供应商不同文件公章不一致（涉嫌围标被重点问询）</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">2. 职责分离与内控有效性</h3>
+                    <div class="highlight-box p-4 mb-6 rounded-r-lg">
+                        <p class="font-medium">要求：严禁同一人兼任采购执行与审批。</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold mb-2 text-indigo-300">核查重点</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                                <li>领料人与审批人是否为同一人（案例：艾索信息因未分离被否）</li>
+                                <li>系统控制是否有效（如ERP记录需与纸质单据一致）</li>
+                                <li>付款审批是否执行双重控制</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold mb-2 text-indigo-300">关键风险点</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                                <li>采购人员直接修改系统参数（缺乏系统控制）</li>
+                                <li>审批流程倒签（事后补批）</li>
+                                <li>供应商准入未经合规审查</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">3. 关联交易与特殊风险</h3>
+                    <div class="highlight-box p-4 mb-6 rounded-r-lg">
+                        <p class="font-medium">核查重点：比对合同签章、客户签收人等细节。</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold mb-2 text-indigo-300">核查方法</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                                <li>检查不同客户签收人是否为同一自然人</li>
+                                <li>比对供应商在不同文件中的公章一致性</li>
+                                <li>核查银行流水中的异常支付对象</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold mb-2 text-indigo-300">典型案例</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                                <li>某企业5家供应商共用同一联系电话（被认定关联交易未披露）</li>
+                                <li>采购负责人亲属控股供应商（构成利益输送）</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Procurement Visualization -->
+            <div class="bg-gray-800 rounded-xl p-6 md:p-8 shadow-lg">
+                <h3 class="text-2xl font-semibold mb-6 text-white">采购穿行测试流程图</h3>
+                <div class="mermaid">
+                    graph TD
+                        A[采购申请] --> B[供应商选择]
+                        B --> C[采购订单]
+                        C --> D[货物验收]
+                        D --> E[入库登记]
+                        E --> F[发票校验]
+                        F --> G[付款审批]
+                        G --> H[付款执行]
+                        
+                        style A fill:#4f46e5,stroke:#4338ca,color:#fff
+                        style B fill:#7c3aed,stroke:#6d28d9,color:#fff
+                        style C fill:#a855f7,stroke:#9333ea,color:#fff
+                        style D fill:#c026d3,stroke:#a21caf,color:#fff
+                        style E fill:#db2777,stroke:#be185d,color:#fff
+                        style F fill:#e11d48,stroke:#be123c,color:#fff
+                        style G fill:#f43f5e,stroke:#e11d48,color:#fff
+                        style H fill:#fb7185,stroke:#f43f5e,color:#fff
+                </div>
+                <div class="mt-6 text-gray-400 text-sm">
+                    <p>注：各环节需核查单据完整性、审批合规性及系统记录一致性</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- R&D Expenses Section -->
+        <section id="rd-expenses" class="mb-20 hidden">
+            <div class="bg-gray-800 rounded-xl p-6 md:p-8 shadow-lg mb-10">
+                <h2 class="serif text-3xl font-bold text-white mb-6">费用穿行测试（研发费用为核心）要求及核查事项</h2>
+                
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">1. 研发费用归集准确性</h3>
+                    <div class="highlight-box p-4 mb-6 rounded-r-lg">
+                        <p class="font-medium">要求：建立工时核算制度及材料领用流程。</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold mb-2 text-indigo-300">核查重点</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                                <li>每日工时是否按项目记录、审批是否规范（案例：亿华通因口头沟通工时被质疑）</li>
+                                <li>材料是否通过系统登记（如ERP），杜绝直接报销入账</li>
+                                <li>试制品的数量、客户反馈记录是否完备</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold mb-2 text-indigo-300">监管案例</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                                <li>浙江光华因试制品记录缺失终止IPO</li>
+                                <li>某企业研发人员占比80%但无工时记录（被质疑真实性）</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">2. 费用真实性及分摊依据</h3>
+                    <div class="highlight-box p-4 mb-6 rounded-r-lg">
+                        <p class="font-medium">核查重点：研发人员薪酬分摊需结合考勤/工时表证明。</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold mb-2 text-indigo-300">关键要求</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                                <li>避免全员计入研发费用（需证明实际参与研发时长）</li>
+                                <li>政府补助项目费用需匹配课题任务书</li>
+                                <li>资本化时点需以立项/合同签署为起点</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold mb-2 text-indigo-300">典型案例</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                                <li>约定40辆示范车但列支70辆（被要求说明差异）</li>
+                                <li>研发费用突增但无项目进度支持（被质疑调节利润）</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold mb-4 text-indigo-400">3. 内控缺陷红线</h3>
+                    <div class="highlight-box p-4 mb-6 rounded-r-lg">
+                        <p class="font-medium">关键风险：无书面工时制度或研发预算管理缺失。</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold mb-2 text-indigo-300">一票否决项</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                                <li>试制品无出入库记录或物流信息</li>
+                                <li>研发材料领用无审批痕迹</li>
+                                <li>跨期费用占比超过5%</li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-semibold mb-2 text-indigo-300">整改建议</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                                <li>建立电子化工时填报系统</li>
+                                <li>实行研发项目预算管理制度</li>
+                                <li>设置试制品专用仓库</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- R&D Visualization -->
+            <div class="bg-gray-800 rounded-xl p-6 md:p-8 shadow-lg">
+                <h3 class="text-2xl font-semibold mb-6 text-white">研发费用穿行测试关键节点</h3>
+                <div class="mermaid">
+                    pie showData
+                        title 研发费用常见问题分布
+                        "工时记录不全/未审批" : 42
+                        "材料领用未系统登记" : 28
+                        "试制品管理缺失" : 18
+                        "费用分摊依据不足" : 12
+                </div>
+                <div class="mt-6 text-gray-400 text-sm">
+                    <p>数据来源：2020-2023年科创板IPO问询案例统计分析</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Documentation Section -->
+        <section class="mb-20">
+            <div class="bg-gray-800 rounded-xl p-6 md:p-8 shadow-lg">
+                <h2 class="serif text-3xl font-bold text-white mb-6">保荐机构底稿必备清单</h2>
+                
+                <div class="table-container mb-8">
+                    <table class="w-full border-collapse">
+                        <thead>
+                            <tr class="bg-gray-700">
+                                <th class="p-4 text-left font-semibold text-indigo-300">测试类型</th>
+                                <th class="p-4 text-left font-semibold text-indigo-300">底稿要求</th>
+                                <th class="p-4 text-left font-semibold text-indigo-300">样本量标准</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-700 hover:bg-gray-700">
+                                <td class="p-4 font-medium">采购穿行测试</td>
+                                <td class="p-4 text-gray-300">
+                                    <ul class="list-disc pl-5 space-y-1">
+                                        <li>采购合同、订单、验收单</li>
+                                        <li>入库单、发票、付款单全链条单据</li>
+                                        <li>供应商资质文件</li>
+                                    </ul>
+                                </td>
+                                <td class="p-4 text-gray-300">前十大供应商100%覆盖+随机抽取5-10笔</td>
+                            </tr>
+                            <tr class="border-b border-gray-700 hover:bg-gray-700">
+                                <td class="p-4 font-medium">研发费用测试</td>
+                                <td class="p-4 text-gray-300">
+                                    <ul class="list-disc pl-5 space-y-1">
+                                        <li>工时表及审批单、考勤记录</li>
+                                        <li>材料领用单、试制品管理文件</li>
+                                        <li>费用分摊依据、项目立项书</li>
+                                    </ul>
+                                </td>
+                                <td class="p-4 text-gray-300">各项目抽取3-6个月完整记录</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="highlight-box p-4 rounded-r-lg">
+                    <p class="font-medium flex items-start">
+                        <span class="text-red-400 mr-2"><i class="fas fa-exclamation-circle"></i></span>
+                        <span>监管警示：科创板对研发内控要求严苛，若上述底稿缺失（如浙江光华试制品无记录），可能直接导致终止审核。</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Further Reading -->
+        <section class="bg-gray-800 rounded-xl p-6 md:p-8 shadow-lg">
+            <h2 class="serif text-3xl font-bold text-white mb-6">延伸阅读</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gray-700 rounded-lg p-6 card-hover">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-300">1. 《企业内部控制基本规范》</h3>
+                    <p class="text-gray-300 mb-4">财政部等五部委联合发布，包含采购与研发内控的核心要求。</p>
+                    <a href="#" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium">查看详情 →</a>
+                </div>
+                <div class="bg-gray-700 rounded-lg p-6 card-hover">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-300">2. 《科创板IPO审核问答》</h3>
+                    <p class="text-gray-300 mb-4">上交所发布，详解研发费用资本化等专业问题的审核标准。</p>
+                    <a href="#" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium">查看详情 →</a>
+                </div>
+                <div class="bg-gray-700 rounded-lg p-6 card-hover">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-300">3. 《研发支出辅助账编制指引》</h3>
+                    <p class="text-gray-300 mb-4">国家税务总局文件，规范研发费用归集与备查材料管理。</p>
+                    <a href="#" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium">查看详情 →</a>
+                </div>
+                <div class="bg-gray-700 rounded-lg p-6 card-hover">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-300">4. 《企业会计准则第6号—无形资产》</h3>
+                    <p class="text-gray-300 mb-4">财政部发布，明确研发支出费用化与资本化的界限。</p>
+                    <a href="#" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium">查看详情 →</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center">
+                <h3 class="text-xl font-semibold mb-4">科创板IPO穿行测试指南</h3>
+                <p class="text-gray-400 mb-6">基于监管要求与实务案例整理</p>
+                <div class="flex justify-center space-x-6 mb-6">
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-weixin text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                </div>
+                <p class="text-gray-500 text-sm">© 2023 科创板IPO咨询. 版权所有.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // 初始化Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: { useMaxWidth: true },
+            pie: { useMaxWidth: true }
+        });
+
+        // 主题切换功能
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        // 检查本地存储或系统偏好
+        const savedTheme = localStorage.getItem('theme') || 
+                          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        
+        if (savedTheme === 'light') {
+            htmlElement.classList.remove('dark');
+        }
+
+        // 切换主题
+        themeToggle.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            const isDark = htmlElement.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+
+        // 标签切换功能
+        const procurementTab = document.getElementById('procurementTab');
+        const rdTab = document.getElementById('rdTab');
+        const procurementSection = document.getElementById('procurement');
+        const rdSection = document.getElementById('rd-expenses');
+
+        procurementTab.addEventListener('click', () => {
+            procurementTab.classList.add('tab-active');
+            procurementTab.classList.remove('text-gray-400', 'hover:text-white');
+            rdTab.classList.remove('tab-active');
+            rdTab.classList.add('text-gray-400', 'hover:text-white');
+            procurementSection.classList.remove('hidden');
+            rdSection.classList.add('hidden');
+        });
+
+        rdTab.addEventListener('click', () => {
+            rdTab.classList.add('tab-active');
+            rdTab.classList.remove('text-gray-400', 'hover:text-white');
+            procurementTab.classList.remove('tab-active');
+            procurementTab.classList.add('text-gray-400', 'hover:text-white');
+            rdSection.classList.remove('hidden');
+            procurementSection.classList.add('hidden');
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+```
