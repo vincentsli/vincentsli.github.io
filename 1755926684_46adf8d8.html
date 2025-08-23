@@ -1,0 +1,502 @@
+# 科创板IPO穿行测试可视化指南
+
+基于您的需求，我设计了一个既专业又美观的科创板IPO穿行测试可视化指南页面。页面采用深色主题，结合现代杂志风格排版，突出重要信息，并提供了清晰的数据可视化。
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板IPO穿行测试可视化指南</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --dark: #111827;
+            --light: #f3f4f6;
+            --gray: #6b7280;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: var(--dark);
+            color: #e5e7eb;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 600;
+        }
+
+        .light-mode {
+            background-color: var(--light);
+            color: var(--dark);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.9) 0%, rgba(37, 99, 235, 0.7) 100%), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%233b82f6" width="50" height="50"/><rect fill="%2310b981" x="50" width="50" height="50"/><rect fill="%23f59e0b" y="50" width="50" height="50"/><rect fill="%23ef4444" x="50" y="50" width="50" height="50"/></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card {
+            background-color: rgba(31, 41, 55, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(75, 85, 99, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .light-mode .card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(209, 213, 219, 0.8);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(59, 130, 246, 0.2) 0%, rgba(16, 185, 129, 0.2) 100%);
+            border-left: 4px solid var(--primary);
+        }
+
+        .light-mode .highlight {
+            background: linear-gradient(120deg, rgba(59, 130, 246, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .test-process {
+            position: relative;
+        }
+
+        .test-process::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 20px;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+
+        .mermaid-container {
+            background-color: rgba(31, 41, 55, 0.5);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+        }
+
+        .light-mode .mermaid-container {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: var(--primary);
+        }
+
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: var(--primary);
+        }
+
+        .hover-lift {
+            transition: transform 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-3px);
+        }
+
+        .drop-cap::first-letter {
+            font-size: 4rem;
+            font-weight: 700;
+            float: left;
+            line-height: 1;
+            margin-right: 0.5rem;
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .drop-cap::first-letter {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- 主题切换 -->
+    <div class="fixed top-4 right-4 z-50">
+        <div class="flex items-center">
+            <span class="mr-2 text-sm hidden md:inline">深色模式</span>
+            <div class="relative inline-block w-12 mr-2 align-middle select-none">
+                <input type="checkbox" name="toggle" id="theme-toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer transition-transform duration-200 ease-in-out" checked>
+                <label for="theme-toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-500 cursor-pointer"></label>
+            </div>
+            <span class="text-sm hidden md:inline">浅色模式</span>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero min-h-screen flex items-center py-16 px-4 md:px-8">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">科创板IPO穿行测试</h1>
+                <p class="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">全面解析采购与研发费用穿行测试的核心要求与核查要点</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+                <div class="card rounded-xl p-6 hover-lift">
+                    <div class="text-blue-400 text-4xl mb-4"><i class="fas fa-file-invoice-dollar"></i></div>
+                    <h3 class="text-xl font-semibold mb-3">采购穿行测试</h3>
+                    <p class="text-gray-300">覆盖供应商选择到付款全流程，确保单据链完整性和逻辑一致性</p>
+                </div>
+                <div class="card rounded-xl p-6 hover-lift">
+                    <div class="text-green-400 text-4xl mb-4"><i class="fas fa-flask"></i></div>
+                    <h3 class="text-xl font-semibold mb-3">研发费用测试</h3>
+                    <p class="text-gray-300">建立工时填报与材料领用流程，保障研发费用归集准确性</p>
+                </div>
+                <div class="card rounded-xl p-6 hover-lift">
+                    <div class="text-yellow-400 text-4xl mb-4"><i class="fas fa-clipboard-check"></i></div>
+                    <h3 class="text-xl font-semibold mb-3">监管合规要点</h3>
+                    <p class="text-gray-300">遵循《科创板股票上市规则》，还原业务实质，避免内控缺陷</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 内容部分 -->
+    <section class="py-16 px-4 md:px-8">
+        <div class="container mx-auto max-w-6xl">
+            <!-- 引言 -->
+            <div class="mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-center">科创板IPO穿行测试核心要求</h2>
+                <p class="text-lg text-gray-300 text-center max-w-3xl mx-auto">根据《科创板股票上市规则》及典型监管案例，穿行测试需"还原业务实质"，单据链断裂或逻辑矛盾视为内控缺陷</p>
+            </div>
+
+            <!-- 采购穿行测试 -->
+            <div class="mb-16">
+                <div class="flex items-center mb-8">
+                    <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white text-2xl">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-bold ml-4">采购穿行测试要求</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <div class="card p-6">
+                        <h3 class="text-xl font-semibold mb-4 text-blue-300"><i class="fas fa-list-ol mr-2"></i>单据链完整性</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                                <span>供应商准入文件与采购合同（含审批记录）</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                                <span>订单、验收单、入库单一致性核查</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                                <span>物流单据与出库单匹配性验证</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                                <span>发票及付款凭证完整性检查</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card p-6">
+                        <h3 class="text-xl font-semibold mb-4 text-blue-300"><i class="fas fa-user-shield mr-2"></i>职责分离与内控</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-exclamation-triangle text-yellow-400 mt-1 mr-2"></i>
+                                <span>禁止同一人操作采购申请、审批、验收</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-exclamation-triangle text-yellow-400 mt-1 mr-2"></i>
+                                <span>合同条款与ERP系统记录一致性检查</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-exclamation-triangle text-yellow-400 mt-1 mr-2"></i>
+                                <span>单据连续编号及审批标记完整性验证</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-red-900 bg-opacity-30 p-6 rounded-xl mb-8">
+                    <h3 class="text-xl font-semibold mb-3 text-red-200"><i class="fas fa-exclamation-circle mr-2"></i>监管警示案例</h3>
+                    <p class="mb-3">太湖金张科技因签收地址矛盾、合同与系统差异超50%终止IPO；艾索信息因领料人与审批人重合被问询</p>
+                    <p class="text-sm text-gray-300">依据：《科创板股票上市规则》第4.5.2条</p>
+                </div>
+            </div>
+
+            <!-- 研发费用测试 -->
+            <div class="mb-16">
+                <div class="flex items-center mb-8">
+                    <div class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white text-2xl">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-bold ml-4">研发费用穿行测试要求</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <div class="card p-6">
+                        <h3 class="text-xl font-semibold mb-4 text-green-300"><i class="fas fa-tasks mr-2"></i>研发费用归集准确性</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                                <span>每日工时记录按项目填报并经审批</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                                <span>材料领用通过ERP系统登记（禁止直接报销）</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                                <span>试制品管理需留存BOM单、客户反馈记录</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card p-6">
+                        <h3 class="text-xl font-semibold mb-4 text-green-300"><i class="fas fa-money-bill-wave mr-2"></i>薪酬分摊依据</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-exclamation-triangle text-yellow-400 mt-1 mr-2"></i>
+                                <span>高管/研发人员薪酬需依据工时表或考勤记录</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-exclamation-triangle text-yellow-400 mt-1 mr-2"></i>
+                                <span>避免主观分摊，确保合理性与可验证性</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-red-900 bg-opacity-30 p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-3 text-red-200"><i class="fas fa-exclamation-circle mr-2"></i>监管警示案例</h3>
+                    <p class="mb-3">亿华通因"口头沟通工时"被要求整改；浙江光华因缺失试制品追踪记录终止IPO；西安新通药物因缺失研发阶段节点确认文件被问询</p>
+                    <p class="text-sm text-gray-300">依据：《科创板股票上市规则》第4.5.2条</p>
+                </div>
+            </div>
+
+            <!-- 流程图 -->
+            <div class="mb-16">
+                <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center">穿行测试流程与要点</h2>
+                <div class="mermaid-container">
+                    <div class="mermaid">
+                        graph TD
+                            A[供应商选择] --> B[采购合同审批]
+                            B --> C[采购订单生成]
+                            C --> D[货物验收]
+                            D --> E[入库处理]
+                            E --> F[发票核对]
+                            F --> G[付款处理]
+                            
+                            subgraph 采购穿行测试
+                                A --> G
+                            end
+                            
+                            subgraph 研发费用测试
+                                H[研发项目立项] --> I[工时填报审批]
+                                I --> J[材料领用登记]
+                                J --> K[试制品管理]
+                                K --> L[研发费用归集]
+                            end
+                            
+                            M[单据链完整性] --> N[职责分离验证]
+                            N --> O[逻辑一致性检查]
+                            
+                            style A fill:#3b82f6,color:white
+                            style G fill:#10b981,color:white
+                            style H fill:#f59e0b,color:white
+                            style L fill:#ef4444,color:white
+                    </div>
+                </div>
+            </div>
+
+            <!-- 测试流程 -->
+            <div class="mb-16">
+                <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center">穿行测试实施步骤</h2>
+                <div class="test-process space-y-12 pl-12">
+                    <div class="relative flex items-start">
+                        <div class="step-number">1</div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold mb-2">样本选取</h3>
+                            <p>根据业务特点与风险水平，选取具有代表性的交易样本，覆盖主要业务类型与重要供应商</p>
+                        </div>
+                    </div>
+                    
+                    <div class="relative flex items-start">
+                        <div class="step-number">2</div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold mb-2">单据收集</h3>
+                            <p>收集从交易发起至结算全流程中的所有相关单据，确保单据链完整且连续编号</p>
+                        </div>
+                    </div>
+                    
+                    <div class="relative flex items-start">
+                        <div class="step-number">3</div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold mb-2">一致性验证</h3>
+                            <p>核查不同单据间关键信息的一致性，包括数量、金额、日期、审批信息等</p>
+                        </div>
+                    </div>
+                    
+                    <div class="relative flex items-start">
+                        <div class="step-number">4</div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold mb-2">内控有效性评估</h3>
+                            <p>评估关键控制点的执行有效性，包括职责分离、审批流程、系统控制等</p>
+                        </div>
+                    </div>
+                    
+                    <div class="relative flex items-start">
+                        <div class="step-number">5</div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-semibold mb-2">问题记录与整改</h3>
+                            <p>记录测试过程中发现的问题，分析根本原因，制定整改措施并跟踪落实</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 进一步阅读 -->
+            <div class="mb-16">
+                <h2 class="text-2xl md:text-3xl font-bold mb-8 text-center">进一步阅读</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card p-5 hover-lift">
+                        <div class="text-blue-400 text-2xl mb-3"><i class="fas fa-book"></i></div>
+                        <h3 class="text-lg font-semibold mb-2">《科创板股票上市规则》</h3>
+                        <p class="text-sm text-gray-300">上海证券交易所发布，涵盖科创板IPO全部规则要求</p>
+                    </div>
+                    
+                    <div class="card p-5 hover-lift">
+                        <div class="text-green-400 text-2xl mb-3"><i class="fas fa-file-alt"></i></div>
+                        <h3 class="text-lg font-semibold mb-2">《企业内部控制基本规范》</h3>
+                        <p class="text-sm text-gray-300">财政部等五部委联合发布，企业内控体系建设基础</p>
+                    </div>
+                    
+                    <div class="card p-5 hover-lift">
+                        <div class="text-yellow-400 text-2xl mb-3"><i class="fas fa-balance-scale"></i></div>
+                        <h3 class="text-lg font-semibold mb-2">《审计准则第1211号》</h3>
+                        <p class="text-sm text-gray-300">中国注册会计师审计准则，了解被审计单位及其环境</p>
+                    </div>
+                    
+                    <div class="card p-5 hover-lift">
+                        <div class="text-purple-400 text-2xl mb-3"><i class="fas fa-chart-line"></i></div>
+                        <h3 class="text-lg font-semibold mb-2">《企业会计准则第6号—无形资产》</h3>
+                        <p class="text-sm text-gray-300">研发支出资本化与费用化处理的具体规范</p>
+                    </div>
+                    
+                    <div class="card p-5 hover-lift">
+                        <div class="text-red-400 text-2xl mb-3"><i class="fas fa-gavel"></i></div>
+                        <h3 class="text-lg font-semibold mb-2">《首发业务若干问题解答》</h3>
+                        <p class="text-sm text-gray-300">证监会发布，IPO审核中的常见问题及解答</p>
+                    </div>
+                    
+                    <div class="card p-5 hover-lift">
+                        <div class="text-indigo-400 text-2xl mb-3"><i class="fas fa-building"></i></div>
+                        <h3 class="text-lg font-semibold mb-2">《上市公司治理准则》</3>
+                        <p class="text-sm text-gray-300">上市公司治理结构、内部控制与风险管理要求</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="py-8 px-4 md:px-8 border-t border-gray-800">
+        <div class="container mx-auto max-w-6xl text-center">
+            <p class="text-gray-400">© 2023 科创板IPO穿行测试可视化指南. 本内容仅供参考，不构成专业建议。</p>
+        </div>
+    </footer>
+
+    <script>
+        // 初始化Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            securityLevel: 'loose',
+            fontFamily: '"Noto Sans SC", sans-serif',
+            flowchart: {
+                useMaxWidth: false,
+                htmlLabels: true
+            }
+        });
+
+        // 主题切换功能
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        
+        // 检查系统偏好
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+            body.classList.add('light-mode');
+            themeToggle.checked = false;
+        }
+        
+        // 切换主题
+        themeToggle.addEventListener('change', function() {
+            if (this.checked) {
+                body.classList.remove('light-mode');
+            } else {
+                body.classList.add('light-mode');
+            }
+        });
+
+        // 响应系统主题变化
+        window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', event => {
+            if (event.matches) {
+                body.classList.add('light-mode');
+                themeToggle.checked = false;
+            } else {
+                body.classList.remove('light-mode');
+                themeToggle.checked = true;
+            }
+        });
+    </script>
+</body>
+</html>
+```
+
+## 设计说明
+
+这个网页设计具有以下特点：
+
+1. **深色主题**：默认采用深色背景，减轻视觉疲劳，同时通过精心设计的配色方案保持专业感
+2. **响应式布局**：在所有设备上都能完美展示，从手机到桌面电脑
+3. **杂志风格排版**：采用卡片式设计、清晰的层次结构和适当的留白，提高可读性
+4. **数据可视化**：使用Mermaid.js创建了穿行测试流程图，直观展示关键流程和关系
+5. **交互元素**：
+   - 深色/浅色模式切换功能
+   - 卡片悬停效果
+   - 图标和视觉元素增强用户体验
+6. **内容组织**：
+   - 采购穿行测试核心要求
+   - 研发费用测试要点
+   - 监管警示案例
+   - 实施步骤指南
+   - 进一步阅读资源
+
+这个设计既满足了专业内容展示的需求，又通过现代UI设计提供了愉悦的视觉体验。
