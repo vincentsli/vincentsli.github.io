@@ -1,0 +1,366 @@
+# 科创板股权激励授予时点指南
+
+下面是一个精美的网页设计，展示科创板拟上市公司股权激励计划授予时点的关键信息。该设计采用深色主题，结合现代UI元素和清晰的数据可视化。
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板股权激励授予时点指南</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        .light-mode {
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        .hero-pattern {
+            background-color: rgba(15, 23, 42, 0.9);
+            background-image: linear-gradient(to right, rgba(30, 64, 175, 0.2), rgba(15, 23, 42, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%231e293b" width="100" height="100"/><path fill="%231e40af" fill-opacity="0.2" d="M0 0h50v50H0z"/><path fill="%233b82f6" fill-opacity="0.1" d="M0 50h50v50H0zM50 0h50v50H50zM50 50h50v50H50z"/></svg>');
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 2px solid #3b82f6;
+            margin-bottom: 2rem;
+        }
+        .timeline-item:before {
+            content: "";
+            position: absolute;
+            left: -0.5rem;
+            top: 0;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background: #3b82f6;
+        }
+        .mermaid {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+        }
+        .light-mode .mermaid {
+            background: rgba(226, 232, 240, 0.5);
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        .section-title:after {
+            content: "";
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #6366f1);
+        }
+        .light-mode .hero-pattern {
+            background-color: rgba(248, 250, 252, 0.9);
+            background-image: linear-gradient(to right, rgba(59, 130, 246, 0.1), rgba(248, 250, 252, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23e2e8f0" width="100" height="100"/><path fill="%233b82f6" fill-opacity="0.1" d="M0 0h50v50H0z"/><path fill="%231e40af" fill-opacity="0.05" d="M0 50h50v50H0zM50 0h50v50H50zM50 50h50v50H50z"/></svg>');
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <!-- 主题切换按钮 -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="theme-toggle" class="p-3 rounded-full bg-slate-800 text-blue-400 shadow-lg hover:bg-slate-700 transition-colors">
+            <i class="fas fa-moon text-xl"></i>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-pattern min-h-screen flex items-center py-20 px-4 md:px-8">
+        <div class="container mx-auto max-w-6xl">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                        科创板拟上市公司<br>
+                        <span class="gradient-text">股权激励授予时点</span><br>
+                        合规指南
+                    </h1>
+                    <p class="text-xl text-slate-300 mb-8 leading-relaxed">
+                        全面解析科创板IPO过程中股权激励计划的关键时点要求、预留份额处理及风险规避策略，助力企业合规操作。
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#timeline" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-medium transition-colors">
+                            查看时间线
+                        </a>
+                        <a href="#recommendations" class="px-6 py-3 border border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white rounded-lg font-medium transition-colors">
+                            操作建议
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <div class="bg-slate-800 bg-opacity-50 backdrop-blur-md rounded-2xl p-6 shadow-xl">
+                        <div class="mermaid">
+                            graph LR
+                                A[基准日前] -->|允许新增授予<br>（需计提股份支付）| B[申报前]
+                                B -->|必须完成全部授予<br>（含≤20%预留份额）| C[提交IPO申请]
+                                C -->|禁止任何变动| D[上市]
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心结论 -->
+    <section class="py-20 px-4 md:px-8 bg-slate-900">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center section-title mx-auto">核心结论</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-slate-800 rounded-xl p-6 card-hover">
+                    <div class="w-14 h-14 rounded-full bg-blue-900 flex items-center justify-center mb-4">
+                        <i class="fas fa-calendar-check text-2xl text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">基准日前</h3>
+                    <p class="text-slate-400">无需全部授予完毕，但建议完成主要授予并计提股份支付费用</p>
+                </div>
+                
+                <div class="bg-slate-800 rounded-xl p-6 card-hover">
+                    <div class="w-14 h-14 rounded-full bg-blue-900 flex items-center justify-center mb-4">
+                        <i class="fas fa-file-signature text-2xl text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">申报前</h3>
+                    <p class="text-slate-400">必须完成所有授予（含预留份额），不得新增激励对象</p>
+                </div>
+                
+                <div class="bg-slate-800 rounded-xl p-6 card-hover">
+                    <div class="w-14 h-14 rounded-full bg-blue-900 flex items-center justify-center mb-4">
+                        <i class="fas fa-box-open text-2xl text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">预留份额</h3>
+                    <p class="text-slate-400">可保留≤20%预留权益，需明确后续授予对象及时间表</p>
+                </div>
+                
+                <div class="bg-slate-800 rounded-xl p-6 card-hover">
+                    <div class="w-14 h-14 rounded-full bg-blue-900 flex items-center justify-center mb-4">
+                        <i class="fas fa-ban text-2xl text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">申报后</h3>
+                    <p class="text-slate-400">完全禁止新增授予、行权或份额变动</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 时间线详情 -->
+    <section id="timeline" class="py-20 px-4 md:px-8 bg-slate-900">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center section-title mx-auto">关键时点要求</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="timeline-item">
+                    <div class="bg-slate-800 rounded-xl p-6 card-hover">
+                        <span class="inline-block px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-sm mb-4">阶段一</span>
+                        <h3 class="text-2xl font-semibold mb-3">基准日前</h3>
+                        <p class="mb-4">申报基准日（审计报告截止日）前，企业可继续实施股权激励，但需确保：</p>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-400">
+                            <li>股份支付费用在报告期内足额计提</li>
+                            <li>授予价格若低于市价50%，需说明定价依据</li>
+                            <li>避免在基准日后集中授予，防止被质疑调节利润</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="bg-slate-800 rounded-xl p-6 card-hover">
+                        <span class="inline-block px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-sm mb-4">阶段二</span>
+                        <h3 class="text-2xl font-semibold mb-3">申报前</h3>
+                        <p class="mb-4">正式提交IPO申请前，必须完成所有授予：</p>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-400">
+                            <li>签署全部授予协议（含持股平台出资）</li>
+                            <li>对预留部分明确授予对象标准及时间表</li>
+                            <li>股权结构需稳定，未授予的预留份额视为潜在变动因素</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="bg-slate-800 rounded-xl p-6 card-hover">
+                        <span class="inline-block px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-sm mb-4">阶段三</span>
+                        <h3 class="text-2xl font-semibold mb-3">申报后</h3>
+                        <p class="mb-4">提交IPO申请至上市期间，完全禁止变动：</p>
+                        <ul class="list-disc pl-5 space-y-2 text-slate-400">
+                            <li>不得办理新增权益登记</li>
+                            <li>所有股权激励计划必须"冻结"</li>
+                            <li>不得新增授予、行权或解锁</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 操作建议 -->
+    <section id="recommendations" class="py-20 px-4 md:px-8 bg-slate-900">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center section-title mx-auto">操作建议与风险规避</h2>
+            
+            <div class="bg-slate-800 rounded-2xl p-8 mb-12">
+                <div class="mermaid">
+                    flowchart TD
+                        A[制定股权激励计划] --> B[基准日前完成≥80%授予]
+                        B --> C[计提股份支付费用]
+                        C --> D[申报前完成全部授予]
+                        D --> E[明确预留部分授予安排]
+                        E --> F[避免集中授予引质疑]
+                        F --> G[提交IPO申请]
+                        G --> H[申报后完全冻结]
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-slate-800 rounded-xl p-6 card-hover">
+                    <div class="w-14 h-14 rounded-full bg-blue-900 flex items-center justify-center mb-4">
+                        <i class="fas fa-lightbulb text-2xl text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">最佳实践</h3>
+                    <ul class="list-disc pl-5 space-y-3 text-slate-400">
+                        <li>最晚在提交IPO申请前完成全部限制性股票的授予（含预留部分）</li>
+                        <li>若在申报基准日后操作，需提前计提股份支付费用并披露</li>
+                        <li>预留部分需在招股说明书中披露具体授予安排（如对象标准、时间表）</li>
+                        <li>参考已成功过会案例的操作方式（如杰普特、奥比中光）</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-slate-800 rounded-xl p-6 card-hover">
+                    <div class="w-14 h-14 rounded-full bg-blue-900 flex items-center justify-center mb-4">
+                        <i class="fas fa-exclamation-triangle text-2xl text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">风险规避</h3>
+                    <ul class="list-disc pl-5 space-y-3 text-slate-400">
+                        <li>避免在临近申报时集中授予，防止被质疑调节利润</li>
+                        <li>确保股份支付费用计提充分，避免影响财务数据可比性</li>
+                        <li>预留部分授予安排需明确，避免被视为潜在股权不稳定因素</li>
+                        <li>在审期间不得新增期权激励计划，需保持股权稳定</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 延伸阅读 -->
+    <section class="py-20 px-4 md:px-8 bg-slate-900">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center section-title mx-auto">延伸阅读</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="http://www.csrc.gov.cn/csrc/c101953/c7547341/content.shtml" target="_blank" class="block bg-slate-800 rounded-xl p-6 card-hover hover:border-blue-500 border border-slate-700 transition-colors">
+                    <div class="text-blue-400 mb-4 text-2xl">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">监管规则适用指引——发行类第5号</h3>
+                    <p class="text-slate-400 text-sm">中国证监会关于IPO股权激励的相关规定</p>
+                </a>
+                
+                <a href="https://www.sse.com.cn/lawandrules/sselawsrules/repeal/rules/c/10118921/files/9bd863640cc44cfb8db0a7e756df68dc.pdf" target="_blank" class="block bg-slate-800 rounded-xl p-6 card-hover hover:border-blue-500 border border-slate-700 transition-colors">
+                    <div class="text-blue-400 mb-4 text-2xl">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">科创板股票上市规则</h3>
+                    <p class="text-slate-400 text-sm">上海证券交易所科创板上市规则全文</p>
+                </a>
+                
+                <a href="https://www.dehenglaw.com/CN/tansuocontent/0008/016645/7.aspx" target="_blank" class="block bg-slate-800 rounded-xl p-6 card-hover hover:border-blue-500 border border-slate-700 transition-colors">
+                    <div class="text-blue-400 mb-4 text-2xl">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">德恒律所科创板股权激励分析</h3>
+                    <p class="text-slate-400 text-sm">科创板拟IPO企业股权激励审核规则的创新与实践</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 md:px-8 bg-slate-950 text-slate-400">
+        <div class="container mx-auto max-w-6xl text-center">
+            <p>© 2023 科创板股权激励指南。本内容仅供参考，不构成法律建议。</p>
+        </div>
+    </footer>
+
+    <script>
+        // 初始化Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            fontFamily: 'Tahoma, Arial, sans-serif',
+            flowchart: {
+                useMaxWidth: false,
+                curve: 'basis'
+            }
+        });
+
+        // 主题切换功能
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // 检查系统偏好
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+            document.body.classList.add('light-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            if (document.body.classList.contains('light-mode')) {
+                document.body.classList.remove('light-mode');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            } else {
+                document.body.classList.add('light-mode');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+```
+
+## 设计特点
+
+1. **深色主题设计**：采用深蓝色和深灰色作为主色调，符合金融和法律内容的专业感
+2. **响应式布局**：适配手机、平板和桌面设备
+3. **视觉层次分明**：通过卡片、时间线和图表清晰展示信息结构
+4. **数据可视化**：使用Mermaid.js绘制流程图，直观展示关键时点要求
+5. **主题切换功能**：允许用户在深色和浅色模式之间切换
+6. **微交互效果**：卡片悬停效果、按钮交互等提升用户体验
+7. **精美排版**：使用渐变色标题、图标和适当留白增强视觉吸引力
+
+这个网页以专业且美观的方式呈现了科创板拟上市公司股权激励授予时点的关键信息，帮助用户快速理解复杂法规要求。
