@@ -1,0 +1,849 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板外协采购核查披露指南 | 专业分析与案例解读</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --secondary: #10b981;
+            --accent: #8b5cf6;
+            --dark-bg: #0f172a;
+            --dark-card: #1e293b;
+            --dark-text: #f1f5f9;
+            --light-bg: #f8fafc;
+            --light-card: #ffffff;
+            --light-text: #1e293b;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        .dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+
+        .light-mode {
+            background-color: var(--light-bg);
+            color: var(--light-text);
+        }
+
+        .card-dark {
+            background-color: var(--dark-card);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-light {
+            background-color: var(--light-card);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-dark:hover, .card-light:hover {
+            transform: translateY(-5px);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.8) 0%, rgba(139, 92, 246, 0.8) 100%);
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>');
+            background-size: cover;
+            opacity: 0.3;
+        }
+
+        .drop-cap::first-letter {
+            initial-letter: 3;
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 700;
+            color: var(--primary);
+            margin-right: 0.5rem;
+            line-height: 1;
+        }
+
+        .hover-lift {
+            transition: transform 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-3px);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 50;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(45deg);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .concept-map-container {
+            min-height: 400px;
+        }
+
+        .concept-link {
+            transition: all 0.3s ease;
+        }
+
+        .concept-link:hover {
+            stroke: var(--primary);
+            stroke-width: 3px;
+        }
+
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            backdrop-filter: blur(10px);
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                min-height: 60vh;
+            }
+            
+            .drop-cap::first-letter {
+                initial-letter: 2;
+            }
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <!-- 主题切换按钮 -->
+    <div id="themeToggle" class="theme-toggle bg-blue-600 text-white">
+        <i class="fas fa-moon text-xl"></i>
+    </div>
+
+    <!-- 导航栏 -->
+    <nav class="sticky-nav py-4 border-b border-gray-700 bg-dark-card/80 dark:bg-dark-card/80">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <i class="fas fa-balance-scale text-blue-400 text-2xl mr-2"></i>
+                    <span class="text-xl font-semibold">科创板合规指南</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#intro" class="hover-lift hover:text-blue-400">核心概念</a>
+                    <a href="#requirements" class="hover-lift hover:text-blue-400">披露要求</a>
+                    <a href="#cases" class="hover-lift hover:text-blue-400">典型案例</a>
+                    <a href="#framework" class="hover-lift hover:text-blue-400">核查框架</a>
+                    <a href="#resources" class="hover-lift hover:text-blue-400">延伸阅读</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobileMenuButton" class="text-gray-300">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 移动端菜单 -->
+    <div id="mobileMenu" class="hidden fixed inset-0 z-50 bg-dark-card/95 backdrop-blur-sm">
+        <div class="flex flex-col items-center justify-center h-full space-y-8">
+            <a href="#intro" class="text-2xl font-medium hover:text-blue-400">核心概念</a>
+            <a href="#requirements" class="text-2xl font-medium hover:text-blue-400">披露要求</a>
+            <a href="#cases" class="text-2xl font-medium hover:text-blue-400">典型案例</a>
+            <a href="#framework" class="text-2xl font-medium hover:text-blue-400">核查框架</a>
+            <a href="#resources" class="text-2xl font-medium hover:text-blue-400">延伸阅读</a>
+            <button id="closeMobileMenu" class="absolute top-6 right-6 text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Hero 区域 -->
+    <section class="hero-section">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">科创板外协采购核查披露指南</h1>
+                <p class="text-xl md:text-2xl text-blue-100 mb-8">专业分析与案例深度解读</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#intro" class="px-6 py-3 bg-white text-blue-600 rounded-full font-semibold hover-lift hover:bg-blue-50">
+                        <i class="fas fa-book-open mr-2"></i>探索指南
+                    </a>
+                    <a href="#cases" class="px-6 py-3 border-2 border-white text-white rounded-full font-semibold hover-lift hover:bg-white hover:text-blue-600">
+                        <i class="fas fa-gavel mr-2"></i>查看案例
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 引言 -->
+    <section class="py-16 bg-gradient-to-b from-blue-900/20 to-dark-bg dark:from-blue-900/20 dark:to-dark-bg">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto">
+                <div class="card-dark p-8 md:p-10">
+                    <p class="text-lg md:text-xl drop-cap">根据科创板审核要求及案例实践，外协采购的核查披露需重点关注业务实质、财务真实性与关联关系。本指南系统梳理了外协与委外加工的概念区分、披露要求及典型案例，为拟上市企业及中介机构提供实操参考。</p>
+                    <div class="flex items-center mt-6 pt-6 border-t border-gray-700">
+                        <div class="w-10 h-10 rounded-full bg-blue-700 flex items-center justify-center mr-4">
+                            <i class="fas fa-feather-alt text-white"></i>
+                        </div>
+                        <div>
+                            <p class="font-medium">专业研究团队</p>
+                            <p class="text-sm text-gray-400">更新于 2023年10月15日</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心概念 -->
+    <section id="intro" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">核心概念辨析</h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto">准确区分外协采购与委外加工的业务实质是科创板信息披露的基础</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="card-dark p-6 fade-in">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-700/20 flex items-center justify-center mr-4">
+                            <i class="fas fa-cube text-blue-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">外协采购</h3>
+                    </div>
+                    <p class="text-gray-300">直接采购成品或半成品（供应商自主提供原料/技术），发行人仅参与验收环节。</p>
+                    <div class="mt-6 p-4 bg-blue-900/30 rounded-lg">
+                        <p class="text-sm"><i class="fas fa-star text-yellow-400 mr-2"></i><strong>典型案例：</strong>四方光电采购SMT贴片成品</p>
+                    </div>
+                </div>
+
+                <div class="card-dark p-6 fade-in">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-purple-700/20 flex items-center justify-center mr-4">
+                            <i class="fas fa-cogs text-purple-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">委外加工</h3>
+                    </div>
+                    <p class="text-gray-300">发行人提供原料/技术标准，委托外部厂商加工特定工序，加工费按量结算。</p>
+                    <div class="mt-6 p-4 bg-purple-900/30 rounded-lg">
+                        <p class="text-sm"><i class="fas fa-star text-yellow-400 mr-2"></i><strong>典型案例：</strong>鼎阳科技委外染色造粒工序</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-dark p-6 fade-in">
+                <h3 class="text-xl font-semibold mb-4 flex items-center">
+                    <i class="fas fa-balance-scale-right text-blue-400 mr-2"></i>核心区别
+                </h3>
+                <p class="mb-4">是否由<strong>发行人提供原材料/技术标准</strong>及<strong>是否涉及生产核心环节</strong>。科创板审核要求明确业务实质，避免混淆概念。</p>
+                
+                <div class="concept-map-container mt-6">
+                    <div class="mermaid">
+                        graph TD
+                            A[外协采购业务实质判断] --> B{是否由发行人提供原材料/技术标准?};
+                            B -->|是| C[委外加工模式];
+                            B -->|否| D[外协采购模式];
+                            C --> E{是否涉及核心生产环节?};
+                            E -->|是| F[审核重点关注];
+                            E -->|否| G[一般性披露];
+                            D --> H[需说明行业惯例及必要性];
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 披露要求 -->
+    <section id="requirements" class="py-16 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">核查及披露要求</h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto">全方位解析科创板对外协采购的信息披露与核查要求</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="card-dark p-6 fade-in">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-green-700/20 flex items-center justify-center mr-4">
+                            <i class="fas fa-file-alt text-green-400 text-lg"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">披露位置（招股说明书）</h3>
+                    </div>
+                    
+                    <div class="space-y-4 mt-6">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 rounded-full bg-blue-700/20 flex items-center justify-center mt-1 mr-3 flex-shrink-0">
+                                <span class="text-blue-400 font-semibold">1</span>
+                            </div>
+                            <div>
+                                <h4 class="font-medium">业务与技术章节</h4>
+                                <p class="text-sm text-gray-300">说明外协模式是否行业惯例，区分委外加工与外协采购的具体环节，分析外协必要性。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 rounded-full bg-blue-700/20 flex items-center justify-center mt-1 mr-3 flex-shrink-0">
+                                <span class="text-blue-400 font-semibold">2</span>
+                            </div>
+                            <div>
+                                <h4 class="font-medium">财务会计信息章节</h4>
+                                <p class="text-sm text-gray-300">披露报告期各期外协采购金额、占比、主要供应商，解释外协成本与主营业务成本的匹配性。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 rounded-full bg-blue-700/20 flex items-center justify-center mt-1 mr-3 flex-shrink-0">
+                                <span class="text-blue-400 font-semibold">3</span>
+                            </div>
+                            <div>
+                                <h4 class="font-medium">关联交易章节</h4>
+                                <p class="text-sm text-gray-300">核查外协商是否与发行人存在关联关系（如股权、前员工控制）。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 rounded-full bg-blue-700/20 flex items-center justify-center mt-1 mr-3 flex-shrink-0">
+                                <span class="text-blue-400 font-semibold">4</span>
+                            </div>
+                            <div>
+                                <h4 class="font-medium">风险因素章节</h4>
+                                <p class="text-sm text-gray-300">提示外协依赖风险（如供应商集中、质量控制风险）。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-dark p-6 fade-in">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-red-700/20 flex items-center justify-center mr-4">
+                            <i class="fas fa-search text-red-400 text-lg"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">审核关注要点</h3>
+                    </div>
+                    
+                    <div class="space-y-4 mt-6">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 rounded-full bg-purple-700/20 flex items-center justify-center mt-1 mr-3 flex-shrink-0">
+                                <i class="fas fa-industry text-purple-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium">业务实质核查</h4>
+                                <p class="text-sm text-gray-300">是否通过外协转移核心生产环节，外协商的资质与能力（如医疗行业需具备GMP认证）。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 rounded-full bg-purple-700/20 flex items-center justify-center mt-1 mr-3 flex-shrink-0">
+                                <i class="fas fa-calculator text-purple-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium">财务真实性核查</h4>
+                                <p class="text-sm text-gray-300">外协定价公允性（对比自主生产成本/市场价），是否存在替发行人承担成本、费用等异常情形。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 rounded-full bg-purple-700/20 flex items-center justify-center mt-1 mr-3 flex-shrink-0">
+                                <i class="fas fa-link text-purple-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium">关联关系穿透核查</h4>
+                                <p class="text-sm text-gray-300">外协商是否由离职员工/关联方控制，需核查至自然人层级。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-dark p-6 fade-in">
+                <h3 class="text-xl font-semibold mb-4 flex items-center">
+                    <i class="fas fa-list-ol text-blue-400 mr-2"></i>披露内容清单
+                </h3>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-300 mt-4">
+                        <thead class="text-xs uppercase bg-gray-700/50">
+                            <tr>
+                                <th class="px-4 py-3">披露项目</th>
+                                <th class="px-4 py-3">内容要求</th>
+                                <th class="px-4 py-3">参考案例</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-700">
+                                <td class="px-4 py-3 font-medium">外协模式说明</td>
+                                <td class="px-4 py-3">区分委外加工与外协采购，说明行业惯例及必要性</td>
+                                <td class="px-4 py-3">四方光电</td>
+                            </tr>
+                            <tr class="border-b border-gray-700">
+                                <td class="px-4 py-3 font-medium">金额及占比</td>
+                                <td class="px-4 py-3">报告期各期外协采购金额、占营业成本/采购总额比例</td>
+                                <td class="px-4 py-3">鼎阳科技</td>
+                            </tr>
+                            <tr class="border-b border-gray-700">
+                                <td class="px-4 py-3 font-medium">前五大供应商</td>
+                                <td class="px-4 py-3">名称、采购内容、金额及占比、成立时间、合作历史</td>
+                                <td class="px-4 py-3">万源通</td>
+                            </tr>
+                            <tr class="border-b border-gray-700">
+                                <td class="px-4 py-3 font-medium">定价机制</td>
+                                <td class="px-4 py-3">定价依据及公允性分析（对比自主生产成本/市场价）</td>
+                                <td class="px-4 py-3">微导纳米</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium">关联关系核查</td>
+                                <td class="px-4 py-3">外协商与发行人关联方关系声明及核查结论</td>
+                                <td class="px-4 py-3">浩欧博</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 典型案例 -->
+    <section id="cases" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">典型案例参考</h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto">科创板IPO企业外协采购披露实践与审核问询分析</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card-dark p-6 fade-in hover-lift">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-blue-700/20 flex items-center justify-center mr-4">
+                            <span class="text-blue-400 font-semibold">688665</span>
+                        </div>
+                        <h3 class="text-xl font-semibold">四方光电</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">明确区分"委外加工"（气室表面处理）与"外协采购"（SMT贴片），披露工序细节及质量控制流程。</p>
+                    <div class="mt-4 pt-4 border-t border-gray-700 flex justify-between items-center">
+                        <a href="http://static.sse.com.cn/stock/disclosure/announcement/c/new/2021-01-29/688665_20210129_2.pdf" target="_blank" class="text-blue-400 hover:text-blue-300 text-sm">
+                            <i class="fas fa-external-link-alt mr-1"></i>查看招股书
+                        </a>
+                        <span class="px-2 py-1 bg-blue-900/50 text-blue-300 rounded text-xs">P1-2-96</span>
+                    </div>
+                </div>
+
+                <div class="card-dark p-6 fade-in hover-lift">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-green-700/20 flex items-center justify-center mr-4">
+                            <span class="text-green-400 font-semibold">688112</span>
+                        </div>
+                        <h3 class="text-xl font-semibold">鼎阳科技</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">解释外协采购金额与成本中"委外加工费"差异原因（因产品未全部当期销售）。</p>
+                    <div class="mt-4 pt-4 border-t border-gray-700 flex justify-between items-center">
+                        <a href="http://static.sse.com.cn/stock/disclosure/announcement/c/new/2021-11-03/688112_20211103_1.pdf" target="_blank" class="text-green-400 hover:text-green-300 text-sm">
+                            <i class="fas fa-external-link-alt mr-1"></i>查看问询回复
+                        </a>
+                        <span class="px-2 py-1 bg-green-900/50 text-green-300 rounded text-xs">问题10</span>
+                    </div>
+                </div>
+
+                <div class="card-dark p-6 fade-in hover-lift">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-purple-700/20 flex items-center justify-center mr-4">
+                            <span class="text-purple-400 font-semibold">万源通</span>
+                        </div>
+                        <h3 class="text-xl font-semibold">万源通</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">披露PCB钻孔为外协采购，并说明供应商与实控人关联关系。</p>
+                    <div class="mt-4 pt-4 border-t border-gray-700 flex justify-between items-center">
+                        <a href="http://static.sse.com.cn/stock/disclosure/announcement/c/new/2023-06-15/XXXXXX_20230615_2.pdf" target="_blank" class="text-purple-400 hover:text-purple-300 text-sm">
+                            <i class="fas fa-external-link-alt mr-1"></i>查看问询函
+                        </a>
+                        <span class="px-2 py-1 bg-purple-900/50 text-purple-300 rounded text-xs">问题14</span>
+                    </div>
+                </div>
+
+                <div class="card-dark p-6 fade-in hover-lift">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-yellow-700/20 flex items-center justify-center mr-4">
+                            <span class="text-yellow-400 font-semibold">微导纳米</span>
+                        </div>
+                        <h3 class="text-xl font-semibold">微导纳米</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">被问询"与先导智能合作是否属于定制化采购"，说明业务实质及关联交易公允性。</p>
+                    <div class="mt-4 pt-4 border-t border-gray-700 flex justify-between items-center">
+                        <a href="https://pdf.dfcfw.com/pdf/H2_AN202011191431092632_1.pdf" target="_blank" class="text-yellow-400 hover:text-yellow-300 text-sm">
+                            <i class="fas fa-external-link-alt mr-1"></i>查看问询回复
+                        </a>
+                        <span class="px-2 py-1 bg-yellow-900/50 text-yellow-300 rounded text-xs">问题3.2</span>
+                    </div>
+                </div>
+
+                <div class="card-dark p-6 fade-in hover-lift">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-red-700/20 flex items-center justify-center mr-4">
+                            <span class="text-red-400 font-semibold">浩欧博</span>
+                        </div>
+                        <h3 class="text-xl font-semibold">浩欧博</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">医疗行业外协核查，关注外协商是否具备GMP资质，关联关系穿透核查。</p>
+                    <div class="mt-4 pt-4 border-t border-gray-700 flex justify-between items-center">
+                        <a href="#" class="text-red-400 hover:text-red-300 text-sm">
+                            <i class="fas fa-external-link-alt mr-1"></i>查看案例
+                        </a>
+                        <span class="px-2 py-1 bg-red-900/50 text-red-300 rounded text-xs">医药行业</span>
+                    </div>
+                </div>
+
+                <div class="card-dark p-6 fade-in hover-lift">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-indigo-700/20 flex items-center justify-center mr-4">
+                            <i class="fas fa-book text-indigo-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">核查指引</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">《证券业务示范实践第3号-保荐人尽职调查》第4.5.12条外协核查要求详解。</p>
+                    <div class="mt-4 pt-4 border-t border-gray-700 flex justify-between items-center">
+                        <a href="http://www.handingipo.com/nd.jsp?id=791" target="_blank" class="text-indigo-400 hover:text-indigo-300 text-sm">
+                            <i class="fas fa-external-link-alt mr-1"></i>查看指引
+                        </a>
+                        <span class="px-2 py-1 bg-indigo-900/50 text-indigo-300 rounded text-xs">第4.5.12条</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核查框架 -->
+    <section id="framework" class="py-16 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">外协采购核查框架</h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto">系统性核查方法与关键程序指引</p>
+            </div>
+
+            <div class="card-dark p-6 md:p-8 fade-in">
+                <div class="mermaid">
+                    flowchart TD
+        A[外协采购核查框架] --> B[业务实质性核查];
+        A --> C[财务真实性核查];
+        A --> D[关联关系核查];
+        
+        B --> B1{是否涉及核心环节?};
+        B1 -->|是| B2[评估技术依赖性风险];
+        B1 -->|否| B3[分析行业惯例合理性];
+        B2 --> B4[说明必要性及替代方案];
+        B3 --> B5[披露质量控制措施];
+        
+        C --> C1[定价公允性分析];
+        C1 --> C2[对比自主生产成本];
+        C1 --> C3[对比市场公开价格];
+        C2 --> C4{是否存在重大差异?};
+        C3 --> C4;
+        C4 -->|是| C5[调查差异原因];
+        C4 -->|否| C6[取得公允性声明];
+        C5 --> C7[评估对IPO影响];
+        
+        D --> D1[核查股权结构];
+        D1 --> D2[穿透至自然人];
+        D2 --> D3[识别关联方];
+        D3 --> D4{是否存在关联关系?};
+        D4 -->|是| D5[披露并论证公允性];
+        D4 -->|否| D6[取得无关联声明];
+        
+        B4 --> E[形成核查结论];
+        C6 --> E;
+        C7 --> E;
+        D5 --> E;
+        D6 --> E;
+        
+        E --> F[招股说明书披露];
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mt-12">
+                <div class="card-dark p-6 fade-in">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-tasks text-blue-400 mr-2"></i>核查程序清单
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                            <span>获取报告期内外协采购明细，按采购内容分类统计</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                            <span>访谈生产部门负责人，了解外协背景及必要性</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                            <span>检查主要外协商的营业执照、资质证书</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                            <span>对比外协定价与自主生产成本/市场价差异</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                            <span>核查外协商股权结构，识别潜在关联方</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                            <span>检查外协产品质量控制记录及验收标准</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card-dark p-6 fade-in">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-exclamation-triangle text-red-400 mr-2"></i>常见问题及应对
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-times-circle text-red-400 mt-1 mr-2"></i>
+                            <span><strong>问题：</strong>外协涉及核心环节，质疑业务完整性<br><strong>应对：</strong>充分说明必要性，展示核心技术控制点</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-times-circle text-red-400 mt-1 mr-2"></i>
+                            <span><strong>问题：</strong>供应商成立时间短但交易额大<br><strong>应对：</strong>核查商业合理性，取得资金流水证明</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-times-circle text-red-400 mt-1 mr-2"></i>
+                            <span><strong>问题：</strong>外协定价显著低于自主生产成本<br><strong>应对：</strong分析规模化效应，验证定价公允性</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-times-circle text-red-400 mt-1 mr-2"></i>
+                            <span><strong>问题：</strong>外协商与离职员工关联<br><strong>应对：</strong>穿透核查，评估交易公允性及连续性</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 延伸阅读 -->
+    <section id="resources" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">延伸阅读</h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto">深度理解科创板信息披露规则与实务操作</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card-dark p-6 fade-in hover-lift">
+                    <div class="text-blue-400 text-2xl mb-4">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">《科创板IPO审核问答》</h3>
+                    <p class="text-gray-300 mb-4">证监会发布，涵盖科创板IPO各类审核问题解答，包含外协采购信息披露要求。</p>
+                    <a href="#" class="text-blue-400 hover:text-blue-300 text-sm inline-flex items-center">
+                        了解更多 <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                    </a>
+                </div>
+
+                <div class="card-dark p-6 fade-in hover-lift">
+                    <div class="text-green-400 text-2xl mb-4">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">《证券业务示范实践第3号》</h3>
+                    <p class="text-gray-300 mb-4">保荐人尽职调查指引，详细规定外协采购核查程序及底稿要求。</p>
+                    <a href="#" class="text-green-400 hover:text-green-300 text-sm inline-flex items-center">
+                        了解更多 <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                    </a>
+                </div>
+
+                <div class="card-dark p-6 fade-in hover-lift">
+                    <div class="text-purple-400 text-2xl mb-4">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">《科创板企业发行上市申报》</h3>
+                    <p class="text-gray-300 mb-4">上交所出版，系统介绍科创板申报流程及信息披露实务案例。</p>
+                    <a href="#" class="text-purple-400 hover:text-purple-300 text-sm inline-flex items-center">
+                        了解更多 <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                    </a>
+                </div>
+
+                <div class="card-dark p-6 fade-in hover-lift">
+                    <div class="text-yellow-400 text-2xl mb-4">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">《制造业外协加工税务处理》</h3>
+                    <p class="text-gray-300 mb-4">分析外协加工模式下增值税、企业所得税处理要点及常见风险。</p>
+                    <a href="#" class="text-yellow-400 hover:text-yellow-300 text-sm inline-flex items-center">
+                        了解更多 <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                    </a>
+                </div>
+
+                <div class="card-dark p-6 fade-in hover-lift">
+                    <div class="text-red-400 text-2xl mb-4">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">《关联交易审核实务》</h3>
+                    <p class="text-gray-300 mb-4">科创板关联交易认定、披露及合规操作指南，包含外协商关联关系认定。</p>
+                    <a href="#" class="text-red-400 hover:text-red-300 text-sm inline-flex items-center">
+                        了解更多 <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                    </a>
+                </div>
+
+                <div class="card-dark p-6 fade-in hover-lift">
+                    <div class="text-indigo-400 text-2xl mb-4">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">《招股说明书编制指南》</h3>
+                    <p class="text-gray-300 mb-4">详解招股书各章节撰写要求及案例，包含外协采购信息披露规范。</p>
+                    <a href="#" class="text-indigo-400 hover:text-indigo-300 text-sm inline-flex items-center">
+                        了解更多 <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="py-12 bg-gray-900 border-t border-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <div class="flex justify-center mb-6">
+                    <i class="fas fa-balance-scale text-blue-400 text-3xl"></i>
+                </div>
+                <p class="text-gray-400 mb-4">科创板外协采购核查披露指南</p>
+                <div class="flex justify-center space-x-4 mb-6">
+                    <a href="#" class="text-gray-400 hover:text-blue-400">
+                        <i class="fab fa-weixin"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400">
+                        <i class="fab fa-weibo"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+                <p class="text-sm text-gray-500">© 2023 科创板合规研究团队. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 主题切换功能
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const themeIcon = themeToggle.querySelector('i');
+
+        // 检查本地存储或系统偏好
+        if (localStorage.getItem('theme') === 'light' || 
+            (window.matchMedia('(prefers-color-scheme: light)').matches && !localStorage.getItem('theme'))) {
+            body.classList.replace('dark-mode', 'light-mode');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark-mode')) {
+                body.classList.replace('dark-mode', 'light-mode');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.classList.replace('light-mode', 'dark-mode');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // 移动端菜单功能
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMobileMenu = document.getElementById('closeMobileMenu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeMobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+
+        // 滚动动画
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(el => observer.observe(el));
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                if (this.getAttribute('href') !== '#') {
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+                
+                // 如果是移动端菜单链接，同时关闭菜单
+                if (window.innerWidth < 768 && mobileMenu) {
+                    mobileMenu.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+```
