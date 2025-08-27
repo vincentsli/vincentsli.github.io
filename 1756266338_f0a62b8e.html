@@ -1,0 +1,690 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naval Ravikant 思想体系 | 财富与幸福指南</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <style>
+        :root {
+            --primary: #6366F1;
+            --secondary: #10B981;
+            --accent: #F59E0B;
+            --dark: #111827;
+            --light: #F3F4F6;
+            --gray: #374151;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            transition: all 0.3s ease;
+        }
+        
+        .serif {
+            font-family: 'Noto Serif SC', serif;
+        }
+        
+        .light-mode {
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #EC4899 100%);
+        }
+        
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .drop-cap::first-letter {
+            initial-letter: 3;
+            font-weight: bold;
+            margin-right: 0.5rem;
+            color: var(--primary);
+            font-family: 'Noto Serif SC', serif;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .concept-map {
+            min-height: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 2rem 0;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+            margin: 2rem 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: var(--primary);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3rem;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--secondary);
+            border: 3px solid var(--dark);
+        }
+        
+        .light-mode .timeline-item::before {
+            border: 3px solid var(--light);
+        }
+        
+        .quote {
+            border-left: 4px solid var(--accent);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+        }
+        
+        .theme-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 50;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gray);
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        .light-mode .theme-toggle {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+            border-radius: 3px;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline {
+                padding-left: 2rem;
+            }
+            
+            .timeline::before {
+                left: 7px;
+            }
+            
+            .timeline-item::before {
+                left: -2.4rem;
+                width: 16px;
+                height: 16px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100">
+    <!-- 主题切换按钮 -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon text-xl"></i>
+    </div>
+
+    <!-- 导航栏 -->
+    <nav class="bg-gray-800 bg-opacity-90 backdrop-filter backdrop-blur-lg py-4 sticky top-0 z-40 shadow-lg">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold serif gradient-text" style="background: linear-gradient(90deg, #EC4899, #8B5CF6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Naval的思想宇宙</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="nav-link">简介</a>
+                <a href="#wealth" class="nav-link">财富指南</a>
+                <a href="#happiness" class="nav-link">幸福之道</a>
+                <a href="#wisdom" class="nav-link">智慧箴言</a>
+                <a href="#books" class="nav-link">延伸阅读</a>
+            </div>
+            <button class="md:hidden text-xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero 模块 -->
+    <header class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 gradient-bg opacity-20"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent"></div>
+        <div class="container mx-auto px-4 py-20 relative z-10 text-center">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 serif">Naval Ravikant的智慧</h1>
+            <p class="text-xl md:text-2xl max-w-3xl mx-auto mb-10 opacity-90">如何不靠运气致富，并找到真正的幸福</p>
+            <div class="quote text-center mx-auto max-w-3xl">
+                <p class="text-2xl">"财富不是你有多少钱，而是你睡着时也在为你赚钱的资产。"</p>
+            </div>
+            <div class="mt-12">
+                <a href="#about" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-lg inline-flex items-center transition-all duration-300 transform hover:-translate-y-1">
+                    探索智慧 <i class="fas fa-arrow-down ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容 -->
+    <main class="container mx-auto px-4 py-20">
+        <!-- 简介部分 -->
+        <section id="about" class="mb-20 fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold mb-10 section-title serif">谁是Naval Ravikant？</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <p class="text-lg mb-6 drop-cap">Naval Ravikant是AngelList的联合创始人兼CEO，一位著名的天使投资人，曾投资过Twitter、Uber等数百家公司。但他更为人熟知的是其深刻的哲学思考和人生智慧，特别是在财富创造和幸福追求方面的独特见解。</p>
+                    <p class="text-lg mb-6">Naval通过推特、博客和播客分享他的思想，尤其是他的"如何不靠运气致富"系列推文，已成为现代创业者和追求财富自由者的必读内容。</p>
+                    <div class="flex space-x-4 mt-8">
+                        <div class="bg-gray-800 p-4 rounded-lg flex-1">
+                            <i class="fas fa-gem text-purple-500 text-2xl mb-2"></i>
+                            <h3 class="font-semibold">投资哲人</h3>
+                            <p class="text-sm opacity-80 mt-2">早期投资了200多家初创公司</p>
+                        </div>
+                        <div class="bg-gray-800 p-4 rounded-lg flex-1">
+                            <i class="fas fa-microphone-alt text-indigo-500 text-2xl mb-2"></i>
+                            <h3 class="font-semibold">思想分享者</h3>
+                            <p class="text-sm opacity-80 mt-2">通过播客分享人生与商业智慧</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-800 rounded-2xl overflow-hidden card-hover">
+                    <img src="https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Naval Ravikant" class="w-full h-72 object-cover">
+                    <div class="p-6">
+                        <p class="text-sm opacity-80"><i class="fas fa-quote-left text-indigo-500 mr-2"></i>我最大的成功不是投资了哪些公司，而是设计了一种我想要的生活方式。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 思想体系可视化 -->
+        <section class="mb-20 fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold mb-10 section-title serif">Naval思想体系</h2>
+            <div class="concept-map">
+                <div class="mermaid">
+                    graph TD
+                    A[Naval Ravikant的思想体系] --> B[财富创造]
+                    A --> C[幸福追求]
+                    A --> D[智慧生活]
+                    
+                    B --> B1[特定知识]
+                    B --> B2[责任与杠杆]
+                    B --> B3[股权与资产]
+                    B --> B4[玩长期游戏]
+                    
+                    C --> C1[活在当下]
+                    C --> C2[管理欲望]
+                    C --> C3[健康第一]
+                    C --> C4[内在幸福]
+                    
+                    D --> D1[阅读与学习]
+                    D --> D2[理性思考]
+                    D --> D3[冥想习惯]
+                    D --> D4[原则生活]
+                    
+                    B1 --> B11[无法规模化教授]
+                    B1 --> B12[通过追求好奇心获得]
+                    B1 --> B13[与激情结合]
+                    
+                    B2 --> B21[承担社会责任]
+                    B2 --> B22[利用资本/代码/媒体杠杆]
+                    B2 --> B23[无需许可的杠杆]
+                    
+                    C2 --> C21[欲望是合约]
+                    C2 --> C22[减少对外部条件的依赖]
+                    C2 --> C23[幸福是一种选择]
+                    
+                    click B "https://nav.al/" "Naval的博客"
+                </div>
+            </div>
+            <p class="text-center mt-4 opacity-80">交互提示：点击图表中的节点探索Naval思想的不同维度</p>
+        </section>
+
+        <!-- 财富指南部分 -->
+        <section id="wealth" class="mb-20 fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold mb-10 section-title serif">如何不靠运气致富</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gray-800 p-8 rounded-2xl card-hover">
+                    <div class="w-16 h-16 rounded-full bg-indigo-900 flex items-center justify-center mb-6">
+                        <i class="fas fa-brain text-2xl text-indigo-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">积累特定知识</h3>
+                    <p class="mb-4">特定知识是那些无法通过培训获得的知识，它往往是通过追求你独特的好奇心和激情而自然产生的。</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                            <span>无法规模化教授</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                            <span>具有创造性</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                            <span>处于技术前沿</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-800 p-8 rounded-2xl card-hover">
+                    <div class="w-16 h-16 rounded-full bg-purple-900 flex items-center justify-center mb-6">
+                        <i class="fas fa-balance-scale text-2xl text-purple-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">利用杠杆效应</h3>
+                    <p class="mb-4">现代世界提供了三种主要的杠杆形式，让你能够放大你的努力和影响：</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-code text-blue-400 mt-1 mr-2"></i>
+                            <span>劳动力（让他人为你工作）</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-money-bill-wave text-yellow-400 mt-1 mr-2"></i>
+                            <span>资本（用钱赚钱）</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-laptop-code text-green-400 mt-1 mr-2"></i>
+                            <span>代码与媒体（最民主的杠杆）</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-800 p-8 rounded-2xl card-hover">
+                    <div class="w-16 h-16 rounded-full bg-blue-900 flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-line text-2xl text-blue-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">玩长期游戏</h3>
+                    <p class="mb-4">财富来自于长期思考和复利效应，而不是短期投机：</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-infinity text-indigo-400 mt-1 mr-2"></i>
+                            <span>复利是世界上最强大的力量</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-handshake text-green-400 mt-1 mr-2"></i>
+                            <span>与长期主义者合作</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-user-check text-yellow-400 mt-1 mr-2"></i>
+                            <span>建立个人品牌和声誉</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-800 p-8 rounded-2xl card-hover">
+                    <div class="w-16 h-16 rounded-full bg-green-900 flex items-center justify-center mb-6">
+                        <i class="fas fa-industry text-2xl text-green-400"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">拥有股权</h3>
+                    <p class="mb-4">真正的财富来自于拥有资产，而不是出卖时间：</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-building text-red-400 mt-1 mr-2"></i>
+                            <span>创建拥有部分所有权的业务</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-coins text-yellow-400 mt-1 mr-2"></i>
+                            <span>投资其他企业的股权</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-robot text-blue-400 mt-1 mr-2"></i>
+                            <span>创建无需人工干预的资产</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 幸福之道部分 -->
+        <section id="happiness" class="mb-20 fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold mb-10 section-title serif">幸福之道</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-heart text-red-500 mr-3"></i> 幸福是一种选择
+                        </h3>
+                        <p class="mb-4">Naval认为幸福不是我们追求的东西，而是我们已有的东西，只是被我们的欲望和条件所掩盖。</p>
+                        <p>"幸福是一种技能，你可以通过练习获得。它不是你要找的东西，而是你要去除的东西。"</p>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-balance-scale-right text-yellow-500 mr-3"></i> 管理欲望
+                        </h3>
+                        <p class="mb-4">我们感到不幸福，往往不是因为缺少什么，而是因为欲望超过了我们的拥有。</p>
+                        <p>"欲望是你与自己签订的合约，在得到你想要的东西之前，你会一直感到不快乐。"</p>
+                    </div>
+                    
+                    <div class="bg-gray-800 p-6 rounded-xl">
+                        <h3 class="text-xl font-semibold mb-4">Naval的幸福公式</h3>
+                        <div class="text-center p-4 bg-gray-700 rounded-lg mb-4">
+                            <p class="text-2xl font-mono">幸福 = 健康 + 财富 + 良好关系</p>
+                        </div>
+                        <p class="text-sm opacity-80">健康包括身体和心理健康，财富指足够的资源，良好关系指与家人、朋友和社会的积极连接。</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-clock text-blue-500 mr-3"></i> 活在当下
+                        </h3>
+                        <p class="mb-4">我们大部分时间要么在后悔过去，要么在担忧未来，却很少真正体验当下。</p>
+                        <p>"当下是你唯一真正拥有的时刻。过去是记忆，未来是想象。"</p>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-medal text-green-500 mr-3"></i> 健康第一
+                        </h3>
+                        <p class="mb-4">没有健康，财富和幸福都无从谈起。健康是1，其他都是后面的0。</p>
+                        <p>"我宁愿身体健康、心态平和，而不是富有但身心俱疲。幸运的是，你不必做出选择。"</p>
+                    </div>
+                    
+                    <div class="bg-gray-800 p-6 rounded-xl">
+                        <h3 class="text-xl font-semibold mb-4">每日习惯</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center">
+                                <i class="fas fa-sun text-yellow-500 mr-3"></i>
+                                <span>早起冥想</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-running text-green-500 mr-3"></i>
+                                <span>定期锻炼</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-book text-blue-500 mr-3"></i>
+                                <span>每日阅读</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-pencil-alt text-purple-500 mr-3"></i>
+                                <span>写日记反思</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 智慧箴言部分 -->
+        <section id="wisdom" class="mb-20 fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold mb-10 section-title serif">Naval的智慧箴言</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-gray-800 p-6 rounded-2xl">
+                    <i class="fas fa-quote-left text-3xl text-indigo-500 mb-4"></i>
+                    <p class="text-xl mb-4">"阅读比你过去80年更重要。基础书籍包含了几个世纪积累的智慧，而现代媒体只包含昨天的垃圾。"</p>
+                    <div class="flex items-center mt-6">
+                        <div class="w-10 h-10 rounded-full bg-indigo-700 flex items-center justify-center mr-3">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <span>关于阅读</span>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800 p-6 rounded-2xl">
+                    <i class="fas fa-quote-left text-3xl text-green-500 mb-4"></i>
+                    <p class="text-xl mb-4">"世界上最危险的东西是海豹突击队队员拿着枪，但更危险的是有魅力的人说着你愿意相信的话。"</p>
+                    <div class="flex items-center mt-6">
+                        <div class="w-10 h-10 rounded-full bg-green-700 flex items-center justify-center mr-3">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <span>关于批判性思维</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3 class="text-2xl font-semibold mb-2">特定知识</h3>
+                    <p class="opacity-80">无法通过培训获得的知识，它是高度个人化和创造性的，来自于你独特的经验和视角。</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3 class="text-2xl font-semibold mb-2">杠杆作用</h3>
+                    <p class="opacity-80">劳动力、资本和代码/媒体是三种主要杠杆形式，其中代码和媒体是新时代最民主的杠杆。</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3 class="text-2xl font-semibold mb-2">承担责任</h3>
+                    <p class="opacity-80">获得财富需要承担社会责任，以你的名义承担风险，并以自己的判断力自豪。</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3 class="text-2xl font-semibold mb-2">股权思维</h3>
+                    <p class="opacity-80">真正的财富来自于拥有企业的股权，而不是出卖时间换取工资。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 进一步阅读部分 -->
+        <section id="books" class="mb-20 fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold mb-10 section-title serif">延伸阅读</h2>
+            <p class="text-xl max-w-3xl mb-12">Naval的思想深受许多经典著作的影响。以下是5本他推荐或与他思想密切相关的书籍：</p>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-800 rounded-2xl overflow-hidden card-hover">
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80')"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">《穷查理宝典》</h3>
+                        <p class="text-sm opacity-80 mb-4">彼得·考夫曼</p>
+                        <p class="mb-4">查理·芒格的智慧箴言录，关于多元思维模型和理性决策的经典之作。</p>
+                        <a href="#" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium">了解更多 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800 rounded-2xl overflow-hidden card-hover">
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1532012197267-da84d254e3eb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80')"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">《人类简史》</h3>
+                        <p class="text-sm opacity-80 mb-4">尤瓦尔·赫拉利</p>
+                        <p class="mb-4">从认知革命到科学革命，重新思考人类社会的形成和发展。</p>
+                        <a href="#" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium">了解更多 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800 rounded-2xl overflow-hidden card-hover">
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80')"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">《沉思录》</h3>
+                        <p class="text-sm opacity-80 mb-4">马可·奥勒留</p>
+                        <p class="mb-4">古罗马皇帝的人生哲学，关于自律、责任和内在平静的永恒智慧。</p>
+                        <a href="#" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium">了解更多 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800 rounded-2xl overflow-hidden card-hover">
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80')"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">《原则》</h3>
+                        <p class="text-sm opacity-80 mb-4">瑞·达利欧</p>
+                        <p class="mb-4">桥水基金创始人的生活和工作原则，关于如何系统化决策和应对现实。</p>
+                        <a href="#" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium">了解更多 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800 rounded-2xl overflow-hidden card-hover">
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1558901357-ca41e027fe50?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80')"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">《Sapiens》</h3>
+                        <p class="text-sm opacity-80 mb-4">尤瓦尔·赫拉利</p>
+                        <p class="mb-4">探索人类如何从无关紧要的动物成为地球的统治者，以及我们未来的可能方向。</p>
+                        <a href="#" class="text-indigo-400 hover:text-indigo-300 text-sm font-medium">了解更多 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800 rounded-2xl overflow-hidden card-hover flex flex-col justify-center items-center p-6">
+                    <i class="fas fa-plus-circle text-5xl text-indigo-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">更多资源</h3>
+                    <p class="text-center mb-4">探索Naval的博客、播客和推特，获取更多深度内容。</p>
+                    <a href="https://nav.al/" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg">访问博客</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 py-12">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <h2 class="text-2xl font-bold mb-6 serif">探索更多Naval的智慧</h2>
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-indigo-600">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-indigo-600">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-indigo-600">
+                        <i class="fas fa-podcast"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-indigo-600">
+                        <i class="fas fa-blog"></i>
+                    </a>
+                </div>
+                <p class="opacity-70">© 2023 Naval的思想宇宙 | 设计灵感来自Naval Ravikant的智慧</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 主题切换功能
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+        
+        // 检查本地存储或系统偏好
+        if (localStorage.getItem('theme') === 'light' || 
+            (window.matchMedia('(prefers-color-scheme: light)').matches && !localStorage.getItem('theme'))) {
+            body.classList.add('light-mode');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('light-mode')) {
+                body.classList.remove('light-mode');
+                localStorage.setItem('theme', 'dark');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            } else {
+                body.classList.add('light-mode');
+                localStorage.setItem('theme', 'light');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        });
+        
+        // 滚动动画
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+```
