@@ -1,0 +1,892 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板招股书业务披露实务指南</title>
+    
+    <!-- 外部依赖 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-primary: #1e293b;
+            --color-secondary: #475569;
+            --color-accent: #0ea5e9;
+            --color-surface: #0f172a;
+            --color-muted: #64748b;
+        }
+        
+        [data-theme="light"] {
+            --color-primary: #1e293b;
+            --color-secondary: #475569;
+            --color-accent: #0ea5e9;
+            --color-surface: #f8fafc;
+            --color-muted: #64748b;
+        }
+        
+        body {
+            font-family: "Noto Sans SC", Tahoma, Arial, "Helvetica Neue", sans-serif;
+            background-color: var(--color-surface);
+            color: var(--color-primary);
+            transition: all 0.3s ease;
+        }
+        
+        .serif {
+            font-family: "Noto Serif SC", serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #0ea5e9, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        [data-theme="light"] .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .hover-lift {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .mermaid-container {
+            display: flex;
+            justify-content: center;
+            min-height: 300px;
+            max-height: 800px;
+            background: var(--color-surface);
+            border: 2px solid rgba(14, 165, 233, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mermaid-container .mermaid {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            cursor: grab;
+            transition: transform 0.3s ease;
+            transform-origin: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            touch-action: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        .mermaid-container .mermaid svg {
+            max-width: 100%;
+            height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .mermaid-container .mermaid:active {
+            cursor: grabbing;
+        }
+        
+        .mermaid-container.zoomed .mermaid {
+            height: 100%;
+            width: 100%;
+            cursor: grab;
+        }
+        
+        .mermaid-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .mermaid-control-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 6px;
+            padding: 10px;
+            cursor: pointer;
+            color: var(--color-primary);
+            font-size: 14px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .mermaid-control-btn:hover {
+            background: rgba(14, 165, 233, 0.3);
+            transform: scale(1.05);
+        }
+        
+        .mermaid-control-btn:active {
+            transform: scale(0.95);
+        }
+        
+        /* Mermaid 主题定制 */
+        .mermaid .node rect,
+        .mermaid .node circle,
+        .mermaid .node ellipse,
+        .mermaid .node polygon {
+            stroke: var(--color-accent) !important;
+            stroke-width: 2px !important;
+            fill: var(--color-surface) !important;
+        }
+        
+        .mermaid .node .label {
+            color: var(--color-primary) !important;
+            font-family: "Noto Sans SC", sans-serif !important;
+            font-size: 14px !important;
+            font-weight: 500 !important;
+        }
+        
+        .mermaid .edgePath .path {
+            stroke: var(--color-accent) !important;
+            stroke-width: 2px !important;
+        }
+        
+        .mermaid .edgeLabel {
+            background-color: var(--color-surface) !important;
+            color: var(--color-primary) !important;
+            font-family: "Noto Sans SC", sans-serif !important;
+            font-size: 12px !important;
+            padding: 4px 8px !important;
+            border-radius: 4px !important;
+        }
+        
+        /* 响应式优化 */
+        @media (max-width: 768px) {
+            .mermaid-container {
+                padding: 15px;
+                margin: 15px 0;
+            }
+            
+            .mermaid-control-btn {
+                padding: 8px;
+                font-size: 12px;
+            }
+        }
+        
+        /* 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-accent);
+            border-radius: 3px;
+        }
+        
+        /* 首字下沉 */
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 4.5rem;
+            line-height: 3.5rem;
+            padding-right: 8px;
+            margin-top: 0.125rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #0ea5e9, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* 表格样式 */
+        .custom-table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        
+        .custom-table th,
+        .custom-table td {
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .custom-table th {
+            background: rgba(14, 165, 233, 0.1);
+            font-weight: 600;
+        }
+        
+        .custom-table tr:hover td {
+            background: rgba(14, 165, 233, 0.05);
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        /* 引用样式 */
+        blockquote {
+            border-left: 4px solid var(--color-accent);
+            background: rgba(14, 165, 233, 0.05);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            position: relative;
+        }
+        
+        blockquote::before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            color: var(--color-accent);
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100" data-theme="dark">
+    <!-- 主题切换按钮 -->
+    <button id="theme-toggle" class="fixed top-4 right-4 z-50 p-3 rounded-full glass-card hover-lift">
+        <i class="fas fa-sun text-sky-400 dark:hidden"></i>
+        <i class="fas fa-moon text-sky-400 hidden dark:block"></i>
+    </button>
+
+    <!-- Hero 区域 -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-sky-900"></div>
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-sky-500 rounded-full filter blur-3xl animate-pulse"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold serif mb-6 leading-tight">
+                <span class="gradient-text">科创板招股书</span>
+                <br>
+                <span class="text-slate-100">业务披露实务指南</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-300 mb-8 leading-relaxed">
+                深度解析收入结构极端情况下的合规披露策略
+            </p>
+            <div class="flex items-center justify-center space-x-4 text-sm text-slate-400">
+                <span><i class="fas fa-chart-line mr-2"></i>实务案例</span>
+                <span><i class="fas fa-shield-alt mr-2"></i>合规标准</span>
+                <span><i class="fas fa-lightbulb mr-2"></i>最佳实践</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 主要内容区域 -->
+    <main class="max-w-6xl mx-auto px-4 py-16 space-y-20">
+        <!-- 合规性分析 -->
+        <section class="animate-fade-in-up">
+            <h2 class="text-3xl md:text-4xl font-bold serif mb-8 text-center">
+                <i class="fas fa-balance-scale text-sky-400 mr-4"></i>
+                合规性分析依据
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-card rounded-xl p-6 hover-lift">
+                    <div class="text-sky-400 text-3xl mb-4">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">业务完整性要求</h3>
+                    <p class="text-slate-300 leading-relaxed">
+                        科创板允许企业存在尚未产业化的技术或业务，只要核心业务具备持续经营能力，且其他业务与核心技术相关。
+                    </p>
+                </div>
+                
+                <div class="glass-card rounded-xl p-6 hover-lift">
+                    <div class="text-sky-400 text-3xl mb-4">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">披露规范</h3>
+                    <p class="text-slate-300 leading-relaxed">
+                        需明确列示各类业务收入占比、毛利率差异及变动原因，充分说明技术关联性，并进行风险提示。
+                    </p>
+                </div>
+                
+                <div class="glass-card rounded-xl p-6 hover-lift">
+                    <div class="text-sky-400 text-3xl mb-4">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">案例支持</h3>
+                    <p class="text-slate-300 leading-relaxed">
+                        钶锐锶数控、鸿禧能源等已成功案例证明，收入结构极端情况下仍可合规披露。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 可视化图表 -->
+        <section class="animate-fade-in-up">
+            <h2 class="text-3xl md:text-4xl font-bold serif mb-8 text-center">
+                <i class="fas fa-project-diagram text-sky-400 mr-4"></i>
+                业务结构关系图
+            </h2>
+            
+            <div class="mermaid-container">
+                <div class="mermaid-controls">
+                    <button class="mermaid-control-btn zoom-in" title="放大">
+                        <i class="fas fa-search-plus"></i>
+                    </button>
+                    <button class="mermaid-control-btn zoom-out" title="缩小">
+                        <i class="fas fa-search-minus"></i>
+                    </button>
+                    <button class="mermaid-control-btn reset-zoom" title="重置">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </button>
+                    <button class="mermaid-control-btn fullscreen" title="全屏查看">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                </div>
+                <div class="mermaid" id="business-diagram">
+                    graph TD
+                        A["核心业务 A
+                        <br />99%收入占比"] --> B["配套业务 B
+                        <br />低占比"]
+                        A --> C["储备技术 C
+                        <br />未产生销售"]
+                        C --> D["募投项目方向"]
+                        B --> E["技术协同效应"]
+                        C --> F["产业化时间表"]
+                        
+                        style A fill:#0ea5e9,stroke:#0284c7,stroke-width:3px,color:#fff
+                        style B fill:#6366f1,stroke:#4f46e5,stroke-width:2px,color:#fff
+                        style C fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff
+                        style D fill:#10b981,stroke:#059669,stroke-width:2px,color:#fff
+                        style E fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff
+                        style F fill:#ef4444,stroke:#dc2626,stroke-width:2px,color:#fff
+                </div>
+            </div>
+        </section>
+
+        <!-- 披露要点表格 -->
+        <section class="animate-fade-in-up">
+            <h2 class="text-3xl md:text-4xl font-bold serif mb-8 text-center">
+                <i class="fas fa-table text-sky-400 mr-4"></i>
+                需强化的披露要点
+            </h2>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full custom-table rounded-xl overflow-hidden">
+                    <thead>
+                        <tr>
+                            <th class="px-6 py-4 text-left">业务类型</th>
+                            <th class="px-6 py-4 text-left">披露重点</th>
+                            <th class="px-6 py-4 text-left">风险提示要求</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="px-6 py-4 font-semibold text-sky-400">A业务（99%）</td>
+                            <td class="px-6 py-4">收入来源稳定性、技术壁垒、市场空间</td>
+                            <td class="px-6 py-4">客户集中/替代品冲击等</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-semibold text-indigo-400">B业务（低占比）</td>
+                            <td class="px-6 py-4">与A业务的协同性、技术转化进展</td>
+                            <td class="px-6 py-4">研发失败或商业化滞后风险</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-semibold text-amber-400">C业务（未销售）</td>
+                            <td class="px-6 py-4">技术阶段（研发/试样）、产业化时间表</td>
+                            <td class="px-6 py-4">技术迭代、资金投入失效等风险</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 监管关注重点 -->
+        <section class="animate-fade-in-up">
+            <h2 class="text-3xl md:text-4xl font-bold serif mb-8 text-center">
+                <i class="fas fa-eye text-sky-400 mr-4"></i>
+                监管关注重点
+            </h2>
+            
+            <div class="space-y-6">
+                <div class="glass-card rounded-xl p-6">
+                    <h3 class="text-xl font-semibold mb-3 flex items-center">
+                        <i class="fas fa-exclamation-triangle text-amber-400 mr-3"></i>
+                        业务独立性
+                    </h3>
+                    <p class="text-slate-300">
+                        若C业务长期无进展，可能被质疑技术研发能力或战略规划合理性。
+                    </p>
+                </div>
+                
+                <div class="glass-card rounded-xl p-6">
+                    <h3 class="text-xl font-semibold mb-3 flex items-center">
+                        <i class="fas fa-link text-green-400 mr-3"></i>
+                        募投项目匹配
+                    </h3>
+                    <p class="text-slate-300">
+                        若募集资金投向C业务，需充分论证其产业化可行性。
+                    </p>
+                </div>
+                
+                <div class="glass-card rounded-xl p-6">
+                    <h3 class="text-xl font-semibold mb-3 flex items-center">
+                        <i class="fas fa-calculator text-purple-400 mr-3"></i>
+                        财务勾稽关系
+                    </h3>
+                    <p class="text-slate-300">
+                        C业务的研发费用需在"研发投入"章节单独列示，避免资本化处理不当。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 实务建议 -->
+        <section class="animate-fade-in-up">
+            <blockquote class="glass-card rounded-xl">
+                <p class="text-lg leading-relaxed">
+                    实务建议：可参考《屹唐股份招股说明书》处理方式，将C业务归类为"战略储备技术"，通过专利布局、研发进度等佐证其商业价值，弱化收入缺位的影响。
+                </p>
+            </blockquote>
+        </section>
+
+        <!-- 延伸阅读 -->
+        <section class="animate-fade-in-up">
+            <h2 class="text-3xl md:text-4xl font-bold serif mb-8 text-center">
+                <i class="fas fa-book-open text-sky-400 mr-4"></i>
+                延伸阅读推荐
+            </h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass-card rounded-xl p-6 hover-lift">
+                    <h3 class="text-lg font-semibold mb-2 text-sky-400">《科创板IPO实务指南》</h3>
+                    <p class="text-sm text-slate-300 mb-3">全面解析科创板IPO全流程，包含大量实务案例</p>
+                    <a href="#" class="text-sm text-sky-400 hover:text-sky-300 transition-colors">
+                        <i class="fas fa-external-link-alt mr-1"></i>查看详情
+                    </a>
+                </div>
+                
+                <div class="glass-card rounded-xl p-6 hover-lift">
+                    <h3 class="text-lg font-semibold mb-2 text-indigo-400">《信息披露准则解读》</h3>
+                    <p class="text-sm text-slate-300 mb-3">证监会官方文件深度解读，实务操作标准</p>
+                    <a href="#" class="text-sm text-indigo-400 hover:text-indigo-300 transition-colors">
+                        <i class="fas fa-external-link-alt mr-1"></i>查看详情
+                    </a>
+                </div>
+                
+                <div class="glass-card rounded-xl p-6 hover-lift">
+                    <h3 class="text-lg font-semibold mb-2 text-amber-400">《科创板案例精析》</h3>
+                    <p class="text-sm text-slate-300 mb-3">精选50个科创板成功案例，深度剖析披露策略</p>
+                    <a href="#" class="text-sm text-amber-400 hover:text-amber-300 transition-colors">
+                        <i class="fas fa-external-link-alt mr-1"></i>查看详情
+                    </a>
+                </div>
+                
+                <div class="glass-card rounded-xl p-6 hover-lift">
+                    <h3 class="text-lg font-semibold mb-2 text-green-400">《IPO财务核查要点》</h3>
+                    <p class="text-sm text-slate-300 mb-3">财务数据与业务披露的匹配性核查方法</p>
+                    <a href="#" class="text-sm text-green-400 hover:text-green-300 transition-colors">
+                        <i class="fas fa-external-link-alt mr-1"></i>查看详情
+                    </a>
+                </div>
+                
+                <div class="glass-card rounded-xl p-6 hover-lift">
+                    <h3 class="text-lg font-semibold mb-2 text-purple-400">《科创板问询回复策略》</h3>
+                    <p class="text-sm text-slate-300 mb-3">针对收入结构问题的问询回复模板与策略</p>
+                    <a href="#" class="text-sm text-purple-400 hover:text-purple-300 transition-colors">
+                        <i class="fas fa-external-link-alt mr-1"></i>查看详情
+                    </a>
+                </div>
+                
+                <div class="glass-card rounded-xl p-6 hover-lift">
+                    <h3 class="text-lg font-semibold mb-2 text-red-400">《风险披露最佳实践》</h3>
+                    <p class="text-sm text-slate-300 mb-3">如何有效披露业务风险而不影响发行估值</p>
+                    <a href="#" class="text-sm text-red-400 hover:text-red-300 transition-colors">
+                        <i class="fas fa-external-link-alt mr-1"></i>查看详情
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="border-t border-slate-700 mt-20 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-slate-400">
+                本指南基于公开法规和实务案例整理，仅供学习参考，不构成投资建议
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // 初始化Mermaid
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#0f172a',
+                primaryTextColor: '#e2e8f0',
+                primaryBorderColor: '#0ea5e9',
+                lineColor: '#0ea5e9',
+                secondaryColor: '#1e293b',
+                tertiaryColor: '#334155',
+                background: '#0f172a',
+                mainBkg: '#0f172a',
+                secondBkg: '#1e293b',
+                tertiaryBkg: '#334155'
+            },
+            flowchart: {
+                useMaxWidth: false,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+
+        // 主题切换
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        // 检测系统主题
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        html.setAttribute('data-theme', systemTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            
+            // 更新图标
+            const sunIcon = themeToggle.querySelector('.fa-sun');
+            const moonIcon = themeToggle.querySelector('.fa-moon');
+            if (newTheme === 'dark') {
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            } else {
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            }
+        });
+
+        // 滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Mermaid 图表交互
+        let scale = 1;
+        let isDragging = false;
+        let startX, startY, translateX = 0, translateY = 0;
+
+        function initializeMermaidControls() {
+            const containers = document.querySelectorAll('.mermaid-container');
+
+            containers.forEach(container => {
+            const mermaidElement = container.querySelector('.mermaid');
+            let scale = 1;
+            let isDragging = false;
+            let startX, startY, translateX = 0, translateY = 0;
+
+            // 触摸相关状态
+            let isTouch = false;
+            let touchStartTime = 0;
+            let initialDistance = 0;
+            let initialScale = 1;
+            let isPinching = false;
+
+            // 缩放功能
+            const zoomInBtn = container.querySelector('.zoom-in');
+            const zoomOutBtn = container.querySelector('.zoom-out');
+            const resetBtn = container.querySelector('.reset-zoom');
+            const fullscreenBtn = container.querySelector('.fullscreen');
+
+            function updateTransform() {
+                mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+                if (scale > 1) {
+                container.classList.add('zoomed');
+                } else {
+                container.classList.remove('zoomed');
+                }
+
+                mermaidElement.style.cursor = isDragging ? 'grabbing' : 'grab';
+            }
+
+            if (zoomInBtn) {
+                zoomInBtn.addEventListener('click', () => {
+                scale = Math.min(scale * 1.25, 4);
+                updateTransform();
+                });
+            }
+
+            if (zoomOutBtn) {
+                zoomOutBtn.addEventListener('click', () => {
+                scale = Math.max(scale / 1.25, 0.3);
+                if (scale <= 1) {
+                    translateX = 0;
+                    translateY = 0;
+                }
+                updateTransform();
+                });
+            }
+
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                scale = 1;
+                translateX = 0;
+                translateY = 0;
+                updateTransform();
+                });
+            }
+
+            if (fullscreenBtn) {
+                fullscreenBtn.addEventListener('click', () => {
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen();
+                } else if (container.msRequestFullscreen) {
+                    container.msRequestFullscreen();
+                }
+                });
+            }
+
+            // 鼠标拖拽
+            mermaidElement.addEventListener('mousedown', (e) => {
+                if (isTouch) return; // 如果是触摸设备，忽略鼠标事件
+
+                isDragging = true;
+                startX = e.clientX - translateX;
+                startY = e.clientY - translateY;
+                mermaidElement.style.cursor = 'grabbing';
+                updateTransform();
+                e.preventDefault();
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging && !isTouch) {
+                translateX = e.clientX - startX;
+                translateY = e.clientY - startY;
+                updateTransform();
+                }
+            });
+
+            document.addEventListener('mouseup', () => {
+                if (isDragging && !isTouch) {
+                isDragging = false;
+                mermaidElement.style.cursor = 'grab';
+                updateTransform();
+                }
+            });
+
+            document.addEventListener('mouseleave', () => {
+                if (isDragging && !isTouch) {
+                isDragging = false;
+                mermaidElement.style.cursor = 'grab';
+                updateTransform();
+                }
+            });
+
+            // 滚轮缩放
+            container.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                const rect = container.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                // 以鼠标位置为中心进行缩放
+                const newScale = Math.min(Math.max(scale * delta, 0.3), 4);
+
+                if (newScale !== scale) {
+                const scaleDiff = newScale / scale;
+                translateX = x - (x - translateX) * scaleDiff;
+                translateY = y - (y - translateY) * scaleDiff;
+                scale = newScale;
+
+                if (scale <= 1) {
+                    translateX = 0;
+                    translateY = 0;
+                }
+
+                updateTransform();
+                }
+            });
+
+            // 获取两点之间的距离
+            function getTouchDistance(touch1, touch2) {
+                return Math.hypot(
+                touch2.clientX - touch1.clientX,
+                touch2.clientY - touch1.clientY
+                );
+            }
+
+            // 触摸事件处理
+            mermaidElement.addEventListener('touchstart', (e) => {
+                isTouch = true;
+                touchStartTime = Date.now();
+
+                if (e.touches.length === 1) {
+                // 单指拖拽
+                isPinching = false;
+                isDragging = true;
+
+                const touch = e.touches[0];
+                startX = touch.clientX - translateX;
+                startY = touch.clientY - translateY;
+
+                } else if (e.touches.length === 2) {
+                // 双指缩放
+                isPinching = true;
+                isDragging = false;
+
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                initialDistance = getTouchDistance(touch1, touch2);
+                initialScale = scale;
+                }
+
+                e.preventDefault();
+            }, { passive: false });
+
+            mermaidElement.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 1 && isDragging && !isPinching) {
+                // 单指拖拽
+                const touch = e.touches[0];
+                translateX = touch.clientX - startX;
+                translateY = touch.clientY - startY;
+                updateTransform();
+
+                } else if (e.touches.length === 2 && isPinching) {
+                // 双指缩放
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                const currentDistance = getTouchDistance(touch1, touch2);
+
+                if (initialDistance > 0) {
+                    const newScale = Math.min(Math.max(
+                    initialScale * (currentDistance / initialDistance),
+                    0.3
+                    ), 4);
+
+                    if (newScale !== scale) {
+                    const rect = container.getBoundingClientRect();
+                    const centerX = (touch1.clientX + touch2.clientX) / 2 - rect.left;
+                    const centerY = (touch1.clientY + touch2.clientY) / 2 - rect.top;
+
+                    const scaleDiff = newScale / scale;
+                    translateX = centerX - (centerX - translateX) * scaleDiff;
+                    translateY = centerY - (centerY - translateY) * scaleDiff;
+                    scale = newScale;
+
+                    if (scale <= 1) {
+                        translateX = 0;
+                        translateY = 0;
+                    }
+
+                    updateTransform();
+                    }
+                }
+                }
+
+                e.preventDefault();
+            }, { passive: false });
+
+            mermaidElement.addEventListener('touchend', (e) => {
+                // 重置状态
+                if (e.touches.length === 0) {
+                isDragging = false;
+                isPinching = false;
+                initialDistance = 0;
+
+                // 延迟重置isTouch，避免鼠标事件立即触发
+                setTimeout(() => {
+                    isTouch = false;
+                }, 100);
+                } else if (e.touches.length === 1 && isPinching) {
+                // 从双指变为单指，切换为拖拽模式
+                isPinching = false;
+                isDragging = true;
+
+                const touch = e.touches[0];
+                startX = touch.clientX - translateX;
+                startY = touch.clientY - translateY;
+                }
+
+                updateTransform();
+            });
+
+            mermaidElement.addEventListener('touchcancel', (e) => {
+                isDragging = false;
+                isPinching = false;
+                initialDistance = 0;
+
+                setTimeout(() => {
+                isTouch = false;
+                }, 100);
+
+                updateTransform();
+            });
+
+            // 初始化
+            updateTransform();
+            });
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            // 等待Mermaid渲染完成
+            setTimeout(initializeMermaidControls, 1000);
+        });
+    </script>
+</body>
+</html>
+```
