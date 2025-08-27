@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板招股书业务拆分问题解析 | 专业合规指南</title>
+    <link href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        // 初始化Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                dark: {
+                    primaryColor: '#4F46E5',
+                    secondaryColor: '#10B981',
+                    tertiaryColor: '#F59E0B',
+                    noteBkgColor: '#1E293B',
+                    noteTextColor: '#E2E8F0',
+                    lineColor: '#64748B',
+                    textColor: '#F8FAFC'
+                },
+                light: {
+                    primaryColor: '#4F46E5',
+                    secondaryColor: '#10B981',
+                    tertiaryColor: '#F59E0B',
+                    noteBkgColor: '#F1F5F9',
+                    noteTextColor: '#1E293B',
+                    lineColor: '#94A3B8',
+                    textColor: '#1E293B'
+                }
+            }
+        });
+        
+        // 深色/浅色模式切换
+        document.addEventListener('DOMContentLoaded', function() {
+            const modeToggle = document.getElementById('mode-toggle');
+            const htmlElement = document.documentElement;
+            
+            // 检查系统偏好
+            const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const savedMode = localStorage.getItem('color-mode');
+            
+            // 设置初始模式
+            if (savedMode === 'light' || (!savedMode && !isSystemDark)) {
+                htmlElement.classList.add('light-mode');
+                modeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                updateMermaidTheme('light');
+            } else {
+                htmlElement.classList.add('dark-mode');
+                modeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                updateMermaidTheme('dark');
+            }
+            
+            // 切换模式
+            modeToggle.addEventListener('click', function() {
+                if (htmlElement.classList.contains('dark-mode')) {
+                    htmlElement.classList.remove('dark-mode');
+                    htmlElement.classList.add('light-mode');
+                    modeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                    localStorage.setItem('color-mode', 'light');
+                    updateMermaidTheme('light');
+                } else {
+                    htmlElement.classList.remove('light-mode');
+                    htmlElement.classList.add('dark-mode');
+                    modeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                    localStorage.setItem('color-mode', 'dark');
+                    updateMermaidTheme('dark');
+                }
+                
+                // 重新渲染图表
+                mermaid.init();
+            });
+            
+            // 更新Mermaid主题
+            function updateMermaidTheme(theme) {
+                mermaid.configuration.theme = theme;
+            }
+            
+            // 添加滚动动画
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('.animate-on-scroll');
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    if (elementPosition < windowHeight - 100) {
+                        element.classList.add('visible');
+                    }
+                });
+            };
+            
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll(); // 初始检查
+        });
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .bg-gradient-primary {
+                background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+            }
+            .card-hover {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+            }
+            .animate-on-scroll {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            }
+            .animate-on-scroll.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .section-divider {
+                height: 3px;
+                width: 50px;
+                margin: 1.5rem 0;
+                border-radius: 3px;
+            }
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4F46E5',
+                        secondary: '#10B981',
+                        accent: '#F59E0B',
+                        dark: {
+                            bg: '#0F172A',
+                            card: '#1E293B',
+                            text: '#F8FAFC',
+                            textSecondary: '#94A3B8',
+                            border: '#334155'
+                        },
+                        light: {
+                            bg: '#F8FAFC',
+                            card: '#FFFFFF',
+                            text: '#1E293B',
+                            textSecondary: '#64748B',
+                            border: '#E2E8F0'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans SC', 'Tahoma', 'Arial', 'Roboto', 'Droid Sans', 'Helvetica Neue', 'sans-serif'],
+                        serif: ['Noto Serif SC', 'Georgia', 'Cambria', 'Times New Roman', 'serif']
+                    },
+                    boxShadow: {
+                        'card': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                        'card-hover': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans antialiased transition-colors duration-300">
+    <!-- 默认深色模式 -->
+    <div class="dark-mode min-h-screen bg-dark-bg text-dark-text">
+        <!-- 导航栏 -->
+        <header class="sticky top-0 z-50 backdrop-blur-md bg-dark-bg/80 border-b border-dark-border transition-all duration-300">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center">
+                        <i class="fas fa-chart-line text-primary text-2xl mr-3"></i>
+                        <span class="text-xl font-semibold">科创板合规指南</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button id="mode-toggle" class="p-2 rounded-full hover:bg-dark-card transition-colors">
+                            <i class="fas fa-sun"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero区域 -->
+        <section class="relative py-20 md:py-28 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-primary opacity-10"></div>
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-shadow animate-on-scroll">
+                        科创板业务拆分合规解析
+                    </h1>
+                    <p class="text-xl md:text-2xl text-dark-textSecondary mb-8 animate-on-scroll" style="animation-delay: 0.1s">
+                        A业务占收入99%、C业务未销售的招股书披露要点
+                    </p>
+                    <div class="inline-block bg-dark-card/50 backdrop-blur-sm px-6 py-3 rounded-full text-sm font-medium border border-dark-border animate-on-scroll" style="animation-delay: 0.2s">
+                        <i class="fas fa-file-alt mr-2 text-primary"></i>科创板信息披露专题解析
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 主要内容 -->
+        <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="max-w-4xl mx-auto">
+                <!-- 核心结论 -->
+                <section class="mb-16 animate-on-scroll">
+                    <div class="bg-dark-card rounded-2xl p-6 md:p-8 shadow-card border border-dark-border">
+                        <div class="flex items-start">
+                            <div class="bg-primary/10 p-3 rounded-lg mr-4">
+                                <i class="fas fa-check-circle text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold mb-4">核心结论</h2>
+                                <p class="text-lg leading-relaxed">
+                                    科创板招股书将主营业务分为A、B、C三部分（A占收入99%、C未销售）的情况<span class="text-secondary font-semibold">本身不违反规则，但需严格满足信息披露要求</span>。关键在于充分说明业务间的技术关联性、披露收入集中风险，并清晰标注未销售业务的研发储备状态。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 合规性要求 -->
+                <section class="mb-16 animate-on-scroll">
+                    <h2 class="text-3xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-gavel text-primary mr-3"></i>
+                        信息披露合规性要求
+                    </h2>
+                    <div class="section-divider bg-primary"></div>
+                    
+                    <div class="grid md:grid-cols-3 gap-6 mt-8">
+                        <!-- 卡片1 -->
+                        <div class="bg-dark-card rounded-xl p-6 shadow-card border border-dark-border card-hover">
+                            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fas fa-chart-pie text-primary text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3">收入结构细节</h3>
+                            <ul class="space-y-2 text-dark-textSecondary">
+                                <li class="flex items-start">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>列示A、B、C三类业务的收入占比、毛利率差异</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>C业务需明确标注"未实现对外销售"</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-angle-right text-primary mt-1 mr-2"></i>
+                                    <span>说明各类业务收入变动原因及趋势</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- 卡片2 -->
+                        <div class="bg-dark-card rounded-xl p-6 shadow-card border border-dark-border card-hover">
+                            <div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fas fa-project-diagram text-secondary text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3">技术关联性</h3>
+                            <ul class="space-y-2 text-dark-textSecondary">
+                                <li class="flex items-start">
+                                    <i class="fas fa-angle-right text-secondary mt-1 mr-2"></i>
+                                    <span>解释B、C业务与核心技术的关联逻辑</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-angle-right text-secondary mt-1 mr-2"></i>
+                                    <span>说明技术储备与未来发展战略的匹配性</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-angle-right text-secondary mt-1 mr-2"></i>
+                                    <span>避免被认定为"非核心业务冗余披露"</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- 卡片3 -->
+                        <div class="bg-dark-card rounded-xl p-6 shadow-card border border-dark-border card-hover">
+                            <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fas fa-exclamation-triangle text-accent text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3">风险提示</h3>
+                            <ul class="space-y-2 text-dark-textSecondary">
+                                <li class="flex items-start">
+                                    <i class="fas fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span>"收入高度集中于A业务"的依赖风险</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span>"C业务未实现产业化"的落地不确定性</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-angle-right text-accent mt-1 mr-2"></i>
+                                    <span>技术研发投入与商业化回报的平衡风险</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 p-5 bg-dark-card border-l-4 border-primary rounded-r-lg">
+                        <h4 class="font-semibold text-lg mb-2 flex items-center">
+                            <i class="fas fa-info-circle mr-2"></i>法规依据
+                        </h4>
+                        <p class="text-dark-textSecondary">
+                            根据《公开发行证券的公司信息披露内容与格式准则》及《上海证券交易所科创板股票上市规则》要求，发行人应"充分披露主营业务、主要产品或服务及核心技术的具体情况"，并"结合行业特点、业务模式、产品结构等因素，分析披露营业收入构成及变动原因"。
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 业务结构示意图 -->
+                <section class="mb-16 animate-on-scroll">
+                    <h2 class="text-3xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-sitemap text-primary mr-3"></i>
+                        业务结构关系模型
+                    </h2>
+                    <div class="section-divider bg-primary"></div>
+                    
+                    <div class="bg-dark-card rounded-xl p-6 shadow-card border border-dark-border mt-8">
+                        <div class="mermaid w-full h-auto">
+                            graph TD
+                                A[核心业务A<br/><span style='font-size:0.8em;color:#94A3B8'>收入占比99%</span>]:::primary
+                                B[配套业务B<br/><span style='font-size:0.8em;color:#94A3B8'>收入占比1%</span>]:::secondary
+                                C[储备业务C<br/><span style='font-size:0.8em;color:#94A3B8'>未实现销售</span>]:::tertiary
+                                Core[核心技术平台]:::core
+                                
+                                Core -->|直接应用| A
+                                Core -->|配套支持| B
+                                Core -->|技术延伸| C
+                                A -->|协同效应| B
+                                B -->|技术验证| C
+                                
+                                classDef primary fill:#4F46E5/20,stroke:#4F46E5,stroke-width:2px
+                                classDef secondary fill:#10B981/20,stroke:#10B981,stroke-width:2px
+                                classDef tertiary fill:#F59E0B/20,stroke:#F59E0B,stroke-width:2px
+                                classDef core fill:#6366F1/30,stroke:#6366F1,stroke-width:2px
+                           
+                            click A "javascript:showInfo('A业务是公司当前主要收入来源，代表已成熟的商业化技术应用，应详细披露其市场地位、竞争优势及客户结构。')"
+                            click B "javascript:showInfo('B业务作为配套技术，虽然收入占比低，但可能对A业务形成技术支撑或协同效应，需说明其与核心业务的关联性。')"
+                            click C "javascript:showInfo('C业务代表公司技术储备和未来发展方向，虽未实现销售，但能体现技术前瞻性，需披露研发进度、技术成熟度及产业化规划。')"
+                            click Core "javascript:showInfo('核心技术平台是连接各业务的基础，需说明其技术壁垒、研发投入及持续创新能力，这是科创板审核的重点关注内容。')"
+                        </div>
+                        
+                        <div id="mermaid-info" class="mt-4 p-4 bg-dark-bg rounded-lg border border-dark-border hidden">
+                            <p id="info-text" class="text-dark-textSecondary"></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 案例支持 -->
+                <section class="mb-16 animate-on-scroll">
+                    <h2 class="text-3xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-graduation-cap text-primary mr-3"></i>
+                        科创板案例参考
+                    </h2>
+                    <div class="section-divider bg-primary"></div>
+                    
+                    <div class="grid md:grid-cols-2 gap-8 mt-8">
+                        <!-- 案例1 -->
+                        <div class="bg-dark-card rounded-xl overflow-hidden shadow-card border border-dark-border card-hover">
+                            <div class="h-40 bg-gradient-to-r from-primary/20 to-primary/5 flex items-center justify-center">
+                                <i class="fas fa-cogs text-5xl text-primary/50"></i>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2">钶锐锶数控</h3>
+                                <p class="text-dark-textSecondary mb-4">科创板申报企业</p>
+                                <ul class="space-y-2 text-sm">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+                                        <span>数控系统业务收入占比超95%</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+                                        <span>保留未量产的智能化研发项目</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+                                        <span>披露储备项目为核心技术延伸方向</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+                                        <span>未被监管质疑业务结构合理性</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- 案例2 -->
+                        <div class="bg-dark-card rounded-xl overflow-hidden shadow-card border border-dark-border card-hover">
+                            <div class="h-40 bg-gradient-to-r from-secondary/20 to-secondary/5 flex items-center justify-center">
+                                <i class="fas fa-solar-panel text-5xl text-secondary/50"></i>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold mb-2">鸿禧能源</h3>
+                                <p class="text-dark-textSecondary mb-4">科创板申报企业</p>
+                                <ul class="space-y-2 text-sm">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+                                        <span>分布式光伏运营业务毛利占比60%</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+                                        <span>收入占比仅17%仍被认定为核心业务</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+                                        <span>强调与主营业务的技术协同效应</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-secondary mt-1 mr-2"></i>
+                                        <span>披露业务间资源共享机制</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 审核关注点 -->
+                <section class="mb-16 animate-on-scroll">
+                    <h2 class="text-3xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-search text-primary mr-3"></i>
+                        监管审核关注点
+                    </h2>
+                    <div class="section-divider bg-primary"></div>
+                    
+                    <div class="bg-dark-card rounded-xl p-6 shadow-card border border-dark-border mt-8">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-dark-border">
+                                <thead>
+                                    <tr>
+                                        <th class="px-4 py-3 text-left text-sm font-semibold">审核关注点</th>
+                                        <th class="px-4 py-3 text-left text-sm font-semibold">合规应答要点</th>
+                                        <th class="px-4 py-3 text-left text-sm font-semibold">重要性</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-dark-border">
+                                    <tr class="hover:bg-dark-bg/50 transition-colors">
+                                        <td class="px-4 py-4">业务分类合理性</td>
+                                        <td class="px-4 py-4 text-dark-textSecondary">是否基于技术属性或应用场景划分，避免人为拆分</td>
+                                        <td class="px-4 py-4"><span class="px-2 py-1 bg-primary/20 text-primary rounded-full text-xs">高</span></td>
+                                    </tr>
+                                    <tr class="hover:bg-dark-bg/50 transition-colors">
+                                        <td class="px-4 py-4">收入集中风险</td>
+                                        <td class="px-4 py-4 text-dark-textSecondary">A业务市场依赖度、客户集中度及应对措施</td>
+                                        <td class="px-4 py-4"><span class="px-2 py-1 bg-primary/20 text-primary rounded-full text-xs">高</span></td>
+                                    </tr>
+                                    <tr class="hover:bg-dark-bg/50 transition-colors">
+                                        <td class="px-4 py-4">技术储备真实性</td>
+                                        <td class="px-4 py-4 text-dark-textSecondary">C业务的研发投入、技术成熟度及专利布局</td>
+                                        <td class="px-4 py-4"><span class="px-2 py-1 bg-secondary/20 text-secondary rounded-full text-xs">中</span></td>
+                                    </tr>
+                                    <tr class="hover:bg-dark-bg/50 transition-colors">
+                                        <td class="px-4 py-4">信息披露一致性</td>
+                                        <td class="px-4 py-4 text-dark-textSecondary">业务描述与财务数据、专利信息的匹配性</td>
+                                        <td class="px-4 py-4"><span class="px-2 py-1 bg-primary/20 text-primary rounded-full text-xs">高</span></td>
+                                    </tr>
+                                    <tr class="hover:bg-dark-bg/50 transition-colors">
+                                        <td class="px-4 py-4">未来发展规划</td>
+                                        <td class="px-4 py-4 text-dark-textSecondary">B/C业务的产业化时间表及资源投入计划</td>
+                                        <td class="px-4 py-4"><span class="px-2 py-1 bg-secondary/20 text-secondary rounded-full text-xs">中</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 操作建议 -->
+                <section class="mb-16 animate-on-scroll">
+                    <h2 class="text-3xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-lightbulb text-primary mr-3"></i>
+                        实务操作建议
+                    </h2>
+                    <div class="section-divider bg-primary"></div>
+                    
+                    <div class="bg-dark-card rounded-xl p-6 shadow-card border border-dark-border mt-8">
+                        <ol class="space-y-6">
+                            <li class="flex">
+                                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-bold mr-4">1</div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">构建技术驱动的业务叙述逻辑</h3>
+                                    <p class="text-dark-textSecondary">以核心技术平台为起点，说明A、B、C业务如何基于共同技术架构展开，形成"核心-配套-储备"的技术演进路径，避免被认定为业务拼凑。</p>
+                                </div>
+                            </li>
+                            <li class="flex">
+                                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-bold mr-4">2</div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">量化披露研发投入与技术进展</h3>
+                                    <p class="text-dark-textSecondary">对C业务，应披露累计研发投入金额、研发人员占比、已取得的阶段性成果（如专利、 prototype、客户验证等），证明其并非虚构业务。</p>
+                                </div>
+                            </li>
+                            <li class="flex">
+                                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-bold mr-4">3</div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">风险提示需具体而非泛泛而谈</h3>
+                                    <p class="text-dark-textSecondary">避免简单罗列"收入集中风险"，应结合行业特点量化分析：如A业务所在市场规模、增长趋势、竞争对手情况及公司应对策略。</p>
+                                </div>
+                            </li>
+                            <li class="flex">
+                                <div class="flex-shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-bold mr-4">4</div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">利用图表强化业务关联性</h3>
+                                    <p class="text-dark-textSecondary">通过技术架构图、业务协同示意图等可视化方式，直观展示A、B、C业务间的技术联系，增强信息披露的可读性和说服力。</p>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </section>
+
+                <!-- 延伸阅读 -->
+                <section class="animate-on-scroll">
+                    <h2 class="text-3xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-book-open text-primary mr-3"></i>
+                        延伸阅读
+                    </h2>
+                    <div class="section-divider bg-primary"></div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mt-8">
+                        <div class="bg-dark-card rounded-lg p-5 shadow-card border border-dark-border flex card-hover">
+                            <div class="w-16 h-24 bg-primary/10 rounded flex-shrink-0 flex items-center justify-center mr-4">
+                                <i class="fas fa-file-alt text-2xl text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold mb-1">《公开发行证券的公司信息披露内容与格式准则第41号》</h3>
+                                <p class="text-sm text-dark-textSecondary mb-2">证监会发布</p>
+                                <p class="text-sm line-clamp-2">详细规定了科创板招股说明书中业务与技术章节的披露要求，包括主营业务、技术研发、生产情况等内容。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-dark-card rounded-lg p-5 shadow-card border border-dark-border flex card-hover">
+                            <div class="w-16 h-24 bg-primary/10 rounded flex-shrink-0 flex items-center justify-center mr-4">
+                                <i class="fas fa-file-alt text-2xl text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold mb-1">《上海证券交易所科创板股票上市规则》</h3>
+                                <p class="text-sm text-dark-textSecondary mb-2">上交所发布</p>
+                                <p class="text-sm line-clamp-2">规定了科创板上市公司的持续信息披露义务，包括主营业务变化、核心技术变更等重大事项的披露要求。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-dark-card rounded-lg p-5 shadow-card border border-dark-border flex card-hover">
+                            <div class="w-16 h-24 bg-primary/10 rounded flex-shrink-0 flex items-center justify-center mr-4">
+                                <i class="fas fa-file-alt text-2xl text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold mb-1">《科创板招股说明书信息披露指引》</h3>
+                                <p class="text-sm text-dark-textSecondary mb-2">上交所发布</p>
+                                <p class="text-sm line-clamp-2">针对科创板企业特点，提供的信息披露操作指引，包括业务模式、技术先进性、研发投入等关键内容的披露要点。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-dark-card rounded-lg p-5 shadow-card border border-dark-border flex card-hover">
+                            <div class="w-16 h-24 bg-primary/10 rounded flex-shrink-0 flex items-center justify-center mr-4">
+                                <i class="fas fa-file-alt text-2xl text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold mb-1">《科创板审核问答》</h3>
+                                <p class="text-sm text-dark-textSecondary mb-2">证监会发布</p>
+                                <p class="text-sm line-clamp-2">针对科创板发行上市审核中常见问题的解答，包括业务收入集中、研发费用资本化等实践问题的处理原则。</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="bg-dark-card border-t border-dark-border py-12 mt-16">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-4xl mx-auto text-center">
+                    <div class="flex justify-center items-center mb-6">
+                        <i class="fas fa-chart-line text-primary text-2xl mr-3"></i>
+                        <span class="text-xl font-semibold">科创板合规指南</span>
+                    </div>
+                    <p class="text-dark-textSecondary mb-6">
+                        本内容仅供参考，不构成任何投资建议或法律意见。科创板申报请以监管机构最新规定为准。
+                    </p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#" class="text-dark-textSecondary hover:text-primary transition-colors">
+                            <i class="fas fa-file-pdf"></i>
+                        </a>
+                        <a href="#" class="text-dark-textSecondary hover:text-primary transition-colors">
+                            <i class="fas fa-share-alt"></i>
+                        </a>
+                        <a href="#" class="text-dark-textSecondary hover:text-primary transition-colors">
+                            <i class="fas fa-bookmark"></i>
+                        </a>
+                    </div>
+                    <div class="mt-8 pt-8 border-t border-dark-border text-sm text-dark-textSecondary">
+                        © 2023 科创板信息研究中心. 保留所有权利.
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 浅色模式样式 -->
+    <style>
+        .light-mode {
+            --tw-bg-opacity: 1;
+            background-color: #F8FAFC;
+            color: #1E293B;
+        }
+        
+        .light-mode .bg-dark-bg {
+            background-color: #F8FAFC;
+        }
+        
+        .light-mode .bg-dark-card {
+            background-color: #FFFFFF;
+        }
+        
+        .light-mode .text-dark-text {
+            color: #1E293B;
+        }
+        
+        .light-mode .text-dark-textSecondary {
+            color: #64748B;
+        }
+        
+        .light-mode .border-dark-border {
+            border-color: #E2E8F0;
+        }
+        
+        .light-mode header {
+            background-color: #FFFFFF/80;
+            border-color: #E2E8F0;
+        }
+        
+        .light-mode .card-hover:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+        }
+        
+        .light-mode .hover\:bg-dark-bg\/50:hover {
+            background-color: #F1F5F9;
+        }
+    </style>
+
+    <script>
+        // 图表点击信息显示
+        function showInfo(text) {
+            const infoBox = document.getElementById('mermaid-info');
+            const infoText = document.getElementById('info-text');
+            
+            infoText.textContent = text;
+            infoBox.classList.remove('hidden');
+            
+            // 5秒后自动隐藏
+            setTimeout(() => {
+                infoBox.classList.add('hidden');
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
