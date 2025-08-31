@@ -1,0 +1,718 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>医药IPO之外协采购与委托加工：专业解析与实操指南</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --gray: #64748b;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: var(--dark);
+            color: #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .light-mode {
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        .serif {
+            font-family: 'Noto Serif SC', serif;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+        }
+        
+        .light-mode .hero-gradient {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+        }
+        
+        .card {
+            background-color: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .light-mode .card {
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.4);
+        }
+        
+        .highlight {
+            position: relative;
+            display: inline-block;
+            z-index: 1;
+        }
+        
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background-color: rgba(37, 99, 235, 0.3);
+            z-index: -1;
+            transition: height 0.3s ease;
+        }
+        
+        .highlight:hover::after {
+            height: 100%;
+        }
+        
+        .drop-cap::first-letter {
+            font-size: 4.5rem;
+            font-weight: 700;
+            float: left;
+            line-height: 1;
+            margin-right: 0.5rem;
+            color: var(--accent);
+            font-family: 'Noto Serif SC', serif;
+        }
+        
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, var(--accent) 50%, transparent 100%);
+            margin: 3rem 0;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            background-color: rgba(37, 99, 235, 0.2);
+            color: var(--primary);
+            font-size: 0.875rem;
+            margin: 0.25rem;
+        }
+        
+        .light-mode .tag {
+            background-color: rgba(37, 99, 235, 0.1);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .mermaid {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .light-mode .mermaid {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        .timeline-item {
+            border-left: 2px solid var(--accent);
+            padding-left: 2rem;
+            padding-bottom: 3rem;
+            position: relative;
+        }
+        
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -0.5rem;
+            top: 0;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background-color: var(--accent);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- 深色/浅色模式切换 -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="theme-toggle" class="p-3 rounded-full bg-slate-800 text-blue-400 hover:bg-blue-500 hover:text-white transition-all duration-300 shadow-lg">
+            <i class="fas fa-moon text-xl"></i>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient min-h-screen flex items-center py-16 px-4 md:px-8">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                        <span class="text-blue-400">医药IPO</span>之外协采购与委托加工：
+                        <span class="highlight text-white">专业解析与实操指南</span>
+                    </h1>
+                    <p class="text-xl text-slate-300 mb-8 leading-relaxed">
+                        深入剖析医药企业IPO过程中外协采购与委托加工的核心区别、会计处理要点及审核关注重点，为拟上市企业提供清晰的操作指引。
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#core-content" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full font-medium transition-all duration-300 flex items-center">
+                            <i class="fas fa-book-open mr-2"></i> 核心内容
+                        </a>
+                        <a href="#visualization" class="px-6 py-3 border border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white rounded-full font-medium transition-all duration-300 flex items-center">
+                            <i class="fas fa-project-diagram mr-2"></i> 可视化分析
+                        </a>
+                    </div>
+                </div>
+                <div class="fade-in hidden lg:block">
+                    <div class="card p-8 relative overflow-hidden">
+                        <div class="absolute -top-20 -right-20 w-40 h-40 rounded-full bg-blue-500 opacity-20 blur-3xl"></div>
+                        <div class="absolute -bottom-20 -left-20 w-40 h-40 rounded-full bg-purple-500 opacity-20 blur-3xl"></div>
+                        <h2 class="text-2xl font-bold mb-6 text-blue-400 flex items-center">
+                            <i class="fas fa-lightbulb mr-3"></i> 核心要点
+                        </h2>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="bg-blue-500 p-2 rounded-full mr-4 flex-shrink-0">
+                                    <i class="fas fa-check text-white"></i>
+                                </div>
+                                <p>外协采购与委托加工的业务本质区别</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="bg-blue-500 p-2 rounded-full mr-4 flex-shrink-0">
+                                    <i class="fas fa-check text-white"></i>
+                                </div>
+                                <p>会计处理的净额法与总额法选择</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="bg-blue-500 p-2 rounded-full mr-4 flex-shrink-0">
+                                    <i class="fas fa-check text-white"></i>
+                                </div>
+                                <p>IPO审核中的关键关注点与应对策略</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="bg-blue-500 p-2 rounded-full mr-4 flex-shrink-0">
+                                    <i class="fas fa-check text-white"></i>
+                                </div>
+                                <p>昊帆生物案例深度解析</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心内容部分 -->
+    <section id="core-content" class="py-20 px-4 md:px-8">
+        <div class="container mx-auto max-w-4xl">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                    <span class="text-blue-400">核心</span>内容解析
+                </h2>
+                <p class="text-xl text-slate-400 max-w-3xl mx-auto">
+                    医药企业IPO过程中，外协采购与委托加工的区别与会计处理是审核关注的重点，直接关系到企业财务数据的准确性与业务模式的清晰性。
+                </p>
+            </div>
+
+            <!-- 业务模式区分 -->
+            <div class="card p-8 mb-12 fade-in card-hover">
+                <div class="flex items-center mb-6">
+                    <div class="bg-blue-500 p-3 rounded-full mr-4">
+                        <i class="fas fa-industry text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold">业务模式区分标准</h3>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-slate-800 p-6 rounded-xl">
+                        <h4 class="text-lg font-semibold mb-4 text-blue-400 flex items-center">
+                            <i class="fas fa-cog mr-2"></i> 委托加工
+                        </h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-blue-400 mt-1 mr-2"></i>
+                                <span>发行人提供核心原料</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-blue-400 mt-1 mr-2"></i>
+                                <span>受托方仅收加工费（与原料价格无关）</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-blue-400 mt-1 mr-2"></i>
+                                <span>发行人承担原料及成品所有权风险</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-slate-800 p-6 rounded-xl">
+                        <h4 class="text-lg font-semibold mb-4 text-purple-400 flex items-center">
+                            <i class="fas fa-handshake mr-2"></i> 外协采购
+                        </h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-purple-400 mt-1 mr-2"></i>
+                                <span>供应商自购原料并交付成品</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-purple-400 mt-1 mr-2"></i>
+                                <span>承担全流程风险</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-arrow-right text-purple-400 mt-1 mr-2"></i>
+                                <span>按含利润的成品价格结算</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-slate-800 p-6 rounded-xl">
+                    <h4 class="text-lg font-semibold mb-4 text-blue-400 flex items-center">
+                        <i class="fas fa-list-check mr-2"></i> 关键判断维度
+                    </h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tag">原料来源</span>
+                        <span class="tag">风险归属</span>
+                        <span class="tag">定价机制</span>
+                        <span class="tag">物权控制</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 会计处理 -->
+            <div class="card p-8 mb-12 fade-in card-hover">
+                <div class="flex items-center mb-6">
+                    <div class="bg-green-500 p-3 rounded-full mr-4">
+                        <i class="fas fa-calculator text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold">会计处理合规性</h3>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-slate-800 p-6 rounded-xl">
+                        <h4 class="text-lg font-semibold mb-4 text-green-400 flex items-center">
+                            <i class="fas fa-minus-circle mr-2"></i> 委托加工（净额法）
+                        </h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                                <span>原料计入"委托加工物资"</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                                <span>加工费摊入产品成本</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                                <span>净额确认收入</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-slate-800 p-6 rounded-xl">
+                        <h4 class="text-lg font-semibold mb-4 text-yellow-400 flex items-center">
+                            <i class="fas fa-plus-circle mr-2"></i> 外协采购（总额法）
+                        </h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-yellow-400 mt-1 mr-2"></i>
+                                <span>按正常采购业务处理</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-yellow-400 mt-1 mr-2"></i>
+                                <span>全额计入存货成本</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-yellow-400 mt-1 mr-2"></i>
+                                <span>总额确认收入</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- IPO审核关注点 -->
+            <div class="card p-8 mb-12 fade-in card-hover">
+                <div class="flex items-center mb-6">
+                    <div class="bg-red-500 p-3 rounded-full mr-4">
+                        <i class="fas fa-search-dollar text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold">IPO审核关键关注点</h3>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-slate-800 p-5 rounded-xl text-center">
+                        <div class="bg-red-500 p-3 rounded-full inline-flex mb-4">
+                            <i class="fas fa-balance-scale-left text-white text-xl"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">业务模式定性</h4>
+                        <p class="text-sm text-slate-400">逻辑一致性（是否规避收入虚增或成本隐藏）</p>
+                    </div>
+                    
+                    <div class="bg-slate-800 p-5 rounded-xl text-center">
+                        <div class="bg-red-500 p-3 rounded-full inline-flex mb-4">
+                            <i class="fas fa-money-bill-wave text-white text-xl"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">定价公允性</h4>
+                        <p class="text-sm text-slate-400">提供人工/材料/利润的拆分依据及市场比价</p>
+                    </div>
+                    
+                    <div class="bg-slate-800 p-5 rounded-xl text-center">
+                        <div class="bg-red-500 p-3 rounded-full inline-flex mb-4">
+                            <i class="fas fa-link text-white text-xl"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">供应商依赖</h4>
+                        <p class="text-sm text-slate-400">关联交易风险（影响业务独立性）</p>
+                    </div>
+                </div>
+                
+                <div class="bg-slate-800 p-6 rounded-xl">
+                    <h4 class="text-lg font-semibold mb-4 text-red-400 flex items-center">
+                        <i class="fas fa-lightbulb mr-2"></i> 企业实操建议
+                    </h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-star text-red-400 mt-1 mr-2"></i>
+                            <span>建立<strong>供应商分层管理制度</strong>（准入、评估、淘汰机制）</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-star text-red-400 mt-1 mr-2"></i>
+                            <span>保留<strong>定价谈判记录</strong>及<strong>市场价格比对证据</strong></span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-star text-red-400 mt-1 mr-2"></i>
+                            <span>在招股书中<strong>明确披露模式分类依据及会计政策</strong></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 结论 -->
+            <div class="card p-8 fade-in card-hover">
+                <div class="flex items-center mb-6">
+                    <div class="bg-purple-500 p-3 rounded-full mr-4">
+                        <i class="fas fa-flag-checkered text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold">结论</h3>
+                </div>
+                
+                <div class="bg-slate-800 p-6 rounded-xl mb-6">
+                    <p class="text-lg leading-relaxed">
+                        医药企业IPO中，<span class="highlight">严格区分外协采购与委托加工、确保会计处理符合准则、通过可验证的定价机制证明公允性</span>，是规避监管问询的核心。
+                    </p>
+                    <p class="mt-4 text-lg leading-relaxed">
+                        昊帆生物案例证明：<span class="text-blue-400">清晰的业务实质论证+完备的定价证据链=过会关键支撑</span>。
+                    </p>
+                </div>
+                
+                <div class="bg-blue-900/30 p-6 rounded-xl">
+                    <p class="flex items-start">
+                        <i class="fas fa-info-circle text-blue-400 mt-1 mr-3"></i>
+                        <span>注：如需延伸探讨特定企业场景（如CRO/CDMO企业模式差异），请补充具体信息。</span>
+                    </p>
+                    <p class="mt-3 flex items-start">
+                        <i class="fas fa-link text-blue-400 mt-1 mr-3"></i>
+                        <span>原文链接：<a href="https://mp.weixin.qq.com/s/ow0aCJgWkYTAs6yVKPKVYQ" class="text-blue-400 hover:underline">医药IPO之外协采购：区分标准与定价公允性</a></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 可视化分析 -->
+    <section id="visualization" class="py-20 px-4 md:px-8 bg-slate-900">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                    <span class="text-blue-400">可视化</span>分析
+                </h2>
+                <p class="text-xl text-slate-400 max-w-3xl mx-auto">
+                    通过交互式图表和概念关系图，深入理解医药IPO中外协采购与委托加工的核心区别及审核要点。
+                </p>
+            </div>
+            
+            <!-- 概念关系图 -->
+            <div class="card p-8 mb-12 fade-in">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-project-diagram text-blue-400 mr-3"></i> 概念关系图
+                </h3>
+                <div class="mermaid">
+                    graph TD
+                    A[医药企业生产模式] --> B[委托加工]
+                    A --> C[外协采购]
+                    
+                    B --> D[发行人提供原料]
+                    B --> E[加工费结算]
+                    B --> F[净额法会计处理]
+                    B --> G[发行人承担风险]
+                    
+                    C --> H[供应商自购原料]
+                    C --> I[成品价格结算]
+                    C --> J[总额法会计处理]
+                    C --> K[供应商承担风险]
+                    
+                    L[IPO审核关注点] --> M[业务模式定性]
+                    L --> N[定价公允性]
+                    L --> O[供应商依赖]
+                    
+                    M --> P[逻辑一致性]
+                    N --> Q[价格拆分与比对]
+                    O --> R[关联交易风险]
+                    
+                    S[成功案例：昊帆生物] --> T[业务实质清晰]
+                    S --> U[定价证据完备]
+                    S --> V[顺利过会]
+                </div>
+            </div>
+            
+            <!-- 决策流程图 -->
+            <div class="card p-8 mb-12 fade-in">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-sitemap text-purple-400 mr-3"></i> 模式选择决策流程
+                </h3>
+                <div class="mermaid">
+                    graph TD
+                    A[医药企业生产决策] --> B{原料由谁提供?}
+                    
+                    B -->|发行人提供| C[委托加工模式]
+                    B -->|供应商自购| D[外协采购模式]
+                    
+                    C --> E[加工费结算]
+                    C --> F[净额法会计处理]
+                    C --> G[风险由发行人承担]
+                    
+                    D --> H[成品价格结算]
+                    D --> I[总额法会计处理]
+                    D --> J[风险由供应商承担]
+                    
+                    K[IPO审核准备] --> L{模式选择是否合理?}
+                    L -->|是| M[准备定价证据]
+                    L -->|否| N[重新评估业务模式]
+                    
+                    M --> O[提供价格拆分依据]
+                    M --> P[市场比价数据]
+                    M --> Q[供应商评估记录]
+                    
+                    R[结果] --> S[顺利通过审核]
+                    R --> T[问询反馈与解释]
+                </div>
+            </div>
+            
+            <!-- 时间线 -->
+            <div class="card p-8 fade-in">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-history text-green-400 mr-3"></i> IPO审核时间线与关键节点
+                </h3>
+                <div class="pl-4">
+                    <div class="timeline-item">
+                        <h4 class="text-xl font-semibold text-green-400">业务模式确定</h4>
+                        <p class="text-slate-400 mt-2">明确区分委托加工与外协采购，建立相应管理制度</p>
+                        <div class="text-sm text-slate-500 mt-2">IPO前期准备</div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4 class="text-xl font-semibold text-green-400">会计处理确定</h4>
+                        <p class="text-slate-400 mt-2">根据业务模式选择净额法或总额法，确保符合会计准则</p>
+                        <div class="text-sm text-slate-500 mt-2">财务规范阶段</div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4 class="text-xl font-semibold text-green-400">证据材料准备</h4>
+                        <p class="text-slate-400 mt-2">收集定价谈判记录、市场比价数据、供应商评估材料</p>
+                        <div class="text-sm text-slate-500 mt-2">申报材料准备</div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4 class="text-xl font-semibold text-green-400">招股书披露</h4>
+                        <p class="text-slate-400 mt-2">清晰披露业务模式分类依据、会计政策及定价机制</p>
+                        <div class="text-sm text-slate-500 mt-2">申报阶段</div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4 class="text-xl font-semibold text-green-400">反馈问询</h4>
+                        <p class="text-slate-400 mt-2">针对审核问询提供详细解释及证明材料</p>
+                        <div class="text-sm text-slate-500 mt-2">审核问询阶段</div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4 class="text-xl font-semibold text-green-400">审核通过</h4>
+                        <p class="text-slate-400 mt-2">业务模式与会计处理得到认可，成功过会</p>
+                        <div class="text-sm text-slate-500 mt-2">最终结果</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 进一步阅读 -->
+    <section class="py-20 px-4 md:px-8">
+        <div class="container mx-auto max-w-4xl">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                    <span class="text-blue-400">进一步</span>阅读
+                </h2>
+                <p class="text-xl text-slate-400 max-w-3xl mx-auto">
+                    推荐阅读以下专业书籍与资料，深入了解医药企业IPO及财务处理相关知识。
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card p-6 fade-in card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-500 p-2 rounded-full mr-3">
+                            <i class="fas fa-book text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">《企业会计准则详解》</h3>
+                    </div>
+                    <p class="text-slate-400">深入解读企业会计准则，特别是收入确认、存货计量等相关内容。</p>
+                </div>
+                
+                <div class="card p-6 fade-in card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-purple-500 p-2 rounded-full mr-3">
+                            <i class="fas fa-book text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">《医药企业IPO审核要点》</h3>
+                    </div>
+                    <p class="text-slate-400">系统分析医药企业IPO过程中的审核关注点及应对策略。</p>
+                </div>
+                
+                <div class="card p-6 fade-in card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-500 p-2 rounded-full mr-3">
+                            <i class="fas fa-book text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">《上市公司关联交易指引》</h3>
+                    </div>
+                    <p class="text-slate-400">详解关联交易的认定、披露及审核要求，避免IPO过程中的关联交易陷阱。</p>
+                </div>
+                
+                <div class="card p-6 fade-in card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-red-500 p-2 rounded-full mr-3">
+                            <i class="fas fa-book text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">《医药行业供应链管理》</h3>
+                    </div>
+                    <p class="text-slate-400">探讨医药企业供应链管理模式，包括外协采购与委托加工的实践应用。</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 fade-in">
+                <a href="#" class="inline-flex items-center px-6 py-3 border border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white rounded-full font-medium transition-all duration-300">
+                    <i class="fas fa-book-open mr-2"></i> 更多专业资源
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="py-12 px-4 md:px-8 border-t border-slate-800">
+        <div class="container mx-auto max-w-6xl text-center">
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="text-slate-400 hover:text-blue-400 transition-colors duration-300">
+                    <i class="fab fa-weixin text-xl"></i>
+                </a>
+                <a href="#" class="text-slate-400 hover:text-blue-400 transition-colors duration-300">
+                    <i class="fab fa-weibo text-xl"></i>
+                </a>
+                <a href="#" class="text-slate-400 hover:text-blue-400 transition-colors duration-300">
+                    <i class="fab fa-linkedin-in text-xl"></i>
+                </a>
+            </div>
+            <p class="text-slate-500">© 2023 医药IPO专业解析. 所有权利保留.</p>
+            <p class="text-slate-500 text-sm mt-2">内容仅供参考，不构成专业建议。</p>
+        </div>
+    </footer>
+
+    <script>
+        // 初始化Mermaid图表
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            securityLevel: 'loose',
+            fontFamily: '"Noto Sans SC", sans-serif',
+        });
+        
+        // 深色/浅色模式切换
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // 检查系统偏好
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+            document.body.classList.add('light-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', function() {
+            if (document.body.classList.contains('light-mode')) {
+                document.body.classList.remove('light-mode');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            } else {
+                document.body.classList.add('light-mode');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        });
+        
+        // 滚动动画
+        function checkFade() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkFade);
+        window.addEventListener('load', checkFade);
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+```
