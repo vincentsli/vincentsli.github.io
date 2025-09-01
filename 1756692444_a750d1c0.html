@@ -1,0 +1,614 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>江苏天兵航天科技 | 资金管理制度修订建议</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: var(--dark);
+            color: #e2e8f0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        body.light-mode {
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        .serif {
+            font-family: 'Noto Serif SC', serif;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+        }
+        
+        .card {
+            background-color: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .light-mode .card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .highlight {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background-color: rgba(37, 99, 235, 0.3);
+            z-index: -1;
+            transition: height 0.3s;
+        }
+        
+        .highlight:hover::after {
+            height: 100%;
+        }
+        
+        .drop-cap::first-letter {
+            font-size: 4.5rem;
+            font-weight: 700;
+            float: left;
+            line-height: 1;
+            margin-right: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .mermaid-container {
+            background-color: rgba(15, 23, 42, 0.5);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+        }
+        
+        .light-mode .mermaid-container {
+            background-color: rgba(248, 250, 252, 0.5);
+        }
+        
+        .timeline {
+            border-left: 3px solid var(--primary);
+            padding-left: 2rem;
+            margin-left: 1rem;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background-color: var(--primary);
+        }
+        
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: var(--primary);
+        }
+        
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: var(--primary);
+        }
+        
+        @media (max-width: 768px) {
+            .drop-cap::first-letter {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-dark text-light antialiased">
+    <!-- 导航栏 -->
+    <nav class="fixed w-full bg-slate-900 bg-opacity-90 backdrop-blur-sm z-50 py-4 px-6 border-b border-slate-700">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-rocket text-2xl text-blue-500 mr-2"></i>
+                <span class="text-xl font-bold serif">江苏天兵航天科技</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#overview" class="hover:text-blue-400 transition">概述</a>
+                <a href="#revisions" class="hover:text-blue-400 transition">修订建议</a>
+                <a href="#visualization" class="hover:text-blue-400 transition">制度架构</a>
+                <a href="#resources" class="hover:text-blue-400 transition">参考资料</a>
+            </div>
+            <div class="flex items-center">
+                <!-- 暗色/亮色模式切换 -->
+                <div class="relative inline-block w-12 mr-4 align-middle select-auto">
+                    <input type="checkbox" name="toggle" id="theme-toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                    <label for="theme-toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                </div>
+                <span class="text-sm mr-2">模式</span>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-xl">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 移动端菜单 -->
+    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-slate-900 z-50 flex flex-col items-center justify-center hidden">
+        <button id="close-menu" class="absolute top-6 right-6 text-2xl">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="flex flex-col space-y-8 text-center">
+            <a href="#overview" class="text-2xl hover:text-blue-400 transition">概述</a>
+            <a href="#revisions" class="text-2xl hover:text-blue-400 transition">修订建议</a>
+            <a href="#visualization" class="text-2xl hover:text-blue-400 transition">制度架构</a>
+            <a href="#resources" class="text-2xl hover:text-blue-400 transition">参考资料</a>
+        </div>
+    </div>
+
+    <!-- Hero 模块 -->
+    <section class="pt-32 pb-20 px-6 hero-gradient">
+        <div class="container mx-auto max-w-4xl">
+            <div class="text-center mb-10">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 serif">资金管理制度修订建议</h1>
+                <p class="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">基于A股IPO审核要求（2024年政策更新）的专业分析与建议</p>
+            </div>
+            
+            <div class="bg-white bg-opacity-10 backdrop-blur-md rounded-2xl p-8 border border-white border-opacity-20">
+                <div class="flex flex-wrap justify-center gap-6">
+                    <div class="flex items-center">
+                        <div class="bg-blue-500 rounded-full p-3 mr-3">
+                            <i class="fas fa-file-invoice-dollar text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-blue-200">涉及制度</p>
+                            <p class="font-semibold">《资金管理制度》</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <div class="bg-purple-500 rounded-full p-3 mr-3">
+                            <i class="fas fa-balance-scale text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-blue-200">依据政策</p>
+                            <p class="font-semibold">财会〔2023〕30号文</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <div class="bg-pink-500 rounded-full p-3 mr-3">
+                            <i class="fas fa-chart-line text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-blue-200">目标</p>
+                            <p class="font-semibold">符合IPO审核要求</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 概述部分 -->
+    <section id="overview" class="py-16 px-6">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold mb-10 text-center serif">制度修订背景与重要性</h2>
+            
+            <div class="card rounded-2xl p-8 mb-12">
+                <p class="text-lg mb-6 drop-cap">根据当前A股IPO审核要求，特别是2024年更新的监管政策，拟上市公司需要建立完善的财务内控制度。《资金管理制度》作为财务内控的核心组成部分，必须符合《首次公开发行股票并上市管理办法》第十七条和财会〔2023〕30号文的具体要求，确保财务报告内部控制的有效性。</p>
+                
+                <div class="bg-slate-800 rounded-xl p-6 mt-6">
+                    <div class="flex items-start">
+                        <div class="bg-blue-500 rounded-full p-2 mr-4 flex-shrink-0">
+                            <i class="fas fa-exclamation-circle text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">审核关注要点</h3>
+                            <ul class="list-disc list-inside space-y-2">
+                                <li>财务内控的有效性及审计要求</li>
+                                <li>资金集中管理的风险控制措施</li>
+                                <li>个人卡交易的全面禁止与处罚机制</li>
+                                <li>募集资金管理的制度衔接</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card rounded-2xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-500 rounded-full p-3 mr-4">
+                            <i class="fas fa-file-medical-alt text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">制度现状</h3>
+                    </div>
+                    <p class="text-gray-300">当前制度已建立基本框架，但在内控审计、电子支付安全、票据管理等方面存在不足，需要根据最新监管要求进行修订完善。</p>
+                </div>
+                
+                <div class="card rounded-2xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-500 rounded-full p-3 mr-4">
+                            <i class="fas fa-target text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">修订目标</h3>
+                    </div>
+                    <p class="text-gray-300">确保制度符合IPO审核要求，消除潜在审核风险，建立完善的资金管理内部控制体系，保障公司资金安全与合规运营。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 修订建议部分 -->
+    <section id="revisions" class="py-16 px-6 bg-slate-800 bg-opacity-50">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold mb-10 text-center serif">关键修订建议</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="card rounded-2xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-red-500 rounded-full p-3 mr-4">
+                            <i class="fas fa-ban text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">个人卡交易禁止</h3>
+                    </div>
+                    <p class="mb-4">当前制度未全面禁止个人卡收付款，存在IPO审核风险。</p>
+                    <div class="bg-red-900 bg-opacity-30 rounded-lg p-4">
+                        <h4 class="font-semibold text-red-300 mb-2">建议修订：</h4>
+                        <p>在第二十七条增加："严禁通过员工个人银行卡办理公司收支业务"，并在第五十六条增加对应罚则。</p>
+                    </div>
+                </div>
+                
+                <div class="card rounded-2xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-purple-500 rounded-full p-3 mr-4">
+                            <i class="fas fa-chart-network text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">资金集中管理</h3>
+                    </div>
+                    <p class="mb-4">当前制度未规定子公司银行账户的动态监控措施。</p>
+                    <div class="bg-purple-900 bg-opacity-30 rounded-lg p-4">
+                        <h4 class="font-semibold text-purple-300 mb-2">建议修订：</h4>
+                        <p>补充集团财务部对子公司银行账户实行银企直连监控，明确资金归集上限，避免过度抽调子公司运营资金。</p>
+                    </div>
+                </div>
+                
+                <div class="card rounded-2xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-500 rounded-full p-3 mr-4">
+                            <i class="fas fa-search-dollar text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">内控审计要求</h3>
+                    </div>
+                    <p class="mb-4">当前制度未明确内控审计要求，不符合IPO申报条件。</p>
+                    <div class="bg-blue-900 bg-opacity-30 rounded-lg p-4">
+                        <h4 class="font-semibold text-blue-300 mb-2">建议修订：</h4>
+                        <p>在第九章"监督检查"中补充定期聘请会计师事务所对资金管理内部控制进行专项审计的要求。</p>
+                    </div>
+                </div>
+                
+                <div class="card rounded-2xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-500 rounded-full p-3 mr-4">
+                            <i class="fas fa-money-check-alt text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">电子支付安全</h3>
+                    </div>
+                    <p class="mb-4">当前电子支付规定未明确分级授权机制。</p>
+                    <div class="bg-green-900 bg-opacity-30 rounded-lg p-4">
+                        <h4 class="font-semibold text-green-300 mb-2">建议修订：</h4>
+                        <p>根据交易金额设置分级操作权限，单笔超过特定金额需双人复核。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-indigo-900 bg-opacity-20 rounded-2xl p-8">
+                <h3 class="text-2xl font-bold mb-6 text-center">修订实施时间线</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4 class="text-lg font-semibold">第一阶段：制度诊断</h4>
+                        <p class="text-sm text-gray-400">2024年1月-2月</p>
+                        <p>全面审查现有制度，识别与IPO要求的差距</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4 class="text-lg font-semibold">第二阶段：修订起草</h4>
+                        <p class="text-sm text-gray-400">2024年3月</p>
+                        <p>根据诊断结果起草修订方案，征求各部门意见</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4 class="text-lg font-semibold">第三阶段：审议发布</h4>
+                        <p class="text-sm text-gray-400">2024年4月</p>
+                        <p>提交董事会审议，正式发布修订后的制度</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4 class="text-lg font-semibold">第四阶段：培训实施</h4>
+                        <p class="text-sm text-gray-400">2024年5月</p>
+                        <p>组织全员培训，确保制度有效执行</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 可视化图表部分 -->
+    <section id="visualization" class="py-16 px-6">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold mb-10 text-center serif">资金管理制度架构</h2>
+            
+            <div class="mermaid-container mb-12">
+                <div class="mermaid">
+flowchart TD
+    A[资金管理制度] --> B1[总则]
+    A --> B2[管理职责]
+    A --> B3[资金计划]
+    A --> B4[资金收入管理]
+    A --> B5[资金支出管理]
+    A --> B6[现金与银行存款]
+    A --> B7[票据与外汇]
+    A --> B8[内部资金调剂]
+    A --> B9[监督检查]
+    A --> B10[附则]
+    
+    B2 --> C1[财务部职责]
+    B2 --> C2[岗位分离原则]
+    
+    B9 --> D1[内部审计]
+    B9 --> D2[缺陷整改]
+    B9 --> D3[外部审计<br>新增要求]
+    
+    B5 --> E1[支付审批流程]
+    B5 --> E2[电子支付安全<br>分级授权]
+    B5 --> E3[个人卡禁止<br>新增条款]
+    
+    B8 --> F1[资金归集管理]
+    B8 --> F2[银企直连监控<br>新增要求]
+    
+    style A fill:#2563eb,color:#fff
+    style D3 fill:#10b981,color:#fff
+    style E2 fill:#10b981,color:#fff
+    style E3 fill:#10b981,color:#fff
+    style F2 fill:#10b981,color:#fff
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card rounded-2xl p-6">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-exclamation-triangle text-yellow-500 mr-2"></i>
+                        高风险领域
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs text-red-500 mt-2 mr-2"></i>
+                            <span>个人卡收付款未全面禁止</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs text-red-500 mt-2 mr-2"></i>
+                            <span>子公司资金监控措施不足</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs text-red-500 mt-2 mr-2"></i>
+                            <span>内控审计要求缺失</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-circle text-xs text-red-500 mt-2 mr-2"></i>
+                            <span>电子支付授权机制不完善</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="card rounded-2xl p-6">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                        合规改进措施
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-star text-xs text-blue-400 mt-2 mr-2"></i>
+                            <span>明确禁止个人卡交易并规定罚则</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-star text-xs text-blue-400 mt-2 mr-2"></i>
+                            <span>建立银企直连监控系统</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-star text-xs text-blue-400 mt-2 mr-2"></i>
+                            <span>增加年度内控审计要求</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-star text-xs text-blue-400 mt-2 mr-2"></i>
+                            <span>实施电子支付分级授权机制</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 参考资料部分 -->
+    <section id="resources" class="py-16 px-6 bg-slate-800 bg-opacity-50">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold mb-10 text-center serif">政策依据与参考资料</h2>
+            
+            <div class="card rounded-2xl p-8 mb-12">
+                <h3 class="text-2xl font-semibold mb-6">核心政策依据</h3>
+                
+                <div class="space-y-6">
+                    <div class="bg-slate-700 p-4 rounded-lg">
+                        <h4 class="text-lg font-semibold mb-2">《首次公开发行股票并上市管理办法》第十七条</h4>
+                        <p class="text-sm text-gray-300 mb-2">明确要求发行人内部控制制度健全且被有效执行</p>
+                        <a href="http://www.csrc.gov.cn/csrc/c106256/c1653753/content.shtml" class="text-blue-400 text-sm hover:underline flex items-center">
+                            <i class="fas fa-link mr-2"></i> 查看原文
+                        </a>
+                    </div>
+                    
+                    <div class="bg-slate-700 p-4 rounded-lg">
+                        <h4 class="text-lg font-semibold mb-2">财会〔2023〕30号文</h4>
+                        <p class="text-sm text-gray-300 mb-2">关于强化上市公司及拟上市企业内部控制建设推进内部控制评价和审计的通知</p>
+                        <a href="https://www.gov.cn/zhengce/zhengceku/202312/content_6920645.htm" class="text-blue-400 text-sm hover:underline flex items-center">
+                            <i class="fas fa-link mr-2"></i> 查看原文
+                        </a>
+                    </div>
+                    
+                    <div class="bg-slate-700 p-4 rounded-lg">
+                        <h4 class="text-lg font-semibold mb-2">《上市公司监管指引第2号》</h4>
+                        <p class="text-sm text-gray-300 mb-2">上市公司募集资金管理和使用的监管要求</p>
+                        <a href="https://ipo.shangpu-china.com/m/news/19332.html" class="text-blue-400 text-sm hover:underline flex items-center">
+                            <i class="fas fa-link mr-2"></i> 分析文章
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card rounded-2xl p-8">
+                <h3 class="text-2xl font-semibold mb-6">延伸阅读</h3>
+                <p class="mb-6">以下书籍和资源可帮助深入理解IPO财务内控要求：</p>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-slate-700 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">《企业内部控制规范》</h4>
+                        <p class="text-sm text-gray-300">财政部制定的企业内部控制基本规范及应用指引</p>
+                    </div>
+                    
+                    <div class="bg-slate-700 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">《IPO财务核查实务》</h4>
+                        <p class="text-sm text-gray-300">深入解析IPO审核中的财务问题及解决方案</p>
+                    </div>
+                    
+                    <div class="bg-slate-700 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">《上市公司治理准则》</h4>
+                        <p class="text-sm text-gray-300">证监会发布的上市公司治理规范性文件</p>
+                    </div>
+                    
+                    <div class="bg-slate-700 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">《证券法》及相关法规</h4>
+                        <p class="text-sm text-gray-300">资本市场基本法律框架</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="py-12 px-6 border-t border-slate-700">
+        <div class="container mx-auto max-w-4xl text-center">
+            <div class="flex justify-center mb-6">
+                <i class="fas fa-rocket text-2xl text-blue-500"></i>
+            </div>
+            <p class="text-gray-400">江苏天兵航天科技股份有限公司 © 2024</p>
+            <p class="text-sm text-gray-500 mt-2">本资料仅供参考，不构成法律建议。具体制度修订请咨询专业律师和保荐机构。</p>
+        </div>
+    </footer>
+
+    <script>
+        // 初始化Mermaid图表
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            securityLevel: 'loose',
+            fontFamily: '"Noto Sans SC", sans-serif',
+        });
+        
+        // 暗色/亮色模式切换
+        const themeToggle = document.getElementById('theme-toggle');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        // 检查本地存储或系统偏好
+        if (localStorage.getItem('theme') === 'light' || 
+            (!localStorage.getItem('theme') && !prefersDarkScheme.matches)) {
+            document.body.classList.add('light-mode');
+            themeToggle.checked = true;
+        }
+        
+        themeToggle.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('light-mode');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.body.classList.remove('light-mode');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+        
+        // 移动端菜单控制
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenu = document.getElementById('close-menu');
+        
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.remove('hidden');
+        });
+        
+        closeMenu.addEventListener('click', function() {
+            mobileMenu.classList.add('hidden');
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // 关闭移动端菜单
+                    mobileMenu.classList.add('hidden');
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // 响应式图表处理
+        function initMermaid() {
+            // 在窗口调整大小时重新渲染Mermaid图表
+            window.addEventListener('resize', function() {
+                mermaid.init(undefined, '.mermaid');
+            });
+        }
+        
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initMermaid();
+        });
+    </script>
+</body>
+</html>
+```
