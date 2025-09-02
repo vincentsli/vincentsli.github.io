@@ -1,0 +1,624 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>江苏天兵航天科技财务报告管理制度修订建议</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+    <style>
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            transition: all 0.3s ease;
+        }
+        .serif {
+            font-family: 'Noto Serif SC', serif;
+        }
+        .dark-mode {
+            background-color: #111827;
+            color: #E5E7EB;
+        }
+        .light-mode {
+            background-color: #F9FAFB;
+            color: #1F2937;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .highlight {
+            position: relative;
+            display: inline-block;
+        }
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #6366F1, #8B5CF6);
+            opacity: 0.6;
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <!-- 导航栏 -->
+    <nav class="sticky-nav py-4 border-b border-gray-700">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-rocket text-purple-500 text-2xl mr-2"></i>
+                <span class="serif text-xl font-semibold">天兵航天科技</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#overview" class="hover:text-purple-400 transition-colors">概览</a>
+                <a href="#recommendations" class="hover:text-purple-400 transition-colors">修订建议</a>
+                <a href="#compliance" class="hover:text-purple-400 transition-colors">合规依据</a>
+                <a href="#framework" class="hover:text-purple-400 transition-colors">框架分析</a>
+                <a href="#resources" class="hover:text-purple-400 transition-colors">延伸阅读</a>
+            </div>
+            <button id="themeToggle" class="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors">
+                <i class="fas fa-moon text-yellow-400"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg py-20 px-4">
+        <div class="container mx-auto max-w-4xl">
+            <div class="fade-in">
+                <h1 class="text-4xl md:text-5xl font-bold text-center mb-6 serif">财务报告管理制度<span class="text-purple-400">修订建议</span></h1>
+                <p class="text-xl text-center text-gray-300 mb-10 max-w-3xl mx-auto">江苏天兵航天科技股份有限公司IPO合规性优化方案</p>
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700">
+                    <p class="text-lg italic text-center text-gray-200">"基于《企业内部控制基本规范》、证监会最新监管要求及IPO审核实务，对财务报告管理制度提出关键修订建议，强化合规性及上市适应性"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 概览部分 -->
+    <section id="overview" class="py-16 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-3xl font-bold text-center mb-12 serif"><span class="highlight">制度修订</span>核心要点</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700 card-hover fade-in">
+                    <div class="text-blue-400 text-3xl mb-4">
+                        <i class="fas fa-file-invoice"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">内控审计要求</h3>
+                    <p class="text-gray-300">新增财务报告内控审计条款，满足财会〔2023〕30号文要求</p>
+                </div>
+                
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700 card-hover fade-in">
+                    <div class="text-green-400 text-3xl mb-4">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">缺陷整改机制</h3>
+                    <p class="text-gray-300">完善财务分析缺陷分类与整改时限要求，符合IPO审核标准</p>
+                </div>
+                
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700 card-hover fade-in">
+                    <div class="text-red-400 text-3xl mb-4">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">保密经费管理</h3>
+                    <p class="text-gray-300">强化军工企业保密经费专项管理，建立双签审批机制</p>
+                </div>
+            </div>
+
+            <!-- 时间线 -->
+            <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700 mb-16">
+                <h3 class="text-2xl font-semibold mb-6 serif">制度修订<span class="text-purple-400">时间线</span></h3>
+                <div class="relative">
+                    <div class="absolute h-full w-1 bg-purple-600 left-3 md:left-1/2 transform md:-translate-x-1/2"></div>
+                    
+                    <div class="mb-8 relative pl-10 md:pl-0 md:flex md:items-center">
+                        <div class="md:w-1/2 md:pr-8 md:text-right mb-2 md:mb-0">
+                            <h4 class="font-semibold">当前制度现状</h4>
+                            <p class="text-sm text-gray-400">识别缺失条款与滞后内容</p>
+                        </div>
+                        <div class="absolute w-6 h-6 rounded-full bg-purple-500 left-0 md:left-1/2 transform md:-translate-x-1/2"></div>
+                        <div class="md:w-1/2 md:pl-8 mt-2 md:mt-0">
+                            <p class="text-sm">内控审计要求、固定资产标准、保密机制等关键内容缺失</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8 relative pl-10 md:pl-0 md:flex md:items-center">
+                        <div class="md:w-1/2 md:pr-8 md:text-right mb-2 md:mb-0">
+                            <h4 class="font-semibold">监管要求分析</h4>
+                            <p class="text-sm text-gray-400">研究最新政策文件</p>
+                        </div>
+                        <div class="absolute w-6 h-6 rounded-full bg-purple-500 left-0 md:left-1/2 transform md:-translate-x-1/2"></div>
+                        <div class="md:w-1/2 md:pl-8 mt-2 md:mt-0">
+                            <p class="text-sm">财会〔2023〕30号文、企业会计准则、军工上市案例</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8 relative pl-10 md:pl-0 md:flex md:items-center">
+                        <div class="md:w-1/2 md:pr-8 md:text-right mb-2 md:mb-0">
+                            <h4 class="font-semibold">修订建议制定</h4>
+                            <p class="text-sm text-gray-400">针对性提出修改方案</p>
+                        </div>
+                        <div class="absolute w-6 h-6 rounded-full bg-purple-500 left-0 md:left-1/2 transform md:-translate-x-1/2"></div>
+                        <div class="md:w-1/2 md:pl-8 mt-2 md:mt-0">
+                            <p class="text-sm">新增内控审计条款、调整固定资产标准、完善保密机制</p>
+                        </div>
+                    </div>
+                    
+                    <div class="relative pl-10 md:pl-0 md:flex md:items-center">
+                        <div class="md:w-1/2 md:pr-8 md:text-right mb-2 md:mb-0">
+                            <h4 class="font-semibold">董事会审议</h4>
+                            <p class="text-sm text-gray-400">提交《内控审计执行方案》</p>
+                        </div>
+                        <div class="absolute w-6 h-6 rounded-full bg-purple-500 left-0 md:left-1/2 transform md:-translate-x-1/2"></div>
+                        <div class="md:w-1/2 md:pl-8 mt-2 md:mt-0">
+                            <p class="text-sm">提前符合上市监管预期，确保IPO进程顺利</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 修订建议 -->
+    <section id="recommendations" class="py-16 px-4 bg-gray-900 bg-opacity-50">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-3xl font-bold text-center mb-12 serif">关键<span class="highlight">修订建议</span></h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-purple-500 card-hover fade-in">
+                    <div class="flex items-start mb-4">
+                        <div class="text-purple-400 text-2xl mr-3">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">新增财务报告内控审计要求</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">现状：第三章第二十七条仅要求年度财务报告审计，未体现内部控制审计。</p>
+                    <p class="text-gray-300 mb-4">依据：财会〔2023〕30号文规定，拟上市企业自2024年12月31日起需提供无保留意见的财务报告内部控制审计报告。</p>
+                    <div class="bg-gray-700 p-4 rounded-lg mt-4">
+                        <p class="text-sm font-mono text-green-300">建议：在第二十七条后新增条款："集团公司应聘请会计师事务所对财务报告内部控制有效性进行审计，出具无保留意见的内部控制审计报告，作为年度财务报告的必备文件。"</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-blue-500 card-hover fade-in">
+                    <div class="flex items-start mb-4">
+                        <div class="text-blue-400 text-2xl mr-3">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">完善财务分析缺陷整改机制</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">现状：第四章第三十八条要求"落实整改问题"，但未明确缺陷分类及整改时限。</p>
+                    <p class="text-gray-300 mb-4">依据：IPO审核关注内控缺陷整改时效性（如深交所问询案例）。</p>
+                    <div class="bg-gray-700 p-4 rounded-lg mt-4">
+                        <p class="text-sm font-mono text-green-300">建议：第三十八条补充："财务分析报告应区分一般缺陷与重大缺陷。重大缺陷需在30日内制定整改计划，经董事会审计委员会批准后实施，并向集团财务部报送整改结果。"</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-yellow-500 card-hover fade-in">
+                    <div class="flex items-start mb-4">
+                        <div class="text-yellow-400 text-2xl mr-3">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">调整固定资产核算标准</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">现状：未明确固定资产价值标准（制度中引用"单位价值1000元以上"已滞后）。</p>
+                    <p class="text-gray-300 mb-4">依据：《企业会计准则》要求固定资产需同时满足"持有目的+使用寿命+价值标准"（实务中通常采用单价5000元以上）。</p>
+                    <div class="bg-gray-700 p-4 rounded-lg mt-4">
+                        <p class="text-sm font-mono text-green-300">建议：第十三条补充："固定资产确认标准为单位价值人民币5000元以上，且预计使用寿命超过一个会计年度。"</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-red-500 card-hover fade-in">
+                    <div class="flex items-start mb-4">
+                        <div class="text-red-400 text-2xl mr-3">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">强化保密经费管理</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">现状：保密经费流程缺失（如第三章第三十二条仅泛泛要求"保密"）。</p>
+                    <p class="text-gray-300 mb-4">依据：军工企业IPO需建立专项保密内控（参考军工上市案例）。</p>
+                    <div class="bg-gray-700 p-4 rounded-lg mt-4">
+                        <p class="text-sm font-mono text-green-300">建议：第三十二条新增："涉及国家秘密的财务报告，其编制、传递需通过独立保密专户操作，经费支出由保密办与财务部双签审批。"</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 细节优化表格 -->
+            <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700">
+                <h3 class="text-2xl font-semibold mb-6 serif">细节<span class="text-purple-400">优化建议</span></h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-400">
+                        <thead class="text-xs uppercase bg-gray-700 text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-4 py-3">条款</th>
+                                <th scope="col" class="px-4 py-3">现状缺陷</th>
+                                <th scope="col" class="px-4 py-3">建议修订</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-700 hover:bg-gray-700 transition-colors">
+                                <td class="px-4 py-3 font-medium whitespace-nowrap text-white">第二十四条</td>
+                                <td class="px-4 py-3">子公司年报报送时限未明确</td>
+                                <td class="px-4 py-3">明确"年度财务报告及审计报告应于会计年度结束后4个月内报送集团"（匹配IPO审计周期）</td>
+                            </tr>
+                            <tr class="border-b border-gray-700 hover:bg-gray-700 transition-colors">
+                                <td class="px-4 py-3 font-medium whitespace-nowrap text-white">第四十条</td>
+                                <td class="px-4 py-3">未涵盖非财务报告内控缺陷检查</td>
+                                <td class="px-4 py-3">新增监督内容："（七）非财务报告内部控制重大缺陷的识别及披露情况"</td>
+                            </tr>
+                            <tr class="hover:bg-gray-700 transition-colors">
+                                <td class="px-4 py-3 font-medium whitespace-nowrap text-white">第三十条</td>
+                                <td class="px-4 py-3">财务报告签章人员缺少"董秘"</td>
+                                <td class="px-4 py-3">增加"董事会秘书"签名要求（《上市公司信息披露管理办法》规定）</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 合规依据 -->
+    <section id="compliance" class="py-16 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-3xl font-bold text-center mb-12 serif">合规性<span class="highlight">依据</span></h2>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700 card-hover fade-in">
+                    <div class="text-amber-400 text-3xl mb-4">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">内控审计强制化</h3>
+                    <p class="text-gray-300">财会〔2023〕30号文要求拟上市企业内部控制审计与财报审计同步，未执行可能直接导致IPO驳回。</p>
+                </div>
+                
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700 card-hover fade-in">
+                    <div class="text-emerald-400 text-3xl mb-4">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">固定资产标准</h3>
+                    <p class="text-gray-300">会计准则将固定资产判定标准从单价转向经济价值实质，原"1000元"易被监管质疑资产分类合理性。</p>
+                </div>
+                
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700 card-hover fade-in">
+                    <div class="text-rose-400 text-3xl mb-4">
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">军工保密特殊性</h3>
+                    <p class="text-gray-300">涉军企业需建立独立保密财务流程（如专户核算、双签制），否则构成上市实质障碍。</p>
+                </div>
+            </div>
+            
+            <!-- 优先级 -->
+            <div class="bg-gradient-to-r from-purple-900 to-blue-900 rounded-xl p-6 mb-16">
+                <h3 class="text-2xl font-semibold mb-6 serif text-white">修订<span class="text-purple-300">优先级</span></h3>
+                <div class="flex flex-col space-y-4">
+                    <div class="flex items-center p-4 bg-purple-800 bg-opacity-50 rounded-lg">
+                        <div class="w-8 h-8 rounded-full bg-red-500 flex items-center justify-center mr-4">
+                            <span class="font-bold">1</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">内控审计条款（新增第二十七条-1）</h4>
+                            <p class="text-sm text-purple-200">最紧急且关键的合规要求</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center p-4 bg-blue-800 bg-opacity-50 rounded-lg">
+                        <div class="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center mr-4">
+                            <span class="font-bold">2</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">固定资产定义更新</h4>
+                            <p class="text-sm text-blue-200">符合会计准则要求</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center p-4 bg-indigo-800 bg-opacity-50 rounded-lg">
+                        <div class="w-8 h-8 rounded-full bg-yellow-500 flex items-center justify-center mr-4">
+                            <span class="font-bold">3</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">保密机制完善</h4>
+                            <p class="text-sm text-indigo-200">军工企业特殊要求</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center p-4 bg-gray-800 bg-opacity-50 rounded-lg">
+                        <div class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center mr-4">
+                            <span class="font-bold">4</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">签章人员补充</h4>
+                            <p class="text-sm text-gray-200">完善制度细节</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 框架分析 -->
+    <section id="framework" class="py-16 px-4 bg-gray-900 bg-opacity-50">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-3xl font-bold text-center mb-12 serif">财务内控<span class="highlight">框架分析</span></h2>
+            
+            <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700 mb-12">
+                <div class="mermaid">
+                    graph TD
+                    A[财务报告管理制度] --> B[财务报告编制]
+                    A --> C[财务报告审计]
+                    A --> D[财务报告报送与披露]
+                    A --> E[财务报告分析利用]
+                    A --> F[财务报告保管]
+                    
+                    B --> B1[基础工作规范]
+                    B --> B2[合并报表编制]
+                    B --> B3[保密管理]
+                    
+                    C --> C1[年度财务报告审计]
+                    C --> C2[财务报告内控审计<br>新增要求]
+                    
+                    D --> D1[对外提供要求]
+                    D --> D2[披露管理]
+                    
+                    E --> E1[财务分析制度]
+                    E --> E2[缺陷整改机制<br>需完善]
+                    
+                    F --> F1[归档管理]
+                    F --> F2[保密与销毁]
+                    
+                    style C2 fill:#6366f1,color:#fff
+                    style E2 fill:#6366f1,color:#fff
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700">
+                    <h3 class="text-xl font-semibold mb-4 serif">修订<span class="text-purple-400">重点领域</span></h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                            <span>财务报告内控审计流程与要求</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                            <span>财务分析缺陷分类与整改机制</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                            <span>固定资产确认标准更新</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                            <span>军工保密专项管理流程</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                            <span>子公司报告报送时效性</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700">
+                    <h3 class="text-xl font-semibold mb-4 serif">预期<span class="text-purple-400">实施效果</span></h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-star text-yellow-400 mt-1 mr-2"></i>
+                            <span>满足财会〔2023〕30号文合规要求</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-star text-yellow-400 mt-1 mr-2"></i>
+                            <span>降低IPO审核风险，避免因内控问题被否</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-star text-yellow-400 mt-1 mr-2"></i>
+                            <span>提升财务信息质量与透明度</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-star text-yellow-400 mt-1 mr-2"></i>
+                            <span>强化军工企业特色保密管理</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-star text-yellow-400 mt-1 mr-2"></i>
+                            <span>建立符合上市标准的完整内控体系</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 延伸阅读 -->
+    <section id="resources" class="py-16 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-3xl font-bold text-center mb-12 serif">延伸<span class="highlight">阅读</span></h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700 card-hover fade-in">
+                    <div class="flex items-start mb-4">
+                        <div class="text-blue-400 text-2xl mr-3">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">《企业内部控制基本规范》</h3>
+                    </div>
+                    <p class="text-gray-300">财政部等五部委联合发布，中国企业内部控制体系的核心框架与基础规范。</p>
+                </div>
+                
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700 card-hover fade-in">
+                    <div class="flex items-start mb-4">
+                        <div class="text-green-400 text-2xl mr-3">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">财会〔2023〕30号文</h3>
+                    </div>
+                    <p class="text-gray-300">《关于强化上市公司及拟上市企业内部控制建设推进内部控制评价和审计的通知》，最新内控监管要求。</p>
+                </div>
+                
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700 card-hover fade-in">
+                    <div class="flex items-start mb-4">
+                        <div class="text-purple-400 text-2xl mr-3">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">《首次公开发行股票并上市管理办法》</h3>
+                    </div>
+                    <p class="text-gray-300">证监会发布，详细规定IPO条件与程序，其中第22条明确内控有效性要求。</p>
+                </div>
+                
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700 card-hover fade-in">
+                    <div class="flex items-start mb-4">
+                        <div class="text-red-400 text-2xl mr-3">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">《军工企业内部控制特别规定》</h3>
+                    </div>
+                    <p class="text-gray-300">针对军工企业的特殊内控要求，重点关注保密管理、专项经费管理等特色内容。</p>
+                </div>
+                
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700 card-hover fade-in">
+                    <div class="flex items-start mb-4">
+                        <div class="text-yellow-400 text-2xl mr-3">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">《企业会计准则第4号—固定资产》</h3>
+                    </div>
+                    <p class="text-gray-300">详细规定固定资产确认、计量、折旧及处置的会计处理标准。</p>
+                </div>
+                
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 border border-gray-700 card-hover fade-in">
+                    <div class="flex items-start mb-4">
+                        <div class="text-indigo-400 text-2xl mr-3">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">《上市公司信息披露管理办法》</h3>
+                    </div>
+                    <p class="text-gray-300">规范上市公司信息披露行为，明确董事会秘书在财务报告披露中的职责。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="gradient-bg py-12 px-4 border-t border-gray-700">
+        <div class="container mx-auto max-w-6xl">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center">
+                        <i class="fas fa-rocket text-purple-500 text-2xl mr-2"></i>
+                        <span class="serif text-xl font-semibold">天兵航天科技</span>
+                    </div>
+                    <p class="text-gray-400 mt-2">财务报告管理制度修订建议方案</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-weixin text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fas fa-envelope text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fas fa-phone text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-500 text-sm">
+                <p>© 2023 江苏天兵航天科技股份有限公司. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 主题切换功能
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+        
+        // 检查系统偏好
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+            body.classList.remove('dark-mode');
+            body.classList.add('light-mode');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                body.classList.remove('light-mode');
+                body.classList.add('dark-mode');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+        
+        // 滚动动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                fadeInObserver.observe(element);
+            });
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+```
