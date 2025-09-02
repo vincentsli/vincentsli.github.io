@@ -1,0 +1,600 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天兵科技财务预算管理制度修订建议</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --dark-bg: #111827;
+            --dark-card: #1f2937;
+            --light-bg: #f9fafb;
+            --light-card: #ffffff;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        .dark-mode {
+            background-color: var(--dark-bg);
+            color: #e5e7eb;
+        }
+
+        .light-mode {
+            background-color: var(--light-bg);
+            color: #374151;
+        }
+
+        .dark-card {
+            background-color: var(--dark-card);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+        }
+
+        .light-card {
+            background-color: var(--light-card);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-5px);
+        }
+
+        .chart-container {
+            overflow: auto;
+        }
+
+        .first-letter::first-letter {
+            initial-letter: 2;
+            margin-right: 0.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2.5rem;
+            padding-bottom: 2rem;
+        }
+
+        .timeline-item:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+
+        .timeline-item:after {
+            content: "";
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--primary);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .book-card {
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <!-- 主题切换按钮 -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="themeToggle" class="p-3 rounded-full shadow-lg dark-card light-card flex items-center justify-center">
+            <i class="fas fa-moon text-yellow-300 dark-mode-icon"></i>
+            <i class="fas fa-sun text-gray-500 light-mode-icon hidden"></i>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden px-4 py-16">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-900/70 to-gray-900/90"></div>
+            <div class="absolute top-0 right-0 -mt-16 mr-32 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl opacity-20 animate-pulse"></div>
+            <div class="absolute bottom-0 left-0 -mb-16 -ml-32 w-96 h-96 bg-green-500 rounded-full filter blur-3xl opacity-20 animate-pulse" style="animation-delay: 1s;"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-5xl mx-auto text-center">
+            <div class="mb-8">
+                <span class="tag bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">财务合规</span>
+                <span class="tag bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">IPO准备</span>
+                <span class="tag bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200">内控优化</span>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">天兵科技财务预算管理制度</h1>
+            <h2 class="text-xl md:text-3xl font-semibold mb-8 gradient-text">IPO合规性修订建议</h2>
+            <p class="text-xl max-w-3xl mx-auto mb-10 opacity-90 first-letter">基于A股IPO财务内控合规要求，结合联网搜索与知识库分析，为北京天兵科技有限公司提供专业修订建议，确保制度符合监管标准。</p>
+            
+            <div class="flex flex-wrap justify-center gap-4 mt-12">
+                <a href="#recommendations" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full transition-all duration-300 flex items-center">
+                    <i class="fas fa-list-check mr-2"></i> 查看修订建议
+                </a>
+                <a href="#visualization" class="px-6 py-3 border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-full transition-all duration-300 flex items-center">
+                    <i class="fas fa-diagram-project mr-2"></i> 内控关系图谱
+                </a>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2">
+            <a href="#introduction" class="animate-bounce flex justify-center">
+                <i class="fas fa-chevron-down text-2xl opacity-70"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section id="introduction" class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">背景与重要性</h2>
+                <div class="h-1 w-20 bg-blue-500 mx-auto"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-10 mb-16">
+                <div class="dark-card light-card p-8 hover-lift">
+                    <div class="section-icon bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-200">
+                        <i class="fas fa-balance-scale text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">IPO合规性要求</h3>
+                    <p class="opacity-80">根据证监会《首次公开发行股票并上市管理办法》，财务内控规范性是IPO审核的核心关注点。预算管理制度作为财务内控的重要组成部分，必须符合《企业内部控制基本规范》及相关指引。</p>
+                </div>
+                
+                <div class="dark-card light-card p-8 hover-lift">
+                    <div class="section-icon bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-200">
+                        <i class="fas fa-exclamation-triangle text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">常见审核问题</h3>
+                    <p class="opacity-80">IPO审核中常见的预算管理问题包括：预算调整机制不健全、超预算审批权限不清晰、预算与实际执行差异过大、缺乏有效的预算考核机制等。这些问题可能导致审核问询甚至否决。</p>
+                </div>
+            </div>
+            
+            <div class="dark-card light-card p-8">
+                <h3 class="text-2xl font-semibold mb-6 text-center">IPO财务内控审核时间线</h3>
+                <div class="timeline-container pl-6">
+                    <div class="timeline-item">
+                        <h4 class="text-lg font-semibold">材料申报前12个月</h4>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">2023年6月-2024年6月</p>
+                        <p class="mt-2">完善财务内控制度建设，确保规范运行一个完整会计年度</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4 class="text-lg font-semibold">申报基准日</h4>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">2024年6月30日</p>
+                        <p class="mt-2">提交IPO申请材料，内控制度需运行至少一个完整会计年度</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4 class="text-lg font-semibold">反馈问询阶段</h4>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">2024年7月-9月</p>
+                        <p class="mt-2">回应证监会关于财务内控的问询，提供制度文件和执行证据</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4 class="text-lg font-semibold">上会审核</h4>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">2024年10月</p>
+                        <p class="mt-2">发审委重点关注内控有效性，预算管理是核心关注点之一</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recommendations Section -->
+    <section id="recommendations" class="py-20 px-4 bg-gray-100 dark:bg-gray-900">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">关键修订建议</h2>
+                <p class="text-xl opacity-80">基于联网搜索与知识库分析的核心修订要点</p>
+                <div class="h-1 w-20 bg-blue-500 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="dark-card light-card p-6 hover-lift">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-200 p-3 rounded-lg mr-4">
+                            <i class="fas fa-file-contract text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold">适用范围表述规范</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">第二章第2条修订</p>
+                        </div>
+                    </div>
+                    <p class="mb-4"><span class="font-semibold">现状：</span>"本办法适用于公司及其关联公司所有员工"</p>
+                    <p class="mb-4"><span class="font-semibold">问题：</span>"关联公司"定义模糊，可能引发监管问询</p>
+                    <div class="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg border-l-4 border-green-500">
+                        <p class="font-semibold">建议修订：</p>
+                        <p>"本办法适用于公司及其控股子公司、分公司及纳入合并报表范围的其他实体，上述实体所有员工均应遵守本制度。"</p>
+                    </div>
+                </div>
+                
+                <div class="dark-card light-card p-6 hover-lift">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-red-100 text-red-600 dark:bg-red-900 dark:text-red-200 p-3 rounded-lg mr-4">
+                            <i class="fas fa-exchange-alt text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold">预算调整机制缺失</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">第四章第5条修订</p>
+                        </div>
+                    </div>
+                    <p class="mb-4"><span class="font-semibold">现状：</span>"公司预算每半年度调整一次"</p>
+                    <p class="mb-4"><span class="font-semibold">问题：</span>缺乏重大情势变更下的临时调整机制</p>
+                    <div class="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg border-l-4 border-green-500">
+                        <p class="font-semibold">建议修订：</p>
+                        <p>"公司预算原则上每半年度调整一次。遇重大政策变动、市场环境突变或重大不可抗力事件，经总经理办公会审议后，可启动临时预算调整程序，调整方案需报董事会批准。"</p>
+                    </div>
+                </div>
+                
+                <div class="dark-card light-card p-6 hover-lift">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-purple-100 text-purple-600 dark:bg-purple-900 dark:text-purple-200 p-3 rounded-lg mr-4">
+                            <i class="fas fa-hand-holding-usd text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold">超预算审批权限冲突</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">第三章第5条修订</p>
+                        </div>
+                    </div>
+                    <p class="mb-4"><span class="font-semibold">现状：</span>超预算事项仅需"业务分管领导、财务分管领导、总经理审批"</p>
+                    <p class="mb-4"><span class="font-semibold">问题：</span>大额超支可能涉及公司重大经营决策，需董事会层级监督</p>
+                    <div class="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg border-l-4 border-green-500">
+                        <p class="font-semibold">建议修订：</p>
+                        <p>"单次超预算金额超过净资产1%或累计超5%的事项，需报董事会审议。特别重大事项应提交股东大会审议。"</p>
+                    </div>
+                </div>
+                
+                <div class="dark-card light-card p-6 hover-lift">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-amber-100 text-amber-600 dark:bg-amber-900 dark:text-amber-200 p-3 rounded-lg mr-4">
+                            <i class="fas fa-user-shield text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold">保密经费管理漏洞</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">第四章第3.1条修订</p>
+                        </div>
+                    </div>
+                    <p class="mb-4"><span class="font-semibold">现状：</span>保密经费由保密办编制，但未规定独立核算机制</p>
+                    <p class="mb-4"><span class="font-semibold">问题：</span>可能造成资金滥用，不符合军工企业特殊要求</p>
+                    <div class="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg border-l-4 border-green-500">
+                        <p class="font-semibold">建议修订：</p>
+                        <p>"设立保密经费专项账户，实行独立核算。所有保密经费支出需经保密办公室与财务部门双签确认，每季度向董事会保密委员会报告执行情况。"</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-16">
+                <a href="#" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full transition-all duration-300 inline-flex items-center">
+                    <i class="fas fa-download mr-2"></i> 下载完整修订建议书
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visualization Section -->
+    <section id="visualization" class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">财务内控关系图谱</h2>
+                <p class="text-xl opacity-80">预算管理制度与IPO财务合规要求关联图</p>
+                <div class="h-1 w-20 bg-blue-500 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="dark-card light-card p-6 mb-16">
+                <div class="chart-container" id="mermaidChart">
+                    <!-- Mermaid chart will be rendered here -->
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-200 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-check-double text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">合规性保障</h3>
+                    <p class="opacity-80">确保制度符合《企业内部控制基本规范》及证监会IPO审核要求</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-200 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">风险防控</h3>
+                    <p class="opacity-80">完善审批流程与权限设置，降低财务舞弊与错误风险</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="bg-purple-100 text-purple-600 dark:bg-purple-900 dark:text-purple-200 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-bolt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">效率提升</h3>
+                    <p class="opacity-80">优化预算编制与调整流程，提高资源配置效率</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Further Reading Section -->
+    <section id="further-reading" class="py-20 px-4 bg-gray-100 dark:bg-gray-900">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">延伸阅读</h2>
+                <p class="text-xl opacity-80">推荐阅读以下专业书籍与法规，深入了解IPO财务合规</p>
+                <div class="h-1 w-20 bg-blue-500 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="book-card dark-card light-card rounded-lg overflow-hidden">
+                    <div class="h-48 bg-blue-500 flex items-center justify-center">
+                        <i class="fas fa-book-open text-6xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">《企业内部控制规范》</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">财政部等五部委</p>
+                        <p class="mt-4 opacity-80">中国企业内部控制体系建设的根本规范，IPO内控审核的核心依据。</p>
+                        <div class="mt-4">
+                            <span class="tag bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">法规</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="book-card dark-card light-card rounded-lg overflow-hidden">
+                    <div class="h-48 bg-green-500 flex items-center justify-center">
+                        <i class="fas fa-balance-scale-right text-6xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">《IPO财务核查实务》</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">张林 著</p>
+                        <p class="mt-4 opacity-80">全面解析IPO财务核查要点与案例，帮助规避常见审核问题。</p>
+                        <div class="mt-4">
+                            <span class="tag bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">实务</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="book-card dark-card light-card rounded-lg overflow-hidden">
+                    <div class="h-48 bg-purple-500 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-6xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">《全面预算管理》</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">李明 著</p>
+                        <p class="mt-4 opacity-80">系统介绍现代企业预算管理体系，提供可操作的实践方法。</p>
+                        <div class="mt-4">
+                            <span class="tag bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">管理</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-16">
+                <a href="#" class="px-6 py-3 border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-full transition-all duration-300 inline-flex items-center">
+                    <i class="fas fa-book mr-2"></i> 查看更多推荐书目
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 bg-gray-800 text-gray-300">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">关于本建议</h3>
+                    <p>本修订建议基于最新监管要求与实务经验，为北京天兵科技有限公司IPO财务合规提供专业支持。</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">联系方式</h3>
+                    <p><i class="fas fa-envelope mr-2"></i> contact@example.com</p>
+                    <p class="mt-2"><i class="fas fa-phone mr-2"></i> (86) 010-12345678</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">关注我们</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-blue-500 transition-colors">
+                            <i class="fab fa-weixin"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-blue-400 transition-colors">
+                            <i class="fab fa-weibo"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-blue-600 transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p>© 2023 天兵科技财务预算管理制度修订建议. 版权所有.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 主题切换功能
+        const themeToggle = document.getElementById('themeToggle');
+        const darkModeIcon = document.querySelector('.dark-mode-icon');
+        const lightModeIcon = document.querySelector('.light-mode-icon');
+        
+        // 检查本地存储或系统偏好
+        if (localStorage.getItem('theme') === 'light' || 
+            (window.matchMedia('(prefers-color-scheme: light)').matches && !localStorage.getItem('theme'))) {
+            document.body.classList.add('light-mode');
+            document.body.classList.remove('dark-mode');
+            darkModeIcon.classList.add('hidden');
+            lightModeIcon.classList.remove('hidden');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            if (document.body.classList.contains('dark-mode')) {
+                document.body.classList.add('light-mode');
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light');
+                darkModeIcon.classList.add('hidden');
+                lightModeIcon.classList.remove('hidden');
+            } else {
+                document.body.classList.add('dark-mode');
+                document.body.classList.remove('light-mode');
+                localStorage.setItem('theme', 'dark');
+                darkModeIcon.classList.remove('hidden');
+                lightModeIcon.classList.add('hidden');
+            }
+        });
+
+        // Mermaid图表初始化
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: document.body.classList.contains('dark-mode') ? 'dark' : 'default',
+            securityLevel: 'loose',
+            fontFamily: '"Noto Sans SC", sans-serif',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+
+        // Mermaid图表内容
+        const graphDefinition = `
+        graph TB
+            subgraph "外部法规要求"
+                A[《企业内部控制基本规范》]
+                B[《首次公开发行股票并上市管理办法》]
+                C[上市公司信息披露管理办法]
+            end
+            
+            subgraph "内部制度体系"
+                D[预算管理制度]
+                E[资金管理制度]
+                F[财务报告制度]
+                G[内部审计制度]
+            end
+            
+            subgraph "核心修订要点"
+                H[适用范围明确化]
+                I[预算调整机制完善]
+                J[超预算审批权限规范]
+                K[保密经费管理强化]
+            end
+            
+            subgraph "IPO审核关注点"
+                L[内控有效性]
+                M[财务规范性]
+                N[信息披露质量]
+                O[风险防控能力]
+            end
+            
+            A --> D
+            B --> L
+            C --> N
+            D --> H
+            D --> I
+            D --> J
+            D --> K
+            H --> L
+            I --> M
+            J --> O
+            K --> N
+            E --> M
+            F --> N
+            G --> O
+            
+            style A fill:#6ee7b7,stroke:#10b981
+            style B fill:#6ee7b7,stroke:#10b981
+            style C fill:#6ee7b7,stroke:#10b981
+            style D fill:#93c5fd,stroke:#3b82f6
+            style E fill:#93c5fd,stroke:#3b82f6
+            style F fill:#93c5fd,stroke:#3b82f6
+            style G fill:#93c5fd,stroke:#3b82f6
+            style H fill:#fcd34d,stroke:#f59e0b
+            style I fill:#fcd34d,stroke:#f59e0b
+            style J fill:#fcd34d,stroke:#f59e0b
+            style K fill:#fcd34d,stroke:#f59e0b
+            style L fill:#fca5a5,stroke:#ef4444
+            style M fill:#fca5a5,stroke:#ef4444
+            style N fill:#fca5a5,stroke:#ef4444
+            style O fill:#fca5a5,stroke:#ef4444
+        `;
+
+        // 渲染Mermaid图表
+        document.getElementById('mermaidChart').innerHTML = `<div class="mermaid">${graphDefinition}</div>`;
+        
+        // 重新渲染图表当主题变化时
+        themeToggle.addEventListener('click', function() {
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: document.body.classList.contains('dark-mode') ? 'dark' : 'default',
+                securityLevel: 'loose',
+                fontFamily: '"Noto Sans SC", sans-serif'
+            });
+            document.getElementById('mermaidChart').innerHTML = `<div class="mermaid">${graphDefinition}</div>`;
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+```
