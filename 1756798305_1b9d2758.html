@@ -1,0 +1,576 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天兵科技研发支出财务核算制度修订建议</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #f59e0b;
+            --accent: #10b981;
+            --text-primary: #f3f4f6;
+            --text-secondary: #d1d5db;
+            --bg-dark: #111827;
+            --bg-card: #1f2937;
+            --border: #374151;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 600;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+
+        .container-custom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(31, 41, 55, 0.95) 100%), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23374251" width="100" height="100"/><path fill="%231F2937" d="M0 0L100 100M100 0L0 100" stroke-width="0.5"/></svg>');
+            background-size: cover;
+            background-position: center;
+            padding: 6rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .highlight {
+            background: linear-gradient(90deg, var(--primary) 0%, transparent 100%);
+            padding: 0.1rem 1rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .quote {
+            border-left: 4px solid var(--secondary);
+            padding-left: 1.5rem;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: rgba(59, 130, 246, 0.2);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tag-warning {
+            background-color: rgba(245, 158, 11, 0.2);
+            color: var(--secondary);
+        }
+
+        .tag-success {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: var(--accent);
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, var(--border) 50%, transparent 100%);
+            margin: 2rem 0;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--primary);
+        }
+
+        .timeline-item:after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1.5rem;
+            bottom: -1rem;
+            width: 2px;
+            background-color: var(--border);
+        }
+
+        .timeline-item:last-child:after {
+            display: none;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn i {
+            margin-right: 0.5rem;
+        }
+
+        .mermaid-container {
+            background-color: var(--bg-card);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            overflow: auto;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 4rem 0;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- 导航栏 -->
+    <nav class="sticky top-0 z-10 bg-gray-900 bg-opacity-90 backdrop-blur-sm py-4 border-b border-gray-800">
+        <div class="container-custom flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-rocket text-blue-500 text-2xl mr-3"></i>
+                <span class="text-xl font-semibold">天兵科技财务制度分析</span>
+            </div>
+            <div class="flex items-center">
+                <button id="themeToggle" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero 区域 -->
+    <section class="hero">
+        <div class="container-custom text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">研发支出财务核算制度修订建议</h1>
+            <p class="text-xl text-blue-200 max-w-3xl mx-auto mb-8">基于投行经验与A股IPO审核要求的深度分析</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <span class="tag tag-warning"><i class="fas fa-exclamation-circle"></i> 资本化时点</span>
+                <span class="tag"><i class="fas fa-flask"></i> 研发样品处理</span>
+                <span class="tag tag-success"><i class="fas fa-balance-scale"></i> 费用分摊</span>
+                <span class="tag tag-warning"><i class="fas fa-chart-line"></i> 股份支付</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 主要内容 -->
+    <main class="container-custom py-16">
+        <!-- 问题概览 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center"><i class="fas fa-search text-blue-500 mr-3"></i>核心问题识别</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                <div class="card">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-blue-900 p-3 rounded-lg mr-4">
+                            <i class="fas fa-calendar-check text-blue-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold">资本化时点合理性不足</h3>
+                            <p class="text-gray-400">第五条：火箭研发项目以"首次飞行试验成功"作为开发阶段起点</p>
+                        </div>
+                    </div>
+                    <p class="text-red-400"><i class="fas fa-exclamation-triangle"></i> 风险：该时点可能未能充分满足资本化五项条件，尤其是"经济利益实现可行性"</p>
+                </div>
+                
+                <div class="card">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-yellow-900 p-3 rounded-lg mr-4">
+                            <i class="fas fa-box-open text-yellow-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold">研发样品会计处理矛盾</h3>
+                            <p class="text-gray-400">第十一条：研发样品成本从研发支出转入生产成本</p>
+                        </div>
+                    </div>
+                    <p class="text-red-400"><i class="fas fa-exclamation-triangle"></i> 问题：未明确区分样品是否可销售，可能违反《企业会计准则第1号——存货》</p>
+                </div>
+                
+                <div class="card">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-purple-900 p-3 rounded-lg mr-4">
+                            <i class="fas fa-sliders-h text-purple-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold">共用资源分摊缺失</h3>
+                            <p class="text-gray-400">第六条：未规定研发与生产共用设备/场地的分摊标准</p>
+                        </div>
+                    </div>
+                    <p class="text-red-400"><i class="fas fa-exclamation-triangle"></i> 风险：易导致研发费用虚增，IPO审核要求共用资源需合理分配</p>
+                </div>
+                
+                <div class="card">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-green-900 p-3 rounded-lg mr-4">
+                            <i class="fas fa-hand-holding-usd text-green-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold">股份支付处理错误</h3>
+                            <p class="text-gray-400">第十一条第六款：股份支付直接计入研发支出-工资</p>
+                        </div>
+                    </div>
+                    <p class="text-red-400"><i class="fas fa-exclamation-triangle"></i> 问题：分录错误且未明确等待期分摊原则</p>
+                </div>
+            </div>
+
+            <div class="bg-blue-900 bg-opacity-30 p-6 rounded-xl border border-blue-800">
+                <h3 class="text-xl font-semibold mb-4"><i class="fas fa-lightbulb text-blue-400"></i> 关键洞察</h3>
+                <p>火箭研发属于高风险领域，资本化政策需比医药等行业更为谨慎。IPO审核中，监管机构特别关注资本化时点的客观性和可比性，以及与同行业公司政策的一致性。</p>
+            </div>
+        </section>
+
+        <!-- 修订建议详情 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center"><i class="fas fa-edit text-blue-500 mr-3"></i>具体修订建议</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 资本化时点修订 -->
+                <div class="card">
+                    <div class="flex items-center mb-4">
+                        <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">1</span>
+                        <h3 class="text-xl font-semibold">资本化时点合理性提升</h3>
+                    </div>
+                    
+                    <div class="bg-gray-800 p-4 rounded-lg mb-4">
+                        <h4 class="font-medium text-blue-300 mb-2">原条款：</h4>
+                        <p class="text-gray-400">"火箭研发项目以'首次飞行试验成功'作为开发阶段起点，此前费用化、此后资本化"</p>
+                    </div>
+                    
+                    <div class="bg-gray-800 p-4 rounded-lg mb-4">
+                        <h4 class="font-medium text-green-300 mb-2">建议修订：</h4>
+                        <p>"首次飞行试验成功 <span class="text-green-400">且同时满足以下条件</span>：①商业化订单/合同已签署；②后续资源（资金、技术）可保障；③经济收益模型经独立验证"</p>
+                    </div>
+                    
+                    <div class="bg-blue-900 bg-opacity-30 p-4 rounded-lg">
+                        <h4 class="font-medium text-blue-300 mb-2"><i class="fas fa-book"></i> 参考依据：</h4>
+                        <p>医药行业以III期临床/新药上市为资本化点，类比火箭领域需增加商业化节点佐证</p>
+                    </div>
+                </div>
+                
+                <!-- 研发样品处理修订 -->
+                <div class="card">
+                    <div class="flex items-center mb-4">
+                        <span class="bg-yellow-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">2</span>
+                        <h3 class="text-xl font-semibold">研发样品会计处理规范</h3>
+                    </div>
+                    
+                    <div class="bg-gray-800 p-4 rounded-lg mb-4">
+                        <h4 class="font-medium text-blue-300 mb-2">原条款：</h4>
+                        <p class="text-gray-400">"研发样品成本从'研发支出-费用化'转入'生产成本'"</p>
+                    </div>
+                    
+                    <div class="bg-gray-800 p-4 rounded-lg mb-4">
+                        <h4 class="font-medium text-green-300 mb-2">建议修订：</h4>
+                        <p class="mb-2"><span class="text-green-400">区分样品性质：</span></p>
+                        <ul class="list-disc pl-5 text-gray-300">
+                            <li>可供销售样品：成本计入库存商品</li>
+                            <li>实验性样品(不可销售)：费用化处理，计入当期损益</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-blue-900 bg-opacity-30 p-4 rounded-lg">
+                        <h4 class="font-medium text-blue-300 mb-2"><i class="fas fa-book"></i> 参考依据：</h4>
+                        <p>《企业会计准则解释第15号》关于研发样品销售收入处理要求</p>
+                    </div>
+                </div>
+                
+                <!-- 共用资源分摊修订 -->
+                <div class="card">
+                    <div class="flex items-center mb-4">
+                        <span class="bg-purple-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">3</span>
+                        <h3 class="text-xl font-semibold">共用资源分摊标准明确</h3>
+                    </div>
+                    
+                    <div class="bg-gray-800 p-4 rounded-lg mb-4">
+                        <h4 class="font-medium text-blue-300 mb-2">缺失条款：</h4>
+                        <p class="text-gray-400">未规定研发与生产共用设备/场地的分摊标准</p>
+                    </div>
+                    
+                    <div class="bg-gray-800 p-4 rounded-lg mb-4">
+                        <h4 class="font-medium text-green-300 mb-2">建议补充：</h4>
+                        <p>"若研发与生产共用设备/场地，按实际工时占比或面积占比分摊费用；<span class="text-green-400">无法合理分配的，不得计入研发支出</span>"</p>
+                    </div>
+                    
+                    <div class="bg-blue-900 bg-opacity-30 p-4 rounded-lg">
+                        <h4 class="font-medium text-blue-300 mb-2"><i class="fas fa-book"></i> 参考依据：</h4>
+                        <p>IPO审核要求共用资源需合理分配，避免研发费用虚增</p>
+                    </div>
+                </div>
+                
+                <!-- 股份支付修订 -->
+                <div class="card">
+                    <div class="flex items-center mb-4">
+                        <span class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">4</span>
+                        <h3 class="text-xl font-semibold">股份支付处理规范</h3>
+                    </div>
+                    
+                    <div class="bg-gray-800 p-4 rounded-lg mb-4">
+                        <h4 class="font-medium text-blue-300 mb-2">原条款：</h4>
+                        <p class="text-gray-400">"股份支付直接计入研发支出-工资"</p>
+                    </div>
+                    
+                    <div class="bg-gray-800 p-4 rounded-lg mb-4">
+                        <h4 class="font-medium text-green-300 mb-2">建议修订：</h4>
+                        <p class="mb-2">按《企业会计准则第11号》规范处理：</p>
+                        <p>"借：研发支出—费用化支出—股份支付(按等待期分摊)<br>贷：资本公积—股份支付"</p>
+                    </div>
+                    
+                    <div class="bg-blue-900 bg-opacity-30 p-4 rounded-lg">
+                        <h4 class="font-medium text-blue-300 mb-2"><i class="fas fa-book"></i> 参考依据：</h4>
+                        <p>监管要求股份支付计入研发支出需有明确依据，避免调节研发投入</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 可视化图表 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center"><i class="fas fa-project-diagram text-blue-500 mr-3"></i>资本化决策流程</h2>
+            
+            <div class="mermaid-container">
+                <div class="mermaid">
+flowchart TD
+    A[研发项目启动] --> B[研究阶段：全部费用化]
+    B --> C{是否达到资本化条件？}
+    
+    C -->|否| D[继续费用化处理]
+    C -->|是| E[开发阶段：符合条件可资本化]
+    
+    subgraph 条件判断[资本化五项条件]
+        F[技术可行性]
+        G[完成意图]
+        H[经济利益流入]
+        I[资源支持能力]
+        J[可靠计量成本]
+    end
+    
+    E --> 条件判断
+    条件判断 --> K[同时满足所有条件]
+    K --> L[资本化处理]
+    
+    L --> M[形成无形资产]
+    M --> N[定期评估减值]
+    
+    D --> O[期末结转损益]
+    
+    style A fill:#1e40af,color:white
+    style L fill:#065f46,color:white
+    style D fill:#9f1239,color:white
+                </div>
+            </div>
+        </section>
+
+        <!-- IPO审核关注要点 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center"><i class="fas fa-clipboard-check text-blue-500 mr-3"></i>IPO审核关注要点</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="card text-center">
+                    <div class="bg-blue-900 p-4 rounded-full inline-flex items-center justify-center mb-4">
+                        <i class="fas fa-balance-scale-left text-3xl text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">政策与同行可比性</h3>
+                    <p class="text-gray-400">需分析航天同业案例，避免差异过大引监管问询</p>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="bg-purple-900 p-4 rounded-full inline-flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-line text-3xl text-purple-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">研发费用占比波动</h3>
+                    <p class="text-gray-400">若资本化导致费用率异常低于同行，需准备合理性论证</p>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="bg-green-900 p-4 rounded-full inline-flex items-center justify-center mb-4">
+                        <i class="fas fa-clipboard-list text-3xl text-green-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">内控痕迹管理</h3>
+                    <p class="text-gray-400">工时记录、费用分摊需留存可审计的原始凭证</p>
+                </div>
+            </div>
+            
+            <div class="bg-yellow-900 bg-opacity-30 p-6 rounded-xl border border-yellow-800 mt-8">
+                <h3 class="text-xl font-semibold mb-4"><i class="fas fa-exclamation-triangle text-yellow-400"></i> 特别风险提示</h3>
+                <p>科创板医药企业资本化比例较高，但硬科技领域（如火箭）案例较少，需警惕监管对高风险项目资本化的质疑。建议参考《监管规则适用指引——发行类第9号》要求。</p>
+            </div>
+        </section>
+
+        <!-- 延伸阅读 -->
+        <section>
+            <h2 class="text-3xl font-bold mb-8 text-center"><i class="fas fa-book-open text-blue-500 mr-3"></i>延伸阅读</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-4">推荐文献</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-file-alt text-blue-400 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium">《企业会计准则解释第15号》</h4>
+                                <p class="text-sm text-gray-400">关于研发样品销售收入处理的官方指引</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-file-alt text-blue-400 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium">《监管规则适用指引——发行类第5号》</h4>
+                                <p class="text-sm text-gray-400">IPO申报企业研发投入认定标准</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-file-alt text-blue-400 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium">《监管规则适用指引——发行类第9号》</h4>
+                                <p class="text-sm text-gray-400">研发人员及研发投入的审核要求</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h3 class="text-xl font-semibold mb-4">行业分析</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-rocket text-blue-400 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium">航天行业研发特点分析</h4>
+                                <p class="text-sm text-gray-400">高风险、长周期项目的资本化策略</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-pills text-blue-400 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium">医药行业资本化参考</h4>
+                                <p class="text-sm text-gray-400">III期临床/新药上市作为资本化时点的案例</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-industry text-blue-400 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium">高科技制造业研发核算</h4>
+                                <p class="text-sm text-gray-400">研发与生产共用资源的分摊方法论</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-900 py-12 border-t border-gray-800">
+        <div class="container-custom">
+            <div class="text-center">
+                <div class="flex justify-center mb-6">
+                    <i class="fas fa-rocket text-blue-500 text-3xl"></i>
+                </div>
+                <p class="text-gray-500">© 2023 天兵科技财务制度分析. 专业投行视角下的财务规范建议.</p>
+                <p class="text-gray-600 text-sm mt-2">本文内容仅供参考，具体决策请咨询专业会计师和券商顾问。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 初始化 Mermaid 图表
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: {
+                useMaxWidth: false,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+
+        // 深色/浅色模式切换
+        const themeToggle = document.getElementById('themeToggle');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        // 检查本地存储或系统偏好
+        const currentTheme = localStorage.getItem('theme') || 
+                            (prefersDarkScheme.matches ? 'dark' : 'light');
+        
+        if (currentTheme === 'light') {
+            document.body.classList.remove('dark');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+            document.body.classList.add('dark');
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.body.classList.contains('dark');
+            if (isDark) {
+                document.body.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                document.body.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        });
+
+        // 微交互效果
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+                card.style.boxShadow = '0 10px 15px rgba(0, 0, 0, 0.2)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+            });
+        });
+    </script>
+</body>
+</html>
+```
