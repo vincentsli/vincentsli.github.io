@@ -1,0 +1,635 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>江苏天兵科技研发管理制度复核报告</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --dark-bg: #111827;
+            --dark-card: #1f2937;
+            --light-bg: #f9fafb;
+            --light-card: #ffffff;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Serif SC', serif;
+        }
+        
+        .dark-mode {
+            background-color: var(--dark-bg);
+            color: #e5e7eb;
+        }
+        
+        .light-mode {
+            background-color: var(--light-bg);
+            color: #374151;
+        }
+        
+        .dark-card {
+            background-color: var(--dark-card);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .light-card {
+            background-color: var(--light-card);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .hero-pattern {
+            background-image: radial-gradient(circle at center, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+        }
+        
+        .risk-indicator {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .risk-indicator:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 50%;
+            background-color: var(--accent);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .first-letter:first-letter {
+            initial-letter: 2;
+            font-weight: bold;
+            margin-right: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .mermaid-container {
+            overflow: auto;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <!-- 导航栏 -->
+    <nav class="sticky top-0 z-50 backdrop-blur-lg bg-opacity-80 border-b border-gray-200 dark:border-gray-800">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <span class="text-xl font-bold gradient-text">天兵科技研发制度分析</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                    <i class="fas fa-moon text-yellow-400 dark:hidden"></i>
+                    <i class="fas fa-sun text-gray-300 hidden dark:block"></i>
+                </button>
+                <a href="#overview" class="hidden md:inline-block hover:text-blue-400 transition-colors">概览</a>
+                <a href="#analysis" class="hidden md:inline-block hover:text-blue-400 transition-colors">分析</a>
+                <a href="#recommendations" class="hidden md:inline-block hover:text-blue-400 transition-colors">建议</a>
+                <a href="#resources" class="hidden md:inline-block hover:text-blue-400 transition-colors">资源</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative py-20 md:py-32 overflow-hidden">
+        <div class="hero-pattern absolute inset-0"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">江苏天兵科技<span class="gradient-text">研发管理制度</span>复核报告</h1>
+                <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8">基于A股IPO审核要求及行业实践的深度分析</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#analysis" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors flex items-center">
+                        <i class="fas fa-chart-line mr-2"></i> 查看分析
+                    </a>
+                    <a href="#recommendations" class="px-6 py-3 border border-blue-600 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white rounded-full transition-colors flex items-center">
+                        <i class="fas fa-lightbulb mr-2"></i> 优化建议
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section id="overview" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">制度复核<span class="gradient-text">概览</span></h2>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="dark-card light-card card-hover p-6">
+                    <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mb-4">
+                        <i class="fas fa-exclamation-triangle text-blue-600 dark:text-blue-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">内控有效性缺陷</h3>
+                    <p class="text-gray-600 dark:text-gray-300">研发人员认定、物料管理等方面存在合规风险</p>
+                </div>
+                
+                <div class="dark-card light-card card-hover p-6">
+                    <div class="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center mb-4">
+                        <i class="fas fa-calculator text-green-600 dark:text-green-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">财务核算合规性问题</h3>
+                    <p class="text-gray-600 dark:text-gray-300">共用设备分摊、研发废料管理存在缺陷</p>
+                </div>
+                
+                <div class="dark-card light-card card-hover p-6">
+                    <div class="w-12 h-12 rounded-full bg-red-100 dark:bg-red-900 flex items-center justify-center mb-4">
+                        <i class="fas fa-balance-scale text-red-600 dark:text-red-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">IPO审核敏感点</h3>
+                    <p class="text-gray-600 dark:text-gray-300">委外研发成果权属、费用资本化标准不明确</p>
+                </div>
+            </div>
+            
+            <div class="dark-card light-card p-8">
+                <h3 class="text-2xl font-semibold mb-6">关键问题分布</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <div class="mb-4">
+                            <div class="flex justify-between mb-2">
+                                <span>研发人员认定</span>
+                                <span class="font-bold text-red-500">高风险</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                <div class="bg-red-500 h-2.5 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="flex justify-between mb-2">
+                                <span>共用设备分摊</span>
+                                <span class="font-bold text-yellow-500">中风险</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="flex justify-between mb-2">
+                                <span>研发废料管理</span>
+                                <span class="font-bold text-red-500">高风险</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                <div class="bg-red-500 h-2.5 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="mb-4">
+                            <div class="flex justify-between mb-2">
+                                <span>委外研发权属</span>
+                                <span class="font-bold text-red-500">高风险</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                <div class="bg-red-500 h-2.5 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="flex justify-between mb-2">
+                                <span>费用资本化</span>
+                                <span class="font-bold text-yellow-500">中风险</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="flex justify-between mb-2">
+                                <span>制度衔接</span>
+                                <span class="font-bold text-green-500">低风险</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                <div class="bg-green-500 h-2.5 rounded-full" style="width: 40%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analysis Section -->
+    <section id="analysis" class="py-16 bg-gray-100 dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">深度<span class="gradient-text">问题分析</span></h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <div class="dark-card light-card p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900 flex items-center justify-center mr-3">
+                            <i class="fas fa-user-clock text-red-600 dark:text-red-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">研发人员认定标准不严谨</h3>
+                    </div>
+                    <p class="first-letter text-gray-600 dark:text-gray-300 mb-4">制度规定研发工时占比≥50%即认定为研发人员，但未明确工时统计方法及交叉任职人员的分摊规则（如管理人员参与研发）。</p>
+                    <div class="risk-indicator mb-2">
+                        <span class="font-medium">风险等级: </span>
+                        <span class="text-red-500 font-bold">高风险</span>
+                    </div>
+                    <div class="risk-indicator">
+                        <span class="font-medium">违反: </span>
+                        <span>《监管规则适用指引——发行类第9号》</span>
+                    </div>
+                </div>
+                
+                <div class="dark-card light-card p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900 flex items-center justify-center mr-3">
+                            <i class="fas fa-box-open text-red-600 dark:text-red-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">研发物料管理漏洞</h3>
+                    </div>
+                    <p class="first-letter text-gray-600 dark:text-gray-300 mb-4">退料流程要求检验人员签字，但未定义质检标准和退料责任主体，退料真实性难以验证，可能虚增研发费用。</p>
+                    <div class="risk-indicator mb-2">
+                        <span class="font-medium">风险等级: </span>
+                        <span class="text-red-500 font-bold">高风险</span>
+                    </div>
+                    <div class="risk-indicator">
+                        <span class="font-medium">参考案例: </span>
+                        <span>特创科技创业板IPO被否案例</span>
+                    </div>
+                </div>
+                
+                <div class="dark-card light-card p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-yellow-100 dark:bg-yellow-900 flex items-center justify-center mr-3">
+                            <i class="fas fa-server text-yellow-600 dark:text-yellow-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">共用设备分摊依据不足</h3>
+                    </div>
+                    <p class="first-letter text-gray-600 dark:text-gray-300 mb-4">产研共用设备按"使用天数"分摊折旧，但未要求设备使用日志或自动化记录系统，分摊比例主观性高。</p>
+                    <div class="risk-indicator mb-2">
+                        <span class="font-medium">风险等级: </span>
+                        <span class="text-yellow-500 font-bold">中风险</span>
+                    </div>
+                    <div class="risk-indicator">
+                        <span class="font-medium">可能导致: </span>
+                        <span>涉嫌调节研发费用</span>
+                    </div>
+                </div>
+                
+                <div class="dark-card light-card p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900 flex items-center justify-center mr-3">
+                            <i class="fas fa-industry text-red-600 dark:text-red-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">研发废料管理缺关键控制</h3>
+                    </div>
+                    <p class="first-letter text-gray-600 dark:text-gray-300 mb-4">虽要求登记《研发废料台账》，但未规定废料估值方法及销售定价机制，可能隐匿收入或调节研发费用。</p>
+                    <div class="risk-indicator mb-2">
+                        <span class="font-medium">风险等级: </span>
+                        <span class="text-red-500 font-bold">高风险</span>
+                    </div>
+                    <div class="risk-indicator">
+                        <span class="font-medium">违反: </span>
+                        <span>《上交所审核动态》（2025年第2期）</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dark-card light-card p-8 mb-16">
+                <h3 class="text-2xl font-semibold mb-6">制度衔接缺陷分析</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b border-gray-200 dark:border-gray-700">
+                                <th class="py-3 px-4 text-left">问题描述</th>
+                                <th class="py-3 px-4 text-left">关联制度缺失</th>
+                                <th class="py-3 px-4 text-left">后果</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-200 dark:border-gray-700">
+                                <td class="py-3 px-4">研发项目结项后知识产权管理流程未细化</td>
+                                <td class="py-3 px-4">未联动《知识产权管理制度》</td>
+                                <td class="py-3 px-4">成果保护不足，核心技术泄露风险</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4">涉密项目文档借阅审批层级不足</td>
+                                <td class="py-3 px-4">未对接《保密管理制度》</td>
+                                <td class="py-3 px-4">不符合军工企业保密资质要求</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="dark-card light-card p-8">
+                <h3 class="text-2xl font-semibold mb-6">研发管理制度问题关系图</h3>
+                <div class="mermaid-container bg-white dark:bg-gray-800">
+                    graph TD
+                    A[研发管理制度缺陷] --> B[内控有效性缺陷]
+                    A --> C[财务核算合规性问题]
+                    A --> D[IPO审核敏感点]
+                    
+                    B --> B1[研发人员认定不严谨]
+                    B --> B2[研发物料管理漏洞]
+                    B --> B3[制度衔接缺陷]
+                    
+                    C --> C1[共用设备分摊依据不足]
+                    C --> C2[研发废料管理缺关键控制]
+                    
+                    D --> D1[委外研发成果权属不明确]
+                    D --> D2[研发费用资本化标准缺失]
+                    
+                    B1 --> E[违反监管规则适用指引第9号]
+                    B2 --> F[参考特创科技IPO被否案例]
+                    C2 --> G[违反上交所审核动态2025年第2期]
+                    D1 --> H[不符合科创板自主研发能力要求]
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recommendations Section -->
+    <section id="recommendations" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">优化<span class="gradient-text">建议与解决方案</span></h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <div class="dark-card light-card p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-3">
+                            <i class="fas fa-users-cog text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">研发人员认定优化</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">补充《工时记录与复核细则》，明确非全时人员工时跟踪表（需部门负责人签字确认）</p>
+                    <div class="bg-blue-50 dark:bg-blue-900 p-4 rounded-lg">
+                        <p class="text-sm text-blue-700 dark:text-blue-200 flex items-start">
+                            <i class="fas fa-lightbulb mr-2 mt-1"></i>
+                            <span>参考浩辰软件（688657）案例，建立工时记录审批制度</span>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="dark-card light-card p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-3">
+                            <i class="fas fa-tools text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">共用设备分摊优化</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">引入设备物联网管理系统自动采集使用数据，保留原始凭证</p>
+                    <div class="bg-blue-50 dark:bg-blue-900 p-4 rounded-lg">
+                        <p class="text-sm text-blue-700 dark:text-blue-200 flex items-start">
+                            <i class="fas fa-lightbulb mr-2 mt-1"></i>
+                            <span>避免分摊比例主观性高，涉嫌调节研发费用风险</span>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="dark-card light-card p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-3">
+                            <i class="fas fa-industry text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">研发废料管理优化</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">补充第三方评估定价流程，销售合同需财务部会签</p>
+                    <div class="bg-blue-50 dark:bg-blue-900 p-4 rounded-lg">
+                        <p class="text-sm text-blue-700 dark:text-blue-200 flex items-start">
+                            <i class="fas fa-lightbulb mr-2 mt-1"></i>
+                            <span>防止隐匿收入或调节研发费用，符合财务内控要求</span>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="dark-card light-card p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-3">
+                            <i class="fas fa-handshake text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">委外研发权属优化</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">增加条款示例，如"甲方享有独占知识产权，乙方需签署终身保密协议"</p>
+                    <div class="bg-blue-50 dark:bg-blue-900 p-4 rounded-lg">
+                        <p class="text-sm text-blue-700 dark:text-blue-200 flex items-start">
+                            <i class="fas fa-lightbulb mr-2 mt-1"></i>
+                            <span>确保核心技术不依赖外部研发，符合科创板要求</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dark-card light-card p-8">
+                <h3 class="text-2xl font-semibold mb-6">实施路线图</h3>
+                <div class="mermaid-container bg-white dark:bg-gray-800">
+                    gantt
+                    title 天兵科技研发制度优化实施路线图
+                    dateFormat  YYYY-MM-DD
+                    axisFormat  %m/%d
+                    
+                    section 制度修订
+                    制定工时记录细则       :crit, 2023-10-01, 7d
+                    完善设备分摊机制       :2023-10-05, 5d
+                    建立废料定价流程       :2023-10-08, 7d
+                    明确委外研发权属       :2023-10-10, 5d
+                    
+                    section 系统实施
+                    设备物联网系统采购     :2023-10-15, 10d
+                    工时管理系统部署       :2023-10-20, 14d
+                    系统联调测试           :2023-10-25, 7d
+                    
+                    section 培训与执行
+                    制度培训             :2023-11-05, 7d
+                    试运行               :2023-11-10, 14d
+                    全面执行             :2023-11-25, 5d
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="py-16 bg-gray-100 dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">进一步<span class="gradient-text">阅读与资源</span></h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="dark-card light-card p-6 card-hover">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-book mr-3 text-blue-500"></i> 参考书籍
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right mt-1 mr-2 text-blue-500"></i>
+                            <span>《企业内部控制规范》- 财政部</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right mt-1 mr-2 text-blue-500"></i>
+                            <span>《科创板IPO审核问答》- 上交所</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right mt-1 mr-2 text-blue-500"></i>
+                            <span>《研发费用核算与税务处理》- 中国税务出版社</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="dark-card light-card p-6 card-hover">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fas fa-gavel mr-3 text-blue-500"></i> 监管文件
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right mt-1 mr-2 text-blue-500"></i>
+                            <span>《监管规则适用指引——发行类第9号》</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right mt-1 mr-2 text-blue-500"></i>
+                            <span>《上交所科创板股票发行上市审核问答》</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-caret-right mt-1 mr-2 text-blue-500"></i>
+                            <span>《企业会计准则解释第15号》</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="dark-card light-card p-8">
+                <h3 class="text-2xl font-semibold mb-6">典型案例研究</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 dark:bg-blue-900 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">浩辰软件（688657）</h4>
+                        <p class="text-sm text-blue-700 dark:text-blue-200">研发工时记录与审批制度范例</p>
+                    </div>
+                    <div class="bg-red-50 dark:bg-red-900 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">特创科技</h4>
+                        <p class="text-sm text-red-700 dark:text-red-200">研发费用归集不合规致IPO被否</p>
+                    </div>
+                    <div class="bg-yellow-50 dark:bg-yellow-900 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">生物医药类企业</h4>
+                        <p class="text-sm text-yellow-700 dark:text-yellow-200">产学研合作中权属模糊问询点</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-200 dark:border-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <p class="text-gray-600 dark:text-gray-400">© 2023 江苏天兵科技研发管理制度复核报告. 本报告仅供参考，不构成投资建议。</p>
+                <div class="mt-4 flex justify-center space-x-4">
+                    <a href="#" class="text-gray-500 hover:text-blue-500 transition-colors">
+                        <i class="fab fa-linkedin-in text-lg"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-blue-400 transition-colors">
+                        <i class="fab fa-twitter text-lg"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors">
+                        <i class="fas fa-envelope text-lg"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 主题切换功能
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        
+        // 检查本地存储或系统偏好
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            body.classList.add('dark-mode');
+            body.classList.remove('light-mode');
+        } else {
+            body.classList.add('light-mode');
+            body.classList.remove('dark-mode');
+        }
+        
+        // 切换主题
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+                localStorage.theme = 'light';
+            } else {
+                body.classList.remove('light-mode');
+                body.classList.add('dark-mode');
+                localStorage.theme = 'dark';
+            }
+        });
+        
+        // Mermaid 图表初始化
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: body.classList.contains('dark-mode') ? 'dark' : 'default',
+            securityLevel: 'loose',
+            fontFamily: 'inherit',
+            flowchart: {
+                useMaxWidth: false,
+                htmlLabels: true
+            }
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // 卡片悬停效果增强
+        const cards = document.querySelectorAll('.card-hover');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
+```
