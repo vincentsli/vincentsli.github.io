@@ -1,0 +1,787 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPO申报企业盘点计划规范指南</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --gray: #64748b;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            background-color: var(--dark);
+            color: #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+        
+        .container-custom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.8) 0%, rgba(139, 92, 246, 0.8) 100%), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%230f172a" width="100" height="100"/><path fill="%231e293b" d="M0 0h50v50H0z"/></svg>');
+            background-size: cover;
+            background-position: center;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        
+        .card {
+            background-color: #1e293b;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid #334155;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+            border-color: var(--accent);
+        }
+        
+        .section-title {
+            position: relative;
+            padding-bottom: 0.75rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .highlight {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -2.35rem;
+            top: 0.5rem;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 3px solid var(--dark);
+        }
+        
+        .table-custom {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .table-custom th {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: left;
+            padding: 0.75rem 1rem;
+        }
+        
+        .table-custom td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #334155;
+        }
+        
+        .table-custom tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .table-custom tr:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background-color: rgba(37, 99, 235, 0.2);
+            color: #60a5fa;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .mode-switch {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 100;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .mode-switch:hover {
+            transform: scale(1.1);
+        }
+        
+        .mermaid-container {
+            background-color: #1e293b;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            overflow: auto;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .flow-chart {
+            background-color: #1e293b;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .flow-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .flow-step:last-child {
+            margin-bottom: 0;
+        }
+        
+        .flow-step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .flow-step-content {
+            flex: 1;
+            background-color: #334155;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--accent);
+        }
+        
+        @media (max-width: 768px) {
+            .flow-step {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .flow-step-number {
+                margin-bottom: 0.5rem;
+            }
+        }
+        
+        .light-mode {
+            background-color: var(--light);
+            color: #334155;
+        }
+        
+        .light-mode .card {
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .light-mode h1, 
+        .light-mode h2, 
+        .light-mode h3, 
+        .light-mode h4, 
+        .light-mode h5 {
+            color: #1e293b;
+        }
+        
+        .light-mode .table-custom tr:hover {
+            background-color: #f8fafc;
+        }
+        
+        .light-mode .flow-step-content {
+            background-color: #f1f5f9;
+        }
+        
+        .light-mode .mermaid-container,
+        .light-mode .flow-chart {
+            background-color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <!-- 导航栏 -->
+    <nav class="bg-gray-900 bg-opacity-90 backdrop-blur-sm py-4 sticky top-0 z-50 border-b border-gray-800">
+        <div class="container-custom flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-chart-line text-2xl text-blue-400 mr-2"></i>
+                <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">IPO盘点指南</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#rules" class="text-gray-300 hover:text-white transition">规则依据</a>
+                <a href="#planning" class="text-gray-300 hover:text-white transition">计划要点</a>
+                <a href="#process" class="text-gray-300 hover:text-white transition">盘点流程</a>
+                <a href="#risks" class="text-gray-300 hover:text-white transition">风险提示</a>
+                <a href="#resources" class="text-gray-300 hover:text-white transition">延伸阅读</a>
+            </div>
+            <div class="md:hidden">
+                <button class="text-gray-300 hover:text-white">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero 模块 -->
+    <section class="py-16 md:py-24">
+        <div class="container-custom">
+            <div class="hero p-8 md:p-12">
+                <div class="max-w-3xl">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">IPO申报企业<span class="highlight">报告期末盘点计划</span>规范指南</h1>
+                    <p class="text-xl text-blue-100 mb-6">券商与会计师工作要点全解析</p>
+                    <p class="text-lg text-gray-200 mb-8">全面梳理监管规则要求，详解存货及其他资产盘点程序，助力企业顺利通过IPO审核</p>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="tag"><i class="fas fa-scale-balanced mr-1"></i>监管合规</span>
+                        <span class="tag"><i class="fas fa-file-invoice-dollar mr-1"></i>审计准则</span>
+                        <span class="tag"><i class="fas fa-chart-line mr-1"></i>财务核查</span>
+                        <span class="tag"><i class="fas fa-triangle-exclamation mr-1"></i>风险防控</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 主要内容 -->
+    <main class="container-custom py-12">
+        <!-- 规则依据部分 -->
+        <section id="rules" class="mb-16">
+            <h2 class="text-3xl section-title">规则依据</h2>
+            <p class="text-gray-400 mb-6">券商和会计师在制定IPO申报企业报告期末盘点计划时，需严格遵循以下监管规则与专业准则：</p>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-900 flex items-center justify-center mr-4">
+                            <i class="fas fa-gavel text-blue-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">审计准则</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">《中国注册会计师审计准则第1311号——存货监盘》要求会计师现场观察被审计单位存货盘点，并对已盘点存货进行适当检查。</p>
+                    <ul class="text-gray-400 pl-5 space-y-2">
+                        <li><i class="fas fa-check-circle text-green-400 mr-2"></i>明确存货监盘的定义与程序要求</li>
+                        <li><i class="fas fa-check-circle text-green-400 mr-2"></i>规范抽盘比例与异常情况处理</li>
+                        <li><i class="fas fa-check-circle text-green-400 mr-2"></i>强调特殊存货的替代审计程序</li>
+                    </ul>
+                </div>
+                
+                <div class="card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-purple-900 flex items-center justify-center mr-4">
+                            <i class="fas fa-landmark text-purple-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">监管规定</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">《证券发行上市保荐业务管理办法》要求券商（保荐人）履行尽职调查职责，需参与存货监盘并核查资产真实性。</p>
+                    <ul class="text-gray-400 pl-5 space-y-2">
+                        <li><i class="fas fa-check-circle text-green-400 mr-2"></i>财务顾问需随同会计师参与存货监盘</li>
+                        <li><i class="fas fa-check-circle text-green-400 mr-2"></i>工作底稿必须记录参与情况</li>
+                        <li><i class="fas fa-check-circle text-green-400 mr-2"></i>对资产真实性发表明确意见</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 计划要点部分 -->
+        <section id="planning" class="mb-16">
+            <h2 class="text-3xl section-title">盘点计划制定要点</h2>
+            <p class="text-gray-400 mb-6">科学合理的盘点计划是确保IPO申报企业资产账实相符的基础，需重点关注以下要素：</p>
+            
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <div class="card p-6">
+                    <div class="w-14 h-14 rounded-full bg-blue-900 flex items-center justify-center mb-4">
+                        <i class="fas fa-clock text-blue-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">时间与范围</h3>
+                    <ul class="text-gray-400 space-y-2">
+                        <li><i class="fas fa-circle-notch text-blue-400 mr-2"></i>报告期末或临近日期执行</li>
+                        <li><i class="fas fa-circle-notch text-blue-400 mr-2"></i>覆盖所有存货存放地点</li>
+                        <li><i class="fas fa-circle-notch text-blue-400 mr-2"></i>包括异地仓、委托加工物资</li>
+                        <li><i class="fas fa-circle-notch text-blue-400 mr-2"></i>延伸至固定资产等关键资产</li>
+                    </ul>
+                </div>
+                
+                <div class="card p-6">
+                    <div class="w-14 h-14 rounded-full bg-purple-900 flex items-center justify-center mb-4">
+                        <i class="fas fa-users text-purple-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">职责分工</h3>
+                    <ul class="text-gray-400 space-y-2">
+                        <li><i class="fas fa-circle-notch text-purple-400 mr-2"></i>会计师主导监盘程序</li>
+                        <li><i class="fas fa-circle-notch text-purple-400 mr-2"></i>券商派员参与并核查</li>
+                        <li><i class="fas fa-circle-notch text-purple-400 mr-2"></i>企业组织内部盘点</li>
+                        <li><i class="fas fa-circle-notch text-purple-400 mr-2"></i>明确各方责任与配合机制</li>
+                    </ul>
+                </div>
+                
+                <div class="card p-6">
+                    <div class="w-14 h-14 rounded-full bg-cyan-900 flex items-center justify-center mb-4">
+                        <i class="fas fa-clipboard-list text-cyan-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">程序设计</h3>
+                    <ul class="text-gray-400 space-y-2">
+                        <li><i class="fas fa-circle-notch text-cyan-400 mr-2"></i>选择全面或循环盘点方法</li>
+                        <li><i class="fas fa-circle-notch text-cyan-400 mr-2"></i>高价值物品重点监盘</li>
+                        <li><i class="fas fa-circle-notch text-cyan-400 mr-2"></i>特殊存货执行替代程序</li>
+                        <li><i class="fas fa-circle-notch text-cyan-400 mr-2"></i>预设差异处理流程</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="bg-gray-800 rounded-xl p-6 mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-blue-300">职责分工明细表</h3>
+                <div class="overflow-x-auto">
+                    <table class="table-custom">
+                        <thead>
+                            <tr>
+                                <th>主体</th>
+                                <th>主要职责</th>
+                                <th>工作输出</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><i class="fas fa-user-tie text-blue-400 mr-2"></i>会计师</td>
+                                <td>设计监盘程序；现场观察与抽盘；记录差异；编制监盘报告</td>
+                                <td>监盘计划书；抽盘记录；差异说明；监盘报告</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fas fa-building text-purple-400 mr-2"></i>券商</td>
+                                <td>派员参与监盘；核查程序合规性；工作底稿记录</td>
+                                <td>参与记录；核查意见；尽职调查底稿</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fas fa-industry text-cyan-400 mr-2"></i>企业</td>
+                                <td>组织内部盘点；提供盘点表单与记录；配合差异解释</td>
+                                <td>盘点计划；盘点表；出入库记录；差异解释</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 可视化图表 -->
+        <section class="mb-16">
+            <h2 class="text-3xl section-title">IPO盘点监管体系框架</h2>
+            <div class="mermaid-container">
+                <div class="mermaid">
+flowchart TD
+    A[IPO申报企业盘点监管体系] --> B[监管机构]
+    A --> C[中介机构]
+    A --> D[申报企业]
+    
+    B --> B1[证监会]
+    B --> B2[交易所]
+    B --> B3[注册会计师协会]
+    
+    C --> C1[券商/保荐人]
+    C --> C2[会计师事务所]
+    C --> C3[律师事务所]
+    
+    D --> D1[董事会]
+    D --> D2[管理层]
+    D --> D3[财务部门]
+    D --> D4[仓储部门]
+    
+    B1 --> B11[制定保荐业务管理办法]
+    B2 --> B21[发布审核指引与问答]
+    B3 --> B31[制定审计准则]
+    
+    C1 --> C11[尽职调查]
+    C1 --> C12[参与监盘]
+    C1 --> C13[发表核查意见]
+    
+    C2 --> C21[制定监盘计划]
+    C2 --> C22[执行监盘程序]
+    C2 --> C23[出具审计意见]
+    
+    D1 --> D11[承担最终责任]
+    D2 --> D21[组织盘点工作]
+    D3 --> D31[账务处理]
+    D4 --> D41[实物管理]
+    
+    C12 -- 协作 --> C22
+    D21 -- 执行 --> D41
+    D21 -- 报告 --> D11
+    C22 -- 核查 --> D41
+                </div>
+            </div>
+        </section>
+
+        <!-- 盘点流程部分 -->
+        <section id="process" class="mb-16">
+            <h2 class="text-3xl section-title">盘点流程与执行要点</h2>
+            <p class="text-gray-400 mb-6">规范的盘点流程是确保资产账实相符的关键，以下是IPO申报企业盘点工作的标准流程：</p>
+            
+            <div class="flow-chart">
+                <div class="flow-step">
+                    <div class="flow-step-number">1</div>
+                    <div class="flow-step-content">
+                        <h4 class="font-bold mb-2">计划准备阶段</h4>
+                        <p class="text-sm">确定盘点范围、时间、人员分工；制定详细的盘点计划；准备盘点表单与工具；通知相关部门做好准备。</p>
+                    </div>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="flow-step-number">2</div>
+                    <div class="flow-step-content">
+                        <h4 class="font-bold mb-2">盘点前会议</h4>
+                        <p class="text-sm">召集所有参与人员；明确盘点流程与注意事项；分派盘点区域与任务；强调盘点纪律与要求。</p>
+                    </div>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="flow-step-number">3</div>
+                    <div class="flow-step-content">
+                        <h4 class="font-bold mb-2">实地盘点</h4>
+                        <p class="text-sm">按计划进行实地清点；记录盘点结果；标识已盘物品；会计师执行抽盘；券商监督整个过程。</p>
+                    </div>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="flow-step-number">4</div>
+                    <div class="flow-step-content">
+                        <h4 class="font-bold mb-2">差异核查</h4>
+                        <p class="text-sm">核对账实差异；调查差异原因；获取相关证据；进行必要的调整处理。</p>
+                    </div>
+                </div>
+                
+                <div class="flow-step">
+                    <div class="flow-step-number">5</div>
+                    <div class="flow-step-content">
+                        <h4 class="font-bold mb-2">报告编制</h4>
+                        <p class="text-sm">编制盘点报告；记录特殊情况；各方签字确认；归档盘点资料。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6 mt-8">
+                <div class="card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-blue-300"><i class="fas fa-exclamation-circle mr-2"></i>监管重点关注</h3>
+                    <ul class="text-gray-400 space-y-2">
+                        <li><i class="fas fa-arrow-right text-blue-400 mr-2"></i>盘点程序是否覆盖所有存放地点</li>
+                        <li><i class="fas fa-arrow-right text-blue-400 mr-2"></i>抽盘比例是否充分（通常≥20%）</li>
+                        <li><i class="fas fa-arrow-right text-blue-400 mr-2"></i>是否存在未纳入盘点的"账外资产"</li>
+                        <li><i class="fas fa-arrow-right text-blue-400 mr-2"></i>差异处理是否合理并符合业务逻辑</li>
+                        <li><i class="fas fa-arrow-right text-blue-400 mr-2"></i>内部控制是否有效执行</li>
+                    </ul>
+                </div>
+                
+                <div class="card p-6">
+                    <h3 class="text-xl font-bold mb-4 text-purple-300"><i class="fas fa-file-alt mr-2"></i>文件记录要求</h3>
+                    <ul class="text-gray-400 space-y-2">
+                        <li><i class="fas fa-check text-purple-400 mr-2"></i>盘点计划书（含时间表、抽盘比例、人员分工）</li>
+                        <li><i class="fas fa-check text-purple-400 mr-2"></i>盘点差异汇总表及原因说明</li>
+                        <li><i class="fas fa-check text-purple-400 mr-2"></i>监盘工作底稿（含现场照片、签到记录）</li>
+                        <li><i class="fas fa-check text-purple-400 mr-2"></i>券商参与的书面证明</li>
+                        <li><i class="fas fa-check text-purple-400 mr-2"></i>会计师监盘报告</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 风险提示部分 -->
+        <section id="risks" class="mb-16">
+            <h2 class="text-3xl section-title">实务风险提示</h2>
+            <p class="text-gray-400 mb-6">IPO盘点工作中常见风险点及应对策略：</p>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <div class="card p-6 mb-6">
+                        <h3 class="text-xl font-bold mb-4 text-red-300"><i class="fas fa-exclamation-triangle mr-2"></i>监管处罚案例</h3>
+                        <p class="text-gray-400 mb-4">某IPO项目因会计师未发现存货虚构（盘点未覆盖异地仓），被证监会处罚900万元。</p>
+                        <div class="bg-gray-800 p-4 rounded-lg">
+                            <p class="text-sm text-gray-300"><i class="fas fa-quote-left text-blue-400 mr-2"></i>盘点程序存在重大缺陷，未能发现账实不符情况，导致财务数据严重失实。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card p-6">
+                        <h3 class="text-xl font-bold mb-4 text-amber-300"><i class="fas fa-bug mr-2"></i>常见漏洞与缺陷</h3>
+                        <ul class="text-gray-400 space-y-2">
+                            <li><i class="fas fa-times-circle text-red-400 mr-2"></i>存货标签与实物不符</li>
+                            <li><i class="fas fa-times-circle text-red-400 mr-2"></i>出入库记录未及时更新导致跨期差异</li>
+                            <li><i class="fas fa-times-circle text-red-400 mr-2"></i>委托加工物资未纳入盘点范围</li>
+                            <li><i class="fas fa-times-circle text-red-400 mr-2"></i>抽盘比例不足，缺乏代表性</li>
+                            <li><i class="fas fa-times-circle text-red-400 mr-2"></i>差异调查不充分，原因解释不合理</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="card p-6">
+                        <h3 class="text-xl font-bold mb-4 text-green-300"><i class="fas fa-shield-alt mr-2"></i>风险应对策略</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-medium text-green-400 mb-2"><i class="fas fa-check-circle mr-2"></i>全面覆盖</h4>
+                                <p class="text-sm text-gray-400">确保所有存货存放地点均纳入盘点范围，特别是异地仓、委托加工物资等容易遗漏的区域。</p>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-green-400 mb-2"><i class="fas fa-check-circle mr-2"></i>充分抽盘</h4>
+                                <p class="text-sm text-gray-400">执行足够的抽盘比例（通常≥20%），对高价值、易损耗物品提高抽盘比例。</p>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-green-400 mb-2"><i class="fas fa-check-circle mr-2"></i>证据保留</h4>
+                                <p class="text-sm text-gray-400">完整保留盘点过程证据，包括现场照片、签到记录、盘点表单等，确保工作底稿完备。</p>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-green-400 mb-2"><i class="fas fa-check-circle mr-2"></i>差异追查</h4>
+                                <p class="text-sm text-gray-400">对所有账实差异追查到底，获取充分适当的证据支持差异原因，并进行正确处理。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 延伸阅读部分 -->
+        <section id="resources" class="mb-16">
+            <h2 class="text-3xl section-title">延伸阅读</h2>
+            <p class="text-gray-400 mb-6">以下资源可帮助您深入了解IPO盘点及相关财务核查工作：</p>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="card p-6">
+                    <div class="flex items-start mb-4">
+                        <div class="w-16 h-16 bg-blue-900 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                            <i class="fas fa-book text-blue-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">《中国注册会计师审计准则第1311号——存货监盘》应用指南</h3>
+                            <p class="text-sm text-gray-400">中国注册会计师协会</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">详细解读存货监盘的程序要求、注意事项以及特殊情况处理，会计师必备参考资料。</p>
+                    <span class="tag"><i class="fas fa-tag mr-1"></i>审计准则</span>
+                    <span class="tag"><i class="fas fa-tag mr-1"></i>存货监盘</span>
+                </div>
+                
+                <div class="card p-6">
+                    <div class="flex items-start mb-4">
+                        <div class="w-16 h-16 bg-purple-900 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                            <i class="fas fa-file-contract text-purple-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">《证券发行上市保荐业务管理办法》</h3>
+                            <p class="text-sm text-gray-400">中国证券监督管理委员会</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">规范保荐机构职责和行为，明确券商在IPO项目中的尽职调查要求和责任边界。</p>
+                    <span class="tag"><i class="fas fa-tag mr-1"></i>监管规定</span>
+                    <span class="tag"><i class="fas fa-tag mr-1"></i>保荐业务</span>
+                </div>
+                
+                <div class="card p-6">
+                    <div class="flex items-start mb-4">
+                        <div class="w-16 h-16 bg-cyan-900 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                            <i class="fas fa-industry text-cyan-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">《企业内部控制应用指引第8号——资产管理》</h3>
+                            <p class="text-sm text-gray-400">财政部等五部委</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">规范企业存货及固定资产管理的内控要求，为企业建立完善资产管理制度提供指引。</p>
+                    <span class="tag"><i class="fas fa-tag mr-1"></i>内部控制</span>
+                    <span class="tag"><i class="fas fa-tag mr-1"></i>资产管理</span>
+                </div>
+                
+                <div class="card p-6">
+                    <div class="flex items-start mb-4">
+                        <div class="w-16 h-16 bg-green-900 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                            <i class="fas fa-balance-scale text-green-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">《上市公司现场检查规则》</h3>
+                            <p class="text-sm text-gray-400">中国证券监督管理委员会</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">明确监管机构现场检查的程序和内容，帮助企业了解监管关注重点，做好迎检准备。</p>
+                    <span class="tag"><i class="fas fa-tag mr-1"></i>现场检查</span>
+                    <span class="tag"><i class="fas fa-tag mr-1"></i>合规管理</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-900 border-t border-gray-800 py-12">
+        <div class="container-custom">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">IPO盘点指南</h3>
+                    <p class="text-gray-400 mb-4">专业解析IPO申报企业盘点工作规范与实务操作，助力企业顺利通过审核。</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-blue-400 transition"><i class="fab fa-weibo text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400 transition"><i class="fab fa-weixin text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400 transition"><i class="fab fa-linkedin text-xl"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">快速链接</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#rules" class="text-gray-400 hover:text-blue-400 transition">规则依据</a></li>
+                        <li><a href="#planning" class="text-gray-400 hover:text-blue-400 transition">计划要点</a></li>
+                        <li><a href="#process" class="text-gray-400 hover:text-blue-400 transition">盘点流程</a></li>
+                        <li><a href="#risks" class="text-gray-400 hover:text-blue-400 transition">风险提示</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">联系我们</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><i class="fas fa-envelope mr-2"></i>contact@ipoguide.com</li>
+                        <li><i class="fas fa-phone mr-2"></i>400-123-4567</li>
+                        <li><i class="fas fa-map-marker-alt mr-2"></i>北京市朝阳区金融街1号</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500 text-sm">
+                <p>© 2023 IPO盘点指南. 版权所有。本网站内容仅供参考，不构成专业建议。</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 深色/浅色模式切换 -->
+    <div class="mode-switch" id="modeSwitch">
+        <i class="fas fa-moon text-white"></i>
+    </div>
+
+    <script>
+        // 初始化Mermaid图表
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            securityLevel: 'loose',
+            fontFamily: 'Noto Sans SC, sans-serif',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+        
+        // 深色/浅色模式切换
+        const modeSwitch = document.getElementById('modeSwitch');
+        const body = document.body;
+        
+        // 检查系统偏好
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+            body.classList.add('light-mode');
+            modeSwitch.innerHTML = '<i class="fas fa-sun text-white"></i>';
+        }
+        
+        // 点击切换
+        modeSwitch.addEventListener('click', () => {
+            if (body.classList.contains('light-mode')) {
+                body.classList.remove('light-mode');
+                modeSwitch.innerHTML = '<i class="fas fa-moon text-white"></i>';
+            } else {
+                body.classList.add('light-mode');
+                modeSwitch.innerHTML = '<i class="fas fa-sun text-white"></i>';
+            }
+        });
+        
+        // 监听系统主题变化
+        window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', event => {
+            if (event.matches) {
+                body.classList.add('light-mode');
+                modeSwitch.innerHTML = '<i class="fas fa-sun text-white"></i>';
+            } else {
+                body.classList.remove('light-mode');
+                modeSwitch.innerHTML = '<i class="fas fa-moon text-white"></i>';
+            }
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+```
