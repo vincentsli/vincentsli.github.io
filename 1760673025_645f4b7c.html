@@ -1,0 +1,387 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科创板第五套标准申报企业安全生产费处理指南</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: 'Noto Sans SC', Tahoma, Arial, Roboto, "Droid Sans", "Helvetica Neue", "Droid Sans Fallback", "Heiti SC", "Hiragino Sans GB", Simsun, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .serif {
+            font-family: 'Noto Serif SC', serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a365d 0%, #2d3748 50%, #4a5568 100%);
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+        }
+        .highlight {
+            position: relative;
+            display: inline-block;
+        }
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background-color: rgba(125, 211, 252, 0.4);
+            z-index: -1;
+            transition: height 0.3s ease;
+        }
+        .highlight:hover::after {
+            height: 100%;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .drop-cap::first-letter {
+            font-size: 4.5rem;
+            line-height: 1;
+            float: left;
+            margin-right: 1rem;
+            font-weight: 700;
+            color: #63b3ed;
+        }
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            margin: 4rem 0;
+        }
+        .chart-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #68D391;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #68D391;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+    <!-- 主题切换按钮 -->
+    <div class="fixed top-4 right-4 z-50">
+        <div class="relative inline-block w-12 mr-2 align-middle select-auto">
+            <input type="checkbox" name="toggle" id="theme-toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+            <label for="theme-toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+        </div>
+        <span class="text-gray-300 font-medium" id="theme-label">深色模式</span>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg min-h-screen flex items-center py-16">
+        <div class="container mx-auto px-6">
+            <div class="fade-in max-w-4xl mx-auto text-center">
+                <h1 class="serif text-4xl md:text-6xl font-bold text-white mb-6">科创板第五套标准申报企业<br><span class="highlight">安全生产费处理指南</span></h1>
+                <p class="text-xl md:text-2xl text-blue-100 mb-10 leading-relaxed">尚未形成主营业务收入企业的财务处理与申报策略</p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#analysis" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition duration-300 transform hover:-translate-y-1">核心分析</a>
+                    <a href="#visualization" class="px-6 py-3 bg-transparent border-2 border-blue-400 hover:bg-blue-400 text-blue-300 hover:text-white rounded-lg transition duration-300 transform hover:-translate-y-1">可视化指南</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 主要内容区 -->
+    <div class="container mx-auto px-6 py-16">
+        <!-- 问题概述 -->
+        <section class="mb-20">
+            <div class="fade-in max-w-4xl mx-auto">
+                <h2 class="serif text-3xl md:text-4xl font-bold text-white mb-6 flex items-center">
+                    <i class="fas fa-question-circle mr-4 text-blue-400"></i>问题背景
+                </h2>
+                <p class="text-lg leading-relaxed mb-6 drop-cap">拟申报科创板第五套标准的企业，在尚未形成主营业务收入的报告期内，是否需要按照《企业安全生产费用提取和使用管理办法》计提和专项核算安全生产费？这是许多创新型企业面临的实务问题。</p>
+                
+                <div class="bg-gray-800 rounded-xl p-6 border-l-4 border-blue-500 my-8">
+                    <p class="text-blue-200 flex items-start">
+                        <i class="fas fa-info-circle mt-1 mr-3 text-blue-400"></i>
+                        <span>科创板第五套标准针对的是尚未形成主营业务收入但具备核心技术的企业，包括生物医药、高端装备等领域。这些企业在研发阶段往往没有营业收入，但可能涉及安全生产相关支出。</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 核心分析 -->
+        <section id="analysis" class="mb-20">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="serif text-3xl md:text-4xl font-bold text-white mb-10 flex items-center">
+                    <i class="fas fa-analytics mr-4 text-blue-400"></i>核心分析
+                </h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="fade-in bg-gray-800 rounded-xl p-6 card-hover">
+                        <div class="text-blue-400 text-3xl mb-4">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">安全生产费计提规则</h3>
+                        <p class="text-blue-100">根据《企业安全生产费用提取和使用管理办法》，安全生产费通常按<strong>上年度实际营业收入</strong>的一定比例计提，并计入"专项储备"科目。</p>
+                    </div>
+                    
+                    <div class="fade-in bg-gray-800 rounded-xl p-6 card-hover">
+                        <div class="text-blue-400 text-3xl mb-4">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">无营业收入企业的困境</h3>
+                        <p class="text-blue-100">尚未形成主营业务收入的企业，由于没有营业收入作为计提基数，<strong>无法按照常规比例计提</strong>安全生产费。</p>
+                    </div>
+                    
+                    <div class="fade-in bg-gray-800 rounded-xl p-6 card-hover">
+                        <div class="text-blue-400 text-3xl mb-4">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">实际支出仍需列支</h3>
+                        <p class="text-blue-100">企业仍需根据实际安全生产需求列支相关费用（如购置安全设备、培训等），直接计入当期损益（如管理费用）。</p>
+                    </div>
+                    
+                    <div class="fade-in bg-gray-800 rounded-xl p-6 card-hover">
+                        <div class="text-blue-400 text-3xl mb-4">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">申报审核关注点</h3>
+                        <p class="text-blue-100">审核中将关注企业是否如实反映安全生产支出，费用归集是否合理，是否存在调节利润的迹象。</p>
+                    </div>
+                </div>
+                
+                <div class="mt-12 bg-blue-900 bg-opacity-30 rounded-xl p-8">
+                    <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
+                        <i class="fas fa-gavel mr-3 text-blue-400"></i>结论
+                    </h3>
+                    <p class="text-lg leading-relaxed">
+                        对于拟申报科创板第五套标准的尚未形成主营业务收入的企业，在报告期内<strong>无需按照营业收入比例计提安全生产费</strong>。企业应当在实际发生安全生产支出时，直接计入当期损益（如管理费用）。同时，企业仍需遵守安全生产相关法律法规，确保安全生产投入。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- 可视化指南 -->
+        <section id="visualization" class="mb-20">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="serif text-3xl md:text-4xl font-bold text-white mb-10 flex items-center">
+                    <i class="fas fa-project-diagram mr-4 text-blue-400"></i>财务处理路径可视化指南
+                </h2>
+                
+                <div class="chart-container mb-12">
+                    <div class="mermaid">
+                        graph TD
+                            A[科创板第五套标准申报企业] --> B{是否形成主营业务收入?};
+                            B -->|否| C[无需按收入比例计提安全生产费];
+                            B -->|是| D[按上年度收入比例计提];
+                            
+                            C --> E[实际发生安全生产支出];
+                            E --> F[直接计入当期损益<br>如: 管理费用-安全生产费];
+                            
+                            F --> G[确保符合安全生产法规];
+                            G --> H[在招股书中披露处理方式];
+                            
+                            D --> I[计提专项储备];
+                            I --> J[按规定范围使用];
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8 mt-12">
+                    <div class="bg-gray-800 rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                            <i class="fas fa-file-alt mr-3 text-blue-400"></i>申报文件处理建议
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-400 mt-1 mr-2"></i>
+                                <span>明确说明无营业收入期间安全生产费的处理方式</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-400 mt-1 mr-2"></i>
+                                <span>详细列示实际发生的安全生产支出项目及金额</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-400 mt-1 mr-2"></i>
+                                <span>披露企业安全生产管理制度及执行情况</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-800 rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                            <i class="fas fa-exclamation-triangle mr-3 text-yellow-400"></i>常见误区
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-times text-red-400 mt-1 mr-2"></i>
+                                <span>错误地按预计收入计提安全生产费</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times text-red-400 mt-1 mr-2"></i>
+                                <span>将实际安全生产支出资本化而非费用化</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times text-red-400 mt-1 mr-2"></i>
+                                <span>未在招股书中充分披露相关会计处理</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- 法规依据 -->
+        <section class="mb-20">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="serif text-3xl md:text-4xl font-bold text-white mb-10 flex items-center">
+                    <i class="fas fa-book mr-4 text-blue-400"></i>法规依据
+                </h2>
+                
+                <div class="space-y-6">
+                    <div class="bg-gray-800 rounded-xl p-6 card-hover">
+                        <h3 class="text-xl font-bold text-white mb-2">《企业安全生产费用提取和使用管理办法》（财资〔2022〕136号）</h3>
+                        <p class="text-blue-100">规定了安全生产费的提取标准和使用范围，明确以营业收入为计提基础。</p>
+                    </div>
+                    
+                    <div class="bg-gray-800 rounded-xl p-6 card-hover">
+                        <h3 class="text-xl font-bold text-white mb-2">《上海证券交易所科创板股票发行上市审核规则》</h3>
+                        <p class="text-blue-100">明确了第五套上市标准的具体要求，针对尚未形成主营业务收入的企业。</p>
+                    </div>
+                    
+                    <div class="bg-gray-800 rounded-xl p-6 card-hover">
+                        <h3 class="text-xl font-bold text-white mb-2">《企业会计准则解释第3号》</h3>
+                        <p class="text-blue-100">规定了安全生产费的会计处理，包括专项储备的确认和计量。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- 延伸阅读 -->
+        <section class="mb-20">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="serif text-3xl md:text-4xl font-bold text-white mb-10 flex items-center">
+                    <i class="fas fa-book-open mr-4 text-blue-400"></i>延伸阅读
+                </h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-gray-800 rounded-xl p-6 card-hover">
+                        <h3 class="text-xl font-bold text-white mb-3">《科创板IPO财务审核要点》</h3>
+                        <p class="text-blue-100 mb-4">全面解析科创板IPO财务审核关注点，包括特殊会计处理事项。</p>
+                        <div class="text-sm text-blue-300">中伦律师事务所，2022年</div>
+                    </div>
+                    
+                    <div class="bg-gray-800 rounded-xl p-6 card-hover">
+                        <h3 class="text-xl font-bold text-white mb-3">《企业会计准则案例讲解》</h3>
+                        <p class="text-blue-100 mb-4">包含大量会计准则应用案例，涵盖专项储备等复杂会计问题。</p>
+                        <div class="text-sm text-blue-300">财政部会计司，2023年版</div>
+                    </div>
+                    
+                    <div class="bg-gray-800 rounded-xl p-6 card-hover">
+                        <h3 class="text-xl font-bold text-white mb-3">《科创板上市实务精要》</h3>
+                        <p class="text-blue-100 mb-4">系统介绍科创板上市全过程，包括第五套标准的具体应用。</p>
+                        <div class="text-sm text-blue-300">普华永道，2023年</div>
+                    </div>
+                    
+                    <div class="bg-gray-800 rounded-xl p-6 card-hover">
+                        <h3 class="text-xl font-bold text-white mb-3">《高新技术企业会计处理特殊问题研究》</h3>
+                        <p class="text-blue-100 mb-4">深入研究研发支出、专项储备等高新技术企业特有的会计问题。</p>
+                        <div class="text-sm text-blue-300">清华大学出版社，2022年</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="gradient-bg py-12">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <p class="text-blue-200">© 2023 科创板申报指南 | 专业财务与法律咨询</p>
+                <div class="flex justify-center space-x-6 mt-4">
+                    <a href="#" class="text-blue-300 hover:text-white transition"><i class="fab fa-weibo"></i></a>
+                    <a href="#" class="text-blue-300 hover:text-white transition"><i class="fab fa-weixin"></i></a>
+                    <a href="#" class="text-blue-300 hover:text-white transition"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 初始化Mermaid图表
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            flowchart: {
+                useMaxWidth: false,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+
+        // 主题切换功能
+        const toggle = document.getElementById('theme-toggle');
+        const label = document.getElementById('theme-label');
+        
+        // 检查系统偏好
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+            document.body.classList.remove('bg-gray-900', 'text-gray-200');
+            document.body.classList.add('bg-gray-50', 'text-gray-800');
+            toggle.checked = true;
+            label.textContent = '浅色模式';
+        }
+        
+        // 切换主题
+        toggle.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.remove('bg-gray-900', 'text-gray-200');
+                document.body.classList.add('bg-gray-50', 'text-gray-800');
+                label.textContent = '浅色模式';
+            } else {
+                document.body.classList.remove('bg-gray-50', 'text-gray-800');
+                document.body.classList.add('bg-gray-900', 'text-gray-200');
+                label.textContent = '深色模式';
+            }
+        });
+
+        // 滚动动画效果
+        function checkVisibility() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(element => {
+                const position = element.getBoundingClientRect();
+                if (position.top < window.innerHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkVisibility);
+        window.addEventListener('load', checkVisibility);
+        
+        // 初始化检查
+        checkVisibility();
+    </script>
+</body>
+</html>
+```
